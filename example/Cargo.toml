@@ -7,7 +7,10 @@ authors = ["Antoni Boucher <bouanto@zoho.com>"]
 crate-type = ["dylib"]
 
 [dependencies]
-glib = "^0.1"
+
+[dependencies.glib]
+git = "https://github.com/gtk-rs/glib"
+version = "0.1.0"
 
 [dependencies.webkit2webextension]
 path = ".."

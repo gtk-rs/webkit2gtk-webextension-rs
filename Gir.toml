@@ -1,0 +1,508 @@
+[options]
+gir_dir = "input"
+library = "WebKit2WebExtension"
+version = "4.0"
+work_mode = "normal"
+generate_safety_asserts = true
+
+generate = [
+    "WebKit2WebExtension.ConsoleMessage",
+    "WebKit2WebExtension.ContextMenu",
+    "WebKit2WebExtension.ContextMenuItem",
+    "WebKit2WebExtension.Frame",
+    "WebKit2WebExtension.HitTestResult",
+    "WebKit2WebExtension.ScriptWorld",
+    "WebKit2WebExtension.WebEditor",
+    "WebKit2WebExtension.WebExtension",
+    "WebKit2WebExtension.WebHitTestResult",
+    "WebKit2WebExtension.WebPage",]
+
+[[object]]
+name = "WebKit2WebExtension.DOMAttr"
+status = "generate"
+module_name = "dom_attr"
+
+[[object]]
+name = "WebKit2WebExtension.DOMBlob"
+status = "generate"
+module_name = "dom_blob"
+
+[[object]]
+name = "WebKit2WebExtension.DOMCDATASection"
+status = "generate"
+module_name = "dom_cdata_section"
+
+[[object]]
+name = "WebKit2WebExtension.DOMCSSRule"
+status = "generate"
+module_name = "dom_css_rule"
+
+[[object]]
+name = "WebKit2WebExtension.DOMCSSRuleList"
+status = "generate"
+module_name = "dom_css_rule_list"
+
+[[object]]
+name = "WebKit2WebExtension.DOMCSSStyleDeclaration"
+status = "generate"
+module_name = "dom_css_style_declaration"
+
+[[object]]
+name = "WebKit2WebExtension.DOMCSSStyleSheet"
+status = "generate"
+module_name = "dom_css_style_sheet"
+
+[[object]]
+name = "WebKit2WebExtension.DOMCSSValue"
+status = "generate"
+module_name = "dom_css_value"
+
+[[object]]
+name = "WebKit2WebExtension.DOMCharacterData"
+status = "generate"
+module_name = "dom_character_data"
+
+[[object]]
+name = "WebKit2WebExtension.DOMComment"
+status = "generate"
+module_name = "dom_comment"
+
+[[object]]
+name = "WebKit2WebExtension.DOMDOMImplementation"
+status = "generate"
+module_name = "dom_dom_implementation"
+
+[[object]]
+name = "WebKit2WebExtension.DOMDOMWindow"
+status = "generate"
+module_name = "dom_dom_window"
+
+[[object]]
+name = "WebKit2WebExtension.DOMDocument"
+status = "generate"
+module_name = "dom_document"
+
+[[object]]
+name = "WebKit2WebExtension.DOMDocumentFragment"
+status = "generate"
+module_name = "dom_document_fragment"
+
+[[object]]
+name = "WebKit2WebExtension.DOMDocumentType"
+status = "generate"
+module_name = "dom_document_type"
+
+[[object]]
+name = "WebKit2WebExtension.DOMElement"
+status = "generate"
+module_name = "dom_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMEntityReference"
+status = "generate"
+module_name = "dom_entity_reference"
+
+[[object]]
+name = "WebKit2WebExtension.DOMEvent"
+status = "generate"
+module_name = "dom_event"
+
+[[object]]
+name = "WebKit2WebExtension.DOMFile"
+status = "generate"
+module_name = "dom_file"
+
+[[object]]
+name = "WebKit2WebExtension.DOMFileList"
+status = "generate"
+module_name = "dom_file_list"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLAnchorElement"
+status = "generate"
+module_name = "dom_html_anchor_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLAppletElement"
+status = "generate"
+module_name = "dom_html_applet_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLAreaElement"
+status = "generate"
+module_name = "dom_html_area_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLBRElement"
+status = "generate"
+module_name = "dom_html_br_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLBaseElement"
+status = "generate"
+module_name = "dom_html_base_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLBaseFontElement"
+status = "generate"
+module_name = "dom_html_base_font_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLBodyElement"
+status = "generate"
+module_name = "dom_html_body_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLButtonElement"
+status = "generate"
+module_name = "dom_html_button_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLCanvasElement"
+status = "generate"
+module_name = "dom_html_canvas_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLCollection"
+status = "generate"
+module_name = "dom_html_collection"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLDListElement"
+status = "generate"
+module_name = "dom_html_d_list_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLDirectoryElement"
+status = "generate"
+module_name = "dom_html_directory_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLDivElement"
+status = "generate"
+module_name = "dom_html_div_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLDocument"
+status = "generate"
+module_name = "dom_html_document"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLElement"
+status = "generate"
+module_name = "dom_html_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLEmbedElement"
+status = "generate"
+module_name = "dom_html_embed_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLFieldSetElement"
+status = "generate"
+module_name = "dom_html_field_set_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLFontElement"
+status = "generate"
+module_name = "dom_html_font_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLFormElement"
+status = "generate"
+module_name = "dom_html_form_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLFrameElement"
+status = "generate"
+module_name = "dom_html_frame_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLFrameSetElement"
+status = "generate"
+module_name = "dom_html_frame_set_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLHRElement"
+status = "generate"
+module_name = "dom_html_hr_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLHeadElement"
+status = "generate"
+module_name = "dom_html_head_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLHeadingElement"
+status = "generate"
+module_name = "dom_html_heading_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLHtmlElement"
+status = "generate"
+module_name = "dom_html_html_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLIFrameElement"
+status = "generate"
+module_name = "dom_html_iframe_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLImageElement"
+status = "generate"
+module_name = "dom_html_image_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLInputElement"
+status = "generate"
+module_name = "dom_html_input_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLLIElement"
+status = "generate"
+module_name = "dom_html_li_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLLabelElement"
+status = "generate"
+module_name = "dom_html_label_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLLegendElement"
+status = "generate"
+module_name = "dom_html_legend_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLLinkElement"
+status = "generate"
+module_name = "dom_html_link_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLMapElement"
+status = "generate"
+module_name = "dom_html_map_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLMarqueeElement"
+status = "generate"
+module_name = "dom_html_marquee_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLMenuElement"
+status = "generate"
+module_name = "dom_html_menu_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLMetaElement"
+status = "generate"
+module_name = "dom_html_meta_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLModElement"
+status = "generate"
+module_name = "dom_html_mod_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLOListElement"
+status = "generate"
+module_name = "dom_html_o_list_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLObjectElement"
+status = "generate"
+module_name = "dom_html_object_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLOptGroupElement"
+status = "generate"
+module_name = "dom_html_opt_group_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLOptionElement"
+status = "generate"
+module_name = "dom_html_option_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLOptionsCollection"
+status = "generate"
+module_name = "dom_html_options_collection"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLParagraphElement"
+status = "generate"
+module_name = "dom_html_paragraph_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLParamElement"
+status = "generate"
+module_name = "dom_html_param_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLPreElement"
+status = "generate"
+module_name = "dom_html_pre_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLQuoteElement"
+status = "generate"
+module_name = "dom_html_quote_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLScriptElement"
+status = "generate"
+module_name = "dom_html_script_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLSelectElement"
+status = "generate"
+module_name = "dom_html_select_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLStyleElement"
+status = "generate"
+module_name = "dom_html_style_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLTableCaptionElement"
+status = "generate"
+module_name = "dom_html_table_caption_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLTableCellElement"
+status = "generate"
+module_name = "dom_html_table_cell_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLTableColElement"
+status = "generate"
+module_name = "dom_html_table_col_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLTableElement"
+status = "generate"
+module_name = "dom_html_table_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLTableRowElement"
+status = "generate"
+module_name = "dom_html_table_row_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLTableSectionElement"
+status = "generate"
+module_name = "dom_html_table_section_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLTextAreaElement"
+status = "generate"
+module_name = "dom_html_text_area_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLTitleElement"
+status = "generate"
+module_name = "dom_html_title_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMHTMLUListElement"
+status = "generate"
+module_name = "dom_html_u_list_element"
+
+[[object]]
+name = "WebKit2WebExtension.DOMKeyboardEvent"
+status = "generate"
+module_name = "dom_keyboard_event"
+
+[[object]]
+name = "WebKit2WebExtension.DOMMediaList"
+status = "generate"
+module_name = "dom_media_list"
+
+[[object]]
+name = "WebKit2WebExtension.DOMMouseEvent"
+status = "generate"
+module_name = "dom_mouse_event"
+
+[[object]]
+name = "WebKit2WebExtension.DOMNamedNodeMap"
+status = "generate"
+module_name = "dom_named_node_map"
+
+[[object]]
+name = "WebKit2WebExtension.DOMNode"
+status = "generate"
+module_name = "dom_node"
+
+[[object]]
+name = "WebKit2WebExtension.DOMNodeIterator"
+status = "generate"
+module_name = "dom_node_iterator"
+
+[[object]]
+name = "WebKit2WebExtension.DOMNodeList"
+status = "generate"
+module_name = "dom_node_list"
+
+[[object]]
+name = "WebKit2WebExtension.DOMObject"
+status = "generate"
+module_name = "dom_object"
+
+[[object]]
+name = "WebKit2WebExtension.DOMProcessingInstruction"
+status = "generate"
+module_name = "dom_processing_instruction"
+
+[[object]]
+name = "WebKit2WebExtension.DOMRange"
+status = "generate"
+module_name = "dom_range"
+
+[[object]]
+name = "WebKit2WebExtension.DOMStyleSheet"
+status = "generate"
+module_name = "dom_style_sheet"
+
+[[object]]
+name = "WebKit2WebExtension.DOMStyleSheetList"
+status = "generate"
+module_name = "dom_style_sheet_list"
+
+[[object]]
+name = "WebKit2WebExtension.DOMText"
+status = "generate"
+module_name = "dom_text"
+
+[[object]]
+name = "WebKit2WebExtension.DOMTreeWalker"
+status = "generate"
+module_name = "dom_tree_walker"
+
+[[object]]
+name = "WebKit2WebExtension.DOMUIEvent"
+status = "generate"
+module_name = "dom_ui_event"
+
+[[object]]
+name = "WebKit2WebExtension.DOMWheelEvent"
+status = "generate"
+module_name = "dom_wheel_event"
+
+[[object]]
+name = "WebKit2WebExtension.DOMXPathExpression"
+status = "generate"
+module_name = "dom_xpath_expression"
+
+[[object]]
+name = "WebKit2WebExtension.DOMXPathResult"
+status = "generate"
+module_name = "dom_xpath_result"
+
+[[object]]
+name = "WebKit2WebExtension.URIRequest"
+status = "generate"
+module_name = "uri_request"
+
+[[object]]
+name = "WebKit2WebExtension.URIResponse"
+status = "generate"
+module_name = "uri_response"

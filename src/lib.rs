@@ -2,6 +2,7 @@
 
 #[macro_use]
 extern crate glib;
+extern crate glib_sys as glib_ffi;
 extern crate gtk;
 
 extern crate webkit2webextension_sys as ffi;
@@ -21,6 +22,12 @@ macro_rules! assert_initialized_main_thread {
 
 macro_rules! skip_assert_initialized {
     () => ()
+}
+
+macro_rules! callback_guard {
+    () => (
+        let _guard = ::glib::CallbackGuard::new();
+    )
 }
 
 #[macro_export]
