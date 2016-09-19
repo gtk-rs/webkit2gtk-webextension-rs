@@ -3,6 +3,12 @@ name = "webkit2webextension"
 version = "0.1.0"
 authors = ["Antoni Boucher <bouanto@zoho.com>"]
 
+[features]
+v2_2 = ["webkit2webextension-sys/v2_2"]
+v2_8 = ["v2_2", "webkit2webextension-sys/v2_8"]
+v2_10 = ["v2_8", "webkit2webextension-sys/v2_10"]
+v2_12 = ["v2_10", "webkit2webextension-sys/v2_12"]
+
 [dependencies]
 
 [dependencies.glib]
