@@ -1,0 +1,16 @@
+[package]
+name = "example"
+version = "0.1.0"
+authors = ["Antoni Boucher <bouanto@zoho.com>"]
+
+[lib]
+crate-type = ["dylib"]
+
+[dependencies]
+glib = "^0.1"
+
+[dependencies.webkit2webextension]
+path = ".."
+
+[dependencies.webkit2webextension-sys]
+path = "../../webkit2webextension-sys"
