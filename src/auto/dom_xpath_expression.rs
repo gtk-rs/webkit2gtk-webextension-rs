@@ -14,7 +14,7 @@ glib_wrapper! {
 }
 
 impl DOMXPathExpression {
-    //pub fn evaluate<T: IsA<DOMNode>>(&self, contextNode: &T, type_: /*Unimplemented*/Fundamental: UShort, inResult: &DOMXPathResult, error: /*Ignored*/Option<Error>) -> Option<DOMXPathResult> {
+    //pub fn evaluate<T: IsA<DOMNode>>(&self, contextNode: &T, type_: /*Unimplemented*/Fundamental: UShort, inResult: &DOMXPathResult) -> Result<DOMXPathResult, Error> {
     //    unsafe { TODO: call ffi::webkit_dom_xpath_expression_evaluate() }
     //}
 }

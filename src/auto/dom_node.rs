@@ -5,9 +5,11 @@ use DOMDocument;
 use DOMElement;
 use DOMNodeList;
 use DOMObject;
+use Error;
 use ffi;
 use glib::object::IsA;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMNode(Object<ffi::WebKitDOMNode>): DOMObject;
@@ -18,7 +20,7 @@ glib_wrapper! {
 }
 
 pub trait DOMNodeExt {
-    //fn append_child<T: IsA<DOMNode>>(&self, newChild: &T, error: /*Ignored*/Option<Error>) -> Option<DOMNode>;
+    fn append_child<T: IsA<DOMNode>>(&self, newChild: &T) -> Result<DOMNode, Error>;
 
     fn clone_node(&self, deep: bool) -> Option<DOMNode>;
 
@@ -60,7 +62,7 @@ pub trait DOMNodeExt {
 
     fn has_child_nodes(&self) -> bool;
 
-    //fn insert_before<T: IsA<DOMNode>, U: IsA<DOMNode>>(&self, newChild: &T, refChild: Option<&U>, error: /*Ignored*/Option<Error>) -> Option<DOMNode>;
+    fn insert_before<T: IsA<DOMNode>, U: IsA<DOMNode>>(&self, newChild: &T, refChild: Option<&U>) -> Result<DOMNode, Error>;
 
     fn is_default_namespace(&self, namespaceURI: &str) -> bool;
 
@@ -76,21 +78,25 @@ pub trait DOMNodeExt {
 
     fn normalize(&self);
 
-    //fn remove_child<T: IsA<DOMNode>>(&self, oldChild: &T, error: /*Ignored*/Option<Error>) -> Option<DOMNode>;
+    fn remove_child<T: IsA<DOMNode>>(&self, oldChild: &T) -> Result<DOMNode, Error>;
 
-    //fn replace_child<T: IsA<DOMNode>, U: IsA<DOMNode>>(&self, newChild: &T, oldChild: &U, error: /*Ignored*/Option<Error>) -> Option<DOMNode>;
+    fn replace_child<T: IsA<DOMNode>, U: IsA<DOMNode>>(&self, newChild: &T, oldChild: &U) -> Result<DOMNode, Error>;
 
-    //fn set_node_value(&self, value: &str, error: /*Ignored*/Option<Error>);
+    fn set_node_value(&self, value: &str) -> Result<(), Error>;
 
-    //fn set_prefix(&self, value: &str, error: /*Ignored*/Option<Error>);
+    fn set_prefix(&self, value: &str) -> Result<(), Error>;
 
-    //fn set_text_content(&self, value: &str, error: /*Ignored*/Option<Error>);
+    fn set_text_content(&self, value: &str) -> Result<(), Error>;
 }
 
 impl<O: IsA<DOMNode>> DOMNodeExt for O {
-    //fn append_child<T: IsA<DOMNode>>(&self, newChild: &T, error: /*Ignored*/Option<Error>) -> Option<DOMNode> {
-    //    unsafe { TODO: call ffi::webkit_dom_node_append_child() }
-    //}
+    fn append_child<T: IsA<DOMNode>>(&self, newChild: &T) -> Result<DOMNode, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_node_append_child(self.to_glib_none().0, newChild.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     fn clone_node(&self, deep: bool) -> Option<DOMNode> {
         unsafe {
@@ -208,9 +214,13 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    //fn insert_before<T: IsA<DOMNode>, U: IsA<DOMNode>>(&self, newChild: &T, refChild: Option<&U>, error: /*Ignored*/Option<Error>) -> Option<DOMNode> {
-    //    unsafe { TODO: call ffi::webkit_dom_node_insert_before() }
-    //}
+    fn insert_before<T: IsA<DOMNode>, U: IsA<DOMNode>>(&self, newChild: &T, refChild: Option<&U>) -> Result<DOMNode, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_node_insert_before(self.to_glib_none().0, newChild.to_glib_none().0, refChild.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     fn is_default_namespace(&self, namespaceURI: &str) -> bool {
         unsafe {
@@ -254,23 +264,43 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    //fn remove_child<T: IsA<DOMNode>>(&self, oldChild: &T, error: /*Ignored*/Option<Error>) -> Option<DOMNode> {
-    //    unsafe { TODO: call ffi::webkit_dom_node_remove_child() }
-    //}
+    fn remove_child<T: IsA<DOMNode>>(&self, oldChild: &T) -> Result<DOMNode, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_node_remove_child(self.to_glib_none().0, oldChild.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn replace_child<T: IsA<DOMNode>, U: IsA<DOMNode>>(&self, newChild: &T, oldChild: &U, error: /*Ignored*/Option<Error>) -> Option<DOMNode> {
-    //    unsafe { TODO: call ffi::webkit_dom_node_replace_child() }
-    //}
+    fn replace_child<T: IsA<DOMNode>, U: IsA<DOMNode>>(&self, newChild: &T, oldChild: &U) -> Result<DOMNode, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_node_replace_child(self.to_glib_none().0, newChild.to_glib_none().0, oldChild.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn set_node_value(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_node_set_node_value() }
-    //}
+    fn set_node_value(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_node_set_node_value(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn set_prefix(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_node_set_prefix() }
-    //}
+    fn set_prefix(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_node_set_prefix(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn set_text_content(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_node_set_text_content() }
-    //}
+    fn set_text_content(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_node_set_text_content(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 }

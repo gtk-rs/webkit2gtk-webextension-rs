@@ -3,8 +3,11 @@
 
 use DOMNode;
 use DOMObject;
+use Error;
 use ffi;
+use glib::object::IsA;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMTreeWalker(Object<ffi::WebKitDOMTreeWalker>): DOMObject;
@@ -85,7 +88,11 @@ impl DOMTreeWalker {
         }
     }
 
-    //pub fn set_current_node<T: IsA<DOMNode>>(&self, value: &T, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_tree_walker_set_current_node() }
-    //}
+    pub fn set_current_node<T: IsA<DOMNode>>(&self, value: &T) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_tree_walker_set_current_node(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 }

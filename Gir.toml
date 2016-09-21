@@ -15,7 +15,12 @@ generate = [
     "WebKit2WebExtension.WebEditor",
     "WebKit2WebExtension.WebExtension",
     "WebKit2WebExtension.WebHitTestResult",
-    "WebKit2WebExtension.WebPage",]
+    "WebKit2WebExtension.WebPage",
+]
+
+manual = [
+    "GLib.Error",
+]
 
 [[object]]
 name = "WebKit2WebExtension.DOMAttr"

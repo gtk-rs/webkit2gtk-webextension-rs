@@ -6,8 +6,10 @@ use DOMHTMLCollection;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
+use Error;
 use ffi;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMHTMLTableRowElement(Object<ffi::WebKitDOMHTMLTableRowElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject;
@@ -18,9 +20,13 @@ glib_wrapper! {
 }
 
 impl DOMHTMLTableRowElement {
-    //pub fn delete_cell(&self, index: i64, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_row_element_delete_cell() }
-    //}
+    pub fn delete_cell(&self, index: i64) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_table_row_element_delete_cell(self.to_glib_none().0, index, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     pub fn get_align(&self) -> Option<String> {
         unsafe {
@@ -70,9 +76,13 @@ impl DOMHTMLTableRowElement {
         }
     }
 
-    //pub fn insert_cell(&self, index: i64, error: /*Ignored*/Option<Error>) -> Option<DOMHTMLElement> {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_row_element_insert_cell() }
-    //}
+    pub fn insert_cell(&self, index: i64) -> Result<DOMHTMLElement, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_html_table_row_element_insert_cell(self.to_glib_none().0, index, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     pub fn set_align(&self, value: &str) {
         unsafe {

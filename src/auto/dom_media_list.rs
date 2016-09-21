@@ -2,8 +2,10 @@
 // DO NOT EDIT
 
 use DOMObject;
+use Error;
 use ffi;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMMediaList(Object<ffi::WebKitDOMMediaList>): DOMObject;
@@ -14,13 +16,21 @@ glib_wrapper! {
 }
 
 impl DOMMediaList {
-    //pub fn append_medium(&self, newMedium: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_media_list_append_medium() }
-    //}
+    pub fn append_medium(&self, newMedium: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_media_list_append_medium(self.to_glib_none().0, newMedium.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //pub fn delete_medium(&self, oldMedium: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_media_list_delete_medium() }
-    //}
+    pub fn delete_medium(&self, oldMedium: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_media_list_delete_medium(self.to_glib_none().0, oldMedium.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     pub fn get_length(&self) -> u64 {
         unsafe {
@@ -40,7 +50,11 @@ impl DOMMediaList {
         }
     }
 
-    //pub fn set_media_text(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_media_list_set_media_text() }
-    //}
+    pub fn set_media_text(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_media_list_set_media_text(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 }

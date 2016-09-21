@@ -3,9 +3,11 @@
 
 use DOMNode;
 use DOMObject;
+use Error;
 use ffi;
 use glib::object::IsA;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMCharacterData(Object<ffi::WebKitDOMCharacterData>): DOMNode, DOMObject;
@@ -16,31 +18,39 @@ glib_wrapper! {
 }
 
 pub trait DOMCharacterDataExt {
-    //fn append_data(&self, data: &str, error: /*Ignored*/Option<Error>);
+    fn append_data(&self, data: &str) -> Result<(), Error>;
 
-    //fn delete_data(&self, offset: u64, length: u64, error: /*Ignored*/Option<Error>);
+    fn delete_data(&self, offset: u64, length: u64) -> Result<(), Error>;
 
     fn get_data(&self) -> Option<String>;
 
     fn get_length(&self) -> u64;
 
-    //fn insert_data(&self, offset: u64, data: &str, error: /*Ignored*/Option<Error>);
+    fn insert_data(&self, offset: u64, data: &str) -> Result<(), Error>;
 
-    //fn replace_data(&self, offset: u64, length: u64, data: &str, error: /*Ignored*/Option<Error>);
+    fn replace_data(&self, offset: u64, length: u64, data: &str) -> Result<(), Error>;
 
-    //fn set_data(&self, value: &str, error: /*Ignored*/Option<Error>);
+    fn set_data(&self, value: &str) -> Result<(), Error>;
 
-    //fn substring_data(&self, offset: u64, length: u64, error: /*Ignored*/Option<Error>) -> Option<String>;
+    fn substring_data(&self, offset: u64, length: u64) -> Result<String, Error>;
 }
 
 impl<O: IsA<DOMCharacterData>> DOMCharacterDataExt for O {
-    //fn append_data(&self, data: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_character_data_append_data() }
-    //}
+    fn append_data(&self, data: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_character_data_append_data(self.to_glib_none().0, data.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn delete_data(&self, offset: u64, length: u64, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_character_data_delete_data() }
-    //}
+    fn delete_data(&self, offset: u64, length: u64) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_character_data_delete_data(self.to_glib_none().0, offset, length, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     fn get_data(&self) -> Option<String> {
         unsafe {
@@ -54,19 +64,35 @@ impl<O: IsA<DOMCharacterData>> DOMCharacterDataExt for O {
         }
     }
 
-    //fn insert_data(&self, offset: u64, data: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_character_data_insert_data() }
-    //}
+    fn insert_data(&self, offset: u64, data: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_character_data_insert_data(self.to_glib_none().0, offset, data.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn replace_data(&self, offset: u64, length: u64, data: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_character_data_replace_data() }
-    //}
+    fn replace_data(&self, offset: u64, length: u64, data: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_character_data_replace_data(self.to_glib_none().0, offset, length, data.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn set_data(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_character_data_set_data() }
-    //}
+    fn set_data(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_character_data_set_data(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn substring_data(&self, offset: u64, length: u64, error: /*Ignored*/Option<Error>) -> Option<String> {
-    //    unsafe { TODO: call ffi::webkit_dom_character_data_substring_data() }
-    //}
+    fn substring_data(&self, offset: u64, length: u64) -> Result<String, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_character_data_substring_data(self.to_glib_none().0, offset, length, &mut error);
+            if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 }

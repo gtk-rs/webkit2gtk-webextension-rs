@@ -9,9 +9,11 @@ use DOMNamedNodeMap;
 use DOMNode;
 use DOMNodeList;
 use DOMObject;
+use Error;
 use ffi;
 use glib::object::IsA;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMElement(Object<ffi::WebKitDOMElement>): DOMNode, DOMObject;
@@ -110,13 +112,13 @@ pub trait DOMElementExt {
 
     fn has_attributes(&self) -> bool;
 
-    //fn query_selector(&self, selectors: &str, error: /*Ignored*/Option<Error>) -> Option<DOMElement>;
+    fn query_selector(&self, selectors: &str) -> Result<DOMElement, Error>;
 
-    //fn query_selector_all(&self, selectors: &str, error: /*Ignored*/Option<Error>) -> Option<DOMNodeList>;
+    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error>;
 
     fn remove_attribute(&self, name: &str);
 
-    //fn remove_attribute_node(&self, oldAttr: &DOMAttr, error: /*Ignored*/Option<Error>) -> Option<DOMAttr>;
+    fn remove_attribute_node(&self, oldAttr: &DOMAttr) -> Result<DOMAttr, Error>;
 
     fn remove_attribute_ns(&self, namespaceURI: &str, localName: &str);
 
@@ -128,23 +130,23 @@ pub trait DOMElementExt {
 
     fn scroll_into_view_if_needed(&self, centerIfNeeded: bool);
 
-    //fn set_attribute(&self, name: &str, value: &str, error: /*Ignored*/Option<Error>);
+    fn set_attribute(&self, name: &str, value: &str) -> Result<(), Error>;
 
-    //fn set_attribute_node(&self, newAttr: &DOMAttr, error: /*Ignored*/Option<Error>) -> Option<DOMAttr>;
+    fn set_attribute_node(&self, newAttr: &DOMAttr) -> Result<DOMAttr, Error>;
 
-    //fn set_attribute_node_ns(&self, newAttr: &DOMAttr, error: /*Ignored*/Option<Error>) -> Option<DOMAttr>;
+    fn set_attribute_node_ns(&self, newAttr: &DOMAttr) -> Result<DOMAttr, Error>;
 
-    //fn set_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str, value: &str, error: /*Ignored*/Option<Error>);
+    fn set_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str, value: &str) -> Result<(), Error>;
 
     fn set_class_name(&self, value: &str);
 
     fn set_id(&self, value: &str);
 
-    //#[cfg(feature = "v2_8")]
-    //fn set_inner_html(&self, value: &str, error: /*Ignored*/Option<Error>);
+    #[cfg(feature = "v2_8")]
+    fn set_inner_html(&self, value: &str) -> Result<(), Error>;
 
-    //#[cfg(feature = "v2_8")]
-    //fn set_outer_html(&self, value: &str, error: /*Ignored*/Option<Error>);
+    #[cfg(feature = "v2_8")]
+    fn set_outer_html(&self, value: &str) -> Result<(), Error>;
 
     fn set_scroll_left(&self, value: i64);
 
@@ -404,13 +406,21 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    //fn query_selector(&self, selectors: &str, error: /*Ignored*/Option<Error>) -> Option<DOMElement> {
-    //    unsafe { TODO: call ffi::webkit_dom_element_query_selector() }
-    //}
+    fn query_selector(&self, selectors: &str) -> Result<DOMElement, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_element_query_selector(self.to_glib_none().0, selectors.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn query_selector_all(&self, selectors: &str, error: /*Ignored*/Option<Error>) -> Option<DOMNodeList> {
-    //    unsafe { TODO: call ffi::webkit_dom_element_query_selector_all() }
-    //}
+    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_element_query_selector_all(self.to_glib_none().0, selectors.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     fn remove_attribute(&self, name: &str) {
         unsafe {
@@ -418,9 +428,13 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    //fn remove_attribute_node(&self, oldAttr: &DOMAttr, error: /*Ignored*/Option<Error>) -> Option<DOMAttr> {
-    //    unsafe { TODO: call ffi::webkit_dom_element_remove_attribute_node() }
-    //}
+    fn remove_attribute_node(&self, oldAttr: &DOMAttr) -> Result<DOMAttr, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_element_remove_attribute_node(self.to_glib_none().0, oldAttr.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     fn remove_attribute_ns(&self, namespaceURI: &str, localName: &str) {
         unsafe {
@@ -452,21 +466,37 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    //fn set_attribute(&self, name: &str, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_element_set_attribute() }
-    //}
+    fn set_attribute(&self, name: &str, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_element_set_attribute(self.to_glib_none().0, name.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn set_attribute_node(&self, newAttr: &DOMAttr, error: /*Ignored*/Option<Error>) -> Option<DOMAttr> {
-    //    unsafe { TODO: call ffi::webkit_dom_element_set_attribute_node() }
-    //}
+    fn set_attribute_node(&self, newAttr: &DOMAttr) -> Result<DOMAttr, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_element_set_attribute_node(self.to_glib_none().0, newAttr.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn set_attribute_node_ns(&self, newAttr: &DOMAttr, error: /*Ignored*/Option<Error>) -> Option<DOMAttr> {
-    //    unsafe { TODO: call ffi::webkit_dom_element_set_attribute_node_ns() }
-    //}
+    fn set_attribute_node_ns(&self, newAttr: &DOMAttr) -> Result<DOMAttr, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_element_set_attribute_node_ns(self.to_glib_none().0, newAttr.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn set_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_element_set_attribute_ns() }
-    //}
+    fn set_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_element_set_attribute_ns(self.to_glib_none().0, namespaceURI.to_glib_none().0, qualifiedName.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     fn set_class_name(&self, value: &str) {
         unsafe {
@@ -480,15 +510,23 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    //#[cfg(feature = "v2_8")]
-    //fn set_inner_html(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_element_set_inner_html() }
-    //}
+    #[cfg(feature = "v2_8")]
+    fn set_inner_html(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_element_set_inner_html(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //#[cfg(feature = "v2_8")]
-    //fn set_outer_html(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_element_set_outer_html() }
-    //}
+    #[cfg(feature = "v2_8")]
+    fn set_outer_html(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_element_set_outer_html(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     fn set_scroll_left(&self, value: i64) {
         unsafe {

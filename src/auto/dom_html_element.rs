@@ -5,9 +5,11 @@ use DOMElement;
 use DOMHTMLCollection;
 use DOMNode;
 use DOMObject;
+use Error;
 use ffi;
 use glib::object::IsA;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMHTMLElement(Object<ffi::WebKitDOMHTMLElement>): DOMElement, DOMNode, DOMObject;
@@ -46,19 +48,19 @@ pub trait DOMHTMLElementExt {
 
     fn set_access_key(&self, value: &str);
 
-    //fn set_content_editable(&self, value: &str, error: /*Ignored*/Option<Error>);
+    fn set_content_editable(&self, value: &str) -> Result<(), Error>;
 
     fn set_dir(&self, value: &str);
 
-    //fn set_inner_html(&self, contents: &str, error: /*Ignored*/Option<Error>);
+    fn set_inner_html(&self, contents: &str) -> Result<(), Error>;
 
-    //fn set_inner_text(&self, value: &str, error: /*Ignored*/Option<Error>);
+    fn set_inner_text(&self, value: &str) -> Result<(), Error>;
 
     fn set_lang(&self, value: &str);
 
-    //fn set_outer_html(&self, contents: &str, error: /*Ignored*/Option<Error>);
+    fn set_outer_html(&self, contents: &str) -> Result<(), Error>;
 
-    //fn set_outer_text(&self, value: &str, error: /*Ignored*/Option<Error>);
+    fn set_outer_text(&self, value: &str) -> Result<(), Error>;
 
     fn set_tab_index(&self, value: i64);
 
@@ -150,9 +152,13 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         }
     }
 
-    //fn set_content_editable(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_element_set_content_editable() }
-    //}
+    fn set_content_editable(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_element_set_content_editable(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     fn set_dir(&self, value: &str) {
         unsafe {
@@ -160,13 +166,21 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         }
     }
 
-    //fn set_inner_html(&self, contents: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_element_set_inner_html() }
-    //}
+    fn set_inner_html(&self, contents: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_element_set_inner_html(self.to_glib_none().0, contents.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn set_inner_text(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_element_set_inner_text() }
-    //}
+    fn set_inner_text(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_element_set_inner_text(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     fn set_lang(&self, value: &str) {
         unsafe {
@@ -174,13 +188,21 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         }
     }
 
-    //fn set_outer_html(&self, contents: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_element_set_outer_html() }
-    //}
+    fn set_outer_html(&self, contents: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_element_set_outer_html(self.to_glib_none().0, contents.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn set_outer_text(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_element_set_outer_text() }
-    //}
+    fn set_outer_text(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_element_set_outer_text(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     fn set_tab_index(&self, value: i64) {
         unsafe {

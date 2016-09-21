@@ -3,8 +3,10 @@
 
 use DOMCSSRule;
 use DOMObject;
+use Error;
 use ffi;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMCSSStyleDeclaration(Object<ffi::WebKitDOMCSSStyleDeclaration>): DOMObject;
@@ -63,15 +65,27 @@ impl DOMCSSStyleDeclaration {
         }
     }
 
-    //pub fn remove_property(&self, propertyName: &str, error: /*Ignored*/Option<Error>) -> Option<String> {
-    //    unsafe { TODO: call ffi::webkit_dom_css_style_declaration_remove_property() }
-    //}
+    pub fn remove_property(&self, propertyName: &str) -> Result<String, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_css_style_declaration_remove_property(self.to_glib_none().0, propertyName.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //pub fn set_css_text(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_css_style_declaration_set_css_text() }
-    //}
+    pub fn set_css_text(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_css_style_declaration_set_css_text(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //pub fn set_property(&self, propertyName: &str, value: &str, priority: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_css_style_declaration_set_property() }
-    //}
+    pub fn set_property(&self, propertyName: &str, value: &str, priority: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_css_style_declaration_set_property(self.to_glib_none().0, propertyName.to_glib_none().0, value.to_glib_none().0, priority.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 }

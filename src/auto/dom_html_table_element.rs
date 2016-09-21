@@ -8,8 +8,10 @@ use DOMHTMLTableCaptionElement;
 use DOMHTMLTableSectionElement;
 use DOMNode;
 use DOMObject;
+use Error;
 use ffi;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMHTMLTableElement(Object<ffi::WebKitDOMHTMLTableElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject;
@@ -44,9 +46,13 @@ impl DOMHTMLTableElement {
         }
     }
 
-    //pub fn delete_row(&self, index: i64, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_element_delete_row() }
-    //}
+    pub fn delete_row(&self, index: i64) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_table_element_delete_row(self.to_glib_none().0, index, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     pub fn delete_t_foot(&self) {
         unsafe {
@@ -138,9 +144,13 @@ impl DOMHTMLTableElement {
         }
     }
 
-    //pub fn insert_row(&self, index: i64, error: /*Ignored*/Option<Error>) -> Option<DOMHTMLElement> {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_element_insert_row() }
-    //}
+    pub fn insert_row(&self, index: i64) -> Result<DOMHTMLElement, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_html_table_element_insert_row(self.to_glib_none().0, index, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     pub fn set_align(&self, value: &str) {
         unsafe {
@@ -160,9 +170,13 @@ impl DOMHTMLTableElement {
         }
     }
 
-    //pub fn set_caption(&self, value: &DOMHTMLTableCaptionElement, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_element_set_caption() }
-    //}
+    pub fn set_caption(&self, value: &DOMHTMLTableCaptionElement) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_table_element_set_caption(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     pub fn set_cell_padding(&self, value: &str) {
         unsafe {
@@ -188,13 +202,21 @@ impl DOMHTMLTableElement {
         }
     }
 
-    //pub fn set_t_foot(&self, value: &DOMHTMLTableSectionElement, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_element_set_t_foot() }
-    //}
+    pub fn set_t_foot(&self, value: &DOMHTMLTableSectionElement) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_table_element_set_t_foot(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //pub fn set_t_head(&self, value: &DOMHTMLTableSectionElement, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_element_set_t_head() }
-    //}
+    pub fn set_t_head(&self, value: &DOMHTMLTableSectionElement) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_table_element_set_t_head(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     pub fn set_width(&self, value: &str) {
         unsafe {

@@ -4,8 +4,10 @@
 use DOMElement;
 use DOMNode;
 use DOMObject;
+use Error;
 use ffi;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMAttr(Object<ffi::WebKitDOMAttr>): DOMNode, DOMObject;
@@ -40,7 +42,11 @@ impl DOMAttr {
         }
     }
 
-    //pub fn set_value(&self, value: &str, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_attr_set_value() }
-    //}
+    pub fn set_value(&self, value: &str) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_attr_set_value(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 }

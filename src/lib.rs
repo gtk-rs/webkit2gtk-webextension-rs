@@ -11,6 +11,8 @@ extern crate gtk;
 
 extern crate webkit2gtk_webextension_sys as ffi;
 
+pub use glib::Error;
+
 macro_rules! assert_initialized_main_thread {
     () => (
         if !::gtk::is_initialized_main_thread() {

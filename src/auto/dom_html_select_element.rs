@@ -7,8 +7,11 @@ use DOMHTMLFormElement;
 use DOMHTMLOptionsCollection;
 use DOMNode;
 use DOMObject;
+use Error;
 use ffi;
+use glib::object::IsA;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMHTMLSelectElement(Object<ffi::WebKitDOMHTMLSelectElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject;
@@ -19,9 +22,13 @@ glib_wrapper! {
 }
 
 impl DOMHTMLSelectElement {
-    //pub fn add<T: IsA<DOMHTMLElement>, U: IsA<DOMHTMLElement>>(&self, element: &T, before: &U, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_select_element_add() }
-    //}
+    pub fn add<T: IsA<DOMHTMLElement>, U: IsA<DOMHTMLElement>>(&self, element: &T, before: &U) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_select_element_add(self.to_glib_none().0, element.to_glib_none().0, before.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     pub fn get_autofocus(&self) -> bool {
         unsafe {
@@ -125,9 +132,13 @@ impl DOMHTMLSelectElement {
         }
     }
 
-    //pub fn set_length(&self, value: u64, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_select_element_set_length() }
-    //}
+    pub fn set_length(&self, value: u64) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_select_element_set_length(self.to_glib_none().0, value, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     pub fn set_multiple(&self, value: bool) {
         unsafe {

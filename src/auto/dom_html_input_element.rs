@@ -7,8 +7,10 @@ use DOMHTMLElement;
 use DOMHTMLFormElement;
 use DOMNode;
 use DOMObject;
+use Error;
 use ffi;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMHTMLInputElement(Object<ffi::WebKitDOMHTMLInputElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject;
@@ -235,9 +237,13 @@ impl DOMHTMLInputElement {
         }
     }
 
-    //pub fn set_max_length(&self, value: i64, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_input_element_set_max_length() }
-    //}
+    pub fn set_max_length(&self, value: i64) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_input_element_set_max_length(self.to_glib_none().0, value, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     pub fn set_multiple(&self, value: bool) {
         unsafe {
@@ -257,9 +263,13 @@ impl DOMHTMLInputElement {
         }
     }
 
-    //pub fn set_size(&self, value: u64, error: /*Ignored*/Option<Error>) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_input_element_set_size() }
-    //}
+    pub fn set_size(&self, value: u64) -> Result<(), Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let _ = ffi::webkit_dom_html_input_element_set_size(self.to_glib_none().0, value, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     pub fn set_src(&self, value: &str) {
         unsafe {

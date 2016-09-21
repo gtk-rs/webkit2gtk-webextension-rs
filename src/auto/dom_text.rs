@@ -4,9 +4,11 @@
 use DOMCharacterData;
 use DOMNode;
 use DOMObject;
+use Error;
 use ffi;
 use glib::object::IsA;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMText(Object<ffi::WebKitDOMText>): DOMCharacterData, DOMNode, DOMObject;
@@ -19,9 +21,9 @@ glib_wrapper! {
 pub trait DOMTextExt {
     fn get_whole_text(&self) -> Option<String>;
 
-    //fn replace_whole_text(&self, content: &str, error: /*Ignored*/Option<Error>) -> Option<DOMText>;
+    fn replace_whole_text(&self, content: &str) -> Result<DOMText, Error>;
 
-    //fn split_text(&self, offset: u64, error: /*Ignored*/Option<Error>) -> Option<DOMText>;
+    fn split_text(&self, offset: u64) -> Result<DOMText, Error>;
 }
 
 impl<O: IsA<DOMText>> DOMTextExt for O {
@@ -31,11 +33,19 @@ impl<O: IsA<DOMText>> DOMTextExt for O {
         }
     }
 
-    //fn replace_whole_text(&self, content: &str, error: /*Ignored*/Option<Error>) -> Option<DOMText> {
-    //    unsafe { TODO: call ffi::webkit_dom_text_replace_whole_text() }
-    //}
+    fn replace_whole_text(&self, content: &str) -> Result<DOMText, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_text_replace_whole_text(self.to_glib_none().0, content.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //fn split_text(&self, offset: u64, error: /*Ignored*/Option<Error>) -> Option<DOMText> {
-    //    unsafe { TODO: call ffi::webkit_dom_text_split_text() }
-    //}
+    fn split_text(&self, offset: u64) -> Result<DOMText, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_text_split_text(self.to_glib_none().0, offset, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 }

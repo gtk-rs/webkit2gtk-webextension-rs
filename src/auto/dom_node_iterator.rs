@@ -3,8 +3,10 @@
 
 use DOMNode;
 use DOMObject;
+use Error;
 use ffi;
 use glib::translate::*;
+use std::ptr;
 
 glib_wrapper! {
     pub struct DOMNodeIterator(Object<ffi::WebKitDOMNodeIterator>): DOMObject;
@@ -55,11 +57,19 @@ impl DOMNodeIterator {
         }
     }
 
-    //pub fn next_node(&self, error: /*Ignored*/Option<Error>) -> Option<DOMNode> {
-    //    unsafe { TODO: call ffi::webkit_dom_node_iterator_next_node() }
-    //}
+    pub fn next_node(&self) -> Result<DOMNode, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_node_iterator_next_node(self.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
-    //pub fn previous_node(&self, error: /*Ignored*/Option<Error>) -> Option<DOMNode> {
-    //    unsafe { TODO: call ffi::webkit_dom_node_iterator_previous_node() }
-    //}
+    pub fn previous_node(&self) -> Result<DOMNode, Error> {
+        unsafe {
+            let mut error = ptr::null_mut();
+            let ret = ffi::webkit_dom_node_iterator_previous_node(self.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 }
