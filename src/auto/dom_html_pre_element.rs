@@ -17,9 +17,11 @@ glib_wrapper! {
 }
 
 impl DOMHTMLPreElement {
-    //pub fn get_width(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_pre_element_get_width() }
-    //}
+    pub fn get_width(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_pre_element_get_width(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_wrap(&self) -> bool {
         unsafe {
@@ -27,9 +29,11 @@ impl DOMHTMLPreElement {
         }
     }
 
-    //pub fn set_width(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_pre_element_set_width() }
-    //}
+    pub fn set_width(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_pre_element_set_width(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_wrap(&self, value: bool) {
         unsafe {

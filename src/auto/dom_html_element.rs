@@ -40,7 +40,7 @@ pub trait DOMHTMLElementExt {
 
     fn get_outer_text(&self) -> Option<String>;
 
-    //fn get_tab_index(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_tab_index(&self) -> i64;
 
     fn get_title(&self) -> Option<String>;
 
@@ -60,7 +60,7 @@ pub trait DOMHTMLElementExt {
 
     //fn set_outer_text(&self, value: &str, error: /*Ignored*/Option<Error>);
 
-    //fn set_tab_index(&self, value: /*Unimplemented*/Fundamental: Long);
+    fn set_tab_index(&self, value: i64);
 
     fn set_title(&self, value: &str);
 }
@@ -132,9 +132,11 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         }
     }
 
-    //fn get_tab_index(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_element_get_tab_index() }
-    //}
+    fn get_tab_index(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_element_get_tab_index(self.to_glib_none().0)
+        }
+    }
 
     fn get_title(&self) -> Option<String> {
         unsafe {
@@ -180,9 +182,11 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
     //    unsafe { TODO: call ffi::webkit_dom_html_element_set_outer_text() }
     //}
 
-    //fn set_tab_index(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_element_set_tab_index() }
-    //}
+    fn set_tab_index(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_element_set_tab_index(self.to_glib_none().0, value);
+        }
+    }
 
     fn set_title(&self, value: &str) {
         unsafe {

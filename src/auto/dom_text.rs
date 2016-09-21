@@ -21,7 +21,7 @@ pub trait DOMTextExt {
 
     //fn replace_whole_text(&self, content: &str, error: /*Ignored*/Option<Error>) -> Option<DOMText>;
 
-    //fn split_text(&self, offset: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) -> Option<DOMText>;
+    //fn split_text(&self, offset: u64, error: /*Ignored*/Option<Error>) -> Option<DOMText>;
 }
 
 impl<O: IsA<DOMText>> DOMTextExt for O {
@@ -35,7 +35,7 @@ impl<O: IsA<DOMText>> DOMTextExt for O {
     //    unsafe { TODO: call ffi::webkit_dom_text_replace_whole_text() }
     //}
 
-    //fn split_text(&self, offset: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) -> Option<DOMText> {
+    //fn split_text(&self, offset: u64, error: /*Ignored*/Option<Error>) -> Option<DOMText> {
     //    unsafe { TODO: call ffi::webkit_dom_text_split_text() }
     //}
 }

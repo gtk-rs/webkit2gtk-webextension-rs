@@ -23,9 +23,11 @@ impl DOMHTMLOListElement {
         }
     }
 
-    //pub fn get_start(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_o_list_element_get_start() }
-    //}
+    pub fn get_start(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_o_list_element_get_start(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_type_attr(&self) -> Option<String> {
         unsafe {
@@ -39,9 +41,11 @@ impl DOMHTMLOListElement {
         }
     }
 
-    //pub fn set_start(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_o_list_element_set_start() }
-    //}
+    pub fn set_start(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_o_list_element_set_start(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_type_attr(&self, value: &str) {
         unsafe {

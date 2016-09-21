@@ -1,13 +1,13 @@
 [package]
-name = "webkit2webextension"
+name = "webkit2gtk-webextension"
 version = "0.1.0"
 authors = ["Antoni Boucher <bouanto@zoho.com>"]
 
 [features]
-v2_2 = ["webkit2webextension-sys/v2_2"]
-v2_8 = ["v2_2", "webkit2webextension-sys/v2_8"]
-v2_10 = ["v2_8", "webkit2webextension-sys/v2_10"]
-v2_12 = ["v2_10", "webkit2webextension-sys/v2_12"]
+v2_2 = ["webkit2gtk-webextension-sys/v2_2"]
+v2_8 = ["v2_2", "webkit2gtk-webextension-sys/v2_8"]
+v2_10 = ["v2_8", "webkit2gtk-webextension-sys/v2_10"]
+v2_12 = ["v2_10", "webkit2gtk-webextension-sys/v2_12"]
 
 [dependencies]
 
@@ -23,5 +23,6 @@ version = "0.3.1"
 git = "https://github.com/gtk-rs/gtk"
 version = "0.1.0"
 
-[dependencies.webkit2webextension-sys]
-path = "../webkit2webextension-sys"
+[dependencies.webkit2gtk-webextension-sys]
+git = "https://github.com/antoyo/webkit2gtk-webextension-sys-rs"
+version = "^0.2"

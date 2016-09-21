@@ -36,7 +36,7 @@ pub trait DOMElementExt {
 
     fn get_attributes(&self) -> Option<DOMNamedNodeMap>;
 
-    //fn get_child_element_count(&self) -> /*Unimplemented*/Fundamental: ULong;
+    fn get_child_element_count(&self) -> u64;
 
     #[cfg(feature = "v2_10")]
     fn get_children(&self) -> Option<DOMHTMLCollection>;
@@ -92,13 +92,13 @@ pub trait DOMElementExt {
 
     fn get_previous_element_sibling(&self) -> Option<DOMElement>;
 
-    //fn get_scroll_height(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_scroll_height(&self) -> i64;
 
-    //fn get_scroll_left(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_scroll_left(&self) -> i64;
 
-    //fn get_scroll_top(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_scroll_top(&self) -> i64;
 
-    //fn get_scroll_width(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_scroll_width(&self) -> i64;
 
     fn get_style(&self) -> Option<DOMCSSStyleDeclaration>;
 
@@ -120,9 +120,9 @@ pub trait DOMElementExt {
 
     fn remove_attribute_ns(&self, namespaceURI: &str, localName: &str);
 
-    //fn scroll_by_lines(&self, lines: /*Unimplemented*/Fundamental: Long);
+    fn scroll_by_lines(&self, lines: i64);
 
-    //fn scroll_by_pages(&self, pages: /*Unimplemented*/Fundamental: Long);
+    fn scroll_by_pages(&self, pages: i64);
 
     fn scroll_into_view(&self, alignWithTop: bool);
 
@@ -146,9 +146,9 @@ pub trait DOMElementExt {
     //#[cfg(feature = "v2_8")]
     //fn set_outer_html(&self, value: &str, error: /*Ignored*/Option<Error>);
 
-    //fn set_scroll_left(&self, value: /*Unimplemented*/Fundamental: Long);
+    fn set_scroll_left(&self, value: i64);
 
-    //fn set_scroll_top(&self, value: /*Unimplemented*/Fundamental: Long);
+    fn set_scroll_top(&self, value: i64);
 }
 
 impl<O: IsA<DOMElement>> DOMElementExt for O {
@@ -194,9 +194,11 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    //fn get_child_element_count(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_element_get_child_element_count() }
-    //}
+    fn get_child_element_count(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_element_get_child_element_count(self.to_glib_none().0)
+        }
+    }
 
     #[cfg(feature = "v2_10")]
     fn get_children(&self) -> Option<DOMHTMLCollection> {
@@ -348,21 +350,29 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    //fn get_scroll_height(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_element_get_scroll_height() }
-    //}
+    fn get_scroll_height(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_element_get_scroll_height(self.to_glib_none().0)
+        }
+    }
 
-    //fn get_scroll_left(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_element_get_scroll_left() }
-    //}
+    fn get_scroll_left(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_element_get_scroll_left(self.to_glib_none().0)
+        }
+    }
 
-    //fn get_scroll_top(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_element_get_scroll_top() }
-    //}
+    fn get_scroll_top(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_element_get_scroll_top(self.to_glib_none().0)
+        }
+    }
 
-    //fn get_scroll_width(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_element_get_scroll_width() }
-    //}
+    fn get_scroll_width(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_element_get_scroll_width(self.to_glib_none().0)
+        }
+    }
 
     fn get_style(&self) -> Option<DOMCSSStyleDeclaration> {
         unsafe {
@@ -418,13 +428,17 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    //fn scroll_by_lines(&self, lines: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_element_scroll_by_lines() }
-    //}
+    fn scroll_by_lines(&self, lines: i64) {
+        unsafe {
+            ffi::webkit_dom_element_scroll_by_lines(self.to_glib_none().0, lines);
+        }
+    }
 
-    //fn scroll_by_pages(&self, pages: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_element_scroll_by_pages() }
-    //}
+    fn scroll_by_pages(&self, pages: i64) {
+        unsafe {
+            ffi::webkit_dom_element_scroll_by_pages(self.to_glib_none().0, pages);
+        }
+    }
 
     fn scroll_into_view(&self, alignWithTop: bool) {
         unsafe {
@@ -476,11 +490,15 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
     //    unsafe { TODO: call ffi::webkit_dom_element_set_outer_html() }
     //}
 
-    //fn set_scroll_left(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_element_set_scroll_left() }
-    //}
+    fn set_scroll_left(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_element_set_scroll_left(self.to_glib_none().0, value);
+        }
+    }
 
-    //fn set_scroll_top(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_element_set_scroll_top() }
-    //}
+    fn set_scroll_top(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_element_set_scroll_top(self.to_glib_none().0, value);
+        }
+    }
 }

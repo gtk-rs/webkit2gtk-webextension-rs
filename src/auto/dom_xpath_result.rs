@@ -36,7 +36,7 @@ impl DOMXPathResult {
     //    unsafe { TODO: call ffi::webkit_dom_xpath_result_get_single_node_value() }
     //}
 
-    //pub fn get_snapshot_length(&self, error: /*Ignored*/Option<Error>) -> /*Unimplemented*/Fundamental: ULong {
+    //pub fn get_snapshot_length(&self, error: /*Ignored*/Option<Error>) -> u64 {
     //    unsafe { TODO: call ffi::webkit_dom_xpath_result_get_snapshot_length() }
     //}
 
@@ -48,7 +48,7 @@ impl DOMXPathResult {
     //    unsafe { TODO: call ffi::webkit_dom_xpath_result_iterate_next() }
     //}
 
-    //pub fn snapshot_item(&self, index: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) -> Option<DOMNode> {
+    //pub fn snapshot_item(&self, index: u64, error: /*Ignored*/Option<Error>) -> Option<DOMNode> {
     //    unsafe { TODO: call ffi::webkit_dom_xpath_result_snapshot_item() }
     //}
 }

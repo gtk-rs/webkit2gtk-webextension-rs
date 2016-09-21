@@ -22,9 +22,11 @@ impl DOMMediaList {
     //    unsafe { TODO: call ffi::webkit_dom_media_list_delete_medium() }
     //}
 
-    //pub fn get_length(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_media_list_get_length() }
-    //}
+    pub fn get_length(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_media_list_get_length(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_media_text(&self) -> Option<String> {
         unsafe {
@@ -32,9 +34,11 @@ impl DOMMediaList {
         }
     }
 
-    //pub fn item(&self, index: /*Unimplemented*/Fundamental: ULong) -> Option<String> {
-    //    unsafe { TODO: call ffi::webkit_dom_media_list_item() }
-    //}
+    pub fn item(&self, index: u64) -> Option<String> {
+        unsafe {
+            from_glib_full(ffi::webkit_dom_media_list_item(self.to_glib_none().0, index))
+        }
+    }
 
     //pub fn set_media_text(&self, value: &str, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_media_list_set_media_text() }

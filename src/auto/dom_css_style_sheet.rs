@@ -17,11 +17,11 @@ glib_wrapper! {
 }
 
 impl DOMCSSStyleSheet {
-    //pub fn add_rule(&self, selector: &str, style: &str, index: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) -> /*Unimplemented*/Fundamental: Long {
+    //pub fn add_rule(&self, selector: &str, style: &str, index: u64, error: /*Ignored*/Option<Error>) -> i64 {
     //    unsafe { TODO: call ffi::webkit_dom_css_style_sheet_add_rule() }
     //}
 
-    //pub fn delete_rule(&self, index: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) {
+    //pub fn delete_rule(&self, index: u64, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_css_style_sheet_delete_rule() }
     //}
 
@@ -43,11 +43,11 @@ impl DOMCSSStyleSheet {
         }
     }
 
-    //pub fn insert_rule(&self, rule: &str, index: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) -> /*Unimplemented*/Fundamental: ULong {
+    //pub fn insert_rule(&self, rule: &str, index: u64, error: /*Ignored*/Option<Error>) -> u64 {
     //    unsafe { TODO: call ffi::webkit_dom_css_style_sheet_insert_rule() }
     //}
 
-    //pub fn remove_rule(&self, index: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) {
+    //pub fn remove_rule(&self, index: u64, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_css_style_sheet_remove_rule() }
     //}
 }

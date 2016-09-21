@@ -77,9 +77,11 @@ impl DOMHTMLDocument {
         }
     }
 
-    //pub fn get_height(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_document_get_height() }
-    //}
+    pub fn get_height(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_document_get_height(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_link_color(&self) -> Option<String> {
         unsafe {
@@ -105,9 +107,11 @@ impl DOMHTMLDocument {
         }
     }
 
-    //pub fn get_width(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_document_get_width() }
-    //}
+    pub fn get_width(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_document_get_width(self.to_glib_none().0)
+        }
+    }
 
     pub fn release_events(&self) {
         unsafe {

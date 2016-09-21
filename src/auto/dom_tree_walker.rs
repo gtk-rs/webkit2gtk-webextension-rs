@@ -43,9 +43,11 @@ impl DOMTreeWalker {
         }
     }
 
-    //pub fn get_what_to_show(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_tree_walker_get_what_to_show() }
-    //}
+    pub fn get_what_to_show(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_tree_walker_get_what_to_show(self.to_glib_none().0)
+        }
+    }
 
     pub fn last_child(&self) -> Option<DOMNode> {
         unsafe {

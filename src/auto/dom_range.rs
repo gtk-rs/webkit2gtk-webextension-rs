@@ -35,7 +35,7 @@ impl DOMRange {
     //    unsafe { TODO: call ffi::webkit_dom_range_compare_node() }
     //}
 
-    //pub fn compare_point<T: IsA<DOMNode>>(&self, refNode: &T, offset: /*Unimplemented*/Fundamental: Long, error: /*Ignored*/Option<Error>) -> /*Unimplemented*/Fundamental: Short {
+    //pub fn compare_point<T: IsA<DOMNode>>(&self, refNode: &T, offset: i64, error: /*Ignored*/Option<Error>) -> /*Unimplemented*/Fundamental: Short {
     //    unsafe { TODO: call ffi::webkit_dom_range_compare_point() }
     //}
 
@@ -67,7 +67,7 @@ impl DOMRange {
     //    unsafe { TODO: call ffi::webkit_dom_range_get_end_container() }
     //}
 
-    //pub fn get_end_offset(&self, error: /*Ignored*/Option<Error>) -> /*Unimplemented*/Fundamental: Long {
+    //pub fn get_end_offset(&self, error: /*Ignored*/Option<Error>) -> i64 {
     //    unsafe { TODO: call ffi::webkit_dom_range_get_end_offset() }
     //}
 
@@ -75,7 +75,7 @@ impl DOMRange {
     //    unsafe { TODO: call ffi::webkit_dom_range_get_start_container() }
     //}
 
-    //pub fn get_start_offset(&self, error: /*Ignored*/Option<Error>) -> /*Unimplemented*/Fundamental: Long {
+    //pub fn get_start_offset(&self, error: /*Ignored*/Option<Error>) -> i64 {
     //    unsafe { TODO: call ffi::webkit_dom_range_get_start_offset() }
     //}
 
@@ -93,7 +93,7 @@ impl DOMRange {
     //    unsafe { TODO: call ffi::webkit_dom_range_intersects_node() }
     //}
 
-    //pub fn is_point_in_range<T: IsA<DOMNode>>(&self, refNode: &T, offset: /*Unimplemented*/Fundamental: Long, error: /*Ignored*/Option<Error>) -> bool {
+    //pub fn is_point_in_range<T: IsA<DOMNode>>(&self, refNode: &T, offset: i64, error: /*Ignored*/Option<Error>) -> bool {
     //    unsafe { TODO: call ffi::webkit_dom_range_is_point_in_range() }
     //}
 
@@ -105,7 +105,7 @@ impl DOMRange {
     //    unsafe { TODO: call ffi::webkit_dom_range_select_node_contents() }
     //}
 
-    //pub fn set_end<T: IsA<DOMNode>>(&self, refNode: &T, offset: /*Unimplemented*/Fundamental: Long, error: /*Ignored*/Option<Error>) {
+    //pub fn set_end<T: IsA<DOMNode>>(&self, refNode: &T, offset: i64, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_range_set_end() }
     //}
 
@@ -117,7 +117,7 @@ impl DOMRange {
     //    unsafe { TODO: call ffi::webkit_dom_range_set_end_before() }
     //}
 
-    //pub fn set_start<T: IsA<DOMNode>>(&self, refNode: &T, offset: /*Unimplemented*/Fundamental: Long, error: /*Ignored*/Option<Error>) {
+    //pub fn set_start<T: IsA<DOMNode>>(&self, refNode: &T, offset: i64, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_range_set_start() }
     //}
 

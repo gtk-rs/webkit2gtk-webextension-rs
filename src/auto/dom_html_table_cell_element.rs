@@ -41,9 +41,11 @@ impl DOMHTMLTableCellElement {
         }
     }
 
-    //pub fn get_cell_index(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_cell_element_get_cell_index() }
-    //}
+    pub fn get_cell_index(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_table_cell_element_get_cell_index(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_ch(&self) -> Option<String> {
         unsafe {
@@ -57,9 +59,11 @@ impl DOMHTMLTableCellElement {
         }
     }
 
-    //pub fn get_col_span(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_cell_element_get_col_span() }
-    //}
+    pub fn get_col_span(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_table_cell_element_get_col_span(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_headers(&self) -> Option<String> {
         unsafe {
@@ -79,9 +83,11 @@ impl DOMHTMLTableCellElement {
         }
     }
 
-    //pub fn get_row_span(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_cell_element_get_row_span() }
-    //}
+    pub fn get_row_span(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_table_cell_element_get_row_span(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_scope(&self) -> Option<String> {
         unsafe {
@@ -137,9 +143,11 @@ impl DOMHTMLTableCellElement {
         }
     }
 
-    //pub fn set_col_span(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_cell_element_set_col_span() }
-    //}
+    pub fn set_col_span(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_table_cell_element_set_col_span(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_headers(&self, value: &str) {
         unsafe {
@@ -159,9 +167,11 @@ impl DOMHTMLTableCellElement {
         }
     }
 
-    //pub fn set_row_span(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_cell_element_set_row_span() }
-    //}
+    pub fn set_row_span(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_table_cell_element_set_row_span(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_scope(&self, value: &str) {
         unsafe {

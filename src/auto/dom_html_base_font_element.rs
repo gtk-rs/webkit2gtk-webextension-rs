@@ -29,9 +29,11 @@ impl DOMHTMLBaseFontElement {
         }
     }
 
-    //pub fn get_size(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_base_font_element_get_size() }
-    //}
+    pub fn get_size(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_base_font_element_get_size(self.to_glib_none().0)
+        }
+    }
 
     pub fn set_color(&self, value: &str) {
         unsafe {
@@ -45,7 +47,9 @@ impl DOMHTMLBaseFontElement {
         }
     }
 
-    //pub fn set_size(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_base_font_element_set_size() }
-    //}
+    pub fn set_size(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_base_font_element_set_size(self.to_glib_none().0, value);
+        }
+    }
 }

@@ -23,9 +23,11 @@ impl DOMHTMLLIElement {
         }
     }
 
-    //pub fn get_value(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_li_element_get_value() }
-    //}
+    pub fn get_value(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_li_element_get_value(self.to_glib_none().0)
+        }
+    }
 
     pub fn set_type_attr(&self, value: &str) {
         unsafe {
@@ -33,7 +35,9 @@ impl DOMHTMLLIElement {
         }
     }
 
-    //pub fn set_value(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_li_element_set_value() }
-    //}
+    pub fn set_value(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_li_element_set_value(self.to_glib_none().0, value);
+        }
+    }
 }

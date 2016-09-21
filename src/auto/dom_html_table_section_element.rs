@@ -18,7 +18,7 @@ glib_wrapper! {
 }
 
 impl DOMHTMLTableSectionElement {
-    //pub fn delete_row(&self, index: /*Unimplemented*/Fundamental: Long, error: /*Ignored*/Option<Error>) {
+    //pub fn delete_row(&self, index: i64, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_html_table_section_element_delete_row() }
     //}
 
@@ -52,7 +52,7 @@ impl DOMHTMLTableSectionElement {
         }
     }
 
-    //pub fn insert_row(&self, index: /*Unimplemented*/Fundamental: Long, error: /*Ignored*/Option<Error>) -> Option<DOMHTMLElement> {
+    //pub fn insert_row(&self, index: i64, error: /*Ignored*/Option<Error>) -> Option<DOMHTMLElement> {
     //    unsafe { TODO: call ffi::webkit_dom_html_table_section_element_insert_row() }
     //}
 

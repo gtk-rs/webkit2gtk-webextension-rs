@@ -85,9 +85,11 @@ impl DOMHTMLInputElement {
         }
     }
 
-    //pub fn get_height(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_html_input_element_get_height() }
-    //}
+    pub fn get_height(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_html_input_element_get_height(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_indeterminate(&self) -> bool {
         unsafe {
@@ -101,9 +103,11 @@ impl DOMHTMLInputElement {
         }
     }
 
-    //pub fn get_max_length(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_input_element_get_max_length() }
-    //}
+    pub fn get_max_length(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_input_element_get_max_length(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_multiple(&self) -> bool {
         unsafe {
@@ -117,9 +121,11 @@ impl DOMHTMLInputElement {
         }
     }
 
-    //pub fn get_size(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_html_input_element_get_size() }
-    //}
+    pub fn get_size(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_html_input_element_get_size(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_src(&self) -> Option<String> {
         unsafe {
@@ -139,9 +145,11 @@ impl DOMHTMLInputElement {
         }
     }
 
-    //pub fn get_width(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_html_input_element_get_width() }
-    //}
+    pub fn get_width(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_html_input_element_get_width(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_will_validate(&self) -> bool {
         unsafe {
@@ -209,9 +217,11 @@ impl DOMHTMLInputElement {
         }
     }
 
-    //pub fn set_height(&self, value: /*Unimplemented*/Fundamental: ULong) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_input_element_set_height() }
-    //}
+    pub fn set_height(&self, value: u64) {
+        unsafe {
+            ffi::webkit_dom_html_input_element_set_height(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_indeterminate(&self, value: bool) {
         unsafe {
@@ -225,7 +235,7 @@ impl DOMHTMLInputElement {
         }
     }
 
-    //pub fn set_max_length(&self, value: /*Unimplemented*/Fundamental: Long, error: /*Ignored*/Option<Error>) {
+    //pub fn set_max_length(&self, value: i64, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_html_input_element_set_max_length() }
     //}
 
@@ -247,7 +257,7 @@ impl DOMHTMLInputElement {
         }
     }
 
-    //pub fn set_size(&self, value: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) {
+    //pub fn set_size(&self, value: u64, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_html_input_element_set_size() }
     //}
 
@@ -269,7 +279,9 @@ impl DOMHTMLInputElement {
         }
     }
 
-    //pub fn set_width(&self, value: /*Unimplemented*/Fundamental: ULong) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_input_element_set_width() }
-    //}
+    pub fn set_width(&self, value: u64) {
+        unsafe {
+            ffi::webkit_dom_html_input_element_set_width(self.to_glib_none().0, value);
+        }
+    }
 }

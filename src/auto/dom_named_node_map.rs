@@ -15,9 +15,11 @@ glib_wrapper! {
 }
 
 impl DOMNamedNodeMap {
-    //pub fn get_length(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_named_node_map_get_length() }
-    //}
+    pub fn get_length(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_named_node_map_get_length(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_named_item(&self, name: &str) -> Option<DOMNode> {
         unsafe {
@@ -31,9 +33,11 @@ impl DOMNamedNodeMap {
         }
     }
 
-    //pub fn item(&self, index: /*Unimplemented*/Fundamental: ULong) -> Option<DOMNode> {
-    //    unsafe { TODO: call ffi::webkit_dom_named_node_map_item() }
-    //}
+    pub fn item(&self, index: u64) -> Option<DOMNode> {
+        unsafe {
+            from_glib_none(ffi::webkit_dom_named_node_map_item(self.to_glib_none().0, index))
+        }
+    }
 
     //pub fn remove_named_item(&self, name: &str, error: /*Ignored*/Option<Error>) -> Option<DOMNode> {
     //    unsafe { TODO: call ffi::webkit_dom_named_node_map_remove_named_item() }

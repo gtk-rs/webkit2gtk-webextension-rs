@@ -49,9 +49,11 @@ impl DOMNodeIterator {
         }
     }
 
-    //pub fn get_what_to_show(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_node_iterator_get_what_to_show() }
-    //}
+    pub fn get_what_to_show(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_node_iterator_get_what_to_show(self.to_glib_none().0)
+        }
+    }
 
     //pub fn next_node(&self, error: /*Ignored*/Option<Error>) -> Option<DOMNode> {
     //    unsafe { TODO: call ffi::webkit_dom_node_iterator_next_node() }

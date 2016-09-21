@@ -48,9 +48,11 @@ impl DOMHTMLFormElement {
         }
     }
 
-    //pub fn get_length(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_form_element_get_length() }
-    //}
+    pub fn get_length(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_form_element_get_length(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_method(&self) -> Option<String> {
         unsafe {

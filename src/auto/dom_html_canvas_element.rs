@@ -17,19 +17,27 @@ glib_wrapper! {
 }
 
 impl DOMHTMLCanvasElement {
-    //pub fn get_height(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_canvas_element_get_height() }
-    //}
+    pub fn get_height(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_canvas_element_get_height(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn get_width(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_canvas_element_get_width() }
-    //}
+    pub fn get_width(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_canvas_element_get_width(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn set_height(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_canvas_element_set_height() }
-    //}
+    pub fn set_height(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_canvas_element_set_height(self.to_glib_none().0, value);
+        }
+    }
 
-    //pub fn set_width(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_canvas_element_set_width() }
-    //}
+    pub fn set_width(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_canvas_element_set_width(self.to_glib_none().0, value);
+        }
+    }
 }

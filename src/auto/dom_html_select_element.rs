@@ -41,9 +41,11 @@ impl DOMHTMLSelectElement {
         }
     }
 
-    //pub fn get_length(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_html_select_element_get_length() }
-    //}
+    pub fn get_length(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_html_select_element_get_length(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_multiple(&self) -> bool {
         unsafe {
@@ -69,13 +71,17 @@ impl DOMHTMLSelectElement {
         }
     }
 
-    //pub fn get_selected_index(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_select_element_get_selected_index() }
-    //}
+    pub fn get_selected_index(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_select_element_get_selected_index(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn get_size(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_select_element_get_size() }
-    //}
+    pub fn get_size(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_select_element_get_size(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_value(&self) -> Option<String> {
         unsafe {
@@ -89,9 +95,11 @@ impl DOMHTMLSelectElement {
         }
     }
 
-    //pub fn item(&self, index: /*Unimplemented*/Fundamental: ULong) -> Option<DOMNode> {
-    //    unsafe { TODO: call ffi::webkit_dom_html_select_element_item() }
-    //}
+    pub fn item(&self, index: u64) -> Option<DOMNode> {
+        unsafe {
+            from_glib_none(ffi::webkit_dom_html_select_element_item(self.to_glib_none().0, index))
+        }
+    }
 
     pub fn named_item(&self, name: &str) -> Option<DOMNode> {
         unsafe {
@@ -99,9 +107,11 @@ impl DOMHTMLSelectElement {
         }
     }
 
-    //pub fn remove(&self, index: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_select_element_remove() }
-    //}
+    pub fn remove(&self, index: i64) {
+        unsafe {
+            ffi::webkit_dom_html_select_element_remove(self.to_glib_none().0, index);
+        }
+    }
 
     pub fn set_autofocus(&self, value: bool) {
         unsafe {
@@ -115,7 +125,7 @@ impl DOMHTMLSelectElement {
         }
     }
 
-    //pub fn set_length(&self, value: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) {
+    //pub fn set_length(&self, value: u64, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_html_select_element_set_length() }
     //}
 
@@ -131,13 +141,17 @@ impl DOMHTMLSelectElement {
         }
     }
 
-    //pub fn set_selected_index(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_select_element_set_selected_index() }
-    //}
+    pub fn set_selected_index(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_select_element_set_selected_index(self.to_glib_none().0, value);
+        }
+    }
 
-    //pub fn set_size(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_select_element_set_size() }
-    //}
+    pub fn set_size(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_select_element_set_size(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_value(&self, value: &str) {
         unsafe {

@@ -2,6 +2,7 @@
 // DO NOT EDIT
 
 use DOMObject;
+use DOMStyleSheet;
 use ffi;
 use glib::translate::*;
 
@@ -14,11 +15,15 @@ glib_wrapper! {
 }
 
 impl DOMStyleSheetList {
-    //pub fn get_length(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_style_sheet_list_get_length() }
-    //}
+    pub fn get_length(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_style_sheet_list_get_length(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn item(&self, index: /*Unimplemented*/Fundamental: ULong) -> Option<DOMStyleSheet> {
-    //    unsafe { TODO: call ffi::webkit_dom_style_sheet_list_item() }
-    //}
+    pub fn item(&self, index: u64) -> Option<DOMStyleSheet> {
+        unsafe {
+            from_glib_full(ffi::webkit_dom_style_sheet_list_item(self.to_glib_none().0, index))
+        }
+    }
 }

@@ -16,21 +16,25 @@ glib_wrapper! {
 }
 
 pub trait DOMHTMLCollectionExt {
-    //fn get_length(&self) -> /*Unimplemented*/Fundamental: ULong;
+    fn get_length(&self) -> u64;
 
-    //fn item(&self, index: /*Unimplemented*/Fundamental: ULong) -> Option<DOMNode>;
+    fn item(&self, index: u64) -> Option<DOMNode>;
 
     fn named_item(&self, name: &str) -> Option<DOMNode>;
 }
 
 impl<O: IsA<DOMHTMLCollection>> DOMHTMLCollectionExt for O {
-    //fn get_length(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_html_collection_get_length() }
-    //}
+    fn get_length(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_html_collection_get_length(self.to_glib_none().0)
+        }
+    }
 
-    //fn item(&self, index: /*Unimplemented*/Fundamental: ULong) -> Option<DOMNode> {
-    //    unsafe { TODO: call ffi::webkit_dom_html_collection_item() }
-    //}
+    fn item(&self, index: u64) -> Option<DOMNode> {
+        unsafe {
+            from_glib_none(ffi::webkit_dom_html_collection_item(self.to_glib_none().0, index))
+        }
+    }
 
     fn named_item(&self, name: &str) -> Option<DOMNode> {
         unsafe {

@@ -17,53 +17,67 @@ glib_wrapper! {
 }
 
 pub trait DOMUIEventExt {
-    //fn get_char_code(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_char_code(&self) -> i64;
 
-    //fn get_detail(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_detail(&self) -> i64;
 
-    //fn get_key_code(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_key_code(&self) -> i64;
 
-    //fn get_layer_x(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_layer_x(&self) -> i64;
 
-    //fn get_layer_y(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_layer_y(&self) -> i64;
 
-    //fn get_page_x(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_page_x(&self) -> i64;
 
-    //fn get_page_y(&self) -> /*Unimplemented*/Fundamental: Long;
+    fn get_page_y(&self) -> i64;
 
     fn get_view(&self) -> Option<DOMDOMWindow>;
 
-    //fn init_ui_event(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: /*Unimplemented*/Fundamental: Long);
+    fn init_ui_event(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: i64);
 }
 
 impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
-    //fn get_char_code(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_ui_event_get_char_code() }
-    //}
+    fn get_char_code(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_ui_event_get_char_code(self.to_glib_none().0)
+        }
+    }
 
-    //fn get_detail(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_ui_event_get_detail() }
-    //}
+    fn get_detail(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_ui_event_get_detail(self.to_glib_none().0)
+        }
+    }
 
-    //fn get_key_code(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_ui_event_get_key_code() }
-    //}
+    fn get_key_code(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_ui_event_get_key_code(self.to_glib_none().0)
+        }
+    }
 
-    //fn get_layer_x(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_ui_event_get_layer_x() }
-    //}
+    fn get_layer_x(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_ui_event_get_layer_x(self.to_glib_none().0)
+        }
+    }
 
-    //fn get_layer_y(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_ui_event_get_layer_y() }
-    //}
+    fn get_layer_y(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_ui_event_get_layer_y(self.to_glib_none().0)
+        }
+    }
 
-    //fn get_page_x(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_ui_event_get_page_x() }
-    //}
+    fn get_page_x(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_ui_event_get_page_x(self.to_glib_none().0)
+        }
+    }
 
-    //fn get_page_y(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_ui_event_get_page_y() }
-    //}
+    fn get_page_y(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_ui_event_get_page_y(self.to_glib_none().0)
+        }
+    }
 
     fn get_view(&self) -> Option<DOMDOMWindow> {
         unsafe {
@@ -71,7 +85,9 @@ impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
         }
     }
 
-    //fn init_ui_event(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_ui_event_init_ui_event() }
-    //}
+    fn init_ui_event(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: i64) {
+        unsafe {
+            ffi::webkit_dom_ui_event_init_ui_event(self.to_glib_none().0, type_.to_glib_none().0, canBubble.to_glib(), cancelable.to_glib(), view.to_glib_none().0, detail);
+        }
+    }
 }

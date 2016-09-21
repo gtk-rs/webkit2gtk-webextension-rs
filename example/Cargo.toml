@@ -6,14 +6,23 @@ authors = ["Antoni Boucher <bouanto@zoho.com>"]
 [lib]
 crate-type = ["dylib"]
 
+[features]
+default = ["webkit2gtk-webextension/v2_2"]
+
 [dependencies]
 
 [dependencies.glib]
 git = "https://github.com/gtk-rs/glib"
 version = "0.1.0"
 
-[dependencies.webkit2webextension]
-path = ".."
+[dependencies.glib-sys]
+git = "https://github.com/gtk-rs/sys"
+version = "0.3.1"
 
-[dependencies.webkit2webextension-sys]
-path = "../../webkit2webextension-sys"
+[dependencies.webkit2gtk-webextension]
+git = "https://github.com/antoyo/webkit2gtk-webextension-rs"
+version = "^0.1"
+
+[dependencies.webkit2gtk-webextension-sys]
+git = "https://github.com/antoyo/webkit2gtk-webextension-sys-rs"
+version = "^0.2"

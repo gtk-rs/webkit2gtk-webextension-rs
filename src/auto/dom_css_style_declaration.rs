@@ -21,9 +21,11 @@ impl DOMCSSStyleDeclaration {
         }
     }
 
-    //pub fn get_length(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_css_style_declaration_get_length() }
-    //}
+    pub fn get_length(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_css_style_declaration_get_length(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_parent_rule(&self) -> Option<DOMCSSRule> {
         unsafe {
@@ -55,9 +57,11 @@ impl DOMCSSStyleDeclaration {
         }
     }
 
-    //pub fn item(&self, index: /*Unimplemented*/Fundamental: ULong) -> Option<String> {
-    //    unsafe { TODO: call ffi::webkit_dom_css_style_declaration_item() }
-    //}
+    pub fn item(&self, index: u64) -> Option<String> {
+        unsafe {
+            from_glib_full(ffi::webkit_dom_css_style_declaration_item(self.to_glib_none().0, index))
+        }
+    }
 
     //pub fn remove_property(&self, propertyName: &str, error: /*Ignored*/Option<Error>) -> Option<String> {
     //    unsafe { TODO: call ffi::webkit_dom_css_style_declaration_remove_property() }

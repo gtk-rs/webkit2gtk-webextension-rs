@@ -18,19 +18,19 @@ glib_wrapper! {
 pub trait DOMCharacterDataExt {
     //fn append_data(&self, data: &str, error: /*Ignored*/Option<Error>);
 
-    //fn delete_data(&self, offset: /*Unimplemented*/Fundamental: ULong, length: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>);
+    //fn delete_data(&self, offset: u64, length: u64, error: /*Ignored*/Option<Error>);
 
     fn get_data(&self) -> Option<String>;
 
-    //fn get_length(&self) -> /*Unimplemented*/Fundamental: ULong;
+    fn get_length(&self) -> u64;
 
-    //fn insert_data(&self, offset: /*Unimplemented*/Fundamental: ULong, data: &str, error: /*Ignored*/Option<Error>);
+    //fn insert_data(&self, offset: u64, data: &str, error: /*Ignored*/Option<Error>);
 
-    //fn replace_data(&self, offset: /*Unimplemented*/Fundamental: ULong, length: /*Unimplemented*/Fundamental: ULong, data: &str, error: /*Ignored*/Option<Error>);
+    //fn replace_data(&self, offset: u64, length: u64, data: &str, error: /*Ignored*/Option<Error>);
 
     //fn set_data(&self, value: &str, error: /*Ignored*/Option<Error>);
 
-    //fn substring_data(&self, offset: /*Unimplemented*/Fundamental: ULong, length: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) -> Option<String>;
+    //fn substring_data(&self, offset: u64, length: u64, error: /*Ignored*/Option<Error>) -> Option<String>;
 }
 
 impl<O: IsA<DOMCharacterData>> DOMCharacterDataExt for O {
@@ -38,7 +38,7 @@ impl<O: IsA<DOMCharacterData>> DOMCharacterDataExt for O {
     //    unsafe { TODO: call ffi::webkit_dom_character_data_append_data() }
     //}
 
-    //fn delete_data(&self, offset: /*Unimplemented*/Fundamental: ULong, length: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) {
+    //fn delete_data(&self, offset: u64, length: u64, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_character_data_delete_data() }
     //}
 
@@ -48,15 +48,17 @@ impl<O: IsA<DOMCharacterData>> DOMCharacterDataExt for O {
         }
     }
 
-    //fn get_length(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_character_data_get_length() }
-    //}
+    fn get_length(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_character_data_get_length(self.to_glib_none().0)
+        }
+    }
 
-    //fn insert_data(&self, offset: /*Unimplemented*/Fundamental: ULong, data: &str, error: /*Ignored*/Option<Error>) {
+    //fn insert_data(&self, offset: u64, data: &str, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_character_data_insert_data() }
     //}
 
-    //fn replace_data(&self, offset: /*Unimplemented*/Fundamental: ULong, length: /*Unimplemented*/Fundamental: ULong, data: &str, error: /*Ignored*/Option<Error>) {
+    //fn replace_data(&self, offset: u64, length: u64, data: &str, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_character_data_replace_data() }
     //}
 
@@ -64,7 +66,7 @@ impl<O: IsA<DOMCharacterData>> DOMCharacterDataExt for O {
     //    unsafe { TODO: call ffi::webkit_dom_character_data_set_data() }
     //}
 
-    //fn substring_data(&self, offset: /*Unimplemented*/Fundamental: ULong, length: /*Unimplemented*/Fundamental: ULong, error: /*Ignored*/Option<Error>) -> Option<String> {
+    //fn substring_data(&self, offset: u64, length: u64, error: /*Ignored*/Option<Error>) -> Option<String> {
     //    unsafe { TODO: call ffi::webkit_dom_character_data_substring_data() }
     //}
 }

@@ -41,13 +41,17 @@ impl DOMHTMLImageElement {
         }
     }
 
-    //pub fn get_height(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_get_height() }
-    //}
+    pub fn get_height(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_image_element_get_height(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn get_hspace(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_get_hspace() }
-    //}
+    pub fn get_hspace(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_image_element_get_hspace(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_is_map(&self) -> bool {
         unsafe {
@@ -73,13 +77,17 @@ impl DOMHTMLImageElement {
         }
     }
 
-    //pub fn get_natural_height(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_get_natural_height() }
-    //}
+    pub fn get_natural_height(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_image_element_get_natural_height(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn get_natural_width(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_get_natural_width() }
-    //}
+    pub fn get_natural_width(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_image_element_get_natural_width(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_src(&self) -> Option<String> {
         unsafe {
@@ -93,21 +101,29 @@ impl DOMHTMLImageElement {
         }
     }
 
-    //pub fn get_vspace(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_get_vspace() }
-    //}
+    pub fn get_vspace(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_image_element_get_vspace(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn get_width(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_get_width() }
-    //}
+    pub fn get_width(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_image_element_get_width(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn get_x(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_get_x() }
-    //}
+    pub fn get_x(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_image_element_get_x(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn get_y(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_get_y() }
-    //}
+    pub fn get_y(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_image_element_get_y(self.to_glib_none().0)
+        }
+    }
 
     pub fn set_align(&self, value: &str) {
         unsafe {
@@ -127,13 +143,17 @@ impl DOMHTMLImageElement {
         }
     }
 
-    //pub fn set_height(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_set_height() }
-    //}
+    pub fn set_height(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_image_element_set_height(self.to_glib_none().0, value);
+        }
+    }
 
-    //pub fn set_hspace(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_set_hspace() }
-    //}
+    pub fn set_hspace(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_image_element_set_hspace(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_is_map(&self, value: bool) {
         unsafe {
@@ -171,11 +191,15 @@ impl DOMHTMLImageElement {
         }
     }
 
-    //pub fn set_vspace(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_set_vspace() }
-    //}
+    pub fn set_vspace(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_image_element_set_vspace(self.to_glib_none().0, value);
+        }
+    }
 
-    //pub fn set_width(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_image_element_set_width() }
-    //}
+    pub fn set_width(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_image_element_set_width(self.to_glib_none().0, value);
+        }
+    }
 }

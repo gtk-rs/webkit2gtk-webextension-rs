@@ -54,7 +54,7 @@ pub trait DOMDocumentExt {
 
     //fn create_expression<T: IsA</*Ignored*/DOMXPathNSResolver>>(&self, expression: &str, resolver: &T, error: /*Ignored*/Option<Error>) -> Option<DOMXPathExpression>;
 
-    //fn create_node_iterator<T: IsA<DOMNode>, U: IsA</*Ignored*/DOMNodeFilter>>(&self, root: &T, whatToShow: /*Unimplemented*/Fundamental: ULong, filter: Option<&U>, expandEntityReferences: bool, error: /*Ignored*/Option<Error>) -> Option<DOMNodeIterator>;
+    //fn create_node_iterator<T: IsA<DOMNode>, U: IsA</*Ignored*/DOMNodeFilter>>(&self, root: &T, whatToShow: u64, filter: Option<&U>, expandEntityReferences: bool, error: /*Ignored*/Option<Error>) -> Option<DOMNodeIterator>;
 
     //fn create_ns_resolver<T: IsA<DOMNode>>(&self, nodeResolver: &T) -> /*Ignored*/Option<DOMXPathNSResolver>;
 
@@ -64,9 +64,9 @@ pub trait DOMDocumentExt {
 
     fn create_text_node(&self, data: &str) -> Option<DOMText>;
 
-    //fn create_tree_walker<T: IsA<DOMNode>, U: IsA</*Ignored*/DOMNodeFilter>>(&self, root: &T, whatToShow: /*Unimplemented*/Fundamental: ULong, filter: Option<&U>, expandEntityReferences: bool, error: /*Ignored*/Option<Error>) -> Option<DOMTreeWalker>;
+    //fn create_tree_walker<T: IsA<DOMNode>, U: IsA</*Ignored*/DOMNodeFilter>>(&self, root: &T, whatToShow: u64, filter: Option<&U>, expandEntityReferences: bool, error: /*Ignored*/Option<Error>) -> Option<DOMTreeWalker>;
 
-    //fn element_from_point(&self, x: /*Unimplemented*/Fundamental: Long, y: /*Unimplemented*/Fundamental: Long) -> Option<DOMElement>;
+    fn element_from_point(&self, x: i64, y: i64) -> Option<DOMElement>;
 
     //fn evaluate<T: IsA<DOMNode>, U: IsA</*Ignored*/DOMXPathNSResolver>>(&self, expression: &str, contextNode: &T, resolver: Option<&U>, type_: /*Unimplemented*/Fundamental: UShort, inResult: Option<&DOMXPathResult>, error: /*Ignored*/Option<Error>) -> Option<DOMXPathResult>;
 
@@ -243,7 +243,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
     //    unsafe { TODO: call ffi::webkit_dom_document_create_expression() }
     //}
 
-    //fn create_node_iterator<T: IsA<DOMNode>, U: IsA</*Ignored*/DOMNodeFilter>>(&self, root: &T, whatToShow: /*Unimplemented*/Fundamental: ULong, filter: Option<&U>, expandEntityReferences: bool, error: /*Ignored*/Option<Error>) -> Option<DOMNodeIterator> {
+    //fn create_node_iterator<T: IsA<DOMNode>, U: IsA</*Ignored*/DOMNodeFilter>>(&self, root: &T, whatToShow: u64, filter: Option<&U>, expandEntityReferences: bool, error: /*Ignored*/Option<Error>) -> Option<DOMNodeIterator> {
     //    unsafe { TODO: call ffi::webkit_dom_document_create_node_iterator() }
     //}
 
@@ -267,13 +267,15 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    //fn create_tree_walker<T: IsA<DOMNode>, U: IsA</*Ignored*/DOMNodeFilter>>(&self, root: &T, whatToShow: /*Unimplemented*/Fundamental: ULong, filter: Option<&U>, expandEntityReferences: bool, error: /*Ignored*/Option<Error>) -> Option<DOMTreeWalker> {
+    //fn create_tree_walker<T: IsA<DOMNode>, U: IsA</*Ignored*/DOMNodeFilter>>(&self, root: &T, whatToShow: u64, filter: Option<&U>, expandEntityReferences: bool, error: /*Ignored*/Option<Error>) -> Option<DOMTreeWalker> {
     //    unsafe { TODO: call ffi::webkit_dom_document_create_tree_walker() }
     //}
 
-    //fn element_from_point(&self, x: /*Unimplemented*/Fundamental: Long, y: /*Unimplemented*/Fundamental: Long) -> Option<DOMElement> {
-    //    unsafe { TODO: call ffi::webkit_dom_document_element_from_point() }
-    //}
+    fn element_from_point(&self, x: i64, y: i64) -> Option<DOMElement> {
+        unsafe {
+            from_glib_none(ffi::webkit_dom_document_element_from_point(self.to_glib_none().0, x, y))
+        }
+    }
 
     //fn evaluate<T: IsA<DOMNode>, U: IsA</*Ignored*/DOMXPathNSResolver>>(&self, expression: &str, contextNode: &T, resolver: Option<&U>, type_: /*Unimplemented*/Fundamental: UShort, inResult: Option<&DOMXPathResult>, error: /*Ignored*/Option<Error>) -> Option<DOMXPathResult> {
     //    unsafe { TODO: call ffi::webkit_dom_document_evaluate() }

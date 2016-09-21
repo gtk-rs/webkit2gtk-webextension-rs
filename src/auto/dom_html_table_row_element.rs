@@ -18,7 +18,7 @@ glib_wrapper! {
 }
 
 impl DOMHTMLTableRowElement {
-    //pub fn delete_cell(&self, index: /*Unimplemented*/Fundamental: Long, error: /*Ignored*/Option<Error>) {
+    //pub fn delete_cell(&self, index: i64, error: /*Ignored*/Option<Error>) {
     //    unsafe { TODO: call ffi::webkit_dom_html_table_row_element_delete_cell() }
     //}
 
@@ -52,13 +52,17 @@ impl DOMHTMLTableRowElement {
         }
     }
 
-    //pub fn get_row_index(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_row_element_get_row_index() }
-    //}
+    pub fn get_row_index(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_table_row_element_get_row_index(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn get_section_row_index(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_row_element_get_section_row_index() }
-    //}
+    pub fn get_section_row_index(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_table_row_element_get_section_row_index(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_v_align(&self) -> Option<String> {
         unsafe {
@@ -66,7 +70,7 @@ impl DOMHTMLTableRowElement {
         }
     }
 
-    //pub fn insert_cell(&self, index: /*Unimplemented*/Fundamental: Long, error: /*Ignored*/Option<Error>) -> Option<DOMHTMLElement> {
+    //pub fn insert_cell(&self, index: i64, error: /*Ignored*/Option<Error>) -> Option<DOMHTMLElement> {
     //    unsafe { TODO: call ffi::webkit_dom_html_table_row_element_insert_cell() }
     //}
 

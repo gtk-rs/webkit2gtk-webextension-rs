@@ -16,13 +16,17 @@ glib_wrapper! {
 }
 
 impl DOMHTMLOptionsCollection {
-    //pub fn get_length(&self) -> /*Unimplemented*/Fundamental: ULong {
-    //    unsafe { TODO: call ffi::webkit_dom_html_options_collection_get_length() }
-    //}
+    pub fn get_length(&self) -> u64 {
+        unsafe {
+            ffi::webkit_dom_html_options_collection_get_length(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn get_selected_index(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_options_collection_get_selected_index() }
-    //}
+    pub fn get_selected_index(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_options_collection_get_selected_index(self.to_glib_none().0)
+        }
+    }
 
     pub fn named_item(&self, name: &str) -> Option<DOMNode> {
         unsafe {
@@ -30,7 +34,9 @@ impl DOMHTMLOptionsCollection {
         }
     }
 
-    //pub fn set_selected_index(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_options_collection_set_selected_index() }
-    //}
+    pub fn set_selected_index(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_options_collection_set_selected_index(self.to_glib_none().0, value);
+        }
+    }
 }

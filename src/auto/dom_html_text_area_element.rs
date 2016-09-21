@@ -30,9 +30,11 @@ impl DOMHTMLTextAreaElement {
         }
     }
 
-    //pub fn get_cols(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_text_area_element_get_cols() }
-    //}
+    pub fn get_cols(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_text_area_element_get_cols(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_default_value(&self) -> Option<String> {
         unsafe {
@@ -64,17 +66,23 @@ impl DOMHTMLTextAreaElement {
         }
     }
 
-    //pub fn get_rows(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_text_area_element_get_rows() }
-    //}
+    pub fn get_rows(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_text_area_element_get_rows(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn get_selection_end(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_text_area_element_get_selection_end() }
-    //}
+    pub fn get_selection_end(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_text_area_element_get_selection_end(self.to_glib_none().0)
+        }
+    }
 
-    //pub fn get_selection_start(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_text_area_element_get_selection_start() }
-    //}
+    pub fn get_selection_start(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_text_area_element_get_selection_start(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_value(&self) -> Option<String> {
         unsafe {
@@ -106,9 +114,11 @@ impl DOMHTMLTextAreaElement {
         }
     }
 
-    //pub fn set_cols(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_text_area_element_set_cols() }
-    //}
+    pub fn set_cols(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_text_area_element_set_cols(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_default_value(&self, value: &str) {
         unsafe {
@@ -134,21 +144,29 @@ impl DOMHTMLTextAreaElement {
         }
     }
 
-    //pub fn set_rows(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_text_area_element_set_rows() }
-    //}
+    pub fn set_rows(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_text_area_element_set_rows(self.to_glib_none().0, value);
+        }
+    }
 
-    //pub fn set_selection_end(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_text_area_element_set_selection_end() }
-    //}
+    pub fn set_selection_end(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_text_area_element_set_selection_end(self.to_glib_none().0, value);
+        }
+    }
 
-    //pub fn set_selection_range(&self, start: /*Unimplemented*/Fundamental: Long, end: /*Unimplemented*/Fundamental: Long, direction: &str) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_text_area_element_set_selection_range() }
-    //}
+    pub fn set_selection_range(&self, start: i64, end: i64, direction: &str) {
+        unsafe {
+            ffi::webkit_dom_html_text_area_element_set_selection_range(self.to_glib_none().0, start, end, direction.to_glib_none().0);
+        }
+    }
 
-    //pub fn set_selection_start(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_text_area_element_set_selection_start() }
-    //}
+    pub fn set_selection_start(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_text_area_element_set_selection_start(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_value(&self, value: &str) {
         unsafe {

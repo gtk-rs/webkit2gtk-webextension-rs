@@ -53,9 +53,11 @@ impl DOMHTMLAppletElement {
         }
     }
 
-    //pub fn get_hspace(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_applet_element_get_hspace() }
-    //}
+    pub fn get_hspace(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_applet_element_get_hspace(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_name(&self) -> Option<String> {
         unsafe {
@@ -69,9 +71,11 @@ impl DOMHTMLAppletElement {
         }
     }
 
-    //pub fn get_vspace(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_applet_element_get_vspace() }
-    //}
+    pub fn get_vspace(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_applet_element_get_vspace(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_width(&self) -> Option<String> {
         unsafe {
@@ -115,9 +119,11 @@ impl DOMHTMLAppletElement {
         }
     }
 
-    //pub fn set_hspace(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_applet_element_set_hspace() }
-    //}
+    pub fn set_hspace(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_applet_element_set_hspace(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_name(&self, value: &str) {
         unsafe {
@@ -131,9 +137,11 @@ impl DOMHTMLAppletElement {
         }
     }
 
-    //pub fn set_vspace(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_applet_element_set_vspace() }
-    //}
+    pub fn set_vspace(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_applet_element_set_vspace(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_width(&self, value: &str) {
         unsafe {

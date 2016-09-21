@@ -35,9 +35,11 @@ impl DOMHTMLTableColElement {
         }
     }
 
-    //pub fn get_span(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_col_element_get_span() }
-    //}
+    pub fn get_span(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_table_col_element_get_span(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_v_align(&self) -> Option<String> {
         unsafe {
@@ -69,9 +71,11 @@ impl DOMHTMLTableColElement {
         }
     }
 
-    //pub fn set_span(&self, value: /*Unimplemented*/Fundamental: Long) {
-    //    unsafe { TODO: call ffi::webkit_dom_html_table_col_element_set_span() }
-    //}
+    pub fn set_span(&self, value: i64) {
+        unsafe {
+            ffi::webkit_dom_html_table_col_element_set_span(self.to_glib_none().0, value);
+        }
+    }
 
     pub fn set_v_align(&self, value: &str) {
         unsafe {

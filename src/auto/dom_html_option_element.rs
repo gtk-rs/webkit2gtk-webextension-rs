@@ -36,9 +36,11 @@ impl DOMHTMLOptionElement {
         }
     }
 
-    //pub fn get_index(&self) -> /*Unimplemented*/Fundamental: Long {
-    //    unsafe { TODO: call ffi::webkit_dom_html_option_element_get_index() }
-    //}
+    pub fn get_index(&self) -> i64 {
+        unsafe {
+            ffi::webkit_dom_html_option_element_get_index(self.to_glib_none().0)
+        }
+    }
 
     pub fn get_label(&self) -> Option<String> {
         unsafe {
