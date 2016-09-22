@@ -8,6 +8,7 @@
 extern crate glib;
 extern crate glib_sys as glib_ffi;
 extern crate gtk;
+extern crate libc;
 
 extern crate webkit2gtk_webextension_sys as ffi;
 
@@ -51,7 +52,11 @@ macro_rules! web_extension_init {
 }
 
 mod auto;
+mod dom_dom_selection;
+mod dom_dom_window;
 
 pub use auto::*;
+pub use dom_dom_selection::*;
+pub use dom_dom_window::*;
 
 unsafe impl Send for WebExtension {}
