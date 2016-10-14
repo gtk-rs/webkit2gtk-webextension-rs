@@ -3,6 +3,7 @@
 
 use DOMAttr;
 use DOMCSSStyleDeclaration;
+use DOMEventTarget;
 #[cfg(feature = "v2_10")]
 use DOMHTMLCollection;
 use DOMNamedNodeMap;
@@ -16,7 +17,7 @@ use glib::translate::*;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMElement(Object<ffi::WebKitDOMElement>): DOMNode, DOMObject;
+    pub struct DOMElement(Object<ffi::WebKitDOMElement>): DOMNode, DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_element_get_type(),

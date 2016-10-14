@@ -2,6 +2,7 @@
 // DO NOT EDIT
 
 use DOMCharacterData;
+use DOMEventTarget;
 use DOMNode;
 use DOMObject;
 use DOMStyleSheet;
@@ -9,7 +10,7 @@ use ffi;
 use glib::translate::*;
 
 glib_wrapper! {
-    pub struct DOMProcessingInstruction(Object<ffi::WebKitDOMProcessingInstruction>): DOMCharacterData, DOMNode, DOMObject;
+    pub struct DOMProcessingInstruction(Object<ffi::WebKitDOMProcessingInstruction>): DOMCharacterData, DOMNode, DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_processing_instruction_get_type(),

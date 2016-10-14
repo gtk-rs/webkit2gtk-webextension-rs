@@ -2,6 +2,7 @@
 // DO NOT EDIT
 
 use DOMElement;
+use DOMEventTarget;
 use DOMHTMLCollection;
 use DOMHTMLElement;
 use DOMHTMLTableCaptionElement;
@@ -14,7 +15,7 @@ use glib::translate::*;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLTableElement(Object<ffi::WebKitDOMHTMLTableElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject;
+    pub struct DOMHTMLTableElement(Object<ffi::WebKitDOMHTMLTableElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_table_element_get_type(),

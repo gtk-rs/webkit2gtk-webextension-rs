@@ -2,6 +2,7 @@
 // DO NOT EDIT
 
 use DOMCharacterData;
+use DOMEventTarget;
 use DOMNode;
 use DOMObject;
 use Error;
@@ -11,7 +12,7 @@ use glib::translate::*;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMText(Object<ffi::WebKitDOMText>): DOMCharacterData, DOMNode, DOMObject;
+    pub struct DOMText(Object<ffi::WebKitDOMText>): DOMCharacterData, DOMNode, DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_text_get_type(),

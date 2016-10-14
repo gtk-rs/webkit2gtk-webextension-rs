@@ -113,6 +113,11 @@ status = "generate"
 module_name = "dom_event"
 
 [[object]]
+name = "WebKit2WebExtension.DOMEventTarget"
+status = "generate"
+module_name = "dom_event_target"
+
+[[object]]
 name = "WebKit2WebExtension.DOMFile"
 status = "generate"
 module_name = "dom_file"

@@ -12,6 +12,7 @@ use DOMDocumentType;
 use DOMElement;
 use DOMEntityReference;
 use DOMEvent;
+use DOMEventTarget;
 use DOMHTMLCollection;
 use DOMHTMLElement;
 use DOMHTMLHeadElement;
@@ -29,7 +30,7 @@ use glib::translate::*;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMDocument(Object<ffi::WebKitDOMDocument>): DOMNode, DOMObject;
+    pub struct DOMDocument(Object<ffi::WebKitDOMDocument>): DOMNode, DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_document_get_type(),

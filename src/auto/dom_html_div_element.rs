@@ -2,6 +2,7 @@
 // DO NOT EDIT
 
 use DOMElement;
+use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
@@ -9,7 +10,7 @@ use ffi;
 use glib::translate::*;
 
 glib_wrapper! {
-    pub struct DOMHTMLDivElement(Object<ffi::WebKitDOMHTMLDivElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject;
+    pub struct DOMHTMLDivElement(Object<ffi::WebKitDOMHTMLDivElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_div_element_get_type(),

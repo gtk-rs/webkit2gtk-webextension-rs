@@ -3,6 +3,7 @@
 
 use DOMDocument;
 use DOMElement;
+use DOMEventTarget;
 use DOMNodeList;
 use DOMObject;
 use Error;
@@ -12,7 +13,7 @@ use glib::translate::*;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMNode(Object<ffi::WebKitDOMNode>): DOMObject;
+    pub struct DOMNode(Object<ffi::WebKitDOMNode>): DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_node_get_type(),

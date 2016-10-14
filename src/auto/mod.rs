@@ -66,6 +66,10 @@ mod dom_event;
 pub use self::dom_event::DOMEvent;
 pub use self::dom_event::DOMEventExt;
 
+mod dom_event_target;
+pub use self::dom_event_target::DOMEventTarget;
+pub use self::dom_event_target::DOMEventTargetExt;
+
 mod dom_file;
 pub use self::dom_file::DOMFile;
 
@@ -356,6 +360,7 @@ pub mod traits {
     pub use super::DOMDocumentExt;
     pub use super::DOMElementExt;
     pub use super::DOMEventExt;
+    pub use super::DOMEventTargetExt;
     pub use super::DOMHTMLCollectionExt;
     pub use super::DOMHTMLElementExt;
     pub use super::DOMMouseEventExt;

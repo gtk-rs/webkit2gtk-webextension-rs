@@ -2,6 +2,7 @@
 // DO NOT EDIT
 
 use DOMElement;
+use DOMEventTarget;
 use DOMNode;
 use DOMObject;
 use Error;
@@ -10,7 +11,7 @@ use glib::translate::*;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMAttr(Object<ffi::WebKitDOMAttr>): DOMNode, DOMObject;
+    pub struct DOMAttr(Object<ffi::WebKitDOMAttr>): DOMNode, DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_attr_get_type(),

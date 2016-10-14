@@ -2,6 +2,7 @@
 // DO NOT EDIT
 
 use DOMElement;
+use DOMEventTarget;
 use DOMHTMLElement;
 use DOMHTMLFormElement;
 use DOMNode;
@@ -10,7 +11,7 @@ use ffi;
 use glib::translate::*;
 
 glib_wrapper! {
-    pub struct DOMHTMLLegendElement(Object<ffi::WebKitDOMHTMLLegendElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject;
+    pub struct DOMHTMLLegendElement(Object<ffi::WebKitDOMHTMLLegendElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_legend_element_get_type(),

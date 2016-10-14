@@ -4,6 +4,7 @@
 use DOMDOMWindow;
 use DOMDocument;
 use DOMElement;
+use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
@@ -11,7 +12,7 @@ use ffi;
 use glib::translate::*;
 
 glib_wrapper! {
-    pub struct DOMHTMLIFrameElement(Object<ffi::WebKitDOMHTMLIFrameElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject;
+    pub struct DOMHTMLIFrameElement(Object<ffi::WebKitDOMHTMLIFrameElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_iframe_element_get_type(),

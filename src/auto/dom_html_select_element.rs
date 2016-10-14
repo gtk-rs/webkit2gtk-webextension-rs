@@ -2,6 +2,7 @@
 // DO NOT EDIT
 
 use DOMElement;
+use DOMEventTarget;
 use DOMHTMLElement;
 use DOMHTMLFormElement;
 use DOMHTMLOptionsCollection;
@@ -14,7 +15,7 @@ use glib::translate::*;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLSelectElement(Object<ffi::WebKitDOMHTMLSelectElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject;
+    pub struct DOMHTMLSelectElement(Object<ffi::WebKitDOMHTMLSelectElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_select_element_get_type(),

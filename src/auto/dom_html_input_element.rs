@@ -2,6 +2,7 @@
 // DO NOT EDIT
 
 use DOMElement;
+use DOMEventTarget;
 use DOMFileList;
 use DOMHTMLElement;
 use DOMHTMLFormElement;
@@ -13,7 +14,7 @@ use glib::translate::*;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLInputElement(Object<ffi::WebKitDOMHTMLInputElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject;
+    pub struct DOMHTMLInputElement(Object<ffi::WebKitDOMHTMLInputElement>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_input_element_get_type(),

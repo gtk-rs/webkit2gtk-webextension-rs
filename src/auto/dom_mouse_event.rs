@@ -2,6 +2,7 @@
 // DO NOT EDIT
 
 use DOMEvent;
+use DOMEventTarget;
 use DOMNode;
 use DOMObject;
 use DOMUIEvent;
@@ -36,7 +37,7 @@ pub trait DOMMouseEventExt {
 
     fn get_offset_y(&self) -> i64;
 
-    //fn get_related_target(&self) -> /*Ignored*/Option<DOMEventTarget>;
+    fn get_related_target(&self) -> Option<DOMEventTarget>;
 
     fn get_screen_x(&self) -> i64;
 
@@ -50,7 +51,7 @@ pub trait DOMMouseEventExt {
 
     fn get_y(&self) -> i64;
 
-    //fn init_mouse_event<T: IsA</*Ignored*/DOMEventTarget>>(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: i64, screenX: i64, screenY: i64, clientX: i64, clientY: i64, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool, button: /*Unimplemented*/Fundamental: UShort, relatedTarget: &T);
+    //fn init_mouse_event<T: IsA<DOMEventTarget>>(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: i64, screenX: i64, screenY: i64, clientX: i64, clientY: i64, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool, button: /*Unimplemented*/Fundamental: UShort, relatedTarget: &T);
 }
 
 impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
@@ -106,9 +107,11 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
         }
     }
 
-    //fn get_related_target(&self) -> /*Ignored*/Option<DOMEventTarget> {
-    //    unsafe { TODO: call ffi::webkit_dom_mouse_event_get_related_target() }
-    //}
+    fn get_related_target(&self) -> Option<DOMEventTarget> {
+        unsafe {
+            from_glib_full(ffi::webkit_dom_mouse_event_get_related_target(self.to_glib_none().0))
+        }
+    }
 
     fn get_screen_x(&self) -> i64 {
         unsafe {
@@ -146,7 +149,7 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
         }
     }
 
-    //fn init_mouse_event<T: IsA</*Ignored*/DOMEventTarget>>(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: i64, screenX: i64, screenY: i64, clientX: i64, clientY: i64, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool, button: /*Unimplemented*/Fundamental: UShort, relatedTarget: &T) {
+    //fn init_mouse_event<T: IsA<DOMEventTarget>>(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: i64, screenX: i64, screenY: i64, clientX: i64, clientY: i64, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool, button: /*Unimplemented*/Fundamental: UShort, relatedTarget: &T) {
     //    unsafe { TODO: call ffi::webkit_dom_mouse_event_init_mouse_event() }
     //}
 }
