@@ -1,7 +1,3 @@
-/*
- * TODO: The send-request event bugs.
- */
-
 #![allow(non_snake_case, unused_imports)]
 
 #[macro_use]

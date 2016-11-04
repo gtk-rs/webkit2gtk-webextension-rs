@@ -119,6 +119,6 @@ unsafe extern "C" fn document_loaded_trampoline(this: *mut ffi::WebKitWebPage, f
 
 unsafe extern "C" fn send_request_trampoline(this: *mut ffi::WebKitWebPage, request: *mut ffi::WebKitURIRequest, redirected_response: *mut ffi::WebKitURIResponse, f: glib_ffi::gpointer) -> glib_ffi::gboolean {
     callback_guard!();
-    let f: &Box_<Fn(&WebPage, &URIRequest, &URIResponse) -> bool + 'static> = transmute(f);
+    let f: &Box_<Fn(&WebPage, &URIRequest, &Option<URIResponse>) -> bool + 'static> = transmute(f);
     f(&from_glib_none(this), &from_glib_none(request), &from_glib_none(redirected_response)).to_glib()
 }
