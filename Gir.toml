@@ -15,7 +15,6 @@ generate = [
     "WebKit2WebExtension.WebEditor",
     "WebKit2WebExtension.WebExtension",
     "WebKit2WebExtension.WebHitTestResult",
-    "WebKit2WebExtension.WebPage",
 ]
 
 manual = [
@@ -516,3 +515,12 @@ module_name = "uri_request"
 name = "WebKit2WebExtension.URIResponse"
 status = "generate"
 module_name = "uri_response"
+
+[[object]]
+name = "WebKit2WebExtension.WebPage"
+status = "generate"
+    [[object.signal]]
+    name = "send-request"
+        [[object.signal.parameter]]
+        name = "redirected_response"
+        nullable = true

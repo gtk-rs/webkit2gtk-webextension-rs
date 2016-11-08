@@ -3,7 +3,7 @@ use std::ptr::null_mut;
 
 use ffi;
 use glib::IsA;
-use glib::translate::{ToGlibPtr, from_glib_full, from_glib_none};
+use glib::translate::{FromGlib, ToGlibPtr, from_glib_full, from_glib_none};
 use gobject_sys::g_object_get;
 use libc::c_void;
 
@@ -13,7 +13,21 @@ use dom_dom_selection::DOMDOMSelection;
 pub trait DOMDOMWindowExtManual {
     fn get_computed_style<T: IsA<DOMElement>>(&self, element: &T, pseudo_element: Option<&str>) -> Option<DOMCSSStyleDeclaration>;
     fn get_frame_element(&self) -> Option<DOMElement>;
+    fn get_inner_height(&self) -> i64;
+    fn get_inner_width(&self) -> i64;
     fn get_selection(&self) -> Option<DOMDOMSelection>;
+}
+
+impl DOMDOMWindow {
+    fn get_long_property(&self, property_name: &str) -> i64 {
+        let property_name = CString::new(property_name).unwrap();
+        let mut value: *mut i64 = null_mut();;
+        let window: *mut ffi::WebKitDOMDOMWindow = self.to_glib_none().0;
+        unsafe {
+            g_object_get(window as *mut _, property_name.as_ptr(), &mut value as *mut _, null_mut() as *mut c_void);
+        }
+        unsafe { *value }
+    }
 }
 
 impl DOMDOMWindowExtManual for DOMDOMWindow {
@@ -30,8 +44,15 @@ impl DOMDOMWindowExtManual for DOMDOMWindow {
         unsafe {
             g_object_get(window as *mut _, property_name.as_ptr(), &mut value as *mut _, null_mut() as *mut c_void);
         }
-        let frame_element = unsafe { from_glib_none(value) };
-        frame_element
+        unsafe { from_glib_none(value) }
+    }
+
+    fn get_inner_height(&self) -> i64 {
+        self.get_long_property("inner-height")
+    }
+
+    fn get_inner_width(&self) -> i64 {
+        self.get_long_property("inner-width")
     }
 
     fn get_selection(&self) -> Option<DOMDOMSelection> {

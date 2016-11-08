@@ -1,4 +1,4 @@
-#![allow(non_snake_case, unused_imports)]
+#![allow(let_unit_value, new_without_default, non_snake_case, transmute_ptr_to_ref, type_complexity, unused_imports)]
 
 #[macro_use]
 extern crate glib;
