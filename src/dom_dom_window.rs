@@ -21,12 +21,12 @@ pub trait DOMDOMWindowExtManual {
 impl DOMDOMWindow {
     fn get_long_property(&self, property_name: &str) -> i64 {
         let property_name = CString::new(property_name).unwrap();
-        let mut value: *mut i64 = null_mut();;
+        let mut value = 0;;
         let window: *mut ffi::WebKitDOMDOMWindow = self.to_glib_none().0;
         unsafe {
             g_object_get(window as *mut _, property_name.as_ptr(), &mut value as *mut _, null_mut() as *mut c_void);
         }
-        unsafe { *value }
+        value
     }
 }
 
