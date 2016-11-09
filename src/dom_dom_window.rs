@@ -18,18 +18,6 @@ pub trait DOMDOMWindowExtManual {
     fn get_selection(&self) -> Option<DOMDOMSelection>;
 }
 
-impl DOMDOMWindow {
-    fn get_long_property(&self, property_name: &str) -> i64 {
-        let property_name = CString::new(property_name).unwrap();
-        let mut value = 0;;
-        let window: *mut ffi::WebKitDOMDOMWindow = self.to_glib_none().0;
-        unsafe {
-            g_object_get(window as *mut _, property_name.as_ptr(), &mut value as *mut _, null_mut() as *mut c_void);
-        }
-        value
-    }
-}
-
 impl DOMDOMWindowExtManual for DOMDOMWindow {
     fn get_computed_style<T: IsA<DOMElement>>(&self, element: &T, pseudo_element: Option<&str>) -> Option<DOMCSSStyleDeclaration> {
         unsafe {
@@ -38,21 +26,15 @@ impl DOMDOMWindowExtManual for DOMDOMWindow {
     }
 
     fn get_frame_element(&self) -> Option<DOMElement> {
-        let property_name = CString::new("frame-element").unwrap();
-        let mut value: *mut ffi::WebKitDOMElement = null_mut();;
-        let window: *mut ffi::WebKitDOMDOMWindow = self.to_glib_none().0;
-        unsafe {
-            g_object_get(window as *mut _, property_name.as_ptr(), &mut value as *mut _, null_mut() as *mut c_void);
-        }
-        unsafe { from_glib_none(value) }
+        unsafe { from_glib_none(sys::webkit_dom_dom_window_get_frame_element(self.to_glib_none().0)) }
     }
 
     fn get_inner_height(&self) -> i64 {
-        self.get_long_property("inner-height")
+        unsafe { sys::webkit_dom_dom_window_get_inner_height(self.to_glib_none().0) }
     }
 
     fn get_inner_width(&self) -> i64 {
-        self.get_long_property("inner-width")
+        unsafe { sys::webkit_dom_dom_window_get_inner_width(self.to_glib_none().0) }
     }
 
     fn get_selection(&self) -> Option<DOMDOMSelection> {
@@ -68,6 +50,9 @@ mod sys {
 
     extern "C" {
         pub fn webkit_dom_dom_window_get_computed_style(window: *mut ffi::WebKitDOMDOMWindow, element: *mut ffi::WebKitDOMElement, pseudo_element: *const c_char) -> *mut ffi::WebKitDOMCSSStyleDeclaration;
+        pub fn webkit_dom_dom_window_get_frame_element(window: *mut ffi::WebKitDOMDOMWindow) -> *mut ffi::WebKitDOMElement;
+        pub fn webkit_dom_dom_window_get_inner_height(window: *mut ffi::WebKitDOMDOMWindow) -> i64;
+        pub fn webkit_dom_dom_window_get_inner_width(window: *mut ffi::WebKitDOMDOMWindow) -> i64;
         pub fn webkit_dom_dom_window_get_selection(window: *mut ffi::WebKitDOMDOMWindow) -> *mut WebKitDOMDOMSelection;
     }
 }
