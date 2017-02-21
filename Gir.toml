@@ -100,6 +100,10 @@ module_name = "dom_document_type"
 name = "WebKit2WebExtension.DOMElement"
 status = "generate"
 module_name = "dom_element"
+    [[object.function]]
+    name = "query_selector"
+        [object.function.return]
+        nullable = true
 
 [[object]]
 name = "WebKit2WebExtension.DOMEntityReference"
