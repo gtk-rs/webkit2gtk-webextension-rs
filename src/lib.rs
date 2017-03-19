@@ -43,7 +43,7 @@ macro_rules! web_extension_init {
 
         #[no_mangle]
         pub unsafe fn webkit_web_extension_initialize_with_user_data(extension: *mut ::webkit2gtk_webextension_sys::WebKitWebExtension, user_data: *mut ::glib_sys::GVariant) {
-            web_extension_initialize(::glib::translate::FromGlibPtr::from_glib_none(extension), ::glib::translate::FromGlibPtr::from_glib_none(user_data));
+            web_extension_initialize(::glib::translate::FromGlibPtrNone::from_glib_none(extension), ::glib::translate::FromGlibPtr::from_glib_none(user_data));
         }
     };
 }
