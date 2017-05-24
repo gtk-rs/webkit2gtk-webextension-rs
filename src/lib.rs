@@ -3,7 +3,7 @@
 #[macro_use]
 extern crate glib;
 extern crate glib_sys as glib_ffi;
-extern crate gobject_sys;
+extern crate gobject_sys as gobject_ffi;
 extern crate gtk;
 extern crate libc;
 
@@ -57,5 +57,6 @@ pub use auto::*;
 pub use dom_dom_selection::*;
 pub use dom_dom_window::*;
 pub use dom_html_field_set_element::*;
+use glib::object::Object;
 
 unsafe impl Send for WebExtension {}

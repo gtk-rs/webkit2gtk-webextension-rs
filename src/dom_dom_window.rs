@@ -4,7 +4,7 @@ use std::ptr::null_mut;
 use ffi;
 use glib::IsA;
 use glib::translate::{FromGlib, ToGlibPtr, from_glib_full, from_glib_none};
-use gobject_sys::g_object_get;
+use gobject_ffi::g_object_get;
 use libc::c_void;
 
 use super::{DOMCSSStyleDeclaration, DOMDOMWindow, DOMElement};

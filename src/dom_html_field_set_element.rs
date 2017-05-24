@@ -3,7 +3,7 @@ use std::ptr::null_mut;
 
 use ffi;
 use glib::translate::ToGlibPtr;
-use gobject_sys::g_object_get;
+use gobject_ffi::g_object_get;
 use libc::c_void;
 
 use super::DOMHTMLFieldSetElement;

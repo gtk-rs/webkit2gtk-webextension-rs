@@ -1,33 +1,25 @@
 [package]
+authors = ["Antoni Boucher <bouanto@zoho.com>"]
 name = "webkit2gtk-webextension"
 version = "0.1.0"
-authors = ["Antoni Boucher <bouanto@zoho.com>"]
-
-[features]
-v2_2 = ["webkit2gtk-webextension-sys/v2_2"]
-v2_8 = ["v2_2", "webkit2gtk-webextension-sys/v2_8"]
-v2_10 = ["v2_8", "webkit2gtk-webextension-sys/v2_10"]
-v2_12 = ["v2_10", "webkit2gtk-webextension-sys/v2_12"]
 
 [dependencies]
+glib = "^0.1.3"
+glib-sys = "^0.3.4"
+gobject-sys = "^0.3.4"
+gtk = "^0.1.3"
 libc = "^0.2"
-
-[dependencies.glib]
-git = "https://github.com/gtk-rs/glib"
-version = "0.1.0"
-
-[dependencies.glib-sys]
-git = "https://github.com/gtk-rs/sys"
-version = "0.3.1"
-
-[dependencies.gobject-sys]
-git = "https://github.com/gtk-rs/sys"
-version = "0.3.1"
-
-[dependencies.gtk]
-git = "https://github.com/gtk-rs/gtk"
-version = "0.1.0"
 
 [dependencies.webkit2gtk-webextension-sys]
 git = "https://github.com/antoyo/webkit2gtk-webextension-sys-rs"
 version = "^0.2"
+
+[features]
+v2_10 = ["v2_8", "webkit2gtk-webextension-sys/v2_10"]
+v2_12 = ["v2_10", "webkit2gtk-webextension-sys/v2_12"]
+v2_2 = ["webkit2gtk-webextension-sys/v2_2"]
+v2_8 = ["v2_2", "webkit2gtk-webextension-sys/v2_8"]
+
+[replace."glib:0.1.3"]
+branch = "crate"
+git = "https://github.com/antoyo/glib"
