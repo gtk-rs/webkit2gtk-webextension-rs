@@ -22,8 +22,9 @@
 #[macro_use]
 extern crate webkit2gtk_webextension;
 
+use glib::closure::Closure;
 use glib::variant::Variant;
-use webkit2gtk_webextension::{DOMDocumentExt, DOMElementExt, WebExtension, WebPage};
+use webkit2gtk_webextension::{DOMDocumentExt, DOMElementExt, DOMEventTargetExt, WebExtension, WebPage};
 
 web_extension_init!();
 
@@ -38,6 +39,12 @@ pub fn web_extension_initialize(extension: WebExtension, user_data: Variant) {
             println!("URL: {:?}", document.get_url());
             println!("Title: {:?}", document.get_title());
             document.set_title("My Web Page");
+
+            let handler = Closure::new(|_values| {
+                println!("Click");
+                None
+            });
+            document.add_event_listener_with_closure("click", &handler, false);
 
             println!("{}%", scroll_percentage(page));
             scroll_by(page, 45);
