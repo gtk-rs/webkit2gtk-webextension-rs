@@ -18,6 +18,7 @@ generate = [
 ]
 
 manual = [
+    "GObject.Closure",
     "GLib.Error",
 ]
 
