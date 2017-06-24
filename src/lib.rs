@@ -42,8 +42,13 @@ macro_rules! web_extension_init {
         extern crate webkit2gtk_webextension_sys;
 
         #[no_mangle]
-        pub unsafe fn webkit_web_extension_initialize_with_user_data(extension: *mut ::webkit2gtk_webextension_sys::WebKitWebExtension, user_data: *mut ::glib_sys::GVariant) {
-            web_extension_initialize(::glib::translate::FromGlibPtrNone::from_glib_none(extension), ::glib::translate::FromGlibPtrNone::from_glib_none(user_data));
+        #[doc(hidden)]
+        pub unsafe fn webkit_web_extension_initialize_with_user_data(
+            extension: *mut ::webkit2gtk_webextension_sys::WebKitWebExtension,
+            user_data: *mut ::glib_sys::GVariant)
+        {
+            web_extension_initialize(::glib::translate::FromGlibPtrNone::from_glib_none(extension),
+                ::glib::translate::FromGlibPtrNone::from_glib_none(user_data));
         }
     };
 }
