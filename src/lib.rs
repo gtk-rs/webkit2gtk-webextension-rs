@@ -47,8 +47,9 @@ macro_rules! web_extension_init {
             extension: *mut ::webkit2gtk_webextension_sys::WebKitWebExtension,
             user_data: *mut ::glib_sys::GVariant)
         {
-            web_extension_initialize(::glib::translate::FromGlibPtrNone::from_glib_none(extension),
-                ::glib::translate::FromGlibPtrNone::from_glib_none(user_data));
+            let extension: $crate::WebExtension = ::glib::translate::FromGlibPtrNone::from_glib_none(extension);
+            let user_data: ::glib::variant::Variant = ::glib::translate::FromGlibPtrNone::from_glib_none(user_data);
+            web_extension_initialize(&extension, &user_data);
         }
     };
 }
