@@ -8,8 +8,7 @@ glib = { git = "https://github.com/gtk-rs/glib" }
 glib-sys = { git = "https://github.com/gtk-rs/sys" }
 
 [dependencies.webkit2gtk-webextension]
-git = "https://github.com/antoyo/webkit2gtk-webextension-rs"
-version = "^0.1"
+path = ".."
 
 [dependencies.webkit2gtk-webextension-sys]
 git = "https://github.com/antoyo/webkit2gtk-webextension-sys-rs"

@@ -38,8 +38,7 @@ use webkit2gtk_webextension::{
 
 web_extension_init!();
 
-#[no_mangle]
-pub fn web_extension_initialize(extension: WebExtension, user_data: Variant) {
+pub fn web_extension_initialize(extension: &WebExtension, user_data: &Variant) {
     let _string = user_data.get_str();
 
     extension.connect_page_created(|_, page| {
