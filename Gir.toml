@@ -18,7 +18,6 @@ generate = [
 ]
 
 manual = [
-    "GObject.Closure",
     "GLib.Error",
 ]
 
@@ -76,6 +75,11 @@ module_name = "dom_comment"
 name = "WebKit2WebExtension.DOMDOMImplementation"
 status = "generate"
 module_name = "dom_dom_implementation"
+
+[[object]]
+name = "WebKit2WebExtension.DOMDOMSelection"
+status = "generate"
+module_name = "dom_dom_selection"
 
 [[object]]
 name = "WebKit2WebExtension.DOMDOMWindow"

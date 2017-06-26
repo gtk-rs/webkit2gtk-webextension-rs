@@ -55,13 +55,9 @@ macro_rules! web_extension_init {
 }
 
 mod auto;
-mod dom_dom_selection;
-mod dom_dom_window;
 mod dom_html_field_set_element;
 
 pub use auto::*;
-pub use dom_dom_selection::*;
-pub use dom_dom_window::*;
 pub use dom_html_field_set_element::*;
 
 unsafe impl Send for WebExtension {}

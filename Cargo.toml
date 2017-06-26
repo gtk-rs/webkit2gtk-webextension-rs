@@ -18,5 +18,6 @@ version = "^0.2"
 [features]
 v2_10 = ["v2_8", "webkit2gtk-webextension-sys/v2_10"]
 v2_12 = ["v2_10", "webkit2gtk-webextension-sys/v2_12"]
-v2_2 = ["webkit2gtk-webextension-sys/v2_2"]
-v2_8 = ["v2_2", "webkit2gtk-webextension-sys/v2_8"]
+v2_16 = ["v2_12", "webkit2gtk-webextension-sys/v2_16"]
+v2_6 = ["webkit2gtk-webextension-sys/v2_6"]
+v2_8 = ["v2_6", "webkit2gtk-webextension-sys/v2_8"]
