@@ -38,7 +38,6 @@ macro_rules! callback_guard {
 macro_rules! web_extension_init {
     () => {
         extern crate glib;
-        extern crate glib_sys;
         extern crate webkit2gtk_webextension_sys;
 
         #[no_mangle]
