@@ -22,21 +22,17 @@
 #[macro_use]
 extern crate webkit2gtk_webextension;
 
-use glib::Cast;
-use glib::Object;
-use glib::closure::Closure;
 use glib::variant::Variant;
 use webkit2gtk_webextension::{
     DOMDocumentExt,
     DOMElementExt,
-    DOMEventTargetExt,
-    DOMMouseEvent,
-    DOMMouseEventExt,
     WebExtension,
+    WebExtensionExt,
     WebPage,
+    WebPageExt,
 };
 
-web_extension_init!();
+web_extension_init_with_data!();
 
 pub fn web_extension_initialize(extension: &WebExtension, user_data: &Variant) {
     let _string = user_data.get_str();
@@ -48,16 +44,6 @@ pub fn web_extension_initialize(extension: &WebExtension, user_data: &Variant) {
             println!("URL: {:?}", document.get_url());
             println!("Title: {:?}", document.get_title());
             document.set_title("My Web Page");
-
-            let handler = Closure::new(|values| {
-                if let Some(event) = values[1].get::<Object>() {
-                    if let Ok(mouse_event) = event.downcast::<DOMMouseEvent>() {
-                        println!("Click at ({}, {})", mouse_event.get_x(), mouse_event.get_y());
-                    }
-                }
-                None
-            });
-            document.add_event_listener_with_closure("click", &handler, false);
 
             println!("{}%", scroll_percentage(page));
             scroll_by(page, 45);

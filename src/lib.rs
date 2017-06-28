@@ -43,6 +43,23 @@ macro_rules! web_extension_init {
 
         #[no_mangle]
         #[doc(hidden)]
+        pub unsafe fn webkit_web_extension_initialize(extension: *mut ::webkit2gtk_webextension_sys::WebKitWebExtension)
+        {
+            let extension: $crate::WebExtension = ::glib::translate::FromGlibPtrNone::from_glib_none(extension);
+            web_extension_initialize(&extension);
+        }
+    };
+}
+
+#[macro_export]
+macro_rules! web_extension_init_with_data {
+    () => {
+        extern crate glib;
+        extern crate glib_sys;
+        extern crate webkit2gtk_webextension_sys;
+
+        #[no_mangle]
+        #[doc(hidden)]
         pub unsafe fn webkit_web_extension_initialize_with_user_data(
             extension: *mut ::webkit2gtk_webextension_sys::WebKitWebExtension,
             user_data: *mut ::glib_sys::GVariant)
