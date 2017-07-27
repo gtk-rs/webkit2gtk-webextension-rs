@@ -3,6 +3,8 @@
 
 #[cfg(feature = "v2_16")]
 use DOMCSSStyleDeclaration;
+#[cfg(feature = "v2_16")]
+use DOMDOMSelection;
 use DOMDocument;
 use DOMElement;
 use DOMEventTarget;
@@ -124,8 +126,8 @@ pub trait DOMDOMWindowExt {
     #[cfg(feature = "v2_16")]
     fn get_scroll_y(&self) -> libc::c_long;
 
-    //#[cfg(feature = "v2_16")]
-    //fn get_selection(&self) -> /*Ignored*/Option<DOMDOMSelection>;
+    #[cfg(feature = "v2_16")]
+    fn get_selection(&self) -> Option<DOMDOMSelection>;
 
     #[cfg(feature = "v2_16")]
     fn get_self(&self) -> Option<DOMDOMWindow>;
@@ -442,10 +444,12 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    //#[cfg(feature = "v2_16")]
-    //fn get_selection(&self) -> /*Ignored*/Option<DOMDOMSelection> {
-    //    unsafe { TODO: call ffi::webkit_dom_dom_window_get_selection() }
-    //}
+    #[cfg(feature = "v2_16")]
+    fn get_selection(&self) -> Option<DOMDOMSelection> {
+        unsafe {
+            from_glib_full(ffi::webkit_dom_dom_window_get_selection(self.to_glib_none().0))
+        }
+    }
 
     #[cfg(feature = "v2_16")]
     fn get_self(&self) -> Option<DOMDOMWindow> {

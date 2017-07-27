@@ -78,6 +78,11 @@ status = "generate"
 module_name = "dom_dom_implementation"
 
 [[object]]
+name = "WebKit2WebExtension.DOMDOMSelection"
+status = "generate"
+module_name = "dom_dom_selection"
+
+[[object]]
 name = "WebKit2WebExtension.DOMDOMWindow"
 status = "generate"
 module_name = "dom_dom_window"

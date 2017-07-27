@@ -51,6 +51,13 @@ mod dom_dom_implementation;
 pub use self::dom_dom_implementation::DOMDOMImplementation;
 pub use self::dom_dom_implementation::DOMDOMImplementationExt;
 
+#[cfg(feature = "v2_16")]
+mod dom_dom_selection;
+#[cfg(feature = "v2_16")]
+pub use self::dom_dom_selection::DOMDOMSelection;
+#[cfg(feature = "v2_16")]
+pub use self::dom_dom_selection::DOMDOMSelectionExt;
+
 mod dom_dom_window;
 pub use self::dom_dom_window::DOMDOMWindow;
 pub use self::dom_dom_window::DOMDOMWindowExt;
@@ -462,6 +469,8 @@ pub mod traits {
     pub use super::DOMCSSValueExt;
     pub use super::DOMCharacterDataExt;
     pub use super::DOMDOMImplementationExt;
+    #[cfg(feature = "v2_16")]
+    pub use super::DOMDOMSelectionExt;
     pub use super::DOMDOMWindowExt;
     pub use super::DOMDocumentExt;
     #[cfg(feature = "v2_16")]
