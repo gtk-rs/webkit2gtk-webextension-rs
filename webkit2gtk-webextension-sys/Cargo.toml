@@ -1,0 +1,39 @@
+[build-dependencies]
+pkg-config = "0.3.7"
+
+[dependencies]
+bitflags = "0.9"
+libc = "0.2"
+
+[dependencies.glib-sys]
+git = "https://github.com/gtk-rs/sys"
+
+[dependencies.gobject-sys]
+git = "https://github.com/gtk-rs/sys"
+
+[dependencies.gtk-sys]
+git = "https://github.com/gtk-rs/sys"
+
+[dependencies.javascriptcore-sys]
+git = "https://github.com/antoyo/javascriptcore-sys-rs"
+
+[dependencies.soup-sys]
+git = "https://github.com/antoyo/soup-sys-rs"
+
+[features]
+v2_10 = ["v2_8"]
+v2_12 = ["v2_10"]
+v2_14 = ["v2_12"]
+v2_16 = ["v2_14"]
+v2_6 = []
+v2_8 = ["v2_6"]
+
+[lib]
+name = "webkit2gtk_webextension_sys"
+
+[package]
+authors = ["Antoni Boucher <bouanto@zoho.com>"]
+build = "build.rs"
+links = "webkit2gtk_webextension"
+name = "webkit2gtk-webextension-sys"
+version = "0.2.0"
