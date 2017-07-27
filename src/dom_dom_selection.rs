@@ -1,6 +1,11 @@
+use std::mem;
+use std::ptr;
+
 use DOMNode;
 use DOMObject;
-use glib::translate::{ToGlibPtr, from_glib_none};
+use glib::translate::{FromGlibPtrFull, Stash, ToGlibPtr, ToGlibPtrMut, from_glib_none};
+use glib_ffi;
+use gobject_ffi;
 
 glib_wrapper! {
     pub struct DOMDOMSelection(Object<sys::WebKitDOMDOMSelection>): DOMObject;
