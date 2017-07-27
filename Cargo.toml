@@ -11,7 +11,7 @@ gtk = "^0.1.3"
 libc = "^0.2"
 
 [dependencies.webkit2gtk-webextension-sys]
-git = "https://github.com/antoyo/webkit2gtk-webextension-sys-rs"
+git = "https://github.com/antoyo/webkit2gtk-webextension-rs"
 branch = "crate"
 version = "^0.2"
 

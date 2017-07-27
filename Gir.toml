@@ -90,6 +90,9 @@ module_name = "dom_dom_window"
 name = "WebKit2WebExtension.DOMDocument"
 status = "generate"
 module_name = "dom_document"
+    [[object.function]]
+    name = "create_document_fragment"
+    version = "2.16"
 
 [[object]]
 name = "WebKit2WebExtension.DOMDocumentFragment"
@@ -474,6 +477,15 @@ module_name = "dom_processing_instruction"
 name = "WebKit2WebExtension.DOMRange"
 status = "generate"
 module_name = "dom_range"
+    [[object.function]]
+    name = "clone_contents"
+    version = "2.16"
+    [[object.function]]
+    name = "create_contextual_fragment"
+    version = "2.16"
+    [[object.function]]
+    name = "extract_contents"
+    version = "2.16"
 
 [[object]]
 name = "WebKit2WebExtension.DOMStyleSheet"
