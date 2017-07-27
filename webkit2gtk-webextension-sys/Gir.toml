@@ -1,0 +1,14 @@
+[options]
+work_mode = "sys"
+min_cfg_version="2.4"
+library = "WebKit2WebExtension"
+version = "4.0"
+external_libraries = [
+   "GLib",
+   "GObject",
+   "Gtk",
+   "Soup",
+]
+
+[external_libraries]
+javascriptcore = "JavaScriptCore"
