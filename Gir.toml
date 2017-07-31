@@ -1,9 +1,10 @@
 [options]
-gir_dir = "input"
+girs_dir = "gir-files"
 library = "WebKit2WebExtension"
 version = "4.0"
 work_mode = "normal"
 generate_safety_asserts = true
+target_path = "."
 
 generate = [
     "WebKit2WebExtension.ConsoleMessage",
