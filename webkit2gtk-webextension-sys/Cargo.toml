@@ -33,7 +33,7 @@ git = "https://github.com/gtk-rs/sys"
 git = "https://github.com/gtk-rs/sys"
 
 [dependencies.javascriptcore-sys]
-git = "https://github.com/antoyo/javascriptcore-sys-rs"
+git = "https://github.com/gtk-rs/javascriptcore-rs"
 
 [dependencies.soup-sys]
-git = "https://github.com/antoyo/soup-sys-rs"
+git = "https://github.com/gtk-rs/soup-sys-rs"

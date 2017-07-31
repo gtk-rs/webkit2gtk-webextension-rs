@@ -34,5 +34,5 @@ gtk = { git = "https://github.com/gtk-rs/gtk" }
 libc = "^0.2"
 
 [dependencies.webkit2gtk-webextension-sys]
-git = "https://github.com/guillaumegomez/webkit2gtk-webextension-rs"
+git = "https://github.com/gtk-rs/webkit2gtk-webextension-rs"
 version = "^0.2"
