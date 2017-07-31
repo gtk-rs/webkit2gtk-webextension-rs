@@ -1,3 +1,21 @@
+[package]
+authors = ["The Gtk-rs Project Developers"]
+build = "build.rs"
+links = "webkit2gtk_webextension"
+name = "webkit2gtk-webextension-sys"
+version = "0.2.0"
+
+[lib]
+name = "webkit2gtk_webextension_sys"
+
+[features]
+v2_6 = []
+v2_8 = ["v2_6"]
+v2_10 = ["v2_8"]
+v2_12 = ["v2_10"]
+v2_14 = ["v2_12"]
+v2_16 = ["v2_14"]
+
 [build-dependencies]
 pkg-config = "0.3.7"
 
@@ -19,21 +37,3 @@ git = "https://github.com/antoyo/javascriptcore-sys-rs"
 
 [dependencies.soup-sys]
 git = "https://github.com/antoyo/soup-sys-rs"
-
-[features]
-v2_10 = ["v2_8"]
-v2_12 = ["v2_10"]
-v2_14 = ["v2_12"]
-v2_16 = ["v2_14"]
-v2_6 = []
-v2_8 = ["v2_6"]
-
-[lib]
-name = "webkit2gtk_webextension_sys"
-
-[package]
-authors = ["Antoni Boucher <bouanto@zoho.com>"]
-build = "build.rs"
-links = "webkit2gtk_webextension"
-name = "webkit2gtk-webextension-sys"
-version = "0.2.0"
