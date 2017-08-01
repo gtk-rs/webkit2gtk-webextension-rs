@@ -16,7 +16,7 @@ keywords = ["webkit", "gtk", "gtk-rs", "GUI"]
 travis-ci = { repository = "gtk-rs/webkit2gtk-webextension-rs" }
 
 [lib]
-name = "webkit2gtk-webextension"
+name = "webkit2gtk_webextension"
 
 [features]
 v2_2 = []
