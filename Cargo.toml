@@ -24,6 +24,7 @@ v2_8 = ["v2_2", "webkit2gtk-webextension-sys/v2_8"]
 v2_10 = ["v2_8", "webkit2gtk-webextension-sys/v2_10"]
 v2_12 = ["v2_10", "webkit2gtk-webextension-sys/v2_12"]
 v2_14 = ["v2_12", "webkit2gtk-webextension-sys/v2_14"]
+v2_16 = ["v2_14", "webkit2gtk-webextension-sys/v2_16"]
 
 [dependencies]
 libc = "^0.2"
