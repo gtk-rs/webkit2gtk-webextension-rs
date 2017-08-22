@@ -3,7 +3,7 @@ authors = ["The Gtk-rs Project Developers"]
 build = "build.rs"
 links = "webkit2gtk_webextension"
 name = "webkit2gtk-webextension-sys"
-version = "0.2.0"
+version = "0.3.0"
 
 [lib]
 name = "webkit2gtk_webextension_sys"
@@ -32,7 +32,7 @@ git = "https://github.com/gtk-rs/sys"
 [dependencies.gtk-sys]
 git = "https://github.com/gtk-rs/sys"
 
-[dependencies.javascriptcore-sys]
+[dependencies.javascriptcore-rs-sys]
 git = "https://github.com/gtk-rs/javascriptcore-rs"
 
 [dependencies.soup-sys]

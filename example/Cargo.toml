@@ -11,7 +11,7 @@ glib-sys = { git = "https://github.com/gtk-rs/sys" }
 path = ".."
 
 [dependencies.webkit2gtk-webextension-sys]
-git = "https://github.com/antoyo/webkit2gtk-webextension-sys-rs"
+git = "https://github.com/gtk-rs/webkit2gtk-webextension-rs"
 version = "^0.2"
 
 [features]
