@@ -33,7 +33,9 @@ use webkit2gtk_webextension::{
     DOMMouseEvent,
     DOMMouseEventExt,
     WebExtension,
+    WebExtensionExt,
     WebPage,
+    WebPageExt,
 };
 
 web_extension_init!();
