@@ -38,7 +38,7 @@ use webkit2gtk_webextension::{
     WebPageExt,
 };
 
-web_extension_init!();
+web_extension_init_with_data!();
 
 pub fn web_extension_initialize(extension: &WebExtension, user_data: &Variant) {
     let _string = user_data.get_str();
