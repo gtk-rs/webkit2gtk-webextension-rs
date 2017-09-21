@@ -25,6 +25,7 @@ v2_10 = ["v2_8", "webkit2gtk-webextension-sys/v2_10"]
 v2_12 = ["v2_10", "webkit2gtk-webextension-sys/v2_12"]
 v2_14 = ["v2_12", "webkit2gtk-webextension-sys/v2_14"]
 v2_16 = ["v2_14", "webkit2gtk-webextension-sys/v2_16"]
+v2_18 = ["v2_16", "webkit2gtk-webextension-sys/v2_18"]
 
 [dependencies]
 glib = { git = "https://github.com/gtk-rs/glib" }
@@ -34,5 +35,5 @@ gtk = { git = "https://github.com/gtk-rs/gtk" }
 libc = "^0.2"
 
 [dependencies.webkit2gtk-webextension-sys]
-git = "https://github.com/gtk-rs/webkit2gtk-webextension-rs"
+path = "./webkit2gtk-webextension-sys"
 version = "^0.3"
