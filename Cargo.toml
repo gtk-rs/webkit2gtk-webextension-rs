@@ -1,6 +1,6 @@
 [package]
 name = "webkit2gtk-webextension"
-version = "0.3.1"
+version = "0.3.2"
 authors = ["The Gtk-rs Project Developers"]
 
 categories = ["api-bindings", "gui"]
