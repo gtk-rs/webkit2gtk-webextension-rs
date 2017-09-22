@@ -9,6 +9,7 @@ target_path = "."
 generate = [
     "WebKit2WebExtension.ConsoleMessage",
     "WebKit2WebExtension.ContextMenu",
+    "WebKit2WebExtension.ContextMenuAction",
     "WebKit2WebExtension.ContextMenuItem",
     "WebKit2WebExtension.Frame",
     "WebKit2WebExtension.HitTestResult",
@@ -19,8 +20,10 @@ generate = [
 ]
 
 manual = [
+    "Gio.Action",
     "GObject.Closure",
     "GLib.Error",
+    "GLib.Variant",
 ]
 
 [[object]]
@@ -37,6 +40,16 @@ module_name = "dom_blob"
 name = "WebKit2WebExtension.DOMCDATASection"
 status = "generate"
 module_name = "dom_cdata_section"
+
+[[object]]
+name = "WebKit2WebExtension.DOMClientRect"
+status = "generate"
+module_name = "dom_client_rect"
+
+[[object]]
+name = "WebKit2WebExtension.DOMClientRectList"
+status = "generate"
+module_name = "dom_client_rect_list"
 
 [[object]]
 name = "WebKit2WebExtension.DOMCSSRule"
@@ -84,6 +97,11 @@ status = "generate"
 module_name = "dom_dom_selection"
 
 [[object]]
+name = "WebKit2WebExtension.DOMDOMTokenList"
+status = "generate"
+module_name = "dom_dom_token_list"
+
+[[object]]
 name = "WebKit2WebExtension.DOMDOMWindow"
 status = "generate"
 module_name = "dom_dom_window"
@@ -114,6 +132,9 @@ module_name = "dom_element"
     name = "query_selector"
         [object.function.return]
         nullable = true
+    [[object.property]]
+    name = "class-list"
+    version = "2.16"
 
 [[object]]
 name = "WebKit2WebExtension.DOMEntityReference"
@@ -299,6 +320,9 @@ module_name = "dom_html_legend_element"
 name = "WebKit2WebExtension.DOMHTMLLinkElement"
 status = "generate"
 module_name = "dom_html_link_element"
+    [[object.property]]
+    name = "sizes"
+    version = "2.16"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLMapElement"
