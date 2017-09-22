@@ -1,6 +1,6 @@
 [package]
 name = "webkit2gtk-webextension-sys"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["The Gtk-rs Project Developers"]
 build = "build.rs"
 
@@ -21,6 +21,7 @@ v2_10 = ["v2_8"]
 v2_12 = ["v2_10"]
 v2_14 = ["v2_12"]
 v2_16 = ["v2_14"]
+v2_18 = ["v2_16"]
 
 [build-dependencies]
 pkg-config = "0.3.7"
