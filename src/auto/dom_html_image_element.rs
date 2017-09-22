@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -92,41 +91,41 @@ pub trait DOMHTMLImageElementExt {
 
     fn set_width(&self, value: libc::c_long);
 
-    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_border_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_border_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_complete_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_complete_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_is_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_is_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_long_desc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_long_desc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_lowsrc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_lowsrc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_natural_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_natural_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_natural_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_natural_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_use_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_use_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElementExt for O {
@@ -316,7 +315,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::align",
@@ -324,7 +323,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::alt",
@@ -332,7 +331,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_border_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_border_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::border",
@@ -340,7 +339,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_complete_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_complete_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::complete",
@@ -348,7 +347,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::height",
@@ -356,7 +355,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::hspace",
@@ -364,7 +363,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_is_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_is_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::is-map",
@@ -372,7 +371,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_long_desc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_long_desc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::long-desc",
@@ -380,7 +379,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_lowsrc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_lowsrc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::lowsrc",
@@ -388,7 +387,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::name",
@@ -396,7 +395,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_natural_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_natural_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::natural-height",
@@ -404,7 +403,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_natural_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_natural_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::natural-width",
@@ -412,7 +411,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::src",
@@ -420,7 +419,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_use_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_use_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::use-map",
@@ -428,7 +427,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::vspace",
@@ -436,7 +435,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::width",
@@ -444,7 +443,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::x",
@@ -452,7 +451,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
         }
     }
 
-    fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::y",

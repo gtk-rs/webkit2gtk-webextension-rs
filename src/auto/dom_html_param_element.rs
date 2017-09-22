@@ -11,7 +11,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -50,13 +49,13 @@ pub trait DOMHTMLParamElementExt {
 
     fn set_property_type(&self, type_: Option<&str>);
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_value_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_value_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLParamElement> + IsA<glib::object::Object>> DOMHTMLParamElementExt for O {
@@ -122,7 +121,7 @@ impl<O: IsA<DOMHTMLParamElement> + IsA<glib::object::Object>> DOMHTMLParamElemen
         }
     }
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::name",
@@ -130,7 +129,7 @@ impl<O: IsA<DOMHTMLParamElement> + IsA<glib::object::Object>> DOMHTMLParamElemen
         }
     }
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::type",
@@ -138,7 +137,7 @@ impl<O: IsA<DOMHTMLParamElement> + IsA<glib::object::Object>> DOMHTMLParamElemen
         }
     }
 
-    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::value",
@@ -146,7 +145,7 @@ impl<O: IsA<DOMHTMLParamElement> + IsA<glib::object::Object>> DOMHTMLParamElemen
         }
     }
 
-    fn connect_property_value_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_value_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::value-type",

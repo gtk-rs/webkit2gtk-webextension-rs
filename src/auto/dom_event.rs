@@ -8,7 +8,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -60,25 +59,25 @@ pub trait DOMEventExt {
 
     fn get_property_type(&self) -> Option<String>;
 
-    fn connect_property_bubbles_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_bubbles_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_cancel_bubble_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_cancel_bubble_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_cancelable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_cancelable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_current_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_current_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_event_phase_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_event_phase_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_return_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_return_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_src_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_src_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_time_stamp_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_time_stamp_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMEvent> + IsA<glib::object::Object>> DOMEventExt for O {
@@ -180,7 +179,7 @@ impl<O: IsA<DOMEvent> + IsA<glib::object::Object>> DOMEventExt for O {
         value.get()
     }
 
-    fn connect_property_bubbles_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_bubbles_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::bubbles",
@@ -188,7 +187,7 @@ impl<O: IsA<DOMEvent> + IsA<glib::object::Object>> DOMEventExt for O {
         }
     }
 
-    fn connect_property_cancel_bubble_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_cancel_bubble_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::cancel-bubble",
@@ -196,7 +195,7 @@ impl<O: IsA<DOMEvent> + IsA<glib::object::Object>> DOMEventExt for O {
         }
     }
 
-    fn connect_property_cancelable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_cancelable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::cancelable",
@@ -204,7 +203,7 @@ impl<O: IsA<DOMEvent> + IsA<glib::object::Object>> DOMEventExt for O {
         }
     }
 
-    fn connect_property_current_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_current_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::current-target",
@@ -212,7 +211,7 @@ impl<O: IsA<DOMEvent> + IsA<glib::object::Object>> DOMEventExt for O {
         }
     }
 
-    fn connect_property_event_phase_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_event_phase_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::event-phase",
@@ -220,7 +219,7 @@ impl<O: IsA<DOMEvent> + IsA<glib::object::Object>> DOMEventExt for O {
         }
     }
 
-    fn connect_property_return_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_return_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::return-value",
@@ -228,7 +227,7 @@ impl<O: IsA<DOMEvent> + IsA<glib::object::Object>> DOMEventExt for O {
         }
     }
 
-    fn connect_property_src_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_src_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::src-element",
@@ -236,7 +235,7 @@ impl<O: IsA<DOMEvent> + IsA<glib::object::Object>> DOMEventExt for O {
         }
     }
 
-    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::target",
@@ -244,7 +243,7 @@ impl<O: IsA<DOMEvent> + IsA<glib::object::Object>> DOMEventExt for O {
         }
     }
 
-    fn connect_property_time_stamp_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_time_stamp_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::time-stamp",
@@ -252,7 +251,7 @@ impl<O: IsA<DOMEvent> + IsA<glib::object::Object>> DOMEventExt for O {
         }
     }
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::type",

@@ -9,7 +9,6 @@ use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
 #[cfg(feature = "v2_10")]
-use glib::signal::SignalHandlerId;
 #[cfg(feature = "v2_10")]
 use glib::signal::connect;
 use glib::translate::*;
@@ -35,7 +34,7 @@ pub trait WebEditorExt {
     fn get_page(&self) -> Option<WebPage>;
 
     #[cfg(feature = "v2_10")]
-    fn connect_selection_changed<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_selection_changed<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<WebEditor> + IsA<glib::object::Object>> WebEditorExt for O {
@@ -47,7 +46,7 @@ impl<O: IsA<WebEditor> + IsA<glib::object::Object>> WebEditorExt for O {
     }
 
     #[cfg(feature = "v2_10")]
-    fn connect_selection_changed<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_selection_changed<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "selection-changed",

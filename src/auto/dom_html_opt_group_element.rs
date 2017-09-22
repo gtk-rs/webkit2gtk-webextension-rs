@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -37,9 +36,9 @@ pub trait DOMHTMLOptGroupElementExt {
 
     fn set_label(&self, value: &str);
 
-    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLOptGroupElement> + IsA<glib::object::Object>> DOMHTMLOptGroupElementExt for O {
@@ -67,7 +66,7 @@ impl<O: IsA<DOMHTMLOptGroupElement> + IsA<glib::object::Object>> DOMHTMLOptGroup
         }
     }
 
-    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::disabled",
@@ -75,7 +74,7 @@ impl<O: IsA<DOMHTMLOptGroupElement> + IsA<glib::object::Object>> DOMHTMLOptGroup
         }
     }
 
-    fn connect_property_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::label",

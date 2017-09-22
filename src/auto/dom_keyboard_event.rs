@@ -9,7 +9,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -47,19 +46,19 @@ pub trait DOMKeyboardEventExt {
 
     fn init_keyboard_event(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, keyIdentifier: &str, location: libc::c_ulong, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool, altGraphKey: bool);
 
-    fn connect_property_alt_graph_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_alt_graph_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_alt_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_alt_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_ctrl_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_ctrl_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_key_identifier_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_key_identifier_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_key_location_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_key_location_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_meta_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_meta_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_shift_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_shift_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMKeyboardEvent> + IsA<glib::object::Object>> DOMKeyboardEventExt for O {
@@ -117,7 +116,7 @@ impl<O: IsA<DOMKeyboardEvent> + IsA<glib::object::Object>> DOMKeyboardEventExt f
         }
     }
 
-    fn connect_property_alt_graph_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_alt_graph_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::alt-graph-key",
@@ -125,7 +124,7 @@ impl<O: IsA<DOMKeyboardEvent> + IsA<glib::object::Object>> DOMKeyboardEventExt f
         }
     }
 
-    fn connect_property_alt_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_alt_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::alt-key",
@@ -133,7 +132,7 @@ impl<O: IsA<DOMKeyboardEvent> + IsA<glib::object::Object>> DOMKeyboardEventExt f
         }
     }
 
-    fn connect_property_ctrl_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_ctrl_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::ctrl-key",
@@ -141,7 +140,7 @@ impl<O: IsA<DOMKeyboardEvent> + IsA<glib::object::Object>> DOMKeyboardEventExt f
         }
     }
 
-    fn connect_property_key_identifier_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_key_identifier_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::key-identifier",
@@ -149,7 +148,7 @@ impl<O: IsA<DOMKeyboardEvent> + IsA<glib::object::Object>> DOMKeyboardEventExt f
         }
     }
 
-    fn connect_property_key_location_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_key_location_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::key-location",
@@ -157,7 +156,7 @@ impl<O: IsA<DOMKeyboardEvent> + IsA<glib::object::Object>> DOMKeyboardEventExt f
         }
     }
 
-    fn connect_property_meta_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_meta_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::meta-key",
@@ -165,7 +164,7 @@ impl<O: IsA<DOMKeyboardEvent> + IsA<glib::object::Object>> DOMKeyboardEventExt f
         }
     }
 
-    fn connect_property_shift_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_shift_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::shift-key",

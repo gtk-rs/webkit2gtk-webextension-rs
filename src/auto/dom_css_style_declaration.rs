@@ -8,7 +8,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -50,11 +49,11 @@ pub trait DOMCSSStyleDeclarationExt {
 
     fn set_property(&self, propertyName: &str, value: &str, priority: &str) -> Result<(), Error>;
 
-    fn connect_property_css_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_css_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_parent_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_parent_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMCSSStyleDeclaration> + IsA<glib::object::Object>> DOMCSSStyleDeclarationExt for O {
@@ -130,7 +129,7 @@ impl<O: IsA<DOMCSSStyleDeclaration> + IsA<glib::object::Object>> DOMCSSStyleDecl
         }
     }
 
-    fn connect_property_css_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_css_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::css-text",
@@ -138,7 +137,7 @@ impl<O: IsA<DOMCSSStyleDeclaration> + IsA<glib::object::Object>> DOMCSSStyleDecl
         }
     }
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::length",
@@ -146,7 +145,7 @@ impl<O: IsA<DOMCSSStyleDeclaration> + IsA<glib::object::Object>> DOMCSSStyleDecl
         }
     }
 
-    fn connect_property_parent_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_parent_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::parent-rule",

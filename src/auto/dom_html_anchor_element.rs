@@ -11,7 +11,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -109,41 +108,41 @@ pub trait DOMHTMLAnchorElementExt {
 
     fn set_property_type(&self, type_: Option<&str>);
 
-    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_coords_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_coords_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_hash_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_hash_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_host_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_host_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_hostname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_hostname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_hreflang_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_hreflang_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_pathname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_pathname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_port_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_port_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_protocol_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_protocol_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_rel_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_rel_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_rev_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_rev_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_search_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_search_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_shape_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_shape_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElementExt for O {
@@ -384,7 +383,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::charset",
@@ -392,7 +391,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_coords_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_coords_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::coords",
@@ -400,7 +399,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_hash_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_hash_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::hash",
@@ -408,7 +407,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_host_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_host_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::host",
@@ -416,7 +415,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_hostname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_hostname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::hostname",
@@ -424,7 +423,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::href",
@@ -432,7 +431,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_hreflang_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_hreflang_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::hreflang",
@@ -440,7 +439,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::name",
@@ -448,7 +447,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_pathname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_pathname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::pathname",
@@ -456,7 +455,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_port_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_port_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::port",
@@ -464,7 +463,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_protocol_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_protocol_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::protocol",
@@ -472,7 +471,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_rel_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_rel_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::rel",
@@ -480,7 +479,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_rev_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_rev_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::rev",
@@ -488,7 +487,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_search_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_search_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::search",
@@ -496,7 +495,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_shape_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_shape_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::shape",
@@ -504,7 +503,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::target",
@@ -512,7 +511,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::text",
@@ -520,7 +519,7 @@ impl<O: IsA<DOMHTMLAnchorElement> + IsA<glib::object::Object>> DOMHTMLAnchorElem
         }
     }
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::type",

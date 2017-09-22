@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -33,7 +32,7 @@ pub trait DOMHTMLTitleElementExt {
 
     fn set_text(&self, value: &str);
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLTitleElement> + IsA<glib::object::Object>> DOMHTMLTitleElementExt for O {
@@ -49,7 +48,7 @@ impl<O: IsA<DOMHTMLTitleElement> + IsA<glib::object::Object>> DOMHTMLTitleElemen
         }
     }
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::text",

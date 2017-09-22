@@ -12,7 +12,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -120,27 +119,27 @@ pub trait DOMDOMSelectionExt {
 
     fn get_property_type(&self) -> Option<String>;
 
-    fn connect_property_anchor_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_anchor_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_anchor_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_anchor_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_base_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_base_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_base_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_base_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_extent_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_extent_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_extent_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_extent_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_focus_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_focus_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_focus_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_focus_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_is_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_is_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_range_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_range_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for O {
@@ -375,7 +374,7 @@ impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for
         value.get()
     }
 
-    fn connect_property_anchor_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_anchor_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::anchor-node",
@@ -383,7 +382,7 @@ impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for
         }
     }
 
-    fn connect_property_anchor_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_anchor_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::anchor-offset",
@@ -391,7 +390,7 @@ impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for
         }
     }
 
-    fn connect_property_base_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_base_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::base-node",
@@ -399,7 +398,7 @@ impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for
         }
     }
 
-    fn connect_property_base_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_base_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::base-offset",
@@ -407,7 +406,7 @@ impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for
         }
     }
 
-    fn connect_property_extent_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_extent_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::extent-node",
@@ -415,7 +414,7 @@ impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for
         }
     }
 
-    fn connect_property_extent_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_extent_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::extent-offset",
@@ -423,7 +422,7 @@ impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for
         }
     }
 
-    fn connect_property_focus_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_focus_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::focus-node",
@@ -431,7 +430,7 @@ impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for
         }
     }
 
-    fn connect_property_focus_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_focus_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::focus-offset",
@@ -439,7 +438,7 @@ impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for
         }
     }
 
-    fn connect_property_is_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_is_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::is-collapsed",
@@ -447,7 +446,7 @@ impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for
         }
     }
 
-    fn connect_property_range_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_range_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::range-count",
@@ -455,7 +454,7 @@ impl<O: IsA<DOMDOMSelection> + IsA<glib::object::Object>> DOMDOMSelectionExt for
         }
     }
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::type",

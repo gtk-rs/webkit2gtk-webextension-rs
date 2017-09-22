@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -74,27 +73,27 @@ pub trait DOMHTMLAppletElementExt {
 
     fn set_width(&self, value: &str);
 
-    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_archive_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_archive_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_code_base_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_code_base_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_object_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_object_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElementExt for O {
@@ -230,7 +229,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
         }
     }
 
-    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::align",
@@ -238,7 +237,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
         }
     }
 
-    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::alt",
@@ -246,7 +245,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
         }
     }
 
-    fn connect_property_archive_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_archive_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::archive",
@@ -254,7 +253,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
         }
     }
 
-    fn connect_property_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::code",
@@ -262,7 +261,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
         }
     }
 
-    fn connect_property_code_base_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_code_base_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::code-base",
@@ -270,7 +269,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
         }
     }
 
-    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::height",
@@ -278,7 +277,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
         }
     }
 
-    fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::hspace",
@@ -286,7 +285,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
         }
     }
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::name",
@@ -294,7 +293,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
         }
     }
 
-    fn connect_property_object_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_object_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::object",
@@ -302,7 +301,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
         }
     }
 
-    fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::vspace",
@@ -310,7 +309,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
         }
     }
 
-    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::width",

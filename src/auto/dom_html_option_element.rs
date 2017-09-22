@@ -11,7 +11,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -57,21 +56,21 @@ pub trait DOMHTMLOptionElementExt {
 
     fn set_value(&self, value: &str);
 
-    fn connect_property_default_selected_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_default_selected_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_selected_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_selected_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLOptionElement> + IsA<glib::object::Object>> DOMHTMLOptionElementExt for O {
@@ -153,7 +152,7 @@ impl<O: IsA<DOMHTMLOptionElement> + IsA<glib::object::Object>> DOMHTMLOptionElem
         }
     }
 
-    fn connect_property_default_selected_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_default_selected_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::default-selected",
@@ -161,7 +160,7 @@ impl<O: IsA<DOMHTMLOptionElement> + IsA<glib::object::Object>> DOMHTMLOptionElem
         }
     }
 
-    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::disabled",
@@ -169,7 +168,7 @@ impl<O: IsA<DOMHTMLOptionElement> + IsA<glib::object::Object>> DOMHTMLOptionElem
         }
     }
 
-    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::form",
@@ -177,7 +176,7 @@ impl<O: IsA<DOMHTMLOptionElement> + IsA<glib::object::Object>> DOMHTMLOptionElem
         }
     }
 
-    fn connect_property_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::index",
@@ -185,7 +184,7 @@ impl<O: IsA<DOMHTMLOptionElement> + IsA<glib::object::Object>> DOMHTMLOptionElem
         }
     }
 
-    fn connect_property_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::label",
@@ -193,7 +192,7 @@ impl<O: IsA<DOMHTMLOptionElement> + IsA<glib::object::Object>> DOMHTMLOptionElem
         }
     }
 
-    fn connect_property_selected_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_selected_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::selected",
@@ -201,7 +200,7 @@ impl<O: IsA<DOMHTMLOptionElement> + IsA<glib::object::Object>> DOMHTMLOptionElem
         }
     }
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::text",
@@ -209,7 +208,7 @@ impl<O: IsA<DOMHTMLOptionElement> + IsA<glib::object::Object>> DOMHTMLOptionElem
         }
     }
 
-    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::value",

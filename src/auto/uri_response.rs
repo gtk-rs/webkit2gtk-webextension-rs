@@ -5,7 +5,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -37,18 +36,18 @@ pub trait URIResponseExt {
 
     fn get_uri(&self) -> Option<String>;
 
-    fn connect_property_content_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_content_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
     #[cfg(feature = "v2_6")]
-    fn connect_property_http_headers_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_http_headers_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_mime_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_mime_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_status_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_status_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_suggested_filename_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_suggested_filename_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<URIResponse> + IsA<glib::object::Object>> URIResponseExt for O {
@@ -87,7 +86,7 @@ impl<O: IsA<URIResponse> + IsA<glib::object::Object>> URIResponseExt for O {
         }
     }
 
-    fn connect_property_content_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_content_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::content-length",
@@ -96,7 +95,7 @@ impl<O: IsA<URIResponse> + IsA<glib::object::Object>> URIResponseExt for O {
     }
 
     #[cfg(feature = "v2_6")]
-    fn connect_property_http_headers_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_http_headers_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::http-headers",
@@ -104,7 +103,7 @@ impl<O: IsA<URIResponse> + IsA<glib::object::Object>> URIResponseExt for O {
         }
     }
 
-    fn connect_property_mime_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_mime_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::mime-type",
@@ -112,7 +111,7 @@ impl<O: IsA<URIResponse> + IsA<glib::object::Object>> URIResponseExt for O {
         }
     }
 
-    fn connect_property_status_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_status_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::status-code",
@@ -120,7 +119,7 @@ impl<O: IsA<URIResponse> + IsA<glib::object::Object>> URIResponseExt for O {
         }
     }
 
-    fn connect_property_suggested_filename_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_suggested_filename_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::suggested-filename",
@@ -128,7 +127,7 @@ impl<O: IsA<URIResponse> + IsA<glib::object::Object>> URIResponseExt for O {
         }
     }
 
-    fn connect_property_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::uri",

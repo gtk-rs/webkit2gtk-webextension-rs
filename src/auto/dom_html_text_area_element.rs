@@ -12,7 +12,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -86,31 +85,31 @@ pub trait DOMHTMLTextAreaElementExt {
 
     fn get_property_type(&self) -> Option<String>;
 
-    fn connect_property_autofocus_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_autofocus_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_cols_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_cols_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_default_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_default_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_read_only_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_read_only_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_rows_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_rows_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_selection_end_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_selection_end_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_selection_start_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_selection_start_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextAreaElementExt for O {
@@ -278,7 +277,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         value.get()
     }
 
-    fn connect_property_autofocus_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_autofocus_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::autofocus",
@@ -286,7 +285,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_cols_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_cols_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::cols",
@@ -294,7 +293,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_default_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_default_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::default-value",
@@ -302,7 +301,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::disabled",
@@ -310,7 +309,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::form",
@@ -318,7 +317,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::name",
@@ -326,7 +325,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_read_only_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_read_only_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::read-only",
@@ -334,7 +333,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_rows_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_rows_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::rows",
@@ -342,7 +341,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_selection_end_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_selection_end_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::selection-end",
@@ -350,7 +349,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_selection_start_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_selection_start_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::selection-start",
@@ -358,7 +357,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::type",
@@ -366,7 +365,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::value",
@@ -374,7 +373,7 @@ impl<O: IsA<DOMHTMLTextAreaElement> + IsA<glib::object::Object>> DOMHTMLTextArea
         }
     }
 
-    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::will-validate",

@@ -7,7 +7,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -39,9 +38,9 @@ pub trait DOMMediaListExt {
 
     fn set_media_text(&self, value: &str) -> Result<(), Error>;
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_media_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_media_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMMediaList> + IsA<glib::object::Object>> DOMMediaListExt for O {
@@ -87,7 +86,7 @@ impl<O: IsA<DOMMediaList> + IsA<glib::object::Object>> DOMMediaListExt for O {
         }
     }
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::length",
@@ -95,7 +94,7 @@ impl<O: IsA<DOMMediaList> + IsA<glib::object::Object>> DOMMediaListExt for O {
         }
     }
 
-    fn connect_property_media_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_media_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::media-text",

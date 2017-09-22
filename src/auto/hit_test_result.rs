@@ -5,7 +5,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -49,17 +48,17 @@ pub trait HitTestResultExt {
 
     fn get_media_uri(&self) -> Option<String>;
 
-    fn connect_property_context_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_context_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_image_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_image_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_link_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_link_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_link_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_link_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_link_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_link_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_media_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_media_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<HitTestResult> + IsA<glib::object::Object>> HitTestResultExt for O {
@@ -136,7 +135,7 @@ impl<O: IsA<HitTestResult> + IsA<glib::object::Object>> HitTestResultExt for O {
         }
     }
 
-    fn connect_property_context_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_context_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::context",
@@ -144,7 +143,7 @@ impl<O: IsA<HitTestResult> + IsA<glib::object::Object>> HitTestResultExt for O {
         }
     }
 
-    fn connect_property_image_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_image_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::image-uri",
@@ -152,7 +151,7 @@ impl<O: IsA<HitTestResult> + IsA<glib::object::Object>> HitTestResultExt for O {
         }
     }
 
-    fn connect_property_link_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_link_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::link-label",
@@ -160,7 +159,7 @@ impl<O: IsA<HitTestResult> + IsA<glib::object::Object>> HitTestResultExt for O {
         }
     }
 
-    fn connect_property_link_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_link_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::link-title",
@@ -168,7 +167,7 @@ impl<O: IsA<HitTestResult> + IsA<glib::object::Object>> HitTestResultExt for O {
         }
     }
 
-    fn connect_property_link_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_link_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::link-uri",
@@ -176,7 +175,7 @@ impl<O: IsA<HitTestResult> + IsA<glib::object::Object>> HitTestResultExt for O {
         }
     }
 
-    fn connect_property_media_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_media_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::media-uri",

@@ -8,7 +8,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -54,13 +53,13 @@ pub trait DOMTreeWalkerExt {
 
     fn set_current_node<P: IsA<DOMNode>>(&self, value: &P) -> Result<(), Error>;
 
-    fn connect_property_current_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_current_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_root_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_root_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_what_to_show_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_what_to_show_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMTreeWalker> + IsA<glib::object::Object>> DOMTreeWalkerExt for O {
@@ -142,7 +141,7 @@ impl<O: IsA<DOMTreeWalker> + IsA<glib::object::Object>> DOMTreeWalkerExt for O {
         }
     }
 
-    fn connect_property_current_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_current_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::current-node",
@@ -150,7 +149,7 @@ impl<O: IsA<DOMTreeWalker> + IsA<glib::object::Object>> DOMTreeWalkerExt for O {
         }
     }
 
-    fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::filter",
@@ -158,7 +157,7 @@ impl<O: IsA<DOMTreeWalker> + IsA<glib::object::Object>> DOMTreeWalkerExt for O {
         }
     }
 
-    fn connect_property_root_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_root_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::root",
@@ -166,7 +165,7 @@ impl<O: IsA<DOMTreeWalker> + IsA<glib::object::Object>> DOMTreeWalkerExt for O {
         }
     }
 
-    fn connect_property_what_to_show_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_what_to_show_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::what-to-show",

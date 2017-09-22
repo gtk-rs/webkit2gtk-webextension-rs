@@ -14,7 +14,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -221,61 +220,61 @@ pub trait DOMDOMWindowExt {
 
     fn get_property_window(&self) -> Option<DOMDOMWindow>;
 
-    fn connect_property_closed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_closed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_default_status_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_default_status_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_device_pixel_ratio_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_device_pixel_ratio_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_frame_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_frame_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_frames_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_frames_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_inner_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_inner_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_inner_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_inner_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_offscreen_buffering_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_offscreen_buffering_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_opener_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_opener_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_orientation_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_orientation_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_outer_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_outer_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_outer_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_outer_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_page_x_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_page_x_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_page_y_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_page_y_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_parent_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_parent_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_screen_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_screen_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_screen_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_screen_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_screen_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_screen_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_screen_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_screen_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_scroll_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_scroll_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_scroll_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_scroll_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_self_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_self_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_status_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_status_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_window_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_window_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
@@ -767,7 +766,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         value.get()
     }
 
-    fn connect_property_closed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_closed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::closed",
@@ -775,7 +774,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_default_status_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_default_status_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::default-status",
@@ -783,7 +782,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_device_pixel_ratio_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_device_pixel_ratio_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::device-pixel-ratio",
@@ -791,7 +790,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::document",
@@ -799,7 +798,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_frame_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_frame_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::frame-element",
@@ -807,7 +806,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_frames_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_frames_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::frames",
@@ -815,7 +814,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_inner_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_inner_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::inner-height",
@@ -823,7 +822,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_inner_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_inner_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::inner-width",
@@ -831,7 +830,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::length",
@@ -839,7 +838,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::name",
@@ -847,7 +846,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_offscreen_buffering_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_offscreen_buffering_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::offscreen-buffering",
@@ -855,7 +854,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_opener_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_opener_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::opener",
@@ -863,7 +862,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_orientation_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_orientation_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::orientation",
@@ -871,7 +870,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_outer_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_outer_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::outer-height",
@@ -879,7 +878,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_outer_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_outer_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::outer-width",
@@ -887,7 +886,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_page_x_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_page_x_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::page-x-offset",
@@ -895,7 +894,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_page_y_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_page_y_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::page-y-offset",
@@ -903,7 +902,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_parent_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_parent_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::parent",
@@ -911,7 +910,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_screen_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_screen_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::screen-left",
@@ -919,7 +918,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_screen_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_screen_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::screen-top",
@@ -927,7 +926,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_screen_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_screen_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::screen-x",
@@ -935,7 +934,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_screen_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_screen_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::screen-y",
@@ -943,7 +942,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_scroll_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_scroll_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::scroll-x",
@@ -951,7 +950,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_scroll_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_scroll_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::scroll-y",
@@ -959,7 +958,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_self_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_self_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::self",
@@ -967,7 +966,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_status_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_status_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::status",
@@ -975,7 +974,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::top",
@@ -983,7 +982,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
         }
     }
 
-    fn connect_property_window_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_window_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::window",

@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -45,13 +44,13 @@ pub trait DOMHTMLHRElementExt {
 
     fn set_width(&self, value: &str);
 
-    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_no_shade_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_no_shade_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLHRElement> + IsA<glib::object::Object>> DOMHTMLHRElementExt for O {
@@ -103,7 +102,7 @@ impl<O: IsA<DOMHTMLHRElement> + IsA<glib::object::Object>> DOMHTMLHRElementExt f
         }
     }
 
-    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::align",
@@ -111,7 +110,7 @@ impl<O: IsA<DOMHTMLHRElement> + IsA<glib::object::Object>> DOMHTMLHRElementExt f
         }
     }
 
-    fn connect_property_no_shade_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_no_shade_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::no-shade",
@@ -119,7 +118,7 @@ impl<O: IsA<DOMHTMLHRElement> + IsA<glib::object::Object>> DOMHTMLHRElementExt f
         }
     }
 
-    fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::size",
@@ -127,7 +126,7 @@ impl<O: IsA<DOMHTMLHRElement> + IsA<glib::object::Object>> DOMHTMLHRElementExt f
         }
     }
 
-    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::width",

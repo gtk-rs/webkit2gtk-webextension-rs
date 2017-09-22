@@ -8,7 +8,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -46,21 +45,21 @@ pub trait DOMUIEventExt {
 
     fn init_ui_event(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: libc::c_long);
 
-    fn connect_property_char_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_char_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_detail_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_detail_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_key_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_key_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_layer_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_layer_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_layer_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_layer_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_page_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_page_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_page_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_page_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
@@ -118,7 +117,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
         }
     }
 
-    fn connect_property_char_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_char_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::char-code",
@@ -126,7 +125,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
         }
     }
 
-    fn connect_property_detail_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_detail_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::detail",
@@ -134,7 +133,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
         }
     }
 
-    fn connect_property_key_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_key_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::key-code",
@@ -142,7 +141,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
         }
     }
 
-    fn connect_property_layer_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_layer_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::layer-x",
@@ -150,7 +149,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
         }
     }
 
-    fn connect_property_layer_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_layer_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::layer-y",
@@ -158,7 +157,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
         }
     }
 
-    fn connect_property_page_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_page_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::page-x",
@@ -166,7 +165,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
         }
     }
 
-    fn connect_property_page_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_page_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::page-y",
@@ -174,7 +173,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
         }
     }
 
-    fn connect_property_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::view",

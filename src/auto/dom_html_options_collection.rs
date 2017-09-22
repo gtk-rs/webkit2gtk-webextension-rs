@@ -7,7 +7,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -31,9 +30,9 @@ pub trait DOMHTMLOptionsCollectionExt {
 
     fn set_selected_index(&self, value: libc::c_long);
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_selected_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_selected_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLOptionsCollection> + IsA<glib::object::Object>> DOMHTMLOptionsCollectionExt for O {
@@ -49,7 +48,7 @@ impl<O: IsA<DOMHTMLOptionsCollection> + IsA<glib::object::Object>> DOMHTMLOption
         }
     }
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::length",
@@ -57,7 +56,7 @@ impl<O: IsA<DOMHTMLOptionsCollection> + IsA<glib::object::Object>> DOMHTMLOption
         }
     }
 
-    fn connect_property_selected_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_selected_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::selected-index",

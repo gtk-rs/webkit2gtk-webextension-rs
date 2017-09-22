@@ -14,7 +14,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -84,29 +83,29 @@ pub trait DOMHTMLSelectElementExt {
 
     fn get_property_type(&self) -> Option<String>;
 
-    fn connect_property_autofocus_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_autofocus_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_multiple_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_multiple_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_options_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_options_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_selected_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_selected_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElementExt for O {
@@ -266,7 +265,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         value.get()
     }
 
-    fn connect_property_autofocus_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_autofocus_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::autofocus",
@@ -274,7 +273,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         }
     }
 
-    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::disabled",
@@ -282,7 +281,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         }
     }
 
-    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::form",
@@ -290,7 +289,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         }
     }
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::length",
@@ -298,7 +297,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         }
     }
 
-    fn connect_property_multiple_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_multiple_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::multiple",
@@ -306,7 +305,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         }
     }
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::name",
@@ -314,7 +313,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         }
     }
 
-    fn connect_property_options_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_options_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::options",
@@ -322,7 +321,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         }
     }
 
-    fn connect_property_selected_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_selected_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::selected-index",
@@ -330,7 +329,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         }
     }
 
-    fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::size",
@@ -338,7 +337,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         }
     }
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::type",
@@ -346,7 +345,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         }
     }
 
-    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::value",
@@ -354,7 +353,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
         }
     }
 
-    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::will-validate",

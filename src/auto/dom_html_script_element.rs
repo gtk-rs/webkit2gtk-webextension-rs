@@ -11,7 +11,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -65,19 +64,19 @@ pub trait DOMHTMLScriptElementExt {
 
     fn set_property_type(&self, type_: Option<&str>);
 
-    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_defer_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_defer_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_event_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_event_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_html_for_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_html_for_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElementExt for O {
@@ -186,7 +185,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
         }
     }
 
-    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::charset",
@@ -194,7 +193,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
         }
     }
 
-    fn connect_property_defer_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_defer_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::defer",
@@ -202,7 +201,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
         }
     }
 
-    fn connect_property_event_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_event_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::event",
@@ -210,7 +209,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
         }
     }
 
-    fn connect_property_html_for_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_html_for_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::html-for",
@@ -218,7 +217,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
         }
     }
 
-    fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::src",
@@ -226,7 +225,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
         }
     }
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::text",
@@ -234,7 +233,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
         }
     }
 
-    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::type",

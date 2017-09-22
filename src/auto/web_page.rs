@@ -18,7 +18,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -50,19 +49,19 @@ pub trait WebPageExt {
     fn get_uri(&self) -> Option<String>;
 
     #[cfg(feature = "v2_12")]
-    fn connect_console_message_sent<F: Fn(&Self, &ConsoleMessage) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_console_message_sent<F: Fn(&Self, &ConsoleMessage) + 'static>(&self, f: F) -> u64;
 
     #[cfg(feature = "v2_8")]
-    fn connect_context_menu<F: Fn(&Self, &ContextMenu, &WebHitTestResult) -> bool + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_context_menu<F: Fn(&Self, &ContextMenu, &WebHitTestResult) -> bool + 'static>(&self, f: F) -> u64;
 
-    fn connect_document_loaded<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_document_loaded<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
     //#[cfg(feature = "v2_16")]
-    //fn connect_form_controls_associated<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId;
+    //fn connect_form_controls_associated<Unsupported or ignored types>(&self, f: F) -> u64;
 
-    fn connect_send_request<F: Fn(&Self, &URIRequest, &Option<URIResponse>) -> bool + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_send_request<F: Fn(&Self, &URIRequest, &Option<URIResponse>) -> bool + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
@@ -99,7 +98,7 @@ impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
     }
 
     #[cfg(feature = "v2_12")]
-    fn connect_console_message_sent<F: Fn(&Self, &ConsoleMessage) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_console_message_sent<F: Fn(&Self, &ConsoleMessage) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self, &ConsoleMessage) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "console-message-sent",
@@ -108,7 +107,7 @@ impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
     }
 
     #[cfg(feature = "v2_8")]
-    fn connect_context_menu<F: Fn(&Self, &ContextMenu, &WebHitTestResult) -> bool + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_context_menu<F: Fn(&Self, &ContextMenu, &WebHitTestResult) -> bool + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self, &ContextMenu, &WebHitTestResult) -> bool + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "context-menu",
@@ -116,7 +115,7 @@ impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
         }
     }
 
-    fn connect_document_loaded<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_document_loaded<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "document-loaded",
@@ -125,11 +124,11 @@ impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
     }
 
     //#[cfg(feature = "v2_16")]
-    //fn connect_form_controls_associated<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId {
+    //fn connect_form_controls_associated<Unsupported or ignored types>(&self, f: F) -> u64 {
     //    Empty ctype elements: *.PtrArray TypeId { ns_id: 1, id: 12 }
     //}
 
-    fn connect_send_request<F: Fn(&Self, &URIRequest, &Option<URIResponse>) -> bool + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_send_request<F: Fn(&Self, &URIRequest, &Option<URIResponse>) -> bool + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self, &URIRequest, &Option<URIResponse>) -> bool + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "send-request",
@@ -137,7 +136,7 @@ impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
         }
     }
 
-    fn connect_property_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::uri",
@@ -173,7 +172,7 @@ unsafe extern "C" fn send_request_trampoline<P>(this: *mut ffi::WebKitWebPage, r
 where P: IsA<WebPage> {
     callback_guard!();
     let f: &&(Fn(&P, &URIRequest, &Option<URIResponse>) -> bool + 'static) = transmute(f);
-    f(&WebPage::from_glib_borrow(this).downcast_unchecked(), &from_glib_borrow(request), &from_glib_borrow(redirected_response)).to_glib()
+    f(&WebPage::from_glib_borrow(this).downcast_unchecked(), &from_glib_borrow(request), &Some(from_glib_borrow(redirected_response))).to_glib()
 }
 
 unsafe extern "C" fn notify_uri_trampoline<P>(this: *mut ffi::WebKitWebPage, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)

@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -38,11 +37,11 @@ pub trait DOMWheelEventExt {
 
     fn init_wheel_event(&self, wheelDeltaX: libc::c_long, wheelDeltaY: libc::c_long, view: &DOMDOMWindow, screenX: libc::c_long, screenY: libc::c_long, clientX: libc::c_long, clientY: libc::c_long, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool);
 
-    fn connect_property_wheel_delta_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_wheel_delta_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_wheel_delta_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_wheel_delta_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_wheel_delta_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_wheel_delta_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMWheelEvent> + IsA<glib::object::Object>> DOMWheelEventExt for O {
@@ -70,7 +69,7 @@ impl<O: IsA<DOMWheelEvent> + IsA<glib::object::Object>> DOMWheelEventExt for O {
         }
     }
 
-    fn connect_property_wheel_delta_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_wheel_delta_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::wheel-delta",
@@ -78,7 +77,7 @@ impl<O: IsA<DOMWheelEvent> + IsA<glib::object::Object>> DOMWheelEventExt for O {
         }
     }
 
-    fn connect_property_wheel_delta_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_wheel_delta_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::wheel-delta-x",
@@ -86,7 +85,7 @@ impl<O: IsA<DOMWheelEvent> + IsA<glib::object::Object>> DOMWheelEventExt for O {
         }
     }
 
-    fn connect_property_wheel_delta_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_wheel_delta_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::wheel-delta-y",

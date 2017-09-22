@@ -8,7 +8,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -44,7 +43,7 @@ pub trait DOMNamedNodeMapExt {
 
     fn set_named_item_ns<P: IsA<DOMNode>>(&self, node: &P) -> Result<DOMNode, Error>;
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMNamedNodeMap> + IsA<glib::object::Object>> DOMNamedNodeMapExt for O {
@@ -104,7 +103,7 @@ impl<O: IsA<DOMNamedNodeMap> + IsA<glib::object::Object>> DOMNamedNodeMapExt for
         }
     }
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::length",

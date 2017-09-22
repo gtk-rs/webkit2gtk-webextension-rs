@@ -8,7 +8,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -32,7 +31,7 @@ pub trait WebHitTestResultExt {
 
     fn get_property_node(&self) -> Option<DOMNode>;
 
-    fn connect_property_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<WebHitTestResult> + IsA<glib::object::Object>> WebHitTestResultExt for O {
@@ -51,7 +50,7 @@ impl<O: IsA<WebHitTestResult> + IsA<glib::object::Object>> WebHitTestResultExt f
         value.get()
     }
 
-    fn connect_property_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::node",

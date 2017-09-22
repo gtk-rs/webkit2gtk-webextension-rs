@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -86,21 +85,21 @@ pub trait DOMHTMLDocumentExt {
 
     fn set_vlink_color(&self, value: &str);
 
-    fn connect_property_alink_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_alink_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_fg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_fg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_link_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_link_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_vlink_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_vlink_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLDocument> + IsA<glib::object::Object>> DOMHTMLDocumentExt for O {
@@ -256,7 +255,7 @@ impl<O: IsA<DOMHTMLDocument> + IsA<glib::object::Object>> DOMHTMLDocumentExt for
         }
     }
 
-    fn connect_property_alink_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_alink_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::alink-color",
@@ -264,7 +263,7 @@ impl<O: IsA<DOMHTMLDocument> + IsA<glib::object::Object>> DOMHTMLDocumentExt for
         }
     }
 
-    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::bg-color",
@@ -272,7 +271,7 @@ impl<O: IsA<DOMHTMLDocument> + IsA<glib::object::Object>> DOMHTMLDocumentExt for
         }
     }
 
-    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::dir",
@@ -280,7 +279,7 @@ impl<O: IsA<DOMHTMLDocument> + IsA<glib::object::Object>> DOMHTMLDocumentExt for
         }
     }
 
-    fn connect_property_fg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_fg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::fg-color",
@@ -288,7 +287,7 @@ impl<O: IsA<DOMHTMLDocument> + IsA<glib::object::Object>> DOMHTMLDocumentExt for
         }
     }
 
-    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::height",
@@ -296,7 +295,7 @@ impl<O: IsA<DOMHTMLDocument> + IsA<glib::object::Object>> DOMHTMLDocumentExt for
         }
     }
 
-    fn connect_property_link_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_link_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::link-color",
@@ -304,7 +303,7 @@ impl<O: IsA<DOMHTMLDocument> + IsA<glib::object::Object>> DOMHTMLDocumentExt for
         }
     }
 
-    fn connect_property_vlink_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_vlink_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::vlink-color",
@@ -312,7 +311,7 @@ impl<O: IsA<DOMHTMLDocument> + IsA<glib::object::Object>> DOMHTMLDocumentExt for
         }
     }
 
-    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::width",

@@ -11,7 +11,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -67,23 +66,23 @@ pub trait DOMHTMLFormElementExt {
 
     fn submit(&self);
 
-    fn connect_property_accept_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_accept_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_action_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_action_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_elements_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_elements_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_enctype_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_enctype_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_method_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_method_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLFormElement> + IsA<glib::object::Object>> DOMHTMLFormElementExt for O {
@@ -195,7 +194,7 @@ impl<O: IsA<DOMHTMLFormElement> + IsA<glib::object::Object>> DOMHTMLFormElementE
         }
     }
 
-    fn connect_property_accept_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_accept_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::accept-charset",
@@ -203,7 +202,7 @@ impl<O: IsA<DOMHTMLFormElement> + IsA<glib::object::Object>> DOMHTMLFormElementE
         }
     }
 
-    fn connect_property_action_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_action_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::action",
@@ -211,7 +210,7 @@ impl<O: IsA<DOMHTMLFormElement> + IsA<glib::object::Object>> DOMHTMLFormElementE
         }
     }
 
-    fn connect_property_elements_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_elements_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::elements",
@@ -219,7 +218,7 @@ impl<O: IsA<DOMHTMLFormElement> + IsA<glib::object::Object>> DOMHTMLFormElementE
         }
     }
 
-    fn connect_property_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::encoding",
@@ -227,7 +226,7 @@ impl<O: IsA<DOMHTMLFormElement> + IsA<glib::object::Object>> DOMHTMLFormElementE
         }
     }
 
-    fn connect_property_enctype_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_enctype_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::enctype",
@@ -235,7 +234,7 @@ impl<O: IsA<DOMHTMLFormElement> + IsA<glib::object::Object>> DOMHTMLFormElementE
         }
     }
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::length",
@@ -243,7 +242,7 @@ impl<O: IsA<DOMHTMLFormElement> + IsA<glib::object::Object>> DOMHTMLFormElementE
         }
     }
 
-    fn connect_property_method_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_method_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::method",
@@ -251,7 +250,7 @@ impl<O: IsA<DOMHTMLFormElement> + IsA<glib::object::Object>> DOMHTMLFormElementE
         }
     }
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::name",
@@ -259,7 +258,7 @@ impl<O: IsA<DOMHTMLFormElement> + IsA<glib::object::Object>> DOMHTMLFormElementE
         }
     }
 
-    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::target",

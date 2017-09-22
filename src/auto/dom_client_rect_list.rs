@@ -8,7 +8,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -35,7 +34,7 @@ pub trait DOMClientRectListExt {
     #[cfg(feature = "v2_18")]
     fn item(&self, index: libc::c_ulong) -> Option<DOMClientRect>;
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMClientRectList> + IsA<glib::object::Object>> DOMClientRectListExt for O {
@@ -53,7 +52,7 @@ impl<O: IsA<DOMClientRectList> + IsA<glib::object::Object>> DOMClientRectListExt
         }
     }
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::length",

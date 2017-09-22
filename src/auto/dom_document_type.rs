@@ -9,7 +9,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -40,17 +39,17 @@ pub trait DOMDocumentTypeExt {
 
     fn get_system_id(&self) -> Option<String>;
 
-    fn connect_property_entities_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_entities_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_internal_subset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_internal_subset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_notations_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_notations_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_public_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_public_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_system_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_system_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMDocumentType> + IsA<glib::object::Object>> DOMDocumentTypeExt for O {
@@ -90,7 +89,7 @@ impl<O: IsA<DOMDocumentType> + IsA<glib::object::Object>> DOMDocumentTypeExt for
         }
     }
 
-    fn connect_property_entities_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_entities_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::entities",
@@ -98,7 +97,7 @@ impl<O: IsA<DOMDocumentType> + IsA<glib::object::Object>> DOMDocumentTypeExt for
         }
     }
 
-    fn connect_property_internal_subset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_internal_subset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::internal-subset",
@@ -106,7 +105,7 @@ impl<O: IsA<DOMDocumentType> + IsA<glib::object::Object>> DOMDocumentTypeExt for
         }
     }
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::name",
@@ -114,7 +113,7 @@ impl<O: IsA<DOMDocumentType> + IsA<glib::object::Object>> DOMDocumentTypeExt for
         }
     }
 
-    fn connect_property_notations_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_notations_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::notations",
@@ -122,7 +121,7 @@ impl<O: IsA<DOMDocumentType> + IsA<glib::object::Object>> DOMDocumentTypeExt for
         }
     }
 
-    fn connect_property_public_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_public_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::public-id",
@@ -130,7 +129,7 @@ impl<O: IsA<DOMDocumentType> + IsA<glib::object::Object>> DOMDocumentTypeExt for
         }
     }
 
-    fn connect_property_system_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_system_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::system-id",

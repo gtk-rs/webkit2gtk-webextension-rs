@@ -6,7 +6,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -27,7 +26,7 @@ glib_wrapper! {
 pub trait WebExtensionExt {
     fn get_page(&self, page_id: u64) -> Option<WebPage>;
 
-    fn connect_page_created<F: Fn(&Self, &WebPage) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_page_created<F: Fn(&Self, &WebPage) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<WebExtension> + IsA<glib::object::Object>> WebExtensionExt for O {
@@ -37,7 +36,7 @@ impl<O: IsA<WebExtension> + IsA<glib::object::Object>> WebExtensionExt for O {
         }
     }
 
-    fn connect_page_created<F: Fn(&Self, &WebPage) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_page_created<F: Fn(&Self, &WebPage) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self, &WebPage) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "page-created",

@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -53,17 +52,17 @@ pub trait DOMHTMLBodyElementExt {
 
     fn set_v_link(&self, value: &str);
 
-    fn connect_property_a_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_a_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_background_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_background_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_v_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_v_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLBodyElement> + IsA<glib::object::Object>> DOMHTMLBodyElementExt for O {
@@ -139,7 +138,7 @@ impl<O: IsA<DOMHTMLBodyElement> + IsA<glib::object::Object>> DOMHTMLBodyElementE
         }
     }
 
-    fn connect_property_a_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_a_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::a-link",
@@ -147,7 +146,7 @@ impl<O: IsA<DOMHTMLBodyElement> + IsA<glib::object::Object>> DOMHTMLBodyElementE
         }
     }
 
-    fn connect_property_background_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_background_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::background",
@@ -155,7 +154,7 @@ impl<O: IsA<DOMHTMLBodyElement> + IsA<glib::object::Object>> DOMHTMLBodyElementE
         }
     }
 
-    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::bg-color",
@@ -163,7 +162,7 @@ impl<O: IsA<DOMHTMLBodyElement> + IsA<glib::object::Object>> DOMHTMLBodyElementE
         }
     }
 
-    fn connect_property_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::link",
@@ -171,7 +170,7 @@ impl<O: IsA<DOMHTMLBodyElement> + IsA<glib::object::Object>> DOMHTMLBodyElementE
         }
     }
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::text",
@@ -179,7 +178,7 @@ impl<O: IsA<DOMHTMLBodyElement> + IsA<glib::object::Object>> DOMHTMLBodyElementE
         }
     }
 
-    fn connect_property_v_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_v_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::v-link",

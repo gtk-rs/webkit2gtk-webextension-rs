@@ -12,7 +12,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -133,33 +132,33 @@ pub trait DOMHTMLElementExt {
 
     fn set_property_webkitdropzone(&self, webkitdropzone: Option<&str>);
 
-    fn connect_property_access_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_access_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_content_editable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_content_editable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_draggable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_draggable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_hidden_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_hidden_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_inner_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_inner_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_is_content_editable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_is_content_editable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_lang_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_lang_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_outer_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_outer_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_spellcheck_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_spellcheck_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_tab_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_tab_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_translate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_translate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_webkitdropzone_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_webkitdropzone_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O {
@@ -456,7 +455,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_access_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_access_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::access-key",
@@ -464,7 +463,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_content_editable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_content_editable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::content-editable",
@@ -472,7 +471,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::dir",
@@ -480,7 +479,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_draggable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_draggable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::draggable",
@@ -488,7 +487,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_hidden_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_hidden_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::hidden",
@@ -496,7 +495,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_inner_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_inner_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::inner-text",
@@ -504,7 +503,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_is_content_editable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_is_content_editable_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::is-content-editable",
@@ -512,7 +511,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_lang_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_lang_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::lang",
@@ -520,7 +519,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_outer_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_outer_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::outer-text",
@@ -528,7 +527,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_spellcheck_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_spellcheck_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::spellcheck",
@@ -536,7 +535,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_tab_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_tab_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::tab-index",
@@ -544,7 +543,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::title",
@@ -552,7 +551,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_translate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_translate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::translate",
@@ -560,7 +559,7 @@ impl<O: IsA<DOMHTMLElement> + IsA<glib::object::Object>> DOMHTMLElementExt for O
         }
     }
 
-    fn connect_property_webkitdropzone_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_webkitdropzone_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::webkitdropzone",

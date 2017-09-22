@@ -11,7 +11,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -65,37 +64,37 @@ pub trait DOMMouseEventExt {
 
     fn init_mouse_event<P: IsA<DOMEventTarget>>(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: libc::c_long, screenX: libc::c_long, screenY: libc::c_long, clientX: libc::c_long, clientY: libc::c_long, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool, button: libc::c_ushort, relatedTarget: &P);
 
-    fn connect_property_alt_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_alt_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_button_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_button_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_client_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_client_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_client_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_client_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_ctrl_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_ctrl_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_from_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_from_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_meta_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_meta_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_offset_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_offset_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_offset_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_offset_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_related_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_related_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_screen_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_screen_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_screen_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_screen_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_shift_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_shift_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_to_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_to_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
@@ -201,7 +200,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_alt_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_alt_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::alt-key",
@@ -209,7 +208,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_button_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_button_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::button",
@@ -217,7 +216,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_client_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_client_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::client-x",
@@ -225,7 +224,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_client_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_client_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::client-y",
@@ -233,7 +232,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_ctrl_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_ctrl_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::ctrl-key",
@@ -241,7 +240,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_from_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_from_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::from-element",
@@ -249,7 +248,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_meta_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_meta_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::meta-key",
@@ -257,7 +256,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_offset_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_offset_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::offset-x",
@@ -265,7 +264,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_offset_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_offset_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::offset-y",
@@ -273,7 +272,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_related_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_related_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::related-target",
@@ -281,7 +280,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_screen_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_screen_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::screen-x",
@@ -289,7 +288,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_screen_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_screen_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::screen-y",
@@ -297,7 +296,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_shift_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_shift_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::shift-key",
@@ -305,7 +304,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_to_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_to_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::to-element",
@@ -313,7 +312,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::x",
@@ -321,7 +320,7 @@ impl<O: IsA<DOMMouseEvent> + IsA<glib::object::Object>> DOMMouseEventExt for O {
         }
     }
 
-    fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::y",

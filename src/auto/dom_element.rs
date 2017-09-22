@@ -21,7 +21,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -220,68 +219,68 @@ pub trait DOMElementExt {
 
     fn get_property_webkit_region_overset(&self) -> Option<String>;
 
-    fn connect_property_attributes_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_attributes_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_children_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_children_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
     #[cfg(feature = "v2_16")]
-    fn connect_property_class_list_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_class_list_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_class_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_class_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_client_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_client_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_client_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_client_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_client_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_client_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_client_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_client_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_inner_html_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_inner_html_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_local_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_local_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_namespace_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_namespace_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_next_element_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_next_element_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_offset_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_offset_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_offset_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_offset_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_offset_parent_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_offset_parent_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_offset_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_offset_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_offset_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_offset_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_outer_html_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_outer_html_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_prefix_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_prefix_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_previous_element_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_previous_element_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_scroll_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_scroll_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_scroll_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_scroll_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_scroll_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_scroll_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_scroll_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_scroll_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_style_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_style_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_tag_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_tag_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_webkit_region_overset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_webkit_region_overset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
@@ -822,7 +821,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         value.get()
     }
 
-    fn connect_property_attributes_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_attributes_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::attributes",
@@ -830,7 +829,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::child-element-count",
@@ -838,7 +837,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_children_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_children_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::children",
@@ -847,7 +846,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
     }
 
     #[cfg(feature = "v2_16")]
-    fn connect_property_class_list_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_class_list_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::class-list",
@@ -855,7 +854,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_class_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_class_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::class-name",
@@ -863,7 +862,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_client_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_client_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::client-height",
@@ -871,7 +870,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_client_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_client_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::client-left",
@@ -879,7 +878,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_client_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_client_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::client-top",
@@ -887,7 +886,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_client_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_client_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::client-width",
@@ -895,7 +894,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::first-element-child",
@@ -903,7 +902,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::id",
@@ -911,7 +910,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_inner_html_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_inner_html_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::inner-html",
@@ -919,7 +918,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::last-element-child",
@@ -927,7 +926,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_local_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_local_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::local-name",
@@ -935,7 +934,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_namespace_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_namespace_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::namespace-uri",
@@ -943,7 +942,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_next_element_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_next_element_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::next-element-sibling",
@@ -951,7 +950,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_offset_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_offset_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::offset-height",
@@ -959,7 +958,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_offset_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_offset_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::offset-left",
@@ -967,7 +966,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_offset_parent_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_offset_parent_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::offset-parent",
@@ -975,7 +974,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_offset_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_offset_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::offset-top",
@@ -983,7 +982,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_offset_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_offset_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::offset-width",
@@ -991,7 +990,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_outer_html_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_outer_html_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::outer-html",
@@ -999,7 +998,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_prefix_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_prefix_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::prefix",
@@ -1007,7 +1006,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_previous_element_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_previous_element_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::previous-element-sibling",
@@ -1015,7 +1014,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_scroll_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_scroll_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::scroll-height",
@@ -1023,7 +1022,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_scroll_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_scroll_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::scroll-left",
@@ -1031,7 +1030,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_scroll_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_scroll_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::scroll-top",
@@ -1039,7 +1038,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_scroll_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_scroll_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::scroll-width",
@@ -1047,7 +1046,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_style_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_style_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::style",
@@ -1055,7 +1054,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_tag_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_tag_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::tag-name",
@@ -1063,7 +1062,7 @@ impl<O: IsA<DOMElement> + IsA<glib::object::Object>> DOMElementExt for O {
         }
     }
 
-    fn connect_property_webkit_region_overset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_webkit_region_overset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::webkit-region-overset",

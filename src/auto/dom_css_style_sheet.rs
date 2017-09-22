@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -44,11 +43,11 @@ pub trait DOMCSSStyleSheetExt {
 
     fn remove_rule(&self, index: libc::c_ulong) -> Result<(), Error>;
 
-    fn connect_property_css_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_css_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_owner_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_owner_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMCSSStyleSheet> + IsA<glib::object::Object>> DOMCSSStyleSheetExt for O {
@@ -102,7 +101,7 @@ impl<O: IsA<DOMCSSStyleSheet> + IsA<glib::object::Object>> DOMCSSStyleSheetExt f
         }
     }
 
-    fn connect_property_css_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_css_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::css-rules",
@@ -110,7 +109,7 @@ impl<O: IsA<DOMCSSStyleSheet> + IsA<glib::object::Object>> DOMCSSStyleSheetExt f
         }
     }
 
-    fn connect_property_owner_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_owner_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::owner-rule",
@@ -118,7 +117,7 @@ impl<O: IsA<DOMCSSStyleSheet> + IsA<glib::object::Object>> DOMCSSStyleSheetExt f
         }
     }
 
-    fn connect_property_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::rules",

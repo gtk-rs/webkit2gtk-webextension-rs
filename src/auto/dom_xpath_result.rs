@@ -8,7 +8,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -46,19 +45,19 @@ pub trait DOMXPathResultExt {
 
     fn snapshot_item(&self, index: libc::c_ulong) -> Result<DOMNode, Error>;
 
-    fn connect_property_boolean_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_boolean_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_invalid_iterator_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_invalid_iterator_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_number_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_number_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_result_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_result_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_single_node_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_single_node_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_snapshot_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_snapshot_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_string_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_string_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMXPathResult> + IsA<glib::object::Object>> DOMXPathResultExt for O {
@@ -130,7 +129,7 @@ impl<O: IsA<DOMXPathResult> + IsA<glib::object::Object>> DOMXPathResultExt for O
         }
     }
 
-    fn connect_property_boolean_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_boolean_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::boolean-value",
@@ -138,7 +137,7 @@ impl<O: IsA<DOMXPathResult> + IsA<glib::object::Object>> DOMXPathResultExt for O
         }
     }
 
-    fn connect_property_invalid_iterator_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_invalid_iterator_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::invalid-iterator-state",
@@ -146,7 +145,7 @@ impl<O: IsA<DOMXPathResult> + IsA<glib::object::Object>> DOMXPathResultExt for O
         }
     }
 
-    fn connect_property_number_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_number_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::number-value",
@@ -154,7 +153,7 @@ impl<O: IsA<DOMXPathResult> + IsA<glib::object::Object>> DOMXPathResultExt for O
         }
     }
 
-    fn connect_property_result_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_result_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::result-type",
@@ -162,7 +161,7 @@ impl<O: IsA<DOMXPathResult> + IsA<glib::object::Object>> DOMXPathResultExt for O
         }
     }
 
-    fn connect_property_single_node_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_single_node_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::single-node-value",
@@ -170,7 +169,7 @@ impl<O: IsA<DOMXPathResult> + IsA<glib::object::Object>> DOMXPathResultExt for O
         }
     }
 
-    fn connect_property_snapshot_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_snapshot_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::snapshot-length",
@@ -178,7 +177,7 @@ impl<O: IsA<DOMXPathResult> + IsA<glib::object::Object>> DOMXPathResultExt for O
         }
     }
 
-    fn connect_property_string_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_string_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::string-value",

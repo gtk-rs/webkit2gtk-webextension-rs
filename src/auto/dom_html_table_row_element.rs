@@ -12,7 +12,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -62,21 +61,21 @@ pub trait DOMHTMLTableRowElementExt {
 
     fn set_v_align(&self, value: &str);
 
-    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_cells_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_cells_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_ch_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_ch_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_ch_off_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_ch_off_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_row_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_row_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_section_row_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_section_row_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_v_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_v_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLTableRowElement> + IsA<glib::object::Object>> DOMHTMLTableRowElementExt for O {
@@ -174,7 +173,7 @@ impl<O: IsA<DOMHTMLTableRowElement> + IsA<glib::object::Object>> DOMHTMLTableRow
         }
     }
 
-    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::align",
@@ -182,7 +181,7 @@ impl<O: IsA<DOMHTMLTableRowElement> + IsA<glib::object::Object>> DOMHTMLTableRow
         }
     }
 
-    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::bg-color",
@@ -190,7 +189,7 @@ impl<O: IsA<DOMHTMLTableRowElement> + IsA<glib::object::Object>> DOMHTMLTableRow
         }
     }
 
-    fn connect_property_cells_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_cells_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::cells",
@@ -198,7 +197,7 @@ impl<O: IsA<DOMHTMLTableRowElement> + IsA<glib::object::Object>> DOMHTMLTableRow
         }
     }
 
-    fn connect_property_ch_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_ch_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::ch",
@@ -206,7 +205,7 @@ impl<O: IsA<DOMHTMLTableRowElement> + IsA<glib::object::Object>> DOMHTMLTableRow
         }
     }
 
-    fn connect_property_ch_off_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_ch_off_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::ch-off",
@@ -214,7 +213,7 @@ impl<O: IsA<DOMHTMLTableRowElement> + IsA<glib::object::Object>> DOMHTMLTableRow
         }
     }
 
-    fn connect_property_row_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_row_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::row-index",
@@ -222,7 +221,7 @@ impl<O: IsA<DOMHTMLTableRowElement> + IsA<glib::object::Object>> DOMHTMLTableRow
         }
     }
 
-    fn connect_property_section_row_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_section_row_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::section-row-index",
@@ -230,7 +229,7 @@ impl<O: IsA<DOMHTMLTableRowElement> + IsA<glib::object::Object>> DOMHTMLTableRow
         }
     }
 
-    fn connect_property_v_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_v_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::v-align",

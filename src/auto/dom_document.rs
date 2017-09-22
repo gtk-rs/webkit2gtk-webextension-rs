@@ -31,7 +31,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -339,107 +338,107 @@ pub trait DOMDocumentExt {
 
     fn get_property_webkit_is_full_screen(&self) -> bool;
 
-    fn connect_property_active_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_active_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_anchors_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_anchors_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_applets_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_applets_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_body_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_body_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_character_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_character_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_children_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_children_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_compat_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_compat_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_content_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_content_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_cookie_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_cookie_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_current_script_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_current_script_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_default_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_default_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_design_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_design_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_doctype_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_doctype_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_document_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_document_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_document_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_document_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_domain_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_domain_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_embeds_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_embeds_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_forms_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_forms_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_head_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_head_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_hidden_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_hidden_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_images_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_images_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_implementation_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_implementation_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_input_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_input_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_last_modified_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_last_modified_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_links_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_links_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_origin_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_origin_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_plugins_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_plugins_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_pointer_lock_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_pointer_lock_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_preferred_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_preferred_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_ready_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_ready_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_referrer_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_referrer_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_scripts_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_scripts_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_scrolling_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_scrolling_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_selected_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_selected_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_style_sheets_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_style_sheets_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_url_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_url_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_visibility_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_visibility_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_webkit_current_full_screen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_webkit_current_full_screen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_webkit_full_screen_keyboard_input_allowed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_webkit_full_screen_keyboard_input_allowed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_webkit_fullscreen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_webkit_fullscreen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_webkit_fullscreen_enabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_webkit_fullscreen_enabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_webkit_is_full_screen_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_webkit_is_full_screen_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_xml_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_xml_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_xml_standalone_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_xml_standalone_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_xml_version_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_xml_version_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
@@ -1317,7 +1316,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         value.get().unwrap()
     }
 
-    fn connect_property_active_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_active_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::active-element",
@@ -1325,7 +1324,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_anchors_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_anchors_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::anchors",
@@ -1333,7 +1332,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_applets_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_applets_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::applets",
@@ -1341,7 +1340,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_body_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_body_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::body",
@@ -1349,7 +1348,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_character_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_character_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::character-set",
@@ -1357,7 +1356,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::charset",
@@ -1365,7 +1364,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::child-element-count",
@@ -1373,7 +1372,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_children_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_children_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::children",
@@ -1381,7 +1380,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_compat_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_compat_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::compat-mode",
@@ -1389,7 +1388,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_content_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_content_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::content-type",
@@ -1397,7 +1396,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_cookie_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_cookie_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::cookie",
@@ -1405,7 +1404,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_current_script_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_current_script_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::current-script",
@@ -1413,7 +1412,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_default_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_default_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::default-view",
@@ -1421,7 +1420,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_design_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_design_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::design-mode",
@@ -1429,7 +1428,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::dir",
@@ -1437,7 +1436,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_doctype_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_doctype_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::doctype",
@@ -1445,7 +1444,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_document_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_document_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::document-element",
@@ -1453,7 +1452,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_document_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_document_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::document-uri",
@@ -1461,7 +1460,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_domain_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_domain_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::domain",
@@ -1469,7 +1468,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_embeds_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_embeds_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::embeds",
@@ -1477,7 +1476,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::first-element-child",
@@ -1485,7 +1484,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_forms_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_forms_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::forms",
@@ -1493,7 +1492,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_head_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_head_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::head",
@@ -1501,7 +1500,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_hidden_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_hidden_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::hidden",
@@ -1509,7 +1508,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_images_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_images_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::images",
@@ -1517,7 +1516,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_implementation_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_implementation_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::implementation",
@@ -1525,7 +1524,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_input_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_input_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::input-encoding",
@@ -1533,7 +1532,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::last-element-child",
@@ -1541,7 +1540,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_last_modified_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_last_modified_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::last-modified",
@@ -1549,7 +1548,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_links_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_links_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::links",
@@ -1557,7 +1556,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_origin_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_origin_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::origin",
@@ -1565,7 +1564,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_plugins_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_plugins_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::plugins",
@@ -1573,7 +1572,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_pointer_lock_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_pointer_lock_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::pointer-lock-element",
@@ -1581,7 +1580,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_preferred_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_preferred_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::preferred-stylesheet-set",
@@ -1589,7 +1588,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_ready_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_ready_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::ready-state",
@@ -1597,7 +1596,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_referrer_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_referrer_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::referrer",
@@ -1605,7 +1604,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_scripts_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_scripts_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::scripts",
@@ -1613,7 +1612,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_scrolling_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_scrolling_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::scrolling-element",
@@ -1621,7 +1620,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_selected_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_selected_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::selected-stylesheet-set",
@@ -1629,7 +1628,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_style_sheets_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_style_sheets_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::style-sheets",
@@ -1637,7 +1636,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::title",
@@ -1645,7 +1644,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_url_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_url_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::url",
@@ -1653,7 +1652,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_visibility_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_visibility_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::visibility-state",
@@ -1661,7 +1660,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_webkit_current_full_screen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_webkit_current_full_screen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::webkit-current-full-screen-element",
@@ -1669,7 +1668,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_webkit_full_screen_keyboard_input_allowed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_webkit_full_screen_keyboard_input_allowed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::webkit-full-screen-keyboard-input-allowed",
@@ -1677,7 +1676,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_webkit_fullscreen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_webkit_fullscreen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::webkit-fullscreen-element",
@@ -1685,7 +1684,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_webkit_fullscreen_enabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_webkit_fullscreen_enabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::webkit-fullscreen-enabled",
@@ -1693,7 +1692,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_webkit_is_full_screen_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_webkit_is_full_screen_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::webkit-is-full-screen",
@@ -1701,7 +1700,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_xml_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_xml_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::xml-encoding",
@@ -1709,7 +1708,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_xml_standalone_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_xml_standalone_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::xml-standalone",
@@ -1717,7 +1716,7 @@ impl<O: IsA<DOMDocument> + IsA<glib::object::Object>> DOMDocumentExt for O {
         }
     }
 
-    fn connect_property_xml_version_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_xml_version_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::xml-version",

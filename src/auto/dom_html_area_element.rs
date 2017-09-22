@@ -11,7 +11,6 @@ use glib;
 use glib::Value;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -100,31 +99,31 @@ pub trait DOMHTMLAreaElementExt {
 
     fn set_property_search(&self, search: Option<&str>);
 
-    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_coords_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_coords_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_hash_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_hash_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_host_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_host_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_hostname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_hostname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_no_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_no_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_pathname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_pathname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_port_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_port_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_protocol_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_protocol_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_search_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_search_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_shape_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_shape_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementExt for O {
@@ -326,7 +325,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::alt",
@@ -334,7 +333,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_coords_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_coords_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::coords",
@@ -342,7 +341,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_hash_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_hash_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::hash",
@@ -350,7 +349,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_host_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_host_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::host",
@@ -358,7 +357,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_hostname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_hostname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::hostname",
@@ -366,7 +365,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::href",
@@ -374,7 +373,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_no_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_no_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::no-href",
@@ -382,7 +381,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_pathname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_pathname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::pathname",
@@ -390,7 +389,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_port_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_port_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::port",
@@ -398,7 +397,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_protocol_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_protocol_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::protocol",
@@ -406,7 +405,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_search_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_search_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::search",
@@ -414,7 +413,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_shape_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_shape_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::shape",
@@ -422,7 +421,7 @@ impl<O: IsA<DOMHTMLAreaElement> + IsA<glib::object::Object>> DOMHTMLAreaElementE
         }
     }
 
-    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::target",

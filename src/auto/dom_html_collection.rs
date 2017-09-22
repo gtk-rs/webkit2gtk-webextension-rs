@@ -7,7 +7,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -33,7 +32,7 @@ pub trait DOMHTMLCollectionExt {
 
     fn named_item(&self, name: &str) -> Option<DOMNode>;
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMHTMLCollection> + IsA<glib::object::Object>> DOMHTMLCollectionExt for O {
@@ -55,7 +54,7 @@ impl<O: IsA<DOMHTMLCollection> + IsA<glib::object::Object>> DOMHTMLCollectionExt
         }
     }
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::length",

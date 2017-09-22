@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -39,19 +38,19 @@ pub trait DOMAttrExt {
 
     fn set_value(&self, value: &str) -> Result<(), Error>;
 
-    fn connect_property_local_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_local_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_namespace_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_namespace_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_owner_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_owner_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_prefix_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_prefix_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_specified_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_specified_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
@@ -87,7 +86,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
         }
     }
 
-    fn connect_property_local_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_local_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::local-name",
@@ -95,7 +94,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
         }
     }
 
-    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::name",
@@ -103,7 +102,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
         }
     }
 
-    fn connect_property_namespace_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_namespace_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::namespace-uri",
@@ -111,7 +110,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
         }
     }
 
-    fn connect_property_owner_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_owner_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::owner-element",
@@ -119,7 +118,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
         }
     }
 
-    fn connect_property_prefix_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_prefix_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::prefix",
@@ -127,7 +126,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
         }
     }
 
-    fn connect_property_specified_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_specified_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::specified",
@@ -135,7 +134,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
         }
     }
 
-    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::value",

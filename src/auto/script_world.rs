@@ -11,7 +11,6 @@ use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
 #[cfg(feature = "v2_2")]
-use glib::signal::SignalHandlerId;
 #[cfg(feature = "v2_2")]
 use glib::signal::connect;
 use glib::translate::*;
@@ -59,12 +58,12 @@ impl Default for ScriptWorld {
 
 pub trait ScriptWorldExt {
     #[cfg(feature = "v2_2")]
-    fn connect_window_object_cleared<F: Fn(&Self, &WebPage, &Frame) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_window_object_cleared<F: Fn(&Self, &WebPage, &Frame) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<ScriptWorld> + IsA<glib::object::Object>> ScriptWorldExt for O {
     #[cfg(feature = "v2_2")]
-    fn connect_window_object_cleared<F: Fn(&Self, &WebPage, &Frame) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_window_object_cleared<F: Fn(&Self, &WebPage, &Frame) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self, &WebPage, &Frame) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "window-object-cleared",

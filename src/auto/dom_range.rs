@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -96,19 +95,19 @@ pub trait DOMRangeExt {
 
     fn to_string(&self) -> Result<String, Error>;
 
-    fn connect_property_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_common_ancestor_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_common_ancestor_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_end_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_end_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_end_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_end_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_start_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_start_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_start_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_start_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMRange> + IsA<glib::object::Object>> DOMRangeExt for O {
@@ -362,7 +361,7 @@ impl<O: IsA<DOMRange> + IsA<glib::object::Object>> DOMRangeExt for O {
         }
     }
 
-    fn connect_property_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::collapsed",
@@ -370,7 +369,7 @@ impl<O: IsA<DOMRange> + IsA<glib::object::Object>> DOMRangeExt for O {
         }
     }
 
-    fn connect_property_common_ancestor_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_common_ancestor_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::common-ancestor-container",
@@ -378,7 +377,7 @@ impl<O: IsA<DOMRange> + IsA<glib::object::Object>> DOMRangeExt for O {
         }
     }
 
-    fn connect_property_end_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_end_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::end-container",
@@ -386,7 +385,7 @@ impl<O: IsA<DOMRange> + IsA<glib::object::Object>> DOMRangeExt for O {
         }
     }
 
-    fn connect_property_end_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_end_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::end-offset",
@@ -394,7 +393,7 @@ impl<O: IsA<DOMRange> + IsA<glib::object::Object>> DOMRangeExt for O {
         }
     }
 
-    fn connect_property_start_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_start_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::start-container",
@@ -402,7 +401,7 @@ impl<O: IsA<DOMRange> + IsA<glib::object::Object>> DOMRangeExt for O {
         }
     }
 
-    fn connect_property_start_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_start_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::start-offset",
@@ -410,7 +409,7 @@ impl<O: IsA<DOMRange> + IsA<glib::object::Object>> DOMRangeExt for O {
         }
     }
 
-    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::text",

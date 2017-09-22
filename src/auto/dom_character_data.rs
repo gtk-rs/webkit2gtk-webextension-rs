@@ -9,7 +9,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -45,9 +44,9 @@ pub trait DOMCharacterDataExt {
 
     fn substring_data(&self, offset: libc::c_ulong, length: libc::c_ulong) -> Result<String, Error>;
 
-    fn connect_property_data_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_data_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMCharacterData> + IsA<glib::object::Object>> DOMCharacterDataExt for O {
@@ -111,7 +110,7 @@ impl<O: IsA<DOMCharacterData> + IsA<glib::object::Object>> DOMCharacterDataExt f
         }
     }
 
-    fn connect_property_data_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_data_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::data",
@@ -119,7 +118,7 @@ impl<O: IsA<DOMCharacterData> + IsA<glib::object::Object>> DOMCharacterDataExt f
         }
     }
 
-    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::length",

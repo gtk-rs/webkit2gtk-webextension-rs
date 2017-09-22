@@ -10,7 +10,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -36,7 +35,7 @@ pub trait DOMTextExt {
 
     fn split_text(&self, offset: libc::c_ulong) -> Result<DOMText, Error>;
 
-    fn connect_property_whole_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_whole_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMText> + IsA<glib::object::Object>> DOMTextExt for O {
@@ -62,7 +61,7 @@ impl<O: IsA<DOMText> + IsA<glib::object::Object>> DOMTextExt for O {
         }
     }
 
-    fn connect_property_whole_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_whole_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::whole-text",

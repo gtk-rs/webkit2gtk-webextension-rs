@@ -8,7 +8,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -46,15 +45,15 @@ pub trait DOMNodeIteratorExt {
 
     fn previous_node(&self) -> Result<DOMNode, Error>;
 
-    fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_pointer_before_reference_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_pointer_before_reference_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_reference_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_reference_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_root_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_root_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_what_to_show_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_what_to_show_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMNodeIterator> + IsA<glib::object::Object>> DOMNodeIteratorExt for O {
@@ -114,7 +113,7 @@ impl<O: IsA<DOMNodeIterator> + IsA<glib::object::Object>> DOMNodeIteratorExt for
         }
     }
 
-    fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::filter",
@@ -122,7 +121,7 @@ impl<O: IsA<DOMNodeIterator> + IsA<glib::object::Object>> DOMNodeIteratorExt for
         }
     }
 
-    fn connect_property_pointer_before_reference_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_pointer_before_reference_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::pointer-before-reference-node",
@@ -130,7 +129,7 @@ impl<O: IsA<DOMNodeIterator> + IsA<glib::object::Object>> DOMNodeIteratorExt for
         }
     }
 
-    fn connect_property_reference_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_reference_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::reference-node",
@@ -138,7 +137,7 @@ impl<O: IsA<DOMNodeIterator> + IsA<glib::object::Object>> DOMNodeIteratorExt for
         }
     }
 
-    fn connect_property_root_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_root_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::root",
@@ -146,7 +145,7 @@ impl<O: IsA<DOMNodeIterator> + IsA<glib::object::Object>> DOMNodeIteratorExt for
         }
     }
 
-    fn connect_property_what_to_show_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_what_to_show_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::what-to-show",

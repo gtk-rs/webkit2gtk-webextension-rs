@@ -11,7 +11,6 @@ use ffi;
 use glib;
 use glib::object::Downcast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect;
 use glib::translate::*;
 use glib_ffi;
@@ -102,31 +101,31 @@ pub trait DOMNodeExt {
 
     fn set_text_content(&self, value: &str) -> Result<(), Error>;
 
-    fn connect_property_base_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_base_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_child_nodes_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_child_nodes_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_first_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_first_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_last_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_last_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_next_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_next_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_node_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_node_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_node_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_node_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_node_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_node_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_owner_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_owner_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_parent_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_parent_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_parent_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_parent_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_previous_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_previous_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 
-    fn connect_property_text_content_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_text_content_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64;
 }
 
 impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
@@ -361,7 +360,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_base_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_base_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::base-uri",
@@ -369,7 +368,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_child_nodes_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_child_nodes_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::child-nodes",
@@ -377,7 +376,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_first_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_first_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::first-child",
@@ -385,7 +384,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_last_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_last_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::last-child",
@@ -393,7 +392,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_next_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_next_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::next-sibling",
@@ -401,7 +400,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_node_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_node_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::node-name",
@@ -409,7 +408,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_node_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_node_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::node-type",
@@ -417,7 +416,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_node_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_node_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::node-value",
@@ -425,7 +424,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_owner_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_owner_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::owner-document",
@@ -433,7 +432,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_parent_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_parent_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::parent-element",
@@ -441,7 +440,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_parent_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_parent_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::parent-node",
@@ -449,7 +448,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_previous_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_previous_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::previous-sibling",
@@ -457,7 +456,7 @@ impl<O: IsA<DOMNode> + IsA<glib::object::Object>> DOMNodeExt for O {
         }
     }
 
-    fn connect_property_text_content_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+    fn connect_property_text_content_notify<F: Fn(&Self) + 'static>(&self, f: F) -> u64 {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
             connect(self.to_glib_none().0, "notify::text-content",
