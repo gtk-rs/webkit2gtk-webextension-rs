@@ -14,4 +14,4 @@ addons:
 script:
   - rustc --version
   - ./check_init_asserts
-  - cargo build
+  - cargo build --all-features
