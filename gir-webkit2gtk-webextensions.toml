@@ -4,6 +4,7 @@ min_cfg_version="2.4"
 library = "WebKit2WebExtension"
 version = "4.0"
 external_libraries = [
+   "Gio",
    "GLib",
    "GObject",
    "Gtk",
