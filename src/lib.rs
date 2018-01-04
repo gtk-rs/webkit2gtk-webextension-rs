@@ -1,5 +1,7 @@
 #![allow(let_unit_value, new_without_default, non_snake_case, transmute_ptr_to_ref, type_complexity, unused_imports)]
 
+#[cfg(any(feature = "v2_18"))]
+extern crate gio;
 #[macro_use]
 extern crate glib;
 extern crate glib_sys as glib_ffi;
