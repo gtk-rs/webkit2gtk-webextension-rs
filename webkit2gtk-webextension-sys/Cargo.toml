@@ -3,7 +3,14 @@ pkg-config = "0.3.7"
 
 [dependencies]
 bitflags = "1.0"
+gio-sys = "^0.5.0"
+glib-sys = "^0.5.0"
+gobject-sys = "^0.5.0"
+gtk = "^0.3.0"
+gtk-sys = "^0.5.0"
+javascriptcore-rs-sys = "^0.1"
 libc = "0.2"
+soup-sys = "^0.5"
 
 [features]
 dox = []
@@ -15,5 +22,17 @@ v2_18 = ["v2_16"]
 v2_6 = []
 v2_8 = ["v2_6"]
 
+[lib]
+name = "webkit2gtk_webextension_sys"
+
 [package]
+authors = ["The Gtk-rs Project Developers"]
 build = "build.rs"
+categories = ["api-bindings", "gui"]
+description = "Rust bindings for the webkit2gtk-webextension library"
+homepage = "http://gtk-rs.org/"
+license = "MIT"
+links = "webkit2gtk_webextension"
+name = "webkit2gtk-webextension-sys"
+repository = "https://github.com/gtk-rs/webkit2gtk-webextension-rs"
+version = "0.4.0"
