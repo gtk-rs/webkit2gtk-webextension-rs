@@ -2,15 +2,16 @@
 name = "webkit2gtk-webextension"
 version = "0.4.0"
 authors = ["The Gtk-rs Project Developers"]
-
 categories = ["api-bindings", "gui"]
 description = "Rust bindings for the GTK+ 3 library"
 repository = "https://github.com/gtk-rs/webkit2gtk-webextension-rs"
 license = "MIT"
 homepage = "http://gtk-rs.org/"
 documentation = "http://gtk-rs.org/docs/gtk/"
-
 keywords = ["webkit", "gtk", "gtk-rs", "GUI"]
+exclude = [
+    "gir-files/*",
+]
 
 [badges]
 travis-ci = { repository = "gtk-rs/webkit2gtk-webextension-rs" }
