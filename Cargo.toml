@@ -37,4 +37,4 @@ libc = "^0.2"
 
 [dependencies.webkit2gtk-webextension-sys]
 path = "./webkit2gtk-webextension-sys"
-version = "^0.4"
+version = "^0.5"
