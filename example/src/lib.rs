@@ -19,6 +19,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+extern crate glib;
 #[macro_use]
 extern crate webkit2gtk_webextension;
 
@@ -38,10 +39,46 @@ use webkit2gtk_webextension::{
     WebPageExt,
 };
 
+/*web_extension_init!();
+
+pub fn web_extension_initialize(extension: &WebExtension) {
+    extension.connect_page_created(|_, page| {
+        page.connect_document_loaded(|page| {
+            println!("Page {} created for {:?}", page.get_id(), page.get_uri());
+            let document = page.get_dom_document().unwrap();
+            println!("URL: {:?}", document.get_url());
+            println!("Title: {:?}", document.get_title());
+            document.set_title("My Web Page");
+
+            let handler = Closure::new(|values| {
+                if let Some(event) = values[1].get::<Object>() {
+                    if let Ok(mouse_event) = event.downcast::<DOMMouseEvent>() {
+                        println!("Click at ({}, {})", mouse_event.get_x(), mouse_event.get_y());
+                    }
+                }
+                None
+            });
+            document.add_event_listener_with_closure("click", &handler, false);
+
+            println!("{}%", scroll_percentage(page));
+            scroll_by(page, 45);
+
+            println!("{}%", scroll_percentage(page));
+            scroll_bottom(page);
+
+            println!("{}%", scroll_percentage(page));
+            scroll_top(page);
+
+            println!("{}%", scroll_percentage(page));
+        });
+    });
+}*/
+
 web_extension_init_with_data!();
 
 pub fn web_extension_initialize(extension: &WebExtension, user_data: &Variant) {
     let _string = user_data.get_str();
+    println!("String: {:?}", _string);
 
     extension.connect_page_created(|_, page| {
         page.connect_document_loaded(|page| {
