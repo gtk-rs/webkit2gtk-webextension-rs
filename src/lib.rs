@@ -30,12 +30,6 @@ macro_rules! skip_assert_initialized {
     () => ()
 }
 
-macro_rules! callback_guard {
-    () => (
-        let _guard = ::glib::CallbackGuard::new();
-    )
-}
-
 #[macro_export]
 macro_rules! web_extension_init {
     () => {
