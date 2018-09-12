@@ -12,6 +12,10 @@ javascriptcore-rs-sys = "^0.1"
 libc = "0.2"
 soup-sys = "^0.7"
 
+[dev-dependencies]
+shell-words = "0.1.0"
+tempdir = "0.3"
+
 [features]
 dox = []
 v2_10 = ["v2_8"]
@@ -19,6 +23,7 @@ v2_12 = ["v2_10"]
 v2_14 = ["v2_12"]
 v2_16 = ["v2_14"]
 v2_18 = ["v2_16"]
+v2_20 = ["v2_18"]
 v2_6 = []
 v2_8 = ["v2_6"]
 

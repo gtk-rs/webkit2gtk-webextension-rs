@@ -1,4 +1,4 @@
-#![allow(let_unit_value, new_without_default, non_snake_case, transmute_ptr_to_ref, type_complexity, unused_imports)]
+#![allow(non_snake_case)]
 
 #[cfg(any(feature = "v2_18"))]
 extern crate gio;
@@ -28,12 +28,6 @@ macro_rules! assert_initialized_main_thread {
 
 macro_rules! skip_assert_initialized {
     () => ()
-}
-
-macro_rules! callback_guard {
-    () => (
-        let _guard = ::glib::CallbackGuard::new();
-    )
 }
 
 #[macro_export]
