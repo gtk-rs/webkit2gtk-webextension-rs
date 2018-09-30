@@ -5,7 +5,8 @@
 use ffi;
 use glib::translate::*;
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
+#[derive(Clone, Copy)]
 pub enum ContextMenuAction {
     NoAction,
     OpenLink,
