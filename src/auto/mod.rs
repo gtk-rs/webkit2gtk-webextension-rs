@@ -384,7 +384,6 @@ pub use self::dom_node_list::DOMNodeListExt;
 
 mod dom_object;
 pub use self::dom_object::DOMObject;
-pub use self::dom_object::DOMObjectExt;
 
 mod dom_processing_instruction;
 pub use self::dom_processing_instruction::DOMProcessingInstruction;
@@ -578,7 +577,6 @@ pub mod traits {
     pub use super::DOMNodeExt;
     pub use super::DOMNodeIteratorExt;
     pub use super::DOMNodeListExt;
-    pub use super::DOMObjectExt;
     pub use super::DOMProcessingInstructionExt;
     pub use super::DOMRangeExt;
     pub use super::DOMStyleSheetExt;
