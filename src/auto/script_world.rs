@@ -7,26 +7,24 @@ use Frame;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
 use WebPage;
 use ffi;
-use glib;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
-use glib::object::Downcast;
+use glib::object::Cast;
 use glib::object::IsA;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
 use glib::signal::SignalHandlerId;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
+#[cfg(any(feature = "v2_2", feature = "dox"))]
 use glib_ffi;
-use gobject_ffi;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct ScriptWorld(Object<ffi::WebKitScriptWorld, ffi::WebKitScriptWorldClass>);
+    pub struct ScriptWorld(Object<ffi::WebKitScriptWorld, ffi::WebKitScriptWorldClass, ScriptWorldClass>);
 
     match fn {
         get_type => || ffi::webkit_script_world_get_type(),
@@ -58,17 +56,19 @@ impl Default for ScriptWorld {
     }
 }
 
-pub trait ScriptWorldExt {
+pub const NONE_SCRIPT_WORLD: Option<&ScriptWorld> = None;
+
+pub trait ScriptWorldExt: 'static {
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     fn connect_window_object_cleared<F: Fn(&Self, &WebPage, &Frame) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<ScriptWorld> + IsA<glib::object::Object>> ScriptWorldExt for O {
+impl<O: IsA<ScriptWorld>> ScriptWorldExt for O {
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     fn connect_window_object_cleared<F: Fn(&Self, &WebPage, &Frame) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self, &WebPage, &Frame) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "window-object-cleared",
+            connect_raw(self.as_ptr() as *mut _, b"window-object-cleared\0".as_ptr() as *const _,
                 transmute(window_object_cleared_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -78,5 +78,11 @@ impl<O: IsA<ScriptWorld> + IsA<glib::object::Object>> ScriptWorldExt for O {
 unsafe extern "C" fn window_object_cleared_trampoline<P>(this: *mut ffi::WebKitScriptWorld, page: *mut ffi::WebKitWebPage, frame: *mut ffi::WebKitFrame, f: glib_ffi::gpointer)
 where P: IsA<ScriptWorld> {
     let f: &&(Fn(&P, &WebPage, &Frame) + 'static) = transmute(f);
-    f(&ScriptWorld::from_glib_borrow(this).downcast_unchecked(), &from_glib_borrow(page), &from_glib_borrow(frame))
+    f(&ScriptWorld::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(page), &from_glib_borrow(frame))
+}
+
+impl fmt::Display for ScriptWorld {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "ScriptWorld")
+    }
 }

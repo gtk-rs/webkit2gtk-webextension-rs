@@ -8,35 +8,35 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLMetaElement(Object<ffi::WebKitDOMHTMLMetaElement, ffi::WebKitDOMHTMLMetaElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLMetaElement(Object<ffi::WebKitDOMHTMLMetaElement, ffi::WebKitDOMHTMLMetaElementClass, DOMHTMLMetaElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_meta_element_get_type(),
     }
 }
 
-pub trait DOMHTMLMetaElementExt {
-    fn get_content(&self) -> Option<String>;
+pub const NONE_DOMHTML_META_ELEMENT: Option<&DOMHTMLMetaElement> = None;
 
-    fn get_http_equiv(&self) -> Option<String>;
+pub trait DOMHTMLMetaElementExt: 'static {
+    fn get_content(&self) -> Option<GString>;
 
-    fn get_name(&self) -> Option<String>;
+    fn get_http_equiv(&self) -> Option<GString>;
 
-    fn get_scheme(&self) -> Option<String>;
+    fn get_name(&self) -> Option<GString>;
+
+    fn get_scheme(&self) -> Option<GString>;
 
     fn set_content(&self, value: &str);
 
@@ -55,59 +55,59 @@ pub trait DOMHTMLMetaElementExt {
     fn connect_property_scheme_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLMetaElement> + IsA<glib::object::Object>> DOMHTMLMetaElementExt for O {
-    fn get_content(&self) -> Option<String> {
+impl<O: IsA<DOMHTMLMetaElement>> DOMHTMLMetaElementExt for O {
+    fn get_content(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_meta_element_get_content(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_meta_element_get_content(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_http_equiv(&self) -> Option<String> {
+    fn get_http_equiv(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_meta_element_get_http_equiv(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_meta_element_get_http_equiv(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_name(&self) -> Option<String> {
+    fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_meta_element_get_name(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_meta_element_get_name(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_scheme(&self) -> Option<String> {
+    fn get_scheme(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_meta_element_get_scheme(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_meta_element_get_scheme(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_content(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_meta_element_set_content(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_meta_element_set_content(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_http_equiv(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_meta_element_set_http_equiv(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_meta_element_set_http_equiv(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_name(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_meta_element_set_name(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_meta_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_scheme(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_meta_element_set_scheme(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_meta_element_set_scheme(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_content_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::content",
+            connect_raw(self.as_ptr() as *mut _, b"notify::content\0".as_ptr() as *const _,
                 transmute(notify_content_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -115,7 +115,7 @@ impl<O: IsA<DOMHTMLMetaElement> + IsA<glib::object::Object>> DOMHTMLMetaElementE
     fn connect_property_http_equiv_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::http-equiv",
+            connect_raw(self.as_ptr() as *mut _, b"notify::http-equiv\0".as_ptr() as *const _,
                 transmute(notify_http_equiv_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -123,7 +123,7 @@ impl<O: IsA<DOMHTMLMetaElement> + IsA<glib::object::Object>> DOMHTMLMetaElementE
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::name",
+            connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
                 transmute(notify_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -131,7 +131,7 @@ impl<O: IsA<DOMHTMLMetaElement> + IsA<glib::object::Object>> DOMHTMLMetaElementE
     fn connect_property_scheme_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::scheme",
+            connect_raw(self.as_ptr() as *mut _, b"notify::scheme\0".as_ptr() as *const _,
                 transmute(notify_scheme_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -140,23 +140,29 @@ impl<O: IsA<DOMHTMLMetaElement> + IsA<glib::object::Object>> DOMHTMLMetaElementE
 unsafe extern "C" fn notify_content_trampoline<P>(this: *mut ffi::WebKitDOMHTMLMetaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLMetaElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLMetaElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_http_equiv_trampoline<P>(this: *mut ffi::WebKitDOMHTMLMetaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLMetaElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLMetaElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_name_trampoline<P>(this: *mut ffi::WebKitDOMHTMLMetaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLMetaElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLMetaElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_scheme_trampoline<P>(this: *mut ffi::WebKitDOMHTMLMetaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLMetaElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLMetaElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLMetaElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLMetaElement")
+    }
 }

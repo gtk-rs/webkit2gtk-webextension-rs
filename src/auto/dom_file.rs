@@ -5,44 +5,44 @@
 use DOMBlob;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMFile(Object<ffi::WebKitDOMFile, ffi::WebKitDOMFileClass>): DOMBlob, DOMObject;
+    pub struct DOMFile(Object<ffi::WebKitDOMFile, ffi::WebKitDOMFileClass, DOMFileClass>) @extends DOMBlob, DOMObject;
 
     match fn {
         get_type => || ffi::webkit_dom_file_get_type(),
     }
 }
 
-pub trait DOMFileExt {
-    fn get_name(&self) -> Option<String>;
+pub const NONE_DOM_FILE: Option<&DOMFile> = None;
+
+pub trait DOMFileExt: 'static {
+    fn get_name(&self) -> Option<GString>;
 
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMFile> + IsA<glib::object::Object>> DOMFileExt for O {
-    fn get_name(&self) -> Option<String> {
+impl<O: IsA<DOMFile>> DOMFileExt for O {
+    fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_file_get_name(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_file_get_name(self.as_ref().to_glib_none().0))
         }
     }
 
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::name",
+            connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
                 transmute(notify_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -51,5 +51,11 @@ impl<O: IsA<DOMFile> + IsA<glib::object::Object>> DOMFileExt for O {
 unsafe extern "C" fn notify_name_trampoline<P>(this: *mut ffi::WebKitDOMFile, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMFile> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMFile::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMFile::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMFile {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMFile")
+    }
 }

@@ -8,31 +8,31 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLOptGroupElement(Object<ffi::WebKitDOMHTMLOptGroupElement, ffi::WebKitDOMHTMLOptGroupElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLOptGroupElement(Object<ffi::WebKitDOMHTMLOptGroupElement, ffi::WebKitDOMHTMLOptGroupElementClass, DOMHTMLOptGroupElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_opt_group_element_get_type(),
     }
 }
 
-pub trait DOMHTMLOptGroupElementExt {
+pub const NONE_DOMHTML_OPT_GROUP_ELEMENT: Option<&DOMHTMLOptGroupElement> = None;
+
+pub trait DOMHTMLOptGroupElementExt: 'static {
     fn get_disabled(&self) -> bool;
 
-    fn get_label(&self) -> Option<String>;
+    fn get_label(&self) -> Option<GString>;
 
     fn set_disabled(&self, value: bool);
 
@@ -43,35 +43,35 @@ pub trait DOMHTMLOptGroupElementExt {
     fn connect_property_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLOptGroupElement> + IsA<glib::object::Object>> DOMHTMLOptGroupElementExt for O {
+impl<O: IsA<DOMHTMLOptGroupElement>> DOMHTMLOptGroupElementExt for O {
     fn get_disabled(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_html_opt_group_element_get_disabled(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_html_opt_group_element_get_disabled(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_label(&self) -> Option<String> {
+    fn get_label(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_opt_group_element_get_label(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_opt_group_element_get_label(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_disabled(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_html_opt_group_element_set_disabled(self.to_glib_none().0, value.to_glib());
+            ffi::webkit_dom_html_opt_group_element_set_disabled(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
     fn set_label(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_opt_group_element_set_label(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_opt_group_element_set_label(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::disabled",
+            connect_raw(self.as_ptr() as *mut _, b"notify::disabled\0".as_ptr() as *const _,
                 transmute(notify_disabled_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -79,7 +79,7 @@ impl<O: IsA<DOMHTMLOptGroupElement> + IsA<glib::object::Object>> DOMHTMLOptGroup
     fn connect_property_label_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::label",
+            connect_raw(self.as_ptr() as *mut _, b"notify::label\0".as_ptr() as *const _,
                 transmute(notify_label_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -88,11 +88,17 @@ impl<O: IsA<DOMHTMLOptGroupElement> + IsA<glib::object::Object>> DOMHTMLOptGroup
 unsafe extern "C" fn notify_disabled_trampoline<P>(this: *mut ffi::WebKitDOMHTMLOptGroupElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLOptGroupElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLOptGroupElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLOptGroupElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_label_trampoline<P>(this: *mut ffi::WebKitDOMHTMLOptGroupElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLOptGroupElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLOptGroupElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLOptGroupElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLOptGroupElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLOptGroupElement")
+    }
 }

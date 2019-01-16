@@ -8,30 +8,31 @@ use DOMNode;
 use DOMObject;
 use Error;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use libc;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMText(Object<ffi::WebKitDOMText, ffi::WebKitDOMTextClass>): DOMCharacterData, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMText(Object<ffi::WebKitDOMText, ffi::WebKitDOMTextClass, DOMTextClass>) @extends DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_text_get_type(),
     }
 }
 
-pub trait DOMTextExt {
-    fn get_whole_text(&self) -> Option<String>;
+pub const NONE_DOM_TEXT: Option<&DOMText> = None;
+
+pub trait DOMTextExt: 'static {
+    fn get_whole_text(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
     fn replace_whole_text(&self, content: &str) -> Result<DOMText, Error>;
@@ -41,17 +42,17 @@ pub trait DOMTextExt {
     fn connect_property_whole_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMText> + IsA<glib::object::Object>> DOMTextExt for O {
-    fn get_whole_text(&self) -> Option<String> {
+impl<O: IsA<DOMText>> DOMTextExt for O {
+    fn get_whole_text(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_text_get_whole_text(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_text_get_whole_text(self.as_ref().to_glib_none().0))
         }
     }
 
     fn replace_whole_text(&self, content: &str) -> Result<DOMText, Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = ffi::webkit_dom_text_replace_whole_text(self.to_glib_none().0, content.to_glib_none().0, &mut error);
+            let ret = ffi::webkit_dom_text_replace_whole_text(self.as_ref().to_glib_none().0, content.to_glib_none().0, &mut error);
             if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
@@ -59,7 +60,7 @@ impl<O: IsA<DOMText> + IsA<glib::object::Object>> DOMTextExt for O {
     fn split_text(&self, offset: libc::c_ulong) -> Result<DOMText, Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = ffi::webkit_dom_text_split_text(self.to_glib_none().0, offset, &mut error);
+            let ret = ffi::webkit_dom_text_split_text(self.as_ref().to_glib_none().0, offset, &mut error);
             if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
@@ -67,7 +68,7 @@ impl<O: IsA<DOMText> + IsA<glib::object::Object>> DOMTextExt for O {
     fn connect_property_whole_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::whole-text",
+            connect_raw(self.as_ptr() as *mut _, b"notify::whole-text\0".as_ptr() as *const _,
                 transmute(notify_whole_text_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -76,5 +77,11 @@ impl<O: IsA<DOMText> + IsA<glib::object::Object>> DOMTextExt for O {
 unsafe extern "C" fn notify_whole_text_trampoline<P>(this: *mut ffi::WebKitDOMText, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMText> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMText::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMText::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMText {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMText")
+    }
 }

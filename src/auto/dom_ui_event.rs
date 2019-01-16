@@ -6,29 +6,28 @@ use DOMDOMWindow;
 use DOMEvent;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use libc;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMUIEvent(Object<ffi::WebKitDOMUIEvent, ffi::WebKitDOMUIEventClass>): DOMEvent, DOMObject;
+    pub struct DOMUIEvent(Object<ffi::WebKitDOMUIEvent, ffi::WebKitDOMUIEventClass, DOMUIEventClass>) @extends DOMEvent, DOMObject;
 
     match fn {
         get_type => || ffi::webkit_dom_ui_event_get_type(),
     }
 }
 
-pub trait DOMUIEventExt {
+pub const NONE_DOMUI_EVENT: Option<&DOMUIEvent> = None;
+
+pub trait DOMUIEventExt: 'static {
     fn get_char_code(&self) -> libc::c_long;
 
     fn get_detail(&self) -> libc::c_long;
@@ -45,7 +44,7 @@ pub trait DOMUIEventExt {
 
     fn get_view(&self) -> Option<DOMDOMWindow>;
 
-    fn init_ui_event(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: libc::c_long);
+    fn init_ui_event<P: IsA<DOMDOMWindow>>(&self, type_: &str, canBubble: bool, cancelable: bool, view: &P, detail: libc::c_long);
 
     fn connect_property_char_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -64,65 +63,65 @@ pub trait DOMUIEventExt {
     fn connect_property_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
+impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
     fn get_char_code(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_char_code(self.to_glib_none().0)
+            ffi::webkit_dom_ui_event_get_char_code(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_detail(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_detail(self.to_glib_none().0)
+            ffi::webkit_dom_ui_event_get_detail(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_key_code(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_key_code(self.to_glib_none().0)
+            ffi::webkit_dom_ui_event_get_key_code(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_layer_x(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_layer_x(self.to_glib_none().0)
+            ffi::webkit_dom_ui_event_get_layer_x(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_layer_y(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_layer_y(self.to_glib_none().0)
+            ffi::webkit_dom_ui_event_get_layer_y(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_page_x(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_page_x(self.to_glib_none().0)
+            ffi::webkit_dom_ui_event_get_page_x(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_page_y(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_page_y(self.to_glib_none().0)
+            ffi::webkit_dom_ui_event_get_page_y(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_view(&self) -> Option<DOMDOMWindow> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_ui_event_get_view(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_ui_event_get_view(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn init_ui_event(&self, type_: &str, canBubble: bool, cancelable: bool, view: &DOMDOMWindow, detail: libc::c_long) {
+    fn init_ui_event<P: IsA<DOMDOMWindow>>(&self, type_: &str, canBubble: bool, cancelable: bool, view: &P, detail: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_ui_event_init_ui_event(self.to_glib_none().0, type_.to_glib_none().0, canBubble.to_glib(), cancelable.to_glib(), view.to_glib_none().0, detail);
+            ffi::webkit_dom_ui_event_init_ui_event(self.as_ref().to_glib_none().0, type_.to_glib_none().0, canBubble.to_glib(), cancelable.to_glib(), view.as_ref().to_glib_none().0, detail);
         }
     }
 
     fn connect_property_char_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::char-code",
+            connect_raw(self.as_ptr() as *mut _, b"notify::char-code\0".as_ptr() as *const _,
                 transmute(notify_char_code_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -130,7 +129,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
     fn connect_property_detail_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::detail",
+            connect_raw(self.as_ptr() as *mut _, b"notify::detail\0".as_ptr() as *const _,
                 transmute(notify_detail_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -138,7 +137,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
     fn connect_property_key_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::key-code",
+            connect_raw(self.as_ptr() as *mut _, b"notify::key-code\0".as_ptr() as *const _,
                 transmute(notify_key_code_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -146,7 +145,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
     fn connect_property_layer_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::layer-x",
+            connect_raw(self.as_ptr() as *mut _, b"notify::layer-x\0".as_ptr() as *const _,
                 transmute(notify_layer_x_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -154,7 +153,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
     fn connect_property_layer_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::layer-y",
+            connect_raw(self.as_ptr() as *mut _, b"notify::layer-y\0".as_ptr() as *const _,
                 transmute(notify_layer_y_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -162,7 +161,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
     fn connect_property_page_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::page-x",
+            connect_raw(self.as_ptr() as *mut _, b"notify::page-x\0".as_ptr() as *const _,
                 transmute(notify_page_x_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -170,7 +169,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
     fn connect_property_page_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::page-y",
+            connect_raw(self.as_ptr() as *mut _, b"notify::page-y\0".as_ptr() as *const _,
                 transmute(notify_page_y_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -178,7 +177,7 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
     fn connect_property_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::view",
+            connect_raw(self.as_ptr() as *mut _, b"notify::view\0".as_ptr() as *const _,
                 transmute(notify_view_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -187,47 +186,53 @@ impl<O: IsA<DOMUIEvent> + IsA<glib::object::Object>> DOMUIEventExt for O {
 unsafe extern "C" fn notify_char_code_trampoline<P>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMUIEvent::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_detail_trampoline<P>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMUIEvent::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_key_code_trampoline<P>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMUIEvent::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_layer_x_trampoline<P>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMUIEvent::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_layer_y_trampoline<P>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMUIEvent::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_page_x_trampoline<P>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMUIEvent::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_page_y_trampoline<P>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMUIEvent::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_view_trampoline<P>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMUIEvent::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMUIEvent {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMUIEvent")
+    }
 }

@@ -8,50 +8,50 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use libc;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLAppletElement(Object<ffi::WebKitDOMHTMLAppletElement, ffi::WebKitDOMHTMLAppletElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLAppletElement(Object<ffi::WebKitDOMHTMLAppletElement, ffi::WebKitDOMHTMLAppletElementClass, DOMHTMLAppletElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_applet_element_get_type(),
     }
 }
 
-pub trait DOMHTMLAppletElementExt {
-    fn get_align(&self) -> Option<String>;
+pub const NONE_DOMHTML_APPLET_ELEMENT: Option<&DOMHTMLAppletElement> = None;
 
-    fn get_alt(&self) -> Option<String>;
+pub trait DOMHTMLAppletElementExt: 'static {
+    fn get_align(&self) -> Option<GString>;
 
-    fn get_archive(&self) -> Option<String>;
+    fn get_alt(&self) -> Option<GString>;
 
-    fn get_code(&self) -> Option<String>;
+    fn get_archive(&self) -> Option<GString>;
 
-    fn get_code_base(&self) -> Option<String>;
+    fn get_code(&self) -> Option<GString>;
 
-    fn get_height(&self) -> Option<String>;
+    fn get_code_base(&self) -> Option<GString>;
+
+    fn get_height(&self) -> Option<GString>;
 
     fn get_hspace(&self) -> libc::c_long;
 
-    fn get_name(&self) -> Option<String>;
+    fn get_name(&self) -> Option<GString>;
 
-    fn get_object(&self) -> Option<String>;
+    fn get_object(&self) -> Option<GString>;
 
     fn get_vspace(&self) -> libc::c_long;
 
-    fn get_width(&self) -> Option<String>;
+    fn get_width(&self) -> Option<GString>;
 
     fn set_align(&self, value: &str);
 
@@ -98,143 +98,143 @@ pub trait DOMHTMLAppletElementExt {
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElementExt for O {
-    fn get_align(&self) -> Option<String> {
+impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
+    fn get_align(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_applet_element_get_align(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_applet_element_get_align(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_alt(&self) -> Option<String> {
+    fn get_alt(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_applet_element_get_alt(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_applet_element_get_alt(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_archive(&self) -> Option<String> {
+    fn get_archive(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_applet_element_get_archive(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_applet_element_get_archive(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_code(&self) -> Option<String> {
+    fn get_code(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_applet_element_get_code(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_applet_element_get_code(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_code_base(&self) -> Option<String> {
+    fn get_code_base(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_applet_element_get_code_base(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_applet_element_get_code_base(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_height(&self) -> Option<String> {
+    fn get_height(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_applet_element_get_height(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_applet_element_get_height(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_hspace(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_applet_element_get_hspace(self.to_glib_none().0)
+            ffi::webkit_dom_html_applet_element_get_hspace(self.as_ref().to_glib_none().0)
         }
     }
 
-    fn get_name(&self) -> Option<String> {
+    fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_applet_element_get_name(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_applet_element_get_name(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_object(&self) -> Option<String> {
+    fn get_object(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_applet_element_get_object(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_applet_element_get_object(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_vspace(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_applet_element_get_vspace(self.to_glib_none().0)
+            ffi::webkit_dom_html_applet_element_get_vspace(self.as_ref().to_glib_none().0)
         }
     }
 
-    fn get_width(&self) -> Option<String> {
+    fn get_width(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_applet_element_get_width(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_applet_element_get_width(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_align(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_applet_element_set_align(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_applet_element_set_align(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_alt(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_applet_element_set_alt(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_applet_element_set_alt(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_archive(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_applet_element_set_archive(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_applet_element_set_archive(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_code(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_applet_element_set_code(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_applet_element_set_code(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_code_base(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_applet_element_set_code_base(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_applet_element_set_code_base(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_height(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_applet_element_set_height(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_applet_element_set_height(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_hspace(&self, value: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_html_applet_element_set_hspace(self.to_glib_none().0, value);
+            ffi::webkit_dom_html_applet_element_set_hspace(self.as_ref().to_glib_none().0, value);
         }
     }
 
     fn set_name(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_applet_element_set_name(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_applet_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_object(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_applet_element_set_object(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_applet_element_set_object(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_vspace(&self, value: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_html_applet_element_set_vspace(self.to_glib_none().0, value);
+            ffi::webkit_dom_html_applet_element_set_vspace(self.as_ref().to_glib_none().0, value);
         }
     }
 
     fn set_width(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_applet_element_set_width(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_applet_element_set_width(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::align",
+            connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
                 transmute(notify_align_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -242,7 +242,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
     fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::alt",
+            connect_raw(self.as_ptr() as *mut _, b"notify::alt\0".as_ptr() as *const _,
                 transmute(notify_alt_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -250,7 +250,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
     fn connect_property_archive_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::archive",
+            connect_raw(self.as_ptr() as *mut _, b"notify::archive\0".as_ptr() as *const _,
                 transmute(notify_archive_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -258,7 +258,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
     fn connect_property_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::code",
+            connect_raw(self.as_ptr() as *mut _, b"notify::code\0".as_ptr() as *const _,
                 transmute(notify_code_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -266,7 +266,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
     fn connect_property_code_base_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::code-base",
+            connect_raw(self.as_ptr() as *mut _, b"notify::code-base\0".as_ptr() as *const _,
                 transmute(notify_code_base_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -274,7 +274,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
     fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::height",
+            connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
                 transmute(notify_height_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -282,7 +282,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
     fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::hspace",
+            connect_raw(self.as_ptr() as *mut _, b"notify::hspace\0".as_ptr() as *const _,
                 transmute(notify_hspace_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -290,7 +290,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::name",
+            connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
                 transmute(notify_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -298,7 +298,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
     fn connect_property_object_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::object",
+            connect_raw(self.as_ptr() as *mut _, b"notify::object\0".as_ptr() as *const _,
                 transmute(notify_object_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -306,7 +306,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
     fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::vspace",
+            connect_raw(self.as_ptr() as *mut _, b"notify::vspace\0".as_ptr() as *const _,
                 transmute(notify_vspace_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -314,7 +314,7 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::width",
+            connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
                 transmute(notify_width_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -323,65 +323,71 @@ impl<O: IsA<DOMHTMLAppletElement> + IsA<glib::object::Object>> DOMHTMLAppletElem
 unsafe extern "C" fn notify_align_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAppletElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLAppletElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLAppletElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_alt_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAppletElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLAppletElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLAppletElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_archive_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAppletElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLAppletElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLAppletElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_code_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAppletElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLAppletElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLAppletElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_code_base_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAppletElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLAppletElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLAppletElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_height_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAppletElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLAppletElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLAppletElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_hspace_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAppletElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLAppletElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLAppletElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_name_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAppletElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLAppletElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLAppletElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_object_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAppletElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLAppletElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLAppletElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_vspace_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAppletElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLAppletElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLAppletElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_width_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAppletElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLAppletElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLAppletElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLAppletElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLAppletElement")
+    }
 }

@@ -6,46 +6,47 @@ use DOMCSSRule;
 use DOMObject;
 use Error;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use libc;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMCSSStyleDeclaration(Object<ffi::WebKitDOMCSSStyleDeclaration, ffi::WebKitDOMCSSStyleDeclarationClass>): DOMObject;
+    pub struct DOMCSSStyleDeclaration(Object<ffi::WebKitDOMCSSStyleDeclaration, ffi::WebKitDOMCSSStyleDeclarationClass, DOMCSSStyleDeclarationClass>) @extends DOMObject;
 
     match fn {
         get_type => || ffi::webkit_dom_css_style_declaration_get_type(),
     }
 }
 
-pub trait DOMCSSStyleDeclarationExt {
-    fn get_css_text(&self) -> Option<String>;
+pub const NONE_DOMCSS_STYLE_DECLARATION: Option<&DOMCSSStyleDeclaration> = None;
+
+pub trait DOMCSSStyleDeclarationExt: 'static {
+    fn get_css_text(&self) -> Option<GString>;
 
     fn get_length(&self) -> libc::c_ulong;
 
     fn get_parent_rule(&self) -> Option<DOMCSSRule>;
 
-    fn get_property_priority(&self, propertyName: &str) -> Option<String>;
+    fn get_property_priority(&self, propertyName: &str) -> Option<GString>;
 
-    fn get_property_shorthand(&self, propertyName: &str) -> Option<String>;
+    fn get_property_shorthand(&self, propertyName: &str) -> Option<GString>;
 
-    fn get_property_value(&self, propertyName: &str) -> Option<String>;
+    fn get_property_value(&self, propertyName: &str) -> Option<GString>;
 
     fn is_property_implicit(&self, propertyName: &str) -> bool;
 
-    fn item(&self, index: libc::c_ulong) -> Option<String>;
+    fn item(&self, index: libc::c_ulong) -> Option<GString>;
 
-    fn remove_property(&self, propertyName: &str) -> Result<String, Error>;
+    fn remove_property(&self, propertyName: &str) -> Result<GString, Error>;
 
     fn set_css_text(&self, value: &str) -> Result<(), Error>;
 
@@ -58,59 +59,59 @@ pub trait DOMCSSStyleDeclarationExt {
     fn connect_property_parent_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMCSSStyleDeclaration> + IsA<glib::object::Object>> DOMCSSStyleDeclarationExt for O {
-    fn get_css_text(&self) -> Option<String> {
+impl<O: IsA<DOMCSSStyleDeclaration>> DOMCSSStyleDeclarationExt for O {
+    fn get_css_text(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_css_style_declaration_get_css_text(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_css_style_declaration_get_css_text(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_length(&self) -> libc::c_ulong {
         unsafe {
-            ffi::webkit_dom_css_style_declaration_get_length(self.to_glib_none().0)
+            ffi::webkit_dom_css_style_declaration_get_length(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_parent_rule(&self) -> Option<DOMCSSRule> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_css_style_declaration_get_parent_rule(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_css_style_declaration_get_parent_rule(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_property_priority(&self, propertyName: &str) -> Option<String> {
+    fn get_property_priority(&self, propertyName: &str) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_css_style_declaration_get_property_priority(self.to_glib_none().0, propertyName.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_css_style_declaration_get_property_priority(self.as_ref().to_glib_none().0, propertyName.to_glib_none().0))
         }
     }
 
-    fn get_property_shorthand(&self, propertyName: &str) -> Option<String> {
+    fn get_property_shorthand(&self, propertyName: &str) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_css_style_declaration_get_property_shorthand(self.to_glib_none().0, propertyName.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_css_style_declaration_get_property_shorthand(self.as_ref().to_glib_none().0, propertyName.to_glib_none().0))
         }
     }
 
-    fn get_property_value(&self, propertyName: &str) -> Option<String> {
+    fn get_property_value(&self, propertyName: &str) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_css_style_declaration_get_property_value(self.to_glib_none().0, propertyName.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_css_style_declaration_get_property_value(self.as_ref().to_glib_none().0, propertyName.to_glib_none().0))
         }
     }
 
     fn is_property_implicit(&self, propertyName: &str) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_css_style_declaration_is_property_implicit(self.to_glib_none().0, propertyName.to_glib_none().0))
+            from_glib(ffi::webkit_dom_css_style_declaration_is_property_implicit(self.as_ref().to_glib_none().0, propertyName.to_glib_none().0))
         }
     }
 
-    fn item(&self, index: libc::c_ulong) -> Option<String> {
+    fn item(&self, index: libc::c_ulong) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_css_style_declaration_item(self.to_glib_none().0, index))
+            from_glib_full(ffi::webkit_dom_css_style_declaration_item(self.as_ref().to_glib_none().0, index))
         }
     }
 
-    fn remove_property(&self, propertyName: &str) -> Result<String, Error> {
+    fn remove_property(&self, propertyName: &str) -> Result<GString, Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = ffi::webkit_dom_css_style_declaration_remove_property(self.to_glib_none().0, propertyName.to_glib_none().0, &mut error);
+            let ret = ffi::webkit_dom_css_style_declaration_remove_property(self.as_ref().to_glib_none().0, propertyName.to_glib_none().0, &mut error);
             if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
         }
     }
@@ -118,7 +119,7 @@ impl<O: IsA<DOMCSSStyleDeclaration> + IsA<glib::object::Object>> DOMCSSStyleDecl
     fn set_css_text(&self, value: &str) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_css_style_declaration_set_css_text(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            let _ = ffi::webkit_dom_css_style_declaration_set_css_text(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
@@ -126,7 +127,7 @@ impl<O: IsA<DOMCSSStyleDeclaration> + IsA<glib::object::Object>> DOMCSSStyleDecl
     fn set_property(&self, propertyName: &str, value: &str, priority: &str) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_css_style_declaration_set_property(self.to_glib_none().0, propertyName.to_glib_none().0, value.to_glib_none().0, priority.to_glib_none().0, &mut error);
+            let _ = ffi::webkit_dom_css_style_declaration_set_property(self.as_ref().to_glib_none().0, propertyName.to_glib_none().0, value.to_glib_none().0, priority.to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
@@ -134,7 +135,7 @@ impl<O: IsA<DOMCSSStyleDeclaration> + IsA<glib::object::Object>> DOMCSSStyleDecl
     fn connect_property_css_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::css-text",
+            connect_raw(self.as_ptr() as *mut _, b"notify::css-text\0".as_ptr() as *const _,
                 transmute(notify_css_text_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -142,7 +143,7 @@ impl<O: IsA<DOMCSSStyleDeclaration> + IsA<glib::object::Object>> DOMCSSStyleDecl
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::length",
+            connect_raw(self.as_ptr() as *mut _, b"notify::length\0".as_ptr() as *const _,
                 transmute(notify_length_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -150,7 +151,7 @@ impl<O: IsA<DOMCSSStyleDeclaration> + IsA<glib::object::Object>> DOMCSSStyleDecl
     fn connect_property_parent_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::parent-rule",
+            connect_raw(self.as_ptr() as *mut _, b"notify::parent-rule\0".as_ptr() as *const _,
                 transmute(notify_parent_rule_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -159,17 +160,23 @@ impl<O: IsA<DOMCSSStyleDeclaration> + IsA<glib::object::Object>> DOMCSSStyleDecl
 unsafe extern "C" fn notify_css_text_trampoline<P>(this: *mut ffi::WebKitDOMCSSStyleDeclaration, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMCSSStyleDeclaration> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMCSSStyleDeclaration::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMCSSStyleDeclaration::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_length_trampoline<P>(this: *mut ffi::WebKitDOMCSSStyleDeclaration, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMCSSStyleDeclaration> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMCSSStyleDeclaration::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMCSSStyleDeclaration::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_parent_rule_trampoline<P>(this: *mut ffi::WebKitDOMCSSStyleDeclaration, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMCSSStyleDeclaration> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMCSSStyleDeclaration::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMCSSStyleDeclaration::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMCSSStyleDeclaration {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMCSSStyleDeclaration")
+    }
 }

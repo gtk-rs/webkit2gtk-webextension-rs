@@ -6,35 +6,36 @@ use DOMMediaList;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
+use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Downcast;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
 use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMStyleSheet(Object<ffi::WebKitDOMStyleSheet, ffi::WebKitDOMStyleSheetClass>): DOMObject;
+    pub struct DOMStyleSheet(Object<ffi::WebKitDOMStyleSheet, ffi::WebKitDOMStyleSheetClass, DOMStyleSheetClass>) @extends DOMObject;
 
     match fn {
         get_type => || ffi::webkit_dom_style_sheet_get_type(),
     }
 }
 
-pub trait DOMStyleSheetExt {
-    fn get_content_type(&self) -> Option<String>;
+pub const NONE_DOM_STYLE_SHEET: Option<&DOMStyleSheet> = None;
+
+pub trait DOMStyleSheetExt: 'static {
+    fn get_content_type(&self) -> Option<GString>;
 
     fn get_disabled(&self) -> bool;
 
-    fn get_href(&self) -> Option<String>;
+    fn get_href(&self) -> Option<GString>;
 
     fn get_media(&self) -> Option<DOMMediaList>;
 
@@ -42,11 +43,11 @@ pub trait DOMStyleSheetExt {
 
     fn get_parent_style_sheet(&self) -> Option<DOMStyleSheet>;
 
-    fn get_title(&self) -> Option<String>;
+    fn get_title(&self) -> Option<GString>;
 
     fn set_disabled(&self, value: bool);
 
-    fn get_property_type(&self) -> Option<String>;
+    fn get_property_type(&self) -> Option<GString>;
 
     fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -63,59 +64,59 @@ pub trait DOMStyleSheetExt {
     fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMStyleSheet> + IsA<glib::object::Object>> DOMStyleSheetExt for O {
-    fn get_content_type(&self) -> Option<String> {
+impl<O: IsA<DOMStyleSheet>> DOMStyleSheetExt for O {
+    fn get_content_type(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_style_sheet_get_content_type(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_style_sheet_get_content_type(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_disabled(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_style_sheet_get_disabled(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_style_sheet_get_disabled(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_href(&self) -> Option<String> {
+    fn get_href(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_style_sheet_get_href(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_style_sheet_get_href(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_media(&self) -> Option<DOMMediaList> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_style_sheet_get_media(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_style_sheet_get_media(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_owner_node(&self) -> Option<DOMNode> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_style_sheet_get_owner_node(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_dom_style_sheet_get_owner_node(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_parent_style_sheet(&self) -> Option<DOMStyleSheet> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_style_sheet_get_parent_style_sheet(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_style_sheet_get_parent_style_sheet(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_title(&self) -> Option<String> {
+    fn get_title(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_style_sheet_get_title(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_style_sheet_get_title(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_disabled(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_style_sheet_set_disabled(self.to_glib_none().0, value.to_glib());
+            ffi::webkit_dom_style_sheet_set_disabled(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
-    fn get_property_type(&self) -> Option<String> {
+    fn get_property_type(&self) -> Option<GString> {
         unsafe {
-            let mut value = Value::from_type(<String as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "type".to_glib_none().0, value.to_glib_none_mut().0);
+            let mut value = Value::from_type(<GString as StaticType>::static_type());
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
@@ -123,7 +124,7 @@ impl<O: IsA<DOMStyleSheet> + IsA<glib::object::Object>> DOMStyleSheetExt for O {
     fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::disabled",
+            connect_raw(self.as_ptr() as *mut _, b"notify::disabled\0".as_ptr() as *const _,
                 transmute(notify_disabled_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -131,7 +132,7 @@ impl<O: IsA<DOMStyleSheet> + IsA<glib::object::Object>> DOMStyleSheetExt for O {
     fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::href",
+            connect_raw(self.as_ptr() as *mut _, b"notify::href\0".as_ptr() as *const _,
                 transmute(notify_href_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -139,7 +140,7 @@ impl<O: IsA<DOMStyleSheet> + IsA<glib::object::Object>> DOMStyleSheetExt for O {
     fn connect_property_media_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::media",
+            connect_raw(self.as_ptr() as *mut _, b"notify::media\0".as_ptr() as *const _,
                 transmute(notify_media_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -147,7 +148,7 @@ impl<O: IsA<DOMStyleSheet> + IsA<glib::object::Object>> DOMStyleSheetExt for O {
     fn connect_property_owner_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::owner-node",
+            connect_raw(self.as_ptr() as *mut _, b"notify::owner-node\0".as_ptr() as *const _,
                 transmute(notify_owner_node_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -155,7 +156,7 @@ impl<O: IsA<DOMStyleSheet> + IsA<glib::object::Object>> DOMStyleSheetExt for O {
     fn connect_property_parent_style_sheet_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::parent-style-sheet",
+            connect_raw(self.as_ptr() as *mut _, b"notify::parent-style-sheet\0".as_ptr() as *const _,
                 transmute(notify_parent_style_sheet_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -163,7 +164,7 @@ impl<O: IsA<DOMStyleSheet> + IsA<glib::object::Object>> DOMStyleSheetExt for O {
     fn connect_property_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::title",
+            connect_raw(self.as_ptr() as *mut _, b"notify::title\0".as_ptr() as *const _,
                 transmute(notify_title_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -171,7 +172,7 @@ impl<O: IsA<DOMStyleSheet> + IsA<glib::object::Object>> DOMStyleSheetExt for O {
     fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::type",
+            connect_raw(self.as_ptr() as *mut _, b"notify::type\0".as_ptr() as *const _,
                 transmute(notify_type_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -180,41 +181,47 @@ impl<O: IsA<DOMStyleSheet> + IsA<glib::object::Object>> DOMStyleSheetExt for O {
 unsafe extern "C" fn notify_disabled_trampoline<P>(this: *mut ffi::WebKitDOMStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMStyleSheet> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMStyleSheet::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_href_trampoline<P>(this: *mut ffi::WebKitDOMStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMStyleSheet> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMStyleSheet::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_media_trampoline<P>(this: *mut ffi::WebKitDOMStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMStyleSheet> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMStyleSheet::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_owner_node_trampoline<P>(this: *mut ffi::WebKitDOMStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMStyleSheet> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMStyleSheet::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_parent_style_sheet_trampoline<P>(this: *mut ffi::WebKitDOMStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMStyleSheet> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMStyleSheet::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_title_trampoline<P>(this: *mut ffi::WebKitDOMStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMStyleSheet> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMStyleSheet::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_type_trampoline<P>(this: *mut ffi::WebKitDOMStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMStyleSheet> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMStyleSheet::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMStyleSheet::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMStyleSheet {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMStyleSheet")
+    }
 }

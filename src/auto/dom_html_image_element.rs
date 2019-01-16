@@ -8,34 +8,34 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use libc;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLImageElement(Object<ffi::WebKitDOMHTMLImageElement, ffi::WebKitDOMHTMLImageElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLImageElement(Object<ffi::WebKitDOMHTMLImageElement, ffi::WebKitDOMHTMLImageElementClass, DOMHTMLImageElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_image_element_get_type(),
     }
 }
 
-pub trait DOMHTMLImageElementExt {
-    fn get_align(&self) -> Option<String>;
+pub const NONE_DOMHTML_IMAGE_ELEMENT: Option<&DOMHTMLImageElement> = None;
 
-    fn get_alt(&self) -> Option<String>;
+pub trait DOMHTMLImageElementExt: 'static {
+    fn get_align(&self) -> Option<GString>;
 
-    fn get_border(&self) -> Option<String>;
+    fn get_alt(&self) -> Option<GString>;
+
+    fn get_border(&self) -> Option<GString>;
 
     fn get_complete(&self) -> bool;
 
@@ -45,19 +45,19 @@ pub trait DOMHTMLImageElementExt {
 
     fn get_is_map(&self) -> bool;
 
-    fn get_long_desc(&self) -> Option<String>;
+    fn get_long_desc(&self) -> Option<GString>;
 
-    fn get_lowsrc(&self) -> Option<String>;
+    fn get_lowsrc(&self) -> Option<GString>;
 
-    fn get_name(&self) -> Option<String>;
+    fn get_name(&self) -> Option<GString>;
 
     fn get_natural_height(&self) -> libc::c_long;
 
     fn get_natural_width(&self) -> libc::c_long;
 
-    fn get_src(&self) -> Option<String>;
+    fn get_src(&self) -> Option<GString>;
 
-    fn get_use_map(&self) -> Option<String>;
+    fn get_use_map(&self) -> Option<GString>;
 
     fn get_vspace(&self) -> libc::c_long;
 
@@ -130,197 +130,197 @@ pub trait DOMHTMLImageElementExt {
     fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElementExt for O {
-    fn get_align(&self) -> Option<String> {
+impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
+    fn get_align(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_image_element_get_align(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_image_element_get_align(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_alt(&self) -> Option<String> {
+    fn get_alt(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_image_element_get_alt(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_image_element_get_alt(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_border(&self) -> Option<String> {
+    fn get_border(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_image_element_get_border(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_image_element_get_border(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_complete(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_html_image_element_get_complete(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_html_image_element_get_complete(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_height(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_image_element_get_height(self.to_glib_none().0)
+            ffi::webkit_dom_html_image_element_get_height(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_hspace(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_image_element_get_hspace(self.to_glib_none().0)
+            ffi::webkit_dom_html_image_element_get_hspace(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_is_map(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_html_image_element_get_is_map(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_html_image_element_get_is_map(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_long_desc(&self) -> Option<String> {
+    fn get_long_desc(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_image_element_get_long_desc(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_image_element_get_long_desc(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_lowsrc(&self) -> Option<String> {
+    fn get_lowsrc(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_image_element_get_lowsrc(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_image_element_get_lowsrc(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_name(&self) -> Option<String> {
+    fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_image_element_get_name(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_image_element_get_name(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_natural_height(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_image_element_get_natural_height(self.to_glib_none().0)
+            ffi::webkit_dom_html_image_element_get_natural_height(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_natural_width(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_image_element_get_natural_width(self.to_glib_none().0)
+            ffi::webkit_dom_html_image_element_get_natural_width(self.as_ref().to_glib_none().0)
         }
     }
 
-    fn get_src(&self) -> Option<String> {
+    fn get_src(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_image_element_get_src(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_image_element_get_src(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_use_map(&self) -> Option<String> {
+    fn get_use_map(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_image_element_get_use_map(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_image_element_get_use_map(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_vspace(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_image_element_get_vspace(self.to_glib_none().0)
+            ffi::webkit_dom_html_image_element_get_vspace(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_width(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_image_element_get_width(self.to_glib_none().0)
+            ffi::webkit_dom_html_image_element_get_width(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_x(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_image_element_get_x(self.to_glib_none().0)
+            ffi::webkit_dom_html_image_element_get_x(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_y(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_image_element_get_y(self.to_glib_none().0)
+            ffi::webkit_dom_html_image_element_get_y(self.as_ref().to_glib_none().0)
         }
     }
 
     fn set_align(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_align(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_image_element_set_align(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_alt(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_alt(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_image_element_set_alt(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_border(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_border(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_image_element_set_border(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_height(&self, value: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_height(self.to_glib_none().0, value);
+            ffi::webkit_dom_html_image_element_set_height(self.as_ref().to_glib_none().0, value);
         }
     }
 
     fn set_hspace(&self, value: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_hspace(self.to_glib_none().0, value);
+            ffi::webkit_dom_html_image_element_set_hspace(self.as_ref().to_glib_none().0, value);
         }
     }
 
     fn set_is_map(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_is_map(self.to_glib_none().0, value.to_glib());
+            ffi::webkit_dom_html_image_element_set_is_map(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
     fn set_long_desc(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_long_desc(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_image_element_set_long_desc(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_lowsrc(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_lowsrc(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_image_element_set_lowsrc(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_name(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_name(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_image_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_src(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_src(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_image_element_set_src(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_use_map(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_use_map(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_image_element_set_use_map(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_vspace(&self, value: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_vspace(self.to_glib_none().0, value);
+            ffi::webkit_dom_html_image_element_set_vspace(self.as_ref().to_glib_none().0, value);
         }
     }
 
     fn set_width(&self, value: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_html_image_element_set_width(self.to_glib_none().0, value);
+            ffi::webkit_dom_html_image_element_set_width(self.as_ref().to_glib_none().0, value);
         }
     }
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::align",
+            connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
                 transmute(notify_align_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -328,7 +328,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::alt",
+            connect_raw(self.as_ptr() as *mut _, b"notify::alt\0".as_ptr() as *const _,
                 transmute(notify_alt_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -336,7 +336,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_border_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::border",
+            connect_raw(self.as_ptr() as *mut _, b"notify::border\0".as_ptr() as *const _,
                 transmute(notify_border_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -344,7 +344,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_complete_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::complete",
+            connect_raw(self.as_ptr() as *mut _, b"notify::complete\0".as_ptr() as *const _,
                 transmute(notify_complete_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -352,7 +352,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::height",
+            connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
                 transmute(notify_height_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -360,7 +360,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::hspace",
+            connect_raw(self.as_ptr() as *mut _, b"notify::hspace\0".as_ptr() as *const _,
                 transmute(notify_hspace_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -368,7 +368,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_is_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::is-map",
+            connect_raw(self.as_ptr() as *mut _, b"notify::is-map\0".as_ptr() as *const _,
                 transmute(notify_is_map_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -376,7 +376,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_long_desc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::long-desc",
+            connect_raw(self.as_ptr() as *mut _, b"notify::long-desc\0".as_ptr() as *const _,
                 transmute(notify_long_desc_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -384,7 +384,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_lowsrc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::lowsrc",
+            connect_raw(self.as_ptr() as *mut _, b"notify::lowsrc\0".as_ptr() as *const _,
                 transmute(notify_lowsrc_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -392,7 +392,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::name",
+            connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
                 transmute(notify_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -400,7 +400,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_natural_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::natural-height",
+            connect_raw(self.as_ptr() as *mut _, b"notify::natural-height\0".as_ptr() as *const _,
                 transmute(notify_natural_height_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -408,7 +408,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_natural_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::natural-width",
+            connect_raw(self.as_ptr() as *mut _, b"notify::natural-width\0".as_ptr() as *const _,
                 transmute(notify_natural_width_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -416,7 +416,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::src",
+            connect_raw(self.as_ptr() as *mut _, b"notify::src\0".as_ptr() as *const _,
                 transmute(notify_src_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -424,7 +424,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_use_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::use-map",
+            connect_raw(self.as_ptr() as *mut _, b"notify::use-map\0".as_ptr() as *const _,
                 transmute(notify_use_map_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -432,7 +432,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::vspace",
+            connect_raw(self.as_ptr() as *mut _, b"notify::vspace\0".as_ptr() as *const _,
                 transmute(notify_vspace_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -440,7 +440,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::width",
+            connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
                 transmute(notify_width_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -448,7 +448,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::x",
+            connect_raw(self.as_ptr() as *mut _, b"notify::x\0".as_ptr() as *const _,
                 transmute(notify_x_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -456,7 +456,7 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
     fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::y",
+            connect_raw(self.as_ptr() as *mut _, b"notify::y\0".as_ptr() as *const _,
                 transmute(notify_y_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -465,107 +465,113 @@ impl<O: IsA<DOMHTMLImageElement> + IsA<glib::object::Object>> DOMHTMLImageElemen
 unsafe extern "C" fn notify_align_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_alt_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_border_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_complete_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_height_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_hspace_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_is_map_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_long_desc_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_lowsrc_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_name_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_natural_height_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_natural_width_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_src_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_use_map_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_vspace_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_width_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_x_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_y_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLImageElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLImageElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLImageElement")
+    }
 }

@@ -9,31 +9,31 @@ use DOMHTMLFormElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLLabelElement(Object<ffi::WebKitDOMHTMLLabelElement, ffi::WebKitDOMHTMLLabelElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLLabelElement(Object<ffi::WebKitDOMHTMLLabelElement, ffi::WebKitDOMHTMLLabelElementClass, DOMHTMLLabelElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_label_element_get_type(),
     }
 }
 
-pub trait DOMHTMLLabelElementExt {
+pub const NONE_DOMHTML_LABEL_ELEMENT: Option<&DOMHTMLLabelElement> = None;
+
+pub trait DOMHTMLLabelElementExt: 'static {
     fn get_form(&self) -> Option<DOMHTMLFormElement>;
 
-    fn get_html_for(&self) -> Option<String>;
+    fn get_html_for(&self) -> Option<GString>;
 
     fn set_html_for(&self, value: &str);
 
@@ -42,29 +42,29 @@ pub trait DOMHTMLLabelElementExt {
     fn connect_property_html_for_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLLabelElement> + IsA<glib::object::Object>> DOMHTMLLabelElementExt for O {
+impl<O: IsA<DOMHTMLLabelElement>> DOMHTMLLabelElementExt for O {
     fn get_form(&self) -> Option<DOMHTMLFormElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_label_element_get_form(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_dom_html_label_element_get_form(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_html_for(&self) -> Option<String> {
+    fn get_html_for(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_label_element_get_html_for(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_label_element_get_html_for(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_html_for(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_label_element_set_html_for(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_label_element_set_html_for(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::form",
+            connect_raw(self.as_ptr() as *mut _, b"notify::form\0".as_ptr() as *const _,
                 transmute(notify_form_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -72,7 +72,7 @@ impl<O: IsA<DOMHTMLLabelElement> + IsA<glib::object::Object>> DOMHTMLLabelElemen
     fn connect_property_html_for_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::html-for",
+            connect_raw(self.as_ptr() as *mut _, b"notify::html-for\0".as_ptr() as *const _,
                 transmute(notify_html_for_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -81,11 +81,17 @@ impl<O: IsA<DOMHTMLLabelElement> + IsA<glib::object::Object>> DOMHTMLLabelElemen
 unsafe extern "C" fn notify_form_trampoline<P>(this: *mut ffi::WebKitDOMHTMLLabelElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLLabelElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLLabelElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLLabelElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_html_for_trampoline<P>(this: *mut ffi::WebKitDOMHTMLLabelElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLLabelElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLLabelElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLLabelElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLLabelElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLLabelElement")
+    }
 }

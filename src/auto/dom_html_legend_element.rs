@@ -9,29 +9,29 @@ use DOMHTMLFormElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLLegendElement(Object<ffi::WebKitDOMHTMLLegendElement, ffi::WebKitDOMHTMLLegendElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLLegendElement(Object<ffi::WebKitDOMHTMLLegendElement, ffi::WebKitDOMHTMLLegendElementClass, DOMHTMLLegendElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_legend_element_get_type(),
     }
 }
 
-pub trait DOMHTMLLegendElementExt {
-    fn get_align(&self) -> Option<String>;
+pub const NONE_DOMHTML_LEGEND_ELEMENT: Option<&DOMHTMLLegendElement> = None;
+
+pub trait DOMHTMLLegendElementExt: 'static {
+    fn get_align(&self) -> Option<GString>;
 
     fn get_form(&self) -> Option<DOMHTMLFormElement>;
 
@@ -42,29 +42,29 @@ pub trait DOMHTMLLegendElementExt {
     fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLLegendElement> + IsA<glib::object::Object>> DOMHTMLLegendElementExt for O {
-    fn get_align(&self) -> Option<String> {
+impl<O: IsA<DOMHTMLLegendElement>> DOMHTMLLegendElementExt for O {
+    fn get_align(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_legend_element_get_align(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_legend_element_get_align(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_form(&self) -> Option<DOMHTMLFormElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_legend_element_get_form(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_dom_html_legend_element_get_form(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_align(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_legend_element_set_align(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_legend_element_set_align(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::align",
+            connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
                 transmute(notify_align_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -72,7 +72,7 @@ impl<O: IsA<DOMHTMLLegendElement> + IsA<glib::object::Object>> DOMHTMLLegendElem
     fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::form",
+            connect_raw(self.as_ptr() as *mut _, b"notify::form\0".as_ptr() as *const _,
                 transmute(notify_form_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -81,11 +81,17 @@ impl<O: IsA<DOMHTMLLegendElement> + IsA<glib::object::Object>> DOMHTMLLegendElem
 unsafe extern "C" fn notify_align_trampoline<P>(this: *mut ffi::WebKitDOMHTMLLegendElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLLegendElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLLegendElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLLegendElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_form_trampoline<P>(this: *mut ffi::WebKitDOMHTMLLegendElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLLegendElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLLegendElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLLegendElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLLegendElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLLegendElement")
+    }
 }

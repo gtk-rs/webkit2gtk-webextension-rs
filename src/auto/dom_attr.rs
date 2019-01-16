@@ -8,35 +8,36 @@ use DOMNode;
 use DOMObject;
 use Error;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMAttr(Object<ffi::WebKitDOMAttr, ffi::WebKitDOMAttrClass>): DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMAttr(Object<ffi::WebKitDOMAttr, ffi::WebKitDOMAttrClass, DOMAttrClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_attr_get_type(),
     }
 }
 
-pub trait DOMAttrExt {
-    fn get_name(&self) -> Option<String>;
+pub const NONE_DOM_ATTR: Option<&DOMAttr> = None;
+
+pub trait DOMAttrExt: 'static {
+    fn get_name(&self) -> Option<GString>;
 
     fn get_owner_element(&self) -> Option<DOMElement>;
 
     fn get_specified(&self) -> bool;
 
-    fn get_value(&self) -> Option<String>;
+    fn get_value(&self) -> Option<GString>;
 
     fn set_value(&self, value: &str) -> Result<(), Error>;
 
@@ -55,35 +56,35 @@ pub trait DOMAttrExt {
     fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
-    fn get_name(&self) -> Option<String> {
+impl<O: IsA<DOMAttr>> DOMAttrExt for O {
+    fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_attr_get_name(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_attr_get_name(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_owner_element(&self) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_attr_get_owner_element(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_dom_attr_get_owner_element(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_specified(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_attr_get_specified(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_attr_get_specified(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_value(&self) -> Option<String> {
+    fn get_value(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_attr_get_value(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_attr_get_value(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_value(&self, value: &str) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_attr_set_value(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            let _ = ffi::webkit_dom_attr_set_value(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
@@ -91,7 +92,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
     fn connect_property_local_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::local-name",
+            connect_raw(self.as_ptr() as *mut _, b"notify::local-name\0".as_ptr() as *const _,
                 transmute(notify_local_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -99,7 +100,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::name",
+            connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
                 transmute(notify_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -107,7 +108,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
     fn connect_property_namespace_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::namespace-uri",
+            connect_raw(self.as_ptr() as *mut _, b"notify::namespace-uri\0".as_ptr() as *const _,
                 transmute(notify_namespace_uri_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -115,7 +116,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
     fn connect_property_owner_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::owner-element",
+            connect_raw(self.as_ptr() as *mut _, b"notify::owner-element\0".as_ptr() as *const _,
                 transmute(notify_owner_element_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -123,7 +124,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
     fn connect_property_prefix_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::prefix",
+            connect_raw(self.as_ptr() as *mut _, b"notify::prefix\0".as_ptr() as *const _,
                 transmute(notify_prefix_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -131,7 +132,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
     fn connect_property_specified_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::specified",
+            connect_raw(self.as_ptr() as *mut _, b"notify::specified\0".as_ptr() as *const _,
                 transmute(notify_specified_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -139,7 +140,7 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
     fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::value",
+            connect_raw(self.as_ptr() as *mut _, b"notify::value\0".as_ptr() as *const _,
                 transmute(notify_value_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -148,41 +149,47 @@ impl<O: IsA<DOMAttr> + IsA<glib::object::Object>> DOMAttrExt for O {
 unsafe extern "C" fn notify_local_name_trampoline<P>(this: *mut ffi::WebKitDOMAttr, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMAttr> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMAttr::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_name_trampoline<P>(this: *mut ffi::WebKitDOMAttr, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMAttr> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMAttr::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_namespace_uri_trampoline<P>(this: *mut ffi::WebKitDOMAttr, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMAttr> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMAttr::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_owner_element_trampoline<P>(this: *mut ffi::WebKitDOMAttr, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMAttr> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMAttr::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_prefix_trampoline<P>(this: *mut ffi::WebKitDOMAttr, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMAttr> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMAttr::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_specified_trampoline<P>(this: *mut ffi::WebKitDOMAttr, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMAttr> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMAttr::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_value_trampoline<P>(this: *mut ffi::WebKitDOMAttr, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMAttr> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMAttr::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMAttr {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMAttr")
+    }
 }

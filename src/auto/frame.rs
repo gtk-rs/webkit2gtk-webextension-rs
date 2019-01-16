@@ -3,30 +3,31 @@
 // DO NOT EDIT
 
 use ffi;
+#[cfg(any(feature = "v2_2", feature = "dox"))]
+use glib::GString;
 use glib::object::IsA;
 use glib::translate::*;
-use glib_ffi;
-use gobject_ffi;
-use std::mem;
-use std::ptr;
+use std::fmt;
 
 glib_wrapper! {
-    pub struct Frame(Object<ffi::WebKitFrame, ffi::WebKitFrameClass>);
+    pub struct Frame(Object<ffi::WebKitFrame, ffi::WebKitFrameClass, FrameClass>);
 
     match fn {
         get_type => || ffi::webkit_frame_get_type(),
     }
 }
 
-pub trait FrameExt {
+pub const NONE_FRAME: Option<&Frame> = None;
+
+pub trait FrameExt: 'static {
     //#[cfg(any(feature = "v2_2", feature = "dox"))]
-    //fn get_javascript_context_for_script_world(&self, world: &ScriptWorld) -> /*Ignored*/Option<java_script_core::GlobalContext>;
+    //fn get_javascript_context_for_script_world<P: IsA<ScriptWorld>>(&self, world: &P) -> /*Ignored*/Option<java_script_core::GlobalContext>;
 
     //#[cfg(any(feature = "v2_2", feature = "dox"))]
     //fn get_javascript_global_context(&self) -> /*Ignored*/Option<java_script_core::GlobalContext>;
 
     #[cfg(any(feature = "v2_2", feature = "dox"))]
-    fn get_uri(&self) -> Option<String>;
+    fn get_uri(&self) -> Option<GString>;
 
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     fn is_main_frame(&self) -> bool;
@@ -34,7 +35,7 @@ pub trait FrameExt {
 
 impl<O: IsA<Frame>> FrameExt for O {
     //#[cfg(any(feature = "v2_2", feature = "dox"))]
-    //fn get_javascript_context_for_script_world(&self, world: &ScriptWorld) -> /*Ignored*/Option<java_script_core::GlobalContext> {
+    //fn get_javascript_context_for_script_world<P: IsA<ScriptWorld>>(&self, world: &P) -> /*Ignored*/Option<java_script_core::GlobalContext> {
     //    unsafe { TODO: call ffi::webkit_frame_get_javascript_context_for_script_world() }
     //}
 
@@ -44,16 +45,22 @@ impl<O: IsA<Frame>> FrameExt for O {
     //}
 
     #[cfg(any(feature = "v2_2", feature = "dox"))]
-    fn get_uri(&self) -> Option<String> {
+    fn get_uri(&self) -> Option<GString> {
         unsafe {
-            from_glib_none(ffi::webkit_frame_get_uri(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_frame_get_uri(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     fn is_main_frame(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_frame_is_main_frame(self.to_glib_none().0))
+            from_glib(ffi::webkit_frame_is_main_frame(self.as_ref().to_glib_none().0))
         }
+    }
+}
+
+impl fmt::Display for Frame {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Frame")
     }
 }

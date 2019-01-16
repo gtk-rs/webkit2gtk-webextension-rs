@@ -10,51 +10,51 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLIFrameElement(Object<ffi::WebKitDOMHTMLIFrameElement, ffi::WebKitDOMHTMLIFrameElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLIFrameElement(Object<ffi::WebKitDOMHTMLIFrameElement, ffi::WebKitDOMHTMLIFrameElementClass, DOMHTMLIFrameElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_iframe_element_get_type(),
     }
 }
 
-pub trait DOMHTMLIFrameElementExt {
-    fn get_align(&self) -> Option<String>;
+pub const NONE_DOMHTMLI_FRAME_ELEMENT: Option<&DOMHTMLIFrameElement> = None;
+
+pub trait DOMHTMLIFrameElementExt: 'static {
+    fn get_align(&self) -> Option<GString>;
 
     fn get_content_document(&self) -> Option<DOMDocument>;
 
     fn get_content_window(&self) -> Option<DOMDOMWindow>;
 
-    fn get_frame_border(&self) -> Option<String>;
+    fn get_frame_border(&self) -> Option<GString>;
 
-    fn get_height(&self) -> Option<String>;
+    fn get_height(&self) -> Option<GString>;
 
-    fn get_long_desc(&self) -> Option<String>;
+    fn get_long_desc(&self) -> Option<GString>;
 
-    fn get_margin_height(&self) -> Option<String>;
+    fn get_margin_height(&self) -> Option<GString>;
 
-    fn get_margin_width(&self) -> Option<String>;
+    fn get_margin_width(&self) -> Option<GString>;
 
-    fn get_name(&self) -> Option<String>;
+    fn get_name(&self) -> Option<GString>;
 
-    fn get_scrolling(&self) -> Option<String>;
+    fn get_scrolling(&self) -> Option<GString>;
 
-    fn get_src(&self) -> Option<String>;
+    fn get_src(&self) -> Option<GString>;
 
-    fn get_width(&self) -> Option<String>;
+    fn get_width(&self) -> Option<GString>;
 
     fn set_align(&self, value: &str);
 
@@ -101,143 +101,143 @@ pub trait DOMHTMLIFrameElementExt {
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElementExt for O {
-    fn get_align(&self) -> Option<String> {
+impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
+    fn get_align(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_iframe_element_get_align(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_iframe_element_get_align(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_content_document(&self) -> Option<DOMDocument> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_iframe_element_get_content_document(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_dom_html_iframe_element_get_content_document(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_content_window(&self) -> Option<DOMDOMWindow> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_iframe_element_get_content_window(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_iframe_element_get_content_window(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_frame_border(&self) -> Option<String> {
+    fn get_frame_border(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_iframe_element_get_frame_border(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_iframe_element_get_frame_border(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_height(&self) -> Option<String> {
+    fn get_height(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_iframe_element_get_height(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_iframe_element_get_height(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_long_desc(&self) -> Option<String> {
+    fn get_long_desc(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_iframe_element_get_long_desc(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_iframe_element_get_long_desc(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_margin_height(&self) -> Option<String> {
+    fn get_margin_height(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_iframe_element_get_margin_height(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_iframe_element_get_margin_height(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_margin_width(&self) -> Option<String> {
+    fn get_margin_width(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_iframe_element_get_margin_width(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_iframe_element_get_margin_width(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_name(&self) -> Option<String> {
+    fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_iframe_element_get_name(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_iframe_element_get_name(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_scrolling(&self) -> Option<String> {
+    fn get_scrolling(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_iframe_element_get_scrolling(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_iframe_element_get_scrolling(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_src(&self) -> Option<String> {
+    fn get_src(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_iframe_element_get_src(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_iframe_element_get_src(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_width(&self) -> Option<String> {
+    fn get_width(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_iframe_element_get_width(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_iframe_element_get_width(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_align(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_iframe_element_set_align(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_iframe_element_set_align(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_frame_border(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_iframe_element_set_frame_border(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_iframe_element_set_frame_border(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_height(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_iframe_element_set_height(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_iframe_element_set_height(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_long_desc(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_iframe_element_set_long_desc(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_iframe_element_set_long_desc(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_margin_height(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_iframe_element_set_margin_height(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_iframe_element_set_margin_height(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_margin_width(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_iframe_element_set_margin_width(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_iframe_element_set_margin_width(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_name(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_iframe_element_set_name(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_iframe_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_scrolling(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_iframe_element_set_scrolling(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_iframe_element_set_scrolling(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_src(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_iframe_element_set_src(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_iframe_element_set_src(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_width(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_iframe_element_set_width(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_iframe_element_set_width(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::align",
+            connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
                 transmute(notify_align_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -245,7 +245,7 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
     fn connect_property_content_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::content-document",
+            connect_raw(self.as_ptr() as *mut _, b"notify::content-document\0".as_ptr() as *const _,
                 transmute(notify_content_document_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -253,7 +253,7 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
     fn connect_property_content_window_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::content-window",
+            connect_raw(self.as_ptr() as *mut _, b"notify::content-window\0".as_ptr() as *const _,
                 transmute(notify_content_window_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -261,7 +261,7 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
     fn connect_property_frame_border_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::frame-border",
+            connect_raw(self.as_ptr() as *mut _, b"notify::frame-border\0".as_ptr() as *const _,
                 transmute(notify_frame_border_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -269,7 +269,7 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
     fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::height",
+            connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
                 transmute(notify_height_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -277,7 +277,7 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
     fn connect_property_long_desc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::long-desc",
+            connect_raw(self.as_ptr() as *mut _, b"notify::long-desc\0".as_ptr() as *const _,
                 transmute(notify_long_desc_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -285,7 +285,7 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
     fn connect_property_margin_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::margin-height",
+            connect_raw(self.as_ptr() as *mut _, b"notify::margin-height\0".as_ptr() as *const _,
                 transmute(notify_margin_height_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -293,7 +293,7 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
     fn connect_property_margin_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::margin-width",
+            connect_raw(self.as_ptr() as *mut _, b"notify::margin-width\0".as_ptr() as *const _,
                 transmute(notify_margin_width_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -301,7 +301,7 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::name",
+            connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
                 transmute(notify_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -309,7 +309,7 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
     fn connect_property_scrolling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::scrolling",
+            connect_raw(self.as_ptr() as *mut _, b"notify::scrolling\0".as_ptr() as *const _,
                 transmute(notify_scrolling_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -317,7 +317,7 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
     fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::src",
+            connect_raw(self.as_ptr() as *mut _, b"notify::src\0".as_ptr() as *const _,
                 transmute(notify_src_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -325,7 +325,7 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::width",
+            connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
                 transmute(notify_width_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -334,71 +334,77 @@ impl<O: IsA<DOMHTMLIFrameElement> + IsA<glib::object::Object>> DOMHTMLIFrameElem
 unsafe extern "C" fn notify_align_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_content_document_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_content_window_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_frame_border_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_height_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_long_desc_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_margin_height_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_margin_width_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_name_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_scrolling_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_src_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_width_trampoline<P>(this: *mut ffi::WebKitDOMHTMLIFrameElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLIFrameElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLIFrameElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLIFrameElement")
+    }
 }

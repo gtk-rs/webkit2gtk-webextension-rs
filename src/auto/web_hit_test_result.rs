@@ -5,44 +5,49 @@
 use DOMNode;
 use HitTestResult;
 use ffi;
-use glib;
 use glib::StaticType;
 use glib::Value;
 use glib::object::IsA;
 use glib::translate::*;
-use glib_ffi;
 use gobject_ffi;
-use std::mem;
-use std::ptr;
+use std::fmt;
 
 glib_wrapper! {
-    pub struct WebHitTestResult(Object<ffi::WebKitWebHitTestResult, ffi::WebKitWebHitTestResultClass>): HitTestResult;
+    pub struct WebHitTestResult(Object<ffi::WebKitWebHitTestResult, ffi::WebKitWebHitTestResultClass, WebHitTestResultClass>) @extends HitTestResult;
 
     match fn {
         get_type => || ffi::webkit_web_hit_test_result_get_type(),
     }
 }
 
-pub trait WebHitTestResultExt {
+pub const NONE_WEB_HIT_TEST_RESULT: Option<&WebHitTestResult> = None;
+
+pub trait WebHitTestResultExt: 'static {
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     fn get_node(&self) -> Option<DOMNode>;
 
     fn get_property_node(&self) -> Option<DOMNode>;
 }
 
-impl<O: IsA<WebHitTestResult> + IsA<glib::object::Object>> WebHitTestResultExt for O {
+impl<O: IsA<WebHitTestResult>> WebHitTestResultExt for O {
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     fn get_node(&self) -> Option<DOMNode> {
         unsafe {
-            from_glib_none(ffi::webkit_web_hit_test_result_get_node(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_web_hit_test_result_get_node(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_property_node(&self) -> Option<DOMNode> {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "node".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
+    }
+}
+
+impl fmt::Display for WebHitTestResult {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "WebHitTestResult")
     }
 }

@@ -7,13 +7,10 @@ use DOMNode;
 use DOMObject;
 use ffi;
 use glib::translate::*;
-use glib_ffi;
-use gobject_ffi;
-use std::mem;
-use std::ptr;
+use std::fmt;
 
 glib_wrapper! {
-    pub struct DOMEntityReference(Object<ffi::WebKitDOMEntityReference, ffi::WebKitDOMEntityReferenceClass>): DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMEntityReference(Object<ffi::WebKitDOMEntityReference, ffi::WebKitDOMEntityReferenceClass, DOMEntityReferenceClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_entity_reference_get_type(),
@@ -21,3 +18,11 @@ glib_wrapper! {
 }
 
 impl DOMEntityReference {}
+
+pub const NONE_DOM_ENTITY_REFERENCE: Option<&DOMEntityReference> = None;
+
+impl fmt::Display for DOMEntityReference {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMEntityReference")
+    }
+}

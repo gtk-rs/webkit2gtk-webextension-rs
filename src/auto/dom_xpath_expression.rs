@@ -9,30 +9,36 @@ use Error;
 use ffi;
 use glib::object::IsA;
 use glib::translate::*;
-use glib_ffi;
-use gobject_ffi;
 use libc;
-use std::mem;
+use std::fmt;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMXPathExpression(Object<ffi::WebKitDOMXPathExpression, ffi::WebKitDOMXPathExpressionClass>): DOMObject;
+    pub struct DOMXPathExpression(Object<ffi::WebKitDOMXPathExpression, ffi::WebKitDOMXPathExpressionClass, DOMXPathExpressionClass>) @extends DOMObject;
 
     match fn {
         get_type => || ffi::webkit_dom_xpath_expression_get_type(),
     }
 }
 
-pub trait DOMXPathExpressionExt {
-    fn evaluate<P: IsA<DOMNode>>(&self, contextNode: &P, type_: libc::c_ushort, inResult: &DOMXPathResult) -> Result<DOMXPathResult, Error>;
+pub const NONE_DOMX_PATH_EXPRESSION: Option<&DOMXPathExpression> = None;
+
+pub trait DOMXPathExpressionExt: 'static {
+    fn evaluate<P: IsA<DOMNode>, Q: IsA<DOMXPathResult>>(&self, contextNode: &P, type_: libc::c_ushort, inResult: &Q) -> Result<DOMXPathResult, Error>;
 }
 
 impl<O: IsA<DOMXPathExpression>> DOMXPathExpressionExt for O {
-    fn evaluate<P: IsA<DOMNode>>(&self, contextNode: &P, type_: libc::c_ushort, inResult: &DOMXPathResult) -> Result<DOMXPathResult, Error> {
+    fn evaluate<P: IsA<DOMNode>, Q: IsA<DOMXPathResult>>(&self, contextNode: &P, type_: libc::c_ushort, inResult: &Q) -> Result<DOMXPathResult, Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = ffi::webkit_dom_xpath_expression_evaluate(self.to_glib_none().0, contextNode.to_glib_none().0, type_, inResult.to_glib_none().0, &mut error);
+            let ret = ffi::webkit_dom_xpath_expression_evaluate(self.as_ref().to_glib_none().0, contextNode.as_ref().to_glib_none().0, type_, inResult.as_ref().to_glib_none().0, &mut error);
             if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
         }
+    }
+}
+
+impl fmt::Display for DOMXPathExpression {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMXPathExpression")
     }
 }

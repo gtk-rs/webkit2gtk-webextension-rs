@@ -8,29 +8,28 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use libc;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLPreElement(Object<ffi::WebKitDOMHTMLPreElement, ffi::WebKitDOMHTMLPreElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLPreElement(Object<ffi::WebKitDOMHTMLPreElement, ffi::WebKitDOMHTMLPreElementClass, DOMHTMLPreElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_pre_element_get_type(),
     }
 }
 
-pub trait DOMHTMLPreElementExt {
+pub const NONE_DOMHTML_PRE_ELEMENT: Option<&DOMHTMLPreElement> = None;
+
+pub trait DOMHTMLPreElementExt: 'static {
     fn get_width(&self) -> libc::c_long;
 
     fn get_wrap(&self) -> bool;
@@ -44,35 +43,35 @@ pub trait DOMHTMLPreElementExt {
     fn connect_property_wrap_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLPreElement> + IsA<glib::object::Object>> DOMHTMLPreElementExt for O {
+impl<O: IsA<DOMHTMLPreElement>> DOMHTMLPreElementExt for O {
     fn get_width(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_pre_element_get_width(self.to_glib_none().0)
+            ffi::webkit_dom_html_pre_element_get_width(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_wrap(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_html_pre_element_get_wrap(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_html_pre_element_get_wrap(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_width(&self, value: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_html_pre_element_set_width(self.to_glib_none().0, value);
+            ffi::webkit_dom_html_pre_element_set_width(self.as_ref().to_glib_none().0, value);
         }
     }
 
     fn set_wrap(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_html_pre_element_set_wrap(self.to_glib_none().0, value.to_glib());
+            ffi::webkit_dom_html_pre_element_set_wrap(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::width",
+            connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
                 transmute(notify_width_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -80,7 +79,7 @@ impl<O: IsA<DOMHTMLPreElement> + IsA<glib::object::Object>> DOMHTMLPreElementExt
     fn connect_property_wrap_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::wrap",
+            connect_raw(self.as_ptr() as *mut _, b"notify::wrap\0".as_ptr() as *const _,
                 transmute(notify_wrap_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -89,11 +88,17 @@ impl<O: IsA<DOMHTMLPreElement> + IsA<glib::object::Object>> DOMHTMLPreElementExt
 unsafe extern "C" fn notify_width_trampoline<P>(this: *mut ffi::WebKitDOMHTMLPreElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLPreElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLPreElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLPreElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_wrap_trampoline<P>(this: *mut ffi::WebKitDOMHTMLPreElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLPreElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLPreElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLPreElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLPreElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLPreElement")
+    }
 }

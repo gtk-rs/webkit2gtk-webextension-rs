@@ -8,52 +8,52 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLBRElement(Object<ffi::WebKitDOMHTMLBRElement, ffi::WebKitDOMHTMLBRElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLBRElement(Object<ffi::WebKitDOMHTMLBRElement, ffi::WebKitDOMHTMLBRElementClass, DOMHTMLBRElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_br_element_get_type(),
     }
 }
 
-pub trait DOMHTMLBRElementExt {
-    fn get_clear(&self) -> Option<String>;
+pub const NONE_DOMHTMLBR_ELEMENT: Option<&DOMHTMLBRElement> = None;
+
+pub trait DOMHTMLBRElementExt: 'static {
+    fn get_clear(&self) -> Option<GString>;
 
     fn set_clear(&self, value: &str);
 
     fn connect_property_clear_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLBRElement> + IsA<glib::object::Object>> DOMHTMLBRElementExt for O {
-    fn get_clear(&self) -> Option<String> {
+impl<O: IsA<DOMHTMLBRElement>> DOMHTMLBRElementExt for O {
+    fn get_clear(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_br_element_get_clear(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_br_element_get_clear(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_clear(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_br_element_set_clear(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_br_element_set_clear(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_clear_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::clear",
+            connect_raw(self.as_ptr() as *mut _, b"notify::clear\0".as_ptr() as *const _,
                 transmute(notify_clear_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -62,5 +62,11 @@ impl<O: IsA<DOMHTMLBRElement> + IsA<glib::object::Object>> DOMHTMLBRElementExt f
 unsafe extern "C" fn notify_clear_trampoline<P>(this: *mut ffi::WebKitDOMHTMLBRElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLBRElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLBRElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLBRElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLBRElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLBRElement")
+    }
 }

@@ -4,30 +4,30 @@
 
 use DOMObject;
 use ffi;
-use glib;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Downcast;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
 use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMClientRect(Object<ffi::WebKitDOMClientRect, ffi::WebKitDOMClientRectClass>): DOMObject;
+    pub struct DOMClientRect(Object<ffi::WebKitDOMClientRect, ffi::WebKitDOMClientRectClass, DOMClientRectClass>) @extends DOMObject;
 
     match fn {
         get_type => || ffi::webkit_dom_client_rect_get_type(),
     }
 }
 
-pub trait DOMClientRectExt {
+pub const NONE_DOM_CLIENT_RECT: Option<&DOMClientRect> = None;
+
+pub trait DOMClientRectExt: 'static {
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_bottom(&self) -> f32;
 
@@ -71,53 +71,53 @@ pub trait DOMClientRectExt {
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
+impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_bottom(&self) -> f32 {
         unsafe {
-            ffi::webkit_dom_client_rect_get_bottom(self.to_glib_none().0)
+            ffi::webkit_dom_client_rect_get_bottom(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_height(&self) -> f32 {
         unsafe {
-            ffi::webkit_dom_client_rect_get_height(self.to_glib_none().0)
+            ffi::webkit_dom_client_rect_get_height(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_left(&self) -> f32 {
         unsafe {
-            ffi::webkit_dom_client_rect_get_left(self.to_glib_none().0)
+            ffi::webkit_dom_client_rect_get_left(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_right(&self) -> f32 {
         unsafe {
-            ffi::webkit_dom_client_rect_get_right(self.to_glib_none().0)
+            ffi::webkit_dom_client_rect_get_right(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_top(&self) -> f32 {
         unsafe {
-            ffi::webkit_dom_client_rect_get_top(self.to_glib_none().0)
+            ffi::webkit_dom_client_rect_get_top(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_width(&self) -> f32 {
         unsafe {
-            ffi::webkit_dom_client_rect_get_width(self.to_glib_none().0)
+            ffi::webkit_dom_client_rect_get_width(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_property_bottom(&self) -> f32 {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "bottom".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"bottom\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -125,7 +125,7 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
     fn get_property_height(&self) -> f32 {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "height".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"height\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -133,7 +133,7 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
     fn get_property_left(&self) -> f32 {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "left".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"left\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -141,7 +141,7 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
     fn get_property_right(&self) -> f32 {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "right".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"right\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -149,7 +149,7 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
     fn get_property_top(&self) -> f32 {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "top".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"top\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -157,7 +157,7 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
     fn get_property_width(&self) -> f32 {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "width".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"width\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -165,7 +165,7 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
     fn connect_property_bottom_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::bottom",
+            connect_raw(self.as_ptr() as *mut _, b"notify::bottom\0".as_ptr() as *const _,
                 transmute(notify_bottom_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -173,7 +173,7 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
     fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::height",
+            connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
                 transmute(notify_height_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -181,7 +181,7 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
     fn connect_property_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::left",
+            connect_raw(self.as_ptr() as *mut _, b"notify::left\0".as_ptr() as *const _,
                 transmute(notify_left_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -189,7 +189,7 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
     fn connect_property_right_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::right",
+            connect_raw(self.as_ptr() as *mut _, b"notify::right\0".as_ptr() as *const _,
                 transmute(notify_right_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -197,7 +197,7 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
     fn connect_property_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::top",
+            connect_raw(self.as_ptr() as *mut _, b"notify::top\0".as_ptr() as *const _,
                 transmute(notify_top_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -205,7 +205,7 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::width",
+            connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
                 transmute(notify_width_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -214,35 +214,41 @@ impl<O: IsA<DOMClientRect> + IsA<glib::object::Object>> DOMClientRectExt for O {
 unsafe extern "C" fn notify_bottom_trampoline<P>(this: *mut ffi::WebKitDOMClientRect, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMClientRect> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMClientRect::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_height_trampoline<P>(this: *mut ffi::WebKitDOMClientRect, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMClientRect> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMClientRect::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_left_trampoline<P>(this: *mut ffi::WebKitDOMClientRect, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMClientRect> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMClientRect::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_right_trampoline<P>(this: *mut ffi::WebKitDOMClientRect, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMClientRect> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMClientRect::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_top_trampoline<P>(this: *mut ffi::WebKitDOMClientRect, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMClientRect> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMClientRect::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_width_trampoline<P>(this: *mut ffi::WebKitDOMClientRect, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMClientRect> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMClientRect::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMClientRect {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMClientRect")
+    }
 }

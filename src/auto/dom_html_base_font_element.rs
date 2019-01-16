@@ -8,28 +8,28 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
+use glib::GString;
 use glib::object::IsA;
 use glib::translate::*;
-use glib_ffi;
-use gobject_ffi;
 use libc;
-use std::mem;
-use std::ptr;
+use std::fmt;
 
 glib_wrapper! {
-    pub struct DOMHTMLBaseFontElement(Object<ffi::WebKitDOMHTMLBaseFontElement, ffi::WebKitDOMHTMLBaseFontElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLBaseFontElement(Object<ffi::WebKitDOMHTMLBaseFontElement, ffi::WebKitDOMHTMLBaseFontElementClass, DOMHTMLBaseFontElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_base_font_element_get_type(),
     }
 }
 
-pub trait DOMHTMLBaseFontElementExt {
+pub const NONE_DOMHTML_BASE_FONT_ELEMENT: Option<&DOMHTMLBaseFontElement> = None;
+
+pub trait DOMHTMLBaseFontElementExt: 'static {
     #[cfg_attr(feature = "v2_12", deprecated)]
-    fn get_color(&self) -> Option<String>;
+    fn get_color(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
-    fn get_face(&self) -> Option<String>;
+    fn get_face(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
     fn get_size(&self) -> libc::c_long;
@@ -45,39 +45,45 @@ pub trait DOMHTMLBaseFontElementExt {
 }
 
 impl<O: IsA<DOMHTMLBaseFontElement>> DOMHTMLBaseFontElementExt for O {
-    fn get_color(&self) -> Option<String> {
+    fn get_color(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_base_font_element_get_color(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_base_font_element_get_color(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_face(&self) -> Option<String> {
+    fn get_face(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_base_font_element_get_face(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_base_font_element_get_face(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_size(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_base_font_element_get_size(self.to_glib_none().0)
+            ffi::webkit_dom_html_base_font_element_get_size(self.as_ref().to_glib_none().0)
         }
     }
 
     fn set_color(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_base_font_element_set_color(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_base_font_element_set_color(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_face(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_base_font_element_set_face(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_base_font_element_set_face(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_size(&self, value: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_html_base_font_element_set_size(self.to_glib_none().0, value);
+            ffi::webkit_dom_html_base_font_element_set_size(self.as_ref().to_glib_none().0, value);
         }
+    }
+}
+
+impl fmt::Display for DOMHTMLBaseFontElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLBaseFontElement")
     }
 }

@@ -8,54 +8,54 @@ use DOMNode;
 use DOMObject;
 use DOMStyleSheet;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMProcessingInstruction(Object<ffi::WebKitDOMProcessingInstruction, ffi::WebKitDOMProcessingInstructionClass>): DOMCharacterData, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMProcessingInstruction(Object<ffi::WebKitDOMProcessingInstruction, ffi::WebKitDOMProcessingInstructionClass, DOMProcessingInstructionClass>) @extends DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_processing_instruction_get_type(),
     }
 }
 
-pub trait DOMProcessingInstructionExt {
+pub const NONE_DOM_PROCESSING_INSTRUCTION: Option<&DOMProcessingInstruction> = None;
+
+pub trait DOMProcessingInstructionExt: 'static {
     fn get_sheet(&self) -> Option<DOMStyleSheet>;
 
-    fn get_target(&self) -> Option<String>;
+    fn get_target(&self) -> Option<GString>;
 
     fn connect_property_sheet_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMProcessingInstruction> + IsA<glib::object::Object>> DOMProcessingInstructionExt for O {
+impl<O: IsA<DOMProcessingInstruction>> DOMProcessingInstructionExt for O {
     fn get_sheet(&self) -> Option<DOMStyleSheet> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_processing_instruction_get_sheet(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_processing_instruction_get_sheet(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_target(&self) -> Option<String> {
+    fn get_target(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_processing_instruction_get_target(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_processing_instruction_get_target(self.as_ref().to_glib_none().0))
         }
     }
 
     fn connect_property_sheet_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::sheet",
+            connect_raw(self.as_ptr() as *mut _, b"notify::sheet\0".as_ptr() as *const _,
                 transmute(notify_sheet_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -63,7 +63,7 @@ impl<O: IsA<DOMProcessingInstruction> + IsA<glib::object::Object>> DOMProcessing
     fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::target",
+            connect_raw(self.as_ptr() as *mut _, b"notify::target\0".as_ptr() as *const _,
                 transmute(notify_target_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -72,11 +72,17 @@ impl<O: IsA<DOMProcessingInstruction> + IsA<glib::object::Object>> DOMProcessing
 unsafe extern "C" fn notify_sheet_trampoline<P>(this: *mut ffi::WebKitDOMProcessingInstruction, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMProcessingInstruction> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMProcessingInstruction::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMProcessingInstruction::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_target_trampoline<P>(this: *mut ffi::WebKitDOMProcessingInstruction, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMProcessingInstruction> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMProcessingInstruction::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMProcessingInstruction::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMProcessingInstruction {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMProcessingInstruction")
+    }
 }

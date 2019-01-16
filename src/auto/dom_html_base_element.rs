@@ -8,31 +8,31 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLBaseElement(Object<ffi::WebKitDOMHTMLBaseElement, ffi::WebKitDOMHTMLBaseElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLBaseElement(Object<ffi::WebKitDOMHTMLBaseElement, ffi::WebKitDOMHTMLBaseElementClass, DOMHTMLBaseElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_base_element_get_type(),
     }
 }
 
-pub trait DOMHTMLBaseElementExt {
-    fn get_href(&self) -> Option<String>;
+pub const NONE_DOMHTML_BASE_ELEMENT: Option<&DOMHTMLBaseElement> = None;
 
-    fn get_target(&self) -> Option<String>;
+pub trait DOMHTMLBaseElementExt: 'static {
+    fn get_href(&self) -> Option<GString>;
+
+    fn get_target(&self) -> Option<GString>;
 
     fn set_href(&self, value: &str);
 
@@ -43,35 +43,35 @@ pub trait DOMHTMLBaseElementExt {
     fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLBaseElement> + IsA<glib::object::Object>> DOMHTMLBaseElementExt for O {
-    fn get_href(&self) -> Option<String> {
+impl<O: IsA<DOMHTMLBaseElement>> DOMHTMLBaseElementExt for O {
+    fn get_href(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_base_element_get_href(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_base_element_get_href(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_target(&self) -> Option<String> {
+    fn get_target(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_base_element_get_target(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_base_element_get_target(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_href(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_base_element_set_href(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_base_element_set_href(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_target(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_base_element_set_target(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_base_element_set_target(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::href",
+            connect_raw(self.as_ptr() as *mut _, b"notify::href\0".as_ptr() as *const _,
                 transmute(notify_href_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -79,7 +79,7 @@ impl<O: IsA<DOMHTMLBaseElement> + IsA<glib::object::Object>> DOMHTMLBaseElementE
     fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::target",
+            connect_raw(self.as_ptr() as *mut _, b"notify::target\0".as_ptr() as *const _,
                 transmute(notify_target_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -88,11 +88,17 @@ impl<O: IsA<DOMHTMLBaseElement> + IsA<glib::object::Object>> DOMHTMLBaseElementE
 unsafe extern "C" fn notify_href_trampoline<P>(this: *mut ffi::WebKitDOMHTMLBaseElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLBaseElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLBaseElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLBaseElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_target_trampoline<P>(this: *mut ffi::WebKitDOMHTMLBaseElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLBaseElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLBaseElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLBaseElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLBaseElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLBaseElement")
+    }
 }

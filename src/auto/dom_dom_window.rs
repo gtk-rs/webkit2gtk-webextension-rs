@@ -11,31 +11,32 @@ use DOMElement;
 use DOMEventTarget;
 use DOMObject;
 use ffi;
-use glib;
+use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Downcast;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
 use gobject_ffi;
 use libc;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMDOMWindow(Object<ffi::WebKitDOMDOMWindow, ffi::WebKitDOMDOMWindowClass>): DOMObject, DOMEventTarget;
+    pub struct DOMDOMWindow(Object<ffi::WebKitDOMDOMWindow, ffi::WebKitDOMDOMWindowClass, DOMDOMWindowClass>) @extends DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_dom_window_get_type(),
     }
 }
 
-pub trait DOMDOMWindowExt {
+pub const NONE_DOMDOM_WINDOW: Option<&DOMDOMWindow> = None;
+
+pub trait DOMDOMWindowExt: 'static {
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn alert(&self, message: &str);
 
@@ -64,7 +65,7 @@ pub trait DOMDOMWindowExt {
     fn get_computed_style<'a, P: IsA<DOMElement>, Q: Into<Option<&'a str>>>(&self, element: &P, pseudoElement: Q) -> Option<DOMCSSStyleDeclaration>;
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_default_status(&self) -> Option<String>;
+    fn get_default_status(&self) -> Option<GString>;
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_device_pixel_ratio(&self) -> f64;
@@ -88,7 +89,7 @@ pub trait DOMDOMWindowExt {
     fn get_length(&self) -> libc::c_ulong;
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_name(&self) -> Option<String>;
+    fn get_name(&self) -> Option<GString>;
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_offscreen_buffering(&self) -> bool;
@@ -139,7 +140,7 @@ pub trait DOMDOMWindowExt {
     fn get_self(&self) -> Option<DOMDOMWindow>;
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_status(&self) -> Option<String>;
+    fn get_status(&self) -> Option<GString>;
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_top(&self) -> Option<DOMDOMWindow>;
@@ -157,7 +158,7 @@ pub trait DOMDOMWindowExt {
     fn print(&self);
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn prompt(&self, message: &str, defaultValue: &str) -> Option<String>;
+    fn prompt(&self, message: &str, defaultValue: &str) -> Option<GString>;
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn release_events(&self);
@@ -190,9 +191,9 @@ pub trait DOMDOMWindowExt {
 
     fn get_property_closed(&self) -> bool;
 
-    fn get_property_default_status(&self) -> Option<String>;
+    fn get_property_default_status(&self) -> Option<GString>;
 
-    fn set_property_default_status(&self, default_status: Option<&str>);
+    fn set_property_default_status<'a, P: Into<Option<&'a str>>>(&self, default_status: P);
 
     fn get_property_device_pixel_ratio(&self) -> f64;
 
@@ -208,9 +209,9 @@ pub trait DOMDOMWindowExt {
 
     fn get_property_length(&self) -> libc::c_ulong;
 
-    fn get_property_name(&self) -> Option<String>;
+    fn get_property_name(&self) -> Option<GString>;
 
-    fn set_property_name(&self, name: Option<&str>);
+    fn set_property_name<'a, P: Into<Option<&'a str>>>(&self, name: P);
 
     fn get_property_offscreen_buffering(&self) -> bool;
 
@@ -242,9 +243,9 @@ pub trait DOMDOMWindowExt {
 
     fn get_property_self(&self) -> Option<DOMDOMWindow>;
 
-    fn get_property_status(&self) -> Option<String>;
+    fn get_property_status(&self) -> Option<GString>;
 
-    fn set_property_status(&self, status: Option<&str>);
+    fn set_property_status<'a, P: Into<Option<&'a str>>>(&self, status: P);
 
     fn get_property_top(&self) -> Option<DOMDOMWindow>;
 
@@ -307,391 +308,391 @@ pub trait DOMDOMWindowExt {
     fn connect_property_window_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
+impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn alert(&self, message: &str) {
         unsafe {
-            ffi::webkit_dom_dom_window_alert(self.to_glib_none().0, message.to_glib_none().0);
+            ffi::webkit_dom_dom_window_alert(self.as_ref().to_glib_none().0, message.to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn blur(&self) {
         unsafe {
-            ffi::webkit_dom_dom_window_blur(self.to_glib_none().0);
+            ffi::webkit_dom_dom_window_blur(self.as_ref().to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn capture_events(&self) {
         unsafe {
-            ffi::webkit_dom_dom_window_capture_events(self.to_glib_none().0);
+            ffi::webkit_dom_dom_window_capture_events(self.as_ref().to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn close(&self) {
         unsafe {
-            ffi::webkit_dom_dom_window_close(self.to_glib_none().0);
+            ffi::webkit_dom_dom_window_close(self.as_ref().to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn confirm(&self, message: &str) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_dom_window_confirm(self.to_glib_none().0, message.to_glib_none().0))
+            from_glib(ffi::webkit_dom_dom_window_confirm(self.as_ref().to_glib_none().0, message.to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn find(&self, string: &str, caseSensitive: bool, backwards: bool, wrap: bool, wholeWord: bool, searchInFrames: bool, showDialog: bool) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_dom_window_find(self.to_glib_none().0, string.to_glib_none().0, caseSensitive.to_glib(), backwards.to_glib(), wrap.to_glib(), wholeWord.to_glib(), searchInFrames.to_glib(), showDialog.to_glib()))
+            from_glib(ffi::webkit_dom_dom_window_find(self.as_ref().to_glib_none().0, string.to_glib_none().0, caseSensitive.to_glib(), backwards.to_glib(), wrap.to_glib(), wholeWord.to_glib(), searchInFrames.to_glib(), showDialog.to_glib()))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn focus(&self) {
         unsafe {
-            ffi::webkit_dom_dom_window_focus(self.to_glib_none().0);
+            ffi::webkit_dom_dom_window_focus(self.as_ref().to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_closed(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_dom_window_get_closed(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_dom_window_get_closed(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_computed_style<'a, P: IsA<DOMElement>, Q: Into<Option<&'a str>>>(&self, element: &P, pseudoElement: Q) -> Option<DOMCSSStyleDeclaration> {
         let pseudoElement = pseudoElement.into();
-        let pseudoElement = pseudoElement.to_glib_none();
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_get_computed_style(self.to_glib_none().0, element.to_glib_none().0, pseudoElement.0))
+            from_glib_full(ffi::webkit_dom_dom_window_get_computed_style(self.as_ref().to_glib_none().0, element.as_ref().to_glib_none().0, pseudoElement.to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_default_status(&self) -> Option<String> {
+    fn get_default_status(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_get_default_status(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_dom_window_get_default_status(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_device_pixel_ratio(&self) -> f64 {
         unsafe {
-            ffi::webkit_dom_dom_window_get_device_pixel_ratio(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_device_pixel_ratio(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_document(&self) -> Option<DOMDocument> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_dom_window_get_document(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_dom_dom_window_get_document(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_frame_element(&self) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_dom_window_get_frame_element(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_dom_dom_window_get_frame_element(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_frames(&self) -> Option<DOMDOMWindow> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_get_frames(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_dom_window_get_frames(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_inner_height(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_inner_height(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_inner_height(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_inner_width(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_inner_width(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_inner_width(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_length(&self) -> libc::c_ulong {
         unsafe {
-            ffi::webkit_dom_dom_window_get_length(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_length(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_name(&self) -> Option<String> {
+    fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_get_name(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_dom_window_get_name(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_offscreen_buffering(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_dom_window_get_offscreen_buffering(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_dom_window_get_offscreen_buffering(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_opener(&self) -> Option<DOMDOMWindow> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_get_opener(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_dom_window_get_opener(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_orientation(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_orientation(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_orientation(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_outer_height(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_outer_height(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_outer_height(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_outer_width(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_outer_width(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_outer_width(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_page_x_offset(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_page_x_offset(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_page_x_offset(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_page_y_offset(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_page_y_offset(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_page_y_offset(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_parent(&self) -> Option<DOMDOMWindow> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_get_parent(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_dom_window_get_parent(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_screen_left(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_screen_left(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_screen_left(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_screen_top(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_screen_top(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_screen_top(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_screen_x(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_screen_x(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_screen_x(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_screen_y(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_screen_y(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_screen_y(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_scroll_x(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_scroll_x(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_scroll_x(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_scroll_y(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_dom_window_get_scroll_y(self.to_glib_none().0)
+            ffi::webkit_dom_dom_window_get_scroll_y(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_selection(&self) -> Option<DOMDOMSelection> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_get_selection(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_dom_window_get_selection(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_self(&self) -> Option<DOMDOMWindow> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_get_self(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_dom_window_get_self(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_status(&self) -> Option<String> {
+    fn get_status(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_get_status(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_dom_window_get_status(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_top(&self) -> Option<DOMDOMWindow> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_get_top(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_dom_window_get_top(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_window(&self) -> Option<DOMDOMWindow> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_get_window(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_dom_window_get_window(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn move_by(&self, x: f32, y: f32) {
         unsafe {
-            ffi::webkit_dom_dom_window_move_by(self.to_glib_none().0, x, y);
+            ffi::webkit_dom_dom_window_move_by(self.as_ref().to_glib_none().0, x, y);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn move_to(&self, x: f32, y: f32) {
         unsafe {
-            ffi::webkit_dom_dom_window_move_to(self.to_glib_none().0, x, y);
+            ffi::webkit_dom_dom_window_move_to(self.as_ref().to_glib_none().0, x, y);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn print(&self) {
         unsafe {
-            ffi::webkit_dom_dom_window_print(self.to_glib_none().0);
+            ffi::webkit_dom_dom_window_print(self.as_ref().to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn prompt(&self, message: &str, defaultValue: &str) -> Option<String> {
+    fn prompt(&self, message: &str, defaultValue: &str) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_window_prompt(self.to_glib_none().0, message.to_glib_none().0, defaultValue.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_dom_window_prompt(self.as_ref().to_glib_none().0, message.to_glib_none().0, defaultValue.to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn release_events(&self) {
         unsafe {
-            ffi::webkit_dom_dom_window_release_events(self.to_glib_none().0);
+            ffi::webkit_dom_dom_window_release_events(self.as_ref().to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn resize_by(&self, x: f32, y: f32) {
         unsafe {
-            ffi::webkit_dom_dom_window_resize_by(self.to_glib_none().0, x, y);
+            ffi::webkit_dom_dom_window_resize_by(self.as_ref().to_glib_none().0, x, y);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn resize_to(&self, width: f32, height: f32) {
         unsafe {
-            ffi::webkit_dom_dom_window_resize_to(self.to_glib_none().0, width, height);
+            ffi::webkit_dom_dom_window_resize_to(self.as_ref().to_glib_none().0, width, height);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn scroll_by(&self, x: f64, y: f64) {
         unsafe {
-            ffi::webkit_dom_dom_window_scroll_by(self.to_glib_none().0, x, y);
+            ffi::webkit_dom_dom_window_scroll_by(self.as_ref().to_glib_none().0, x, y);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn scroll_to(&self, x: f64, y: f64) {
         unsafe {
-            ffi::webkit_dom_dom_window_scroll_to(self.to_glib_none().0, x, y);
+            ffi::webkit_dom_dom_window_scroll_to(self.as_ref().to_glib_none().0, x, y);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_default_status(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_dom_window_set_default_status(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_dom_window_set_default_status(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_name(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_dom_window_set_name(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_dom_window_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_status(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_dom_window_set_status(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_dom_window_set_status(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn stop(&self) {
         unsafe {
-            ffi::webkit_dom_dom_window_stop(self.to_glib_none().0);
+            ffi::webkit_dom_dom_window_stop(self.as_ref().to_glib_none().0);
         }
     }
 
     fn webkit_message_handlers_post_message(&self, handler: &str, message: &str) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_dom_window_webkit_message_handlers_post_message(self.to_glib_none().0, handler.to_glib_none().0, message.to_glib_none().0))
+            from_glib(ffi::webkit_dom_dom_window_webkit_message_handlers_post_message(self.as_ref().to_glib_none().0, handler.to_glib_none().0, message.to_glib_none().0))
         }
     }
 
     fn get_property_closed(&self) -> bool {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "closed".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"closed\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
 
-    fn get_property_default_status(&self) -> Option<String> {
+    fn get_property_default_status(&self) -> Option<GString> {
         unsafe {
-            let mut value = Value::from_type(<String as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "default-status".to_glib_none().0, value.to_glib_none_mut().0);
+            let mut value = Value::from_type(<GString as StaticType>::static_type());
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"default-status\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
 
-    fn set_property_default_status(&self, default_status: Option<&str>) {
+    fn set_property_default_status<'a, P: Into<Option<&'a str>>>(&self, default_status: P) {
+        let default_status = default_status.into();
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0, "default-status".to_glib_none().0, Value::from(default_status).to_glib_none().0);
+            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"default-status\0".as_ptr() as *const _, Value::from(default_status).to_glib_none().0);
         }
     }
 
     fn get_property_device_pixel_ratio(&self) -> f64 {
         unsafe {
             let mut value = Value::from_type(<f64 as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "device-pixel-ratio".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"device-pixel-ratio\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -699,7 +700,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_document(&self) -> Option<DOMDocument> {
         unsafe {
             let mut value = Value::from_type(<DOMDocument as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "document".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"document\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
@@ -707,7 +708,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_frame_element(&self) -> Option<DOMElement> {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "frame-element".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"frame-element\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
@@ -715,7 +716,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_frames(&self) -> Option<DOMDOMWindow> {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "frames".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"frames\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
@@ -723,7 +724,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_inner_height(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "inner-height".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"inner-height\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -731,7 +732,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_inner_width(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "inner-width".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"inner-width\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -739,29 +740,30 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_length(&self) -> libc::c_ulong {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "length".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"length\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
 
-    fn get_property_name(&self) -> Option<String> {
+    fn get_property_name(&self) -> Option<GString> {
         unsafe {
-            let mut value = Value::from_type(<String as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "name".to_glib_none().0, value.to_glib_none_mut().0);
+            let mut value = Value::from_type(<GString as StaticType>::static_type());
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"name\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
 
-    fn set_property_name(&self, name: Option<&str>) {
+    fn set_property_name<'a, P: Into<Option<&'a str>>>(&self, name: P) {
+        let name = name.into();
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0, "name".to_glib_none().0, Value::from(name).to_glib_none().0);
+            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"name\0".as_ptr() as *const _, Value::from(name).to_glib_none().0);
         }
     }
 
     fn get_property_offscreen_buffering(&self) -> bool {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "offscreen-buffering".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"offscreen-buffering\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -769,7 +771,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_opener(&self) -> Option<DOMDOMWindow> {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "opener".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"opener\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
@@ -777,7 +779,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_orientation(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "orientation".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"orientation\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -785,7 +787,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_outer_height(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "outer-height".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"outer-height\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -793,7 +795,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_outer_width(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "outer-width".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"outer-width\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -801,7 +803,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_page_x_offset(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "page-x-offset".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"page-x-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -809,7 +811,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_page_y_offset(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "page-y-offset".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"page-y-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -817,7 +819,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_parent(&self) -> Option<DOMDOMWindow> {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "parent".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"parent\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
@@ -825,7 +827,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_screen_left(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "screen-left".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"screen-left\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -833,7 +835,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_screen_top(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "screen-top".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"screen-top\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -841,7 +843,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_screen_x(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "screen-x".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"screen-x\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -849,7 +851,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_screen_y(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "screen-y".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"screen-y\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -857,7 +859,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_scroll_x(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "scroll-x".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"scroll-x\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -865,7 +867,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_scroll_y(&self) -> libc::c_long {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "scroll-y".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"scroll-y\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -873,29 +875,30 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_self(&self) -> Option<DOMDOMWindow> {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "self".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"self\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
 
-    fn get_property_status(&self) -> Option<String> {
+    fn get_property_status(&self) -> Option<GString> {
         unsafe {
-            let mut value = Value::from_type(<String as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "status".to_glib_none().0, value.to_glib_none_mut().0);
+            let mut value = Value::from_type(<GString as StaticType>::static_type());
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"status\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
 
-    fn set_property_status(&self, status: Option<&str>) {
+    fn set_property_status<'a, P: Into<Option<&'a str>>>(&self, status: P) {
+        let status = status.into();
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0, "status".to_glib_none().0, Value::from(status).to_glib_none().0);
+            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"status\0".as_ptr() as *const _, Value::from(status).to_glib_none().0);
         }
     }
 
     fn get_property_top(&self) -> Option<DOMDOMWindow> {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "top".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"top\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
@@ -903,7 +906,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn get_property_window(&self) -> Option<DOMDOMWindow> {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "window".to_glib_none().0, value.to_glib_none_mut().0);
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"window\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
@@ -911,7 +914,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_closed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::closed",
+            connect_raw(self.as_ptr() as *mut _, b"notify::closed\0".as_ptr() as *const _,
                 transmute(notify_closed_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -919,7 +922,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_default_status_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::default-status",
+            connect_raw(self.as_ptr() as *mut _, b"notify::default-status\0".as_ptr() as *const _,
                 transmute(notify_default_status_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -927,7 +930,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_device_pixel_ratio_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::device-pixel-ratio",
+            connect_raw(self.as_ptr() as *mut _, b"notify::device-pixel-ratio\0".as_ptr() as *const _,
                 transmute(notify_device_pixel_ratio_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -935,7 +938,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::document",
+            connect_raw(self.as_ptr() as *mut _, b"notify::document\0".as_ptr() as *const _,
                 transmute(notify_document_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -943,7 +946,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_frame_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::frame-element",
+            connect_raw(self.as_ptr() as *mut _, b"notify::frame-element\0".as_ptr() as *const _,
                 transmute(notify_frame_element_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -951,7 +954,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_frames_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::frames",
+            connect_raw(self.as_ptr() as *mut _, b"notify::frames\0".as_ptr() as *const _,
                 transmute(notify_frames_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -959,7 +962,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_inner_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::inner-height",
+            connect_raw(self.as_ptr() as *mut _, b"notify::inner-height\0".as_ptr() as *const _,
                 transmute(notify_inner_height_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -967,7 +970,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_inner_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::inner-width",
+            connect_raw(self.as_ptr() as *mut _, b"notify::inner-width\0".as_ptr() as *const _,
                 transmute(notify_inner_width_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -975,7 +978,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::length",
+            connect_raw(self.as_ptr() as *mut _, b"notify::length\0".as_ptr() as *const _,
                 transmute(notify_length_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -983,7 +986,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::name",
+            connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
                 transmute(notify_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -991,7 +994,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_offscreen_buffering_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::offscreen-buffering",
+            connect_raw(self.as_ptr() as *mut _, b"notify::offscreen-buffering\0".as_ptr() as *const _,
                 transmute(notify_offscreen_buffering_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -999,7 +1002,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_opener_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::opener",
+            connect_raw(self.as_ptr() as *mut _, b"notify::opener\0".as_ptr() as *const _,
                 transmute(notify_opener_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1007,7 +1010,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_orientation_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::orientation",
+            connect_raw(self.as_ptr() as *mut _, b"notify::orientation\0".as_ptr() as *const _,
                 transmute(notify_orientation_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1015,7 +1018,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_outer_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::outer-height",
+            connect_raw(self.as_ptr() as *mut _, b"notify::outer-height\0".as_ptr() as *const _,
                 transmute(notify_outer_height_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1023,7 +1026,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_outer_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::outer-width",
+            connect_raw(self.as_ptr() as *mut _, b"notify::outer-width\0".as_ptr() as *const _,
                 transmute(notify_outer_width_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1031,7 +1034,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_page_x_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::page-x-offset",
+            connect_raw(self.as_ptr() as *mut _, b"notify::page-x-offset\0".as_ptr() as *const _,
                 transmute(notify_page_x_offset_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1039,7 +1042,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_page_y_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::page-y-offset",
+            connect_raw(self.as_ptr() as *mut _, b"notify::page-y-offset\0".as_ptr() as *const _,
                 transmute(notify_page_y_offset_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1047,7 +1050,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_parent_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::parent",
+            connect_raw(self.as_ptr() as *mut _, b"notify::parent\0".as_ptr() as *const _,
                 transmute(notify_parent_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1055,7 +1058,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_screen_left_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::screen-left",
+            connect_raw(self.as_ptr() as *mut _, b"notify::screen-left\0".as_ptr() as *const _,
                 transmute(notify_screen_left_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1063,7 +1066,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_screen_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::screen-top",
+            connect_raw(self.as_ptr() as *mut _, b"notify::screen-top\0".as_ptr() as *const _,
                 transmute(notify_screen_top_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1071,7 +1074,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_screen_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::screen-x",
+            connect_raw(self.as_ptr() as *mut _, b"notify::screen-x\0".as_ptr() as *const _,
                 transmute(notify_screen_x_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1079,7 +1082,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_screen_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::screen-y",
+            connect_raw(self.as_ptr() as *mut _, b"notify::screen-y\0".as_ptr() as *const _,
                 transmute(notify_screen_y_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1087,7 +1090,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_scroll_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::scroll-x",
+            connect_raw(self.as_ptr() as *mut _, b"notify::scroll-x\0".as_ptr() as *const _,
                 transmute(notify_scroll_x_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1095,7 +1098,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_scroll_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::scroll-y",
+            connect_raw(self.as_ptr() as *mut _, b"notify::scroll-y\0".as_ptr() as *const _,
                 transmute(notify_scroll_y_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1103,7 +1106,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_self_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::self",
+            connect_raw(self.as_ptr() as *mut _, b"notify::self\0".as_ptr() as *const _,
                 transmute(notify_self_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1111,7 +1114,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_status_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::status",
+            connect_raw(self.as_ptr() as *mut _, b"notify::status\0".as_ptr() as *const _,
                 transmute(notify_status_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1119,7 +1122,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_top_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::top",
+            connect_raw(self.as_ptr() as *mut _, b"notify::top\0".as_ptr() as *const _,
                 transmute(notify_top_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1127,7 +1130,7 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
     fn connect_property_window_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::window",
+            connect_raw(self.as_ptr() as *mut _, b"notify::window\0".as_ptr() as *const _,
                 transmute(notify_window_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -1136,167 +1139,173 @@ impl<O: IsA<DOMDOMWindow> + IsA<glib::object::Object>> DOMDOMWindowExt for O {
 unsafe extern "C" fn notify_closed_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_default_status_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_device_pixel_ratio_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_document_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_frame_element_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_frames_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_inner_height_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_inner_width_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_length_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_name_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_offscreen_buffering_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_opener_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_orientation_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_outer_height_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_outer_width_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_page_x_offset_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_page_y_offset_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_parent_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_screen_left_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_screen_top_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_screen_x_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_screen_y_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_scroll_x_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_scroll_y_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_self_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_status_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_top_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_window_trampoline<P>(this: *mut ffi::WebKitDOMDOMWindow, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMWindow> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMDOMWindow::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMDOMWindow::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMDOMWindow {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMDOMWindow")
+    }
 }
