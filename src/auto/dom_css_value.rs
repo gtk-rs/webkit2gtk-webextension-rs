@@ -5,30 +5,31 @@
 use DOMObject;
 use Error;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use libc;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMCSSValue(Object<ffi::WebKitDOMCSSValue, ffi::WebKitDOMCSSValueClass>): DOMObject;
+    pub struct DOMCSSValue(Object<ffi::WebKitDOMCSSValue, ffi::WebKitDOMCSSValueClass, DOMCSSValueClass>) @extends DOMObject;
 
     match fn {
         get_type => || ffi::webkit_dom_css_value_get_type(),
     }
 }
 
-pub trait DOMCSSValueExt {
-    fn get_css_text(&self) -> Option<String>;
+pub const NONE_DOMCSS_VALUE: Option<&DOMCSSValue> = None;
+
+pub trait DOMCSSValueExt: 'static {
+    fn get_css_text(&self) -> Option<GString>;
 
     fn get_css_value_type(&self) -> libc::c_ushort;
 
@@ -39,23 +40,23 @@ pub trait DOMCSSValueExt {
     fn connect_property_css_value_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMCSSValue> + IsA<glib::object::Object>> DOMCSSValueExt for O {
-    fn get_css_text(&self) -> Option<String> {
+impl<O: IsA<DOMCSSValue>> DOMCSSValueExt for O {
+    fn get_css_text(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_css_value_get_css_text(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_css_value_get_css_text(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_css_value_type(&self) -> libc::c_ushort {
         unsafe {
-            ffi::webkit_dom_css_value_get_css_value_type(self.to_glib_none().0)
+            ffi::webkit_dom_css_value_get_css_value_type(self.as_ref().to_glib_none().0)
         }
     }
 
     fn set_css_text(&self, value: &str) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_css_value_set_css_text(self.to_glib_none().0, value.to_glib_none().0, &mut error);
+            let _ = ffi::webkit_dom_css_value_set_css_text(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
@@ -63,7 +64,7 @@ impl<O: IsA<DOMCSSValue> + IsA<glib::object::Object>> DOMCSSValueExt for O {
     fn connect_property_css_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::css-text",
+            connect_raw(self.as_ptr() as *mut _, b"notify::css-text\0".as_ptr() as *const _,
                 transmute(notify_css_text_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -71,7 +72,7 @@ impl<O: IsA<DOMCSSValue> + IsA<glib::object::Object>> DOMCSSValueExt for O {
     fn connect_property_css_value_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::css-value-type",
+            connect_raw(self.as_ptr() as *mut _, b"notify::css-value-type\0".as_ptr() as *const _,
                 transmute(notify_css_value_type_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -80,11 +81,17 @@ impl<O: IsA<DOMCSSValue> + IsA<glib::object::Object>> DOMCSSValueExt for O {
 unsafe extern "C" fn notify_css_text_trampoline<P>(this: *mut ffi::WebKitDOMCSSValue, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMCSSValue> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMCSSValue::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMCSSValue::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_css_value_type_trampoline<P>(this: *mut ffi::WebKitDOMCSSValue, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMCSSValue> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMCSSValue::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMCSSValue::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMCSSValue {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMCSSValue")
+    }
 }

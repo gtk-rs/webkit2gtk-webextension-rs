@@ -8,13 +8,10 @@ use DOMNode;
 use DOMObject;
 use ffi;
 use glib::translate::*;
-use glib_ffi;
-use gobject_ffi;
-use std::mem;
-use std::ptr;
+use std::fmt;
 
 glib_wrapper! {
-    pub struct DOMComment(Object<ffi::WebKitDOMComment, ffi::WebKitDOMCommentClass>): DOMCharacterData, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMComment(Object<ffi::WebKitDOMComment, ffi::WebKitDOMCommentClass, DOMCommentClass>) @extends DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_comment_get_type(),
@@ -22,3 +19,11 @@ glib_wrapper! {
 }
 
 impl DOMComment {}
+
+pub const NONE_DOM_COMMENT: Option<&DOMComment> = None;
+
+impl fmt::Display for DOMComment {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMComment")
+    }
+}

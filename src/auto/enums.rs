@@ -4,6 +4,7 @@
 
 use ffi;
 use glib::translate::*;
+use std::fmt;
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
 #[derive(Clone, Copy)]
@@ -55,6 +56,59 @@ pub enum ContextMenuAction {
     Custom,
     #[doc(hidden)]
     __Unknown(i32),
+}
+
+impl fmt::Display for ContextMenuAction {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "ContextMenuAction::{}", match *self {
+            ContextMenuAction::NoAction => "NoAction",
+            ContextMenuAction::OpenLink => "OpenLink",
+            ContextMenuAction::OpenLinkInNewWindow => "OpenLinkInNewWindow",
+            ContextMenuAction::DownloadLinkToDisk => "DownloadLinkToDisk",
+            ContextMenuAction::CopyLinkToClipboard => "CopyLinkToClipboard",
+            ContextMenuAction::OpenImageInNewWindow => "OpenImageInNewWindow",
+            ContextMenuAction::DownloadImageToDisk => "DownloadImageToDisk",
+            ContextMenuAction::CopyImageToClipboard => "CopyImageToClipboard",
+            ContextMenuAction::CopyImageUrlToClipboard => "CopyImageUrlToClipboard",
+            ContextMenuAction::OpenFrameInNewWindow => "OpenFrameInNewWindow",
+            ContextMenuAction::GoBack => "GoBack",
+            ContextMenuAction::GoForward => "GoForward",
+            ContextMenuAction::Stop => "Stop",
+            ContextMenuAction::Reload => "Reload",
+            ContextMenuAction::Copy => "Copy",
+            ContextMenuAction::Cut => "Cut",
+            ContextMenuAction::Paste => "Paste",
+            ContextMenuAction::Delete => "Delete",
+            ContextMenuAction::SelectAll => "SelectAll",
+            ContextMenuAction::InputMethods => "InputMethods",
+            ContextMenuAction::Unicode => "Unicode",
+            ContextMenuAction::SpellingGuess => "SpellingGuess",
+            ContextMenuAction::NoGuessesFound => "NoGuessesFound",
+            ContextMenuAction::IgnoreSpelling => "IgnoreSpelling",
+            ContextMenuAction::LearnSpelling => "LearnSpelling",
+            ContextMenuAction::IgnoreGrammar => "IgnoreGrammar",
+            ContextMenuAction::FontMenu => "FontMenu",
+            ContextMenuAction::Bold => "Bold",
+            ContextMenuAction::Italic => "Italic",
+            ContextMenuAction::Underline => "Underline",
+            ContextMenuAction::Outline => "Outline",
+            ContextMenuAction::InspectElement => "InspectElement",
+            ContextMenuAction::OpenVideoInNewWindow => "OpenVideoInNewWindow",
+            ContextMenuAction::OpenAudioInNewWindow => "OpenAudioInNewWindow",
+            ContextMenuAction::CopyVideoLinkToClipboard => "CopyVideoLinkToClipboard",
+            ContextMenuAction::CopyAudioLinkToClipboard => "CopyAudioLinkToClipboard",
+            ContextMenuAction::ToggleMediaControls => "ToggleMediaControls",
+            ContextMenuAction::ToggleMediaLoop => "ToggleMediaLoop",
+            ContextMenuAction::EnterVideoFullscreen => "EnterVideoFullscreen",
+            ContextMenuAction::MediaPlay => "MediaPlay",
+            ContextMenuAction::MediaPause => "MediaPause",
+            ContextMenuAction::MediaMute => "MediaMute",
+            ContextMenuAction::DownloadVideoToDisk => "DownloadVideoToDisk",
+            ContextMenuAction::DownloadAudioToDisk => "DownloadAudioToDisk",
+            ContextMenuAction::Custom => "Custom",
+            _ => "Unknown",
+        })
+    }
 }
 
 #[doc(hidden)]

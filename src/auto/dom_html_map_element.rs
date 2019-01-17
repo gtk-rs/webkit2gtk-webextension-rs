@@ -9,31 +9,31 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLMapElement(Object<ffi::WebKitDOMHTMLMapElement, ffi::WebKitDOMHTMLMapElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLMapElement(Object<ffi::WebKitDOMHTMLMapElement, ffi::WebKitDOMHTMLMapElementClass, DOMHTMLMapElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_map_element_get_type(),
     }
 }
 
-pub trait DOMHTMLMapElementExt {
+pub const NONE_DOMHTML_MAP_ELEMENT: Option<&DOMHTMLMapElement> = None;
+
+pub trait DOMHTMLMapElementExt: 'static {
     fn get_areas(&self) -> Option<DOMHTMLCollection>;
 
-    fn get_name(&self) -> Option<String>;
+    fn get_name(&self) -> Option<GString>;
 
     fn set_name(&self, value: &str);
 
@@ -42,29 +42,29 @@ pub trait DOMHTMLMapElementExt {
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLMapElement> + IsA<glib::object::Object>> DOMHTMLMapElementExt for O {
+impl<O: IsA<DOMHTMLMapElement>> DOMHTMLMapElementExt for O {
     fn get_areas(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_map_element_get_areas(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_map_element_get_areas(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_name(&self) -> Option<String> {
+    fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_map_element_get_name(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_map_element_get_name(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_name(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_map_element_set_name(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_map_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_areas_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::areas",
+            connect_raw(self.as_ptr() as *mut _, b"notify::areas\0".as_ptr() as *const _,
                 transmute(notify_areas_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -72,7 +72,7 @@ impl<O: IsA<DOMHTMLMapElement> + IsA<glib::object::Object>> DOMHTMLMapElementExt
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::name",
+            connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
                 transmute(notify_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -81,11 +81,17 @@ impl<O: IsA<DOMHTMLMapElement> + IsA<glib::object::Object>> DOMHTMLMapElementExt
 unsafe extern "C" fn notify_areas_trampoline<P>(this: *mut ffi::WebKitDOMHTMLMapElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLMapElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLMapElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLMapElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_name_trampoline<P>(this: *mut ffi::WebKitDOMHTMLMapElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLMapElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLMapElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLMapElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLMapElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLMapElement")
+    }
 }

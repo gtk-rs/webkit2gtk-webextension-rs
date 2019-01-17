@@ -16,28 +16,28 @@ use WebEditor;
 #[cfg(any(feature = "v2_8", feature = "dox"))]
 use WebHitTestResult;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct WebPage(Object<ffi::WebKitWebPage, ffi::WebKitWebPageClass>);
+    pub struct WebPage(Object<ffi::WebKitWebPage, ffi::WebKitWebPageClass, WebPageClass>);
 
     match fn {
         get_type => || ffi::webkit_web_page_get_type(),
     }
 }
 
-pub trait WebPageExt {
+pub const NONE_WEB_PAGE: Option<&WebPage> = None;
+
+pub trait WebPageExt: 'static {
     fn get_dom_document(&self) -> Option<DOMDocument>;
 
     #[cfg(any(feature = "v2_10", feature = "dox"))]
@@ -48,7 +48,7 @@ pub trait WebPageExt {
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     fn get_main_frame(&self) -> Option<Frame>;
 
-    fn get_uri(&self) -> Option<String>;
+    fn get_uri(&self) -> Option<GString>;
 
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn connect_console_message_sent<F: Fn(&Self, &ConsoleMessage) + 'static>(&self, f: F) -> SignalHandlerId;
@@ -69,36 +69,36 @@ pub trait WebPageExt {
     fn connect_property_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
+impl<O: IsA<WebPage>> WebPageExt for O {
     fn get_dom_document(&self) -> Option<DOMDocument> {
         unsafe {
-            from_glib_none(ffi::webkit_web_page_get_dom_document(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_web_page_get_dom_document(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_10", feature = "dox"))]
     fn get_editor(&self) -> Option<WebEditor> {
         unsafe {
-            from_glib_none(ffi::webkit_web_page_get_editor(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_web_page_get_editor(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_id(&self) -> u64 {
         unsafe {
-            ffi::webkit_web_page_get_id(self.to_glib_none().0)
+            ffi::webkit_web_page_get_id(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     fn get_main_frame(&self) -> Option<Frame> {
         unsafe {
-            from_glib_none(ffi::webkit_web_page_get_main_frame(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_web_page_get_main_frame(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_uri(&self) -> Option<String> {
+    fn get_uri(&self) -> Option<GString> {
         unsafe {
-            from_glib_none(ffi::webkit_web_page_get_uri(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_web_page_get_uri(self.as_ref().to_glib_none().0))
         }
     }
 
@@ -106,7 +106,7 @@ impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
     fn connect_console_message_sent<F: Fn(&Self, &ConsoleMessage) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self, &ConsoleMessage) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "console-message-sent",
+            connect_raw(self.as_ptr() as *mut _, b"console-message-sent\0".as_ptr() as *const _,
                 transmute(console_message_sent_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -115,7 +115,7 @@ impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
     fn connect_context_menu<F: Fn(&Self, &ContextMenu, &WebHitTestResult) -> bool + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self, &ContextMenu, &WebHitTestResult) -> bool + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "context-menu",
+            connect_raw(self.as_ptr() as *mut _, b"context-menu\0".as_ptr() as *const _,
                 transmute(context_menu_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -123,7 +123,7 @@ impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
     fn connect_document_loaded<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "document-loaded",
+            connect_raw(self.as_ptr() as *mut _, b"document-loaded\0".as_ptr() as *const _,
                 transmute(document_loaded_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -136,7 +136,7 @@ impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
     fn connect_send_request<F: Fn(&Self, &URIRequest, &Option<URIResponse>) -> bool + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self, &URIRequest, &Option<URIResponse>) -> bool + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "send-request",
+            connect_raw(self.as_ptr() as *mut _, b"send-request\0".as_ptr() as *const _,
                 transmute(send_request_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -151,7 +151,7 @@ impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
     fn connect_property_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::uri",
+            connect_raw(self.as_ptr() as *mut _, b"notify::uri\0".as_ptr() as *const _,
                 transmute(notify_uri_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -161,30 +161,36 @@ impl<O: IsA<WebPage> + IsA<glib::object::Object>> WebPageExt for O {
 unsafe extern "C" fn console_message_sent_trampoline<P>(this: *mut ffi::WebKitWebPage, console_message: *mut ffi::WebKitConsoleMessage, f: glib_ffi::gpointer)
 where P: IsA<WebPage> {
     let f: &&(Fn(&P, &ConsoleMessage) + 'static) = transmute(f);
-    f(&WebPage::from_glib_borrow(this).downcast_unchecked(), &from_glib_borrow(console_message))
+    f(&WebPage::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(console_message))
 }
 
 #[cfg(any(feature = "v2_8", feature = "dox"))]
 unsafe extern "C" fn context_menu_trampoline<P>(this: *mut ffi::WebKitWebPage, context_menu: *mut ffi::WebKitContextMenu, hit_test_result: *mut ffi::WebKitWebHitTestResult, f: glib_ffi::gpointer) -> glib_ffi::gboolean
 where P: IsA<WebPage> {
     let f: &&(Fn(&P, &ContextMenu, &WebHitTestResult) -> bool + 'static) = transmute(f);
-    f(&WebPage::from_glib_borrow(this).downcast_unchecked(), &from_glib_borrow(context_menu), &from_glib_borrow(hit_test_result)).to_glib()
+    f(&WebPage::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(context_menu), &from_glib_borrow(hit_test_result)).to_glib()
 }
 
 unsafe extern "C" fn document_loaded_trampoline<P>(this: *mut ffi::WebKitWebPage, f: glib_ffi::gpointer)
 where P: IsA<WebPage> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&WebPage::from_glib_borrow(this).downcast_unchecked())
+    f(&WebPage::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn send_request_trampoline<P>(this: *mut ffi::WebKitWebPage, request: *mut ffi::WebKitURIRequest, redirected_response: *mut ffi::WebKitURIResponse, f: glib_ffi::gpointer) -> glib_ffi::gboolean
 where P: IsA<WebPage> {
     let f: &&(Fn(&P, &URIRequest, &Option<URIResponse>) -> bool + 'static) = transmute(f);
-    f(&WebPage::from_glib_borrow(this).downcast_unchecked(), &from_glib_borrow(request), &from_glib_borrow(redirected_response)).to_glib()
+    f(&WebPage::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(request), &from_glib_borrow(redirected_response)).to_glib()
 }
 
 unsafe extern "C" fn notify_uri_trampoline<P>(this: *mut ffi::WebKitWebPage, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<WebPage> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&WebPage::from_glib_borrow(this).downcast_unchecked())
+    f(&WebPage::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for WebPage {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "WebPage")
+    }
 }

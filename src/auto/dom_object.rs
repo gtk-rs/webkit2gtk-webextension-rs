@@ -4,13 +4,10 @@
 
 use ffi;
 use glib::translate::*;
-use glib_ffi;
-use gobject_ffi;
-use std::mem;
-use std::ptr;
+use std::fmt;
 
 glib_wrapper! {
-    pub struct DOMObject(Object<ffi::WebKitDOMObject, ffi::WebKitDOMObjectClass>);
+    pub struct DOMObject(Object<ffi::WebKitDOMObject, ffi::WebKitDOMObjectClass, DOMObjectClass>);
 
     match fn {
         get_type => || ffi::webkit_dom_object_get_type(),
@@ -18,3 +15,11 @@ glib_wrapper! {
 }
 
 impl DOMObject {}
+
+pub const NONE_DOM_OBJECT: Option<&DOMObject> = None;
+
+impl fmt::Display for DOMObject {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMObject")
+    }
+}

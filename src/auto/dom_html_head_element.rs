@@ -8,52 +8,52 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
-use glib::object::Downcast;
+use glib::GString;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
-use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLHeadElement(Object<ffi::WebKitDOMHTMLHeadElement, ffi::WebKitDOMHTMLHeadElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLHeadElement(Object<ffi::WebKitDOMHTMLHeadElement, ffi::WebKitDOMHTMLHeadElementClass, DOMHTMLHeadElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_head_element_get_type(),
     }
 }
 
-pub trait DOMHTMLHeadElementExt {
-    fn get_profile(&self) -> Option<String>;
+pub const NONE_DOMHTML_HEAD_ELEMENT: Option<&DOMHTMLHeadElement> = None;
+
+pub trait DOMHTMLHeadElementExt: 'static {
+    fn get_profile(&self) -> Option<GString>;
 
     fn set_profile(&self, value: &str);
 
     fn connect_property_profile_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLHeadElement> + IsA<glib::object::Object>> DOMHTMLHeadElementExt for O {
-    fn get_profile(&self) -> Option<String> {
+impl<O: IsA<DOMHTMLHeadElement>> DOMHTMLHeadElementExt for O {
+    fn get_profile(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_head_element_get_profile(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_head_element_get_profile(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_profile(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_head_element_set_profile(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_head_element_set_profile(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_profile_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::profile",
+            connect_raw(self.as_ptr() as *mut _, b"notify::profile\0".as_ptr() as *const _,
                 transmute(notify_profile_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -62,5 +62,11 @@ impl<O: IsA<DOMHTMLHeadElement> + IsA<glib::object::Object>> DOMHTMLHeadElementE
 unsafe extern "C" fn notify_profile_trampoline<P>(this: *mut ffi::WebKitDOMHTMLHeadElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLHeadElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLHeadElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLHeadElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLHeadElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLHeadElement")
+    }
 }

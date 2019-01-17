@@ -11,31 +11,33 @@ use DOMNode;
 use DOMObject;
 use Error;
 use ffi;
-use glib;
+use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Downcast;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
 use gobject_ffi;
 use libc;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLSelectElement(Object<ffi::WebKitDOMHTMLSelectElement, ffi::WebKitDOMHTMLSelectElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLSelectElement(Object<ffi::WebKitDOMHTMLSelectElement, ffi::WebKitDOMHTMLSelectElementClass, DOMHTMLSelectElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_select_element_get_type(),
     }
 }
 
-pub trait DOMHTMLSelectElementExt {
+pub const NONE_DOMHTML_SELECT_ELEMENT: Option<&DOMHTMLSelectElement> = None;
+
+pub trait DOMHTMLSelectElementExt: 'static {
     fn add<P: IsA<DOMHTMLElement>, Q: IsA<DOMHTMLElement>>(&self, element: &P, before: &Q) -> Result<(), Error>;
 
     fn get_autofocus(&self) -> bool;
@@ -48,17 +50,17 @@ pub trait DOMHTMLSelectElementExt {
 
     fn get_multiple(&self) -> bool;
 
-    fn get_name(&self) -> Option<String>;
+    fn get_name(&self) -> Option<GString>;
 
     fn get_options(&self) -> Option<DOMHTMLOptionsCollection>;
 
-    fn get_select_type(&self) -> Option<String>;
+    fn get_select_type(&self) -> Option<GString>;
 
     fn get_selected_index(&self) -> libc::c_long;
 
     fn get_size(&self) -> libc::c_long;
 
-    fn get_value(&self) -> Option<String>;
+    fn get_value(&self) -> Option<GString>;
 
     fn get_will_validate(&self) -> bool;
 
@@ -84,7 +86,7 @@ pub trait DOMHTMLSelectElementExt {
 
     fn set_value(&self, value: &str);
 
-    fn get_property_type(&self) -> Option<String>;
+    fn get_property_type(&self) -> Option<GString>;
 
     fn connect_property_autofocus_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -111,159 +113,159 @@ pub trait DOMHTMLSelectElementExt {
     fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElementExt for O {
+impl<O: IsA<DOMHTMLSelectElement>> DOMHTMLSelectElementExt for O {
     fn add<P: IsA<DOMHTMLElement>, Q: IsA<DOMHTMLElement>>(&self, element: &P, before: &Q) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_html_select_element_add(self.to_glib_none().0, element.to_glib_none().0, before.to_glib_none().0, &mut error);
+            let _ = ffi::webkit_dom_html_select_element_add(self.as_ref().to_glib_none().0, element.as_ref().to_glib_none().0, before.as_ref().to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn get_autofocus(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_html_select_element_get_autofocus(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_html_select_element_get_autofocus(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_disabled(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_html_select_element_get_disabled(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_html_select_element_get_disabled(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_form(&self) -> Option<DOMHTMLFormElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_select_element_get_form(self.to_glib_none().0))
+            from_glib_none(ffi::webkit_dom_html_select_element_get_form(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_length(&self) -> libc::c_ulong {
         unsafe {
-            ffi::webkit_dom_html_select_element_get_length(self.to_glib_none().0)
+            ffi::webkit_dom_html_select_element_get_length(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_multiple(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_html_select_element_get_multiple(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_html_select_element_get_multiple(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_name(&self) -> Option<String> {
+    fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_select_element_get_name(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_select_element_get_name(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_options(&self) -> Option<DOMHTMLOptionsCollection> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_select_element_get_options(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_select_element_get_options(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_select_type(&self) -> Option<String> {
+    fn get_select_type(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_select_element_get_select_type(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_select_element_get_select_type(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_selected_index(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_select_element_get_selected_index(self.to_glib_none().0)
+            ffi::webkit_dom_html_select_element_get_selected_index(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_size(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_html_select_element_get_size(self.to_glib_none().0)
+            ffi::webkit_dom_html_select_element_get_size(self.as_ref().to_glib_none().0)
         }
     }
 
-    fn get_value(&self) -> Option<String> {
+    fn get_value(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_select_element_get_value(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_select_element_get_value(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_will_validate(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_html_select_element_get_will_validate(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_html_select_element_get_will_validate(self.as_ref().to_glib_none().0))
         }
     }
 
     fn item(&self, index: libc::c_ulong) -> Option<DOMNode> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_select_element_item(self.to_glib_none().0, index))
+            from_glib_none(ffi::webkit_dom_html_select_element_item(self.as_ref().to_glib_none().0, index))
         }
     }
 
     fn named_item(&self, name: &str) -> Option<DOMNode> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_select_element_named_item(self.to_glib_none().0, name.to_glib_none().0))
+            from_glib_none(ffi::webkit_dom_html_select_element_named_item(self.as_ref().to_glib_none().0, name.to_glib_none().0))
         }
     }
 
     fn remove(&self, index: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_html_select_element_remove(self.to_glib_none().0, index);
+            ffi::webkit_dom_html_select_element_remove(self.as_ref().to_glib_none().0, index);
         }
     }
 
     fn set_autofocus(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_html_select_element_set_autofocus(self.to_glib_none().0, value.to_glib());
+            ffi::webkit_dom_html_select_element_set_autofocus(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
     fn set_disabled(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_html_select_element_set_disabled(self.to_glib_none().0, value.to_glib());
+            ffi::webkit_dom_html_select_element_set_disabled(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
     fn set_length(&self, value: libc::c_ulong) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_html_select_element_set_length(self.to_glib_none().0, value, &mut error);
+            let _ = ffi::webkit_dom_html_select_element_set_length(self.as_ref().to_glib_none().0, value, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn set_multiple(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_html_select_element_set_multiple(self.to_glib_none().0, value.to_glib());
+            ffi::webkit_dom_html_select_element_set_multiple(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
     fn set_name(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_select_element_set_name(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_select_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_selected_index(&self, value: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_html_select_element_set_selected_index(self.to_glib_none().0, value);
+            ffi::webkit_dom_html_select_element_set_selected_index(self.as_ref().to_glib_none().0, value);
         }
     }
 
     fn set_size(&self, value: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_html_select_element_set_size(self.to_glib_none().0, value);
+            ffi::webkit_dom_html_select_element_set_size(self.as_ref().to_glib_none().0, value);
         }
     }
 
     fn set_value(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_select_element_set_value(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_select_element_set_value(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
-    fn get_property_type(&self) -> Option<String> {
+    fn get_property_type(&self) -> Option<GString> {
         unsafe {
-            let mut value = Value::from_type(<String as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "type".to_glib_none().0, value.to_glib_none_mut().0);
+            let mut value = Value::from_type(<GString as StaticType>::static_type());
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
@@ -271,7 +273,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_autofocus_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::autofocus",
+            connect_raw(self.as_ptr() as *mut _, b"notify::autofocus\0".as_ptr() as *const _,
                 transmute(notify_autofocus_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -279,7 +281,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::disabled",
+            connect_raw(self.as_ptr() as *mut _, b"notify::disabled\0".as_ptr() as *const _,
                 transmute(notify_disabled_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -287,7 +289,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::form",
+            connect_raw(self.as_ptr() as *mut _, b"notify::form\0".as_ptr() as *const _,
                 transmute(notify_form_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -295,7 +297,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::length",
+            connect_raw(self.as_ptr() as *mut _, b"notify::length\0".as_ptr() as *const _,
                 transmute(notify_length_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -303,7 +305,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_multiple_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::multiple",
+            connect_raw(self.as_ptr() as *mut _, b"notify::multiple\0".as_ptr() as *const _,
                 transmute(notify_multiple_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -311,7 +313,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::name",
+            connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
                 transmute(notify_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -319,7 +321,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_options_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::options",
+            connect_raw(self.as_ptr() as *mut _, b"notify::options\0".as_ptr() as *const _,
                 transmute(notify_options_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -327,7 +329,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_selected_index_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::selected-index",
+            connect_raw(self.as_ptr() as *mut _, b"notify::selected-index\0".as_ptr() as *const _,
                 transmute(notify_selected_index_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -335,7 +337,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::size",
+            connect_raw(self.as_ptr() as *mut _, b"notify::size\0".as_ptr() as *const _,
                 transmute(notify_size_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -343,7 +345,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::type",
+            connect_raw(self.as_ptr() as *mut _, b"notify::type\0".as_ptr() as *const _,
                 transmute(notify_type_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -351,7 +353,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::value",
+            connect_raw(self.as_ptr() as *mut _, b"notify::value\0".as_ptr() as *const _,
                 transmute(notify_value_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -359,7 +361,7 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
     fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::will-validate",
+            connect_raw(self.as_ptr() as *mut _, b"notify::will-validate\0".as_ptr() as *const _,
                 transmute(notify_will_validate_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -368,71 +370,77 @@ impl<O: IsA<DOMHTMLSelectElement> + IsA<glib::object::Object>> DOMHTMLSelectElem
 unsafe extern "C" fn notify_autofocus_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_disabled_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_form_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_length_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_multiple_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_name_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_options_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_selected_index_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_size_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_type_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_value_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_will_validate_trampoline<P>(this: *mut ffi::WebKitDOMHTMLSelectElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLSelectElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLSelectElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLSelectElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLSelectElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLSelectElement")
+    }
 }

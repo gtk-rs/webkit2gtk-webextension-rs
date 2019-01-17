@@ -8,43 +8,44 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use ffi;
-use glib;
+use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Downcast;
+use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
-use glib::signal::connect;
+use glib::signal::connect_raw;
 use glib::translate::*;
 use glib_ffi;
 use gobject_ffi;
 use std::boxed::Box as Box_;
-use std::mem;
+use std::fmt;
 use std::mem::transmute;
-use std::ptr;
 
 glib_wrapper! {
-    pub struct DOMHTMLScriptElement(Object<ffi::WebKitDOMHTMLScriptElement, ffi::WebKitDOMHTMLScriptElementClass>): DOMHTMLElement, DOMElement, DOMNode, DOMObject, DOMEventTarget;
+    pub struct DOMHTMLScriptElement(Object<ffi::WebKitDOMHTMLScriptElement, ffi::WebKitDOMHTMLScriptElementClass, DOMHTMLScriptElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
         get_type => || ffi::webkit_dom_html_script_element_get_type(),
     }
 }
 
-pub trait DOMHTMLScriptElementExt {
-    fn get_charset(&self) -> Option<String>;
+pub const NONE_DOMHTML_SCRIPT_ELEMENT: Option<&DOMHTMLScriptElement> = None;
+
+pub trait DOMHTMLScriptElementExt: 'static {
+    fn get_charset(&self) -> Option<GString>;
 
     fn get_defer(&self) -> bool;
 
-    fn get_event(&self) -> Option<String>;
+    fn get_event(&self) -> Option<GString>;
 
-    fn get_html_for(&self) -> Option<String>;
+    fn get_html_for(&self) -> Option<GString>;
 
-    fn get_src(&self) -> Option<String>;
+    fn get_src(&self) -> Option<GString>;
 
-    fn get_text(&self) -> Option<String>;
+    fn get_text(&self) -> Option<GString>;
 
-    fn get_type_attr(&self) -> Option<String>;
+    fn get_type_attr(&self) -> Option<GString>;
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_charset(&self, value: &str);
@@ -61,11 +62,11 @@ pub trait DOMHTMLScriptElementExt {
 
     fn set_type_attr(&self, value: &str);
 
-    fn set_property_charset(&self, charset: Option<&str>);
+    fn set_property_charset<'a, P: Into<Option<&'a str>>>(&self, charset: P);
 
-    fn get_property_type(&self) -> Option<String>;
+    fn get_property_type(&self) -> Option<GString>;
 
-    fn set_property_type(&self, type_: Option<&str>);
+    fn set_property_type<'a, P: Into<Option<&'a str>>>(&self, type_: P);
 
     fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -82,116 +83,118 @@ pub trait DOMHTMLScriptElementExt {
     fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
-impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElementExt for O {
-    fn get_charset(&self) -> Option<String> {
+impl<O: IsA<DOMHTMLScriptElement>> DOMHTMLScriptElementExt for O {
+    fn get_charset(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_script_element_get_charset(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_script_element_get_charset(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_defer(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_html_script_element_get_defer(self.to_glib_none().0))
+            from_glib(ffi::webkit_dom_html_script_element_get_defer(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_event(&self) -> Option<String> {
+    fn get_event(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_script_element_get_event(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_script_element_get_event(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_html_for(&self) -> Option<String> {
+    fn get_html_for(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_script_element_get_html_for(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_script_element_get_html_for(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_src(&self) -> Option<String> {
+    fn get_src(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_script_element_get_src(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_script_element_get_src(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_text(&self) -> Option<String> {
+    fn get_text(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_script_element_get_text(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_script_element_get_text(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_type_attr(&self) -> Option<String> {
+    fn get_type_attr(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_script_element_get_type_attr(self.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_html_script_element_get_type_attr(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_charset(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_script_element_set_charset(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_script_element_set_charset(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_defer(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_html_script_element_set_defer(self.to_glib_none().0, value.to_glib());
+            ffi::webkit_dom_html_script_element_set_defer(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
     fn set_event(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_script_element_set_event(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_script_element_set_event(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_html_for(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_script_element_set_html_for(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_script_element_set_html_for(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_src(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_script_element_set_src(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_script_element_set_src(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_text(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_script_element_set_text(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_script_element_set_text(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_type_attr(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_script_element_set_type_attr(self.to_glib_none().0, value.to_glib_none().0);
+            ffi::webkit_dom_html_script_element_set_type_attr(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
-    fn set_property_charset(&self, charset: Option<&str>) {
+    fn set_property_charset<'a, P: Into<Option<&'a str>>>(&self, charset: P) {
+        let charset = charset.into();
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0, "charset".to_glib_none().0, Value::from(charset).to_glib_none().0);
+            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"charset\0".as_ptr() as *const _, Value::from(charset).to_glib_none().0);
         }
     }
 
-    fn get_property_type(&self) -> Option<String> {
+    fn get_property_type(&self) -> Option<GString> {
         unsafe {
-            let mut value = Value::from_type(<String as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0, "type".to_glib_none().0, value.to_glib_none_mut().0);
+            let mut value = Value::from_type(<GString as StaticType>::static_type());
+            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
 
-    fn set_property_type(&self, type_: Option<&str>) {
+    fn set_property_type<'a, P: Into<Option<&'a str>>>(&self, type_: P) {
+        let type_ = type_.into();
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0, "type".to_glib_none().0, Value::from(type_).to_glib_none().0);
+            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"type\0".as_ptr() as *const _, Value::from(type_).to_glib_none().0);
         }
     }
 
     fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::charset",
+            connect_raw(self.as_ptr() as *mut _, b"notify::charset\0".as_ptr() as *const _,
                 transmute(notify_charset_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -199,7 +202,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
     fn connect_property_defer_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::defer",
+            connect_raw(self.as_ptr() as *mut _, b"notify::defer\0".as_ptr() as *const _,
                 transmute(notify_defer_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -207,7 +210,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
     fn connect_property_event_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::event",
+            connect_raw(self.as_ptr() as *mut _, b"notify::event\0".as_ptr() as *const _,
                 transmute(notify_event_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -215,7 +218,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
     fn connect_property_html_for_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::html-for",
+            connect_raw(self.as_ptr() as *mut _, b"notify::html-for\0".as_ptr() as *const _,
                 transmute(notify_html_for_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -223,7 +226,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
     fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::src",
+            connect_raw(self.as_ptr() as *mut _, b"notify::src\0".as_ptr() as *const _,
                 transmute(notify_src_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -231,7 +234,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
     fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::text",
+            connect_raw(self.as_ptr() as *mut _, b"notify::text\0".as_ptr() as *const _,
                 transmute(notify_text_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -239,7 +242,7 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
     fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
             let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
-            connect(self.to_glib_none().0, "notify::type",
+            connect_raw(self.as_ptr() as *mut _, b"notify::type\0".as_ptr() as *const _,
                 transmute(notify_type_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
         }
     }
@@ -248,41 +251,47 @@ impl<O: IsA<DOMHTMLScriptElement> + IsA<glib::object::Object>> DOMHTMLScriptElem
 unsafe extern "C" fn notify_charset_trampoline<P>(this: *mut ffi::WebKitDOMHTMLScriptElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLScriptElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLScriptElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLScriptElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_defer_trampoline<P>(this: *mut ffi::WebKitDOMHTMLScriptElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLScriptElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLScriptElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLScriptElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_event_trampoline<P>(this: *mut ffi::WebKitDOMHTMLScriptElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLScriptElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLScriptElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLScriptElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_html_for_trampoline<P>(this: *mut ffi::WebKitDOMHTMLScriptElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLScriptElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLScriptElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLScriptElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_src_trampoline<P>(this: *mut ffi::WebKitDOMHTMLScriptElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLScriptElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLScriptElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLScriptElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_text_trampoline<P>(this: *mut ffi::WebKitDOMHTMLScriptElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLScriptElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLScriptElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLScriptElement::from_glib_borrow(this).unsafe_cast())
 }
 
 unsafe extern "C" fn notify_type_trampoline<P>(this: *mut ffi::WebKitDOMHTMLScriptElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLScriptElement> {
     let f: &&(Fn(&P) + 'static) = transmute(f);
-    f(&DOMHTMLScriptElement::from_glib_borrow(this).downcast_unchecked())
+    f(&DOMHTMLScriptElement::from_glib_borrow(this).unsafe_cast())
+}
+
+impl fmt::Display for DOMHTMLScriptElement {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DOMHTMLScriptElement")
+    }
 }
