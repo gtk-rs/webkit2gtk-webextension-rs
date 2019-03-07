@@ -35,56 +35,82 @@ glib_wrapper! {
 pub const NONE_DOMHTML_TEXT_AREA_ELEMENT: Option<&DOMHTMLTextAreaElement> = None;
 
 pub trait DOMHTMLTextAreaElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_area_type(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_autofocus(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_cols(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_default_value(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_disabled(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_form(&self) -> Option<DOMHTMLFormElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_read_only(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_rows(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_selection_end(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_selection_start(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_value(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_will_validate(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn is_edited(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn select(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_autofocus(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_cols(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_default_value(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_disabled(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_read_only(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_rows(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_selection_end(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_selection_range(&self, start: libc::c_long, end: libc::c_long, direction: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_selection_start(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_value(&self, value: &str);
 
     fn get_property_type(&self) -> Option<GString>;

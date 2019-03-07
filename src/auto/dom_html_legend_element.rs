@@ -31,10 +31,13 @@ glib_wrapper! {
 pub const NONE_DOMHTML_LEGEND_ELEMENT: Option<&DOMHTMLLegendElement> = None;
 
 pub trait DOMHTMLLegendElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_form(&self) -> Option<DOMHTMLFormElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

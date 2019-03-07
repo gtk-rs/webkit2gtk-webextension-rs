@@ -38,116 +38,167 @@ glib_wrapper! {
 pub const NONE_DOMHTML_INPUT_ELEMENT: Option<&DOMHTMLInputElement> = None;
 
 pub trait DOMHTMLInputElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_accept(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_alt(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_auto_filled(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_autofocus(&self) -> bool;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
     fn get_capture(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     fn get_capture_type(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_checked(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_default_checked(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_default_value(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_disabled(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_files(&self) -> Option<DOMFileList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_form(&self) -> Option<DOMHTMLFormElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_height(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_indeterminate(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_input_type(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_max_length(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_multiple(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_read_only(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_size(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_src(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_use_map(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_value(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_will_validate(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn is_edited(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn select(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_accept(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_alt(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_auto_filled(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_autofocus(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_capture_type(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_checked(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_default_checked(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_default_value(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_disabled(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_editing_value(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_files<P: IsA<DOMFileList>>(&self, value: &P);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_height(&self, value: libc::c_ulong);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_indeterminate(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_input_type(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_max_length(&self, value: libc::c_long) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_multiple(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_read_only(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_size(&self, value: libc::c_ulong) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_src(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_use_map(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_value(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: libc::c_ulong);
 
     fn set_property_capture<'a, P: Into<Option<&'a str>>>(&self, capture: P);

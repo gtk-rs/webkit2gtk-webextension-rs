@@ -30,8 +30,10 @@ glib_wrapper! {
 pub const NONE_DOMHTML_HEAD_ELEMENT: Option<&DOMHTMLHeadElement> = None;
 
 pub trait DOMHTMLHeadElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_profile(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_profile(&self, value: &str);
 
     fn connect_property_profile_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

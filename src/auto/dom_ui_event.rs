@@ -28,22 +28,31 @@ glib_wrapper! {
 pub const NONE_DOMUI_EVENT: Option<&DOMUIEvent> = None;
 
 pub trait DOMUIEventExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_char_code(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_detail(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_key_code(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_layer_x(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_layer_y(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_page_x(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_page_y(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_view(&self) -> Option<DOMDOMWindow>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn init_ui_event<P: IsA<DOMDOMWindow>>(&self, type_: &str, canBubble: bool, cancelable: bool, view: &P, detail: libc::c_long);
 
     fn connect_property_char_code_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

@@ -30,8 +30,10 @@ glib_wrapper! {
 pub const NONE_DOMHTML_TITLE_ELEMENT: Option<&DOMHTMLTitleElement> = None;
 
 pub trait DOMHTMLTitleElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_text(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_text(&self, value: &str);
 
     fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

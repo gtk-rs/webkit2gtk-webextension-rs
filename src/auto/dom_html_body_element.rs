@@ -30,28 +30,40 @@ glib_wrapper! {
 pub const NONE_DOMHTML_BODY_ELEMENT: Option<&DOMHTMLBodyElement> = None;
 
 pub trait DOMHTMLBodyElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_a_link(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_background(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_bg_color(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_link(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_text(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_v_link(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_a_link(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_background(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_bg_color(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_link(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_text(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_v_link(&self, value: &str);
 
     fn connect_property_a_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

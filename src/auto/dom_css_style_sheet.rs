@@ -31,18 +31,25 @@ glib_wrapper! {
 pub const NONE_DOMCSS_STYLE_SHEET: Option<&DOMCSSStyleSheet> = None;
 
 pub trait DOMCSSStyleSheetExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn add_rule(&self, selector: &str, style: &str, index: libc::c_ulong) -> Result<libc::c_long, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn delete_rule(&self, index: libc::c_ulong) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_css_rules(&self) -> Option<DOMCSSRuleList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_owner_rule(&self) -> Option<DOMCSSRule>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_rules(&self) -> Option<DOMCSSRuleList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn insert_rule(&self, rule: &str, index: libc::c_ulong) -> Result<libc::c_ulong, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_rule(&self, index: libc::c_ulong) -> Result<(), Error>;
 
     fn connect_property_css_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

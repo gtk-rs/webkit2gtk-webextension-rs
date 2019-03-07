@@ -30,22 +30,31 @@ glib_wrapper! {
 pub const NONE_DOM_KEYBOARD_EVENT: Option<&DOMKeyboardEvent> = None;
 
 pub trait DOMKeyboardEventExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_alt_graph_key(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_alt_key(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_ctrl_key(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_key_identifier(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_key_location(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_meta_key(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_modifier_state(&self, keyIdentifierArg: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_shift_key(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn init_keyboard_event<P: IsA<DOMDOMWindow>>(&self, type_: &str, canBubble: bool, cancelable: bool, view: &P, keyIdentifier: &str, location: libc::c_ulong, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool, altGraphKey: bool);
 
     fn connect_property_alt_graph_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

@@ -32,48 +32,70 @@ glib_wrapper! {
 pub const NONE_DOMHTMLI_FRAME_ELEMENT: Option<&DOMHTMLIFrameElement> = None;
 
 pub trait DOMHTMLIFrameElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_content_document(&self) -> Option<DOMDocument>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_content_window(&self) -> Option<DOMDOMWindow>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_frame_border(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_height(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_long_desc(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_margin_height(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_margin_width(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_scrolling(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_src(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_frame_border(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_height(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_long_desc(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_margin_height(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_margin_width(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_scrolling(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_src(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: &str);
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

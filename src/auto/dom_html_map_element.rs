@@ -31,10 +31,13 @@ glib_wrapper! {
 pub const NONE_DOMHTML_MAP_ELEMENT: Option<&DOMHTMLMapElement> = None;
 
 pub trait DOMHTMLMapElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_areas(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
     fn connect_property_areas_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

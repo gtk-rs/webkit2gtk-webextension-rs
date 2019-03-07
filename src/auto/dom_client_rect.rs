@@ -28,21 +28,27 @@ glib_wrapper! {
 pub const NONE_DOM_CLIENT_RECT: Option<&DOMClientRect> = None;
 
 pub trait DOMClientRectExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_bottom(&self) -> f32;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_height(&self) -> f32;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_left(&self) -> f32;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_right(&self) -> f32;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_top(&self) -> f32;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_width(&self) -> f32;
 

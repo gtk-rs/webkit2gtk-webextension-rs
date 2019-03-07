@@ -27,8 +27,10 @@ glib_wrapper! {
 pub const NONE_DOMHTML_OPTIONS_COLLECTION: Option<&DOMHTMLOptionsCollection> = None;
 
 pub trait DOMHTMLOptionsCollectionExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_selected_index(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_selected_index(&self, value: libc::c_long);
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

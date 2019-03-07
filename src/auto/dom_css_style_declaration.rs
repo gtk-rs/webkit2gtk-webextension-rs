@@ -30,26 +30,37 @@ glib_wrapper! {
 pub const NONE_DOMCSS_STYLE_DECLARATION: Option<&DOMCSSStyleDeclaration> = None;
 
 pub trait DOMCSSStyleDeclarationExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_css_text(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_parent_rule(&self) -> Option<DOMCSSRule>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_property_priority(&self, propertyName: &str) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_property_shorthand(&self, propertyName: &str) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_property_value(&self, propertyName: &str) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn is_property_implicit(&self, propertyName: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn item(&self, index: libc::c_ulong) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_property(&self, propertyName: &str) -> Result<GString, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_css_text(&self, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_property(&self, propertyName: &str, value: &str, priority: &str) -> Result<(), Error>;
 
     fn connect_property_css_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

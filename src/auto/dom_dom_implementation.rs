@@ -25,14 +25,19 @@ glib_wrapper! {
 pub const NONE_DOMDOM_IMPLEMENTATION: Option<&DOMDOMImplementation> = None;
 
 pub trait DOMDOMImplementationExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_css_style_sheet(&self, title: &str, media: &str) -> Result<DOMCSSStyleSheet, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_document<'a, 'b, P: Into<Option<&'a str>>, Q: IsA<DOMDocumentType> + 'b, R: Into<Option<&'b Q>>>(&self, namespaceURI: P, qualifiedName: &str, doctype: R) -> Result<DOMDocument, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_document_type(&self, qualifiedName: &str, publicId: &str, systemId: &str) -> Result<DOMDocumentType, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_html_document(&self, title: &str) -> Option<DOMHTMLDocument>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn has_feature(&self, feature: &str, version: &str) -> bool;
 }
 

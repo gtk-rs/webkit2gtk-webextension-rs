@@ -31,20 +31,28 @@ glib_wrapper! {
 pub const NONE_DOM_STYLE_SHEET: Option<&DOMStyleSheet> = None;
 
 pub trait DOMStyleSheetExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_content_type(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_disabled(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_href(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_media(&self) -> Option<DOMMediaList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_owner_node(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_parent_style_sheet(&self) -> Option<DOMStyleSheet>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_title(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_disabled(&self, value: bool);
 
     fn get_property_type(&self) -> Option<GString>;

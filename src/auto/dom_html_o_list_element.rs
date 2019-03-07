@@ -34,16 +34,22 @@ glib_wrapper! {
 pub const NONE_DOMHTMLO_LIST_ELEMENT: Option<&DOMHTMLOListElement> = None;
 
 pub trait DOMHTMLOListElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_compact(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_start(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_type_attr(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_compact(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_start(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_type_attr(&self, value: &str);
 
     fn get_property_type(&self) -> Option<GString>;

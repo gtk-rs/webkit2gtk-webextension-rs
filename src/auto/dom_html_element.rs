@@ -36,21 +36,27 @@ glib_wrapper! {
 pub const NONE_DOMHTML_ELEMENT: Option<&DOMHTMLElement> = None;
 
 pub trait DOMHTMLElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn click(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_access_key(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_10", deprecated)]
     #[cfg(any(not(feature = "v2_10"), feature = "dox"))]
     fn get_children(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_content_editable(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_dir(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_draggable(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_hidden(&self) -> bool;
 
@@ -58,40 +64,54 @@ pub trait DOMHTMLElementExt: 'static {
     #[cfg(any(not(feature = "v2_8"), feature = "dox"))]
     fn get_inner_html(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_inner_text(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_is_content_editable(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_lang(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_8", deprecated)]
     #[cfg(any(not(feature = "v2_8"), feature = "dox"))]
     fn get_outer_html(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_outer_text(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_spellcheck(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_tab_index(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_title(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_translate(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_webkitdropzone(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_access_key(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_content_editable(&self, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_dir(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_draggable(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_hidden(&self, value: bool);
 
@@ -99,26 +119,34 @@ pub trait DOMHTMLElementExt: 'static {
     #[cfg(any(not(feature = "v2_8"), feature = "dox"))]
     fn set_inner_html(&self, contents: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_inner_text(&self, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_lang(&self, value: &str);
 
     #[cfg_attr(feature = "v2_8", deprecated)]
     #[cfg(any(not(feature = "v2_8"), feature = "dox"))]
     fn set_outer_html(&self, contents: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_outer_text(&self, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_spellcheck(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_tab_index(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_title(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_translate(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_webkitdropzone(&self, value: &str);
 

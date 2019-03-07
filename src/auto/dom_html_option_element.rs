@@ -32,30 +32,43 @@ glib_wrapper! {
 pub const NONE_DOMHTML_OPTION_ELEMENT: Option<&DOMHTMLOptionElement> = None;
 
 pub trait DOMHTMLOptionElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_default_selected(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_disabled(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_form(&self) -> Option<DOMHTMLFormElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_index(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_label(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_selected(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_text(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_value(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_default_selected(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_disabled(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_label(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_selected(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_value(&self, value: &str);
 
     fn connect_property_default_selected_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

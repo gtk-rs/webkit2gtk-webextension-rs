@@ -29,16 +29,22 @@ glib_wrapper! {
 pub const NONE_DOM_MEDIA_LIST: Option<&DOMMediaList> = None;
 
 pub trait DOMMediaListExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn append_medium(&self, newMedium: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn delete_medium(&self, oldMedium: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_media_text(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn item(&self, index: libc::c_ulong) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_media_text(&self, value: &str) -> Result<(), Error>;
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

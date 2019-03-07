@@ -31,10 +31,13 @@ glib_wrapper! {
 pub const NONE_DOMHTML_LABEL_ELEMENT: Option<&DOMHTMLLabelElement> = None;
 
 pub trait DOMHTMLLabelElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_form(&self) -> Option<DOMHTMLFormElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_html_for(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_html_for(&self, value: &str);
 
     fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

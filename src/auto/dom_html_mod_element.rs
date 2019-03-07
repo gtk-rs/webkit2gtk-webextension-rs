@@ -30,12 +30,16 @@ glib_wrapper! {
 pub const NONE_DOMHTML_MOD_ELEMENT: Option<&DOMHTMLModElement> = None;
 
 pub trait DOMHTMLModElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_cite(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_date_time(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_cite(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_date_time(&self, value: &str);
 
     fn connect_property_cite_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

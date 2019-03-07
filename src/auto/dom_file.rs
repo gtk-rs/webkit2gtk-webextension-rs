@@ -27,6 +27,7 @@ glib_wrapper! {
 pub const NONE_DOM_FILE: Option<&DOMFile> = None;
 
 pub trait DOMFileExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

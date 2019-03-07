@@ -33,77 +33,113 @@ glib_wrapper! {
 pub const NONE_DOMHTML_ANCHOR_ELEMENT: Option<&DOMHTMLAnchorElement> = None;
 
 pub trait DOMHTMLAnchorElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_charset(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_coords(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_hash(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_host(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_hostname(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_href(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_hreflang(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_pathname(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_port(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_protocol(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_rel(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_rev(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_search(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_shape(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_target(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_text(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_type_attr(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_charset(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_coords(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_hash(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_host(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_hostname(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_href(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_hreflang(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_pathname(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_port(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_protocol(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_rel(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_rev(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_search(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_shape(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_target(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_text(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_type_attr(&self, value: &str);
 
     fn set_property_text<'a, P: Into<Option<&'a str>>>(&self, text: P);

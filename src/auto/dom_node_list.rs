@@ -27,8 +27,10 @@ glib_wrapper! {
 pub const NONE_DOM_NODE_LIST: Option<&DOMNodeList> = None;
 
 pub trait DOMNodeListExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn item(&self, index: libc::c_ulong) -> Option<DOMNode>;
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

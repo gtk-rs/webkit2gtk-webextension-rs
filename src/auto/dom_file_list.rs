@@ -27,8 +27,10 @@ glib_wrapper! {
 pub const NONE_DOM_FILE_LIST: Option<&DOMFileList> = None;
 
 pub trait DOMFileListExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn item(&self, index: libc::c_ulong) -> Option<DOMFile>;
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

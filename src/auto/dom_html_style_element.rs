@@ -34,18 +34,25 @@ glib_wrapper! {
 pub const NONE_DOMHTML_STYLE_ELEMENT: Option<&DOMHTMLStyleElement> = None;
 
 pub trait DOMHTMLStyleElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_disabled(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_media(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_sheet(&self) -> Option<DOMStyleSheet>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_type_attr(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_disabled(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_media(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_type_attr(&self, value: &str);
 
     fn get_property_type(&self) -> Option<GString>;

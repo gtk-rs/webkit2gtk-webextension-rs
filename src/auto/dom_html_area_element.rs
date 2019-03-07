@@ -32,62 +32,88 @@ glib_wrapper! {
 pub const NONE_DOMHTML_AREA_ELEMENT: Option<&DOMHTMLAreaElement> = None;
 
 pub trait DOMHTMLAreaElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_alt(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_coords(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_hash(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_host(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_hostname(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_href(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_no_href(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_pathname(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_port(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_protocol(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_search(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_shape(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_target(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_alt(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_coords(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_hash(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_host(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_hostname(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_href(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_no_href(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_pathname(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_port(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_protocol(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_search(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_shape(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_target(&self, value: &str);
 
     fn set_property_host<'a, P: Into<Option<&'a str>>>(&self, host: P);

@@ -24,6 +24,7 @@ glib_wrapper! {
 pub const NONE_DOMX_PATH_EXPRESSION: Option<&DOMXPathExpression> = None;
 
 pub trait DOMXPathExpressionExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn evaluate<P: IsA<DOMNode>, Q: IsA<DOMXPathResult>>(&self, contextNode: &P, type_: libc::c_ushort, inResult: &Q) -> Result<DOMXPathResult, Error>;
 }
 

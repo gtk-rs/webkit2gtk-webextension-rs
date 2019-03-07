@@ -33,20 +33,28 @@ glib_wrapper! {
 pub const NONE_DOMHTML_PARAM_ELEMENT: Option<&DOMHTMLParamElement> = None;
 
 pub trait DOMHTMLParamElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_type_attr(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_value(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_value_type(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_type_attr(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_value(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_value_type(&self, value: &str);
 
     fn get_property_type(&self) -> Option<GString>;

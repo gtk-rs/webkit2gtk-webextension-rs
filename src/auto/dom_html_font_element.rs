@@ -30,16 +30,22 @@ glib_wrapper! {
 pub const NONE_DOMHTML_FONT_ELEMENT: Option<&DOMHTMLFontElement> = None;
 
 pub trait DOMHTMLFontElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_color(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_face(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_size(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_color(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_face(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_size(&self, value: &str);
 
     fn connect_property_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

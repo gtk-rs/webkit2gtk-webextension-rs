@@ -33,33 +33,47 @@ glib_wrapper! {
 pub const NONE_DOMHTML_SCRIPT_ELEMENT: Option<&DOMHTMLScriptElement> = None;
 
 pub trait DOMHTMLScriptElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_charset(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_defer(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_event(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_html_for(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_src(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_text(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_type_attr(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_charset(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_defer(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_event(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_html_for(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_src(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_text(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_type_attr(&self, value: &str);
 
     fn set_property_charset<'a, P: Into<Option<&'a str>>>(&self, charset: P);

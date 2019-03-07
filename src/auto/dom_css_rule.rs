@@ -33,14 +33,19 @@ glib_wrapper! {
 pub const NONE_DOMCSS_RULE: Option<&DOMCSSRule> = None;
 
 pub trait DOMCSSRuleExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_css_text(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_parent_rule(&self) -> Option<DOMCSSRule>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_parent_style_sheet(&self) -> Option<DOMCSSStyleSheet>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_rule_type(&self) -> libc::c_ushort;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_css_text(&self, value: &str) -> Result<(), Error>;
 
     fn get_property_type(&self) -> u32;

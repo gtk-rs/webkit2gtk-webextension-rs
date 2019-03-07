@@ -34,34 +34,49 @@ glib_wrapper! {
 pub const NONE_DOMHTML_TABLE_ROW_ELEMENT: Option<&DOMHTMLTableRowElement> = None;
 
 pub trait DOMHTMLTableRowElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn delete_cell(&self, index: libc::c_long) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_bg_color(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_cells(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_ch(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_ch_off(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_row_index(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_section_row_index(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_v_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn insert_cell(&self, index: libc::c_long) -> Result<DOMHTMLElement, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_bg_color(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_ch(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_ch_off(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_v_align(&self, value: &str);
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

@@ -30,8 +30,10 @@ glib_wrapper! {
 pub const NONE_DOM_PROCESSING_INSTRUCTION: Option<&DOMProcessingInstruction> = None;
 
 pub trait DOMProcessingInstructionExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_sheet(&self) -> Option<DOMStyleSheet>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_target(&self) -> Option<GString>;
 
     fn connect_property_sheet_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

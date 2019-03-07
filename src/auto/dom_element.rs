@@ -45,173 +45,253 @@ glib_wrapper! {
 pub const NONE_DOM_ELEMENT: Option<&DOMElement> = None;
 
 pub trait DOMElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn blur(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn closest(&self, selectors: &str) -> Result<DOMElement, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn focus(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_attribute(&self, name: &str) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_attribute_node(&self, name: &str) -> Option<DOMAttr>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_attribute_node_ns(&self, namespaceURI: &str, localName: &str) -> Option<DOMAttr>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_attribute_ns(&self, namespaceURI: &str, localName: &str) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_attributes(&self) -> Option<DOMNamedNodeMap>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_bounding_client_rect(&self) -> Option<DOMClientRect>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_child_element_count(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_10", feature = "dox"))]
     fn get_children(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_class_list(&self) -> Option<DOMDOMTokenList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_class_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_client_height(&self) -> f64;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_client_left(&self) -> f64;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_client_rects(&self) -> Option<DOMClientRectList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_client_top(&self) -> f64;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_client_width(&self) -> f64;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
     fn get_elements_by_class_name(&self, class_name: &str) -> Option<DOMNodeList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn get_elements_by_class_name_as_html_collection(&self, name: &str) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
     fn get_elements_by_tag_name(&self, tag_name: &str) -> Option<DOMNodeList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn get_elements_by_tag_name_as_html_collection(&self, name: &str) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
     fn get_elements_by_tag_name_ns(&self, namespace_uri: &str, tag_name: &str) -> Option<DOMNodeList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn get_elements_by_tag_name_ns_as_html_collection(&self, namespaceURI: &str, localName: &str) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_first_element_child(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_id(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     fn get_inner_html(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_last_element_child(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_next_element_sibling(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_offset_height(&self) -> f64;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_offset_left(&self) -> f64;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_offset_parent(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_offset_top(&self) -> f64;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_offset_width(&self) -> f64;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     fn get_outer_html(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_previous_element_sibling(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_scroll_height(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_scroll_left(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_scroll_top(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_scroll_width(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_style(&self) -> Option<DOMCSSStyleDeclaration>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_tag_name(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_20", deprecated)]
     fn get_webkit_region_overset(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn has_attribute(&self, name: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn has_attribute_ns(&self, namespaceURI: &str, localName: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn has_attributes(&self) -> bool;
 
+    fn html_input_element_get_auto_filled(&self) -> bool;
+
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    fn html_input_element_is_user_edited(&self) -> bool;
+
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    fn html_input_element_set_auto_filled(&self, auto_filled: bool);
+
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    fn html_input_element_set_editing_value(&self, value: &str);
+
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn insert_adjacent_element<P: IsA<DOMElement>>(&self, where_: &str, element: &P) -> Result<DOMElement, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn insert_adjacent_html(&self, where_: &str, html: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn insert_adjacent_text(&self, where_: &str, text: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn matches(&self, selectors: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn query_selector(&self, selectors: &str) -> Result<Option<DOMElement>, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn remove(&self) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_attribute(&self, name: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_attribute_node<P: IsA<DOMAttr>>(&self, oldAttr: &P) -> Result<DOMAttr, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_attribute_ns(&self, namespaceURI: &str, localName: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn request_pointer_lock(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn scroll_by_lines(&self, lines: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn scroll_by_pages(&self, pages: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn scroll_into_view(&self, alignWithTop: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn scroll_into_view_if_needed(&self, centerIfNeeded: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_attribute(&self, name: &str, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_attribute_node<P: IsA<DOMAttr>>(&self, newAttr: &P) -> Result<DOMAttr, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_attribute_node_ns<P: IsA<DOMAttr>>(&self, newAttr: &P) -> Result<DOMAttr, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_attribute_ns<'a, P: Into<Option<&'a str>>>(&self, namespaceURI: P, qualifiedName: &str, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_class_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_id(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     fn set_inner_html(&self, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     fn set_outer_html(&self, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_scroll_left(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_scroll_top(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn webkit_matches_selector(&self, selectors: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn webkit_request_fullscreen(&self);
 
@@ -575,6 +655,33 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
     fn has_attributes(&self) -> bool {
         unsafe {
             from_glib(ffi::webkit_dom_element_has_attributes(self.as_ref().to_glib_none().0))
+        }
+    }
+
+    fn html_input_element_get_auto_filled(&self) -> bool {
+        unsafe {
+            from_glib(ffi::webkit_dom_element_html_input_element_get_auto_filled(self.as_ref().to_glib_none().0))
+        }
+    }
+
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    fn html_input_element_is_user_edited(&self) -> bool {
+        unsafe {
+            from_glib(ffi::webkit_dom_element_html_input_element_is_user_edited(self.as_ref().to_glib_none().0))
+        }
+    }
+
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    fn html_input_element_set_auto_filled(&self, auto_filled: bool) {
+        unsafe {
+            ffi::webkit_dom_element_html_input_element_set_auto_filled(self.as_ref().to_glib_none().0, auto_filled.to_glib());
+        }
+    }
+
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    fn html_input_element_set_editing_value(&self, value: &str) {
+        unsafe {
+            ffi::webkit_dom_element_html_input_element_set_editing_value(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 

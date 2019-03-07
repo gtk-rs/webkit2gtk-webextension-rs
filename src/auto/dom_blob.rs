@@ -25,6 +25,7 @@ glib_wrapper! {
 pub const NONE_DOM_BLOB: Option<&DOMBlob> = None;
 
 pub trait DOMBlobExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_size(&self) -> u64;
 
     fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

@@ -3,7 +3,7 @@
 // DO NOT EDIT
 
 #![allow(non_camel_case_types, non_upper_case_globals, non_snake_case)]
-#![cfg_attr(feature = "cargo-clippy", allow(approx_constant, type_complexity, unreadable_literal))]
+#![allow(clippy::approx_constant, clippy::type_complexity, clippy::unreadable_literal)]
 
 extern crate libc;
 extern crate gio_sys as gio;
@@ -141,7 +141,7 @@ pub const WEBKIT_DOM_NODE_ENTITY_NODE: c_int = 6;
 pub const WEBKIT_DOM_NODE_ENTITY_REFERENCE_NODE: c_int = 5;
 pub const WEBKIT_DOM_NODE_FILTER_ACCEPT: c_int = 1;
 pub const WEBKIT_DOM_NODE_FILTER_REJECT: c_int = 2;
-pub const WEBKIT_DOM_NODE_FILTER_SHOW_ALL: c_int = 4294967295;
+pub const WEBKIT_DOM_NODE_FILTER_SHOW_ALL: c_uint = 4294967295;
 pub const WEBKIT_DOM_NODE_FILTER_SHOW_ATTRIBUTE: c_int = 2;
 pub const WEBKIT_DOM_NODE_FILTER_SHOW_CDATA_SECTION: c_int = 8;
 pub const WEBKIT_DOM_NODE_FILTER_SHOW_COMMENT: c_int = 128;
@@ -1573,16 +1573,6 @@ impl ::std::fmt::Debug for WebKitDOMObjectClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMObjectClass @ {:?}", self as *const _))
          .field("parentClass", &self.parentClass)
-         .finish()
-    }
-}
-
-#[repr(C)]
-pub struct WebKitDOMObjectPrivate(c_void);
-
-impl ::std::fmt::Debug for WebKitDOMObjectPrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMObjectPrivate @ {:?}", self as *const _))
          .finish()
     }
 }
@@ -4265,6 +4255,13 @@ extern "C" {
     pub fn webkit_dom_element_has_attribute(self_: *mut WebKitDOMElement, name: *const c_char) -> gboolean;
     pub fn webkit_dom_element_has_attribute_ns(self_: *mut WebKitDOMElement, namespaceURI: *const c_char, localName: *const c_char) -> gboolean;
     pub fn webkit_dom_element_has_attributes(self_: *mut WebKitDOMElement) -> gboolean;
+    pub fn webkit_dom_element_html_input_element_get_auto_filled(element: *mut WebKitDOMElement) -> gboolean;
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    pub fn webkit_dom_element_html_input_element_is_user_edited(element: *mut WebKitDOMElement) -> gboolean;
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    pub fn webkit_dom_element_html_input_element_set_auto_filled(element: *mut WebKitDOMElement, auto_filled: gboolean);
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    pub fn webkit_dom_element_html_input_element_set_editing_value(element: *mut WebKitDOMElement, value: *const c_char);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_element_insert_adjacent_element(self_: *mut WebKitDOMElement, where_: *const c_char, element: *mut WebKitDOMElement, error: *mut *mut glib::GError) -> *mut WebKitDOMElement;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -5397,6 +5394,8 @@ extern "C" {
     // WebKitDOMNode
     //=========================================================================
     pub fn webkit_dom_node_get_type() -> GType;
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    pub fn webkit_dom_node_for_js_value(value: *mut java_script_core::JSCValue) -> *mut WebKitDOMNode;
     pub fn webkit_dom_node_append_child(self_: *mut WebKitDOMNode, newChild: *mut WebKitDOMNode, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
     pub fn webkit_dom_node_clone_node(self_: *mut WebKitDOMNode, deep: gboolean, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
     #[cfg(any(feature = "v2_14", feature = "dox"))]
@@ -5597,8 +5596,16 @@ extern "C" {
     // WebKitFrame
     //=========================================================================
     pub fn webkit_frame_get_type() -> GType;
-    pub fn webkit_frame_get_javascript_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> java_script_core::JSGlobalContextRef;
-    pub fn webkit_frame_get_javascript_global_context(frame: *mut WebKitFrame) -> java_script_core::JSGlobalContextRef;
+    //pub fn webkit_frame_get_javascript_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> /*Metadata mismatch*/[c:type mismatch JSGlobalContextRef != JSCContext of Context];
+    //pub fn webkit_frame_get_javascript_global_context(frame: *mut WebKitFrame) -> /*Metadata mismatch*/[c:type mismatch JSGlobalContextRef != JSCContext of Context];
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    pub fn webkit_frame_get_js_context(frame: *mut WebKitFrame) -> *mut java_script_core::JSCContext;
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    pub fn webkit_frame_get_js_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> *mut java_script_core::JSCContext;
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    pub fn webkit_frame_get_js_value_for_dom_object(frame: *mut WebKitFrame, dom_object: *mut WebKitDOMObject) -> *mut java_script_core::JSCValue;
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    pub fn webkit_frame_get_js_value_for_dom_object_in_script_world(frame: *mut WebKitFrame, dom_object: *mut WebKitDOMObject, world: *mut WebKitScriptWorld) -> *mut java_script_core::JSCValue;
     pub fn webkit_frame_get_uri(frame: *mut WebKitFrame) -> *const c_char;
     pub fn webkit_frame_is_main_frame(frame: *mut WebKitFrame) -> gboolean;
 
@@ -5625,7 +5632,11 @@ extern "C" {
     //=========================================================================
     pub fn webkit_script_world_get_type() -> GType;
     pub fn webkit_script_world_new() -> *mut WebKitScriptWorld;
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    pub fn webkit_script_world_new_with_name(name: *const c_char) -> *mut WebKitScriptWorld;
     pub fn webkit_script_world_get_default() -> *mut WebKitScriptWorld;
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    pub fn webkit_script_world_get_name(world: *mut WebKitScriptWorld) -> *const c_char;
 
     //=========================================================================
     // WebKitURIRequest

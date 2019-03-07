@@ -31,38 +31,55 @@ glib_wrapper! {
 pub const NONE_DOM_MOUSE_EVENT: Option<&DOMMouseEvent> = None;
 
 pub trait DOMMouseEventExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_alt_key(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_button(&self) -> libc::c_ushort;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_client_x(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_client_y(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_ctrl_key(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_from_element(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_meta_key(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_offset_x(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_offset_y(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_related_target(&self) -> Option<DOMEventTarget>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_screen_x(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_screen_y(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_shift_key(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_to_element(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_x(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_y(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn init_mouse_event<P: IsA<DOMDOMWindow>, Q: IsA<DOMEventTarget>>(&self, type_: &str, canBubble: bool, cancelable: bool, view: &P, detail: libc::c_long, screenX: libc::c_long, screenY: libc::c_long, clientX: libc::c_long, clientY: libc::c_long, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool, button: libc::c_ushort, relatedTarget: &Q);
 
     fn connect_property_alt_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

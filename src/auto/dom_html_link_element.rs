@@ -36,48 +36,69 @@ glib_wrapper! {
 pub const NONE_DOMHTML_LINK_ELEMENT: Option<&DOMHTMLLinkElement> = None;
 
 pub trait DOMHTMLLinkElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_charset(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_disabled(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_href(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_hreflang(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_media(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_rel(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_rev(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_sheet(&self) -> Option<DOMStyleSheet>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_sizes(&self) -> Option<DOMDOMTokenList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_target(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_type_attr(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_charset(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_disabled(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_href(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_hreflang(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_media(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_rel(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_rev(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_sizes(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_target(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_type_attr(&self, value: &str);
 
     fn get_property_type(&self) -> Option<GString>;
