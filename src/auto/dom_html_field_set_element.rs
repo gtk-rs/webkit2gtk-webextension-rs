@@ -30,6 +30,7 @@ glib_wrapper! {
 pub const NONE_DOMHTML_FIELD_SET_ELEMENT: Option<&DOMHTMLFieldSetElement> = None;
 
 pub trait DOMHTMLFieldSetElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_form(&self) -> Option<DOMHTMLFormElement>;
 
     fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

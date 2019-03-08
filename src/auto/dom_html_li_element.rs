@@ -34,12 +34,16 @@ glib_wrapper! {
 pub const NONE_DOMHTMLLI_ELEMENT: Option<&DOMHTMLLIElement> = None;
 
 pub trait DOMHTMLLIElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_type_attr(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_value(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_type_attr(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_value(&self, value: libc::c_long);
 
     fn get_property_type(&self) -> Option<GString>;

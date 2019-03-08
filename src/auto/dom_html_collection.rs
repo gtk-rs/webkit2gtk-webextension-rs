@@ -27,10 +27,13 @@ glib_wrapper! {
 pub const NONE_DOMHTML_COLLECTION: Option<&DOMHTMLCollection> = None;
 
 pub trait DOMHTMLCollectionExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn item(&self, index: libc::c_ulong) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn named_item(&self, name: &str) -> Option<DOMNode>;
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

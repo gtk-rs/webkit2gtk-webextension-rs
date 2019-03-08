@@ -32,11 +32,13 @@ glib_wrapper! {
 pub const NONE_DOM_TEXT: Option<&DOMText> = None;
 
 pub trait DOMTextExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_whole_text(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
     fn replace_whole_text(&self, content: &str) -> Result<DOMText, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn split_text(&self, offset: libc::c_ulong) -> Result<DOMText, Error>;
 
     fn connect_property_whole_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

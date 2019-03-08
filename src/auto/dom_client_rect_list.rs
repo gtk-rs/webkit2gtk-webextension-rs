@@ -31,9 +31,11 @@ glib_wrapper! {
 pub const NONE_DOM_CLIENT_RECT_LIST: Option<&DOMClientRectList> = None;
 
 pub trait DOMClientRectListExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn item(&self, index: libc::c_ulong) -> Option<DOMClientRect>;
 

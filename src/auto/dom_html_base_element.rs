@@ -30,12 +30,16 @@ glib_wrapper! {
 pub const NONE_DOMHTML_BASE_ELEMENT: Option<&DOMHTMLBaseElement> = None;
 
 pub trait DOMHTMLBaseElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_href(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_target(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_href(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_target(&self, value: &str);
 
     fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

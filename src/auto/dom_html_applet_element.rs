@@ -31,48 +31,70 @@ glib_wrapper! {
 pub const NONE_DOMHTML_APPLET_ELEMENT: Option<&DOMHTMLAppletElement> = None;
 
 pub trait DOMHTMLAppletElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_alt(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_archive(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_code(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_code_base(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_height(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_hspace(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_object(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_vspace(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_alt(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_archive(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_code(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_code_base(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_height(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_hspace(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_object(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_vspace(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: &str);
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

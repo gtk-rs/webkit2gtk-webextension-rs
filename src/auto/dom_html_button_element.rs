@@ -34,28 +34,40 @@ glib_wrapper! {
 pub const NONE_DOMHTML_BUTTON_ELEMENT: Option<&DOMHTMLButtonElement> = None;
 
 pub trait DOMHTMLButtonElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_autofocus(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_button_type(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_disabled(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_form(&self) -> Option<DOMHTMLFormElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_value(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_will_validate(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_autofocus(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_button_type(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_disabled(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_value(&self, value: &str);
 
     fn get_property_type(&self) -> Option<GString>;

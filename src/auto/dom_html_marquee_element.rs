@@ -23,8 +23,10 @@ glib_wrapper! {
 pub const NONE_DOMHTML_MARQUEE_ELEMENT: Option<&DOMHTMLMarqueeElement> = None;
 
 pub trait DOMHTMLMarqueeElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn start(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn stop(&self);
 }
 

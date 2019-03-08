@@ -31,66 +31,97 @@ glib_wrapper! {
 pub const NONE_DOMHTML_IMAGE_ELEMENT: Option<&DOMHTMLImageElement> = None;
 
 pub trait DOMHTMLImageElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_alt(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_border(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_complete(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_height(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_hspace(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_is_map(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_long_desc(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_lowsrc(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_natural_height(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_natural_width(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_src(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_use_map(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_vspace(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_x(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_y(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_alt(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_border(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_height(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_hspace(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_is_map(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_long_desc(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_lowsrc(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_src(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_use_map(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_vspace(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: libc::c_long);
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

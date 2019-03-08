@@ -55,250 +55,350 @@ glib_wrapper! {
 pub const NONE_DOM_DOCUMENT: Option<&DOMDocument> = None;
 
 pub trait DOMDocumentExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn adopt_node<P: IsA<DOMNode>>(&self, source: &P) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn caret_range_from_point(&self, x: libc::c_long, y: libc::c_long) -> Option<DOMRange>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_attribute(&self, name: &str) -> Result<DOMAttr, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_attribute_ns<'a, P: Into<Option<&'a str>>>(&self, namespaceURI: P, qualifiedName: &str) -> Result<DOMAttr, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_cdata_section(&self, data: &str) -> Result<DOMCDATASection, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_comment(&self, data: &str) -> Option<DOMComment>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_css_style_declaration(&self) -> Option<DOMCSSStyleDeclaration>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn create_document_fragment(&self) -> Option<DOMDocumentFragment>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_element(&self, tagName: &str) -> Result<DOMElement, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_element_ns<'a, P: Into<Option<&'a str>>>(&self, namespaceURI: P, qualifiedName: &str) -> Result<DOMElement, Error>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
     fn create_entity_reference<'a, P: Into<Option<&'a str>>>(&self, name: P) -> Result<DOMEntityReference, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_event(&self, eventType: &str) -> Result<DOMEvent, Error>;
 
+    //#[cfg_attr(feature = "v2_22", deprecated)]
     //fn create_expression<P: IsA</*Ignored*/DOMXPathNSResolver>>(&self, expression: &str, resolver: &P) -> Result<DOMXPathExpression, Error>;
 
+    //#[cfg_attr(feature = "v2_22", deprecated)]
     //fn create_node_iterator<'a, P: IsA<DOMNode>, Q: IsA</*Ignored*/DOMNodeFilter> + 'a, R: Into<Option<&'a Q>>>(&self, root: &P, whatToShow: libc::c_ulong, filter: R, expandEntityReferences: bool) -> Result<DOMNodeIterator, Error>;
 
+    //#[cfg_attr(feature = "v2_22", deprecated)]
     //fn create_ns_resolver<P: IsA<DOMNode>>(&self, nodeResolver: &P) -> /*Ignored*/Option<DOMXPathNSResolver>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_processing_instruction(&self, target: &str, data: &str) -> Result<DOMProcessingInstruction, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_range(&self) -> Option<DOMRange>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_text_node(&self, data: &str) -> Option<DOMText>;
 
+    //#[cfg_attr(feature = "v2_22", deprecated)]
     //fn create_tree_walker<'a, P: IsA<DOMNode>, Q: IsA</*Ignored*/DOMNodeFilter> + 'a, R: Into<Option<&'a Q>>>(&self, root: &P, whatToShow: libc::c_ulong, filter: R, expandEntityReferences: bool) -> Result<DOMTreeWalker, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn element_from_point(&self, x: libc::c_long, y: libc::c_long) -> Option<DOMElement>;
 
+    //#[cfg_attr(feature = "v2_22", deprecated)]
     //fn evaluate<'a, 'b, P: IsA<DOMNode>, Q: IsA</*Ignored*/DOMXPathNSResolver> + 'a, R: Into<Option<&'a Q>>, S: IsA<DOMXPathResult> + 'b, T: Into<Option<&'b S>>>(&self, expression: &str, contextNode: &P, resolver: R, type_: libc::c_ushort, inResult: T) -> Result<DOMXPathResult, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn exec_command(&self, command: &str, userInterface: bool, value: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn exit_pointer_lock(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_active_element(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_anchors(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_applets(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_body(&self) -> Option<DOMHTMLElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_character_set(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_charset(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_child_element_count(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_children(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     fn get_compat_mode(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_content_type(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_cookie(&self) -> Result<GString, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_current_script(&self) -> Option<DOMHTMLScriptElement>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
     fn get_default_charset(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_default_view(&self) -> Option<DOMDOMWindow>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     fn get_design_mode(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_dir(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_doctype(&self) -> Option<DOMDocumentType>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_document_element(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_document_uri(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_domain(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_element_by_id(&self, elementId: &str) -> Option<DOMElement>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
     fn get_elements_by_class_name(&self, class_name: &str) -> Option<DOMNodeList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn get_elements_by_class_name_as_html_collection(&self, classNames: &str) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_elements_by_name(&self, elementName: &str) -> Option<DOMNodeList>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
     fn get_elements_by_tag_name(&self, tag_name: &str) -> Option<DOMNodeList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn get_elements_by_tag_name_as_html_collection(&self, tagname: &str) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
     fn get_elements_by_tag_name_ns(&self, namespace_uri: &str, tag_name: &str) -> Option<DOMNodeList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn get_elements_by_tag_name_ns_as_html_collection(&self, namespaceURI: &str, localName: &str) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     fn get_embeds(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_first_element_child(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_forms(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_head(&self) -> Option<DOMHTMLHeadElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_hidden(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_images(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_implementation(&self) -> Option<DOMDOMImplementation>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_input_encoding(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_last_element_child(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_last_modified(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_links(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_origin(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_override_style<'a, P: IsA<DOMElement>, Q: Into<Option<&'a str>>>(&self, element: &P, pseudoElement: Q) -> Option<DOMCSSStyleDeclaration>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     fn get_plugins(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_pointer_lock_element(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_preferred_stylesheet_set(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_ready_state(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_referrer(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     fn get_scripts(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_scrolling_element(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_selected_stylesheet_set(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_style_sheets(&self) -> Option<DOMStyleSheetList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_title(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_url(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_visibility_state(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_webkit_current_fullscreen_element(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_webkit_fullscreen_element(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_webkit_fullscreen_enabled(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_webkit_fullscreen_keyboard_input_allowed(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_webkit_is_fullscreen(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_xml_encoding(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_xml_standalone(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_xml_version(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn has_focus(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn import_node<P: IsA<DOMNode>>(&self, importedNode: &P, deep: bool) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn query_command_enabled(&self, command: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn query_command_indeterm(&self, command: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn query_command_state(&self, command: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn query_command_supported(&self, command: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn query_command_value(&self, command: &str) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn query_selector(&self, selectors: &str) -> Result<DOMElement, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_body<P: IsA<DOMHTMLElement>>(&self, value: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_charset(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_cookie(&self, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     fn set_design_mode(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_dir(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_document_uri(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_selected_stylesheet_set(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_title(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_xml_standalone(&self, value: bool) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_xml_version(&self, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn webkit_cancel_fullscreen(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn webkit_exit_fullscreen(&self);
 

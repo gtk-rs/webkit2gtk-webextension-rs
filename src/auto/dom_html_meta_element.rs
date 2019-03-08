@@ -30,20 +30,28 @@ glib_wrapper! {
 pub const NONE_DOMHTML_META_ELEMENT: Option<&DOMHTMLMetaElement> = None;
 
 pub trait DOMHTMLMetaElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_content(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_http_equiv(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_scheme(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_content(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_http_equiv(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_scheme(&self, value: &str);
 
     fn connect_property_content_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

@@ -29,23 +29,31 @@ glib_wrapper! {
 pub const NONE_DOM_NODE_ITERATOR: Option<&DOMNodeIterator> = None;
 
 pub trait DOMNodeIteratorExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn detach(&self);
 
     #[cfg_attr(feature = "v2_12", deprecated)]
     fn get_expand_entity_references(&self) -> bool;
 
+    //#[cfg_attr(feature = "v2_22", deprecated)]
     //fn get_filter(&self) -> /*Ignored*/Option<DOMNodeFilter>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_pointer_before_reference_node(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_reference_node(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_root(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_what_to_show(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn next_node(&self) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn previous_node(&self) -> Result<DOMNode, Error>;
 
     fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

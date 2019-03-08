@@ -31,20 +31,28 @@ glib_wrapper! {
 pub const NONE_DOM_CHARACTER_DATA: Option<&DOMCharacterData> = None;
 
 pub trait DOMCharacterDataExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn append_data(&self, data: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn delete_data(&self, offset: libc::c_ulong, length: libc::c_ulong) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_data(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn insert_data(&self, offset: libc::c_ulong, data: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn replace_data(&self, offset: libc::c_ulong, length: libc::c_ulong, data: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_data(&self, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn substring_data(&self, offset: libc::c_ulong, length: libc::c_ulong) -> Result<GString, Error>;
 
     fn connect_property_data_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

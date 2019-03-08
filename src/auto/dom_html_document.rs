@@ -31,14 +31,19 @@ glib_wrapper! {
 pub const NONE_DOMHTML_DOCUMENT: Option<&DOMHTMLDocument> = None;
 
 pub trait DOMHTMLDocumentExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn capture_events(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn clear(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn close(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_alink_color(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_bg_color(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
@@ -49,6 +54,7 @@ pub trait DOMHTMLDocumentExt: 'static {
     #[cfg(any(not(feature = "v2_14"), feature = "dox"))]
     fn get_design_mode(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(not(feature = "v2_16"), feature = "dox"))]
     fn get_dir(&self) -> Option<GString>;
 
@@ -56,10 +62,13 @@ pub trait DOMHTMLDocumentExt: 'static {
     #[cfg(any(not(feature = "v2_14"), feature = "dox"))]
     fn get_embeds(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_fg_color(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_height(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_link_color(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
@@ -70,27 +79,36 @@ pub trait DOMHTMLDocumentExt: 'static {
     #[cfg(any(not(feature = "v2_14"), feature = "dox"))]
     fn get_scripts(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_vlink_color(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn release_events(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_alink_color(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_bg_color(&self, value: &str);
 
     #[cfg_attr(feature = "v2_14", deprecated)]
     #[cfg(any(not(feature = "v2_14"), feature = "dox"))]
     fn set_design_mode(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(not(feature = "v2_16"), feature = "dox"))]
     fn set_dir(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_fg_color(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_link_color(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_vlink_color(&self, value: &str);
 
     fn connect_property_alink_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

@@ -30,12 +30,16 @@ glib_wrapper! {
 pub const NONE_DOMHTML_CANVAS_ELEMENT: Option<&DOMHTMLCanvasElement> = None;
 
 pub trait DOMHTMLCanvasElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_height(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_height(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: libc::c_long);
 
     fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

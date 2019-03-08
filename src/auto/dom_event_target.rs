@@ -22,14 +22,19 @@ glib_wrapper! {
 pub const NONE_DOM_EVENT_TARGET: Option<&DOMEventTarget> = None;
 
 pub trait DOMEventTargetExt: 'static {
+    //#[cfg_attr(feature = "v2_22", deprecated)]
     //fn add_event_listener(&self, event_name: &str, handler: /*Unknown conversion*//*Unimplemented*/Callback, use_capture: bool) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn add_event_listener_with_closure(&self, event_name: &str, handler: &glib::Closure, use_capture: bool) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn dispatch_event<P: IsA<DOMEvent>>(&self, event: &P) -> Result<(), Error>;
 
+    //#[cfg_attr(feature = "v2_22", deprecated)]
     //fn remove_event_listener(&self, event_name: &str, handler: /*Unknown conversion*//*Unimplemented*/Callback, use_capture: bool) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_event_listener_with_closure(&self, event_name: &str, handler: &glib::Closure, use_capture: bool) -> bool;
 }
 

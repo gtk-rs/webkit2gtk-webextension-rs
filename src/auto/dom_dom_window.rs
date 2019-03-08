@@ -37,153 +37,203 @@ glib_wrapper! {
 pub const NONE_DOMDOM_WINDOW: Option<&DOMDOMWindow> = None;
 
 pub trait DOMDOMWindowExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn alert(&self, message: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn blur(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn capture_events(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn close(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn confirm(&self, message: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn find(&self, string: &str, caseSensitive: bool, backwards: bool, wrap: bool, wholeWord: bool, searchInFrames: bool, showDialog: bool) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn focus(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_closed(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_computed_style<'a, P: IsA<DOMElement>, Q: Into<Option<&'a str>>>(&self, element: &P, pseudoElement: Q) -> Option<DOMCSSStyleDeclaration>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_default_status(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_device_pixel_ratio(&self) -> f64;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_document(&self) -> Option<DOMDocument>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_frame_element(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_frames(&self) -> Option<DOMDOMWindow>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_inner_height(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_inner_width(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_offscreen_buffering(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_opener(&self) -> Option<DOMDOMWindow>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_orientation(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_outer_height(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_outer_width(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_page_x_offset(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_page_y_offset(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_parent(&self) -> Option<DOMDOMWindow>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_screen_left(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_screen_top(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_screen_x(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_screen_y(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_scroll_x(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_scroll_y(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_selection(&self) -> Option<DOMDOMSelection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_self(&self) -> Option<DOMDOMWindow>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_status(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_top(&self) -> Option<DOMDOMWindow>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_window(&self) -> Option<DOMDOMWindow>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn move_by(&self, x: f32, y: f32);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn move_to(&self, x: f32, y: f32);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn print(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn prompt(&self, message: &str, defaultValue: &str) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn release_events(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn resize_by(&self, x: f32, y: f32);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn resize_to(&self, width: f32, height: f32);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn scroll_by(&self, x: f64, y: f64);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn scroll_to(&self, x: f64, y: f64);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_default_status(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_status(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn stop(&self);
 

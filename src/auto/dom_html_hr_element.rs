@@ -30,20 +30,28 @@ glib_wrapper! {
 pub const NONE_DOMHTMLHR_ELEMENT: Option<&DOMHTMLHRElement> = None;
 
 pub trait DOMHTMLHRElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_no_shade(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_size(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_no_shade(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_size(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: &str);
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

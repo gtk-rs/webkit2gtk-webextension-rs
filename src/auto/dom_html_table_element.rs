@@ -36,68 +36,100 @@ glib_wrapper! {
 pub const NONE_DOMHTML_TABLE_ELEMENT: Option<&DOMHTMLTableElement> = None;
 
 pub trait DOMHTMLTableElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_caption(&self) -> Option<DOMHTMLElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_t_foot(&self) -> Option<DOMHTMLElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_t_head(&self) -> Option<DOMHTMLElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn delete_caption(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn delete_row(&self, index: libc::c_long) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn delete_t_foot(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn delete_t_head(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_bg_color(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_border(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_caption(&self) -> Option<DOMHTMLTableCaptionElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_cell_padding(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_cell_spacing(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_rows(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_rules(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_summary(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_t_bodies(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_t_foot(&self) -> Option<DOMHTMLTableSectionElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_t_head(&self) -> Option<DOMHTMLTableSectionElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_bg_color(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_border(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_caption<P: IsA<DOMHTMLTableCaptionElement>>(&self, value: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_cell_padding(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_cell_spacing(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_rules(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_summary(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_t_foot<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_t_head<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: &str);
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

@@ -30,8 +30,10 @@ glib_wrapper! {
 pub const NONE_DOMHTML_HTML_ELEMENT: Option<&DOMHTMLHtmlElement> = None;
 
 pub trait DOMHTMLHtmlElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_version(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_version(&self, value: &str);
 
     fn connect_property_version_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

@@ -38,52 +38,76 @@ glib_wrapper! {
 pub const NONE_DOMHTML_SELECT_ELEMENT: Option<&DOMHTMLSelectElement> = None;
 
 pub trait DOMHTMLSelectElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn add<P: IsA<DOMHTMLElement>, Q: IsA<DOMHTMLElement>>(&self, element: &P, before: &Q) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_autofocus(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_disabled(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_form(&self) -> Option<DOMHTMLFormElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_multiple(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_options(&self) -> Option<DOMHTMLOptionsCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_select_type(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_selected_index(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_size(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_value(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_will_validate(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn item(&self, index: libc::c_ulong) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn named_item(&self, name: &str) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove(&self, index: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_autofocus(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_disabled(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_length(&self, value: libc::c_ulong) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_multiple(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_selected_index(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_size(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_value(&self, value: &str);
 
     fn get_property_type(&self) -> Option<GString>;

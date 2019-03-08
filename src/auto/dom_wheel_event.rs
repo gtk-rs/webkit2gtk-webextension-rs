@@ -30,12 +30,16 @@ glib_wrapper! {
 pub const NONE_DOM_WHEEL_EVENT: Option<&DOMWheelEvent> = None;
 
 pub trait DOMWheelEventExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_wheel_delta(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_wheel_delta_x(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_wheel_delta_y(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn init_wheel_event<P: IsA<DOMDOMWindow>>(&self, wheelDeltaX: libc::c_long, wheelDeltaY: libc::c_long, view: &P, screenX: libc::c_long, screenY: libc::c_long, clientX: libc::c_long, clientY: libc::c_long, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool);
 
     fn connect_property_wheel_delta_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

@@ -29,31 +29,43 @@ glib_wrapper! {
 pub const NONE_DOM_TREE_WALKER: Option<&DOMTreeWalker> = None;
 
 pub trait DOMTreeWalkerExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn first_child(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_current_node(&self) -> Option<DOMNode>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
     fn get_expand_entity_references(&self) -> bool;
 
+    //#[cfg_attr(feature = "v2_22", deprecated)]
     //fn get_filter(&self) -> /*Ignored*/Option<DOMNodeFilter>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_root(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_what_to_show(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn last_child(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn next_node(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn next_sibling(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn parent_node(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn previous_node(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn previous_sibling(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_current_node<P: IsA<DOMNode>>(&self, value: &P) -> Result<(), Error>;
 
     fn connect_property_current_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

@@ -30,12 +30,16 @@ glib_wrapper! {
 pub const NONE_DOMHTML_PRE_ELEMENT: Option<&DOMHTMLPreElement> = None;
 
 pub trait DOMHTMLPreElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_wrap(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_wrap(&self, value: bool);
 
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

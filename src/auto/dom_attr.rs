@@ -31,14 +31,19 @@ glib_wrapper! {
 pub const NONE_DOM_ATTR: Option<&DOMAttr> = None;
 
 pub trait DOMAttrExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_owner_element(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_specified(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_value(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_value(&self, value: &str) -> Result<(), Error>;
 
     fn connect_property_local_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

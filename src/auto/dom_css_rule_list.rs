@@ -27,8 +27,10 @@ glib_wrapper! {
 pub const NONE_DOMCSS_RULE_LIST: Option<&DOMCSSRuleList> = None;
 
 pub trait DOMCSSRuleListExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn item(&self, index: libc::c_ulong) -> Option<DOMCSSRule>;
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

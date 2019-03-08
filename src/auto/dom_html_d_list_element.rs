@@ -29,8 +29,10 @@ glib_wrapper! {
 pub const NONE_DOMHTMLD_LIST_ELEMENT: Option<&DOMHTMLDListElement> = None;
 
 pub trait DOMHTMLDListElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_compact(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_compact(&self, value: bool);
 
     fn connect_property_compact_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

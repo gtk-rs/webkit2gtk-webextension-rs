@@ -7,6 +7,8 @@ use Frame;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
 use WebPage;
 use ffi;
+#[cfg(any(feature = "v2_22", feature = "dox"))]
+use glib::GString;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
 use glib::object::Cast;
 use glib::object::IsA;
@@ -40,6 +42,14 @@ impl ScriptWorld {
         }
     }
 
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    pub fn new_with_name(name: &str) -> ScriptWorld {
+        assert_initialized_main_thread!();
+        unsafe {
+            from_glib_full(ffi::webkit_script_world_new_with_name(name.to_glib_none().0))
+        }
+    }
+
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     pub fn get_default() -> Option<ScriptWorld> {
         assert_initialized_main_thread!();
@@ -59,11 +69,21 @@ impl Default for ScriptWorld {
 pub const NONE_SCRIPT_WORLD: Option<&ScriptWorld> = None;
 
 pub trait ScriptWorldExt: 'static {
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    fn get_name(&self) -> Option<GString>;
+
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     fn connect_window_object_cleared<F: Fn(&Self, &WebPage, &Frame) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
 impl<O: IsA<ScriptWorld>> ScriptWorldExt for O {
+    #[cfg(any(feature = "v2_22", feature = "dox"))]
+    fn get_name(&self) -> Option<GString> {
+        unsafe {
+            from_glib_none(ffi::webkit_script_world_get_name(self.as_ref().to_glib_none().0))
+        }
+    }
+
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     fn connect_window_object_cleared<F: Fn(&Self, &WebPage, &Frame) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {

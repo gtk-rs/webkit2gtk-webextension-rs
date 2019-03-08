@@ -37,78 +37,103 @@ glib_wrapper! {
 pub const NONE_DOMDOM_SELECTION: Option<&DOMDOMSelection> = None;
 
 pub trait DOMDOMSelectionExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn add_range<P: IsA<DOMRange>>(&self, range: &P);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn collapse<P: IsA<DOMNode>>(&self, node: &P, offset: libc::c_ulong);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn collapse_to_end(&self) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn collapse_to_start(&self) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn contains_node<P: IsA<DOMNode>>(&self, node: &P, allowPartial: bool) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn delete_from_document(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn empty(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn extend<P: IsA<DOMNode>>(&self, node: &P, offset: libc::c_ulong) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_anchor_node(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_anchor_offset(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_base_node(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_base_offset(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_extent_node(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_extent_offset(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_focus_node(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_focus_offset(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_is_collapsed(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_range_at(&self, index: libc::c_ulong) -> Result<DOMRange, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_range_count(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_selection_type(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn modify(&self, alter: &str, direction: &str, granularity: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn remove_all_ranges(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn select_all_children<P: IsA<DOMNode>>(&self, node: &P);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_base_and_extent<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, baseNode: &P, baseOffset: libc::c_ulong, extentNode: &Q, extentOffset: libc::c_ulong);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_position<P: IsA<DOMNode>>(&self, node: &P, offset: libc::c_ulong);
 

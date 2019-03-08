@@ -32,70 +32,101 @@ glib_wrapper! {
 pub const NONE_DOM_RANGE: Option<&DOMRange> = None;
 
 pub trait DOMRangeExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn clone_contents(&self) -> Result<DOMDocumentFragment, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn clone_range(&self) -> Result<DOMRange, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn collapse(&self, toStart: bool) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn compare_boundary_points<P: IsA<DOMRange>>(&self, how: libc::c_ushort, sourceRange: &P) -> Result<libc::c_short, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn compare_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<libc::c_short, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn compare_point<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<libc::c_short, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn create_contextual_fragment(&self, html: &str) -> Result<DOMDocumentFragment, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn delete_contents(&self) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn detach(&self) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn expand(&self, unit: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn extract_contents(&self) -> Result<DOMDocumentFragment, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_collapsed(&self) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_common_ancestor_container(&self) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_end_container(&self) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_end_offset(&self) -> Result<libc::c_long, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_start_container(&self) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_start_offset(&self) -> Result<libc::c_long, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_text(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn insert_node<P: IsA<DOMNode>>(&self, newNode: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn intersects_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn is_point_in_range<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn select_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn select_node_contents<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_end<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_end_after<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_end_before<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_start<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_start_after<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_start_before<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn surround_contents<P: IsA<DOMNode>>(&self, newParent: &P) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn to_string(&self) -> Result<GString, Error>;
 
     fn connect_property_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

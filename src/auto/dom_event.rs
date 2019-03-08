@@ -31,34 +31,49 @@ glib_wrapper! {
 pub const NONE_DOM_EVENT: Option<&DOMEvent> = None;
 
 pub trait DOMEventExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_bubbles(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_cancel_bubble(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_cancelable(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_current_target(&self) -> Option<DOMEventTarget>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_event_phase(&self) -> libc::c_ushort;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_event_type(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_return_value(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_src_element(&self) -> Option<DOMEventTarget>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_target(&self) -> Option<DOMEventTarget>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_time_stamp(&self) -> u32;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn init_event(&self, eventTypeArg: &str, canBubbleArg: bool, cancelableArg: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn prevent_default(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_cancel_bubble(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_return_value(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn stop_propagation(&self);
 
     fn get_property_type(&self) -> Option<GString>;

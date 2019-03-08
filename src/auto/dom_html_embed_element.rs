@@ -34,28 +34,40 @@ glib_wrapper! {
 pub const NONE_DOMHTML_EMBED_ELEMENT: Option<&DOMHTMLEmbedElement> = None;
 
 pub trait DOMHTMLEmbedElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_height(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_src(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_type_attr(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_height(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_src(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_type_attr(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: libc::c_long);
 
     fn get_property_type(&self) -> Option<GString>;

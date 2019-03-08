@@ -30,12 +30,16 @@ glib_wrapper! {
 pub const NONE_DOMHTML_OPT_GROUP_ELEMENT: Option<&DOMHTMLOptGroupElement> = None;
 
 pub trait DOMHTMLOptGroupElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_disabled(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_label(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_disabled(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_label(&self, value: &str);
 
     fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

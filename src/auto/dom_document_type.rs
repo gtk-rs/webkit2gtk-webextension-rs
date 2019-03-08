@@ -29,16 +29,22 @@ glib_wrapper! {
 pub const NONE_DOM_DOCUMENT_TYPE: Option<&DOMDocumentType> = None;
 
 pub trait DOMDocumentTypeExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_entities(&self) -> Option<DOMNamedNodeMap>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_internal_subset(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_notations(&self) -> Option<DOMNamedNodeMap>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_public_id(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_system_id(&self) -> Option<GString>;
 
     fn connect_property_entities_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

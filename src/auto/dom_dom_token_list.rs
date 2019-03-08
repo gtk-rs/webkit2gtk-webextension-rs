@@ -34,30 +34,39 @@ glib_wrapper! {
 pub const NONE_DOMDOM_TOKEN_LIST: Option<&DOMDOMTokenList> = None;
 
 pub trait DOMDOMTokenListExt: 'static {
+    //#[cfg_attr(feature = "v2_22", deprecated)]
     //#[cfg(any(feature = "v2_16", feature = "dox"))]
     //fn add(&self, error: &mut Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn contains(&self, token: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_value(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn item(&self, index: libc::c_ulong) -> Option<GString>;
 
+    //#[cfg_attr(feature = "v2_22", deprecated)]
     //#[cfg(any(feature = "v2_16", feature = "dox"))]
     //fn remove(&self, error: &mut Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn replace(&self, token: &str, newToken: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_value(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn toggle(&self, token: &str, force: bool) -> Result<(), Error>;
 

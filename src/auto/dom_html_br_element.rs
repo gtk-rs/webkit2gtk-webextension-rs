@@ -30,8 +30,10 @@ glib_wrapper! {
 pub const NONE_DOMHTMLBR_ELEMENT: Option<&DOMHTMLBRElement> = None;
 
 pub trait DOMHTMLBRElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_clear(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_clear(&self, value: &str);
 
     fn connect_property_clear_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

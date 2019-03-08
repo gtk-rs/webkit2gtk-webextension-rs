@@ -31,62 +31,91 @@ glib_wrapper! {
 pub const NONE_DOMHTML_TABLE_CELL_ELEMENT: Option<&DOMHTMLTableCellElement> = None;
 
 pub trait DOMHTMLTableCellElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_abbr(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_axis(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_bg_color(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_cell_index(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_ch(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_ch_off(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_col_span(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_headers(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_height(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_no_wrap(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_row_span(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_scope(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_v_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_abbr(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_axis(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_bg_color(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_ch(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_ch_off(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_col_span(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_headers(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_height(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_no_wrap(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_row_span(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_scope(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_v_align(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: &str);
 
     fn connect_property_abbr_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

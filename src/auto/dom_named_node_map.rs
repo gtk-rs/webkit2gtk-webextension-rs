@@ -29,20 +29,28 @@ glib_wrapper! {
 pub const NONE_DOM_NAMED_NODE_MAP: Option<&DOMNamedNodeMap> = None;
 
 pub trait DOMNamedNodeMapExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_length(&self) -> libc::c_ulong;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_named_item(&self, name: &str) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_named_item_ns(&self, namespaceURI: &str, localName: &str) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn item(&self, index: libc::c_ulong) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_named_item(&self, name: &str) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_named_item_ns(&self, namespaceURI: &str, localName: &str) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_named_item<P: IsA<DOMNode>>(&self, node: &P) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_named_item_ns<P: IsA<DOMNode>>(&self, node: &P) -> Result<DOMNode, Error>;
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

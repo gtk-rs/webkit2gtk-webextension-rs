@@ -32,40 +32,58 @@ glib_wrapper! {
 pub const NONE_DOMHTML_FORM_ELEMENT: Option<&DOMHTMLFormElement> = None;
 
 pub trait DOMHTMLFormElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_accept_charset(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_action(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_elements(&self) -> Option<DOMHTMLCollection>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_encoding(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_enctype(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_length(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_method(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_target(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn reset(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_accept_charset(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_action(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_encoding(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_enctype(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_method(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_target(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn submit(&self);
 
     fn connect_property_accept_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

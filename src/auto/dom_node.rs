@@ -30,27 +30,42 @@ glib_wrapper! {
     }
 }
 
+impl DOMNode {
+    //#[cfg(any(feature = "v2_22", feature = "dox"))]
+    //pub fn for_js_value<P: IsA</*Ignored*/java_script_core::Value>>(value: &P) -> Option<DOMNode> {
+    //    unsafe { TODO: call ffi::webkit_dom_node_for_js_value() }
+    //}
+}
+
 pub const NONE_DOM_NODE: Option<&DOMNode> = None;
 
 pub trait DOMNodeExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn append_child<P: IsA<DOMNode>>(&self, newChild: &P) -> Result<DOMNode, Error>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
     fn clone_node(&self, deep: bool) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     fn clone_node_with_error(&self, deep: bool) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn compare_document_position<P: IsA<DOMNode>>(&self, other: &P) -> libc::c_ushort;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn contains<P: IsA<DOMNode>>(&self, other: &P) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_base_uri(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_child_nodes(&self) -> Option<DOMNodeList>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_first_child(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_last_child(&self) -> Option<DOMNode>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
@@ -59,54 +74,76 @@ pub trait DOMNodeExt: 'static {
     #[cfg_attr(feature = "v2_14", deprecated)]
     fn get_namespace_uri(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_next_sibling(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_node_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_node_type(&self) -> libc::c_ushort;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_node_value(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_owner_document(&self) -> Option<DOMDocument>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_parent_element(&self) -> Option<DOMElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_parent_node(&self) -> Option<DOMNode>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
     fn get_prefix(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_previous_sibling(&self) -> Option<DOMNode>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_text_content(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn has_child_nodes(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn insert_before<'a, P: IsA<DOMNode>, Q: IsA<DOMNode> + 'a, R: Into<Option<&'a Q>>>(&self, newChild: &P, refChild: R) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn is_default_namespace(&self, namespaceURI: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn is_equal_node<P: IsA<DOMNode>>(&self, other: &P) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn is_same_node<P: IsA<DOMNode>>(&self, other: &P) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn is_supported(&self, feature: &str, version: &str) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn lookup_namespace_uri(&self, prefix: &str) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn lookup_prefix(&self, namespaceURI: &str) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn normalize(&self);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_child<P: IsA<DOMNode>>(&self, oldChild: &P) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn replace_child<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, oldChild: &Q) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_node_value(&self, value: &str) -> Result<(), Error>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
     fn set_prefix(&self, value: &str) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_text_content(&self, value: &str) -> Result<(), Error>;
 
     fn connect_property_base_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

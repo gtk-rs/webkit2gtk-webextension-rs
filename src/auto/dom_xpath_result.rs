@@ -30,22 +30,31 @@ glib_wrapper! {
 pub const NONE_DOMX_PATH_RESULT: Option<&DOMXPathResult> = None;
 
 pub trait DOMXPathResultExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_boolean_value(&self) -> Result<(), Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_invalid_iterator_state(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_number_value(&self) -> Result<f64, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_result_type(&self) -> libc::c_ushort;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_single_node_value(&self) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_snapshot_length(&self) -> Result<libc::c_ulong, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_string_value(&self) -> Result<GString, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn iterate_next(&self) -> Result<DOMNode, Error>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn snapshot_item(&self, index: libc::c_ulong) -> Result<DOMNode, Error>;
 
     fn connect_property_boolean_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;

@@ -36,72 +36,106 @@ glib_wrapper! {
 pub const NONE_DOMHTML_OBJECT_ELEMENT: Option<&DOMHTMLObjectElement> = None;
 
 pub trait DOMHTMLObjectElementExt: 'static {
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_archive(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_border(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_code(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_code_base(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_code_type(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_content_document(&self) -> Option<DOMDocument>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_data(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_declare(&self) -> bool;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_form(&self) -> Option<DOMHTMLFormElement>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_height(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_hspace(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_name(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_standby(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_type_attr(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_use_map(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_vspace(&self) -> libc::c_long;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_width(&self) -> Option<GString>;
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_archive(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_border(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_code(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_code_base(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_code_type(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_data(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_declare(&self, value: bool);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_height(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_hspace(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_name(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_standby(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_type_attr(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_use_map(&self, value: &str);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_vspace(&self, value: libc::c_long);
 
+    #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: &str);
 
     fn get_property_type(&self) -> Option<GString>;
