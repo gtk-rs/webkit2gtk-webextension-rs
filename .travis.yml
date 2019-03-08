@@ -1,3 +1,4 @@
+dist: xenial
 language: rust
 rust:
   - nightly
@@ -11,6 +12,7 @@ addons:
   apt:
     packages:
     - libgtk-3-dev
+    - libmount-dev
 script:
   - rustc --version
   - ./check_init_asserts
