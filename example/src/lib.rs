@@ -76,8 +76,9 @@ pub fn web_extension_initialize(extension: &WebExtension) {
 
 web_extension_init_with_data!();
 
-pub fn web_extension_initialize(extension: &WebExtension, user_data: &Variant) {
-    let _string = user_data.get_str();
+pub fn web_extension_initialize(extension: &WebExtension, user_data: Option<&Variant>) {
+    let user_string = user_data.map(|v| v.get_str()).and_then(|s| s.to_owned());
+    dbg!(user_string);
 
     extension.connect_page_created(|_, page| {
         page.connect_document_loaded(|page| {

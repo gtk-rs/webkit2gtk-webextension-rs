@@ -54,8 +54,8 @@ macro_rules! web_extension_init_with_data {
             user_data: *mut $crate::glib_ffi::GVariant)
         {
             let extension: $crate::WebExtension = ::glib::translate::FromGlibPtrNone::from_glib_none(extension);
-            let user_data: ::glib::variant::Variant = ::glib::translate::FromGlibPtrNone::from_glib_none(user_data);
-            web_extension_initialize(&extension, &user_data);
+            let user_data: Option<::glib::variant::Variant> = ::glib::translate::FromGlibPtrNone::from_glib_none(user_data);
+            web_extension_initialize(&extension, user_data.as_ref());
         }
     };
 }
