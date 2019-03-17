@@ -141,7 +141,7 @@ pub const WEBKIT_DOM_NODE_ENTITY_NODE: c_int = 6;
 pub const WEBKIT_DOM_NODE_ENTITY_REFERENCE_NODE: c_int = 5;
 pub const WEBKIT_DOM_NODE_FILTER_ACCEPT: c_int = 1;
 pub const WEBKIT_DOM_NODE_FILTER_REJECT: c_int = 2;
-pub const WEBKIT_DOM_NODE_FILTER_SHOW_ALL: c_uint = 4294967295;
+pub const WEBKIT_DOM_NODE_FILTER_SHOW_ALL: c_int = 4294967295;
 pub const WEBKIT_DOM_NODE_FILTER_SHOW_ATTRIBUTE: c_int = 2;
 pub const WEBKIT_DOM_NODE_FILTER_SHOW_CDATA_SECTION: c_int = 8;
 pub const WEBKIT_DOM_NODE_FILTER_SHOW_COMMENT: c_int = 128;
@@ -5596,8 +5596,8 @@ extern "C" {
     // WebKitFrame
     //=========================================================================
     pub fn webkit_frame_get_type() -> GType;
-    //pub fn webkit_frame_get_javascript_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> /*Metadata mismatch*/[c:type mismatch JSGlobalContextRef != JSCContext of Context];
-    //pub fn webkit_frame_get_javascript_global_context(frame: *mut WebKitFrame) -> /*Metadata mismatch*/[c:type mismatch JSGlobalContextRef != JSCContext of Context];
+    pub fn webkit_frame_get_javascript_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> java_script_core::JSGlobalContextRef;
+    pub fn webkit_frame_get_javascript_global_context(frame: *mut WebKitFrame) -> java_script_core::JSGlobalContextRef;
     #[cfg(any(feature = "v2_22", feature = "dox"))]
     pub fn webkit_frame_get_js_context(frame: *mut WebKitFrame) -> *mut java_script_core::JSCContext;
     #[cfg(any(feature = "v2_22", feature = "dox"))]
