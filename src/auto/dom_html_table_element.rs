@@ -11,25 +11,25 @@ use DOMHTMLTableSectionElement;
 use DOMNode;
 use DOMObject;
 use Error;
-use ffi;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 use std::ptr;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMHTMLTableElement(Object<ffi::WebKitDOMHTMLTableElement, ffi::WebKitDOMHTMLTableElementClass, DOMHTMLTableElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMHTMLTableElement(Object<webkit2_webextension_sys::WebKitDOMHTMLTableElement, webkit2_webextension_sys::WebKitDOMHTMLTableElementClass, DOMHTMLTableElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_html_table_element_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_html_table_element_get_type(),
     }
 }
 
@@ -162,188 +162,188 @@ pub trait DOMHTMLTableElementExt: 'static {
 impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     fn create_caption(&self) -> Option<DOMHTMLElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_table_element_create_caption(self.as_ref().to_glib_none().0))
+            from_glib_none(webkit2_webextension_sys::webkit_dom_html_table_element_create_caption(self.as_ref().to_glib_none().0))
         }
     }
 
     fn create_t_foot(&self) -> Option<DOMHTMLElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_table_element_create_t_foot(self.as_ref().to_glib_none().0))
+            from_glib_none(webkit2_webextension_sys::webkit_dom_html_table_element_create_t_foot(self.as_ref().to_glib_none().0))
         }
     }
 
     fn create_t_head(&self) -> Option<DOMHTMLElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_table_element_create_t_head(self.as_ref().to_glib_none().0))
+            from_glib_none(webkit2_webextension_sys::webkit_dom_html_table_element_create_t_head(self.as_ref().to_glib_none().0))
         }
     }
 
     fn delete_caption(&self) {
         unsafe {
-            ffi::webkit_dom_html_table_element_delete_caption(self.as_ref().to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_table_element_delete_caption(self.as_ref().to_glib_none().0);
         }
     }
 
     fn delete_row(&self, index: libc::c_long) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_html_table_element_delete_row(self.as_ref().to_glib_none().0, index, &mut error);
+            let _ = webkit2_webextension_sys::webkit_dom_html_table_element_delete_row(self.as_ref().to_glib_none().0, index, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn delete_t_foot(&self) {
         unsafe {
-            ffi::webkit_dom_html_table_element_delete_t_foot(self.as_ref().to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_table_element_delete_t_foot(self.as_ref().to_glib_none().0);
         }
     }
 
     fn delete_t_head(&self) {
         unsafe {
-            ffi::webkit_dom_html_table_element_delete_t_head(self.as_ref().to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_table_element_delete_t_head(self.as_ref().to_glib_none().0);
         }
     }
 
     fn get_align(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_table_element_get_align(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_table_element_get_align(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_bg_color(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_table_element_get_bg_color(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_table_element_get_bg_color(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_border(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_table_element_get_border(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_table_element_get_border(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_caption(&self) -> Option<DOMHTMLTableCaptionElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_table_element_get_caption(self.as_ref().to_glib_none().0))
+            from_glib_none(webkit2_webextension_sys::webkit_dom_html_table_element_get_caption(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_cell_padding(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_table_element_get_cell_padding(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_table_element_get_cell_padding(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_cell_spacing(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_table_element_get_cell_spacing(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_table_element_get_cell_spacing(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_rows(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_table_element_get_rows(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_table_element_get_rows(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_rules(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_table_element_get_rules(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_table_element_get_rules(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_summary(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_table_element_get_summary(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_table_element_get_summary(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_t_bodies(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_table_element_get_t_bodies(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_table_element_get_t_bodies(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_t_foot(&self) -> Option<DOMHTMLTableSectionElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_table_element_get_t_foot(self.as_ref().to_glib_none().0))
+            from_glib_none(webkit2_webextension_sys::webkit_dom_html_table_element_get_t_foot(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_t_head(&self) -> Option<DOMHTMLTableSectionElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_table_element_get_t_head(self.as_ref().to_glib_none().0))
+            from_glib_none(webkit2_webextension_sys::webkit_dom_html_table_element_get_t_head(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_width(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_table_element_get_width(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_table_element_get_width(self.as_ref().to_glib_none().0))
         }
     }
 
     fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = ffi::webkit_dom_html_table_element_insert_row(self.as_ref().to_glib_none().0, index, &mut error);
+            let ret = webkit2_webextension_sys::webkit_dom_html_table_element_insert_row(self.as_ref().to_glib_none().0, index, &mut error);
             if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn set_align(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_table_element_set_align(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_table_element_set_align(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_bg_color(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_table_element_set_bg_color(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_table_element_set_bg_color(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_border(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_table_element_set_border(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_table_element_set_border(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_caption<P: IsA<DOMHTMLTableCaptionElement>>(&self, value: &P) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_html_table_element_set_caption(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
+            let _ = webkit2_webextension_sys::webkit_dom_html_table_element_set_caption(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn set_cell_padding(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_table_element_set_cell_padding(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_table_element_set_cell_padding(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_cell_spacing(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_table_element_set_cell_spacing(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_table_element_set_cell_spacing(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_rules(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_table_element_set_rules(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_table_element_set_rules(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_summary(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_table_element_set_summary(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_table_element_set_summary(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_t_foot<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_html_table_element_set_t_foot(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
+            let _ = webkit2_webextension_sys::webkit_dom_html_table_element_set_t_foot(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
@@ -351,14 +351,14 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     fn set_t_head<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_html_table_element_set_t_head(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
+            let _ = webkit2_webextension_sys::webkit_dom_html_table_element_set_t_head(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn set_width(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_table_element_set_width(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_table_element_set_width(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
@@ -467,79 +467,79 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 }
 
-unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_bg_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_bg_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_border_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_border_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_caption_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_caption_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_cell_padding_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_cell_padding_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_cell_spacing_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_cell_spacing_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_rows_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_rows_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_rules_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_rules_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_summary_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_summary_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_t_bodies_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_t_bodies_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_t_foot_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_t_foot_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_t_head_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_t_head_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTableElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTableElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())

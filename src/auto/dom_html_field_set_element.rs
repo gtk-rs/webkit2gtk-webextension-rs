@@ -8,22 +8,22 @@ use DOMHTMLElement;
 use DOMHTMLFormElement;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMHTMLFieldSetElement(Object<ffi::WebKitDOMHTMLFieldSetElement, ffi::WebKitDOMHTMLFieldSetElementClass, DOMHTMLFieldSetElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMHTMLFieldSetElement(Object<webkit2_webextension_sys::WebKitDOMHTMLFieldSetElement, webkit2_webextension_sys::WebKitDOMHTMLFieldSetElementClass, DOMHTMLFieldSetElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_html_field_set_element_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_html_field_set_element_get_type(),
     }
 }
 
@@ -39,7 +39,7 @@ pub trait DOMHTMLFieldSetElementExt: 'static {
 impl<O: IsA<DOMHTMLFieldSetElement>> DOMHTMLFieldSetElementExt for O {
     fn get_form(&self) -> Option<DOMHTMLFormElement> {
         unsafe {
-            from_glib_none(ffi::webkit_dom_html_field_set_element_get_form(self.as_ref().to_glib_none().0))
+            from_glib_none(webkit2_webextension_sys::webkit_dom_html_field_set_element_get_form(self.as_ref().to_glib_none().0))
         }
     }
 
@@ -52,7 +52,7 @@ impl<O: IsA<DOMHTMLFieldSetElement>> DOMHTMLFieldSetElementExt for O {
     }
 }
 
-unsafe extern "C" fn notify_form_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLFieldSetElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_form_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLFieldSetElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLFieldSetElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLFieldSetElement::from_glib_borrow(this).unsafe_cast())

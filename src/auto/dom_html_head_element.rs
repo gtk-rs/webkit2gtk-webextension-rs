@@ -7,23 +7,23 @@ use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMHTMLHeadElement(Object<ffi::WebKitDOMHTMLHeadElement, ffi::WebKitDOMHTMLHeadElementClass, DOMHTMLHeadElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMHTMLHeadElement(Object<webkit2_webextension_sys::WebKitDOMHTMLHeadElement, webkit2_webextension_sys::WebKitDOMHTMLHeadElementClass, DOMHTMLHeadElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_html_head_element_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_html_head_element_get_type(),
     }
 }
 
@@ -42,13 +42,13 @@ pub trait DOMHTMLHeadElementExt: 'static {
 impl<O: IsA<DOMHTMLHeadElement>> DOMHTMLHeadElementExt for O {
     fn get_profile(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_head_element_get_profile(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_head_element_get_profile(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_profile(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_head_element_set_profile(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_head_element_set_profile(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
@@ -61,7 +61,7 @@ impl<O: IsA<DOMHTMLHeadElement>> DOMHTMLHeadElementExt for O {
     }
 }
 
-unsafe extern "C" fn notify_profile_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLHeadElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_profile_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLHeadElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLHeadElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLHeadElement::from_glib_borrow(this).unsafe_cast())

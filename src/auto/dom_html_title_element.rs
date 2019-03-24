@@ -7,23 +7,23 @@ use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMHTMLTitleElement(Object<ffi::WebKitDOMHTMLTitleElement, ffi::WebKitDOMHTMLTitleElementClass, DOMHTMLTitleElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMHTMLTitleElement(Object<webkit2_webextension_sys::WebKitDOMHTMLTitleElement, webkit2_webextension_sys::WebKitDOMHTMLTitleElementClass, DOMHTMLTitleElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_html_title_element_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_html_title_element_get_type(),
     }
 }
 
@@ -42,13 +42,13 @@ pub trait DOMHTMLTitleElementExt: 'static {
 impl<O: IsA<DOMHTMLTitleElement>> DOMHTMLTitleElementExt for O {
     fn get_text(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_title_element_get_text(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_title_element_get_text(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_text(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_title_element_set_text(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_title_element_set_text(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
@@ -61,7 +61,7 @@ impl<O: IsA<DOMHTMLTitleElement>> DOMHTMLTitleElementExt for O {
     }
 }
 
-unsafe extern "C" fn notify_text_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLTitleElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_text_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTitleElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLTitleElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLTitleElement::from_glib_borrow(this).unsafe_cast())

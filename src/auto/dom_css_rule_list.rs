@@ -4,23 +4,23 @@
 
 use DOMCSSRule;
 use DOMObject;
-use ffi;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMCSSRuleList(Object<ffi::WebKitDOMCSSRuleList, ffi::WebKitDOMCSSRuleListClass, DOMCSSRuleListClass>) @extends DOMObject;
+    pub struct DOMCSSRuleList(Object<webkit2_webextension_sys::WebKitDOMCSSRuleList, webkit2_webextension_sys::WebKitDOMCSSRuleListClass, DOMCSSRuleListClass>) @extends DOMObject;
 
     match fn {
-        get_type => || ffi::webkit_dom_css_rule_list_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_css_rule_list_get_type(),
     }
 }
 
@@ -39,13 +39,13 @@ pub trait DOMCSSRuleListExt: 'static {
 impl<O: IsA<DOMCSSRuleList>> DOMCSSRuleListExt for O {
     fn get_length(&self) -> libc::c_ulong {
         unsafe {
-            ffi::webkit_dom_css_rule_list_get_length(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_css_rule_list_get_length(self.as_ref().to_glib_none().0)
         }
     }
 
     fn item(&self, index: libc::c_ulong) -> Option<DOMCSSRule> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_css_rule_list_item(self.as_ref().to_glib_none().0, index))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_css_rule_list_item(self.as_ref().to_glib_none().0, index))
         }
     }
 
@@ -58,7 +58,7 @@ impl<O: IsA<DOMCSSRuleList>> DOMCSSRuleListExt for O {
     }
 }
 
-unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMCSSRuleList, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMCSSRuleList, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMCSSRuleList> {
     let f: &F = &*(f as *const F);
     f(&DOMCSSRuleList::from_glib_borrow(this).unsafe_cast())

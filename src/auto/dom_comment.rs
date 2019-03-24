@@ -6,15 +6,15 @@ use DOMCharacterData;
 use DOMEventTarget;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::translate::*;
 use std::fmt;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMComment(Object<ffi::WebKitDOMComment, ffi::WebKitDOMCommentClass, DOMCommentClass>) @extends DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMComment(Object<webkit2_webextension_sys::WebKitDOMComment, webkit2_webextension_sys::WebKitDOMCommentClass, DOMCommentClass>) @extends DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_comment_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_comment_get_type(),
     }
 }
 

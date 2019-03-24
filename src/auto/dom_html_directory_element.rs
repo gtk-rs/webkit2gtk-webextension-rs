@@ -7,22 +7,22 @@ use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMHTMLDirectoryElement(Object<ffi::WebKitDOMHTMLDirectoryElement, ffi::WebKitDOMHTMLDirectoryElementClass, DOMHTMLDirectoryElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMHTMLDirectoryElement(Object<webkit2_webextension_sys::WebKitDOMHTMLDirectoryElement, webkit2_webextension_sys::WebKitDOMHTMLDirectoryElementClass, DOMHTMLDirectoryElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_html_directory_element_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_html_directory_element_get_type(),
     }
 }
 
@@ -41,13 +41,13 @@ pub trait DOMHTMLDirectoryElementExt: 'static {
 impl<O: IsA<DOMHTMLDirectoryElement>> DOMHTMLDirectoryElementExt for O {
     fn get_compact(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_html_directory_element_get_compact(self.as_ref().to_glib_none().0))
+            from_glib(webkit2_webextension_sys::webkit_dom_html_directory_element_get_compact(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_compact(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_html_directory_element_set_compact(self.as_ref().to_glib_none().0, value.to_glib());
+            webkit2_webextension_sys::webkit_dom_html_directory_element_set_compact(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
@@ -60,7 +60,7 @@ impl<O: IsA<DOMHTMLDirectoryElement>> DOMHTMLDirectoryElementExt for O {
     }
 }
 
-unsafe extern "C" fn notify_compact_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLDirectoryElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_compact_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDirectoryElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLDirectoryElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLDirectoryElement::from_glib_borrow(this).unsafe_cast())

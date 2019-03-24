@@ -7,23 +7,23 @@ use DOMEventTarget;
 use DOMNode;
 use DOMObject;
 use DOMStyleSheet;
-use ffi;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMProcessingInstruction(Object<ffi::WebKitDOMProcessingInstruction, ffi::WebKitDOMProcessingInstructionClass, DOMProcessingInstructionClass>) @extends DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMProcessingInstruction(Object<webkit2_webextension_sys::WebKitDOMProcessingInstruction, webkit2_webextension_sys::WebKitDOMProcessingInstructionClass, DOMProcessingInstructionClass>) @extends DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_processing_instruction_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_processing_instruction_get_type(),
     }
 }
 
@@ -44,13 +44,13 @@ pub trait DOMProcessingInstructionExt: 'static {
 impl<O: IsA<DOMProcessingInstruction>> DOMProcessingInstructionExt for O {
     fn get_sheet(&self) -> Option<DOMStyleSheet> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_processing_instruction_get_sheet(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_processing_instruction_get_sheet(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_target(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_processing_instruction_get_target(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_processing_instruction_get_target(self.as_ref().to_glib_none().0))
         }
     }
 
@@ -71,13 +71,13 @@ impl<O: IsA<DOMProcessingInstruction>> DOMProcessingInstructionExt for O {
     }
 }
 
-unsafe extern "C" fn notify_sheet_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMProcessingInstruction, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_sheet_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMProcessingInstruction, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMProcessingInstruction> {
     let f: &F = &*(f as *const F);
     f(&DOMProcessingInstruction::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_target_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMProcessingInstruction, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_target_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMProcessingInstruction, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMProcessingInstruction> {
     let f: &F = &*(f as *const F);
     f(&DOMProcessingInstruction::from_glib_borrow(this).unsafe_cast())

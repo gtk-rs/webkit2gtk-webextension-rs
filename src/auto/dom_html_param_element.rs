@@ -7,7 +7,6 @@ use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
@@ -16,17 +15,18 @@ use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
-use gobject_ffi;
+use glib_sys;
+use gobject_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMHTMLParamElement(Object<ffi::WebKitDOMHTMLParamElement, ffi::WebKitDOMHTMLParamElementClass, DOMHTMLParamElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMHTMLParamElement(Object<webkit2_webextension_sys::WebKitDOMHTMLParamElement, webkit2_webextension_sys::WebKitDOMHTMLParamElementClass, DOMHTMLParamElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_html_param_element_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_html_param_element_get_type(),
     }
 }
 
@@ -73,63 +73,63 @@ pub trait DOMHTMLParamElementExt: 'static {
 impl<O: IsA<DOMHTMLParamElement>> DOMHTMLParamElementExt for O {
     fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_param_element_get_name(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_param_element_get_name(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_type_attr(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_param_element_get_type_attr(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_param_element_get_type_attr(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_value(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_param_element_get_value(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_param_element_get_value(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_value_type(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_param_element_get_value_type(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_param_element_get_value_type(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_name(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_param_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_param_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_type_attr(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_param_element_set_type_attr(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_param_element_set_type_attr(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_value(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_param_element_set_value(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_param_element_set_value(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_value_type(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_param_element_set_value_type(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_param_element_set_value_type(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn get_property_type(&self) -> Option<GString> {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
 
     fn set_property_type(&self, type_: Option<&str>) {
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"type\0".as_ptr() as *const _, Value::from(type_).to_glib_none().0);
+            gobject_sys::g_object_set_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"type\0".as_ptr() as *const _, Value::from(type_).to_glib_none().0);
         }
     }
 
@@ -166,25 +166,25 @@ impl<O: IsA<DOMHTMLParamElement>> DOMHTMLParamElementExt for O {
     }
 }
 
-unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLParamElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLParamElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLParamElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLParamElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLParamElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLParamElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLParamElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLParamElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLParamElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_value_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLParamElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_value_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLParamElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLParamElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast())

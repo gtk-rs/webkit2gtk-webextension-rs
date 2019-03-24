@@ -4,25 +4,25 @@
 
 use DOMObject;
 use Error;
-use ffi;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 use std::ptr;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMMediaList(Object<ffi::WebKitDOMMediaList, ffi::WebKitDOMMediaListClass, DOMMediaListClass>) @extends DOMObject;
+    pub struct DOMMediaList(Object<webkit2_webextension_sys::WebKitDOMMediaList, webkit2_webextension_sys::WebKitDOMMediaListClass, DOMMediaListClass>) @extends DOMObject;
 
     match fn {
-        get_type => || ffi::webkit_dom_media_list_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_media_list_get_type(),
     }
 }
 
@@ -56,7 +56,7 @@ impl<O: IsA<DOMMediaList>> DOMMediaListExt for O {
     fn append_medium(&self, newMedium: &str) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_media_list_append_medium(self.as_ref().to_glib_none().0, newMedium.to_glib_none().0, &mut error);
+            let _ = webkit2_webextension_sys::webkit_dom_media_list_append_medium(self.as_ref().to_glib_none().0, newMedium.to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
@@ -64,33 +64,33 @@ impl<O: IsA<DOMMediaList>> DOMMediaListExt for O {
     fn delete_medium(&self, oldMedium: &str) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_media_list_delete_medium(self.as_ref().to_glib_none().0, oldMedium.to_glib_none().0, &mut error);
+            let _ = webkit2_webextension_sys::webkit_dom_media_list_delete_medium(self.as_ref().to_glib_none().0, oldMedium.to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn get_length(&self) -> libc::c_ulong {
         unsafe {
-            ffi::webkit_dom_media_list_get_length(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_media_list_get_length(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_media_text(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_media_list_get_media_text(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_media_list_get_media_text(self.as_ref().to_glib_none().0))
         }
     }
 
     fn item(&self, index: libc::c_ulong) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_media_list_item(self.as_ref().to_glib_none().0, index))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_media_list_item(self.as_ref().to_glib_none().0, index))
         }
     }
 
     fn set_media_text(&self, value: &str) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_media_list_set_media_text(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
+            let _ = webkit2_webextension_sys::webkit_dom_media_list_set_media_text(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
@@ -112,13 +112,13 @@ impl<O: IsA<DOMMediaList>> DOMMediaListExt for O {
     }
 }
 
-unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMMediaList, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMediaList, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMMediaList> {
     let f: &F = &*(f as *const F);
     f(&DOMMediaList::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_media_text_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMMediaList, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_media_text_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMediaList, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMMediaList> {
     let f: &F = &*(f as *const F);
     f(&DOMMediaList::from_glib_borrow(this).unsafe_cast())

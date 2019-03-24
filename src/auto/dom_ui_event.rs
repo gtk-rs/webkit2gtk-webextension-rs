@@ -5,23 +5,23 @@
 use DOMDOMWindow;
 use DOMEvent;
 use DOMObject;
-use ffi;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMUIEvent(Object<ffi::WebKitDOMUIEvent, ffi::WebKitDOMUIEventClass, DOMUIEventClass>) @extends DOMEvent, DOMObject;
+    pub struct DOMUIEvent(Object<webkit2_webextension_sys::WebKitDOMUIEvent, webkit2_webextension_sys::WebKitDOMUIEventClass, DOMUIEventClass>) @extends DOMEvent, DOMObject;
 
     match fn {
-        get_type => || ffi::webkit_dom_ui_event_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_ui_event_get_type(),
     }
 }
 
@@ -75,55 +75,55 @@ pub trait DOMUIEventExt: 'static {
 impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
     fn get_char_code(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_char_code(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_ui_event_get_char_code(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_detail(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_detail(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_ui_event_get_detail(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_key_code(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_key_code(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_ui_event_get_key_code(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_layer_x(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_layer_x(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_ui_event_get_layer_x(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_layer_y(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_layer_y(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_ui_event_get_layer_y(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_page_x(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_page_x(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_ui_event_get_page_x(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_page_y(&self) -> libc::c_long {
         unsafe {
-            ffi::webkit_dom_ui_event_get_page_y(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_ui_event_get_page_y(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_view(&self) -> Option<DOMDOMWindow> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_ui_event_get_view(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_ui_event_get_view(self.as_ref().to_glib_none().0))
         }
     }
 
     fn init_ui_event<P: IsA<DOMDOMWindow>>(&self, type_: &str, canBubble: bool, cancelable: bool, view: &P, detail: libc::c_long) {
         unsafe {
-            ffi::webkit_dom_ui_event_init_ui_event(self.as_ref().to_glib_none().0, type_.to_glib_none().0, canBubble.to_glib(), cancelable.to_glib(), view.as_ref().to_glib_none().0, detail);
+            webkit2_webextension_sys::webkit_dom_ui_event_init_ui_event(self.as_ref().to_glib_none().0, type_.to_glib_none().0, canBubble.to_glib(), cancelable.to_glib(), view.as_ref().to_glib_none().0, detail);
         }
     }
 
@@ -192,49 +192,49 @@ impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
     }
 }
 
-unsafe extern "C" fn notify_char_code_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_char_code_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMUIEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_detail_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_detail_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMUIEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_key_code_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_key_code_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMUIEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_layer_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_layer_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMUIEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_layer_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_layer_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMUIEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_page_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_page_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMUIEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_page_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_page_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMUIEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_view_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMUIEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_view_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMUIEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMUIEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())

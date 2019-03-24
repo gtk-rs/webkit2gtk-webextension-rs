@@ -7,23 +7,23 @@ use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMHTMLHtmlElement(Object<ffi::WebKitDOMHTMLHtmlElement, ffi::WebKitDOMHTMLHtmlElementClass, DOMHTMLHtmlElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMHTMLHtmlElement(Object<webkit2_webextension_sys::WebKitDOMHTMLHtmlElement, webkit2_webextension_sys::WebKitDOMHTMLHtmlElementClass, DOMHTMLHtmlElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_html_html_element_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_html_html_element_get_type(),
     }
 }
 
@@ -42,13 +42,13 @@ pub trait DOMHTMLHtmlElementExt: 'static {
 impl<O: IsA<DOMHTMLHtmlElement>> DOMHTMLHtmlElementExt for O {
     fn get_version(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_html_element_get_version(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_html_element_get_version(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_version(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_html_element_set_version(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_html_element_set_version(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
@@ -61,7 +61,7 @@ impl<O: IsA<DOMHTMLHtmlElement>> DOMHTMLHtmlElementExt for O {
     }
 }
 
-unsafe extern "C" fn notify_version_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLHtmlElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_version_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLHtmlElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLHtmlElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLHtmlElement::from_glib_borrow(this).unsafe_cast())

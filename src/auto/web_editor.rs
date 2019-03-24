@@ -4,7 +4,6 @@
 
 #[cfg(any(feature = "v2_10", feature = "dox"))]
 use WebPage;
-use ffi;
 #[cfg(any(feature = "v2_10", feature = "dox"))]
 use glib::object::Cast;
 use glib::object::IsA;
@@ -14,18 +13,19 @@ use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
 #[cfg(any(feature = "v2_10", feature = "dox"))]
-use glib_ffi;
+use glib_sys;
 #[cfg(any(feature = "v2_10", feature = "dox"))]
 use std::boxed::Box as Box_;
 use std::fmt;
 #[cfg(any(feature = "v2_10", feature = "dox"))]
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct WebEditor(Object<ffi::WebKitWebEditor, ffi::WebKitWebEditorClass, WebEditorClass>);
+    pub struct WebEditor(Object<webkit2_webextension_sys::WebKitWebEditor, webkit2_webextension_sys::WebKitWebEditorClass, WebEditorClass>);
 
     match fn {
-        get_type => || ffi::webkit_web_editor_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_web_editor_get_type(),
     }
 }
 
@@ -43,7 +43,7 @@ impl<O: IsA<WebEditor>> WebEditorExt for O {
     #[cfg(any(feature = "v2_10", feature = "dox"))]
     fn get_page(&self) -> Option<WebPage> {
         unsafe {
-            from_glib_none(ffi::webkit_web_editor_get_page(self.as_ref().to_glib_none().0))
+            from_glib_none(webkit2_webextension_sys::webkit_web_editor_get_page(self.as_ref().to_glib_none().0))
         }
     }
 
@@ -58,7 +58,7 @@ impl<O: IsA<WebEditor>> WebEditorExt for O {
 }
 
 #[cfg(any(feature = "v2_10", feature = "dox"))]
-unsafe extern "C" fn selection_changed_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitWebEditor, f: glib_ffi::gpointer)
+unsafe extern "C" fn selection_changed_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitWebEditor, f: glib_sys::gpointer)
 where P: IsA<WebEditor> {
     let f: &F = &*(f as *const F);
     f(&WebEditor::from_glib_borrow(this).unsafe_cast())

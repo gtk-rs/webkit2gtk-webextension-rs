@@ -7,23 +7,23 @@ use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMHTMLDivElement(Object<ffi::WebKitDOMHTMLDivElement, ffi::WebKitDOMHTMLDivElementClass, DOMHTMLDivElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMHTMLDivElement(Object<webkit2_webextension_sys::WebKitDOMHTMLDivElement, webkit2_webextension_sys::WebKitDOMHTMLDivElementClass, DOMHTMLDivElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_html_div_element_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_html_div_element_get_type(),
     }
 }
 
@@ -42,13 +42,13 @@ pub trait DOMHTMLDivElementExt: 'static {
 impl<O: IsA<DOMHTMLDivElement>> DOMHTMLDivElementExt for O {
     fn get_align(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_div_element_get_align(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_div_element_get_align(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_align(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_div_element_set_align(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_div_element_set_align(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
@@ -61,7 +61,7 @@ impl<O: IsA<DOMHTMLDivElement>> DOMHTMLDivElementExt for O {
     }
 }
 
-unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLDivElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDivElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLDivElement> {
     let f: &F = &*(f as *const F);
     f(&DOMHTMLDivElement::from_glib_borrow(this).unsafe_cast())

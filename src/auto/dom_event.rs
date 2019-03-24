@@ -4,7 +4,6 @@
 
 use DOMEventTarget;
 use DOMObject;
-use ffi;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
@@ -13,18 +12,19 @@ use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
-use gobject_ffi;
+use glib_sys;
+use gobject_sys;
 use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMEvent(Object<ffi::WebKitDOMEvent, ffi::WebKitDOMEventClass, DOMEventClass>) @extends DOMObject;
+    pub struct DOMEvent(Object<webkit2_webextension_sys::WebKitDOMEvent, webkit2_webextension_sys::WebKitDOMEventClass, DOMEventClass>) @extends DOMObject;
 
     match fn {
-        get_type => || ffi::webkit_dom_event_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_event_get_type(),
     }
 }
 
@@ -102,98 +102,98 @@ pub trait DOMEventExt: 'static {
 impl<O: IsA<DOMEvent>> DOMEventExt for O {
     fn get_bubbles(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_event_get_bubbles(self.as_ref().to_glib_none().0))
+            from_glib(webkit2_webextension_sys::webkit_dom_event_get_bubbles(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_cancel_bubble(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_event_get_cancel_bubble(self.as_ref().to_glib_none().0))
+            from_glib(webkit2_webextension_sys::webkit_dom_event_get_cancel_bubble(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_cancelable(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_event_get_cancelable(self.as_ref().to_glib_none().0))
+            from_glib(webkit2_webextension_sys::webkit_dom_event_get_cancelable(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_current_target(&self) -> Option<DOMEventTarget> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_event_get_current_target(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_event_get_current_target(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_event_phase(&self) -> libc::c_ushort {
         unsafe {
-            ffi::webkit_dom_event_get_event_phase(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_event_get_event_phase(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_event_type(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_event_get_event_type(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_event_get_event_type(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_return_value(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_event_get_return_value(self.as_ref().to_glib_none().0))
+            from_glib(webkit2_webextension_sys::webkit_dom_event_get_return_value(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_src_element(&self) -> Option<DOMEventTarget> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_event_get_src_element(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_event_get_src_element(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_target(&self) -> Option<DOMEventTarget> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_event_get_target(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_event_get_target(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_time_stamp(&self) -> u32 {
         unsafe {
-            ffi::webkit_dom_event_get_time_stamp(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_event_get_time_stamp(self.as_ref().to_glib_none().0)
         }
     }
 
     fn init_event(&self, eventTypeArg: &str, canBubbleArg: bool, cancelableArg: bool) {
         unsafe {
-            ffi::webkit_dom_event_init_event(self.as_ref().to_glib_none().0, eventTypeArg.to_glib_none().0, canBubbleArg.to_glib(), cancelableArg.to_glib());
+            webkit2_webextension_sys::webkit_dom_event_init_event(self.as_ref().to_glib_none().0, eventTypeArg.to_glib_none().0, canBubbleArg.to_glib(), cancelableArg.to_glib());
         }
     }
 
     fn prevent_default(&self) {
         unsafe {
-            ffi::webkit_dom_event_prevent_default(self.as_ref().to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_event_prevent_default(self.as_ref().to_glib_none().0);
         }
     }
 
     fn set_cancel_bubble(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_event_set_cancel_bubble(self.as_ref().to_glib_none().0, value.to_glib());
+            webkit2_webextension_sys::webkit_dom_event_set_cancel_bubble(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
     fn set_return_value(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_event_set_return_value(self.as_ref().to_glib_none().0, value.to_glib());
+            webkit2_webextension_sys::webkit_dom_event_set_return_value(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
     fn stop_propagation(&self) {
         unsafe {
-            ffi::webkit_dom_event_stop_propagation(self.as_ref().to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_event_stop_propagation(self.as_ref().to_glib_none().0);
         }
     }
 
     fn get_property_type(&self) -> Option<GString> {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
@@ -279,61 +279,61 @@ impl<O: IsA<DOMEvent>> DOMEventExt for O {
     }
 }
 
-unsafe extern "C" fn notify_bubbles_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_bubbles_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_cancel_bubble_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_cancel_bubble_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_cancelable_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_cancelable_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_current_target_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_current_target_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_event_phase_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_event_phase_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_return_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_return_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_src_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_src_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_target_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_target_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_time_stamp_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_time_stamp_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMEvent> {
     let f: &F = &*(f as *const F);
     f(&DOMEvent::from_glib_borrow(this).unsafe_cast())

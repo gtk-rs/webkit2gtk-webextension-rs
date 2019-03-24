@@ -4,23 +4,23 @@
 
 use DOMFile;
 use DOMObject;
-use ffi;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMFileList(Object<ffi::WebKitDOMFileList, ffi::WebKitDOMFileListClass, DOMFileListClass>) @extends DOMObject;
+    pub struct DOMFileList(Object<webkit2_webextension_sys::WebKitDOMFileList, webkit2_webextension_sys::WebKitDOMFileListClass, DOMFileListClass>) @extends DOMObject;
 
     match fn {
-        get_type => || ffi::webkit_dom_file_list_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_file_list_get_type(),
     }
 }
 
@@ -39,13 +39,13 @@ pub trait DOMFileListExt: 'static {
 impl<O: IsA<DOMFileList>> DOMFileListExt for O {
     fn get_length(&self) -> libc::c_ulong {
         unsafe {
-            ffi::webkit_dom_file_list_get_length(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_file_list_get_length(self.as_ref().to_glib_none().0)
         }
     }
 
     fn item(&self, index: libc::c_ulong) -> Option<DOMFile> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_file_list_item(self.as_ref().to_glib_none().0, index))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_file_list_item(self.as_ref().to_glib_none().0, index))
         }
     }
 
@@ -58,7 +58,7 @@ impl<O: IsA<DOMFileList>> DOMFileListExt for O {
     }
 }
 
-unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMFileList, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMFileList, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMFileList> {
     let f: &F = &*(f as *const F);
     f(&DOMFileList::from_glib_borrow(this).unsafe_cast())

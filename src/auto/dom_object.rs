@@ -2,15 +2,15 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use ffi;
 use glib::translate::*;
 use std::fmt;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMObject(Object<ffi::WebKitDOMObject, ffi::WebKitDOMObjectClass, DOMObjectClass>);
+    pub struct DOMObject(Object<webkit2_webextension_sys::WebKitDOMObject, webkit2_webextension_sys::WebKitDOMObjectClass, DOMObjectClass>);
 
     match fn {
-        get_type => || ffi::webkit_dom_object_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_object_get_type(),
     }
 }
 

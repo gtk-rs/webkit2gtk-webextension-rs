@@ -5,7 +5,6 @@
 #[cfg(any(feature = "v2_18", feature = "dox"))]
 use DOMClientRect;
 use DOMObject;
-use ffi;
 use glib::StaticType;
 use glib::Value;
 use glib::object::Cast;
@@ -13,18 +12,19 @@ use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
-use gobject_ffi;
+use glib_sys;
+use gobject_sys;
 use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMClientRectList(Object<ffi::WebKitDOMClientRectList, ffi::WebKitDOMClientRectListClass, DOMClientRectListClass>) @extends DOMObject;
+    pub struct DOMClientRectList(Object<webkit2_webextension_sys::WebKitDOMClientRectList, webkit2_webextension_sys::WebKitDOMClientRectListClass, DOMClientRectListClass>) @extends DOMObject;
 
     match fn {
-        get_type => || ffi::webkit_dom_client_rect_list_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_client_rect_list_get_type(),
     }
 }
 
@@ -48,21 +48,21 @@ impl<O: IsA<DOMClientRectList>> DOMClientRectListExt for O {
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn get_length(&self) -> libc::c_ulong {
         unsafe {
-            ffi::webkit_dom_client_rect_list_get_length(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_client_rect_list_get_length(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     fn item(&self, index: libc::c_ulong) -> Option<DOMClientRect> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_client_rect_list_item(self.as_ref().to_glib_none().0, index))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_client_rect_list_item(self.as_ref().to_glib_none().0, index))
         }
     }
 
     fn get_property_length(&self) -> libc::c_ulong {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"length\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"length\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -76,7 +76,7 @@ impl<O: IsA<DOMClientRectList>> DOMClientRectListExt for O {
     }
 }
 
-unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMClientRectList, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMClientRectList, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMClientRectList> {
     let f: &F = &*(f as *const F);
     f(&DOMClientRectList::from_glib_borrow(this).unsafe_cast())

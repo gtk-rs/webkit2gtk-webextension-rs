@@ -5,7 +5,6 @@
 use DOMObject;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use Error;
-use ffi;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
@@ -14,20 +13,21 @@ use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
-use gobject_ffi;
+use glib_sys;
+use gobject_sys;
 use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use std::ptr;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMDOMTokenList(Object<ffi::WebKitDOMDOMTokenList, ffi::WebKitDOMDOMTokenListClass, DOMDOMTokenListClass>) @extends DOMObject;
+    pub struct DOMDOMTokenList(Object<webkit2_webextension_sys::WebKitDOMDOMTokenList, webkit2_webextension_sys::WebKitDOMDOMTokenListClass, DOMDOMTokenListClass>) @extends DOMObject;
 
     match fn {
-        get_type => || ffi::webkit_dom_dom_token_list_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_dom_token_list_get_type(),
     }
 }
 
@@ -84,47 +84,47 @@ pub trait DOMDOMTokenListExt: 'static {
 impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
     //#[cfg(any(feature = "v2_16", feature = "dox"))]
     //fn add(&self, error: &mut Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs) {
-    //    unsafe { TODO: call ffi::webkit_dom_dom_token_list_add() }
+    //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_dom_token_list_add() }
     //}
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn contains(&self, token: &str) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_dom_token_list_contains(self.as_ref().to_glib_none().0, token.to_glib_none().0))
+            from_glib(webkit2_webextension_sys::webkit_dom_dom_token_list_contains(self.as_ref().to_glib_none().0, token.to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_length(&self) -> libc::c_ulong {
         unsafe {
-            ffi::webkit_dom_dom_token_list_get_length(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_dom_token_list_get_length(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_value(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_token_list_get_value(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_dom_token_list_get_value(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn item(&self, index: libc::c_ulong) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_dom_token_list_item(self.as_ref().to_glib_none().0, index))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_dom_token_list_item(self.as_ref().to_glib_none().0, index))
         }
     }
 
     //#[cfg(any(feature = "v2_16", feature = "dox"))]
     //fn remove(&self, error: &mut Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs) {
-    //    unsafe { TODO: call ffi::webkit_dom_dom_token_list_remove() }
+    //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_dom_token_list_remove() }
     //}
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn replace(&self, token: &str, newToken: &str) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_dom_token_list_replace(self.as_ref().to_glib_none().0, token.to_glib_none().0, newToken.to_glib_none().0, &mut error);
+            let _ = webkit2_webextension_sys::webkit_dom_dom_token_list_replace(self.as_ref().to_glib_none().0, token.to_glib_none().0, newToken.to_glib_none().0, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
@@ -132,7 +132,7 @@ impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_value(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_dom_token_list_set_value(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_dom_token_list_set_value(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
@@ -140,7 +140,7 @@ impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
     fn toggle(&self, token: &str, force: bool) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_dom_token_list_toggle(self.as_ref().to_glib_none().0, token.to_glib_none().0, force.to_glib(), &mut error);
+            let _ = webkit2_webextension_sys::webkit_dom_dom_token_list_toggle(self.as_ref().to_glib_none().0, token.to_glib_none().0, force.to_glib(), &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
@@ -148,7 +148,7 @@ impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
     fn get_property_length(&self) -> libc::c_ulong {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"length\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"length\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().unwrap()
         }
     }
@@ -156,14 +156,14 @@ impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
     fn get_property_value(&self) -> Option<GString> {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"value\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"value\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }
 
     fn set_property_value(&self, value: Option<&str>) {
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"value\0".as_ptr() as *const _, Value::from(value).to_glib_none().0);
+            gobject_sys::g_object_set_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"value\0".as_ptr() as *const _, Value::from(value).to_glib_none().0);
         }
     }
 
@@ -184,13 +184,13 @@ impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
     }
 }
 
-unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMTokenList, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMTokenList, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMDOMTokenList> {
     let f: &F = &*(f as *const F);
     f(&DOMDOMTokenList::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMTokenList, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMTokenList, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMDOMTokenList> {
     let f: &F = &*(f as *const F);
     f(&DOMDOMTokenList::from_glib_borrow(this).unsafe_cast())
