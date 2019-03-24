@@ -42,3 +42,6 @@ libc = "^0.2"
 [dependencies.webkit2gtk-webextension-sys]
 path = "./webkit2gtk-webextension-sys"
 version = "^0.5"
+
+[patch.'https://github.com/gtk-rs/javascriptcore-rs']
+javascriptcore-rs-sys = { git = 'https://github.com/EPashkin/javascriptcore-rs', branch = 'add_new_types' }
