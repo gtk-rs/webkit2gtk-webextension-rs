@@ -129,100 +129,100 @@ impl<O: IsA<DOMKeyboardEvent>> DOMKeyboardEventExt for O {
 
     fn connect_property_alt_graph_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alt-graph-key\0".as_ptr() as *const _,
-                transmute(notify_alt_graph_key_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_alt_graph_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_alt_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alt-key\0".as_ptr() as *const _,
-                transmute(notify_alt_key_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_alt_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_ctrl_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::ctrl-key\0".as_ptr() as *const _,
-                transmute(notify_ctrl_key_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_ctrl_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_key_identifier_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::key-identifier\0".as_ptr() as *const _,
-                transmute(notify_key_identifier_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_key_identifier_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_key_location_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::key-location\0".as_ptr() as *const _,
-                transmute(notify_key_location_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_key_location_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_meta_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::meta-key\0".as_ptr() as *const _,
-                transmute(notify_meta_key_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_meta_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_shift_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::shift-key\0".as_ptr() as *const _,
-                transmute(notify_shift_key_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_shift_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 }
 
-unsafe extern "C" fn notify_alt_graph_key_trampoline<P>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_alt_graph_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMKeyboardEvent> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_alt_key_trampoline<P>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_alt_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMKeyboardEvent> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_ctrl_key_trampoline<P>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_ctrl_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMKeyboardEvent> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_key_identifier_trampoline<P>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_key_identifier_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMKeyboardEvent> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_key_location_trampoline<P>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_key_location_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMKeyboardEvent> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_meta_key_trampoline<P>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_meta_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMKeyboardEvent> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_shift_key_trampoline<P>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_shift_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMKeyboardEvent, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMKeyboardEvent> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
 }
 

@@ -29,7 +29,7 @@ pub trait DOMDOMImplementationExt: 'static {
     fn create_css_style_sheet(&self, title: &str, media: &str) -> Result<DOMCSSStyleSheet, Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_document<'a, 'b, P: Into<Option<&'a str>>, Q: IsA<DOMDocumentType> + 'b, R: Into<Option<&'b Q>>>(&self, namespaceURI: P, qualifiedName: &str, doctype: R) -> Result<DOMDocument, Error>;
+    fn create_document<P: IsA<DOMDocumentType>>(&self, namespaceURI: Option<&str>, qualifiedName: &str, doctype: Option<&P>) -> Result<DOMDocument, Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_document_type(&self, qualifiedName: &str, publicId: &str, systemId: &str) -> Result<DOMDocumentType, Error>;
@@ -50,9 +50,7 @@ impl<O: IsA<DOMDOMImplementation>> DOMDOMImplementationExt for O {
         }
     }
 
-    fn create_document<'a, 'b, P: Into<Option<&'a str>>, Q: IsA<DOMDocumentType> + 'b, R: Into<Option<&'b Q>>>(&self, namespaceURI: P, qualifiedName: &str, doctype: R) -> Result<DOMDocument, Error> {
-        let namespaceURI = namespaceURI.into();
-        let doctype = doctype.into();
+    fn create_document<P: IsA<DOMDocumentType>>(&self, namespaceURI: Option<&str>, qualifiedName: &str, doctype: Option<&P>) -> Result<DOMDocument, Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = ffi::webkit_dom_dom_implementation_create_document(self.as_ref().to_glib_none().0, namespaceURI.to_glib_none().0, qualifiedName.to_glib_none().0, doctype.map(|p| p.as_ref()).to_glib_none().0, &mut error);

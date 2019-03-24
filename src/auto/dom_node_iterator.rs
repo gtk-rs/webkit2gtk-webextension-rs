@@ -126,72 +126,72 @@ impl<O: IsA<DOMNodeIterator>> DOMNodeIteratorExt for O {
 
     fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::filter\0".as_ptr() as *const _,
-                transmute(notify_filter_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_filter_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_pointer_before_reference_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::pointer-before-reference-node\0".as_ptr() as *const _,
-                transmute(notify_pointer_before_reference_node_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_pointer_before_reference_node_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_reference_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::reference-node\0".as_ptr() as *const _,
-                transmute(notify_reference_node_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_reference_node_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_root_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::root\0".as_ptr() as *const _,
-                transmute(notify_root_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_root_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_what_to_show_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::what-to-show\0".as_ptr() as *const _,
-                transmute(notify_what_to_show_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_what_to_show_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 }
 
-unsafe extern "C" fn notify_filter_trampoline<P>(this: *mut ffi::WebKitDOMNodeIterator, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_filter_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMNodeIterator, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMNodeIterator> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_pointer_before_reference_node_trampoline<P>(this: *mut ffi::WebKitDOMNodeIterator, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_pointer_before_reference_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMNodeIterator, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMNodeIterator> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_reference_node_trampoline<P>(this: *mut ffi::WebKitDOMNodeIterator, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_reference_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMNodeIterator, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMNodeIterator> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_root_trampoline<P>(this: *mut ffi::WebKitDOMNodeIterator, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_root_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMNodeIterator, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMNodeIterator> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_what_to_show_trampoline<P>(this: *mut ffi::WebKitDOMNodeIterator, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_what_to_show_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMNodeIterator, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMNodeIterator> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast())
 }
 
