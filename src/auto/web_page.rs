@@ -105,26 +105,26 @@ impl<O: IsA<WebPage>> WebPageExt for O {
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn connect_console_message_sent<F: Fn(&Self, &ConsoleMessage) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self, &ConsoleMessage) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"console-message-sent\0".as_ptr() as *const _,
-                transmute(console_message_sent_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(console_message_sent_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     fn connect_context_menu<F: Fn(&Self, &ContextMenu, &WebHitTestResult) -> bool + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self, &ContextMenu, &WebHitTestResult) -> bool + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"context-menu\0".as_ptr() as *const _,
-                transmute(context_menu_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(context_menu_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_document_loaded<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"document-loaded\0".as_ptr() as *const _,
-                transmute(document_loaded_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(document_loaded_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
@@ -135,9 +135,9 @@ impl<O: IsA<WebPage>> WebPageExt for O {
 
     fn connect_send_request<F: Fn(&Self, &URIRequest, &Option<URIResponse>) -> bool + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self, &URIRequest, &Option<URIResponse>) -> bool + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"send-request\0".as_ptr() as *const _,
-                transmute(send_request_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(send_request_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
@@ -150,42 +150,42 @@ impl<O: IsA<WebPage>> WebPageExt for O {
 
     fn connect_property_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::uri\0".as_ptr() as *const _,
-                transmute(notify_uri_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_uri_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 }
 
 #[cfg(any(feature = "v2_12", feature = "dox"))]
-unsafe extern "C" fn console_message_sent_trampoline<P>(this: *mut ffi::WebKitWebPage, console_message: *mut ffi::WebKitConsoleMessage, f: glib_ffi::gpointer)
+unsafe extern "C" fn console_message_sent_trampoline<P, F: Fn(&P, &ConsoleMessage) + 'static>(this: *mut ffi::WebKitWebPage, console_message: *mut ffi::WebKitConsoleMessage, f: glib_ffi::gpointer)
 where P: IsA<WebPage> {
-    let f: &&(Fn(&P, &ConsoleMessage) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&WebPage::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(console_message))
 }
 
 #[cfg(any(feature = "v2_8", feature = "dox"))]
-unsafe extern "C" fn context_menu_trampoline<P>(this: *mut ffi::WebKitWebPage, context_menu: *mut ffi::WebKitContextMenu, hit_test_result: *mut ffi::WebKitWebHitTestResult, f: glib_ffi::gpointer) -> glib_ffi::gboolean
+unsafe extern "C" fn context_menu_trampoline<P, F: Fn(&P, &ContextMenu, &WebHitTestResult) -> bool + 'static>(this: *mut ffi::WebKitWebPage, context_menu: *mut ffi::WebKitContextMenu, hit_test_result: *mut ffi::WebKitWebHitTestResult, f: glib_ffi::gpointer) -> glib_ffi::gboolean
 where P: IsA<WebPage> {
-    let f: &&(Fn(&P, &ContextMenu, &WebHitTestResult) -> bool + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&WebPage::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(context_menu), &from_glib_borrow(hit_test_result)).to_glib()
 }
 
-unsafe extern "C" fn document_loaded_trampoline<P>(this: *mut ffi::WebKitWebPage, f: glib_ffi::gpointer)
+unsafe extern "C" fn document_loaded_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitWebPage, f: glib_ffi::gpointer)
 where P: IsA<WebPage> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&WebPage::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn send_request_trampoline<P>(this: *mut ffi::WebKitWebPage, request: *mut ffi::WebKitURIRequest, redirected_response: *mut ffi::WebKitURIResponse, f: glib_ffi::gpointer) -> glib_ffi::gboolean
+unsafe extern "C" fn send_request_trampoline<P, F: Fn(&P, &URIRequest, &Option<URIResponse>) -> bool + 'static>(this: *mut ffi::WebKitWebPage, request: *mut ffi::WebKitURIRequest, redirected_response: *mut ffi::WebKitURIResponse, f: glib_ffi::gpointer) -> glib_ffi::gboolean
 where P: IsA<WebPage> {
-    let f: &&(Fn(&P, &URIRequest, &Option<URIResponse>) -> bool + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&WebPage::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(request), &from_glib_borrow(redirected_response)).to_glib()
 }
 
-unsafe extern "C" fn notify_uri_trampoline<P>(this: *mut ffi::WebKitWebPage, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_uri_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitWebPage, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<WebPage> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&WebPage::from_glib_borrow(this).unsafe_cast())
 }
 

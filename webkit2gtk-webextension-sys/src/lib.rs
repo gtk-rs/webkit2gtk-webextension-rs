@@ -5596,8 +5596,8 @@ extern "C" {
     // WebKitFrame
     //=========================================================================
     pub fn webkit_frame_get_type() -> GType;
-    //pub fn webkit_frame_get_javascript_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> /*Metadata mismatch*/[c:type mismatch JSGlobalContextRef != JSCContext of Context];
-    //pub fn webkit_frame_get_javascript_global_context(frame: *mut WebKitFrame) -> /*Metadata mismatch*/[c:type mismatch JSGlobalContextRef != JSCContext of Context];
+    pub fn webkit_frame_get_javascript_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> java_script_core::JSGlobalContextRef;
+    pub fn webkit_frame_get_javascript_global_context(frame: *mut WebKitFrame) -> java_script_core::JSGlobalContextRef;
     #[cfg(any(feature = "v2_22", feature = "dox"))]
     pub fn webkit_frame_get_js_context(frame: *mut WebKitFrame) -> *mut java_script_core::JSCContext;
     #[cfg(any(feature = "v2_22", feature = "dox"))]

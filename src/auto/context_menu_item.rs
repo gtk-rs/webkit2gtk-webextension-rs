@@ -23,14 +23,13 @@ glib_wrapper! {
 
 impl ContextMenuItem {
     //#[cfg_attr(feature = "v2_18", deprecated)]
-    //pub fn new<P: IsA</*Ignored*/gtk::Action>>(action: &P) -> ContextMenuItem {
+    //pub fn new(action: /*Ignored*/&gtk::Action) -> ContextMenuItem {
     //    unsafe { TODO: call ffi::webkit_context_menu_item_new() }
     //}
 
     #[cfg(any(feature = "v2_18", feature = "dox"))]
-    pub fn new_from_gaction<'a, P: IsA<gio::Action>, Q: Into<Option<&'a glib::Variant>>>(action: &P, label: &str, target: Q) -> ContextMenuItem {
+    pub fn new_from_gaction<P: IsA<gio::Action>>(action: &P, label: &str, target: Option<&glib::Variant>) -> ContextMenuItem {
         assert_initialized_main_thread!();
-        let target = target.into();
         unsafe {
             from_glib_none(ffi::webkit_context_menu_item_new_from_gaction(action.as_ref().to_glib_none().0, label.to_glib_none().0, target.to_glib_none().0))
         }
@@ -80,7 +79,7 @@ pub trait ContextMenuItemExt: 'static {
 
     fn is_separator(&self) -> bool;
 
-    fn set_submenu<'a, P: IsA<ContextMenu> + 'a, Q: Into<Option<&'a P>>>(&self, submenu: Q);
+    fn set_submenu<P: IsA<ContextMenu>>(&self, submenu: Option<&P>);
 }
 
 impl<O: IsA<ContextMenuItem>> ContextMenuItemExt for O {
@@ -113,8 +112,7 @@ impl<O: IsA<ContextMenuItem>> ContextMenuItemExt for O {
         }
     }
 
-    fn set_submenu<'a, P: IsA<ContextMenu> + 'a, Q: Into<Option<&'a P>>>(&self, submenu: Q) {
-        let submenu = submenu.into();
+    fn set_submenu<P: IsA<ContextMenu>>(&self, submenu: Option<&P>) {
         unsafe {
             ffi::webkit_context_menu_item_set_submenu(self.as_ref().to_glib_none().0, submenu.map(|p| p.as_ref()).to_glib_none().0);
         }

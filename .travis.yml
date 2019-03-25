@@ -17,3 +17,4 @@ script:
   - rustc --version
   - ./check_init_asserts
   - cargo build
+  - cargo build --features="v2_20"

@@ -112,44 +112,44 @@ impl<O: IsA<DOMCSSStyleSheet>> DOMCSSStyleSheetExt for O {
 
     fn connect_property_css_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::css-rules\0".as_ptr() as *const _,
-                transmute(notify_css_rules_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_css_rules_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_owner_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::owner-rule\0".as_ptr() as *const _,
-                transmute(notify_owner_rule_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_owner_rule_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::rules\0".as_ptr() as *const _,
-                transmute(notify_rules_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_rules_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 }
 
-unsafe extern "C" fn notify_css_rules_trampoline<P>(this: *mut ffi::WebKitDOMCSSStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_css_rules_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMCSSStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMCSSStyleSheet> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMCSSStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_owner_rule_trampoline<P>(this: *mut ffi::WebKitDOMCSSStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_owner_rule_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMCSSStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMCSSStyleSheet> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMCSSStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_rules_trampoline<P>(this: *mut ffi::WebKitDOMCSSStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_rules_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMCSSStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMCSSStyleSheet> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMCSSStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 

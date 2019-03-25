@@ -23,7 +23,7 @@ pub const NONE_DOM_EVENT_TARGET: Option<&DOMEventTarget> = None;
 
 pub trait DOMEventTargetExt: 'static {
     //#[cfg_attr(feature = "v2_22", deprecated)]
-    //fn add_event_listener(&self, event_name: &str, handler: /*Unknown conversion*//*Unimplemented*/Callback, use_capture: bool) -> bool;
+    //fn add_event_listener<P: FnOnce() + 'static>(&self, event_name: &str, handler: P, use_capture: bool, user_data: /*Unimplemented*/Option<Fundamental: Pointer>) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn add_event_listener_with_closure(&self, event_name: &str, handler: &glib::Closure, use_capture: bool) -> bool;
@@ -32,14 +32,14 @@ pub trait DOMEventTargetExt: 'static {
     fn dispatch_event<P: IsA<DOMEvent>>(&self, event: &P) -> Result<(), Error>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
-    //fn remove_event_listener(&self, event_name: &str, handler: /*Unknown conversion*//*Unimplemented*/Callback, use_capture: bool) -> bool;
+    //fn remove_event_listener<P: FnMut()>(&self, event_name: &str, handler: P, use_capture: bool) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_event_listener_with_closure(&self, event_name: &str, handler: &glib::Closure, use_capture: bool) -> bool;
 }
 
 impl<O: IsA<DOMEventTarget>> DOMEventTargetExt for O {
-    //fn add_event_listener(&self, event_name: &str, handler: /*Unknown conversion*//*Unimplemented*/Callback, use_capture: bool) -> bool {
+    //fn add_event_listener<P: FnOnce() + 'static>(&self, event_name: &str, handler: P, use_capture: bool, user_data: /*Unimplemented*/Option<Fundamental: Pointer>) -> bool {
     //    unsafe { TODO: call ffi::webkit_dom_event_target_add_event_listener() }
     //}
 
@@ -57,7 +57,7 @@ impl<O: IsA<DOMEventTarget>> DOMEventTargetExt for O {
         }
     }
 
-    //fn remove_event_listener(&self, event_name: &str, handler: /*Unknown conversion*//*Unimplemented*/Callback, use_capture: bool) -> bool {
+    //fn remove_event_listener<P: FnMut()>(&self, event_name: &str, handler: P, use_capture: bool) -> bool {
     //    unsafe { TODO: call ffi::webkit_dom_event_target_remove_event_listener() }
     //}
 

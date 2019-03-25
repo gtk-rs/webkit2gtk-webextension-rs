@@ -39,16 +39,16 @@ impl<O: IsA<WebExtension>> WebExtensionExt for O {
 
     fn connect_page_created<F: Fn(&Self, &WebPage) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self, &WebPage) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"page-created\0".as_ptr() as *const _,
-                transmute(page_created_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(page_created_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 }
 
-unsafe extern "C" fn page_created_trampoline<P>(this: *mut ffi::WebKitWebExtension, web_page: *mut ffi::WebKitWebPage, f: glib_ffi::gpointer)
+unsafe extern "C" fn page_created_trampoline<P, F: Fn(&P, &WebPage) + 'static>(this: *mut ffi::WebKitWebExtension, web_page: *mut ffi::WebKitWebPage, f: glib_ffi::gpointer)
 where P: IsA<WebExtension> {
-    let f: &&(Fn(&P, &WebPage) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&WebExtension::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(web_page))
 }
 

@@ -20,6 +20,7 @@ travis-ci = { repository = "gtk-rs/webkit2gtk-webextension-rs" }
 name = "webkit2gtk_webextension"
 
 [features]
+#default = ["v2_22"]
 v2_2 = []
 v2_8 = ["v2_2", "webkit2gtk-webextension-sys/v2_8"]
 v2_10 = ["v2_8", "webkit2gtk-webextension-sys/v2_10"]
@@ -27,6 +28,8 @@ v2_12 = ["v2_10", "webkit2gtk-webextension-sys/v2_12"]
 v2_14 = ["v2_12", "webkit2gtk-webextension-sys/v2_14"]
 v2_16 = ["v2_14", "webkit2gtk-webextension-sys/v2_16"]
 v2_18 = ["v2_16", "webkit2gtk-webextension-sys/v2_18"]
+v2_20 = ["v2_18", "webkit2gtk-webextension-sys/v2_20"]
+v2_22 = ["v2_20", "webkit2gtk-webextension-sys/v2_22"]
 
 [dependencies]
 gio = { git = "https://github.com/gtk-rs/gio" }
@@ -39,3 +42,6 @@ libc = "^0.2"
 [dependencies.webkit2gtk-webextension-sys]
 path = "./webkit2gtk-webextension-sys"
 version = "^0.5"
+
+[patch.'https://github.com/gtk-rs/javascriptcore-rs']
+javascriptcore-rs-sys = { git = 'https://github.com/EPashkin/javascriptcore-rs', branch = 'add_new_types' }

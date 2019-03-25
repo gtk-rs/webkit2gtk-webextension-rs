@@ -1,4 +1,4 @@
-#![allow(let_unit_value, new_without_default, non_snake_case, transmute_ptr_to_ref, type_complexity, unused_imports)]
+#![allow(clippy::let_unit_value, clippy::new_without_default, non_snake_case, clippy::transmute_ptr_to_ref, clippy::type_complexity, clippy::unused_imports)]
 
 #[cfg(any(feature = "v2_18"))]
 extern crate gio;

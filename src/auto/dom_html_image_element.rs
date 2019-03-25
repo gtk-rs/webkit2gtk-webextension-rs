@@ -350,254 +350,254 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
-                transmute(notify_align_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_align_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alt\0".as_ptr() as *const _,
-                transmute(notify_alt_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_alt_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_border_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::border\0".as_ptr() as *const _,
-                transmute(notify_border_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_border_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_complete_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::complete\0".as_ptr() as *const _,
-                transmute(notify_complete_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_complete_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
-                transmute(notify_height_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_height_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::hspace\0".as_ptr() as *const _,
-                transmute(notify_hspace_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_hspace_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_is_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::is-map\0".as_ptr() as *const _,
-                transmute(notify_is_map_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_is_map_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_long_desc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::long-desc\0".as_ptr() as *const _,
-                transmute(notify_long_desc_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_long_desc_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_lowsrc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::lowsrc\0".as_ptr() as *const _,
-                transmute(notify_lowsrc_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_lowsrc_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
-                transmute(notify_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_name_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_natural_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::natural-height\0".as_ptr() as *const _,
-                transmute(notify_natural_height_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_natural_height_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_natural_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::natural-width\0".as_ptr() as *const _,
-                transmute(notify_natural_width_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_natural_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::src\0".as_ptr() as *const _,
-                transmute(notify_src_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_src_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_use_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::use-map\0".as_ptr() as *const _,
-                transmute(notify_use_map_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_use_map_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::vspace\0".as_ptr() as *const _,
-                transmute(notify_vspace_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_vspace_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
-                transmute(notify_width_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::x\0".as_ptr() as *const _,
-                transmute(notify_x_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_x_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::y\0".as_ptr() as *const _,
-                transmute(notify_y_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_y_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 }
 
-unsafe extern "C" fn notify_align_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_alt_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_alt_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_border_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_border_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_complete_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_complete_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_height_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_height_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_hspace_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_hspace_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_is_map_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_is_map_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_long_desc_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_long_desc_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_lowsrc_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_lowsrc_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_name_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_natural_height_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_natural_height_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_natural_width_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_natural_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_src_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_src_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_use_map_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_use_map_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_vspace_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_vspace_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_width_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_x_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_y_trampoline<P>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLImageElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMHTMLImageElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
 }
 

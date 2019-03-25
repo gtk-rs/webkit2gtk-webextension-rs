@@ -456,156 +456,156 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
 
     fn connect_property_anchor_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::anchor-node\0".as_ptr() as *const _,
-                transmute(notify_anchor_node_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_anchor_node_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_anchor_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::anchor-offset\0".as_ptr() as *const _,
-                transmute(notify_anchor_offset_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_anchor_offset_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_base_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::base-node\0".as_ptr() as *const _,
-                transmute(notify_base_node_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_base_node_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_base_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::base-offset\0".as_ptr() as *const _,
-                transmute(notify_base_offset_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_base_offset_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_extent_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::extent-node\0".as_ptr() as *const _,
-                transmute(notify_extent_node_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_extent_node_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_extent_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::extent-offset\0".as_ptr() as *const _,
-                transmute(notify_extent_offset_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_extent_offset_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_focus_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::focus-node\0".as_ptr() as *const _,
-                transmute(notify_focus_node_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_focus_node_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_focus_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::focus-offset\0".as_ptr() as *const _,
-                transmute(notify_focus_offset_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_focus_offset_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_is_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::is-collapsed\0".as_ptr() as *const _,
-                transmute(notify_is_collapsed_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_is_collapsed_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_range_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::range-count\0".as_ptr() as *const _,
-                transmute(notify_range_count_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_range_count_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::type\0".as_ptr() as *const _,
-                transmute(notify_type_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_type_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 }
 
-unsafe extern "C" fn notify_anchor_node_trampoline<P>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_anchor_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMSelection> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_anchor_offset_trampoline<P>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_anchor_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMSelection> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_base_node_trampoline<P>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_base_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMSelection> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_base_offset_trampoline<P>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_base_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMSelection> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_extent_node_trampoline<P>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_extent_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMSelection> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_extent_offset_trampoline<P>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_extent_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMSelection> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_focus_node_trampoline<P>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_focus_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMSelection> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_focus_offset_trampoline<P>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_focus_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMSelection> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_is_collapsed_trampoline<P>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_is_collapsed_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMSelection> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_range_count_trampoline<P>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_range_count_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMSelection> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_type_trampoline<P>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDOMSelection, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
 where P: IsA<DOMDOMSelection> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
