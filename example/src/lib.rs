@@ -23,20 +23,13 @@ extern crate glib;
 #[macro_use]
 extern crate webkit2gtk_webextension;
 
-use glib::Cast;
-use glib::Object;
 use glib::closure::Closure;
 use glib::variant::Variant;
+use glib::Cast;
+use glib::Object;
 use webkit2gtk_webextension::{
-    DOMDocumentExt,
-    DOMElementExt,
-    DOMEventTargetExt,
-    DOMMouseEvent,
-    DOMMouseEventExt,
-    WebExtension,
-    WebExtensionExt,
-    WebPage,
-    WebPageExt,
+    DOMDocumentExt, DOMElementExt, DOMEventTargetExt, DOMMouseEvent, DOMMouseEventExt,
+    WebExtension, WebExtensionExt, WebPage, WebPageExt,
 };
 
 /*web_extension_init!();
@@ -77,7 +70,7 @@ pub fn web_extension_initialize(extension: &WebExtension) {
 web_extension_init_with_data!();
 
 pub fn web_extension_initialize(extension: &WebExtension, user_data: Option<&Variant>) {
-    let user_string = user_data.map(|v| v.get_str()).and_then(|s| s.to_owned());
+    let user_string: Option<String> = user_data.and_then(Variant::get_str).map(ToOwned::to_owned);
     dbg!(user_string);
 
     extension.connect_page_created(|_, page| {
@@ -91,7 +84,11 @@ pub fn web_extension_initialize(extension: &WebExtension, user_data: Option<&Var
             let handler = Closure::new(|values| {
                 if let Some(event) = values[1].get::<Object>() {
                     if let Ok(mouse_event) = event.downcast::<DOMMouseEvent>() {
-                        println!("Click at ({}, {})", mouse_event.get_x(), mouse_event.get_y());
+                        println!(
+                            "Click at ({}, {})",
+                            mouse_event.get_x(),
+                            mouse_event.get_y()
+                        );
                     }
                 }
                 None
