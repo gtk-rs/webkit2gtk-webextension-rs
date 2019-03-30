@@ -19,9 +19,12 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#![allow(deprecated)]
+
 extern crate glib;
 #[macro_use]
 extern crate webkit2gtk_webextension;
+extern crate libc;
 
 use glib::closure::Closure;
 use glib::variant::Variant;
@@ -112,7 +115,7 @@ pub fn web_extension_initialize(extension: &WebExtension, user_data: Option<&Var
 fn scroll_by(page: &WebPage, pixels: i64) {
     let document = page.get_dom_document().unwrap();
     let body = document.get_body().unwrap();
-    body.set_scroll_top(body.get_scroll_top() + pixels);
+    body.set_scroll_top(body.get_scroll_top() + pixels as libc::c_long);
 }
 
 fn scroll_bottom(page: &WebPage) {

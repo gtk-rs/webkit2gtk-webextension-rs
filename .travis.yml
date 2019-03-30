@@ -19,5 +19,5 @@ script:
     make regen_check;
     fi
   - ./check_init_asserts
-  - cargo build
-  - cargo build --features="v2_20"
+  - cargo build --all
+  - cargo build --all --features="v2_20"
