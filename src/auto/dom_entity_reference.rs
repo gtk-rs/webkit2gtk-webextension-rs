@@ -5,15 +5,15 @@
 use DOMEventTarget;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::translate::*;
 use std::fmt;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMEntityReference(Object<ffi::WebKitDOMEntityReference, ffi::WebKitDOMEntityReferenceClass, DOMEntityReferenceClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMEntityReference(Object<webkit2_webextension_sys::WebKitDOMEntityReference, webkit2_webextension_sys::WebKitDOMEntityReferenceClass, DOMEntityReferenceClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_entity_reference_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_entity_reference_get_type(),
     }
 }
 

@@ -7,7 +7,6 @@ use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::GString;
 use glib::Value;
 use glib::object::Cast;
@@ -15,17 +14,18 @@ use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
-use gobject_ffi;
+use glib_sys;
+use gobject_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMHTMLAreaElement(Object<ffi::WebKitDOMHTMLAreaElement, ffi::WebKitDOMHTMLAreaElementClass, DOMHTMLAreaElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMHTMLAreaElement(Object<webkit2_webextension_sys::WebKitDOMHTMLAreaElement, webkit2_webextension_sys::WebKitDOMHTMLAreaElementClass, DOMHTMLAreaElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_html_area_element_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_html_area_element_get_type(),
     }
 }
 
@@ -116,17 +116,17 @@ pub trait DOMHTMLAreaElementExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_target(&self, value: &str);
 
-    fn set_property_host<'a, P: Into<Option<&'a str>>>(&self, host: P);
+    fn set_property_host(&self, host: Option<&str>);
 
-    fn set_property_hostname<'a, P: Into<Option<&'a str>>>(&self, hostname: P);
+    fn set_property_hostname(&self, hostname: Option<&str>);
 
-    fn set_property_pathname<'a, P: Into<Option<&'a str>>>(&self, pathname: P);
+    fn set_property_pathname(&self, pathname: Option<&str>);
 
-    fn set_property_port<'a, P: Into<Option<&'a str>>>(&self, port: P);
+    fn set_property_port(&self, port: Option<&str>);
 
-    fn set_property_protocol<'a, P: Into<Option<&'a str>>>(&self, protocol: P);
+    fn set_property_protocol(&self, protocol: Option<&str>);
 
-    fn set_property_search<'a, P: Into<Option<&'a str>>>(&self, search: P);
+    fn set_property_search(&self, search: Option<&str>);
 
     fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -158,388 +158,382 @@ pub trait DOMHTMLAreaElementExt: 'static {
 impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     fn get_alt(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_alt(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_alt(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_coords(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_coords(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_coords(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_hash(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_hash(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_hash(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_host(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_host(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_host(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_hostname(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_hostname(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_hostname(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_href(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_href(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_href(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_no_href(&self) -> bool {
         unsafe {
-            from_glib(ffi::webkit_dom_html_area_element_get_no_href(self.as_ref().to_glib_none().0))
+            from_glib(webkit2_webextension_sys::webkit_dom_html_area_element_get_no_href(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_pathname(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_pathname(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_pathname(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_port(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_port(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_port(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_protocol(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_protocol(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_protocol(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_search(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_search(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_search(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_shape(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_shape(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_shape(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_target(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_area_element_get_target(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_area_element_get_target(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_alt(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_alt(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_alt(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_coords(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_coords(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_coords(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_hash(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_hash(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_hash(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_host(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_host(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_host(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_hostname(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_hostname(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_hostname(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_href(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_href(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_href(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_no_href(&self, value: bool) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_no_href(self.as_ref().to_glib_none().0, value.to_glib());
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_no_href(self.as_ref().to_glib_none().0, value.to_glib());
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_pathname(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_pathname(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_pathname(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_port(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_port(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_port(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_protocol(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_protocol(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_protocol(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn set_search(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_search(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_search(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_shape(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_shape(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_shape(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_target(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_area_element_set_target(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_area_element_set_target(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
-    fn set_property_host<'a, P: Into<Option<&'a str>>>(&self, host: P) {
-        let host = host.into();
+    fn set_property_host(&self, host: Option<&str>) {
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"host\0".as_ptr() as *const _, Value::from(host).to_glib_none().0);
+            gobject_sys::g_object_set_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"host\0".as_ptr() as *const _, Value::from(host).to_glib_none().0);
         }
     }
 
-    fn set_property_hostname<'a, P: Into<Option<&'a str>>>(&self, hostname: P) {
-        let hostname = hostname.into();
+    fn set_property_hostname(&self, hostname: Option<&str>) {
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"hostname\0".as_ptr() as *const _, Value::from(hostname).to_glib_none().0);
+            gobject_sys::g_object_set_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"hostname\0".as_ptr() as *const _, Value::from(hostname).to_glib_none().0);
         }
     }
 
-    fn set_property_pathname<'a, P: Into<Option<&'a str>>>(&self, pathname: P) {
-        let pathname = pathname.into();
+    fn set_property_pathname(&self, pathname: Option<&str>) {
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"pathname\0".as_ptr() as *const _, Value::from(pathname).to_glib_none().0);
+            gobject_sys::g_object_set_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"pathname\0".as_ptr() as *const _, Value::from(pathname).to_glib_none().0);
         }
     }
 
-    fn set_property_port<'a, P: Into<Option<&'a str>>>(&self, port: P) {
-        let port = port.into();
+    fn set_property_port(&self, port: Option<&str>) {
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"port\0".as_ptr() as *const _, Value::from(port).to_glib_none().0);
+            gobject_sys::g_object_set_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"port\0".as_ptr() as *const _, Value::from(port).to_glib_none().0);
         }
     }
 
-    fn set_property_protocol<'a, P: Into<Option<&'a str>>>(&self, protocol: P) {
-        let protocol = protocol.into();
+    fn set_property_protocol(&self, protocol: Option<&str>) {
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"protocol\0".as_ptr() as *const _, Value::from(protocol).to_glib_none().0);
+            gobject_sys::g_object_set_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"protocol\0".as_ptr() as *const _, Value::from(protocol).to_glib_none().0);
         }
     }
 
-    fn set_property_search<'a, P: Into<Option<&'a str>>>(&self, search: P) {
-        let search = search.into();
+    fn set_property_search(&self, search: Option<&str>) {
         unsafe {
-            gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"search\0".as_ptr() as *const _, Value::from(search).to_glib_none().0);
+            gobject_sys::g_object_set_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"search\0".as_ptr() as *const _, Value::from(search).to_glib_none().0);
         }
     }
 
     fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alt\0".as_ptr() as *const _,
-                transmute(notify_alt_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_alt_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_coords_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::coords\0".as_ptr() as *const _,
-                transmute(notify_coords_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_coords_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_hash_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::hash\0".as_ptr() as *const _,
-                transmute(notify_hash_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_hash_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_host_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::host\0".as_ptr() as *const _,
-                transmute(notify_host_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_host_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_hostname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::hostname\0".as_ptr() as *const _,
-                transmute(notify_hostname_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_hostname_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::href\0".as_ptr() as *const _,
-                transmute(notify_href_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_href_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_no_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::no-href\0".as_ptr() as *const _,
-                transmute(notify_no_href_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_no_href_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_pathname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::pathname\0".as_ptr() as *const _,
-                transmute(notify_pathname_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_pathname_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_port_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::port\0".as_ptr() as *const _,
-                transmute(notify_port_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_port_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_protocol_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::protocol\0".as_ptr() as *const _,
-                transmute(notify_protocol_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_protocol_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_search_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::search\0".as_ptr() as *const _,
-                transmute(notify_search_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_search_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_shape_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::shape\0".as_ptr() as *const _,
-                transmute(notify_shape_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_shape_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::target\0".as_ptr() as *const _,
-                transmute(notify_target_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_target_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 }
 
-unsafe extern "C" fn notify_alt_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_alt_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_coords_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_coords_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_hash_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_hash_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_host_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_host_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_hostname_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_hostname_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_href_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_href_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_no_href_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_no_href_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_pathname_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_pathname_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_port_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_port_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_protocol_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_protocol_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_search_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_search_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_shape_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_shape_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_target_trampoline<P>(this: *mut ffi::WebKitDOMHTMLAreaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_target_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLAreaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 

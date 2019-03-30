@@ -4,19 +4,19 @@
 
 use DOMNode;
 use HitTestResult;
-use ffi;
 use glib::StaticType;
 use glib::Value;
 use glib::object::IsA;
 use glib::translate::*;
-use gobject_ffi;
+use gobject_sys;
 use std::fmt;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct WebHitTestResult(Object<ffi::WebKitWebHitTestResult, ffi::WebKitWebHitTestResultClass, WebHitTestResultClass>) @extends HitTestResult;
+    pub struct WebHitTestResult(Object<webkit2_webextension_sys::WebKitWebHitTestResult, webkit2_webextension_sys::WebKitWebHitTestResultClass, WebHitTestResultClass>) @extends HitTestResult;
 
     match fn {
-        get_type => || ffi::webkit_web_hit_test_result_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_web_hit_test_result_get_type(),
     }
 }
 
@@ -33,14 +33,14 @@ impl<O: IsA<WebHitTestResult>> WebHitTestResultExt for O {
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     fn get_node(&self) -> Option<DOMNode> {
         unsafe {
-            from_glib_none(ffi::webkit_web_hit_test_result_get_node(self.as_ref().to_glib_none().0))
+            from_glib_none(webkit2_webextension_sys::webkit_web_hit_test_result_get_node(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_property_node(&self) -> Option<DOMNode> {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
-            gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut gobject_ffi::GObject, b"node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get()
         }
     }

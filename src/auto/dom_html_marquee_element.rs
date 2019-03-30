@@ -7,16 +7,16 @@ use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::object::IsA;
 use glib::translate::*;
 use std::fmt;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMHTMLMarqueeElement(Object<ffi::WebKitDOMHTMLMarqueeElement, ffi::WebKitDOMHTMLMarqueeElementClass, DOMHTMLMarqueeElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMHTMLMarqueeElement(Object<webkit2_webextension_sys::WebKitDOMHTMLMarqueeElement, webkit2_webextension_sys::WebKitDOMHTMLMarqueeElementClass, DOMHTMLMarqueeElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_html_marquee_element_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_html_marquee_element_get_type(),
     }
 }
 
@@ -33,13 +33,13 @@ pub trait DOMHTMLMarqueeElementExt: 'static {
 impl<O: IsA<DOMHTMLMarqueeElement>> DOMHTMLMarqueeElementExt for O {
     fn start(&self) {
         unsafe {
-            ffi::webkit_dom_html_marquee_element_start(self.as_ref().to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_marquee_element_start(self.as_ref().to_glib_none().0);
         }
     }
 
     fn stop(&self) {
         unsafe {
-            ffi::webkit_dom_html_marquee_element_stop(self.as_ref().to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_marquee_element_stop(self.as_ref().to_glib_none().0);
         }
     }
 }

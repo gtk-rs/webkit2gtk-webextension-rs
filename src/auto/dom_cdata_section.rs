@@ -7,15 +7,15 @@ use DOMEventTarget;
 use DOMNode;
 use DOMObject;
 use DOMText;
-use ffi;
 use glib::translate::*;
 use std::fmt;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMCDATASection(Object<ffi::WebKitDOMCDATASection, ffi::WebKitDOMCDATASectionClass, DOMCDATASectionClass>) @extends DOMText, DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMCDATASection(Object<webkit2_webextension_sys::WebKitDOMCDATASection, webkit2_webextension_sys::WebKitDOMCDATASectionClass, DOMCDATASectionClass>) @extends DOMText, DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_cdata_section_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_cdata_section_get_type(),
     }
 }
 

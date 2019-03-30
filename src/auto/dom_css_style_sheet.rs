@@ -7,24 +7,24 @@ use DOMCSSRuleList;
 use DOMObject;
 use DOMStyleSheet;
 use Error;
-use ffi;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 use std::ptr;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMCSSStyleSheet(Object<ffi::WebKitDOMCSSStyleSheet, ffi::WebKitDOMCSSStyleSheetClass, DOMCSSStyleSheetClass>) @extends DOMStyleSheet, DOMObject;
+    pub struct DOMCSSStyleSheet(Object<webkit2_webextension_sys::WebKitDOMCSSStyleSheet, webkit2_webextension_sys::WebKitDOMCSSStyleSheetClass, DOMCSSStyleSheetClass>) @extends DOMStyleSheet, DOMObject;
 
     match fn {
-        get_type => || ffi::webkit_dom_css_style_sheet_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_css_style_sheet_get_type(),
     }
 }
 
@@ -63,7 +63,7 @@ impl<O: IsA<DOMCSSStyleSheet>> DOMCSSStyleSheetExt for O {
     fn add_rule(&self, selector: &str, style: &str, index: libc::c_ulong) -> Result<libc::c_long, Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = ffi::webkit_dom_css_style_sheet_add_rule(self.as_ref().to_glib_none().0, selector.to_glib_none().0, style.to_glib_none().0, index, &mut error);
+            let ret = webkit2_webextension_sys::webkit_dom_css_style_sheet_add_rule(self.as_ref().to_glib_none().0, selector.to_glib_none().0, style.to_glib_none().0, index, &mut error);
             if error.is_null() { Ok(ret) } else { Err(from_glib_full(error)) }
         }
     }
@@ -71,33 +71,33 @@ impl<O: IsA<DOMCSSStyleSheet>> DOMCSSStyleSheetExt for O {
     fn delete_rule(&self, index: libc::c_ulong) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_css_style_sheet_delete_rule(self.as_ref().to_glib_none().0, index, &mut error);
+            let _ = webkit2_webextension_sys::webkit_dom_css_style_sheet_delete_rule(self.as_ref().to_glib_none().0, index, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn get_css_rules(&self) -> Option<DOMCSSRuleList> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_css_style_sheet_get_css_rules(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_css_style_sheet_get_css_rules(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_owner_rule(&self) -> Option<DOMCSSRule> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_css_style_sheet_get_owner_rule(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_css_style_sheet_get_owner_rule(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_rules(&self) -> Option<DOMCSSRuleList> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_css_style_sheet_get_rules(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_css_style_sheet_get_rules(self.as_ref().to_glib_none().0))
         }
     }
 
     fn insert_rule(&self, rule: &str, index: libc::c_ulong) -> Result<libc::c_ulong, Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = ffi::webkit_dom_css_style_sheet_insert_rule(self.as_ref().to_glib_none().0, rule.to_glib_none().0, index, &mut error);
+            let ret = webkit2_webextension_sys::webkit_dom_css_style_sheet_insert_rule(self.as_ref().to_glib_none().0, rule.to_glib_none().0, index, &mut error);
             if error.is_null() { Ok(ret) } else { Err(from_glib_full(error)) }
         }
     }
@@ -105,51 +105,51 @@ impl<O: IsA<DOMCSSStyleSheet>> DOMCSSStyleSheetExt for O {
     fn remove_rule(&self, index: libc::c_ulong) -> Result<(), Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = ffi::webkit_dom_css_style_sheet_remove_rule(self.as_ref().to_glib_none().0, index, &mut error);
+            let _ = webkit2_webextension_sys::webkit_dom_css_style_sheet_remove_rule(self.as_ref().to_glib_none().0, index, &mut error);
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn connect_property_css_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::css-rules\0".as_ptr() as *const _,
-                transmute(notify_css_rules_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_css_rules_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_owner_rule_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::owner-rule\0".as_ptr() as *const _,
-                transmute(notify_owner_rule_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_owner_rule_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::rules\0".as_ptr() as *const _,
-                transmute(notify_rules_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_rules_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 }
 
-unsafe extern "C" fn notify_css_rules_trampoline<P>(this: *mut ffi::WebKitDOMCSSStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_css_rules_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMCSSStyleSheet, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMCSSStyleSheet> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMCSSStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_owner_rule_trampoline<P>(this: *mut ffi::WebKitDOMCSSStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_owner_rule_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMCSSStyleSheet, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMCSSStyleSheet> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMCSSStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_rules_trampoline<P>(this: *mut ffi::WebKitDOMCSSStyleSheet, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_rules_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMCSSStyleSheet, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMCSSStyleSheet> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMCSSStyleSheet::from_glib_borrow(this).unsafe_cast())
 }
 

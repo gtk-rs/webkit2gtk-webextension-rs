@@ -19,24 +19,20 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#![allow(deprecated)]
+
 extern crate glib;
 #[macro_use]
 extern crate webkit2gtk_webextension;
+extern crate libc;
 
-use glib::Cast;
-use glib::Object;
 use glib::closure::Closure;
 use glib::variant::Variant;
+use glib::Cast;
+use glib::Object;
 use webkit2gtk_webextension::{
-    DOMDocumentExt,
-    DOMElementExt,
-    DOMEventTargetExt,
-    DOMMouseEvent,
-    DOMMouseEventExt,
-    WebExtension,
-    WebExtensionExt,
-    WebPage,
-    WebPageExt,
+    DOMDocumentExt, DOMElementExt, DOMEventTargetExt, DOMMouseEvent, DOMMouseEventExt,
+    WebExtension, WebExtensionExt, WebPage, WebPageExt,
 };
 
 /*web_extension_init!();
@@ -76,8 +72,9 @@ pub fn web_extension_initialize(extension: &WebExtension) {
 
 web_extension_init_with_data!();
 
-pub fn web_extension_initialize(extension: &WebExtension, user_data: &Variant) {
-    let _string = user_data.get_str();
+pub fn web_extension_initialize(extension: &WebExtension, user_data: Option<&Variant>) {
+    let user_string: Option<String> = user_data.and_then(Variant::get_str).map(ToOwned::to_owned);
+    dbg!(user_string);
 
     extension.connect_page_created(|_, page| {
         page.connect_document_loaded(|page| {
@@ -90,7 +87,11 @@ pub fn web_extension_initialize(extension: &WebExtension, user_data: &Variant) {
             let handler = Closure::new(|values| {
                 if let Some(event) = values[1].get::<Object>() {
                     if let Ok(mouse_event) = event.downcast::<DOMMouseEvent>() {
-                        println!("Click at ({}, {})", mouse_event.get_x(), mouse_event.get_y());
+                        println!(
+                            "Click at ({}, {})",
+                            mouse_event.get_x(),
+                            mouse_event.get_y()
+                        );
                     }
                 }
                 None
@@ -114,7 +115,7 @@ pub fn web_extension_initialize(extension: &WebExtension, user_data: &Variant) {
 fn scroll_by(page: &WebPage, pixels: i64) {
     let document = page.get_dom_document().unwrap();
     let body = document.get_body().unwrap();
-    body.set_scroll_top(body.get_scroll_top() + pixels);
+    body.set_scroll_top(body.get_scroll_top() + pixels as libc::c_long);
 }
 
 fn scroll_bottom(page: &WebPage) {

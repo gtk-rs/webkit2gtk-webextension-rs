@@ -4,6 +4,8 @@ min_cfg_version="2.4"
 library = "WebKit2WebExtension"
 version = "4.0"
 single_version_file = "."
+girs_dir = "../gir-files"
+target_path = "."
 
 external_libraries = [
    "Gio",
@@ -15,3 +17,4 @@ external_libraries = [
 
 [external_libraries]
 javascriptcore = "JavaScriptCore"
+

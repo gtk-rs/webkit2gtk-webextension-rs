@@ -6,18 +6,18 @@ use DOMNode;
 use DOMObject;
 use DOMXPathResult;
 use Error;
-use ffi;
 use glib::object::IsA;
 use glib::translate::*;
 use libc;
 use std::fmt;
 use std::ptr;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMXPathExpression(Object<ffi::WebKitDOMXPathExpression, ffi::WebKitDOMXPathExpressionClass, DOMXPathExpressionClass>) @extends DOMObject;
+    pub struct DOMXPathExpression(Object<webkit2_webextension_sys::WebKitDOMXPathExpression, webkit2_webextension_sys::WebKitDOMXPathExpressionClass, DOMXPathExpressionClass>) @extends DOMObject;
 
     match fn {
-        get_type => || ffi::webkit_dom_xpath_expression_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_xpath_expression_get_type(),
     }
 }
 
@@ -32,7 +32,7 @@ impl<O: IsA<DOMXPathExpression>> DOMXPathExpressionExt for O {
     fn evaluate<P: IsA<DOMNode>, Q: IsA<DOMXPathResult>>(&self, contextNode: &P, type_: libc::c_ushort, inResult: &Q) -> Result<DOMXPathResult, Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = ffi::webkit_dom_xpath_expression_evaluate(self.as_ref().to_glib_none().0, contextNode.as_ref().to_glib_none().0, type_, inResult.as_ref().to_glib_none().0, &mut error);
+            let ret = webkit2_webextension_sys::webkit_dom_xpath_expression_evaluate(self.as_ref().to_glib_none().0, contextNode.as_ref().to_glib_none().0, type_, inResult.as_ref().to_glib_none().0, &mut error);
             if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
         }
     }

@@ -7,23 +7,23 @@ use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
-use ffi;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
 use glib::translate::*;
-use glib_ffi;
+use glib_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+use webkit2_webextension_sys;
 
 glib_wrapper! {
-    pub struct DOMHTMLMetaElement(Object<ffi::WebKitDOMHTMLMetaElement, ffi::WebKitDOMHTMLMetaElementClass, DOMHTMLMetaElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+    pub struct DOMHTMLMetaElement(Object<webkit2_webextension_sys::WebKitDOMHTMLMetaElement, webkit2_webextension_sys::WebKitDOMHTMLMetaElementClass, DOMHTMLMetaElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || ffi::webkit_dom_html_meta_element_get_type(),
+        get_type => || webkit2_webextension_sys::webkit_dom_html_meta_element_get_type(),
     }
 }
 
@@ -66,106 +66,106 @@ pub trait DOMHTMLMetaElementExt: 'static {
 impl<O: IsA<DOMHTMLMetaElement>> DOMHTMLMetaElementExt for O {
     fn get_content(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_meta_element_get_content(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_meta_element_get_content(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_http_equiv(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_meta_element_get_http_equiv(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_meta_element_get_http_equiv(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_meta_element_get_name(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_meta_element_get_name(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_scheme(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(ffi::webkit_dom_html_meta_element_get_scheme(self.as_ref().to_glib_none().0))
+            from_glib_full(webkit2_webextension_sys::webkit_dom_html_meta_element_get_scheme(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_content(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_meta_element_set_content(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_meta_element_set_content(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_http_equiv(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_meta_element_set_http_equiv(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_meta_element_set_http_equiv(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_name(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_meta_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_meta_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_scheme(&self, value: &str) {
         unsafe {
-            ffi::webkit_dom_html_meta_element_set_scheme(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_meta_element_set_scheme(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_content_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::content\0".as_ptr() as *const _,
-                transmute(notify_content_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_content_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_http_equiv_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::http-equiv\0".as_ptr() as *const _,
-                transmute(notify_http_equiv_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_http_equiv_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
-                transmute(notify_name_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_name_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 
     fn connect_property_scheme_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe {
-            let f: Box_<Box_<Fn(&Self) + 'static>> = Box_::new(Box_::new(f));
+            let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::scheme\0".as_ptr() as *const _,
-                transmute(notify_scheme_trampoline::<Self> as usize), Box_::into_raw(f) as *mut _)
+                Some(transmute(notify_scheme_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
 }
 
-unsafe extern "C" fn notify_content_trampoline<P>(this: *mut ffi::WebKitDOMHTMLMetaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_content_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLMetaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_http_equiv_trampoline<P>(this: *mut ffi::WebKitDOMHTMLMetaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_http_equiv_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLMetaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_name_trampoline<P>(this: *mut ffi::WebKitDOMHTMLMetaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLMetaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
 }
 
-unsafe extern "C" fn notify_scheme_trampoline<P>(this: *mut ffi::WebKitDOMHTMLMetaElement, _param_spec: glib_ffi::gpointer, f: glib_ffi::gpointer)
+unsafe extern "C" fn notify_scheme_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
 where P: IsA<DOMHTMLMetaElement> {
-    let f: &&(Fn(&P) + 'static) = transmute(f);
+    let f: &F = &*(f as *const F);
     f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
 }
 
