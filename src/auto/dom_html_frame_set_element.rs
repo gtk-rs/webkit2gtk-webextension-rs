@@ -73,6 +73,12 @@ impl<O: IsA<DOMHTMLFrameSetElement>> DOMHTMLFrameSetElementExt for O {
     }
 
     fn connect_property_cols_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_cols_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLFrameSetElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLFrameSetElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLFrameSetElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::cols\0".as_ptr() as *const _,
@@ -81,24 +87,18 @@ impl<O: IsA<DOMHTMLFrameSetElement>> DOMHTMLFrameSetElementExt for O {
     }
 
     fn connect_property_rows_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_rows_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLFrameSetElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLFrameSetElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLFrameSetElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::rows\0".as_ptr() as *const _,
                 Some(transmute(notify_rows_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_cols_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLFrameSetElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLFrameSetElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLFrameSetElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_rows_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLFrameSetElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLFrameSetElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLFrameSetElement::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMHTMLFrameSetElement {

@@ -20,6 +20,9 @@ glib_wrapper! {
 pub const NONE_FRAME: Option<&Frame> = None;
 
 pub trait FrameExt: 'static {
+    #[cfg(any(feature = "v2_26", feature = "dox"))]
+    fn get_id(&self) -> u64;
+
     //#[cfg_attr(feature = "v2_22", deprecated)]
     //#[cfg(any(feature = "v2_2", feature = "dox"))]
     //fn get_javascript_context_for_script_world<P: IsA<ScriptWorld>>(&self, world: &P) -> /*Ignored*/Option<java_script_core::GlobalContextRef>;
@@ -48,6 +51,13 @@ pub trait FrameExt: 'static {
 }
 
 impl<O: IsA<Frame>> FrameExt for O {
+    #[cfg(any(feature = "v2_26", feature = "dox"))]
+    fn get_id(&self) -> u64 {
+        unsafe {
+            webkit2_webextension_sys::webkit_frame_get_id(self.as_ref().to_glib_none().0)
+        }
+    }
+
     //#[cfg(any(feature = "v2_2", feature = "dox"))]
     //fn get_javascript_context_for_script_world<P: IsA<ScriptWorld>>(&self, world: &P) -> /*Ignored*/Option<java_script_core::GlobalContextRef> {
     //    unsafe {

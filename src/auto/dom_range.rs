@@ -6,7 +6,7 @@
 use DOMDocumentFragment;
 use DOMNode;
 use DOMObject;
-use Error;
+use glib;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
@@ -34,100 +34,100 @@ pub const NONE_DOM_RANGE: Option<&DOMRange> = None;
 pub trait DOMRangeExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn clone_contents(&self) -> Result<DOMDocumentFragment, Error>;
+    fn clone_contents(&self) -> Result<DOMDocumentFragment, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn clone_range(&self) -> Result<DOMRange, Error>;
+    fn clone_range(&self) -> Result<DOMRange, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn collapse(&self, toStart: bool) -> Result<(), Error>;
+    fn collapse(&self, toStart: bool) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn compare_boundary_points<P: IsA<DOMRange>>(&self, how: libc::c_ushort, sourceRange: &P) -> Result<libc::c_short, Error>;
+    fn compare_boundary_points<P: IsA<DOMRange>>(&self, how: libc::c_ushort, sourceRange: &P) -> Result<libc::c_short, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn compare_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<libc::c_short, Error>;
+    fn compare_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<libc::c_short, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn compare_point<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<libc::c_short, Error>;
-
-    #[cfg_attr(feature = "v2_22", deprecated)]
-    #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn create_contextual_fragment(&self, html: &str) -> Result<DOMDocumentFragment, Error>;
-
-    #[cfg_attr(feature = "v2_22", deprecated)]
-    fn delete_contents(&self) -> Result<(), Error>;
-
-    #[cfg_attr(feature = "v2_22", deprecated)]
-    fn detach(&self) -> Result<(), Error>;
+    fn compare_point<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<libc::c_short, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn expand(&self, unit: &str) -> Result<(), Error>;
+    fn create_contextual_fragment(&self, html: &str) -> Result<DOMDocumentFragment, glib::Error>;
+
+    #[cfg_attr(feature = "v2_22", deprecated)]
+    fn delete_contents(&self) -> Result<(), glib::Error>;
+
+    #[cfg_attr(feature = "v2_22", deprecated)]
+    fn detach(&self) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn extract_contents(&self) -> Result<DOMDocumentFragment, Error>;
+    fn expand(&self, unit: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_collapsed(&self) -> Result<(), Error>;
+    #[cfg(any(feature = "v2_16", feature = "dox"))]
+    fn extract_contents(&self) -> Result<DOMDocumentFragment, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_common_ancestor_container(&self) -> Result<DOMNode, Error>;
+    fn get_collapsed(&self) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_end_container(&self) -> Result<DOMNode, Error>;
+    fn get_common_ancestor_container(&self) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_end_offset(&self) -> Result<libc::c_long, Error>;
+    fn get_end_container(&self) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_start_container(&self) -> Result<DOMNode, Error>;
+    fn get_end_offset(&self) -> Result<libc::c_long, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_start_offset(&self) -> Result<libc::c_long, Error>;
+    fn get_start_container(&self) -> Result<DOMNode, glib::Error>;
+
+    #[cfg_attr(feature = "v2_22", deprecated)]
+    fn get_start_offset(&self) -> Result<libc::c_long, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_text(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn insert_node<P: IsA<DOMNode>>(&self, newNode: &P) -> Result<(), Error>;
+    fn insert_node<P: IsA<DOMNode>>(&self, newNode: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn intersects_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
+    fn intersects_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn is_point_in_range<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), Error>;
+    fn is_point_in_range<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn select_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
+    fn select_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn select_node_contents<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
+    fn select_node_contents<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_end<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), Error>;
+    fn set_end<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_end_after<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
+    fn set_end_after<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_end_before<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
+    fn set_end_before<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_start<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), Error>;
+    fn set_start<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_start_after<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
+    fn set_start_after<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_start_before<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error>;
+    fn set_start_before<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn surround_contents<P: IsA<DOMNode>>(&self, newParent: &P) -> Result<(), Error>;
+    fn surround_contents<P: IsA<DOMNode>>(&self, newParent: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn to_string(&self) -> Result<GString, Error>;
+    fn to_string(&self) -> Result<GString, glib::Error>;
 
     fn connect_property_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -146,7 +146,7 @@ pub trait DOMRangeExt: 'static {
 
 impl<O: IsA<DOMRange>> DOMRangeExt for O {
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn clone_contents(&self) -> Result<DOMDocumentFragment, Error> {
+    fn clone_contents(&self) -> Result<DOMDocumentFragment, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_clone_contents(self.as_ref().to_glib_none().0, &mut error);
@@ -154,7 +154,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn clone_range(&self) -> Result<DOMRange, Error> {
+    fn clone_range(&self) -> Result<DOMRange, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_clone_range(self.as_ref().to_glib_none().0, &mut error);
@@ -162,7 +162,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn collapse(&self, toStart: bool) -> Result<(), Error> {
+    fn collapse(&self, toStart: bool) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_collapse(self.as_ref().to_glib_none().0, toStart.to_glib(), &mut error);
@@ -170,7 +170,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn compare_boundary_points<P: IsA<DOMRange>>(&self, how: libc::c_ushort, sourceRange: &P) -> Result<libc::c_short, Error> {
+    fn compare_boundary_points<P: IsA<DOMRange>>(&self, how: libc::c_ushort, sourceRange: &P) -> Result<libc::c_short, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_compare_boundary_points(self.as_ref().to_glib_none().0, how, sourceRange.as_ref().to_glib_none().0, &mut error);
@@ -178,7 +178,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn compare_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<libc::c_short, Error> {
+    fn compare_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<libc::c_short, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_compare_node(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, &mut error);
@@ -186,7 +186,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn compare_point<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<libc::c_short, Error> {
+    fn compare_point<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<libc::c_short, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_compare_point(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, offset, &mut error);
@@ -195,7 +195,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn create_contextual_fragment(&self, html: &str) -> Result<DOMDocumentFragment, Error> {
+    fn create_contextual_fragment(&self, html: &str) -> Result<DOMDocumentFragment, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_create_contextual_fragment(self.as_ref().to_glib_none().0, html.to_glib_none().0, &mut error);
@@ -203,7 +203,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn delete_contents(&self) -> Result<(), Error> {
+    fn delete_contents(&self) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_delete_contents(self.as_ref().to_glib_none().0, &mut error);
@@ -211,7 +211,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn detach(&self) -> Result<(), Error> {
+    fn detach(&self) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_detach(self.as_ref().to_glib_none().0, &mut error);
@@ -220,7 +220,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn expand(&self, unit: &str) -> Result<(), Error> {
+    fn expand(&self, unit: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_expand(self.as_ref().to_glib_none().0, unit.to_glib_none().0, &mut error);
@@ -229,7 +229,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn extract_contents(&self) -> Result<DOMDocumentFragment, Error> {
+    fn extract_contents(&self) -> Result<DOMDocumentFragment, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_extract_contents(self.as_ref().to_glib_none().0, &mut error);
@@ -237,7 +237,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn get_collapsed(&self) -> Result<(), Error> {
+    fn get_collapsed(&self) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_get_collapsed(self.as_ref().to_glib_none().0, &mut error);
@@ -245,7 +245,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn get_common_ancestor_container(&self) -> Result<DOMNode, Error> {
+    fn get_common_ancestor_container(&self) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_get_common_ancestor_container(self.as_ref().to_glib_none().0, &mut error);
@@ -253,7 +253,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn get_end_container(&self) -> Result<DOMNode, Error> {
+    fn get_end_container(&self) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_get_end_container(self.as_ref().to_glib_none().0, &mut error);
@@ -261,7 +261,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn get_end_offset(&self) -> Result<libc::c_long, Error> {
+    fn get_end_offset(&self) -> Result<libc::c_long, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_get_end_offset(self.as_ref().to_glib_none().0, &mut error);
@@ -269,7 +269,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn get_start_container(&self) -> Result<DOMNode, Error> {
+    fn get_start_container(&self) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_get_start_container(self.as_ref().to_glib_none().0, &mut error);
@@ -277,7 +277,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn get_start_offset(&self) -> Result<libc::c_long, Error> {
+    fn get_start_offset(&self) -> Result<libc::c_long, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_get_start_offset(self.as_ref().to_glib_none().0, &mut error);
@@ -291,7 +291,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn insert_node<P: IsA<DOMNode>>(&self, newNode: &P) -> Result<(), Error> {
+    fn insert_node<P: IsA<DOMNode>>(&self, newNode: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_insert_node(self.as_ref().to_glib_none().0, newNode.as_ref().to_glib_none().0, &mut error);
@@ -299,7 +299,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn intersects_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error> {
+    fn intersects_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_intersects_node(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, &mut error);
@@ -307,7 +307,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn is_point_in_range<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), Error> {
+    fn is_point_in_range<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_is_point_in_range(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, offset, &mut error);
@@ -315,7 +315,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn select_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error> {
+    fn select_node<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_select_node(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, &mut error);
@@ -323,7 +323,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn select_node_contents<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error> {
+    fn select_node_contents<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_select_node_contents(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, &mut error);
@@ -331,7 +331,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn set_end<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), Error> {
+    fn set_end<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_set_end(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, offset, &mut error);
@@ -339,7 +339,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn set_end_after<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error> {
+    fn set_end_after<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_set_end_after(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, &mut error);
@@ -347,7 +347,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn set_end_before<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error> {
+    fn set_end_before<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_set_end_before(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, &mut error);
@@ -355,7 +355,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn set_start<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), Error> {
+    fn set_start<P: IsA<DOMNode>>(&self, refNode: &P, offset: libc::c_long) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_set_start(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, offset, &mut error);
@@ -363,7 +363,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn set_start_after<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error> {
+    fn set_start_after<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_set_start_after(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, &mut error);
@@ -371,7 +371,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn set_start_before<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), Error> {
+    fn set_start_before<P: IsA<DOMNode>>(&self, refNode: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_set_start_before(self.as_ref().to_glib_none().0, refNode.as_ref().to_glib_none().0, &mut error);
@@ -379,7 +379,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn surround_contents<P: IsA<DOMNode>>(&self, newParent: &P) -> Result<(), Error> {
+    fn surround_contents<P: IsA<DOMNode>>(&self, newParent: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_range_surround_contents(self.as_ref().to_glib_none().0, newParent.as_ref().to_glib_none().0, &mut error);
@@ -387,7 +387,7 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
         }
     }
 
-    fn to_string(&self) -> Result<GString, Error> {
+    fn to_string(&self) -> Result<GString, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_range_to_string(self.as_ref().to_glib_none().0, &mut error);
@@ -396,6 +396,12 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
     }
 
     fn connect_property_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_collapsed_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMRange>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::collapsed\0".as_ptr() as *const _,
@@ -404,6 +410,12 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
     }
 
     fn connect_property_common_ancestor_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_common_ancestor_container_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMRange>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::common-ancestor-container\0".as_ptr() as *const _,
@@ -412,6 +424,12 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
     }
 
     fn connect_property_end_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_end_container_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMRange>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::end-container\0".as_ptr() as *const _,
@@ -420,6 +438,12 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
     }
 
     fn connect_property_end_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_end_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMRange>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::end-offset\0".as_ptr() as *const _,
@@ -428,6 +452,12 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
     }
 
     fn connect_property_start_container_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_start_container_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMRange>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::start-container\0".as_ptr() as *const _,
@@ -436,6 +466,12 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
     }
 
     fn connect_property_start_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_start_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMRange>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::start-offset\0".as_ptr() as *const _,
@@ -444,54 +480,18 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
     }
 
     fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_text_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMRange>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::text\0".as_ptr() as *const _,
                 Some(transmute(notify_text_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_collapsed_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMRange> {
-    let f: &F = &*(f as *const F);
-    f(&DOMRange::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_common_ancestor_container_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMRange> {
-    let f: &F = &*(f as *const F);
-    f(&DOMRange::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_end_container_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMRange> {
-    let f: &F = &*(f as *const F);
-    f(&DOMRange::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_end_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMRange> {
-    let f: &F = &*(f as *const F);
-    f(&DOMRange::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_start_container_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMRange> {
-    let f: &F = &*(f as *const F);
-    f(&DOMRange::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_start_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMRange> {
-    let f: &F = &*(f as *const F);
-    f(&DOMRange::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_text_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMRange, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMRange> {
-    let f: &F = &*(f as *const F);
-    f(&DOMRange::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMRange {

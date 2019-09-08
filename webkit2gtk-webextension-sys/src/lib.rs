@@ -81,6 +81,7 @@ pub const WEBKIT_CONTEXT_MENU_ACTION_MEDIA_PAUSE: WebKitContextMenuAction = 40;
 pub const WEBKIT_CONTEXT_MENU_ACTION_MEDIA_MUTE: WebKitContextMenuAction = 41;
 pub const WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_VIDEO_TO_DISK: WebKitContextMenuAction = 42;
 pub const WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_AUDIO_TO_DISK: WebKitContextMenuAction = 43;
+pub const WEBKIT_CONTEXT_MENU_ACTION_INSERT_EMOJI: WebKitContextMenuAction = 44;
 pub const WEBKIT_CONTEXT_MENU_ACTION_CUSTOM: WebKitContextMenuAction = 10000;
 
 pub type WebKitFormSubmissionStep = c_int;
@@ -246,24 +247,14 @@ impl ::std::fmt::Debug for WebKitContextMenuItemClass {
 }
 
 #[repr(C)]
-pub struct WebKitContextMenuItemPrivate(c_void);
+pub struct _WebKitContextMenuItemPrivate(c_void);
 
-impl ::std::fmt::Debug for WebKitContextMenuItemPrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitContextMenuItemPrivate @ {:?}", self as *const _))
-         .finish()
-    }
-}
+pub type WebKitContextMenuItemPrivate = *mut _WebKitContextMenuItemPrivate;
 
 #[repr(C)]
-pub struct WebKitContextMenuPrivate(c_void);
+pub struct _WebKitContextMenuPrivate(c_void);
 
-impl ::std::fmt::Debug for WebKitContextMenuPrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitContextMenuPrivate @ {:?}", self as *const _))
-         .finish()
-    }
-}
+pub type WebKitContextMenuPrivate = *mut _WebKitContextMenuPrivate;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -1756,14 +1747,9 @@ impl ::std::fmt::Debug for WebKitFrameClass {
 }
 
 #[repr(C)]
-pub struct WebKitFramePrivate(c_void);
+pub struct _WebKitFramePrivate(c_void);
 
-impl ::std::fmt::Debug for WebKitFramePrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitFramePrivate @ {:?}", self as *const _))
-         .finish()
-    }
-}
+pub type WebKitFramePrivate = *mut _WebKitFramePrivate;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -1788,14 +1774,9 @@ impl ::std::fmt::Debug for WebKitHitTestResultClass {
 }
 
 #[repr(C)]
-pub struct WebKitHitTestResultPrivate(c_void);
+pub struct _WebKitHitTestResultPrivate(c_void);
 
-impl ::std::fmt::Debug for WebKitHitTestResultPrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitHitTestResultPrivate @ {:?}", self as *const _))
-         .finish()
-    }
-}
+pub type WebKitHitTestResultPrivate = *mut _WebKitHitTestResultPrivate;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -1820,14 +1801,9 @@ impl ::std::fmt::Debug for WebKitScriptWorldClass {
 }
 
 #[repr(C)]
-pub struct WebKitScriptWorldPrivate(c_void);
+pub struct _WebKitScriptWorldPrivate(c_void);
 
-impl ::std::fmt::Debug for WebKitScriptWorldPrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitScriptWorldPrivate @ {:?}", self as *const _))
-         .finish()
-    }
-}
+pub type WebKitScriptWorldPrivate = *mut _WebKitScriptWorldPrivate;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -1852,14 +1828,9 @@ impl ::std::fmt::Debug for WebKitURIRequestClass {
 }
 
 #[repr(C)]
-pub struct WebKitURIRequestPrivate(c_void);
+pub struct _WebKitURIRequestPrivate(c_void);
 
-impl ::std::fmt::Debug for WebKitURIRequestPrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitURIRequestPrivate @ {:?}", self as *const _))
-         .finish()
-    }
-}
+pub type WebKitURIRequestPrivate = *mut _WebKitURIRequestPrivate;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -1884,14 +1855,9 @@ impl ::std::fmt::Debug for WebKitURIResponseClass {
 }
 
 #[repr(C)]
-pub struct WebKitURIResponsePrivate(c_void);
+pub struct _WebKitURIResponsePrivate(c_void);
 
-impl ::std::fmt::Debug for WebKitURIResponsePrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitURIResponsePrivate @ {:?}", self as *const _))
-         .finish()
-    }
-}
+pub type WebKitURIResponsePrivate = *mut _WebKitURIResponsePrivate;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -1908,14 +1874,9 @@ impl ::std::fmt::Debug for WebKitWebEditorClass {
 }
 
 #[repr(C)]
-pub struct WebKitWebEditorPrivate(c_void);
+pub struct _WebKitWebEditorPrivate(c_void);
 
-impl ::std::fmt::Debug for WebKitWebEditorPrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitWebEditorPrivate @ {:?}", self as *const _))
-         .finish()
-    }
-}
+pub type WebKitWebEditorPrivate = *mut _WebKitWebEditorPrivate;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -1932,14 +1893,9 @@ impl ::std::fmt::Debug for WebKitWebExtensionClass {
 }
 
 #[repr(C)]
-pub struct WebKitWebExtensionPrivate(c_void);
+pub struct _WebKitWebExtensionPrivate(c_void);
 
-impl ::std::fmt::Debug for WebKitWebExtensionPrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitWebExtensionPrivate @ {:?}", self as *const _))
-         .finish()
-    }
-}
+pub type WebKitWebExtensionPrivate = *mut _WebKitWebExtensionPrivate;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -1964,14 +1920,9 @@ impl ::std::fmt::Debug for WebKitWebHitTestResultClass {
 }
 
 #[repr(C)]
-pub struct WebKitWebHitTestResultPrivate(c_void);
+pub struct _WebKitWebHitTestResultPrivate(c_void);
 
-impl ::std::fmt::Debug for WebKitWebHitTestResultPrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitWebHitTestResultPrivate @ {:?}", self as *const _))
-         .finish()
-    }
-}
+pub type WebKitWebHitTestResultPrivate = *mut _WebKitWebHitTestResultPrivate;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -1988,14 +1939,9 @@ impl ::std::fmt::Debug for WebKitWebPageClass {
 }
 
 #[repr(C)]
-pub struct WebKitWebPagePrivate(c_void);
+pub struct _WebKitWebPagePrivate(c_void);
 
-impl ::std::fmt::Debug for WebKitWebPagePrivate {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitWebPagePrivate @ {:?}", self as *const _))
-         .finish()
-    }
-}
+pub type WebKitWebPagePrivate = *mut _WebKitWebPagePrivate;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -5596,6 +5542,8 @@ extern "C" {
     // WebKitFrame
     //=========================================================================
     pub fn webkit_frame_get_type() -> GType;
+    #[cfg(any(feature = "v2_26", feature = "dox"))]
+    pub fn webkit_frame_get_id(frame: *mut WebKitFrame) -> u64;
     pub fn webkit_frame_get_javascript_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> java_script_core::JSGlobalContextRef;
     pub fn webkit_frame_get_javascript_global_context(frame: *mut WebKitFrame) -> java_script_core::JSGlobalContextRef;
     #[cfg(any(feature = "v2_22", feature = "dox"))]

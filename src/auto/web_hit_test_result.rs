@@ -41,7 +41,7 @@ impl<O: IsA<WebHitTestResult>> WebHitTestResultExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `node` getter")
         }
     }
 }

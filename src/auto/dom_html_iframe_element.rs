@@ -257,6 +257,12 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
@@ -265,6 +271,12 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_content_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_content_document_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::content-document\0".as_ptr() as *const _,
@@ -273,6 +285,12 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_content_window_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_content_window_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::content-window\0".as_ptr() as *const _,
@@ -281,6 +299,12 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_frame_border_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_frame_border_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::frame-border\0".as_ptr() as *const _,
@@ -289,6 +313,12 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_height_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
@@ -297,6 +327,12 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_long_desc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_long_desc_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::long-desc\0".as_ptr() as *const _,
@@ -305,6 +341,12 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_margin_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_margin_height_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::margin-height\0".as_ptr() as *const _,
@@ -313,6 +355,12 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_margin_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_margin_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::margin-width\0".as_ptr() as *const _,
@@ -321,6 +369,12 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
@@ -329,6 +383,12 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_scrolling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_scrolling_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::scrolling\0".as_ptr() as *const _,
@@ -337,6 +397,12 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_src_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::src\0".as_ptr() as *const _,
@@ -345,84 +411,18 @@ impl<O: IsA<DOMHTMLIFrameElement>> DOMHTMLIFrameElementExt for O {
     }
 
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLIFrameElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
                 Some(transmute(notify_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_content_document_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_content_window_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_frame_border_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_height_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_long_desc_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_margin_height_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_margin_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_scrolling_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_src_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLIFrameElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLIFrameElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLIFrameElement::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMHTMLIFrameElement {

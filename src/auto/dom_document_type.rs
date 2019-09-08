@@ -98,6 +98,12 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
     }
 
     fn connect_property_entities_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_entities_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDocumentType>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::entities\0".as_ptr() as *const _,
@@ -106,6 +112,12 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
     }
 
     fn connect_property_internal_subset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_internal_subset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDocumentType>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::internal-subset\0".as_ptr() as *const _,
@@ -114,6 +126,12 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
     }
 
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDocumentType>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
@@ -122,6 +140,12 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
     }
 
     fn connect_property_notations_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_notations_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDocumentType>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::notations\0".as_ptr() as *const _,
@@ -130,6 +154,12 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
     }
 
     fn connect_property_public_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_public_id_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDocumentType>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::public-id\0".as_ptr() as *const _,
@@ -138,48 +168,18 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
     }
 
     fn connect_property_system_id_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_system_id_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDocumentType>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::system-id\0".as_ptr() as *const _,
                 Some(transmute(notify_system_id_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_entities_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDocumentType> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_internal_subset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDocumentType> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDocumentType> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_notations_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDocumentType> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_public_id_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDocumentType> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_system_id_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentType, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDocumentType> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMDocumentType {

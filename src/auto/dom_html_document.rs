@@ -282,6 +282,12 @@ impl<O: IsA<DOMHTMLDocument>> DOMHTMLDocumentExt for O {
     }
 
     fn connect_property_alink_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_alink_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLDocument>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alink-color\0".as_ptr() as *const _,
@@ -290,6 +296,12 @@ impl<O: IsA<DOMHTMLDocument>> DOMHTMLDocumentExt for O {
     }
 
     fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_bg_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLDocument>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::bg-color\0".as_ptr() as *const _,
@@ -298,6 +310,12 @@ impl<O: IsA<DOMHTMLDocument>> DOMHTMLDocumentExt for O {
     }
 
     fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_dir_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLDocument>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::dir\0".as_ptr() as *const _,
@@ -306,6 +324,12 @@ impl<O: IsA<DOMHTMLDocument>> DOMHTMLDocumentExt for O {
     }
 
     fn connect_property_fg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_fg_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLDocument>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::fg-color\0".as_ptr() as *const _,
@@ -314,6 +338,12 @@ impl<O: IsA<DOMHTMLDocument>> DOMHTMLDocumentExt for O {
     }
 
     fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_height_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLDocument>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
@@ -322,6 +352,12 @@ impl<O: IsA<DOMHTMLDocument>> DOMHTMLDocumentExt for O {
     }
 
     fn connect_property_link_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_link_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLDocument>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::link-color\0".as_ptr() as *const _,
@@ -330,6 +366,12 @@ impl<O: IsA<DOMHTMLDocument>> DOMHTMLDocumentExt for O {
     }
 
     fn connect_property_vlink_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_vlink_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLDocument>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::vlink-color\0".as_ptr() as *const _,
@@ -338,60 +380,18 @@ impl<O: IsA<DOMHTMLDocument>> DOMHTMLDocumentExt for O {
     }
 
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLDocument>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
                 Some(transmute(notify_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_alink_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLDocument> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_bg_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLDocument> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_dir_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLDocument> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_fg_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLDocument> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_height_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLDocument> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_link_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLDocument> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_vlink_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLDocument> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLDocument, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLDocument> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLDocument::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMHTMLDocument {

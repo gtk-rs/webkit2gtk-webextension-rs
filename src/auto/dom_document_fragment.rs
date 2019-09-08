@@ -10,7 +10,7 @@ use DOMNode;
 use DOMNodeList;
 use DOMObject;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
-use Error;
+use glib;
 use glib::StaticType;
 use glib::Value;
 use glib::object::Cast;
@@ -61,11 +61,11 @@ pub trait DOMDocumentFragmentExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn query_selector(&self, selectors: &str) -> Result<DOMElement, Error>;
+    fn query_selector(&self, selectors: &str) -> Result<DOMElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error>;
+    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, glib::Error>;
 
     fn get_property_child_element_count(&self) -> libc::c_ulong;
 
@@ -121,7 +121,7 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn query_selector(&self, selectors: &str) -> Result<DOMElement, Error> {
+    fn query_selector(&self, selectors: &str) -> Result<DOMElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_fragment_query_selector(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
@@ -130,7 +130,7 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error> {
+    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_fragment_query_selector_all(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
@@ -142,7 +142,7 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"child-element-count\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `child-element-count` getter").unwrap()
         }
     }
 
@@ -150,7 +150,7 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"children\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `children` getter")
         }
     }
 
@@ -158,7 +158,7 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"first-element-child\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `first-element-child` getter")
         }
     }
 
@@ -166,11 +166,17 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"last-element-child\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `last-element-child` getter")
         }
     }
 
     fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_child_element_count_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentFragment, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDocumentFragment>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::child-element-count\0".as_ptr() as *const _,
@@ -179,6 +185,12 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
     }
 
     fn connect_property_children_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_children_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentFragment, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDocumentFragment>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::children\0".as_ptr() as *const _,
@@ -187,6 +199,12 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
     }
 
     fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_first_element_child_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentFragment, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDocumentFragment>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::first-element-child\0".as_ptr() as *const _,
@@ -195,36 +213,18 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
     }
 
     fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_last_element_child_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentFragment, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDocumentFragment>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::last-element-child\0".as_ptr() as *const _,
                 Some(transmute(notify_last_element_child_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_child_element_count_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentFragment, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDocumentFragment> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_children_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentFragment, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDocumentFragment> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_first_element_child_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentFragment, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDocumentFragment> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_last_element_child_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDocumentFragment, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDocumentFragment> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMDocumentFragment {

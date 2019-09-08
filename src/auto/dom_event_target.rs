@@ -3,7 +3,6 @@
 // DO NOT EDIT
 
 use DOMEvent;
-use Error;
 use glib;
 use glib::object::IsA;
 use glib::translate::*;
@@ -29,7 +28,7 @@ pub trait DOMEventTargetExt: 'static {
     fn add_event_listener_with_closure(&self, event_name: &str, handler: &glib::Closure, use_capture: bool) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn dispatch_event<P: IsA<DOMEvent>>(&self, event: &P) -> Result<(), Error>;
+    fn dispatch_event<P: IsA<DOMEvent>>(&self, event: &P) -> Result<(), glib::Error>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
     //fn remove_event_listener<P: FnMut()>(&self, event_name: &str, handler: P, use_capture: bool) -> bool;
@@ -49,7 +48,7 @@ impl<O: IsA<DOMEventTarget>> DOMEventTargetExt for O {
         }
     }
 
-    fn dispatch_event<P: IsA<DOMEvent>>(&self, event: &P) -> Result<(), Error> {
+    fn dispatch_event<P: IsA<DOMEvent>>(&self, event: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_event_target_dispatch_event(self.as_ref().to_glib_none().0, event.as_ref().to_glib_none().0, &mut error);

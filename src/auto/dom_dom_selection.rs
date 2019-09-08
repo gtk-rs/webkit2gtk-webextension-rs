@@ -7,7 +7,7 @@ use DOMObject;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use DOMRange;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
-use Error;
+use glib;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
@@ -47,11 +47,11 @@ pub trait DOMDOMSelectionExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn collapse_to_end(&self) -> Result<(), Error>;
+    fn collapse_to_end(&self) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn collapse_to_start(&self) -> Result<(), Error>;
+    fn collapse_to_start(&self) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -67,7 +67,7 @@ pub trait DOMDOMSelectionExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn extend<P: IsA<DOMNode>>(&self, node: &P, offset: libc::c_ulong) -> Result<(), Error>;
+    fn extend<P: IsA<DOMNode>>(&self, node: &P, offset: libc::c_ulong) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -107,7 +107,7 @@ pub trait DOMDOMSelectionExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_range_at(&self, index: libc::c_ulong) -> Result<DOMRange, Error>;
+    fn get_range_at(&self, index: libc::c_ulong) -> Result<DOMRange, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -198,7 +198,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn collapse_to_end(&self) -> Result<(), Error> {
+    fn collapse_to_end(&self) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_dom_selection_collapse_to_end(self.as_ref().to_glib_none().0, &mut error);
@@ -207,7 +207,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn collapse_to_start(&self) -> Result<(), Error> {
+    fn collapse_to_start(&self) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_dom_selection_collapse_to_start(self.as_ref().to_glib_none().0, &mut error);
@@ -237,7 +237,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn extend<P: IsA<DOMNode>>(&self, node: &P, offset: libc::c_ulong) -> Result<(), Error> {
+    fn extend<P: IsA<DOMNode>>(&self, node: &P, offset: libc::c_ulong) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_dom_selection_extend(self.as_ref().to_glib_none().0, node.as_ref().to_glib_none().0, offset, &mut error);
@@ -309,7 +309,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_range_at(&self, index: libc::c_ulong) -> Result<DOMRange, Error> {
+    fn get_range_at(&self, index: libc::c_ulong) -> Result<DOMRange, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_dom_selection_get_range_at(self.as_ref().to_glib_none().0, index, &mut error);
@@ -370,7 +370,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"anchor-node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `anchor-node` getter")
         }
     }
 
@@ -378,7 +378,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"anchor-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `anchor-offset` getter").unwrap()
         }
     }
 
@@ -386,7 +386,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"base-node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `base-node` getter")
         }
     }
 
@@ -394,7 +394,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"base-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `base-offset` getter").unwrap()
         }
     }
 
@@ -402,7 +402,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"extent-node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `extent-node` getter")
         }
     }
 
@@ -410,7 +410,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"extent-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `extent-offset` getter").unwrap()
         }
     }
 
@@ -418,7 +418,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"focus-node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `focus-node` getter")
         }
     }
 
@@ -426,7 +426,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"focus-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `focus-offset` getter").unwrap()
         }
     }
 
@@ -434,7 +434,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"is-collapsed\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `is-collapsed` getter").unwrap()
         }
     }
 
@@ -442,7 +442,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"range-count\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `range-count` getter").unwrap()
         }
     }
 
@@ -450,11 +450,17 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `type` getter")
         }
     }
 
     fn connect_property_anchor_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_anchor_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMSelection>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::anchor-node\0".as_ptr() as *const _,
@@ -463,6 +469,12 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     fn connect_property_anchor_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_anchor_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMSelection>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::anchor-offset\0".as_ptr() as *const _,
@@ -471,6 +483,12 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     fn connect_property_base_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_base_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMSelection>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::base-node\0".as_ptr() as *const _,
@@ -479,6 +497,12 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     fn connect_property_base_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_base_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMSelection>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::base-offset\0".as_ptr() as *const _,
@@ -487,6 +511,12 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     fn connect_property_extent_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_extent_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMSelection>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::extent-node\0".as_ptr() as *const _,
@@ -495,6 +525,12 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     fn connect_property_extent_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_extent_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMSelection>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::extent-offset\0".as_ptr() as *const _,
@@ -503,6 +539,12 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     fn connect_property_focus_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_focus_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMSelection>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::focus-node\0".as_ptr() as *const _,
@@ -511,6 +553,12 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     fn connect_property_focus_offset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_focus_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMSelection>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::focus-offset\0".as_ptr() as *const _,
@@ -519,6 +567,12 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     fn connect_property_is_collapsed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_is_collapsed_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMSelection>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::is-collapsed\0".as_ptr() as *const _,
@@ -527,6 +581,12 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     fn connect_property_range_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_range_count_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMSelection>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::range-count\0".as_ptr() as *const _,
@@ -535,78 +595,18 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMSelection>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::type\0".as_ptr() as *const _,
                 Some(transmute(notify_type_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_anchor_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMSelection> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_anchor_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMSelection> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_base_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMSelection> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_base_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMSelection> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_extent_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMSelection> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_extent_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMSelection> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_focus_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMSelection> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_focus_offset_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMSelection> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_is_collapsed_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMSelection> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_range_count_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMSelection> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMSelection, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMSelection> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMSelection::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMDOMSelection {
