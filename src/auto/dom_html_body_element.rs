@@ -153,6 +153,12 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
     }
 
     fn connect_property_a_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_a_link_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLBodyElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::a-link\0".as_ptr() as *const _,
@@ -161,6 +167,12 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
     }
 
     fn connect_property_background_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_background_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLBodyElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::background\0".as_ptr() as *const _,
@@ -169,6 +181,12 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
     }
 
     fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_bg_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLBodyElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::bg-color\0".as_ptr() as *const _,
@@ -177,6 +195,12 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
     }
 
     fn connect_property_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_link_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLBodyElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::link\0".as_ptr() as *const _,
@@ -185,6 +209,12 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
     }
 
     fn connect_property_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_text_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLBodyElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::text\0".as_ptr() as *const _,
@@ -193,48 +223,18 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
     }
 
     fn connect_property_v_link_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_v_link_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLBodyElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::v-link\0".as_ptr() as *const _,
                 Some(transmute(notify_v_link_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_a_link_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLBodyElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_background_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLBodyElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_bg_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLBodyElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_link_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLBodyElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_text_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLBodyElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_v_link_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLBodyElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLBodyElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMHTMLBodyElement {

@@ -86,19 +86,18 @@ impl<O: IsA<ScriptWorld>> ScriptWorldExt for O {
 
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     fn connect_window_object_cleared<F: Fn(&Self, &WebPage, &Frame) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn window_object_cleared_trampoline<P, F: Fn(&P, &WebPage, &Frame) + 'static>(this: *mut webkit2_webextension_sys::WebKitScriptWorld, page: *mut webkit2_webextension_sys::WebKitWebPage, frame: *mut webkit2_webextension_sys::WebKitFrame, f: glib_sys::gpointer)
+            where P: IsA<ScriptWorld>
+        {
+            let f: &F = &*(f as *const F);
+            f(&ScriptWorld::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(page), &from_glib_borrow(frame))
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"window-object-cleared\0".as_ptr() as *const _,
                 Some(transmute(window_object_cleared_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-#[cfg(any(feature = "v2_2", feature = "dox"))]
-unsafe extern "C" fn window_object_cleared_trampoline<P, F: Fn(&P, &WebPage, &Frame) + 'static>(this: *mut webkit2_webextension_sys::WebKitScriptWorld, page: *mut webkit2_webextension_sys::WebKitWebPage, frame: *mut webkit2_webextension_sys::WebKitFrame, f: glib_sys::gpointer)
-where P: IsA<ScriptWorld> {
-    let f: &F = &*(f as *const F);
-    f(&ScriptWorld::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(page), &from_glib_borrow(frame))
 }
 
 impl fmt::Display for ScriptWorld {

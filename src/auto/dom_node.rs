@@ -7,7 +7,7 @@ use DOMElement;
 use DOMEventTarget;
 use DOMNodeList;
 use DOMObject;
-use Error;
+use glib;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
@@ -32,7 +32,7 @@ glib_wrapper! {
 
 impl DOMNode {
     //#[cfg(any(feature = "v2_22", feature = "dox"))]
-    //pub fn for_js_value(value: /*Ignored*/&mut java_script_core::Value) -> Option<DOMNode> {
+    //pub fn for_js_value(value: /*Ignored*/&java_script_core::Value) -> Option<DOMNode> {
     //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_node_for_js_value() }
     //}
 }
@@ -41,14 +41,14 @@ pub const NONE_DOM_NODE: Option<&DOMNode> = None;
 
 pub trait DOMNodeExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn append_child<P: IsA<DOMNode>>(&self, newChild: &P) -> Result<DOMNode, Error>;
+    fn append_child<P: IsA<DOMNode>>(&self, newChild: &P) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
-    fn clone_node(&self, deep: bool) -> Result<DOMNode, Error>;
+    fn clone_node(&self, deep: bool) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    fn clone_node_with_error(&self, deep: bool) -> Result<DOMNode, Error>;
+    fn clone_node_with_error(&self, deep: bool) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn compare_document_position<P: IsA<DOMNode>>(&self, other: &P) -> libc::c_ushort;
@@ -108,7 +108,7 @@ pub trait DOMNodeExt: 'static {
     fn has_child_nodes(&self) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn insert_before<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, refChild: Option<&Q>) -> Result<DOMNode, Error>;
+    fn insert_before<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, refChild: Option<&Q>) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn is_default_namespace(&self, namespaceURI: &str) -> bool;
@@ -132,19 +132,19 @@ pub trait DOMNodeExt: 'static {
     fn normalize(&self);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn remove_child<P: IsA<DOMNode>>(&self, oldChild: &P) -> Result<DOMNode, Error>;
+    fn remove_child<P: IsA<DOMNode>>(&self, oldChild: &P) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn replace_child<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, oldChild: &Q) -> Result<DOMNode, Error>;
+    fn replace_child<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, oldChild: &Q) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_node_value(&self, value: &str) -> Result<(), Error>;
+    fn set_node_value(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
-    fn set_prefix(&self, value: &str) -> Result<(), Error>;
+    fn set_prefix(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_text_content(&self, value: &str) -> Result<(), Error>;
+    fn set_text_content(&self, value: &str) -> Result<(), glib::Error>;
 
     fn connect_property_base_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -174,7 +174,7 @@ pub trait DOMNodeExt: 'static {
 }
 
 impl<O: IsA<DOMNode>> DOMNodeExt for O {
-    fn append_child<P: IsA<DOMNode>>(&self, newChild: &P) -> Result<DOMNode, Error> {
+    fn append_child<P: IsA<DOMNode>>(&self, newChild: &P) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_append_child(self.as_ref().to_glib_none().0, newChild.as_ref().to_glib_none().0, &mut error);
@@ -182,7 +182,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn clone_node(&self, deep: bool) -> Result<DOMNode, Error> {
+    fn clone_node(&self, deep: bool) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_clone_node(self.as_ref().to_glib_none().0, deep.to_glib(), &mut error);
@@ -191,7 +191,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    fn clone_node_with_error(&self, deep: bool) -> Result<DOMNode, Error> {
+    fn clone_node_with_error(&self, deep: bool) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_clone_node_with_error(self.as_ref().to_glib_none().0, deep.to_glib(), &mut error);
@@ -313,7 +313,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn insert_before<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, refChild: Option<&Q>) -> Result<DOMNode, Error> {
+    fn insert_before<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, refChild: Option<&Q>) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_insert_before(self.as_ref().to_glib_none().0, newChild.as_ref().to_glib_none().0, refChild.map(|p| p.as_ref()).to_glib_none().0, &mut error);
@@ -363,7 +363,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn remove_child<P: IsA<DOMNode>>(&self, oldChild: &P) -> Result<DOMNode, Error> {
+    fn remove_child<P: IsA<DOMNode>>(&self, oldChild: &P) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_remove_child(self.as_ref().to_glib_none().0, oldChild.as_ref().to_glib_none().0, &mut error);
@@ -371,7 +371,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn replace_child<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, oldChild: &Q) -> Result<DOMNode, Error> {
+    fn replace_child<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, oldChild: &Q) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_replace_child(self.as_ref().to_glib_none().0, newChild.as_ref().to_glib_none().0, oldChild.as_ref().to_glib_none().0, &mut error);
@@ -379,7 +379,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn set_node_value(&self, value: &str) -> Result<(), Error> {
+    fn set_node_value(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_node_set_node_value(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -387,7 +387,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn set_prefix(&self, value: &str) -> Result<(), Error> {
+    fn set_prefix(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_node_set_prefix(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -395,7 +395,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn set_text_content(&self, value: &str) -> Result<(), Error> {
+    fn set_text_content(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_node_set_text_content(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -404,6 +404,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_base_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_base_uri_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::base-uri\0".as_ptr() as *const _,
@@ -412,6 +418,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_child_nodes_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_child_nodes_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::child-nodes\0".as_ptr() as *const _,
@@ -420,6 +432,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_first_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_first_child_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::first-child\0".as_ptr() as *const _,
@@ -428,6 +446,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_last_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_last_child_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::last-child\0".as_ptr() as *const _,
@@ -436,6 +460,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_next_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_next_sibling_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::next-sibling\0".as_ptr() as *const _,
@@ -444,6 +474,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_node_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_node_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::node-name\0".as_ptr() as *const _,
@@ -452,6 +488,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_node_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_node_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::node-type\0".as_ptr() as *const _,
@@ -460,6 +502,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_node_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_node_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::node-value\0".as_ptr() as *const _,
@@ -468,6 +516,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_owner_document_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_owner_document_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::owner-document\0".as_ptr() as *const _,
@@ -476,6 +530,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_parent_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_parent_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::parent-element\0".as_ptr() as *const _,
@@ -484,6 +544,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_parent_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_parent_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::parent-node\0".as_ptr() as *const _,
@@ -492,6 +558,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_previous_sibling_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_previous_sibling_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::previous-sibling\0".as_ptr() as *const _,
@@ -500,90 +572,18 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     fn connect_property_text_content_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_text_content_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMNode>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::text-content\0".as_ptr() as *const _,
                 Some(transmute(notify_text_content_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_base_uri_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_child_nodes_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_first_child_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_last_child_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_next_sibling_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_node_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_node_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_node_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_owner_document_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_parent_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_parent_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_previous_sibling_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_text_content_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMNode, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMNode> {
-    let f: &F = &*(f as *const F);
-    f(&DOMNode::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMNode {

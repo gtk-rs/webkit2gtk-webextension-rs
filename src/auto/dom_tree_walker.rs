@@ -4,7 +4,7 @@
 
 use DOMNode;
 use DOMObject;
-use Error;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::SignalHandlerId;
@@ -66,7 +66,7 @@ pub trait DOMTreeWalkerExt: 'static {
     fn previous_sibling(&self) -> Option<DOMNode>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_current_node<P: IsA<DOMNode>>(&self, value: &P) -> Result<(), Error>;
+    fn set_current_node<P: IsA<DOMNode>>(&self, value: &P) -> Result<(), glib::Error>;
 
     fn connect_property_current_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -148,7 +148,7 @@ impl<O: IsA<DOMTreeWalker>> DOMTreeWalkerExt for O {
         }
     }
 
-    fn set_current_node<P: IsA<DOMNode>>(&self, value: &P) -> Result<(), Error> {
+    fn set_current_node<P: IsA<DOMNode>>(&self, value: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_tree_walker_set_current_node(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
@@ -157,6 +157,12 @@ impl<O: IsA<DOMTreeWalker>> DOMTreeWalkerExt for O {
     }
 
     fn connect_property_current_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_current_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMTreeWalker, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMTreeWalker>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::current-node\0".as_ptr() as *const _,
@@ -165,6 +171,12 @@ impl<O: IsA<DOMTreeWalker>> DOMTreeWalkerExt for O {
     }
 
     fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_filter_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMTreeWalker, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMTreeWalker>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::filter\0".as_ptr() as *const _,
@@ -173,6 +185,12 @@ impl<O: IsA<DOMTreeWalker>> DOMTreeWalkerExt for O {
     }
 
     fn connect_property_root_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_root_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMTreeWalker, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMTreeWalker>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::root\0".as_ptr() as *const _,
@@ -181,36 +199,18 @@ impl<O: IsA<DOMTreeWalker>> DOMTreeWalkerExt for O {
     }
 
     fn connect_property_what_to_show_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_what_to_show_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMTreeWalker, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMTreeWalker>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::what-to-show\0".as_ptr() as *const _,
                 Some(transmute(notify_what_to_show_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_current_node_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMTreeWalker, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMTreeWalker> {
-    let f: &F = &*(f as *const F);
-    f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_filter_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMTreeWalker, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMTreeWalker> {
-    let f: &F = &*(f as *const F);
-    f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_root_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMTreeWalker, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMTreeWalker> {
-    let f: &F = &*(f as *const F);
-    f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_what_to_show_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMTreeWalker, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMTreeWalker> {
-    let f: &F = &*(f as *const F);
-    f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMTreeWalker {

@@ -6,7 +6,7 @@ use DOMCharacterData;
 use DOMEventTarget;
 use DOMNode;
 use DOMObject;
-use Error;
+use glib;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
@@ -36,10 +36,10 @@ pub trait DOMTextExt: 'static {
     fn get_whole_text(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
-    fn replace_whole_text(&self, content: &str) -> Result<DOMText, Error>;
+    fn replace_whole_text(&self, content: &str) -> Result<DOMText, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn split_text(&self, offset: libc::c_ulong) -> Result<DOMText, Error>;
+    fn split_text(&self, offset: libc::c_ulong) -> Result<DOMText, glib::Error>;
 
     fn connect_property_whole_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
@@ -51,7 +51,7 @@ impl<O: IsA<DOMText>> DOMTextExt for O {
         }
     }
 
-    fn replace_whole_text(&self, content: &str) -> Result<DOMText, Error> {
+    fn replace_whole_text(&self, content: &str) -> Result<DOMText, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_text_replace_whole_text(self.as_ref().to_glib_none().0, content.to_glib_none().0, &mut error);
@@ -59,7 +59,7 @@ impl<O: IsA<DOMText>> DOMTextExt for O {
         }
     }
 
-    fn split_text(&self, offset: libc::c_ulong) -> Result<DOMText, Error> {
+    fn split_text(&self, offset: libc::c_ulong) -> Result<DOMText, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_text_split_text(self.as_ref().to_glib_none().0, offset, &mut error);
@@ -68,18 +68,18 @@ impl<O: IsA<DOMText>> DOMTextExt for O {
     }
 
     fn connect_property_whole_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_whole_text_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMText, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMText>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMText::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::whole-text\0".as_ptr() as *const _,
                 Some(transmute(notify_whole_text_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_whole_text_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMText, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMText> {
-    let f: &F = &*(f as *const F);
-    f(&DOMText::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMText {

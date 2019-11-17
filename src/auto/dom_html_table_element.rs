@@ -10,7 +10,7 @@ use DOMHTMLTableCaptionElement;
 use DOMHTMLTableSectionElement;
 use DOMNode;
 use DOMObject;
-use Error;
+use glib;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
@@ -49,7 +49,7 @@ pub trait DOMHTMLTableElementExt: 'static {
     fn delete_caption(&self);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn delete_row(&self, index: libc::c_long) -> Result<(), Error>;
+    fn delete_row(&self, index: libc::c_long) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn delete_t_foot(&self);
@@ -97,7 +97,7 @@ pub trait DOMHTMLTableElementExt: 'static {
     fn get_width(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, Error>;
+    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
@@ -109,7 +109,7 @@ pub trait DOMHTMLTableElementExt: 'static {
     fn set_border(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_caption<P: IsA<DOMHTMLTableCaptionElement>>(&self, value: &P) -> Result<(), Error>;
+    fn set_caption<P: IsA<DOMHTMLTableCaptionElement>>(&self, value: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_cell_padding(&self, value: &str);
@@ -124,10 +124,10 @@ pub trait DOMHTMLTableElementExt: 'static {
     fn set_summary(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_t_foot<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error>;
+    fn set_t_foot<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_t_head<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error>;
+    fn set_t_head<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: &str);
@@ -184,7 +184,7 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
         }
     }
 
-    fn delete_row(&self, index: libc::c_long) -> Result<(), Error> {
+    fn delete_row(&self, index: libc::c_long) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_table_element_delete_row(self.as_ref().to_glib_none().0, index, &mut error);
@@ -282,7 +282,7 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
         }
     }
 
-    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, Error> {
+    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_html_table_element_insert_row(self.as_ref().to_glib_none().0, index, &mut error);
@@ -308,7 +308,7 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
         }
     }
 
-    fn set_caption<P: IsA<DOMHTMLTableCaptionElement>>(&self, value: &P) -> Result<(), Error> {
+    fn set_caption<P: IsA<DOMHTMLTableCaptionElement>>(&self, value: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_table_element_set_caption(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
@@ -340,7 +340,7 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
         }
     }
 
-    fn set_t_foot<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error> {
+    fn set_t_foot<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_table_element_set_t_foot(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
@@ -348,7 +348,7 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
         }
     }
 
-    fn set_t_head<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error> {
+    fn set_t_head<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_table_element_set_t_head(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
@@ -363,6 +363,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
@@ -371,6 +377,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_bg_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_bg_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::bg-color\0".as_ptr() as *const _,
@@ -379,6 +391,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_border_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_border_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::border\0".as_ptr() as *const _,
@@ -387,6 +405,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_caption_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_caption_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::caption\0".as_ptr() as *const _,
@@ -395,6 +419,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_cell_padding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_cell_padding_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::cell-padding\0".as_ptr() as *const _,
@@ -403,6 +433,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_cell_spacing_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_cell_spacing_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::cell-spacing\0".as_ptr() as *const _,
@@ -411,6 +447,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_rows_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_rows_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::rows\0".as_ptr() as *const _,
@@ -419,6 +461,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_rules_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::rules\0".as_ptr() as *const _,
@@ -427,6 +475,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_summary_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_summary_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::summary\0".as_ptr() as *const _,
@@ -435,6 +489,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_t_bodies_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_t_bodies_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::t-bodies\0".as_ptr() as *const _,
@@ -443,6 +503,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_t_foot_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_t_foot_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::t-foot\0".as_ptr() as *const _,
@@ -451,6 +517,12 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_t_head_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_t_head_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::t-head\0".as_ptr() as *const _,
@@ -459,90 +531,18 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
     }
 
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLTableElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
                 Some(transmute(notify_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_bg_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_border_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_caption_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_cell_padding_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_cell_spacing_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_rows_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_rules_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_summary_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_t_bodies_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_t_foot_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_t_head_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLTableElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLTableElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLTableElement::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMHTMLTableElement {

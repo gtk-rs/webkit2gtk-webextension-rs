@@ -355,6 +355,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_alt_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alt\0".as_ptr() as *const _,
@@ -363,6 +369,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_coords_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_coords_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::coords\0".as_ptr() as *const _,
@@ -371,6 +383,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_hash_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_hash_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::hash\0".as_ptr() as *const _,
@@ -379,6 +397,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_host_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_host_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::host\0".as_ptr() as *const _,
@@ -387,6 +411,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_hostname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_hostname_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::hostname\0".as_ptr() as *const _,
@@ -395,6 +425,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_href_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::href\0".as_ptr() as *const _,
@@ -403,6 +439,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_no_href_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_no_href_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::no-href\0".as_ptr() as *const _,
@@ -411,6 +453,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_pathname_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_pathname_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::pathname\0".as_ptr() as *const _,
@@ -419,6 +467,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_port_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_port_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::port\0".as_ptr() as *const _,
@@ -427,6 +481,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_protocol_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_protocol_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::protocol\0".as_ptr() as *const _,
@@ -435,6 +495,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_search_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_search_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::search\0".as_ptr() as *const _,
@@ -443,6 +509,12 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_shape_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_shape_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::shape\0".as_ptr() as *const _,
@@ -451,90 +523,18 @@ impl<O: IsA<DOMHTMLAreaElement>> DOMHTMLAreaElementExt for O {
     }
 
     fn connect_property_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_target_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLAreaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::target\0".as_ptr() as *const _,
                 Some(transmute(notify_target_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_alt_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_coords_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_hash_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_host_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_hostname_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_href_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_no_href_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_pathname_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_port_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_protocol_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_search_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_shape_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_target_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLAreaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLAreaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLAreaElement::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMHTMLAreaElement {

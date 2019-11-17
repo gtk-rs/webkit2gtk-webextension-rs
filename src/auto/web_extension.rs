@@ -38,18 +38,18 @@ impl<O: IsA<WebExtension>> WebExtensionExt for O {
     }
 
     fn connect_page_created<F: Fn(&Self, &WebPage) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn page_created_trampoline<P, F: Fn(&P, &WebPage) + 'static>(this: *mut webkit2_webextension_sys::WebKitWebExtension, web_page: *mut webkit2_webextension_sys::WebKitWebPage, f: glib_sys::gpointer)
+            where P: IsA<WebExtension>
+        {
+            let f: &F = &*(f as *const F);
+            f(&WebExtension::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(web_page))
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"page-created\0".as_ptr() as *const _,
                 Some(transmute(page_created_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn page_created_trampoline<P, F: Fn(&P, &WebPage) + 'static>(this: *mut webkit2_webextension_sys::WebKitWebExtension, web_page: *mut webkit2_webextension_sys::WebKitWebPage, f: glib_sys::gpointer)
-where P: IsA<WebExtension> {
-    let f: &F = &*(f as *const F);
-    f(&WebExtension::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(web_page))
 }
 
 impl fmt::Display for WebExtension {

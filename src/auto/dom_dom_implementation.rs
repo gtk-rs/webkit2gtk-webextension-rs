@@ -7,7 +7,7 @@ use DOMDocument;
 use DOMDocumentType;
 use DOMHTMLDocument;
 use DOMObject;
-use Error;
+use glib;
 use glib::object::IsA;
 use glib::translate::*;
 use std::fmt;
@@ -26,13 +26,13 @@ pub const NONE_DOMDOM_IMPLEMENTATION: Option<&DOMDOMImplementation> = None;
 
 pub trait DOMDOMImplementationExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_css_style_sheet(&self, title: &str, media: &str) -> Result<DOMCSSStyleSheet, Error>;
+    fn create_css_style_sheet(&self, title: &str, media: &str) -> Result<DOMCSSStyleSheet, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_document<P: IsA<DOMDocumentType>>(&self, namespaceURI: Option<&str>, qualifiedName: &str, doctype: Option<&P>) -> Result<DOMDocument, Error>;
+    fn create_document<P: IsA<DOMDocumentType>>(&self, namespaceURI: Option<&str>, qualifiedName: &str, doctype: Option<&P>) -> Result<DOMDocument, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_document_type(&self, qualifiedName: &str, publicId: &str, systemId: &str) -> Result<DOMDocumentType, Error>;
+    fn create_document_type(&self, qualifiedName: &str, publicId: &str, systemId: &str) -> Result<DOMDocumentType, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_html_document(&self, title: &str) -> Option<DOMHTMLDocument>;
@@ -42,7 +42,7 @@ pub trait DOMDOMImplementationExt: 'static {
 }
 
 impl<O: IsA<DOMDOMImplementation>> DOMDOMImplementationExt for O {
-    fn create_css_style_sheet(&self, title: &str, media: &str) -> Result<DOMCSSStyleSheet, Error> {
+    fn create_css_style_sheet(&self, title: &str, media: &str) -> Result<DOMCSSStyleSheet, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_dom_implementation_create_css_style_sheet(self.as_ref().to_glib_none().0, title.to_glib_none().0, media.to_glib_none().0, &mut error);
@@ -50,7 +50,7 @@ impl<O: IsA<DOMDOMImplementation>> DOMDOMImplementationExt for O {
         }
     }
 
-    fn create_document<P: IsA<DOMDocumentType>>(&self, namespaceURI: Option<&str>, qualifiedName: &str, doctype: Option<&P>) -> Result<DOMDocument, Error> {
+    fn create_document<P: IsA<DOMDocumentType>>(&self, namespaceURI: Option<&str>, qualifiedName: &str, doctype: Option<&P>) -> Result<DOMDocument, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_dom_implementation_create_document(self.as_ref().to_glib_none().0, namespaceURI.to_glib_none().0, qualifiedName.to_glib_none().0, doctype.map(|p| p.as_ref()).to_glib_none().0, &mut error);
@@ -58,7 +58,7 @@ impl<O: IsA<DOMDOMImplementation>> DOMDOMImplementationExt for O {
         }
     }
 
-    fn create_document_type(&self, qualifiedName: &str, publicId: &str, systemId: &str) -> Result<DOMDocumentType, Error> {
+    fn create_document_type(&self, qualifiedName: &str, publicId: &str, systemId: &str) -> Result<DOMDocumentType, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_dom_implementation_create_document_type(self.as_ref().to_glib_none().0, qualifiedName.to_glib_none().0, publicId.to_glib_none().0, systemId.to_glib_none().0, &mut error);

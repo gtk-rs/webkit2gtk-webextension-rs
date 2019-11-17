@@ -219,6 +219,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_alt_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_alt_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alt-key\0".as_ptr() as *const _,
@@ -227,6 +233,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_button_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_button_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::button\0".as_ptr() as *const _,
@@ -235,6 +247,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_client_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_client_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::client-x\0".as_ptr() as *const _,
@@ -243,6 +261,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_client_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_client_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::client-y\0".as_ptr() as *const _,
@@ -251,6 +275,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_ctrl_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_ctrl_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::ctrl-key\0".as_ptr() as *const _,
@@ -259,6 +289,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_from_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_from_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::from-element\0".as_ptr() as *const _,
@@ -267,6 +303,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_meta_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_meta_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::meta-key\0".as_ptr() as *const _,
@@ -275,6 +317,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_offset_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_offset_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::offset-x\0".as_ptr() as *const _,
@@ -283,6 +331,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_offset_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_offset_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::offset-y\0".as_ptr() as *const _,
@@ -291,6 +345,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_related_target_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_related_target_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::related-target\0".as_ptr() as *const _,
@@ -299,6 +359,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_screen_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_screen_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::screen-x\0".as_ptr() as *const _,
@@ -307,6 +373,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_screen_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_screen_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::screen-y\0".as_ptr() as *const _,
@@ -315,6 +387,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_shift_key_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_shift_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::shift-key\0".as_ptr() as *const _,
@@ -323,6 +401,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_to_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_to_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::to-element\0".as_ptr() as *const _,
@@ -331,6 +415,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::x\0".as_ptr() as *const _,
@@ -339,108 +429,18 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
     }
 
     fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMMouseEvent>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::y\0".as_ptr() as *const _,
                 Some(transmute(notify_y_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_alt_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_button_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_client_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_client_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_ctrl_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_from_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_meta_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_offset_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_offset_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_related_target_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_screen_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_screen_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_shift_key_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_to_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMMouseEvent, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMMouseEvent> {
-    let f: &F = &*(f as *const F);
-    f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMMouseEvent {

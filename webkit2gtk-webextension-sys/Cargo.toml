@@ -24,7 +24,7 @@ git = "https://github.com/gtk-rs/soup-sys-rs"
 
 [dev-dependencies]
 shell-words = "0.1.0"
-tempdir = "0.3"
+tempfile = "3"
 
 [features]
 dox = []
@@ -37,6 +37,7 @@ v2_20 = ["v2_18"]
 v2_22 = ["v2_20"]
 v2_6 = []
 v2_8 = ["v2_6"]
+v2_26 = ["v2_22"]
 
 [lib]
 name = "webkit2gtk_webextension_sys"
@@ -47,3 +48,5 @@ build = "build.rs"
 links = "webkit2gtk_webextension"
 name = "webkit2gtk-webextension-sys"
 version = "0.5.0"
+[package.metadata.docs.rs]
+features = ["dox"]

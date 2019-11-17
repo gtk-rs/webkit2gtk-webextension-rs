@@ -4,7 +4,7 @@
 
 use DOMNode;
 use DOMObject;
-use Error;
+use glib;
 use glib::GString;
 use glib::object::Cast;
 use glib::object::IsA;
@@ -31,31 +31,31 @@ pub const NONE_DOMX_PATH_RESULT: Option<&DOMXPathResult> = None;
 
 pub trait DOMXPathResultExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_boolean_value(&self) -> Result<(), Error>;
+    fn get_boolean_value(&self) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_invalid_iterator_state(&self) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_number_value(&self) -> Result<f64, Error>;
+    fn get_number_value(&self) -> Result<f64, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_result_type(&self) -> libc::c_ushort;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_single_node_value(&self) -> Result<DOMNode, Error>;
+    fn get_single_node_value(&self) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_snapshot_length(&self) -> Result<libc::c_ulong, Error>;
+    fn get_snapshot_length(&self) -> Result<libc::c_ulong, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_string_value(&self) -> Result<GString, Error>;
+    fn get_string_value(&self) -> Result<GString, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn iterate_next(&self) -> Result<DOMNode, Error>;
+    fn iterate_next(&self) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn snapshot_item(&self, index: libc::c_ulong) -> Result<DOMNode, Error>;
+    fn snapshot_item(&self, index: libc::c_ulong) -> Result<DOMNode, glib::Error>;
 
     fn connect_property_boolean_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -73,7 +73,7 @@ pub trait DOMXPathResultExt: 'static {
 }
 
 impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
-    fn get_boolean_value(&self) -> Result<(), Error> {
+    fn get_boolean_value(&self) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_xpath_result_get_boolean_value(self.as_ref().to_glib_none().0, &mut error);
@@ -87,7 +87,7 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
         }
     }
 
-    fn get_number_value(&self) -> Result<f64, Error> {
+    fn get_number_value(&self) -> Result<f64, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_xpath_result_get_number_value(self.as_ref().to_glib_none().0, &mut error);
@@ -101,7 +101,7 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
         }
     }
 
-    fn get_single_node_value(&self) -> Result<DOMNode, Error> {
+    fn get_single_node_value(&self) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_xpath_result_get_single_node_value(self.as_ref().to_glib_none().0, &mut error);
@@ -109,7 +109,7 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
         }
     }
 
-    fn get_snapshot_length(&self) -> Result<libc::c_ulong, Error> {
+    fn get_snapshot_length(&self) -> Result<libc::c_ulong, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_xpath_result_get_snapshot_length(self.as_ref().to_glib_none().0, &mut error);
@@ -117,7 +117,7 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
         }
     }
 
-    fn get_string_value(&self) -> Result<GString, Error> {
+    fn get_string_value(&self) -> Result<GString, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_xpath_result_get_string_value(self.as_ref().to_glib_none().0, &mut error);
@@ -125,7 +125,7 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
         }
     }
 
-    fn iterate_next(&self) -> Result<DOMNode, Error> {
+    fn iterate_next(&self) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_xpath_result_iterate_next(self.as_ref().to_glib_none().0, &mut error);
@@ -133,7 +133,7 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
         }
     }
 
-    fn snapshot_item(&self, index: libc::c_ulong) -> Result<DOMNode, Error> {
+    fn snapshot_item(&self, index: libc::c_ulong) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_xpath_result_snapshot_item(self.as_ref().to_glib_none().0, index, &mut error);
@@ -142,6 +142,12 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
     }
 
     fn connect_property_boolean_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_boolean_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMXPathResult>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::boolean-value\0".as_ptr() as *const _,
@@ -150,6 +156,12 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
     }
 
     fn connect_property_invalid_iterator_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_invalid_iterator_state_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMXPathResult>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::invalid-iterator-state\0".as_ptr() as *const _,
@@ -158,6 +170,12 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
     }
 
     fn connect_property_number_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_number_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMXPathResult>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::number-value\0".as_ptr() as *const _,
@@ -166,6 +184,12 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
     }
 
     fn connect_property_result_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_result_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMXPathResult>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::result-type\0".as_ptr() as *const _,
@@ -174,6 +198,12 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
     }
 
     fn connect_property_single_node_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_single_node_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMXPathResult>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::single-node-value\0".as_ptr() as *const _,
@@ -182,6 +212,12 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
     }
 
     fn connect_property_snapshot_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_snapshot_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMXPathResult>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::snapshot-length\0".as_ptr() as *const _,
@@ -190,54 +226,18 @@ impl<O: IsA<DOMXPathResult>> DOMXPathResultExt for O {
     }
 
     fn connect_property_string_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_string_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMXPathResult>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::string-value\0".as_ptr() as *const _,
                 Some(transmute(notify_string_value_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_boolean_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMXPathResult> {
-    let f: &F = &*(f as *const F);
-    f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_invalid_iterator_state_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMXPathResult> {
-    let f: &F = &*(f as *const F);
-    f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_number_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMXPathResult> {
-    let f: &F = &*(f as *const F);
-    f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_result_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMXPathResult> {
-    let f: &F = &*(f as *const F);
-    f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_single_node_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMXPathResult> {
-    let f: &F = &*(f as *const F);
-    f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_snapshot_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMXPathResult> {
-    let f: &F = &*(f as *const F);
-    f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_string_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMXPathResult, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMXPathResult> {
-    let f: &F = &*(f as *const F);
-    f(&DOMXPathResult::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMXPathResult {

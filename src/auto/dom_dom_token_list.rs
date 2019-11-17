@@ -4,7 +4,7 @@
 
 use DOMObject;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
-use Error;
+use glib;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
@@ -36,7 +36,7 @@ pub const NONE_DOMDOM_TOKEN_LIST: Option<&DOMDOMTokenList> = None;
 pub trait DOMDOMTokenListExt: 'static {
     //#[cfg_attr(feature = "v2_22", deprecated)]
     //#[cfg(any(feature = "v2_16", feature = "dox"))]
-    //fn add(&self, error: &mut Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs);
+    //fn add(&self, error: &mut glib::Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -56,11 +56,11 @@ pub trait DOMDOMTokenListExt: 'static {
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
     //#[cfg(any(feature = "v2_16", feature = "dox"))]
-    //fn remove(&self, error: &mut Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs);
+    //fn remove(&self, error: &mut glib::Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn replace(&self, token: &str, newToken: &str) -> Result<(), Error>;
+    fn replace(&self, token: &str, newToken: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -68,7 +68,7 @@ pub trait DOMDOMTokenListExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn toggle(&self, token: &str, force: bool) -> Result<(), Error>;
+    fn toggle(&self, token: &str, force: bool) -> Result<(), glib::Error>;
 
     fn get_property_length(&self) -> libc::c_ulong;
 
@@ -83,7 +83,7 @@ pub trait DOMDOMTokenListExt: 'static {
 
 impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
     //#[cfg(any(feature = "v2_16", feature = "dox"))]
-    //fn add(&self, error: &mut Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs) {
+    //fn add(&self, error: &mut glib::Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs) {
     //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_dom_token_list_add() }
     //}
 
@@ -116,12 +116,12 @@ impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
     }
 
     //#[cfg(any(feature = "v2_16", feature = "dox"))]
-    //fn remove(&self, error: &mut Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs) {
+    //fn remove(&self, error: &mut glib::Error, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs) {
     //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_dom_token_list_remove() }
     //}
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn replace(&self, token: &str, newToken: &str) -> Result<(), Error> {
+    fn replace(&self, token: &str, newToken: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_dom_token_list_replace(self.as_ref().to_glib_none().0, token.to_glib_none().0, newToken.to_glib_none().0, &mut error);
@@ -137,7 +137,7 @@ impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn toggle(&self, token: &str, force: bool) -> Result<(), Error> {
+    fn toggle(&self, token: &str, force: bool) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_dom_token_list_toggle(self.as_ref().to_glib_none().0, token.to_glib_none().0, force.to_glib(), &mut error);
@@ -149,7 +149,7 @@ impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"length\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `length` getter").unwrap()
         }
     }
 
@@ -157,7 +157,7 @@ impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"value\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `value` getter")
         }
     }
 
@@ -168,6 +168,12 @@ impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
     }
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMTokenList, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMTokenList>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMTokenList::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::length\0".as_ptr() as *const _,
@@ -176,24 +182,18 @@ impl<O: IsA<DOMDOMTokenList>> DOMDOMTokenListExt for O {
     }
 
     fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMTokenList, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMDOMTokenList>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMDOMTokenList::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::value\0".as_ptr() as *const _,
                 Some(transmute(notify_value_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMTokenList, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMTokenList> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMTokenList::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMDOMTokenList, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMDOMTokenList> {
-    let f: &F = &*(f as *const F);
-    f(&DOMDOMTokenList::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMDOMTokenList {

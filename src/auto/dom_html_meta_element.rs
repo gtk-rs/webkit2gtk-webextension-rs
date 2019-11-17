@@ -113,6 +113,12 @@ impl<O: IsA<DOMHTMLMetaElement>> DOMHTMLMetaElementExt for O {
     }
 
     fn connect_property_content_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_content_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLMetaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::content\0".as_ptr() as *const _,
@@ -121,6 +127,12 @@ impl<O: IsA<DOMHTMLMetaElement>> DOMHTMLMetaElementExt for O {
     }
 
     fn connect_property_http_equiv_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_http_equiv_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLMetaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::http-equiv\0".as_ptr() as *const _,
@@ -129,6 +141,12 @@ impl<O: IsA<DOMHTMLMetaElement>> DOMHTMLMetaElementExt for O {
     }
 
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLMetaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
@@ -137,36 +155,18 @@ impl<O: IsA<DOMHTMLMetaElement>> DOMHTMLMetaElementExt for O {
     }
 
     fn connect_property_scheme_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_scheme_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
+            where P: IsA<DOMHTMLMetaElement>
+        {
+            let f: &F = &*(f as *const F);
+            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
+        }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::scheme\0".as_ptr() as *const _,
                 Some(transmute(notify_scheme_trampoline::<Self, F> as usize)), Box_::into_raw(f))
         }
     }
-}
-
-unsafe extern "C" fn notify_content_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLMetaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_http_equiv_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLMetaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLMetaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
-}
-
-unsafe extern "C" fn notify_scheme_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLMetaElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-where P: IsA<DOMHTMLMetaElement> {
-    let f: &F = &*(f as *const F);
-    f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
 }
 
 impl fmt::Display for DOMHTMLMetaElement {
