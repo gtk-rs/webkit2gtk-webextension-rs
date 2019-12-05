@@ -2,7 +2,7 @@
 // from gir-files (https://github.com/gtk-rs/gir-files @ b8f5ef1)
 // DO NOT EDIT
 
-#![allow(non_camel_case_types, non_upper_case_globals, non_snake_case)]
+#![allow(non_camel_case_types, non_upper_case_globals, non_snake_case, overflowing_literals)]
 #![cfg_attr(feature = "cargo-clippy", allow(approx_constant, type_complexity, unreadable_literal))]
 
 extern crate libc;
