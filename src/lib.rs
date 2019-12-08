@@ -4,12 +4,12 @@
 extern crate gio;
 #[macro_use]
 extern crate glib;
-pub extern crate glib_sys as glib_ffi;
-extern crate gobject_sys as gobject_ffi;
+pub extern crate glib_sys;
+extern crate gobject_sys;
 extern crate gtk;
 extern crate libc;
 
-pub extern crate webkit2gtk_webextension_sys as ffi;
+pub extern crate webkit2gtk_webextension_sys as webkit2_webextension_sys;
 
 pub use glib::{Error, Object};
 

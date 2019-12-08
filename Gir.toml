@@ -1,9 +1,13 @@
+[crate_name_overrides]
+"web_kit2_web_extension" = "webkit2_webextension"
+
 [options]
 girs_dir = "gir-files"
 library = "WebKit2WebExtension"
 version = "4.0"
 work_mode = "normal"
 generate_safety_asserts = true
+single_version_file = true
 target_path = "."
 
 generate = [
