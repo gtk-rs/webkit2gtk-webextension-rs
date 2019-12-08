@@ -3,17 +3,17 @@ pkg-config = "0.3.7"
 
 [dependencies]
 bitflags = "1.0"
-gio-sys = "^0.7.0"
-glib-sys = "^0.7.0"
-gobject-sys = "^0.7.0"
-gtk = "^0.5.0"
-gtk-sys = "^0.7.0"
+gio-sys = "^0.9.0"
+glib-sys = "^0.9.0"
+gobject-sys = "^0.9.0"
+gtk-sys = "^0.9.0"
 javascriptcore-rs-sys = "^0.1"
 libc = "0.2"
-soup-sys = "^0.7"
+soup-sys = "^0.9"
 
 [dev-dependencies]
 shell-words = "0.1.0"
+tempfile = "3"
 tempdir = "0.3"
 
 [features]
@@ -26,6 +26,10 @@ v2_18 = ["v2_16"]
 v2_20 = ["v2_18"]
 v2_6 = []
 v2_8 = ["v2_6"]
+v2_2 = []
+v2_4 = ["v2_2"]
+v2_22 = ["v2_20"]
+v2_26 = ["v2_22"]
 
 [lib]
 name = "webkit2gtk_webextension_sys"
@@ -40,4 +44,6 @@ license = "MIT"
 links = "webkit2gtk_webextension"
 name = "webkit2gtk-webextension-sys"
 repository = "https://github.com/gtk-rs/webkit2gtk-webextension-rs"
-version = "0.6.0"
+version = "0.7.0"
+[package.metadata.docs.rs]
+features = ["dox"]
