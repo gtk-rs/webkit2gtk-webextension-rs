@@ -2,15 +2,11 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMCSSRule;
-use DOMCSSRuleList;
-use DOMObject;
-use DOMStyleSheet;
 use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
 use glib_sys;
 use libc;
@@ -19,6 +15,10 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMCSSRule;
+use DOMCSSRuleList;
+use DOMObject;
+use DOMStyleSheet;
 
 glib_wrapper! {
     pub struct DOMCSSStyleSheet(Object<webkit2_webextension_sys::WebKitDOMCSSStyleSheet, webkit2_webextension_sys::WebKitDOMCSSStyleSheetClass, DOMCSSStyleSheetClass>) @extends DOMStyleSheet, DOMObject;

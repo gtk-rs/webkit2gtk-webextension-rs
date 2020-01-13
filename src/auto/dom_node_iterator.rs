@@ -2,13 +2,11 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMNode;
-use DOMObject;
 use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
 use glib_sys;
 use libc;
@@ -17,6 +15,8 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMNodeIterator(Object<webkit2_webextension_sys::WebKitDOMNodeIterator, webkit2_webextension_sys::WebKitDOMNodeIteratorClass, DOMNodeIteratorClass>) @extends DOMObject;

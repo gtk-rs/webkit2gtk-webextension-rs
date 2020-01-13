@@ -2,13 +2,13 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMEvent;
 use glib;
 use glib::object::IsA;
 use glib::translate::*;
 use std::fmt;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMEvent;
 
 glib_wrapper! {
     pub struct DOMEventTarget(Interface<webkit2_webextension_sys::WebKitDOMEventTarget>);

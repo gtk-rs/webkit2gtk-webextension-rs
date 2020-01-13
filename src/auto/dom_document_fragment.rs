@@ -2,22 +2,15 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMElement;
-use DOMEventTarget;
-use DOMHTMLCollection;
-use DOMNode;
-#[cfg(any(feature = "v2_16", feature = "dox"))]
-use DOMNodeList;
-use DOMObject;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use glib;
-use glib::StaticType;
-use glib::Value;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
+use glib::StaticType;
+use glib::Value;
 use glib_sys;
 use gobject_sys;
 use libc;
@@ -27,6 +20,13 @@ use std::mem::transmute;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMElement;
+use DOMEventTarget;
+use DOMHTMLCollection;
+use DOMNode;
+#[cfg(any(feature = "v2_16", feature = "dox"))]
+use DOMNodeList;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMDocumentFragment(Object<webkit2_webextension_sys::WebKitDOMDocumentFragment, webkit2_webextension_sys::WebKitDOMDocumentFragmentClass, DOMDocumentFragmentClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;

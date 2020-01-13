@@ -2,8 +2,6 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use ContextMenu;
-use ContextMenuAction;
 #[cfg(any(feature = "v2_18", feature = "dox"))]
 use gio;
 #[cfg(any(feature = "v2_18", feature = "dox"))]
@@ -12,6 +10,8 @@ use glib::object::IsA;
 use glib::translate::*;
 use std::fmt;
 use webkit2_webextension_sys;
+use ContextMenu;
+use ContextMenuAction;
 
 glib_wrapper! {
     pub struct ContextMenuItem(Object<webkit2_webextension_sys::WebKitContextMenuItem, webkit2_webextension_sys::WebKitContextMenuItemClass, ContextMenuItemClass>);

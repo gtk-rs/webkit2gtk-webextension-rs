@@ -2,9 +2,6 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMNode;
-use DOMObject;
-use DOMXPathResult;
 use glib;
 use glib::object::IsA;
 use glib::translate::*;
@@ -12,6 +9,9 @@ use libc;
 use std::fmt;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMNode;
+use DOMObject;
+use DOMXPathResult;
 
 glib_wrapper! {
     pub struct DOMXPathExpression(Object<webkit2_webextension_sys::WebKitDOMXPathExpression, webkit2_webextension_sys::WebKitDOMXPathExpressionClass, DOMXPathExpressionClass>) @extends DOMObject;

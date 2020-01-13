@@ -2,10 +2,10 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-#[cfg(any(feature = "v2_2", feature = "dox"))]
-use glib::GString;
 use glib::object::IsA;
 use glib::translate::*;
+#[cfg(any(feature = "v2_2", feature = "dox"))]
+use glib::GString;
 use std::fmt;
 use webkit2_webextension_sys;
 

@@ -2,16 +2,13 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-#[cfg(any(feature = "v2_18", feature = "dox"))]
-use DOMClientRect;
-use DOMObject;
-use glib::StaticType;
-use glib::Value;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
+use glib::StaticType;
+use glib::Value;
 use glib_sys;
 use gobject_sys;
 use libc;
@@ -19,6 +16,9 @@ use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 use webkit2_webextension_sys;
+#[cfg(any(feature = "v2_18", feature = "dox"))]
+use DOMClientRect;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMClientRectList(Object<webkit2_webextension_sys::WebKitDOMClientRectList, webkit2_webextension_sys::WebKitDOMClientRectListClass, DOMClientRectListClass>) @extends DOMObject;

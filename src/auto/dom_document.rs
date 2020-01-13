@@ -2,6 +2,23 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
+use glib::GString;
+use glib::StaticType;
+use glib::Value;
+use glib_sys;
+use gobject_sys;
+use libc;
+use std::boxed::Box as Box_;
+use std::fmt;
+use std::mem::transmute;
+use std::ptr;
+use webkit2_webextension_sys;
 use DOMAttr;
 use DOMCDATASection;
 use DOMCSSStyleDeclaration;
@@ -26,23 +43,6 @@ use DOMProcessingInstruction;
 use DOMRange;
 use DOMStyleSheetList;
 use DOMText;
-use glib;
-use glib::GString;
-use glib::StaticType;
-use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
-use glib_sys;
-use gobject_sys;
-use libc;
-use std::boxed::Box as Box_;
-use std::fmt;
-use std::mem::transmute;
-use std::ptr;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct DOMDocument(Object<webkit2_webextension_sys::WebKitDOMDocument, webkit2_webextension_sys::WebKitDOMDocumentClass, DOMDocumentClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;

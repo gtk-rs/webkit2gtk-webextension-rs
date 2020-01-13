@@ -2,17 +2,17 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMCSSStyleSheet;
-use DOMDocument;
-use DOMDocumentType;
-use DOMHTMLDocument;
-use DOMObject;
 use glib;
 use glib::object::IsA;
 use glib::translate::*;
 use std::fmt;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMCSSStyleSheet;
+use DOMDocument;
+use DOMDocumentType;
+use DOMHTMLDocument;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMDOMImplementation(Object<webkit2_webextension_sys::WebKitDOMDOMImplementation, webkit2_webextension_sys::WebKitDOMDOMImplementationClass, DOMDOMImplementationClass>) @extends DOMObject;

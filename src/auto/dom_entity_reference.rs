@@ -2,12 +2,12 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMEventTarget;
-use DOMNode;
-use DOMObject;
 use glib::translate::*;
 use std::fmt;
 use webkit2_webextension_sys;
+use DOMEventTarget;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMEntityReference(Object<webkit2_webextension_sys::WebKitDOMEntityReference, webkit2_webextension_sys::WebKitDOMEntityReferenceClass, DOMEntityReferenceClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;

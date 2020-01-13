@@ -2,17 +2,15 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMCSSStyleSheet;
-use DOMObject;
 use glib;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
 use glib_sys;
 use gobject_sys;
 use libc;
@@ -21,6 +19,8 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMCSSStyleSheet;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMCSSRule(Object<webkit2_webextension_sys::WebKitDOMCSSRule, webkit2_webextension_sys::WebKitDOMCSSRuleClass, DOMCSSRuleClass>) @extends DOMObject;

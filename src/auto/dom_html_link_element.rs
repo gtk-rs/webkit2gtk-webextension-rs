@@ -2,6 +2,20 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
+use glib::GString;
+use glib::StaticType;
+use glib::Value;
+use glib_sys;
+use gobject_sys;
+use std::boxed::Box as Box_;
+use std::fmt;
+use std::mem::transmute;
+use webkit2_webextension_sys;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use DOMDOMTokenList;
 use DOMElement;
@@ -10,20 +24,6 @@ use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
 use DOMStyleSheet;
-use glib::GString;
-use glib::StaticType;
-use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
-use glib_sys;
-use gobject_sys;
-use std::boxed::Box as Box_;
-use std::fmt;
-use std::mem::transmute;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct DOMHTMLLinkElement(Object<webkit2_webextension_sys::WebKitDOMHTMLLinkElement, webkit2_webextension_sys::WebKitDOMHTMLLinkElementClass, DOMHTMLLinkElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;

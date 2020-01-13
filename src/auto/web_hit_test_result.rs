@@ -2,15 +2,15 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMNode;
-use HitTestResult;
-use glib::StaticType;
-use glib::Value;
 use glib::object::IsA;
 use glib::translate::*;
+use glib::StaticType;
+use glib::Value;
 use gobject_sys;
 use std::fmt;
 use webkit2_webextension_sys;
+use DOMNode;
+use HitTestResult;
 
 glib_wrapper! {
     pub struct WebHitTestResult(Object<webkit2_webextension_sys::WebKitWebHitTestResult, webkit2_webextension_sys::WebKitWebHitTestResultClass, WebHitTestResultClass>) @extends HitTestResult;

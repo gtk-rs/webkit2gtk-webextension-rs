@@ -2,6 +2,17 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
+use glib::GString;
+use glib_sys;
+use std::boxed::Box as Box_;
+use std::fmt;
+use std::mem::transmute;
+use webkit2_webextension_sys;
 #[cfg(any(feature = "v2_12", feature = "dox"))]
 use ConsoleMessage;
 #[cfg(any(feature = "v2_8", feature = "dox"))]
@@ -15,17 +26,6 @@ use URIResponse;
 use WebEditor;
 #[cfg(any(feature = "v2_8", feature = "dox"))]
 use WebHitTestResult;
-use glib::GString;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
-use glib_sys;
-use std::boxed::Box as Box_;
-use std::fmt;
-use std::mem::transmute;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct WebPage(Object<webkit2_webextension_sys::WebKitWebPage, webkit2_webextension_sys::WebKitWebPageClass, WebPageClass>);

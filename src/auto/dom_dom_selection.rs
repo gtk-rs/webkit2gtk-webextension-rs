@@ -2,20 +2,16 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMNode;
-use DOMObject;
-#[cfg(any(feature = "v2_16", feature = "dox"))]
-use DOMRange;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use glib;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
 use glib_sys;
 use gobject_sys;
 use libc;
@@ -25,6 +21,10 @@ use std::mem::transmute;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMNode;
+use DOMObject;
+#[cfg(any(feature = "v2_16", feature = "dox"))]
+use DOMRange;
 
 glib_wrapper! {
     pub struct DOMDOMSelection(Object<webkit2_webextension_sys::WebKitDOMDOMSelection, webkit2_webextension_sys::WebKitDOMDOMSelectionClass, DOMDOMSelectionClass>) @extends DOMObject;
