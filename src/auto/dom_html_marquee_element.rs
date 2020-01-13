@@ -2,15 +2,15 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib::object::IsA;
+use glib::translate::*;
+use std::fmt;
+use webkit2_webextension_sys;
 use DOMElement;
 use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
-use glib::object::IsA;
-use glib::translate::*;
-use std::fmt;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct DOMHTMLMarqueeElement(Object<webkit2_webextension_sys::WebKitDOMHTMLMarqueeElement, webkit2_webextension_sys::WebKitDOMHTMLMarqueeElementClass, DOMHTMLMarqueeElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
@@ -33,13 +33,17 @@ pub trait DOMHTMLMarqueeElementExt: 'static {
 impl<O: IsA<DOMHTMLMarqueeElement>> DOMHTMLMarqueeElementExt for O {
     fn start(&self) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_marquee_element_start(self.as_ref().to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_marquee_element_start(
+                self.as_ref().to_glib_none().0,
+            );
         }
     }
 
     fn stop(&self) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_marquee_element_stop(self.as_ref().to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_marquee_element_stop(
+                self.as_ref().to_glib_none().0,
+            );
         }
     }
 }

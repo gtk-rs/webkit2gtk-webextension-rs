@@ -2,17 +2,17 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMObject;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
 use glib_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 use webkit2_webextension_sys;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMBlob(Object<webkit2_webextension_sys::WebKitDOMBlob, webkit2_webextension_sys::WebKitDOMBlobClass, DOMBlobClass>) @extends DOMObject;
@@ -39,16 +39,24 @@ impl<O: IsA<DOMBlob>> DOMBlobExt for O {
     }
 
     fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_size_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMBlob, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMBlob>
+        unsafe extern "C" fn notify_size_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMBlob,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMBlob>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMBlob::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::size\0".as_ptr() as *const _,
-                Some(transmute(notify_size_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::size\0".as_ptr() as *const _,
+                Some(transmute(notify_size_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 }

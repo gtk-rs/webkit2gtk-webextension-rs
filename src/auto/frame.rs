@@ -2,10 +2,10 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-#[cfg(any(feature = "v2_2", feature = "dox"))]
-use glib::GString;
 use glib::object::IsA;
 use glib::translate::*;
+#[cfg(any(feature = "v2_2", feature = "dox"))]
+use glib::GString;
 use std::fmt;
 use webkit2_webextension_sys;
 
@@ -53,9 +53,7 @@ pub trait FrameExt: 'static {
 impl<O: IsA<Frame>> FrameExt for O {
     #[cfg(any(feature = "v2_26", feature = "dox"))]
     fn get_id(&self) -> u64 {
-        unsafe {
-            webkit2_webextension_sys::webkit_frame_get_id(self.as_ref().to_glib_none().0)
-        }
+        unsafe { webkit2_webextension_sys::webkit_frame_get_id(self.as_ref().to_glib_none().0) }
     }
 
     //#[cfg(any(feature = "v2_2", feature = "dox"))]
@@ -95,14 +93,18 @@ impl<O: IsA<Frame>> FrameExt for O {
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     fn get_uri(&self) -> Option<GString> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_frame_get_uri(self.as_ref().to_glib_none().0))
+            from_glib_none(webkit2_webextension_sys::webkit_frame_get_uri(
+                self.as_ref().to_glib_none().0,
+            ))
         }
     }
 
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     fn is_main_frame(&self) -> bool {
         unsafe {
-            from_glib(webkit2_webextension_sys::webkit_frame_is_main_frame(self.as_ref().to_glib_none().0))
+            from_glib(webkit2_webextension_sys::webkit_frame_is_main_frame(
+                self.as_ref().to_glib_none().0,
+            ))
         }
     }
 }

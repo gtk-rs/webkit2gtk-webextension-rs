@@ -2,14 +2,14 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib::translate::*;
+use std::fmt;
+use webkit2_webextension_sys;
 use DOMCharacterData;
 use DOMEventTarget;
 use DOMNode;
 use DOMObject;
 use DOMText;
-use glib::translate::*;
-use std::fmt;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct DOMCDATASection(Object<webkit2_webextension_sys::WebKitDOMCDATASection, webkit2_webextension_sys::WebKitDOMCDATASectionClass, DOMCDATASectionClass>) @extends DOMText, DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;

@@ -6,8 +6,7 @@ use glib::translate::*;
 use std::fmt;
 use webkit2_webextension_sys;
 
-#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
-#[derive(Clone, Copy)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
 pub enum ContextMenuAction {
     NoAction,
     OpenLink,
@@ -61,55 +60,59 @@ pub enum ContextMenuAction {
 
 impl fmt::Display for ContextMenuAction {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "ContextMenuAction::{}", match *self {
-            ContextMenuAction::NoAction => "NoAction",
-            ContextMenuAction::OpenLink => "OpenLink",
-            ContextMenuAction::OpenLinkInNewWindow => "OpenLinkInNewWindow",
-            ContextMenuAction::DownloadLinkToDisk => "DownloadLinkToDisk",
-            ContextMenuAction::CopyLinkToClipboard => "CopyLinkToClipboard",
-            ContextMenuAction::OpenImageInNewWindow => "OpenImageInNewWindow",
-            ContextMenuAction::DownloadImageToDisk => "DownloadImageToDisk",
-            ContextMenuAction::CopyImageToClipboard => "CopyImageToClipboard",
-            ContextMenuAction::CopyImageUrlToClipboard => "CopyImageUrlToClipboard",
-            ContextMenuAction::OpenFrameInNewWindow => "OpenFrameInNewWindow",
-            ContextMenuAction::GoBack => "GoBack",
-            ContextMenuAction::GoForward => "GoForward",
-            ContextMenuAction::Stop => "Stop",
-            ContextMenuAction::Reload => "Reload",
-            ContextMenuAction::Copy => "Copy",
-            ContextMenuAction::Cut => "Cut",
-            ContextMenuAction::Paste => "Paste",
-            ContextMenuAction::Delete => "Delete",
-            ContextMenuAction::SelectAll => "SelectAll",
-            ContextMenuAction::InputMethods => "InputMethods",
-            ContextMenuAction::Unicode => "Unicode",
-            ContextMenuAction::SpellingGuess => "SpellingGuess",
-            ContextMenuAction::NoGuessesFound => "NoGuessesFound",
-            ContextMenuAction::IgnoreSpelling => "IgnoreSpelling",
-            ContextMenuAction::LearnSpelling => "LearnSpelling",
-            ContextMenuAction::IgnoreGrammar => "IgnoreGrammar",
-            ContextMenuAction::FontMenu => "FontMenu",
-            ContextMenuAction::Bold => "Bold",
-            ContextMenuAction::Italic => "Italic",
-            ContextMenuAction::Underline => "Underline",
-            ContextMenuAction::Outline => "Outline",
-            ContextMenuAction::InspectElement => "InspectElement",
-            ContextMenuAction::OpenVideoInNewWindow => "OpenVideoInNewWindow",
-            ContextMenuAction::OpenAudioInNewWindow => "OpenAudioInNewWindow",
-            ContextMenuAction::CopyVideoLinkToClipboard => "CopyVideoLinkToClipboard",
-            ContextMenuAction::CopyAudioLinkToClipboard => "CopyAudioLinkToClipboard",
-            ContextMenuAction::ToggleMediaControls => "ToggleMediaControls",
-            ContextMenuAction::ToggleMediaLoop => "ToggleMediaLoop",
-            ContextMenuAction::EnterVideoFullscreen => "EnterVideoFullscreen",
-            ContextMenuAction::MediaPlay => "MediaPlay",
-            ContextMenuAction::MediaPause => "MediaPause",
-            ContextMenuAction::MediaMute => "MediaMute",
-            ContextMenuAction::DownloadVideoToDisk => "DownloadVideoToDisk",
-            ContextMenuAction::DownloadAudioToDisk => "DownloadAudioToDisk",
-            ContextMenuAction::InsertEmoji => "InsertEmoji",
-            ContextMenuAction::Custom => "Custom",
-            _ => "Unknown",
-        })
+        write!(
+            f,
+            "ContextMenuAction::{}",
+            match *self {
+                ContextMenuAction::NoAction => "NoAction",
+                ContextMenuAction::OpenLink => "OpenLink",
+                ContextMenuAction::OpenLinkInNewWindow => "OpenLinkInNewWindow",
+                ContextMenuAction::DownloadLinkToDisk => "DownloadLinkToDisk",
+                ContextMenuAction::CopyLinkToClipboard => "CopyLinkToClipboard",
+                ContextMenuAction::OpenImageInNewWindow => "OpenImageInNewWindow",
+                ContextMenuAction::DownloadImageToDisk => "DownloadImageToDisk",
+                ContextMenuAction::CopyImageToClipboard => "CopyImageToClipboard",
+                ContextMenuAction::CopyImageUrlToClipboard => "CopyImageUrlToClipboard",
+                ContextMenuAction::OpenFrameInNewWindow => "OpenFrameInNewWindow",
+                ContextMenuAction::GoBack => "GoBack",
+                ContextMenuAction::GoForward => "GoForward",
+                ContextMenuAction::Stop => "Stop",
+                ContextMenuAction::Reload => "Reload",
+                ContextMenuAction::Copy => "Copy",
+                ContextMenuAction::Cut => "Cut",
+                ContextMenuAction::Paste => "Paste",
+                ContextMenuAction::Delete => "Delete",
+                ContextMenuAction::SelectAll => "SelectAll",
+                ContextMenuAction::InputMethods => "InputMethods",
+                ContextMenuAction::Unicode => "Unicode",
+                ContextMenuAction::SpellingGuess => "SpellingGuess",
+                ContextMenuAction::NoGuessesFound => "NoGuessesFound",
+                ContextMenuAction::IgnoreSpelling => "IgnoreSpelling",
+                ContextMenuAction::LearnSpelling => "LearnSpelling",
+                ContextMenuAction::IgnoreGrammar => "IgnoreGrammar",
+                ContextMenuAction::FontMenu => "FontMenu",
+                ContextMenuAction::Bold => "Bold",
+                ContextMenuAction::Italic => "Italic",
+                ContextMenuAction::Underline => "Underline",
+                ContextMenuAction::Outline => "Outline",
+                ContextMenuAction::InspectElement => "InspectElement",
+                ContextMenuAction::OpenVideoInNewWindow => "OpenVideoInNewWindow",
+                ContextMenuAction::OpenAudioInNewWindow => "OpenAudioInNewWindow",
+                ContextMenuAction::CopyVideoLinkToClipboard => "CopyVideoLinkToClipboard",
+                ContextMenuAction::CopyAudioLinkToClipboard => "CopyAudioLinkToClipboard",
+                ContextMenuAction::ToggleMediaControls => "ToggleMediaControls",
+                ContextMenuAction::ToggleMediaLoop => "ToggleMediaLoop",
+                ContextMenuAction::EnterVideoFullscreen => "EnterVideoFullscreen",
+                ContextMenuAction::MediaPlay => "MediaPlay",
+                ContextMenuAction::MediaPause => "MediaPause",
+                ContextMenuAction::MediaMute => "MediaMute",
+                ContextMenuAction::DownloadVideoToDisk => "DownloadVideoToDisk",
+                ContextMenuAction::DownloadAudioToDisk => "DownloadAudioToDisk",
+                ContextMenuAction::InsertEmoji => "InsertEmoji",
+                ContextMenuAction::Custom => "Custom",
+                _ => "Unknown",
+            }
+        )
     }
 }
 
@@ -119,53 +122,135 @@ impl ToGlib for ContextMenuAction {
 
     fn to_glib(&self) -> webkit2_webextension_sys::WebKitContextMenuAction {
         match *self {
-            ContextMenuAction::NoAction => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_NO_ACTION,
-            ContextMenuAction::OpenLink => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_LINK,
-            ContextMenuAction::OpenLinkInNewWindow => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_LINK_IN_NEW_WINDOW,
-            ContextMenuAction::DownloadLinkToDisk => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_LINK_TO_DISK,
-            ContextMenuAction::CopyLinkToClipboard => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_COPY_LINK_TO_CLIPBOARD,
-            ContextMenuAction::OpenImageInNewWindow => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_IMAGE_IN_NEW_WINDOW,
-            ContextMenuAction::DownloadImageToDisk => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_IMAGE_TO_DISK,
-            ContextMenuAction::CopyImageToClipboard => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_COPY_IMAGE_TO_CLIPBOARD,
-            ContextMenuAction::CopyImageUrlToClipboard => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_COPY_IMAGE_URL_TO_CLIPBOARD,
-            ContextMenuAction::OpenFrameInNewWindow => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_FRAME_IN_NEW_WINDOW,
-            ContextMenuAction::GoBack => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_GO_BACK,
-            ContextMenuAction::GoForward => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_GO_FORWARD,
+            ContextMenuAction::NoAction => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_NO_ACTION
+            }
+            ContextMenuAction::OpenLink => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_LINK
+            }
+            ContextMenuAction::OpenLinkInNewWindow => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_LINK_IN_NEW_WINDOW
+            }
+            ContextMenuAction::DownloadLinkToDisk => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_LINK_TO_DISK
+            }
+            ContextMenuAction::CopyLinkToClipboard => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_COPY_LINK_TO_CLIPBOARD
+            }
+            ContextMenuAction::OpenImageInNewWindow => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_IMAGE_IN_NEW_WINDOW
+            }
+            ContextMenuAction::DownloadImageToDisk => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_IMAGE_TO_DISK
+            }
+            ContextMenuAction::CopyImageToClipboard => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_COPY_IMAGE_TO_CLIPBOARD
+            }
+            ContextMenuAction::CopyImageUrlToClipboard => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_COPY_IMAGE_URL_TO_CLIPBOARD
+            }
+            ContextMenuAction::OpenFrameInNewWindow => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_FRAME_IN_NEW_WINDOW
+            }
+            ContextMenuAction::GoBack => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_GO_BACK
+            }
+            ContextMenuAction::GoForward => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_GO_FORWARD
+            }
             ContextMenuAction::Stop => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_STOP,
-            ContextMenuAction::Reload => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_RELOAD,
+            ContextMenuAction::Reload => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_RELOAD
+            }
             ContextMenuAction::Copy => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_COPY,
             ContextMenuAction::Cut => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_CUT,
             ContextMenuAction::Paste => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_PASTE,
-            ContextMenuAction::Delete => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_DELETE,
-            ContextMenuAction::SelectAll => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_SELECT_ALL,
-            ContextMenuAction::InputMethods => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_INPUT_METHODS,
-            ContextMenuAction::Unicode => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_UNICODE,
-            ContextMenuAction::SpellingGuess => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_SPELLING_GUESS,
-            ContextMenuAction::NoGuessesFound => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_NO_GUESSES_FOUND,
-            ContextMenuAction::IgnoreSpelling => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_IGNORE_SPELLING,
-            ContextMenuAction::LearnSpelling => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_LEARN_SPELLING,
-            ContextMenuAction::IgnoreGrammar => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_IGNORE_GRAMMAR,
-            ContextMenuAction::FontMenu => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_FONT_MENU,
+            ContextMenuAction::Delete => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_DELETE
+            }
+            ContextMenuAction::SelectAll => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_SELECT_ALL
+            }
+            ContextMenuAction::InputMethods => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_INPUT_METHODS
+            }
+            ContextMenuAction::Unicode => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_UNICODE
+            }
+            ContextMenuAction::SpellingGuess => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_SPELLING_GUESS
+            }
+            ContextMenuAction::NoGuessesFound => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_NO_GUESSES_FOUND
+            }
+            ContextMenuAction::IgnoreSpelling => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_IGNORE_SPELLING
+            }
+            ContextMenuAction::LearnSpelling => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_LEARN_SPELLING
+            }
+            ContextMenuAction::IgnoreGrammar => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_IGNORE_GRAMMAR
+            }
+            ContextMenuAction::FontMenu => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_FONT_MENU
+            }
             ContextMenuAction::Bold => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_BOLD,
-            ContextMenuAction::Italic => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_ITALIC,
-            ContextMenuAction::Underline => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_UNDERLINE,
-            ContextMenuAction::Outline => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OUTLINE,
-            ContextMenuAction::InspectElement => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_INSPECT_ELEMENT,
-            ContextMenuAction::OpenVideoInNewWindow => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_VIDEO_IN_NEW_WINDOW,
-            ContextMenuAction::OpenAudioInNewWindow => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_AUDIO_IN_NEW_WINDOW,
-            ContextMenuAction::CopyVideoLinkToClipboard => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_COPY_VIDEO_LINK_TO_CLIPBOARD,
-            ContextMenuAction::CopyAudioLinkToClipboard => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_COPY_AUDIO_LINK_TO_CLIPBOARD,
-            ContextMenuAction::ToggleMediaControls => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_TOGGLE_MEDIA_CONTROLS,
-            ContextMenuAction::ToggleMediaLoop => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_TOGGLE_MEDIA_LOOP,
-            ContextMenuAction::EnterVideoFullscreen => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_ENTER_VIDEO_FULLSCREEN,
-            ContextMenuAction::MediaPlay => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_MEDIA_PLAY,
-            ContextMenuAction::MediaPause => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_MEDIA_PAUSE,
-            ContextMenuAction::MediaMute => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_MEDIA_MUTE,
-            ContextMenuAction::DownloadVideoToDisk => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_VIDEO_TO_DISK,
-            ContextMenuAction::DownloadAudioToDisk => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_AUDIO_TO_DISK,
-            ContextMenuAction::InsertEmoji => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_INSERT_EMOJI,
-            ContextMenuAction::Custom => webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_CUSTOM,
-            ContextMenuAction::__Unknown(value) => value
+            ContextMenuAction::Italic => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_ITALIC
+            }
+            ContextMenuAction::Underline => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_UNDERLINE
+            }
+            ContextMenuAction::Outline => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OUTLINE
+            }
+            ContextMenuAction::InspectElement => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_INSPECT_ELEMENT
+            }
+            ContextMenuAction::OpenVideoInNewWindow => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_VIDEO_IN_NEW_WINDOW
+            }
+            ContextMenuAction::OpenAudioInNewWindow => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_OPEN_AUDIO_IN_NEW_WINDOW
+            }
+            ContextMenuAction::CopyVideoLinkToClipboard => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_COPY_VIDEO_LINK_TO_CLIPBOARD
+            }
+            ContextMenuAction::CopyAudioLinkToClipboard => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_COPY_AUDIO_LINK_TO_CLIPBOARD
+            }
+            ContextMenuAction::ToggleMediaControls => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_TOGGLE_MEDIA_CONTROLS
+            }
+            ContextMenuAction::ToggleMediaLoop => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_TOGGLE_MEDIA_LOOP
+            }
+            ContextMenuAction::EnterVideoFullscreen => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_ENTER_VIDEO_FULLSCREEN
+            }
+            ContextMenuAction::MediaPlay => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_MEDIA_PLAY
+            }
+            ContextMenuAction::MediaPause => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_MEDIA_PAUSE
+            }
+            ContextMenuAction::MediaMute => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_MEDIA_MUTE
+            }
+            ContextMenuAction::DownloadVideoToDisk => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_VIDEO_TO_DISK
+            }
+            ContextMenuAction::DownloadAudioToDisk => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_AUDIO_TO_DISK
+            }
+            ContextMenuAction::InsertEmoji => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_INSERT_EMOJI
+            }
+            ContextMenuAction::Custom => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_CUSTOM
+            }
+            ContextMenuAction::__Unknown(value) => value,
         }
     }
 }
@@ -225,4 +310,3 @@ impl FromGlib<webkit2_webextension_sys::WebKitContextMenuAction> for ContextMenu
         }
     }
 }
-
