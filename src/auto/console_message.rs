@@ -40,14 +40,20 @@ impl ConsoleMessage {
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     pub fn get_source_id(&mut self) -> Option<GString> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_console_message_get_source_id(self.to_glib_none_mut().0))
+            from_glib_none(
+                webkit2_webextension_sys::webkit_console_message_get_source_id(
+                    self.to_glib_none_mut().0,
+                ),
+            )
         }
     }
 
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     pub fn get_text(&mut self) -> Option<GString> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_console_message_get_text(self.to_glib_none_mut().0))
+            from_glib_none(webkit2_webextension_sys::webkit_console_message_get_text(
+                self.to_glib_none_mut().0,
+            ))
         }
     }
 }

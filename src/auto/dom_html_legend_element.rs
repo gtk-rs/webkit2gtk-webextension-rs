@@ -48,47 +48,74 @@ pub trait DOMHTMLLegendElementExt: 'static {
 impl<O: IsA<DOMHTMLLegendElement>> DOMHTMLLegendElementExt for O {
     fn get_align(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_legend_element_get_align(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_legend_element_get_align(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_form(&self) -> Option<DOMHTMLFormElement> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_dom_html_legend_element_get_form(self.as_ref().to_glib_none().0))
+            from_glib_none(
+                webkit2_webextension_sys::webkit_dom_html_legend_element_get_form(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn set_align(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_legend_element_set_align(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_legend_element_set_align(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLLegendElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLLegendElement>
+        unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLLegendElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLLegendElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLLegendElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
-                Some(transmute(notify_align_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::align\0".as_ptr() as *const _,
+                Some(transmute(notify_align_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_form_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLLegendElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLLegendElement>
+        unsafe extern "C" fn notify_form_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLLegendElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLLegendElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLLegendElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::form\0".as_ptr() as *const _,
-                Some(transmute(notify_form_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::form\0".as_ptr() as *const _,
+                Some(transmute(notify_form_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 }

@@ -16,9 +16,15 @@ impl DOMHTMLFieldSetElementExtManual for DOMHTMLFieldSetElement {
     fn get_disabled(&self) -> bool {
         let property_name = CString::new("disabled").unwrap();
         let mut value = 0;
-        let element: *mut webkit2_webextension_sys::WebKitDOMHTMLFieldSetElement = self.to_glib_none().0;
+        let element: *mut webkit2_webextension_sys::WebKitDOMHTMLFieldSetElement =
+            self.to_glib_none().0;
         unsafe {
-            g_object_get(element as *mut _, property_name.as_ptr(), &mut value as *mut _, null_mut() as *mut c_void);
+            g_object_get(
+                element as *mut _,
+                property_name.as_ptr(),
+                &mut value as *mut _,
+                null_mut() as *mut c_void,
+            );
         }
         value != 0
     }

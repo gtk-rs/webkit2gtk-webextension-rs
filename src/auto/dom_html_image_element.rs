@@ -144,9 +144,15 @@ pub trait DOMHTMLImageElementExt: 'static {
 
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_natural_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_natural_height_notify<F: Fn(&Self) + 'static>(
+        &self,
+        f: F,
+    ) -> SignalHandlerId;
 
-    fn connect_property_natural_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_natural_width_notify<F: Fn(&Self) + 'static>(
+        &self,
+        f: F,
+    ) -> SignalHandlerId;
 
     fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -164,439 +170,688 @@ pub trait DOMHTMLImageElementExt: 'static {
 impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
     fn get_align(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_image_element_get_align(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_image_element_get_align(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_alt(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_image_element_get_alt(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_image_element_get_alt(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_border(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_image_element_get_border(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_image_element_get_border(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_complete(&self) -> bool {
         unsafe {
-            from_glib(webkit2_webextension_sys::webkit_dom_html_image_element_get_complete(self.as_ref().to_glib_none().0))
+            from_glib(
+                webkit2_webextension_sys::webkit_dom_html_image_element_get_complete(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_height(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_get_height(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_html_image_element_get_height(
+                self.as_ref().to_glib_none().0,
+            )
         }
     }
 
     fn get_hspace(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_get_hspace(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_html_image_element_get_hspace(
+                self.as_ref().to_glib_none().0,
+            )
         }
     }
 
     fn get_is_map(&self) -> bool {
         unsafe {
-            from_glib(webkit2_webextension_sys::webkit_dom_html_image_element_get_is_map(self.as_ref().to_glib_none().0))
+            from_glib(
+                webkit2_webextension_sys::webkit_dom_html_image_element_get_is_map(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_long_desc(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_image_element_get_long_desc(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_image_element_get_long_desc(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_lowsrc(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_image_element_get_lowsrc(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_image_element_get_lowsrc(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_image_element_get_name(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_image_element_get_name(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_natural_height(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_get_natural_height(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_html_image_element_get_natural_height(
+                self.as_ref().to_glib_none().0,
+            )
         }
     }
 
     fn get_natural_width(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_get_natural_width(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_html_image_element_get_natural_width(
+                self.as_ref().to_glib_none().0,
+            )
         }
     }
 
     fn get_src(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_image_element_get_src(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_image_element_get_src(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_use_map(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_image_element_get_use_map(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_image_element_get_use_map(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_vspace(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_get_vspace(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_html_image_element_get_vspace(
+                self.as_ref().to_glib_none().0,
+            )
         }
     }
 
     fn get_width(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_get_width(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_html_image_element_get_width(
+                self.as_ref().to_glib_none().0,
+            )
         }
     }
 
     fn get_x(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_get_x(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_html_image_element_get_x(
+                self.as_ref().to_glib_none().0,
+            )
         }
     }
 
     fn get_y(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_get_y(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_html_image_element_get_y(
+                self.as_ref().to_glib_none().0,
+            )
         }
     }
 
     fn set_align(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_align(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_align(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_alt(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_alt(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_alt(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_border(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_border(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_border(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_height(&self, value: libc::c_long) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_height(self.as_ref().to_glib_none().0, value);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_height(
+                self.as_ref().to_glib_none().0,
+                value,
+            );
         }
     }
 
     fn set_hspace(&self, value: libc::c_long) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_hspace(self.as_ref().to_glib_none().0, value);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_hspace(
+                self.as_ref().to_glib_none().0,
+                value,
+            );
         }
     }
 
     fn set_is_map(&self, value: bool) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_is_map(self.as_ref().to_glib_none().0, value.to_glib());
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_is_map(
+                self.as_ref().to_glib_none().0,
+                value.to_glib(),
+            );
         }
     }
 
     fn set_long_desc(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_long_desc(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_long_desc(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_lowsrc(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_lowsrc(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_lowsrc(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_name(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_name(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_src(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_src(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_src(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_use_map(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_use_map(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_use_map(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_vspace(&self, value: libc::c_long) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_vspace(self.as_ref().to_glib_none().0, value);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_vspace(
+                self.as_ref().to_glib_none().0,
+                value,
+            );
         }
     }
 
     fn set_width(&self, value: libc::c_long) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_image_element_set_width(self.as_ref().to_glib_none().0, value);
+            webkit2_webextension_sys::webkit_dom_html_image_element_set_width(
+                self.as_ref().to_glib_none().0,
+                value,
+            );
         }
     }
 
     fn connect_property_align_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_align_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
-                Some(transmute(notify_align_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::align\0".as_ptr() as *const _,
+                Some(transmute(notify_align_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_alt_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_alt_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_alt_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::alt\0".as_ptr() as *const _,
-                Some(transmute(notify_alt_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::alt\0".as_ptr() as *const _,
+                Some(transmute(notify_alt_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_border_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_border_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_border_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::border\0".as_ptr() as *const _,
-                Some(transmute(notify_border_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::border\0".as_ptr() as *const _,
+                Some(transmute(notify_border_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_complete_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_complete_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_complete_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::complete\0".as_ptr() as *const _,
-                Some(transmute(notify_complete_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::complete\0".as_ptr() as *const _,
+                Some(transmute(notify_complete_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_height_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_height_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
-                Some(transmute(notify_height_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::height\0".as_ptr() as *const _,
+                Some(transmute(notify_height_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_hspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_hspace_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_hspace_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::hspace\0".as_ptr() as *const _,
-                Some(transmute(notify_hspace_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::hspace\0".as_ptr() as *const _,
+                Some(transmute(notify_hspace_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_is_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_is_map_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_is_map_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::is-map\0".as_ptr() as *const _,
-                Some(transmute(notify_is_map_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::is-map\0".as_ptr() as *const _,
+                Some(transmute(notify_is_map_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_long_desc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_long_desc_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_long_desc_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::long-desc\0".as_ptr() as *const _,
-                Some(transmute(notify_long_desc_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::long-desc\0".as_ptr() as *const _,
+                Some(transmute(notify_long_desc_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_lowsrc_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_lowsrc_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_lowsrc_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::lowsrc\0".as_ptr() as *const _,
-                Some(transmute(notify_lowsrc_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::lowsrc\0".as_ptr() as *const _,
+                Some(transmute(notify_lowsrc_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::name\0".as_ptr() as *const _,
+                Some(transmute(notify_name_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
-    fn connect_property_natural_height_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_natural_height_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+    fn connect_property_natural_height_notify<F: Fn(&Self) + 'static>(
+        &self,
+        f: F,
+    ) -> SignalHandlerId {
+        unsafe extern "C" fn notify_natural_height_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::natural-height\0".as_ptr() as *const _,
-                Some(transmute(notify_natural_height_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::natural-height\0".as_ptr() as *const _,
+                Some(transmute(
+                    notify_natural_height_trampoline::<Self, F> as usize,
+                )),
+                Box_::into_raw(f),
+            )
         }
     }
 
-    fn connect_property_natural_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_natural_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+    fn connect_property_natural_width_notify<F: Fn(&Self) + 'static>(
+        &self,
+        f: F,
+    ) -> SignalHandlerId {
+        unsafe extern "C" fn notify_natural_width_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::natural-width\0".as_ptr() as *const _,
-                Some(transmute(notify_natural_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::natural-width\0".as_ptr() as *const _,
+                Some(transmute(
+                    notify_natural_width_trampoline::<Self, F> as usize,
+                )),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_src_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_src_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_src_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::src\0".as_ptr() as *const _,
-                Some(transmute(notify_src_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::src\0".as_ptr() as *const _,
+                Some(transmute(notify_src_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_use_map_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_use_map_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_use_map_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::use-map\0".as_ptr() as *const _,
-                Some(transmute(notify_use_map_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::use-map\0".as_ptr() as *const _,
+                Some(transmute(notify_use_map_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_vspace_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_vspace_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_vspace_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::vspace\0".as_ptr() as *const _,
-                Some(transmute(notify_vspace_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::vspace\0".as_ptr() as *const _,
+                Some(transmute(notify_vspace_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_width_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_width_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_width_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
-                Some(transmute(notify_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::width\0".as_ptr() as *const _,
+                Some(transmute(notify_width_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_x_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::x\0".as_ptr() as *const _,
-                Some(transmute(notify_x_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::x\0".as_ptr() as *const _,
+                Some(transmute(notify_x_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLImageElement>
+        unsafe extern "C" fn notify_y_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLImageElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLImageElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::y\0".as_ptr() as *const _,
-                Some(transmute(notify_y_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::y\0".as_ptr() as *const _,
+                Some(transmute(notify_y_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 }

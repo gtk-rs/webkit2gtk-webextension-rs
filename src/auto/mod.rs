@@ -3,475 +3,613 @@
 // DO NOT EDIT
 
 mod context_menu;
-pub use self::context_menu::{ContextMenu, ContextMenuClass, NONE_CONTEXT_MENU};
 pub use self::context_menu::ContextMenuExt;
+pub use self::context_menu::{ContextMenu, ContextMenuClass, NONE_CONTEXT_MENU};
 
 mod context_menu_item;
-pub use self::context_menu_item::{ContextMenuItem, ContextMenuItemClass, NONE_CONTEXT_MENU_ITEM};
 pub use self::context_menu_item::ContextMenuItemExt;
+pub use self::context_menu_item::{ContextMenuItem, ContextMenuItemClass, NONE_CONTEXT_MENU_ITEM};
 
 mod dom_attr;
-pub use self::dom_attr::{DOMAttr, DOMAttrClass, NONE_DOM_ATTR};
 pub use self::dom_attr::DOMAttrExt;
+pub use self::dom_attr::{DOMAttr, DOMAttrClass, NONE_DOM_ATTR};
 
 mod dom_blob;
-pub use self::dom_blob::{DOMBlob, DOMBlobClass, NONE_DOM_BLOB};
 pub use self::dom_blob::DOMBlobExt;
+pub use self::dom_blob::{DOMBlob, DOMBlobClass, NONE_DOM_BLOB};
 
 mod dom_cdata_section;
 pub use self::dom_cdata_section::{DOMCDATASection, DOMCDATASectionClass, NONE_DOMCDATA_SECTION};
 
 mod dom_css_rule;
-pub use self::dom_css_rule::{DOMCSSRule, DOMCSSRuleClass, NONE_DOMCSS_RULE};
 pub use self::dom_css_rule::DOMCSSRuleExt;
+pub use self::dom_css_rule::{DOMCSSRule, DOMCSSRuleClass, NONE_DOMCSS_RULE};
 
 mod dom_css_rule_list;
-pub use self::dom_css_rule_list::{DOMCSSRuleList, DOMCSSRuleListClass, NONE_DOMCSS_RULE_LIST};
 pub use self::dom_css_rule_list::DOMCSSRuleListExt;
+pub use self::dom_css_rule_list::{DOMCSSRuleList, DOMCSSRuleListClass, NONE_DOMCSS_RULE_LIST};
 
 mod dom_css_style_declaration;
-pub use self::dom_css_style_declaration::{DOMCSSStyleDeclaration, DOMCSSStyleDeclarationClass, NONE_DOMCSS_STYLE_DECLARATION};
 pub use self::dom_css_style_declaration::DOMCSSStyleDeclarationExt;
+pub use self::dom_css_style_declaration::{
+    DOMCSSStyleDeclaration, DOMCSSStyleDeclarationClass, NONE_DOMCSS_STYLE_DECLARATION,
+};
 
 mod dom_css_style_sheet;
-pub use self::dom_css_style_sheet::{DOMCSSStyleSheet, DOMCSSStyleSheetClass, NONE_DOMCSS_STYLE_SHEET};
 pub use self::dom_css_style_sheet::DOMCSSStyleSheetExt;
+pub use self::dom_css_style_sheet::{
+    DOMCSSStyleSheet, DOMCSSStyleSheetClass, NONE_DOMCSS_STYLE_SHEET,
+};
 
 mod dom_css_value;
-pub use self::dom_css_value::{DOMCSSValue, DOMCSSValueClass, NONE_DOMCSS_VALUE};
 pub use self::dom_css_value::DOMCSSValueExt;
+pub use self::dom_css_value::{DOMCSSValue, DOMCSSValueClass, NONE_DOMCSS_VALUE};
 
 mod dom_character_data;
-pub use self::dom_character_data::{DOMCharacterData, DOMCharacterDataClass, NONE_DOM_CHARACTER_DATA};
 pub use self::dom_character_data::DOMCharacterDataExt;
+pub use self::dom_character_data::{
+    DOMCharacterData, DOMCharacterDataClass, NONE_DOM_CHARACTER_DATA,
+};
 
 #[cfg(any(feature = "v2_18", feature = "dox"))]
 mod dom_client_rect;
 #[cfg(any(feature = "v2_18", feature = "dox"))]
-pub use self::dom_client_rect::{DOMClientRect, DOMClientRectClass, NONE_DOM_CLIENT_RECT};
-#[cfg(any(feature = "v2_18", feature = "dox"))]
 pub use self::dom_client_rect::DOMClientRectExt;
+#[cfg(any(feature = "v2_18", feature = "dox"))]
+pub use self::dom_client_rect::{DOMClientRect, DOMClientRectClass, NONE_DOM_CLIENT_RECT};
 
 #[cfg(any(feature = "v2_18", feature = "dox"))]
 mod dom_client_rect_list;
 #[cfg(any(feature = "v2_18", feature = "dox"))]
-pub use self::dom_client_rect_list::{DOMClientRectList, DOMClientRectListClass, NONE_DOM_CLIENT_RECT_LIST};
-#[cfg(any(feature = "v2_18", feature = "dox"))]
 pub use self::dom_client_rect_list::DOMClientRectListExt;
+#[cfg(any(feature = "v2_18", feature = "dox"))]
+pub use self::dom_client_rect_list::{
+    DOMClientRectList, DOMClientRectListClass, NONE_DOM_CLIENT_RECT_LIST,
+};
 
 mod dom_comment;
 pub use self::dom_comment::{DOMComment, DOMCommentClass, NONE_DOM_COMMENT};
 
 mod dom_dom_implementation;
-pub use self::dom_dom_implementation::{DOMDOMImplementation, DOMDOMImplementationClass, NONE_DOMDOM_IMPLEMENTATION};
 pub use self::dom_dom_implementation::DOMDOMImplementationExt;
+pub use self::dom_dom_implementation::{
+    DOMDOMImplementation, DOMDOMImplementationClass, NONE_DOMDOM_IMPLEMENTATION,
+};
 
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 mod dom_dom_selection;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
-pub use self::dom_dom_selection::{DOMDOMSelection, DOMDOMSelectionClass, NONE_DOMDOM_SELECTION};
-#[cfg(any(feature = "v2_16", feature = "dox"))]
 pub use self::dom_dom_selection::DOMDOMSelectionExt;
+#[cfg(any(feature = "v2_16", feature = "dox"))]
+pub use self::dom_dom_selection::{DOMDOMSelection, DOMDOMSelectionClass, NONE_DOMDOM_SELECTION};
 
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 mod dom_dom_token_list;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
-pub use self::dom_dom_token_list::{DOMDOMTokenList, DOMDOMTokenListClass, NONE_DOMDOM_TOKEN_LIST};
-#[cfg(any(feature = "v2_16", feature = "dox"))]
 pub use self::dom_dom_token_list::DOMDOMTokenListExt;
+#[cfg(any(feature = "v2_16", feature = "dox"))]
+pub use self::dom_dom_token_list::{DOMDOMTokenList, DOMDOMTokenListClass, NONE_DOMDOM_TOKEN_LIST};
 
 mod dom_dom_window;
-pub use self::dom_dom_window::{DOMDOMWindow, DOMDOMWindowClass, NONE_DOMDOM_WINDOW};
 pub use self::dom_dom_window::DOMDOMWindowExt;
+pub use self::dom_dom_window::{DOMDOMWindow, DOMDOMWindowClass, NONE_DOMDOM_WINDOW};
 
 mod dom_document;
-pub use self::dom_document::{DOMDocument, DOMDocumentClass, NONE_DOM_DOCUMENT};
 pub use self::dom_document::DOMDocumentExt;
+pub use self::dom_document::{DOMDocument, DOMDocumentClass, NONE_DOM_DOCUMENT};
 
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 mod dom_document_fragment;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
-pub use self::dom_document_fragment::{DOMDocumentFragment, DOMDocumentFragmentClass, NONE_DOM_DOCUMENT_FRAGMENT};
-#[cfg(any(feature = "v2_16", feature = "dox"))]
 pub use self::dom_document_fragment::DOMDocumentFragmentExt;
+#[cfg(any(feature = "v2_16", feature = "dox"))]
+pub use self::dom_document_fragment::{
+    DOMDocumentFragment, DOMDocumentFragmentClass, NONE_DOM_DOCUMENT_FRAGMENT,
+};
 
 mod dom_document_type;
-pub use self::dom_document_type::{DOMDocumentType, DOMDocumentTypeClass, NONE_DOM_DOCUMENT_TYPE};
 pub use self::dom_document_type::DOMDocumentTypeExt;
+pub use self::dom_document_type::{DOMDocumentType, DOMDocumentTypeClass, NONE_DOM_DOCUMENT_TYPE};
 
 mod dom_element;
-pub use self::dom_element::{DOMElement, DOMElementClass, NONE_DOM_ELEMENT};
 pub use self::dom_element::DOMElementExt;
+pub use self::dom_element::{DOMElement, DOMElementClass, NONE_DOM_ELEMENT};
 
 mod dom_entity_reference;
-pub use self::dom_entity_reference::{DOMEntityReference, DOMEntityReferenceClass, NONE_DOM_ENTITY_REFERENCE};
+pub use self::dom_entity_reference::{
+    DOMEntityReference, DOMEntityReferenceClass, NONE_DOM_ENTITY_REFERENCE,
+};
 
 mod dom_event;
-pub use self::dom_event::{DOMEvent, DOMEventClass, NONE_DOM_EVENT};
 pub use self::dom_event::DOMEventExt;
+pub use self::dom_event::{DOMEvent, DOMEventClass, NONE_DOM_EVENT};
 
 mod dom_event_target;
-pub use self::dom_event_target::{DOMEventTarget, NONE_DOM_EVENT_TARGET};
 pub use self::dom_event_target::DOMEventTargetExt;
+pub use self::dom_event_target::{DOMEventTarget, NONE_DOM_EVENT_TARGET};
 
 mod dom_file;
-pub use self::dom_file::{DOMFile, DOMFileClass, NONE_DOM_FILE};
 pub use self::dom_file::DOMFileExt;
+pub use self::dom_file::{DOMFile, DOMFileClass, NONE_DOM_FILE};
 
 mod dom_file_list;
-pub use self::dom_file_list::{DOMFileList, DOMFileListClass, NONE_DOM_FILE_LIST};
 pub use self::dom_file_list::DOMFileListExt;
+pub use self::dom_file_list::{DOMFileList, DOMFileListClass, NONE_DOM_FILE_LIST};
 
 mod dom_html_anchor_element;
-pub use self::dom_html_anchor_element::{DOMHTMLAnchorElement, DOMHTMLAnchorElementClass, NONE_DOMHTML_ANCHOR_ELEMENT};
 pub use self::dom_html_anchor_element::DOMHTMLAnchorElementExt;
+pub use self::dom_html_anchor_element::{
+    DOMHTMLAnchorElement, DOMHTMLAnchorElementClass, NONE_DOMHTML_ANCHOR_ELEMENT,
+};
 
 mod dom_html_applet_element;
-pub use self::dom_html_applet_element::{DOMHTMLAppletElement, DOMHTMLAppletElementClass, NONE_DOMHTML_APPLET_ELEMENT};
 pub use self::dom_html_applet_element::DOMHTMLAppletElementExt;
+pub use self::dom_html_applet_element::{
+    DOMHTMLAppletElement, DOMHTMLAppletElementClass, NONE_DOMHTML_APPLET_ELEMENT,
+};
 
 mod dom_html_area_element;
-pub use self::dom_html_area_element::{DOMHTMLAreaElement, DOMHTMLAreaElementClass, NONE_DOMHTML_AREA_ELEMENT};
 pub use self::dom_html_area_element::DOMHTMLAreaElementExt;
+pub use self::dom_html_area_element::{
+    DOMHTMLAreaElement, DOMHTMLAreaElementClass, NONE_DOMHTML_AREA_ELEMENT,
+};
 
 mod dom_html_br_element;
-pub use self::dom_html_br_element::{DOMHTMLBRElement, DOMHTMLBRElementClass, NONE_DOMHTMLBR_ELEMENT};
 pub use self::dom_html_br_element::DOMHTMLBRElementExt;
+pub use self::dom_html_br_element::{
+    DOMHTMLBRElement, DOMHTMLBRElementClass, NONE_DOMHTMLBR_ELEMENT,
+};
 
 mod dom_html_base_element;
-pub use self::dom_html_base_element::{DOMHTMLBaseElement, DOMHTMLBaseElementClass, NONE_DOMHTML_BASE_ELEMENT};
 pub use self::dom_html_base_element::DOMHTMLBaseElementExt;
+pub use self::dom_html_base_element::{
+    DOMHTMLBaseElement, DOMHTMLBaseElementClass, NONE_DOMHTML_BASE_ELEMENT,
+};
 
 mod dom_html_base_font_element;
-pub use self::dom_html_base_font_element::{DOMHTMLBaseFontElement, DOMHTMLBaseFontElementClass, NONE_DOMHTML_BASE_FONT_ELEMENT};
 pub use self::dom_html_base_font_element::DOMHTMLBaseFontElementExt;
+pub use self::dom_html_base_font_element::{
+    DOMHTMLBaseFontElement, DOMHTMLBaseFontElementClass, NONE_DOMHTML_BASE_FONT_ELEMENT,
+};
 
 mod dom_html_body_element;
-pub use self::dom_html_body_element::{DOMHTMLBodyElement, DOMHTMLBodyElementClass, NONE_DOMHTML_BODY_ELEMENT};
 pub use self::dom_html_body_element::DOMHTMLBodyElementExt;
+pub use self::dom_html_body_element::{
+    DOMHTMLBodyElement, DOMHTMLBodyElementClass, NONE_DOMHTML_BODY_ELEMENT,
+};
 
 mod dom_html_button_element;
-pub use self::dom_html_button_element::{DOMHTMLButtonElement, DOMHTMLButtonElementClass, NONE_DOMHTML_BUTTON_ELEMENT};
 pub use self::dom_html_button_element::DOMHTMLButtonElementExt;
+pub use self::dom_html_button_element::{
+    DOMHTMLButtonElement, DOMHTMLButtonElementClass, NONE_DOMHTML_BUTTON_ELEMENT,
+};
 
 mod dom_html_canvas_element;
-pub use self::dom_html_canvas_element::{DOMHTMLCanvasElement, DOMHTMLCanvasElementClass, NONE_DOMHTML_CANVAS_ELEMENT};
 pub use self::dom_html_canvas_element::DOMHTMLCanvasElementExt;
+pub use self::dom_html_canvas_element::{
+    DOMHTMLCanvasElement, DOMHTMLCanvasElementClass, NONE_DOMHTML_CANVAS_ELEMENT,
+};
 
 mod dom_html_collection;
-pub use self::dom_html_collection::{DOMHTMLCollection, DOMHTMLCollectionClass, NONE_DOMHTML_COLLECTION};
 pub use self::dom_html_collection::DOMHTMLCollectionExt;
+pub use self::dom_html_collection::{
+    DOMHTMLCollection, DOMHTMLCollectionClass, NONE_DOMHTML_COLLECTION,
+};
 
 mod dom_html_d_list_element;
-pub use self::dom_html_d_list_element::{DOMHTMLDListElement, DOMHTMLDListElementClass, NONE_DOMHTMLD_LIST_ELEMENT};
 pub use self::dom_html_d_list_element::DOMHTMLDListElementExt;
+pub use self::dom_html_d_list_element::{
+    DOMHTMLDListElement, DOMHTMLDListElementClass, NONE_DOMHTMLD_LIST_ELEMENT,
+};
 
 mod dom_html_directory_element;
-pub use self::dom_html_directory_element::{DOMHTMLDirectoryElement, DOMHTMLDirectoryElementClass, NONE_DOMHTML_DIRECTORY_ELEMENT};
 pub use self::dom_html_directory_element::DOMHTMLDirectoryElementExt;
+pub use self::dom_html_directory_element::{
+    DOMHTMLDirectoryElement, DOMHTMLDirectoryElementClass, NONE_DOMHTML_DIRECTORY_ELEMENT,
+};
 
 mod dom_html_div_element;
-pub use self::dom_html_div_element::{DOMHTMLDivElement, DOMHTMLDivElementClass, NONE_DOMHTML_DIV_ELEMENT};
 pub use self::dom_html_div_element::DOMHTMLDivElementExt;
+pub use self::dom_html_div_element::{
+    DOMHTMLDivElement, DOMHTMLDivElementClass, NONE_DOMHTML_DIV_ELEMENT,
+};
 
 mod dom_html_document;
-pub use self::dom_html_document::{DOMHTMLDocument, DOMHTMLDocumentClass, NONE_DOMHTML_DOCUMENT};
 pub use self::dom_html_document::DOMHTMLDocumentExt;
+pub use self::dom_html_document::{DOMHTMLDocument, DOMHTMLDocumentClass, NONE_DOMHTML_DOCUMENT};
 
 mod dom_html_element;
-pub use self::dom_html_element::{DOMHTMLElement, DOMHTMLElementClass, NONE_DOMHTML_ELEMENT};
 pub use self::dom_html_element::DOMHTMLElementExt;
+pub use self::dom_html_element::{DOMHTMLElement, DOMHTMLElementClass, NONE_DOMHTML_ELEMENT};
 
 mod dom_html_embed_element;
-pub use self::dom_html_embed_element::{DOMHTMLEmbedElement, DOMHTMLEmbedElementClass, NONE_DOMHTML_EMBED_ELEMENT};
 pub use self::dom_html_embed_element::DOMHTMLEmbedElementExt;
+pub use self::dom_html_embed_element::{
+    DOMHTMLEmbedElement, DOMHTMLEmbedElementClass, NONE_DOMHTML_EMBED_ELEMENT,
+};
 
 mod dom_html_field_set_element;
-pub use self::dom_html_field_set_element::{DOMHTMLFieldSetElement, DOMHTMLFieldSetElementClass, NONE_DOMHTML_FIELD_SET_ELEMENT};
 pub use self::dom_html_field_set_element::DOMHTMLFieldSetElementExt;
+pub use self::dom_html_field_set_element::{
+    DOMHTMLFieldSetElement, DOMHTMLFieldSetElementClass, NONE_DOMHTML_FIELD_SET_ELEMENT,
+};
 
 mod dom_html_font_element;
-pub use self::dom_html_font_element::{DOMHTMLFontElement, DOMHTMLFontElementClass, NONE_DOMHTML_FONT_ELEMENT};
 pub use self::dom_html_font_element::DOMHTMLFontElementExt;
+pub use self::dom_html_font_element::{
+    DOMHTMLFontElement, DOMHTMLFontElementClass, NONE_DOMHTML_FONT_ELEMENT,
+};
 
 mod dom_html_form_element;
-pub use self::dom_html_form_element::{DOMHTMLFormElement, DOMHTMLFormElementClass, NONE_DOMHTML_FORM_ELEMENT};
 pub use self::dom_html_form_element::DOMHTMLFormElementExt;
+pub use self::dom_html_form_element::{
+    DOMHTMLFormElement, DOMHTMLFormElementClass, NONE_DOMHTML_FORM_ELEMENT,
+};
 
 mod dom_html_frame_element;
-pub use self::dom_html_frame_element::{DOMHTMLFrameElement, DOMHTMLFrameElementClass, NONE_DOMHTML_FRAME_ELEMENT};
 pub use self::dom_html_frame_element::DOMHTMLFrameElementExt;
+pub use self::dom_html_frame_element::{
+    DOMHTMLFrameElement, DOMHTMLFrameElementClass, NONE_DOMHTML_FRAME_ELEMENT,
+};
 
 mod dom_html_frame_set_element;
-pub use self::dom_html_frame_set_element::{DOMHTMLFrameSetElement, DOMHTMLFrameSetElementClass, NONE_DOMHTML_FRAME_SET_ELEMENT};
 pub use self::dom_html_frame_set_element::DOMHTMLFrameSetElementExt;
+pub use self::dom_html_frame_set_element::{
+    DOMHTMLFrameSetElement, DOMHTMLFrameSetElementClass, NONE_DOMHTML_FRAME_SET_ELEMENT,
+};
 
 mod dom_html_hr_element;
-pub use self::dom_html_hr_element::{DOMHTMLHRElement, DOMHTMLHRElementClass, NONE_DOMHTMLHR_ELEMENT};
 pub use self::dom_html_hr_element::DOMHTMLHRElementExt;
+pub use self::dom_html_hr_element::{
+    DOMHTMLHRElement, DOMHTMLHRElementClass, NONE_DOMHTMLHR_ELEMENT,
+};
 
 mod dom_html_head_element;
-pub use self::dom_html_head_element::{DOMHTMLHeadElement, DOMHTMLHeadElementClass, NONE_DOMHTML_HEAD_ELEMENT};
 pub use self::dom_html_head_element::DOMHTMLHeadElementExt;
+pub use self::dom_html_head_element::{
+    DOMHTMLHeadElement, DOMHTMLHeadElementClass, NONE_DOMHTML_HEAD_ELEMENT,
+};
 
 mod dom_html_heading_element;
-pub use self::dom_html_heading_element::{DOMHTMLHeadingElement, DOMHTMLHeadingElementClass, NONE_DOMHTML_HEADING_ELEMENT};
 pub use self::dom_html_heading_element::DOMHTMLHeadingElementExt;
+pub use self::dom_html_heading_element::{
+    DOMHTMLHeadingElement, DOMHTMLHeadingElementClass, NONE_DOMHTML_HEADING_ELEMENT,
+};
 
 mod dom_html_html_element;
-pub use self::dom_html_html_element::{DOMHTMLHtmlElement, DOMHTMLHtmlElementClass, NONE_DOMHTML_HTML_ELEMENT};
 pub use self::dom_html_html_element::DOMHTMLHtmlElementExt;
+pub use self::dom_html_html_element::{
+    DOMHTMLHtmlElement, DOMHTMLHtmlElementClass, NONE_DOMHTML_HTML_ELEMENT,
+};
 
 mod dom_html_iframe_element;
-pub use self::dom_html_iframe_element::{DOMHTMLIFrameElement, DOMHTMLIFrameElementClass, NONE_DOMHTMLI_FRAME_ELEMENT};
 pub use self::dom_html_iframe_element::DOMHTMLIFrameElementExt;
+pub use self::dom_html_iframe_element::{
+    DOMHTMLIFrameElement, DOMHTMLIFrameElementClass, NONE_DOMHTMLI_FRAME_ELEMENT,
+};
 
 mod dom_html_image_element;
-pub use self::dom_html_image_element::{DOMHTMLImageElement, DOMHTMLImageElementClass, NONE_DOMHTML_IMAGE_ELEMENT};
 pub use self::dom_html_image_element::DOMHTMLImageElementExt;
+pub use self::dom_html_image_element::{
+    DOMHTMLImageElement, DOMHTMLImageElementClass, NONE_DOMHTML_IMAGE_ELEMENT,
+};
 
 mod dom_html_input_element;
-pub use self::dom_html_input_element::{DOMHTMLInputElement, DOMHTMLInputElementClass, NONE_DOMHTML_INPUT_ELEMENT};
 pub use self::dom_html_input_element::DOMHTMLInputElementExt;
+pub use self::dom_html_input_element::{
+    DOMHTMLInputElement, DOMHTMLInputElementClass, NONE_DOMHTML_INPUT_ELEMENT,
+};
 
 mod dom_html_li_element;
-pub use self::dom_html_li_element::{DOMHTMLLIElement, DOMHTMLLIElementClass, NONE_DOMHTMLLI_ELEMENT};
 pub use self::dom_html_li_element::DOMHTMLLIElementExt;
+pub use self::dom_html_li_element::{
+    DOMHTMLLIElement, DOMHTMLLIElementClass, NONE_DOMHTMLLI_ELEMENT,
+};
 
 mod dom_html_label_element;
-pub use self::dom_html_label_element::{DOMHTMLLabelElement, DOMHTMLLabelElementClass, NONE_DOMHTML_LABEL_ELEMENT};
 pub use self::dom_html_label_element::DOMHTMLLabelElementExt;
+pub use self::dom_html_label_element::{
+    DOMHTMLLabelElement, DOMHTMLLabelElementClass, NONE_DOMHTML_LABEL_ELEMENT,
+};
 
 mod dom_html_legend_element;
-pub use self::dom_html_legend_element::{DOMHTMLLegendElement, DOMHTMLLegendElementClass, NONE_DOMHTML_LEGEND_ELEMENT};
 pub use self::dom_html_legend_element::DOMHTMLLegendElementExt;
+pub use self::dom_html_legend_element::{
+    DOMHTMLLegendElement, DOMHTMLLegendElementClass, NONE_DOMHTML_LEGEND_ELEMENT,
+};
 
 mod dom_html_link_element;
-pub use self::dom_html_link_element::{DOMHTMLLinkElement, DOMHTMLLinkElementClass, NONE_DOMHTML_LINK_ELEMENT};
 pub use self::dom_html_link_element::DOMHTMLLinkElementExt;
+pub use self::dom_html_link_element::{
+    DOMHTMLLinkElement, DOMHTMLLinkElementClass, NONE_DOMHTML_LINK_ELEMENT,
+};
 
 mod dom_html_map_element;
-pub use self::dom_html_map_element::{DOMHTMLMapElement, DOMHTMLMapElementClass, NONE_DOMHTML_MAP_ELEMENT};
 pub use self::dom_html_map_element::DOMHTMLMapElementExt;
+pub use self::dom_html_map_element::{
+    DOMHTMLMapElement, DOMHTMLMapElementClass, NONE_DOMHTML_MAP_ELEMENT,
+};
 
 mod dom_html_marquee_element;
-pub use self::dom_html_marquee_element::{DOMHTMLMarqueeElement, DOMHTMLMarqueeElementClass, NONE_DOMHTML_MARQUEE_ELEMENT};
 pub use self::dom_html_marquee_element::DOMHTMLMarqueeElementExt;
+pub use self::dom_html_marquee_element::{
+    DOMHTMLMarqueeElement, DOMHTMLMarqueeElementClass, NONE_DOMHTML_MARQUEE_ELEMENT,
+};
 
 mod dom_html_menu_element;
-pub use self::dom_html_menu_element::{DOMHTMLMenuElement, DOMHTMLMenuElementClass, NONE_DOMHTML_MENU_ELEMENT};
 pub use self::dom_html_menu_element::DOMHTMLMenuElementExt;
+pub use self::dom_html_menu_element::{
+    DOMHTMLMenuElement, DOMHTMLMenuElementClass, NONE_DOMHTML_MENU_ELEMENT,
+};
 
 mod dom_html_meta_element;
-pub use self::dom_html_meta_element::{DOMHTMLMetaElement, DOMHTMLMetaElementClass, NONE_DOMHTML_META_ELEMENT};
 pub use self::dom_html_meta_element::DOMHTMLMetaElementExt;
+pub use self::dom_html_meta_element::{
+    DOMHTMLMetaElement, DOMHTMLMetaElementClass, NONE_DOMHTML_META_ELEMENT,
+};
 
 mod dom_html_mod_element;
-pub use self::dom_html_mod_element::{DOMHTMLModElement, DOMHTMLModElementClass, NONE_DOMHTML_MOD_ELEMENT};
 pub use self::dom_html_mod_element::DOMHTMLModElementExt;
+pub use self::dom_html_mod_element::{
+    DOMHTMLModElement, DOMHTMLModElementClass, NONE_DOMHTML_MOD_ELEMENT,
+};
 
 mod dom_html_o_list_element;
-pub use self::dom_html_o_list_element::{DOMHTMLOListElement, DOMHTMLOListElementClass, NONE_DOMHTMLO_LIST_ELEMENT};
 pub use self::dom_html_o_list_element::DOMHTMLOListElementExt;
+pub use self::dom_html_o_list_element::{
+    DOMHTMLOListElement, DOMHTMLOListElementClass, NONE_DOMHTMLO_LIST_ELEMENT,
+};
 
 mod dom_html_object_element;
-pub use self::dom_html_object_element::{DOMHTMLObjectElement, DOMHTMLObjectElementClass, NONE_DOMHTML_OBJECT_ELEMENT};
 pub use self::dom_html_object_element::DOMHTMLObjectElementExt;
+pub use self::dom_html_object_element::{
+    DOMHTMLObjectElement, DOMHTMLObjectElementClass, NONE_DOMHTML_OBJECT_ELEMENT,
+};
 
 mod dom_html_opt_group_element;
-pub use self::dom_html_opt_group_element::{DOMHTMLOptGroupElement, DOMHTMLOptGroupElementClass, NONE_DOMHTML_OPT_GROUP_ELEMENT};
 pub use self::dom_html_opt_group_element::DOMHTMLOptGroupElementExt;
+pub use self::dom_html_opt_group_element::{
+    DOMHTMLOptGroupElement, DOMHTMLOptGroupElementClass, NONE_DOMHTML_OPT_GROUP_ELEMENT,
+};
 
 mod dom_html_option_element;
-pub use self::dom_html_option_element::{DOMHTMLOptionElement, DOMHTMLOptionElementClass, NONE_DOMHTML_OPTION_ELEMENT};
 pub use self::dom_html_option_element::DOMHTMLOptionElementExt;
+pub use self::dom_html_option_element::{
+    DOMHTMLOptionElement, DOMHTMLOptionElementClass, NONE_DOMHTML_OPTION_ELEMENT,
+};
 
 mod dom_html_options_collection;
-pub use self::dom_html_options_collection::{DOMHTMLOptionsCollection, DOMHTMLOptionsCollectionClass, NONE_DOMHTML_OPTIONS_COLLECTION};
 pub use self::dom_html_options_collection::DOMHTMLOptionsCollectionExt;
+pub use self::dom_html_options_collection::{
+    DOMHTMLOptionsCollection, DOMHTMLOptionsCollectionClass, NONE_DOMHTML_OPTIONS_COLLECTION,
+};
 
 mod dom_html_paragraph_element;
-pub use self::dom_html_paragraph_element::{DOMHTMLParagraphElement, DOMHTMLParagraphElementClass, NONE_DOMHTML_PARAGRAPH_ELEMENT};
 pub use self::dom_html_paragraph_element::DOMHTMLParagraphElementExt;
+pub use self::dom_html_paragraph_element::{
+    DOMHTMLParagraphElement, DOMHTMLParagraphElementClass, NONE_DOMHTML_PARAGRAPH_ELEMENT,
+};
 
 mod dom_html_param_element;
-pub use self::dom_html_param_element::{DOMHTMLParamElement, DOMHTMLParamElementClass, NONE_DOMHTML_PARAM_ELEMENT};
 pub use self::dom_html_param_element::DOMHTMLParamElementExt;
+pub use self::dom_html_param_element::{
+    DOMHTMLParamElement, DOMHTMLParamElementClass, NONE_DOMHTML_PARAM_ELEMENT,
+};
 
 mod dom_html_pre_element;
-pub use self::dom_html_pre_element::{DOMHTMLPreElement, DOMHTMLPreElementClass, NONE_DOMHTML_PRE_ELEMENT};
 pub use self::dom_html_pre_element::DOMHTMLPreElementExt;
+pub use self::dom_html_pre_element::{
+    DOMHTMLPreElement, DOMHTMLPreElementClass, NONE_DOMHTML_PRE_ELEMENT,
+};
 
 mod dom_html_quote_element;
-pub use self::dom_html_quote_element::{DOMHTMLQuoteElement, DOMHTMLQuoteElementClass, NONE_DOMHTML_QUOTE_ELEMENT};
 pub use self::dom_html_quote_element::DOMHTMLQuoteElementExt;
+pub use self::dom_html_quote_element::{
+    DOMHTMLQuoteElement, DOMHTMLQuoteElementClass, NONE_DOMHTML_QUOTE_ELEMENT,
+};
 
 mod dom_html_script_element;
-pub use self::dom_html_script_element::{DOMHTMLScriptElement, DOMHTMLScriptElementClass, NONE_DOMHTML_SCRIPT_ELEMENT};
 pub use self::dom_html_script_element::DOMHTMLScriptElementExt;
+pub use self::dom_html_script_element::{
+    DOMHTMLScriptElement, DOMHTMLScriptElementClass, NONE_DOMHTML_SCRIPT_ELEMENT,
+};
 
 mod dom_html_select_element;
-pub use self::dom_html_select_element::{DOMHTMLSelectElement, DOMHTMLSelectElementClass, NONE_DOMHTML_SELECT_ELEMENT};
 pub use self::dom_html_select_element::DOMHTMLSelectElementExt;
+pub use self::dom_html_select_element::{
+    DOMHTMLSelectElement, DOMHTMLSelectElementClass, NONE_DOMHTML_SELECT_ELEMENT,
+};
 
 mod dom_html_style_element;
-pub use self::dom_html_style_element::{DOMHTMLStyleElement, DOMHTMLStyleElementClass, NONE_DOMHTML_STYLE_ELEMENT};
 pub use self::dom_html_style_element::DOMHTMLStyleElementExt;
+pub use self::dom_html_style_element::{
+    DOMHTMLStyleElement, DOMHTMLStyleElementClass, NONE_DOMHTML_STYLE_ELEMENT,
+};
 
 mod dom_html_table_caption_element;
-pub use self::dom_html_table_caption_element::{DOMHTMLTableCaptionElement, DOMHTMLTableCaptionElementClass, NONE_DOMHTML_TABLE_CAPTION_ELEMENT};
 pub use self::dom_html_table_caption_element::DOMHTMLTableCaptionElementExt;
+pub use self::dom_html_table_caption_element::{
+    DOMHTMLTableCaptionElement, DOMHTMLTableCaptionElementClass, NONE_DOMHTML_TABLE_CAPTION_ELEMENT,
+};
 
 mod dom_html_table_cell_element;
-pub use self::dom_html_table_cell_element::{DOMHTMLTableCellElement, DOMHTMLTableCellElementClass, NONE_DOMHTML_TABLE_CELL_ELEMENT};
 pub use self::dom_html_table_cell_element::DOMHTMLTableCellElementExt;
+pub use self::dom_html_table_cell_element::{
+    DOMHTMLTableCellElement, DOMHTMLTableCellElementClass, NONE_DOMHTML_TABLE_CELL_ELEMENT,
+};
 
 mod dom_html_table_col_element;
-pub use self::dom_html_table_col_element::{DOMHTMLTableColElement, DOMHTMLTableColElementClass, NONE_DOMHTML_TABLE_COL_ELEMENT};
 pub use self::dom_html_table_col_element::DOMHTMLTableColElementExt;
+pub use self::dom_html_table_col_element::{
+    DOMHTMLTableColElement, DOMHTMLTableColElementClass, NONE_DOMHTML_TABLE_COL_ELEMENT,
+};
 
 mod dom_html_table_element;
-pub use self::dom_html_table_element::{DOMHTMLTableElement, DOMHTMLTableElementClass, NONE_DOMHTML_TABLE_ELEMENT};
 pub use self::dom_html_table_element::DOMHTMLTableElementExt;
+pub use self::dom_html_table_element::{
+    DOMHTMLTableElement, DOMHTMLTableElementClass, NONE_DOMHTML_TABLE_ELEMENT,
+};
 
 mod dom_html_table_row_element;
-pub use self::dom_html_table_row_element::{DOMHTMLTableRowElement, DOMHTMLTableRowElementClass, NONE_DOMHTML_TABLE_ROW_ELEMENT};
 pub use self::dom_html_table_row_element::DOMHTMLTableRowElementExt;
+pub use self::dom_html_table_row_element::{
+    DOMHTMLTableRowElement, DOMHTMLTableRowElementClass, NONE_DOMHTML_TABLE_ROW_ELEMENT,
+};
 
 mod dom_html_table_section_element;
-pub use self::dom_html_table_section_element::{DOMHTMLTableSectionElement, DOMHTMLTableSectionElementClass, NONE_DOMHTML_TABLE_SECTION_ELEMENT};
 pub use self::dom_html_table_section_element::DOMHTMLTableSectionElementExt;
+pub use self::dom_html_table_section_element::{
+    DOMHTMLTableSectionElement, DOMHTMLTableSectionElementClass, NONE_DOMHTML_TABLE_SECTION_ELEMENT,
+};
 
 mod dom_html_text_area_element;
-pub use self::dom_html_text_area_element::{DOMHTMLTextAreaElement, DOMHTMLTextAreaElementClass, NONE_DOMHTML_TEXT_AREA_ELEMENT};
 pub use self::dom_html_text_area_element::DOMHTMLTextAreaElementExt;
+pub use self::dom_html_text_area_element::{
+    DOMHTMLTextAreaElement, DOMHTMLTextAreaElementClass, NONE_DOMHTML_TEXT_AREA_ELEMENT,
+};
 
 mod dom_html_title_element;
-pub use self::dom_html_title_element::{DOMHTMLTitleElement, DOMHTMLTitleElementClass, NONE_DOMHTML_TITLE_ELEMENT};
 pub use self::dom_html_title_element::DOMHTMLTitleElementExt;
+pub use self::dom_html_title_element::{
+    DOMHTMLTitleElement, DOMHTMLTitleElementClass, NONE_DOMHTML_TITLE_ELEMENT,
+};
 
 mod dom_html_u_list_element;
-pub use self::dom_html_u_list_element::{DOMHTMLUListElement, DOMHTMLUListElementClass, NONE_DOMHTMLU_LIST_ELEMENT};
 pub use self::dom_html_u_list_element::DOMHTMLUListElementExt;
+pub use self::dom_html_u_list_element::{
+    DOMHTMLUListElement, DOMHTMLUListElementClass, NONE_DOMHTMLU_LIST_ELEMENT,
+};
 
 mod dom_keyboard_event;
-pub use self::dom_keyboard_event::{DOMKeyboardEvent, DOMKeyboardEventClass, NONE_DOM_KEYBOARD_EVENT};
 pub use self::dom_keyboard_event::DOMKeyboardEventExt;
+pub use self::dom_keyboard_event::{
+    DOMKeyboardEvent, DOMKeyboardEventClass, NONE_DOM_KEYBOARD_EVENT,
+};
 
 mod dom_media_list;
-pub use self::dom_media_list::{DOMMediaList, DOMMediaListClass, NONE_DOM_MEDIA_LIST};
 pub use self::dom_media_list::DOMMediaListExt;
+pub use self::dom_media_list::{DOMMediaList, DOMMediaListClass, NONE_DOM_MEDIA_LIST};
 
 mod dom_mouse_event;
-pub use self::dom_mouse_event::{DOMMouseEvent, DOMMouseEventClass, NONE_DOM_MOUSE_EVENT};
 pub use self::dom_mouse_event::DOMMouseEventExt;
+pub use self::dom_mouse_event::{DOMMouseEvent, DOMMouseEventClass, NONE_DOM_MOUSE_EVENT};
 
 mod dom_named_node_map;
-pub use self::dom_named_node_map::{DOMNamedNodeMap, DOMNamedNodeMapClass, NONE_DOM_NAMED_NODE_MAP};
 pub use self::dom_named_node_map::DOMNamedNodeMapExt;
+pub use self::dom_named_node_map::{
+    DOMNamedNodeMap, DOMNamedNodeMapClass, NONE_DOM_NAMED_NODE_MAP,
+};
 
 mod dom_node;
-pub use self::dom_node::{DOMNode, DOMNodeClass, NONE_DOM_NODE};
 pub use self::dom_node::DOMNodeExt;
+pub use self::dom_node::{DOMNode, DOMNodeClass, NONE_DOM_NODE};
 
 mod dom_node_iterator;
-pub use self::dom_node_iterator::{DOMNodeIterator, DOMNodeIteratorClass, NONE_DOM_NODE_ITERATOR};
 pub use self::dom_node_iterator::DOMNodeIteratorExt;
+pub use self::dom_node_iterator::{DOMNodeIterator, DOMNodeIteratorClass, NONE_DOM_NODE_ITERATOR};
 
 mod dom_node_list;
-pub use self::dom_node_list::{DOMNodeList, DOMNodeListClass, NONE_DOM_NODE_LIST};
 pub use self::dom_node_list::DOMNodeListExt;
+pub use self::dom_node_list::{DOMNodeList, DOMNodeListClass, NONE_DOM_NODE_LIST};
 
 mod dom_object;
 pub use self::dom_object::{DOMObject, DOMObjectClass, NONE_DOM_OBJECT};
 
 mod dom_processing_instruction;
-pub use self::dom_processing_instruction::{DOMProcessingInstruction, DOMProcessingInstructionClass, NONE_DOM_PROCESSING_INSTRUCTION};
 pub use self::dom_processing_instruction::DOMProcessingInstructionExt;
+pub use self::dom_processing_instruction::{
+    DOMProcessingInstruction, DOMProcessingInstructionClass, NONE_DOM_PROCESSING_INSTRUCTION,
+};
 
 mod dom_range;
-pub use self::dom_range::{DOMRange, DOMRangeClass, NONE_DOM_RANGE};
 pub use self::dom_range::DOMRangeExt;
+pub use self::dom_range::{DOMRange, DOMRangeClass, NONE_DOM_RANGE};
 
 mod dom_style_sheet;
-pub use self::dom_style_sheet::{DOMStyleSheet, DOMStyleSheetClass, NONE_DOM_STYLE_SHEET};
 pub use self::dom_style_sheet::DOMStyleSheetExt;
+pub use self::dom_style_sheet::{DOMStyleSheet, DOMStyleSheetClass, NONE_DOM_STYLE_SHEET};
 
 mod dom_style_sheet_list;
-pub use self::dom_style_sheet_list::{DOMStyleSheetList, DOMStyleSheetListClass, NONE_DOM_STYLE_SHEET_LIST};
 pub use self::dom_style_sheet_list::DOMStyleSheetListExt;
+pub use self::dom_style_sheet_list::{
+    DOMStyleSheetList, DOMStyleSheetListClass, NONE_DOM_STYLE_SHEET_LIST,
+};
 
 mod dom_text;
-pub use self::dom_text::{DOMText, DOMTextClass, NONE_DOM_TEXT};
 pub use self::dom_text::DOMTextExt;
+pub use self::dom_text::{DOMText, DOMTextClass, NONE_DOM_TEXT};
 
 mod dom_tree_walker;
-pub use self::dom_tree_walker::{DOMTreeWalker, DOMTreeWalkerClass, NONE_DOM_TREE_WALKER};
 pub use self::dom_tree_walker::DOMTreeWalkerExt;
+pub use self::dom_tree_walker::{DOMTreeWalker, DOMTreeWalkerClass, NONE_DOM_TREE_WALKER};
 
 mod dom_ui_event;
-pub use self::dom_ui_event::{DOMUIEvent, DOMUIEventClass, NONE_DOMUI_EVENT};
 pub use self::dom_ui_event::DOMUIEventExt;
+pub use self::dom_ui_event::{DOMUIEvent, DOMUIEventClass, NONE_DOMUI_EVENT};
 
 mod dom_wheel_event;
-pub use self::dom_wheel_event::{DOMWheelEvent, DOMWheelEventClass, NONE_DOM_WHEEL_EVENT};
 pub use self::dom_wheel_event::DOMWheelEventExt;
+pub use self::dom_wheel_event::{DOMWheelEvent, DOMWheelEventClass, NONE_DOM_WHEEL_EVENT};
 
 mod dom_xpath_expression;
-pub use self::dom_xpath_expression::{DOMXPathExpression, DOMXPathExpressionClass, NONE_DOMX_PATH_EXPRESSION};
 pub use self::dom_xpath_expression::DOMXPathExpressionExt;
+pub use self::dom_xpath_expression::{
+    DOMXPathExpression, DOMXPathExpressionClass, NONE_DOMX_PATH_EXPRESSION,
+};
 
 mod dom_xpath_result;
-pub use self::dom_xpath_result::{DOMXPathResult, DOMXPathResultClass, NONE_DOMX_PATH_RESULT};
 pub use self::dom_xpath_result::DOMXPathResultExt;
+pub use self::dom_xpath_result::{DOMXPathResult, DOMXPathResultClass, NONE_DOMX_PATH_RESULT};
 
 #[cfg(any(feature = "v2_2", feature = "dox"))]
 mod frame;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
-pub use self::frame::{Frame, FrameClass, NONE_FRAME};
-#[cfg(any(feature = "v2_2", feature = "dox"))]
 pub use self::frame::FrameExt;
+#[cfg(any(feature = "v2_2", feature = "dox"))]
+pub use self::frame::{Frame, FrameClass, NONE_FRAME};
 
 mod hit_test_result;
-pub use self::hit_test_result::{HitTestResult, HitTestResultClass, NONE_HIT_TEST_RESULT};
 pub use self::hit_test_result::HitTestResultExt;
+pub use self::hit_test_result::{HitTestResult, HitTestResultClass, NONE_HIT_TEST_RESULT};
 
 #[cfg(any(feature = "v2_2", feature = "dox"))]
 mod script_world;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
-pub use self::script_world::{ScriptWorld, ScriptWorldClass, NONE_SCRIPT_WORLD};
-#[cfg(any(feature = "v2_2", feature = "dox"))]
 pub use self::script_world::ScriptWorldExt;
+#[cfg(any(feature = "v2_2", feature = "dox"))]
+pub use self::script_world::{ScriptWorld, ScriptWorldClass, NONE_SCRIPT_WORLD};
 
 mod uri_request;
-pub use self::uri_request::{URIRequest, URIRequestClass, NONE_URI_REQUEST};
 pub use self::uri_request::URIRequestExt;
+pub use self::uri_request::{URIRequest, URIRequestClass, NONE_URI_REQUEST};
 
 mod uri_response;
-pub use self::uri_response::{URIResponse, URIResponseClass, NONE_URI_RESPONSE};
 pub use self::uri_response::URIResponseExt;
+pub use self::uri_response::{URIResponse, URIResponseClass, NONE_URI_RESPONSE};
 
 #[cfg(any(feature = "v2_10", feature = "dox"))]
 mod web_editor;
 #[cfg(any(feature = "v2_10", feature = "dox"))]
-pub use self::web_editor::{WebEditor, WebEditorClass, NONE_WEB_EDITOR};
-#[cfg(any(feature = "v2_10", feature = "dox"))]
 pub use self::web_editor::WebEditorExt;
+#[cfg(any(feature = "v2_10", feature = "dox"))]
+pub use self::web_editor::{WebEditor, WebEditorClass, NONE_WEB_EDITOR};
 
 mod web_extension;
-pub use self::web_extension::{WebExtension, WebExtensionClass, NONE_WEB_EXTENSION};
 pub use self::web_extension::WebExtensionExt;
+pub use self::web_extension::{WebExtension, WebExtensionClass, NONE_WEB_EXTENSION};
 
 #[cfg(any(feature = "v2_8", feature = "dox"))]
 mod web_hit_test_result;
 #[cfg(any(feature = "v2_8", feature = "dox"))]
-pub use self::web_hit_test_result::{WebHitTestResult, WebHitTestResultClass, NONE_WEB_HIT_TEST_RESULT};
-#[cfg(any(feature = "v2_8", feature = "dox"))]
 pub use self::web_hit_test_result::WebHitTestResultExt;
+#[cfg(any(feature = "v2_8", feature = "dox"))]
+pub use self::web_hit_test_result::{
+    WebHitTestResult, WebHitTestResultClass, NONE_WEB_HIT_TEST_RESULT,
+};
 
 mod web_page;
-pub use self::web_page::{WebPage, WebPageClass, NONE_WEB_PAGE};
 pub use self::web_page::WebPageExt;
+pub use self::web_page::{WebPage, WebPageClass, NONE_WEB_PAGE};
 
 #[cfg(any(feature = "v2_12", feature = "dox"))]
 mod console_message;

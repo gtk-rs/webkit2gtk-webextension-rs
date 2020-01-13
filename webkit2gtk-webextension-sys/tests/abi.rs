@@ -2,13 +2,13 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-extern crate webkit2gtk_webextension_sys;
 extern crate shell_words;
 extern crate tempfile;
+extern crate webkit2gtk_webextension_sys;
 use std::env;
 use std::error::Error;
-use std::path::Path;
 use std::mem::{align_of, size_of};
+use std::path::Path;
 use std::process::Command;
 use std::str;
 use tempfile::Builder;
@@ -48,8 +48,7 @@ impl Compiler {
         cmd.arg(out);
         let status = cmd.spawn()?.wait()?;
         if !status.success() {
-            return Err(format!("compilation command {:?} failed, {}",
-                               &cmd, status).into());
+            return Err(format!("compilation command {:?} failed, {}", &cmd, status).into());
         }
         Ok(())
     }
@@ -78,13 +77,11 @@ fn pkg_config_cflags(packages: &[&str]) -> Result<Vec<String>, Box<dyn Error>> {
     cmd.args(packages);
     let out = cmd.output()?;
     if !out.status.success() {
-        return Err(format!("command {:?} returned {}",
-                           &cmd, out.status).into());
+        return Err(format!("command {:?} returned {}", &cmd, out.status).into());
     }
     let stdout = str::from_utf8(&out.stdout)?;
     Ok(shell_words::split(stdout.trim())?)
 }
-
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 struct Layout {
@@ -116,9 +113,8 @@ impl Results {
     fn summary(&self) -> String {
         format!(
             "{} passed; {} failed (compilation errors: {})",
-            self.passed,
-            self.failed,
-            self.failed_to_compile)
+            self.passed, self.failed, self.failed_to_compile
+        )
     }
     fn expect_total_success(&self) {
         if self.failed == 0 {
@@ -131,27 +127,34 @@ impl Results {
 
 #[test]
 fn cross_validate_constants_with_c() {
-    let tmpdir = Builder::new().prefix("abi").tempdir().expect("temporary directory");
+    let tmpdir = Builder::new()
+        .prefix("abi")
+        .tempdir()
+        .expect("temporary directory");
     let cc = Compiler::new().expect("configured compiler");
 
-    assert_eq!("1",
-               get_c_value(tmpdir.path(), &cc, "1").expect("C constant"),
-               "failed to obtain correct constant value for 1");
+    assert_eq!(
+        "1",
+        get_c_value(tmpdir.path(), &cc, "1").expect("C constant"),
+        "failed to obtain correct constant value for 1"
+    );
 
-    let mut results : Results = Default::default();
+    let mut results: Results = Default::default();
     for (i, &(name, rust_value)) in RUST_CONSTANTS.iter().enumerate() {
         match get_c_value(tmpdir.path(), &cc, name) {
             Err(e) => {
                 results.record_failed_to_compile();
                 eprintln!("{}", e);
-            },
+            }
             Ok(ref c_value) => {
                 if rust_value == c_value {
                     results.record_passed();
                 } else {
                     results.record_failed();
-                    eprintln!("Constant value mismatch for {}\nRust: {:?}\nC:    {:?}",
-                              name, rust_value, c_value);
+                    eprintln!(
+                        "Constant value mismatch for {}\nRust: {:?}\nC:    {:?}",
+                        name, rust_value, c_value
+                    );
                 }
             }
         };
@@ -164,27 +167,37 @@ fn cross_validate_constants_with_c() {
 
 #[test]
 fn cross_validate_layout_with_c() {
-    let tmpdir = Builder::new().prefix("abi").tempdir().expect("temporary directory");
+    let tmpdir = Builder::new()
+        .prefix("abi")
+        .tempdir()
+        .expect("temporary directory");
     let cc = Compiler::new().expect("configured compiler");
 
-    assert_eq!(Layout {size: 1, alignment: 1},
-               get_c_layout(tmpdir.path(), &cc, "char").expect("C layout"),
-               "failed to obtain correct layout for char type");
+    assert_eq!(
+        Layout {
+            size: 1,
+            alignment: 1
+        },
+        get_c_layout(tmpdir.path(), &cc, "char").expect("C layout"),
+        "failed to obtain correct layout for char type"
+    );
 
-    let mut results : Results = Default::default();
+    let mut results: Results = Default::default();
     for (i, &(name, rust_layout)) in RUST_LAYOUTS.iter().enumerate() {
         match get_c_layout(tmpdir.path(), &cc, name) {
             Err(e) => {
                 results.record_failed_to_compile();
                 eprintln!("{}", e);
-            },
+            }
             Ok(c_layout) => {
                 if rust_layout == c_layout {
                     results.record_passed();
                 } else {
                     results.record_failed();
-                    eprintln!("Layout mismatch for {}\nRust: {:?}\nC:    {:?}",
-                              name, rust_layout, &c_layout);
+                    eprintln!(
+                        "Layout mismatch for {}\nRust: {:?}\nC:    {:?}",
+                        name, rust_layout, &c_layout
+                    );
                 }
             }
         };
@@ -204,15 +217,14 @@ fn get_c_layout(dir: &Path, cc: &Compiler, name: &str) -> Result<Layout, Box<dyn
     let mut abi_cmd = Command::new(exe);
     let output = abi_cmd.output()?;
     if !output.status.success() {
-        return Err(format!("command {:?} failed, {:?}",
-                           &abi_cmd, &output).into());
+        return Err(format!("command {:?} failed, {:?}", &abi_cmd, &output).into());
     }
 
     let stdout = str::from_utf8(&output.stdout)?;
     let mut words = stdout.trim().split_whitespace();
     let size = words.next().unwrap().parse().unwrap();
     let alignment = words.next().unwrap().parse().unwrap();
-    Ok(Layout {size, alignment})
+    Ok(Layout { size, alignment })
 }
 
 fn get_c_value(dir: &Path, cc: &Compiler, name: &str) -> Result<String, Box<dyn Error>> {
@@ -224,249 +236,1618 @@ fn get_c_value(dir: &Path, cc: &Compiler, name: &str) -> Result<String, Box<dyn 
     let mut abi_cmd = Command::new(exe);
     let output = abi_cmd.output()?;
     if !output.status.success() {
-        return Err(format!("command {:?} failed, {:?}",
-                           &abi_cmd, &output).into());
+        return Err(format!("command {:?} failed, {:?}", &abi_cmd, &output).into());
     }
 
     let output = str::from_utf8(&output.stdout)?.trim();
-    if !output.starts_with("###gir test###") ||
-       !output.ends_with("###gir test###") {
-        return Err(format!("command {:?} return invalid output, {:?}",
-                           &abi_cmd, &output).into());
+    if !output.starts_with("###gir test###") || !output.ends_with("###gir test###") {
+        return Err(format!(
+            "command {:?} return invalid output, {:?}",
+            &abi_cmd, &output
+        )
+        .into());
     }
 
     Ok(String::from(&output[14..(output.len() - 14)]))
 }
 
 const RUST_LAYOUTS: &[(&str, Layout)] = &[
-    ("WebKitConsoleMessageLevel", Layout {size: size_of::<WebKitConsoleMessageLevel>(), alignment: align_of::<WebKitConsoleMessageLevel>()}),
-    ("WebKitConsoleMessageSource", Layout {size: size_of::<WebKitConsoleMessageSource>(), alignment: align_of::<WebKitConsoleMessageSource>()}),
-    ("WebKitContextMenuAction", Layout {size: size_of::<WebKitContextMenuAction>(), alignment: align_of::<WebKitContextMenuAction>()}),
-    ("WebKitContextMenuClass", Layout {size: size_of::<WebKitContextMenuClass>(), alignment: align_of::<WebKitContextMenuClass>()}),
-    ("WebKitContextMenuItemClass", Layout {size: size_of::<WebKitContextMenuItemClass>(), alignment: align_of::<WebKitContextMenuItemClass>()}),
-    ("WebKitDOMAttr", Layout {size: size_of::<WebKitDOMAttr>(), alignment: align_of::<WebKitDOMAttr>()}),
-    ("WebKitDOMAttrClass", Layout {size: size_of::<WebKitDOMAttrClass>(), alignment: align_of::<WebKitDOMAttrClass>()}),
-    ("WebKitDOMBlob", Layout {size: size_of::<WebKitDOMBlob>(), alignment: align_of::<WebKitDOMBlob>()}),
-    ("WebKitDOMBlobClass", Layout {size: size_of::<WebKitDOMBlobClass>(), alignment: align_of::<WebKitDOMBlobClass>()}),
-    ("WebKitDOMCDATASection", Layout {size: size_of::<WebKitDOMCDATASection>(), alignment: align_of::<WebKitDOMCDATASection>()}),
-    ("WebKitDOMCDATASectionClass", Layout {size: size_of::<WebKitDOMCDATASectionClass>(), alignment: align_of::<WebKitDOMCDATASectionClass>()}),
-    ("WebKitDOMCSSRule", Layout {size: size_of::<WebKitDOMCSSRule>(), alignment: align_of::<WebKitDOMCSSRule>()}),
-    ("WebKitDOMCSSRuleClass", Layout {size: size_of::<WebKitDOMCSSRuleClass>(), alignment: align_of::<WebKitDOMCSSRuleClass>()}),
-    ("WebKitDOMCSSRuleList", Layout {size: size_of::<WebKitDOMCSSRuleList>(), alignment: align_of::<WebKitDOMCSSRuleList>()}),
-    ("WebKitDOMCSSRuleListClass", Layout {size: size_of::<WebKitDOMCSSRuleListClass>(), alignment: align_of::<WebKitDOMCSSRuleListClass>()}),
-    ("WebKitDOMCSSStyleDeclaration", Layout {size: size_of::<WebKitDOMCSSStyleDeclaration>(), alignment: align_of::<WebKitDOMCSSStyleDeclaration>()}),
-    ("WebKitDOMCSSStyleDeclarationClass", Layout {size: size_of::<WebKitDOMCSSStyleDeclarationClass>(), alignment: align_of::<WebKitDOMCSSStyleDeclarationClass>()}),
-    ("WebKitDOMCSSStyleSheet", Layout {size: size_of::<WebKitDOMCSSStyleSheet>(), alignment: align_of::<WebKitDOMCSSStyleSheet>()}),
-    ("WebKitDOMCSSStyleSheetClass", Layout {size: size_of::<WebKitDOMCSSStyleSheetClass>(), alignment: align_of::<WebKitDOMCSSStyleSheetClass>()}),
-    ("WebKitDOMCSSValue", Layout {size: size_of::<WebKitDOMCSSValue>(), alignment: align_of::<WebKitDOMCSSValue>()}),
-    ("WebKitDOMCSSValueClass", Layout {size: size_of::<WebKitDOMCSSValueClass>(), alignment: align_of::<WebKitDOMCSSValueClass>()}),
-    ("WebKitDOMCharacterData", Layout {size: size_of::<WebKitDOMCharacterData>(), alignment: align_of::<WebKitDOMCharacterData>()}),
-    ("WebKitDOMCharacterDataClass", Layout {size: size_of::<WebKitDOMCharacterDataClass>(), alignment: align_of::<WebKitDOMCharacterDataClass>()}),
-    ("WebKitDOMClientRect", Layout {size: size_of::<WebKitDOMClientRect>(), alignment: align_of::<WebKitDOMClientRect>()}),
-    ("WebKitDOMClientRectClass", Layout {size: size_of::<WebKitDOMClientRectClass>(), alignment: align_of::<WebKitDOMClientRectClass>()}),
-    ("WebKitDOMClientRectList", Layout {size: size_of::<WebKitDOMClientRectList>(), alignment: align_of::<WebKitDOMClientRectList>()}),
-    ("WebKitDOMClientRectListClass", Layout {size: size_of::<WebKitDOMClientRectListClass>(), alignment: align_of::<WebKitDOMClientRectListClass>()}),
-    ("WebKitDOMComment", Layout {size: size_of::<WebKitDOMComment>(), alignment: align_of::<WebKitDOMComment>()}),
-    ("WebKitDOMCommentClass", Layout {size: size_of::<WebKitDOMCommentClass>(), alignment: align_of::<WebKitDOMCommentClass>()}),
-    ("WebKitDOMDOMImplementation", Layout {size: size_of::<WebKitDOMDOMImplementation>(), alignment: align_of::<WebKitDOMDOMImplementation>()}),
-    ("WebKitDOMDOMImplementationClass", Layout {size: size_of::<WebKitDOMDOMImplementationClass>(), alignment: align_of::<WebKitDOMDOMImplementationClass>()}),
-    ("WebKitDOMDOMSelection", Layout {size: size_of::<WebKitDOMDOMSelection>(), alignment: align_of::<WebKitDOMDOMSelection>()}),
-    ("WebKitDOMDOMSelectionClass", Layout {size: size_of::<WebKitDOMDOMSelectionClass>(), alignment: align_of::<WebKitDOMDOMSelectionClass>()}),
-    ("WebKitDOMDOMTokenList", Layout {size: size_of::<WebKitDOMDOMTokenList>(), alignment: align_of::<WebKitDOMDOMTokenList>()}),
-    ("WebKitDOMDOMTokenListClass", Layout {size: size_of::<WebKitDOMDOMTokenListClass>(), alignment: align_of::<WebKitDOMDOMTokenListClass>()}),
-    ("WebKitDOMDOMWindow", Layout {size: size_of::<WebKitDOMDOMWindow>(), alignment: align_of::<WebKitDOMDOMWindow>()}),
-    ("WebKitDOMDOMWindowClass", Layout {size: size_of::<WebKitDOMDOMWindowClass>(), alignment: align_of::<WebKitDOMDOMWindowClass>()}),
-    ("WebKitDOMDocument", Layout {size: size_of::<WebKitDOMDocument>(), alignment: align_of::<WebKitDOMDocument>()}),
-    ("WebKitDOMDocumentClass", Layout {size: size_of::<WebKitDOMDocumentClass>(), alignment: align_of::<WebKitDOMDocumentClass>()}),
-    ("WebKitDOMDocumentFragment", Layout {size: size_of::<WebKitDOMDocumentFragment>(), alignment: align_of::<WebKitDOMDocumentFragment>()}),
-    ("WebKitDOMDocumentFragmentClass", Layout {size: size_of::<WebKitDOMDocumentFragmentClass>(), alignment: align_of::<WebKitDOMDocumentFragmentClass>()}),
-    ("WebKitDOMDocumentType", Layout {size: size_of::<WebKitDOMDocumentType>(), alignment: align_of::<WebKitDOMDocumentType>()}),
-    ("WebKitDOMDocumentTypeClass", Layout {size: size_of::<WebKitDOMDocumentTypeClass>(), alignment: align_of::<WebKitDOMDocumentTypeClass>()}),
-    ("WebKitDOMElement", Layout {size: size_of::<WebKitDOMElement>(), alignment: align_of::<WebKitDOMElement>()}),
-    ("WebKitDOMElementClass", Layout {size: size_of::<WebKitDOMElementClass>(), alignment: align_of::<WebKitDOMElementClass>()}),
-    ("WebKitDOMEntityReference", Layout {size: size_of::<WebKitDOMEntityReference>(), alignment: align_of::<WebKitDOMEntityReference>()}),
-    ("WebKitDOMEntityReferenceClass", Layout {size: size_of::<WebKitDOMEntityReferenceClass>(), alignment: align_of::<WebKitDOMEntityReferenceClass>()}),
-    ("WebKitDOMEvent", Layout {size: size_of::<WebKitDOMEvent>(), alignment: align_of::<WebKitDOMEvent>()}),
-    ("WebKitDOMEventClass", Layout {size: size_of::<WebKitDOMEventClass>(), alignment: align_of::<WebKitDOMEventClass>()}),
-    ("WebKitDOMEventTargetIface", Layout {size: size_of::<WebKitDOMEventTargetIface>(), alignment: align_of::<WebKitDOMEventTargetIface>()}),
-    ("WebKitDOMFile", Layout {size: size_of::<WebKitDOMFile>(), alignment: align_of::<WebKitDOMFile>()}),
-    ("WebKitDOMFileClass", Layout {size: size_of::<WebKitDOMFileClass>(), alignment: align_of::<WebKitDOMFileClass>()}),
-    ("WebKitDOMFileList", Layout {size: size_of::<WebKitDOMFileList>(), alignment: align_of::<WebKitDOMFileList>()}),
-    ("WebKitDOMFileListClass", Layout {size: size_of::<WebKitDOMFileListClass>(), alignment: align_of::<WebKitDOMFileListClass>()}),
-    ("WebKitDOMHTMLAnchorElement", Layout {size: size_of::<WebKitDOMHTMLAnchorElement>(), alignment: align_of::<WebKitDOMHTMLAnchorElement>()}),
-    ("WebKitDOMHTMLAnchorElementClass", Layout {size: size_of::<WebKitDOMHTMLAnchorElementClass>(), alignment: align_of::<WebKitDOMHTMLAnchorElementClass>()}),
-    ("WebKitDOMHTMLAppletElement", Layout {size: size_of::<WebKitDOMHTMLAppletElement>(), alignment: align_of::<WebKitDOMHTMLAppletElement>()}),
-    ("WebKitDOMHTMLAppletElementClass", Layout {size: size_of::<WebKitDOMHTMLAppletElementClass>(), alignment: align_of::<WebKitDOMHTMLAppletElementClass>()}),
-    ("WebKitDOMHTMLAreaElement", Layout {size: size_of::<WebKitDOMHTMLAreaElement>(), alignment: align_of::<WebKitDOMHTMLAreaElement>()}),
-    ("WebKitDOMHTMLAreaElementClass", Layout {size: size_of::<WebKitDOMHTMLAreaElementClass>(), alignment: align_of::<WebKitDOMHTMLAreaElementClass>()}),
-    ("WebKitDOMHTMLBRElement", Layout {size: size_of::<WebKitDOMHTMLBRElement>(), alignment: align_of::<WebKitDOMHTMLBRElement>()}),
-    ("WebKitDOMHTMLBRElementClass", Layout {size: size_of::<WebKitDOMHTMLBRElementClass>(), alignment: align_of::<WebKitDOMHTMLBRElementClass>()}),
-    ("WebKitDOMHTMLBaseElement", Layout {size: size_of::<WebKitDOMHTMLBaseElement>(), alignment: align_of::<WebKitDOMHTMLBaseElement>()}),
-    ("WebKitDOMHTMLBaseElementClass", Layout {size: size_of::<WebKitDOMHTMLBaseElementClass>(), alignment: align_of::<WebKitDOMHTMLBaseElementClass>()}),
-    ("WebKitDOMHTMLBaseFontElement", Layout {size: size_of::<WebKitDOMHTMLBaseFontElement>(), alignment: align_of::<WebKitDOMHTMLBaseFontElement>()}),
-    ("WebKitDOMHTMLBaseFontElementClass", Layout {size: size_of::<WebKitDOMHTMLBaseFontElementClass>(), alignment: align_of::<WebKitDOMHTMLBaseFontElementClass>()}),
-    ("WebKitDOMHTMLBodyElement", Layout {size: size_of::<WebKitDOMHTMLBodyElement>(), alignment: align_of::<WebKitDOMHTMLBodyElement>()}),
-    ("WebKitDOMHTMLBodyElementClass", Layout {size: size_of::<WebKitDOMHTMLBodyElementClass>(), alignment: align_of::<WebKitDOMHTMLBodyElementClass>()}),
-    ("WebKitDOMHTMLButtonElement", Layout {size: size_of::<WebKitDOMHTMLButtonElement>(), alignment: align_of::<WebKitDOMHTMLButtonElement>()}),
-    ("WebKitDOMHTMLButtonElementClass", Layout {size: size_of::<WebKitDOMHTMLButtonElementClass>(), alignment: align_of::<WebKitDOMHTMLButtonElementClass>()}),
-    ("WebKitDOMHTMLCanvasElement", Layout {size: size_of::<WebKitDOMHTMLCanvasElement>(), alignment: align_of::<WebKitDOMHTMLCanvasElement>()}),
-    ("WebKitDOMHTMLCanvasElementClass", Layout {size: size_of::<WebKitDOMHTMLCanvasElementClass>(), alignment: align_of::<WebKitDOMHTMLCanvasElementClass>()}),
-    ("WebKitDOMHTMLCollection", Layout {size: size_of::<WebKitDOMHTMLCollection>(), alignment: align_of::<WebKitDOMHTMLCollection>()}),
-    ("WebKitDOMHTMLCollectionClass", Layout {size: size_of::<WebKitDOMHTMLCollectionClass>(), alignment: align_of::<WebKitDOMHTMLCollectionClass>()}),
-    ("WebKitDOMHTMLDListElement", Layout {size: size_of::<WebKitDOMHTMLDListElement>(), alignment: align_of::<WebKitDOMHTMLDListElement>()}),
-    ("WebKitDOMHTMLDListElementClass", Layout {size: size_of::<WebKitDOMHTMLDListElementClass>(), alignment: align_of::<WebKitDOMHTMLDListElementClass>()}),
-    ("WebKitDOMHTMLDirectoryElement", Layout {size: size_of::<WebKitDOMHTMLDirectoryElement>(), alignment: align_of::<WebKitDOMHTMLDirectoryElement>()}),
-    ("WebKitDOMHTMLDirectoryElementClass", Layout {size: size_of::<WebKitDOMHTMLDirectoryElementClass>(), alignment: align_of::<WebKitDOMHTMLDirectoryElementClass>()}),
-    ("WebKitDOMHTMLDivElement", Layout {size: size_of::<WebKitDOMHTMLDivElement>(), alignment: align_of::<WebKitDOMHTMLDivElement>()}),
-    ("WebKitDOMHTMLDivElementClass", Layout {size: size_of::<WebKitDOMHTMLDivElementClass>(), alignment: align_of::<WebKitDOMHTMLDivElementClass>()}),
-    ("WebKitDOMHTMLDocument", Layout {size: size_of::<WebKitDOMHTMLDocument>(), alignment: align_of::<WebKitDOMHTMLDocument>()}),
-    ("WebKitDOMHTMLDocumentClass", Layout {size: size_of::<WebKitDOMHTMLDocumentClass>(), alignment: align_of::<WebKitDOMHTMLDocumentClass>()}),
-    ("WebKitDOMHTMLElement", Layout {size: size_of::<WebKitDOMHTMLElement>(), alignment: align_of::<WebKitDOMHTMLElement>()}),
-    ("WebKitDOMHTMLElementClass", Layout {size: size_of::<WebKitDOMHTMLElementClass>(), alignment: align_of::<WebKitDOMHTMLElementClass>()}),
-    ("WebKitDOMHTMLEmbedElement", Layout {size: size_of::<WebKitDOMHTMLEmbedElement>(), alignment: align_of::<WebKitDOMHTMLEmbedElement>()}),
-    ("WebKitDOMHTMLEmbedElementClass", Layout {size: size_of::<WebKitDOMHTMLEmbedElementClass>(), alignment: align_of::<WebKitDOMHTMLEmbedElementClass>()}),
-    ("WebKitDOMHTMLFieldSetElement", Layout {size: size_of::<WebKitDOMHTMLFieldSetElement>(), alignment: align_of::<WebKitDOMHTMLFieldSetElement>()}),
-    ("WebKitDOMHTMLFieldSetElementClass", Layout {size: size_of::<WebKitDOMHTMLFieldSetElementClass>(), alignment: align_of::<WebKitDOMHTMLFieldSetElementClass>()}),
-    ("WebKitDOMHTMLFontElement", Layout {size: size_of::<WebKitDOMHTMLFontElement>(), alignment: align_of::<WebKitDOMHTMLFontElement>()}),
-    ("WebKitDOMHTMLFontElementClass", Layout {size: size_of::<WebKitDOMHTMLFontElementClass>(), alignment: align_of::<WebKitDOMHTMLFontElementClass>()}),
-    ("WebKitDOMHTMLFormElement", Layout {size: size_of::<WebKitDOMHTMLFormElement>(), alignment: align_of::<WebKitDOMHTMLFormElement>()}),
-    ("WebKitDOMHTMLFormElementClass", Layout {size: size_of::<WebKitDOMHTMLFormElementClass>(), alignment: align_of::<WebKitDOMHTMLFormElementClass>()}),
-    ("WebKitDOMHTMLFrameElement", Layout {size: size_of::<WebKitDOMHTMLFrameElement>(), alignment: align_of::<WebKitDOMHTMLFrameElement>()}),
-    ("WebKitDOMHTMLFrameElementClass", Layout {size: size_of::<WebKitDOMHTMLFrameElementClass>(), alignment: align_of::<WebKitDOMHTMLFrameElementClass>()}),
-    ("WebKitDOMHTMLFrameSetElement", Layout {size: size_of::<WebKitDOMHTMLFrameSetElement>(), alignment: align_of::<WebKitDOMHTMLFrameSetElement>()}),
-    ("WebKitDOMHTMLFrameSetElementClass", Layout {size: size_of::<WebKitDOMHTMLFrameSetElementClass>(), alignment: align_of::<WebKitDOMHTMLFrameSetElementClass>()}),
-    ("WebKitDOMHTMLHRElement", Layout {size: size_of::<WebKitDOMHTMLHRElement>(), alignment: align_of::<WebKitDOMHTMLHRElement>()}),
-    ("WebKitDOMHTMLHRElementClass", Layout {size: size_of::<WebKitDOMHTMLHRElementClass>(), alignment: align_of::<WebKitDOMHTMLHRElementClass>()}),
-    ("WebKitDOMHTMLHeadElement", Layout {size: size_of::<WebKitDOMHTMLHeadElement>(), alignment: align_of::<WebKitDOMHTMLHeadElement>()}),
-    ("WebKitDOMHTMLHeadElementClass", Layout {size: size_of::<WebKitDOMHTMLHeadElementClass>(), alignment: align_of::<WebKitDOMHTMLHeadElementClass>()}),
-    ("WebKitDOMHTMLHeadingElement", Layout {size: size_of::<WebKitDOMHTMLHeadingElement>(), alignment: align_of::<WebKitDOMHTMLHeadingElement>()}),
-    ("WebKitDOMHTMLHeadingElementClass", Layout {size: size_of::<WebKitDOMHTMLHeadingElementClass>(), alignment: align_of::<WebKitDOMHTMLHeadingElementClass>()}),
-    ("WebKitDOMHTMLHtmlElement", Layout {size: size_of::<WebKitDOMHTMLHtmlElement>(), alignment: align_of::<WebKitDOMHTMLHtmlElement>()}),
-    ("WebKitDOMHTMLHtmlElementClass", Layout {size: size_of::<WebKitDOMHTMLHtmlElementClass>(), alignment: align_of::<WebKitDOMHTMLHtmlElementClass>()}),
-    ("WebKitDOMHTMLIFrameElement", Layout {size: size_of::<WebKitDOMHTMLIFrameElement>(), alignment: align_of::<WebKitDOMHTMLIFrameElement>()}),
-    ("WebKitDOMHTMLIFrameElementClass", Layout {size: size_of::<WebKitDOMHTMLIFrameElementClass>(), alignment: align_of::<WebKitDOMHTMLIFrameElementClass>()}),
-    ("WebKitDOMHTMLImageElement", Layout {size: size_of::<WebKitDOMHTMLImageElement>(), alignment: align_of::<WebKitDOMHTMLImageElement>()}),
-    ("WebKitDOMHTMLImageElementClass", Layout {size: size_of::<WebKitDOMHTMLImageElementClass>(), alignment: align_of::<WebKitDOMHTMLImageElementClass>()}),
-    ("WebKitDOMHTMLInputElement", Layout {size: size_of::<WebKitDOMHTMLInputElement>(), alignment: align_of::<WebKitDOMHTMLInputElement>()}),
-    ("WebKitDOMHTMLInputElementClass", Layout {size: size_of::<WebKitDOMHTMLInputElementClass>(), alignment: align_of::<WebKitDOMHTMLInputElementClass>()}),
-    ("WebKitDOMHTMLLIElement", Layout {size: size_of::<WebKitDOMHTMLLIElement>(), alignment: align_of::<WebKitDOMHTMLLIElement>()}),
-    ("WebKitDOMHTMLLIElementClass", Layout {size: size_of::<WebKitDOMHTMLLIElementClass>(), alignment: align_of::<WebKitDOMHTMLLIElementClass>()}),
-    ("WebKitDOMHTMLLabelElement", Layout {size: size_of::<WebKitDOMHTMLLabelElement>(), alignment: align_of::<WebKitDOMHTMLLabelElement>()}),
-    ("WebKitDOMHTMLLabelElementClass", Layout {size: size_of::<WebKitDOMHTMLLabelElementClass>(), alignment: align_of::<WebKitDOMHTMLLabelElementClass>()}),
-    ("WebKitDOMHTMLLegendElement", Layout {size: size_of::<WebKitDOMHTMLLegendElement>(), alignment: align_of::<WebKitDOMHTMLLegendElement>()}),
-    ("WebKitDOMHTMLLegendElementClass", Layout {size: size_of::<WebKitDOMHTMLLegendElementClass>(), alignment: align_of::<WebKitDOMHTMLLegendElementClass>()}),
-    ("WebKitDOMHTMLLinkElement", Layout {size: size_of::<WebKitDOMHTMLLinkElement>(), alignment: align_of::<WebKitDOMHTMLLinkElement>()}),
-    ("WebKitDOMHTMLLinkElementClass", Layout {size: size_of::<WebKitDOMHTMLLinkElementClass>(), alignment: align_of::<WebKitDOMHTMLLinkElementClass>()}),
-    ("WebKitDOMHTMLMapElement", Layout {size: size_of::<WebKitDOMHTMLMapElement>(), alignment: align_of::<WebKitDOMHTMLMapElement>()}),
-    ("WebKitDOMHTMLMapElementClass", Layout {size: size_of::<WebKitDOMHTMLMapElementClass>(), alignment: align_of::<WebKitDOMHTMLMapElementClass>()}),
-    ("WebKitDOMHTMLMarqueeElement", Layout {size: size_of::<WebKitDOMHTMLMarqueeElement>(), alignment: align_of::<WebKitDOMHTMLMarqueeElement>()}),
-    ("WebKitDOMHTMLMarqueeElementClass", Layout {size: size_of::<WebKitDOMHTMLMarqueeElementClass>(), alignment: align_of::<WebKitDOMHTMLMarqueeElementClass>()}),
-    ("WebKitDOMHTMLMenuElement", Layout {size: size_of::<WebKitDOMHTMLMenuElement>(), alignment: align_of::<WebKitDOMHTMLMenuElement>()}),
-    ("WebKitDOMHTMLMenuElementClass", Layout {size: size_of::<WebKitDOMHTMLMenuElementClass>(), alignment: align_of::<WebKitDOMHTMLMenuElementClass>()}),
-    ("WebKitDOMHTMLMetaElement", Layout {size: size_of::<WebKitDOMHTMLMetaElement>(), alignment: align_of::<WebKitDOMHTMLMetaElement>()}),
-    ("WebKitDOMHTMLMetaElementClass", Layout {size: size_of::<WebKitDOMHTMLMetaElementClass>(), alignment: align_of::<WebKitDOMHTMLMetaElementClass>()}),
-    ("WebKitDOMHTMLModElement", Layout {size: size_of::<WebKitDOMHTMLModElement>(), alignment: align_of::<WebKitDOMHTMLModElement>()}),
-    ("WebKitDOMHTMLModElementClass", Layout {size: size_of::<WebKitDOMHTMLModElementClass>(), alignment: align_of::<WebKitDOMHTMLModElementClass>()}),
-    ("WebKitDOMHTMLOListElement", Layout {size: size_of::<WebKitDOMHTMLOListElement>(), alignment: align_of::<WebKitDOMHTMLOListElement>()}),
-    ("WebKitDOMHTMLOListElementClass", Layout {size: size_of::<WebKitDOMHTMLOListElementClass>(), alignment: align_of::<WebKitDOMHTMLOListElementClass>()}),
-    ("WebKitDOMHTMLObjectElement", Layout {size: size_of::<WebKitDOMHTMLObjectElement>(), alignment: align_of::<WebKitDOMHTMLObjectElement>()}),
-    ("WebKitDOMHTMLObjectElementClass", Layout {size: size_of::<WebKitDOMHTMLObjectElementClass>(), alignment: align_of::<WebKitDOMHTMLObjectElementClass>()}),
-    ("WebKitDOMHTMLOptGroupElement", Layout {size: size_of::<WebKitDOMHTMLOptGroupElement>(), alignment: align_of::<WebKitDOMHTMLOptGroupElement>()}),
-    ("WebKitDOMHTMLOptGroupElementClass", Layout {size: size_of::<WebKitDOMHTMLOptGroupElementClass>(), alignment: align_of::<WebKitDOMHTMLOptGroupElementClass>()}),
-    ("WebKitDOMHTMLOptionElement", Layout {size: size_of::<WebKitDOMHTMLOptionElement>(), alignment: align_of::<WebKitDOMHTMLOptionElement>()}),
-    ("WebKitDOMHTMLOptionElementClass", Layout {size: size_of::<WebKitDOMHTMLOptionElementClass>(), alignment: align_of::<WebKitDOMHTMLOptionElementClass>()}),
-    ("WebKitDOMHTMLOptionsCollection", Layout {size: size_of::<WebKitDOMHTMLOptionsCollection>(), alignment: align_of::<WebKitDOMHTMLOptionsCollection>()}),
-    ("WebKitDOMHTMLOptionsCollectionClass", Layout {size: size_of::<WebKitDOMHTMLOptionsCollectionClass>(), alignment: align_of::<WebKitDOMHTMLOptionsCollectionClass>()}),
-    ("WebKitDOMHTMLParagraphElement", Layout {size: size_of::<WebKitDOMHTMLParagraphElement>(), alignment: align_of::<WebKitDOMHTMLParagraphElement>()}),
-    ("WebKitDOMHTMLParagraphElementClass", Layout {size: size_of::<WebKitDOMHTMLParagraphElementClass>(), alignment: align_of::<WebKitDOMHTMLParagraphElementClass>()}),
-    ("WebKitDOMHTMLParamElement", Layout {size: size_of::<WebKitDOMHTMLParamElement>(), alignment: align_of::<WebKitDOMHTMLParamElement>()}),
-    ("WebKitDOMHTMLParamElementClass", Layout {size: size_of::<WebKitDOMHTMLParamElementClass>(), alignment: align_of::<WebKitDOMHTMLParamElementClass>()}),
-    ("WebKitDOMHTMLPreElement", Layout {size: size_of::<WebKitDOMHTMLPreElement>(), alignment: align_of::<WebKitDOMHTMLPreElement>()}),
-    ("WebKitDOMHTMLPreElementClass", Layout {size: size_of::<WebKitDOMHTMLPreElementClass>(), alignment: align_of::<WebKitDOMHTMLPreElementClass>()}),
-    ("WebKitDOMHTMLQuoteElement", Layout {size: size_of::<WebKitDOMHTMLQuoteElement>(), alignment: align_of::<WebKitDOMHTMLQuoteElement>()}),
-    ("WebKitDOMHTMLQuoteElementClass", Layout {size: size_of::<WebKitDOMHTMLQuoteElementClass>(), alignment: align_of::<WebKitDOMHTMLQuoteElementClass>()}),
-    ("WebKitDOMHTMLScriptElement", Layout {size: size_of::<WebKitDOMHTMLScriptElement>(), alignment: align_of::<WebKitDOMHTMLScriptElement>()}),
-    ("WebKitDOMHTMLScriptElementClass", Layout {size: size_of::<WebKitDOMHTMLScriptElementClass>(), alignment: align_of::<WebKitDOMHTMLScriptElementClass>()}),
-    ("WebKitDOMHTMLSelectElement", Layout {size: size_of::<WebKitDOMHTMLSelectElement>(), alignment: align_of::<WebKitDOMHTMLSelectElement>()}),
-    ("WebKitDOMHTMLSelectElementClass", Layout {size: size_of::<WebKitDOMHTMLSelectElementClass>(), alignment: align_of::<WebKitDOMHTMLSelectElementClass>()}),
-    ("WebKitDOMHTMLStyleElement", Layout {size: size_of::<WebKitDOMHTMLStyleElement>(), alignment: align_of::<WebKitDOMHTMLStyleElement>()}),
-    ("WebKitDOMHTMLStyleElementClass", Layout {size: size_of::<WebKitDOMHTMLStyleElementClass>(), alignment: align_of::<WebKitDOMHTMLStyleElementClass>()}),
-    ("WebKitDOMHTMLTableCaptionElement", Layout {size: size_of::<WebKitDOMHTMLTableCaptionElement>(), alignment: align_of::<WebKitDOMHTMLTableCaptionElement>()}),
-    ("WebKitDOMHTMLTableCaptionElementClass", Layout {size: size_of::<WebKitDOMHTMLTableCaptionElementClass>(), alignment: align_of::<WebKitDOMHTMLTableCaptionElementClass>()}),
-    ("WebKitDOMHTMLTableCellElement", Layout {size: size_of::<WebKitDOMHTMLTableCellElement>(), alignment: align_of::<WebKitDOMHTMLTableCellElement>()}),
-    ("WebKitDOMHTMLTableCellElementClass", Layout {size: size_of::<WebKitDOMHTMLTableCellElementClass>(), alignment: align_of::<WebKitDOMHTMLTableCellElementClass>()}),
-    ("WebKitDOMHTMLTableColElement", Layout {size: size_of::<WebKitDOMHTMLTableColElement>(), alignment: align_of::<WebKitDOMHTMLTableColElement>()}),
-    ("WebKitDOMHTMLTableColElementClass", Layout {size: size_of::<WebKitDOMHTMLTableColElementClass>(), alignment: align_of::<WebKitDOMHTMLTableColElementClass>()}),
-    ("WebKitDOMHTMLTableElement", Layout {size: size_of::<WebKitDOMHTMLTableElement>(), alignment: align_of::<WebKitDOMHTMLTableElement>()}),
-    ("WebKitDOMHTMLTableElementClass", Layout {size: size_of::<WebKitDOMHTMLTableElementClass>(), alignment: align_of::<WebKitDOMHTMLTableElementClass>()}),
-    ("WebKitDOMHTMLTableRowElement", Layout {size: size_of::<WebKitDOMHTMLTableRowElement>(), alignment: align_of::<WebKitDOMHTMLTableRowElement>()}),
-    ("WebKitDOMHTMLTableRowElementClass", Layout {size: size_of::<WebKitDOMHTMLTableRowElementClass>(), alignment: align_of::<WebKitDOMHTMLTableRowElementClass>()}),
-    ("WebKitDOMHTMLTableSectionElement", Layout {size: size_of::<WebKitDOMHTMLTableSectionElement>(), alignment: align_of::<WebKitDOMHTMLTableSectionElement>()}),
-    ("WebKitDOMHTMLTableSectionElementClass", Layout {size: size_of::<WebKitDOMHTMLTableSectionElementClass>(), alignment: align_of::<WebKitDOMHTMLTableSectionElementClass>()}),
-    ("WebKitDOMHTMLTextAreaElement", Layout {size: size_of::<WebKitDOMHTMLTextAreaElement>(), alignment: align_of::<WebKitDOMHTMLTextAreaElement>()}),
-    ("WebKitDOMHTMLTextAreaElementClass", Layout {size: size_of::<WebKitDOMHTMLTextAreaElementClass>(), alignment: align_of::<WebKitDOMHTMLTextAreaElementClass>()}),
-    ("WebKitDOMHTMLTitleElement", Layout {size: size_of::<WebKitDOMHTMLTitleElement>(), alignment: align_of::<WebKitDOMHTMLTitleElement>()}),
-    ("WebKitDOMHTMLTitleElementClass", Layout {size: size_of::<WebKitDOMHTMLTitleElementClass>(), alignment: align_of::<WebKitDOMHTMLTitleElementClass>()}),
-    ("WebKitDOMHTMLUListElement", Layout {size: size_of::<WebKitDOMHTMLUListElement>(), alignment: align_of::<WebKitDOMHTMLUListElement>()}),
-    ("WebKitDOMHTMLUListElementClass", Layout {size: size_of::<WebKitDOMHTMLUListElementClass>(), alignment: align_of::<WebKitDOMHTMLUListElementClass>()}),
-    ("WebKitDOMKeyboardEvent", Layout {size: size_of::<WebKitDOMKeyboardEvent>(), alignment: align_of::<WebKitDOMKeyboardEvent>()}),
-    ("WebKitDOMKeyboardEventClass", Layout {size: size_of::<WebKitDOMKeyboardEventClass>(), alignment: align_of::<WebKitDOMKeyboardEventClass>()}),
-    ("WebKitDOMMediaList", Layout {size: size_of::<WebKitDOMMediaList>(), alignment: align_of::<WebKitDOMMediaList>()}),
-    ("WebKitDOMMediaListClass", Layout {size: size_of::<WebKitDOMMediaListClass>(), alignment: align_of::<WebKitDOMMediaListClass>()}),
-    ("WebKitDOMMouseEvent", Layout {size: size_of::<WebKitDOMMouseEvent>(), alignment: align_of::<WebKitDOMMouseEvent>()}),
-    ("WebKitDOMMouseEventClass", Layout {size: size_of::<WebKitDOMMouseEventClass>(), alignment: align_of::<WebKitDOMMouseEventClass>()}),
-    ("WebKitDOMNamedNodeMap", Layout {size: size_of::<WebKitDOMNamedNodeMap>(), alignment: align_of::<WebKitDOMNamedNodeMap>()}),
-    ("WebKitDOMNamedNodeMapClass", Layout {size: size_of::<WebKitDOMNamedNodeMapClass>(), alignment: align_of::<WebKitDOMNamedNodeMapClass>()}),
-    ("WebKitDOMNode", Layout {size: size_of::<WebKitDOMNode>(), alignment: align_of::<WebKitDOMNode>()}),
-    ("WebKitDOMNodeClass", Layout {size: size_of::<WebKitDOMNodeClass>(), alignment: align_of::<WebKitDOMNodeClass>()}),
-    ("WebKitDOMNodeFilterIface", Layout {size: size_of::<WebKitDOMNodeFilterIface>(), alignment: align_of::<WebKitDOMNodeFilterIface>()}),
-    ("WebKitDOMNodeIterator", Layout {size: size_of::<WebKitDOMNodeIterator>(), alignment: align_of::<WebKitDOMNodeIterator>()}),
-    ("WebKitDOMNodeIteratorClass", Layout {size: size_of::<WebKitDOMNodeIteratorClass>(), alignment: align_of::<WebKitDOMNodeIteratorClass>()}),
-    ("WebKitDOMNodeList", Layout {size: size_of::<WebKitDOMNodeList>(), alignment: align_of::<WebKitDOMNodeList>()}),
-    ("WebKitDOMNodeListClass", Layout {size: size_of::<WebKitDOMNodeListClass>(), alignment: align_of::<WebKitDOMNodeListClass>()}),
-    ("WebKitDOMObject", Layout {size: size_of::<WebKitDOMObject>(), alignment: align_of::<WebKitDOMObject>()}),
-    ("WebKitDOMObjectClass", Layout {size: size_of::<WebKitDOMObjectClass>(), alignment: align_of::<WebKitDOMObjectClass>()}),
-    ("WebKitDOMProcessingInstruction", Layout {size: size_of::<WebKitDOMProcessingInstruction>(), alignment: align_of::<WebKitDOMProcessingInstruction>()}),
-    ("WebKitDOMProcessingInstructionClass", Layout {size: size_of::<WebKitDOMProcessingInstructionClass>(), alignment: align_of::<WebKitDOMProcessingInstructionClass>()}),
-    ("WebKitDOMRange", Layout {size: size_of::<WebKitDOMRange>(), alignment: align_of::<WebKitDOMRange>()}),
-    ("WebKitDOMRangeClass", Layout {size: size_of::<WebKitDOMRangeClass>(), alignment: align_of::<WebKitDOMRangeClass>()}),
-    ("WebKitDOMStyleSheet", Layout {size: size_of::<WebKitDOMStyleSheet>(), alignment: align_of::<WebKitDOMStyleSheet>()}),
-    ("WebKitDOMStyleSheetClass", Layout {size: size_of::<WebKitDOMStyleSheetClass>(), alignment: align_of::<WebKitDOMStyleSheetClass>()}),
-    ("WebKitDOMStyleSheetList", Layout {size: size_of::<WebKitDOMStyleSheetList>(), alignment: align_of::<WebKitDOMStyleSheetList>()}),
-    ("WebKitDOMStyleSheetListClass", Layout {size: size_of::<WebKitDOMStyleSheetListClass>(), alignment: align_of::<WebKitDOMStyleSheetListClass>()}),
-    ("WebKitDOMText", Layout {size: size_of::<WebKitDOMText>(), alignment: align_of::<WebKitDOMText>()}),
-    ("WebKitDOMTextClass", Layout {size: size_of::<WebKitDOMTextClass>(), alignment: align_of::<WebKitDOMTextClass>()}),
-    ("WebKitDOMTreeWalker", Layout {size: size_of::<WebKitDOMTreeWalker>(), alignment: align_of::<WebKitDOMTreeWalker>()}),
-    ("WebKitDOMTreeWalkerClass", Layout {size: size_of::<WebKitDOMTreeWalkerClass>(), alignment: align_of::<WebKitDOMTreeWalkerClass>()}),
-    ("WebKitDOMUIEvent", Layout {size: size_of::<WebKitDOMUIEvent>(), alignment: align_of::<WebKitDOMUIEvent>()}),
-    ("WebKitDOMUIEventClass", Layout {size: size_of::<WebKitDOMUIEventClass>(), alignment: align_of::<WebKitDOMUIEventClass>()}),
-    ("WebKitDOMWheelEvent", Layout {size: size_of::<WebKitDOMWheelEvent>(), alignment: align_of::<WebKitDOMWheelEvent>()}),
-    ("WebKitDOMWheelEventClass", Layout {size: size_of::<WebKitDOMWheelEventClass>(), alignment: align_of::<WebKitDOMWheelEventClass>()}),
-    ("WebKitDOMXPathExpression", Layout {size: size_of::<WebKitDOMXPathExpression>(), alignment: align_of::<WebKitDOMXPathExpression>()}),
-    ("WebKitDOMXPathExpressionClass", Layout {size: size_of::<WebKitDOMXPathExpressionClass>(), alignment: align_of::<WebKitDOMXPathExpressionClass>()}),
-    ("WebKitDOMXPathNSResolverIface", Layout {size: size_of::<WebKitDOMXPathNSResolverIface>(), alignment: align_of::<WebKitDOMXPathNSResolverIface>()}),
-    ("WebKitDOMXPathResult", Layout {size: size_of::<WebKitDOMXPathResult>(), alignment: align_of::<WebKitDOMXPathResult>()}),
-    ("WebKitDOMXPathResultClass", Layout {size: size_of::<WebKitDOMXPathResultClass>(), alignment: align_of::<WebKitDOMXPathResultClass>()}),
-    ("WebKitFormSubmissionStep", Layout {size: size_of::<WebKitFormSubmissionStep>(), alignment: align_of::<WebKitFormSubmissionStep>()}),
-    ("WebKitFrame", Layout {size: size_of::<WebKitFrame>(), alignment: align_of::<WebKitFrame>()}),
-    ("WebKitFrameClass", Layout {size: size_of::<WebKitFrameClass>(), alignment: align_of::<WebKitFrameClass>()}),
-    ("WebKitHitTestResult", Layout {size: size_of::<WebKitHitTestResult>(), alignment: align_of::<WebKitHitTestResult>()}),
-    ("WebKitHitTestResultClass", Layout {size: size_of::<WebKitHitTestResultClass>(), alignment: align_of::<WebKitHitTestResultClass>()}),
-    ("WebKitHitTestResultContext", Layout {size: size_of::<WebKitHitTestResultContext>(), alignment: align_of::<WebKitHitTestResultContext>()}),
-    ("WebKitScriptWorld", Layout {size: size_of::<WebKitScriptWorld>(), alignment: align_of::<WebKitScriptWorld>()}),
-    ("WebKitScriptWorldClass", Layout {size: size_of::<WebKitScriptWorldClass>(), alignment: align_of::<WebKitScriptWorldClass>()}),
-    ("WebKitURIRequest", Layout {size: size_of::<WebKitURIRequest>(), alignment: align_of::<WebKitURIRequest>()}),
-    ("WebKitURIRequestClass", Layout {size: size_of::<WebKitURIRequestClass>(), alignment: align_of::<WebKitURIRequestClass>()}),
-    ("WebKitURIResponse", Layout {size: size_of::<WebKitURIResponse>(), alignment: align_of::<WebKitURIResponse>()}),
-    ("WebKitURIResponseClass", Layout {size: size_of::<WebKitURIResponseClass>(), alignment: align_of::<WebKitURIResponseClass>()}),
-    ("WebKitWebEditor", Layout {size: size_of::<WebKitWebEditor>(), alignment: align_of::<WebKitWebEditor>()}),
-    ("WebKitWebEditorClass", Layout {size: size_of::<WebKitWebEditorClass>(), alignment: align_of::<WebKitWebEditorClass>()}),
-    ("WebKitWebExtension", Layout {size: size_of::<WebKitWebExtension>(), alignment: align_of::<WebKitWebExtension>()}),
-    ("WebKitWebExtensionClass", Layout {size: size_of::<WebKitWebExtensionClass>(), alignment: align_of::<WebKitWebExtensionClass>()}),
-    ("WebKitWebHitTestResult", Layout {size: size_of::<WebKitWebHitTestResult>(), alignment: align_of::<WebKitWebHitTestResult>()}),
-    ("WebKitWebHitTestResultClass", Layout {size: size_of::<WebKitWebHitTestResultClass>(), alignment: align_of::<WebKitWebHitTestResultClass>()}),
-    ("WebKitWebPage", Layout {size: size_of::<WebKitWebPage>(), alignment: align_of::<WebKitWebPage>()}),
-    ("WebKitWebPageClass", Layout {size: size_of::<WebKitWebPageClass>(), alignment: align_of::<WebKitWebPageClass>()}),
+    (
+        "WebKitConsoleMessageLevel",
+        Layout {
+            size: size_of::<WebKitConsoleMessageLevel>(),
+            alignment: align_of::<WebKitConsoleMessageLevel>(),
+        },
+    ),
+    (
+        "WebKitConsoleMessageSource",
+        Layout {
+            size: size_of::<WebKitConsoleMessageSource>(),
+            alignment: align_of::<WebKitConsoleMessageSource>(),
+        },
+    ),
+    (
+        "WebKitContextMenuAction",
+        Layout {
+            size: size_of::<WebKitContextMenuAction>(),
+            alignment: align_of::<WebKitContextMenuAction>(),
+        },
+    ),
+    (
+        "WebKitContextMenuClass",
+        Layout {
+            size: size_of::<WebKitContextMenuClass>(),
+            alignment: align_of::<WebKitContextMenuClass>(),
+        },
+    ),
+    (
+        "WebKitContextMenuItemClass",
+        Layout {
+            size: size_of::<WebKitContextMenuItemClass>(),
+            alignment: align_of::<WebKitContextMenuItemClass>(),
+        },
+    ),
+    (
+        "WebKitDOMAttr",
+        Layout {
+            size: size_of::<WebKitDOMAttr>(),
+            alignment: align_of::<WebKitDOMAttr>(),
+        },
+    ),
+    (
+        "WebKitDOMAttrClass",
+        Layout {
+            size: size_of::<WebKitDOMAttrClass>(),
+            alignment: align_of::<WebKitDOMAttrClass>(),
+        },
+    ),
+    (
+        "WebKitDOMBlob",
+        Layout {
+            size: size_of::<WebKitDOMBlob>(),
+            alignment: align_of::<WebKitDOMBlob>(),
+        },
+    ),
+    (
+        "WebKitDOMBlobClass",
+        Layout {
+            size: size_of::<WebKitDOMBlobClass>(),
+            alignment: align_of::<WebKitDOMBlobClass>(),
+        },
+    ),
+    (
+        "WebKitDOMCDATASection",
+        Layout {
+            size: size_of::<WebKitDOMCDATASection>(),
+            alignment: align_of::<WebKitDOMCDATASection>(),
+        },
+    ),
+    (
+        "WebKitDOMCDATASectionClass",
+        Layout {
+            size: size_of::<WebKitDOMCDATASectionClass>(),
+            alignment: align_of::<WebKitDOMCDATASectionClass>(),
+        },
+    ),
+    (
+        "WebKitDOMCSSRule",
+        Layout {
+            size: size_of::<WebKitDOMCSSRule>(),
+            alignment: align_of::<WebKitDOMCSSRule>(),
+        },
+    ),
+    (
+        "WebKitDOMCSSRuleClass",
+        Layout {
+            size: size_of::<WebKitDOMCSSRuleClass>(),
+            alignment: align_of::<WebKitDOMCSSRuleClass>(),
+        },
+    ),
+    (
+        "WebKitDOMCSSRuleList",
+        Layout {
+            size: size_of::<WebKitDOMCSSRuleList>(),
+            alignment: align_of::<WebKitDOMCSSRuleList>(),
+        },
+    ),
+    (
+        "WebKitDOMCSSRuleListClass",
+        Layout {
+            size: size_of::<WebKitDOMCSSRuleListClass>(),
+            alignment: align_of::<WebKitDOMCSSRuleListClass>(),
+        },
+    ),
+    (
+        "WebKitDOMCSSStyleDeclaration",
+        Layout {
+            size: size_of::<WebKitDOMCSSStyleDeclaration>(),
+            alignment: align_of::<WebKitDOMCSSStyleDeclaration>(),
+        },
+    ),
+    (
+        "WebKitDOMCSSStyleDeclarationClass",
+        Layout {
+            size: size_of::<WebKitDOMCSSStyleDeclarationClass>(),
+            alignment: align_of::<WebKitDOMCSSStyleDeclarationClass>(),
+        },
+    ),
+    (
+        "WebKitDOMCSSStyleSheet",
+        Layout {
+            size: size_of::<WebKitDOMCSSStyleSheet>(),
+            alignment: align_of::<WebKitDOMCSSStyleSheet>(),
+        },
+    ),
+    (
+        "WebKitDOMCSSStyleSheetClass",
+        Layout {
+            size: size_of::<WebKitDOMCSSStyleSheetClass>(),
+            alignment: align_of::<WebKitDOMCSSStyleSheetClass>(),
+        },
+    ),
+    (
+        "WebKitDOMCSSValue",
+        Layout {
+            size: size_of::<WebKitDOMCSSValue>(),
+            alignment: align_of::<WebKitDOMCSSValue>(),
+        },
+    ),
+    (
+        "WebKitDOMCSSValueClass",
+        Layout {
+            size: size_of::<WebKitDOMCSSValueClass>(),
+            alignment: align_of::<WebKitDOMCSSValueClass>(),
+        },
+    ),
+    (
+        "WebKitDOMCharacterData",
+        Layout {
+            size: size_of::<WebKitDOMCharacterData>(),
+            alignment: align_of::<WebKitDOMCharacterData>(),
+        },
+    ),
+    (
+        "WebKitDOMCharacterDataClass",
+        Layout {
+            size: size_of::<WebKitDOMCharacterDataClass>(),
+            alignment: align_of::<WebKitDOMCharacterDataClass>(),
+        },
+    ),
+    (
+        "WebKitDOMClientRect",
+        Layout {
+            size: size_of::<WebKitDOMClientRect>(),
+            alignment: align_of::<WebKitDOMClientRect>(),
+        },
+    ),
+    (
+        "WebKitDOMClientRectClass",
+        Layout {
+            size: size_of::<WebKitDOMClientRectClass>(),
+            alignment: align_of::<WebKitDOMClientRectClass>(),
+        },
+    ),
+    (
+        "WebKitDOMClientRectList",
+        Layout {
+            size: size_of::<WebKitDOMClientRectList>(),
+            alignment: align_of::<WebKitDOMClientRectList>(),
+        },
+    ),
+    (
+        "WebKitDOMClientRectListClass",
+        Layout {
+            size: size_of::<WebKitDOMClientRectListClass>(),
+            alignment: align_of::<WebKitDOMClientRectListClass>(),
+        },
+    ),
+    (
+        "WebKitDOMComment",
+        Layout {
+            size: size_of::<WebKitDOMComment>(),
+            alignment: align_of::<WebKitDOMComment>(),
+        },
+    ),
+    (
+        "WebKitDOMCommentClass",
+        Layout {
+            size: size_of::<WebKitDOMCommentClass>(),
+            alignment: align_of::<WebKitDOMCommentClass>(),
+        },
+    ),
+    (
+        "WebKitDOMDOMImplementation",
+        Layout {
+            size: size_of::<WebKitDOMDOMImplementation>(),
+            alignment: align_of::<WebKitDOMDOMImplementation>(),
+        },
+    ),
+    (
+        "WebKitDOMDOMImplementationClass",
+        Layout {
+            size: size_of::<WebKitDOMDOMImplementationClass>(),
+            alignment: align_of::<WebKitDOMDOMImplementationClass>(),
+        },
+    ),
+    (
+        "WebKitDOMDOMSelection",
+        Layout {
+            size: size_of::<WebKitDOMDOMSelection>(),
+            alignment: align_of::<WebKitDOMDOMSelection>(),
+        },
+    ),
+    (
+        "WebKitDOMDOMSelectionClass",
+        Layout {
+            size: size_of::<WebKitDOMDOMSelectionClass>(),
+            alignment: align_of::<WebKitDOMDOMSelectionClass>(),
+        },
+    ),
+    (
+        "WebKitDOMDOMTokenList",
+        Layout {
+            size: size_of::<WebKitDOMDOMTokenList>(),
+            alignment: align_of::<WebKitDOMDOMTokenList>(),
+        },
+    ),
+    (
+        "WebKitDOMDOMTokenListClass",
+        Layout {
+            size: size_of::<WebKitDOMDOMTokenListClass>(),
+            alignment: align_of::<WebKitDOMDOMTokenListClass>(),
+        },
+    ),
+    (
+        "WebKitDOMDOMWindow",
+        Layout {
+            size: size_of::<WebKitDOMDOMWindow>(),
+            alignment: align_of::<WebKitDOMDOMWindow>(),
+        },
+    ),
+    (
+        "WebKitDOMDOMWindowClass",
+        Layout {
+            size: size_of::<WebKitDOMDOMWindowClass>(),
+            alignment: align_of::<WebKitDOMDOMWindowClass>(),
+        },
+    ),
+    (
+        "WebKitDOMDocument",
+        Layout {
+            size: size_of::<WebKitDOMDocument>(),
+            alignment: align_of::<WebKitDOMDocument>(),
+        },
+    ),
+    (
+        "WebKitDOMDocumentClass",
+        Layout {
+            size: size_of::<WebKitDOMDocumentClass>(),
+            alignment: align_of::<WebKitDOMDocumentClass>(),
+        },
+    ),
+    (
+        "WebKitDOMDocumentFragment",
+        Layout {
+            size: size_of::<WebKitDOMDocumentFragment>(),
+            alignment: align_of::<WebKitDOMDocumentFragment>(),
+        },
+    ),
+    (
+        "WebKitDOMDocumentFragmentClass",
+        Layout {
+            size: size_of::<WebKitDOMDocumentFragmentClass>(),
+            alignment: align_of::<WebKitDOMDocumentFragmentClass>(),
+        },
+    ),
+    (
+        "WebKitDOMDocumentType",
+        Layout {
+            size: size_of::<WebKitDOMDocumentType>(),
+            alignment: align_of::<WebKitDOMDocumentType>(),
+        },
+    ),
+    (
+        "WebKitDOMDocumentTypeClass",
+        Layout {
+            size: size_of::<WebKitDOMDocumentTypeClass>(),
+            alignment: align_of::<WebKitDOMDocumentTypeClass>(),
+        },
+    ),
+    (
+        "WebKitDOMElement",
+        Layout {
+            size: size_of::<WebKitDOMElement>(),
+            alignment: align_of::<WebKitDOMElement>(),
+        },
+    ),
+    (
+        "WebKitDOMElementClass",
+        Layout {
+            size: size_of::<WebKitDOMElementClass>(),
+            alignment: align_of::<WebKitDOMElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMEntityReference",
+        Layout {
+            size: size_of::<WebKitDOMEntityReference>(),
+            alignment: align_of::<WebKitDOMEntityReference>(),
+        },
+    ),
+    (
+        "WebKitDOMEntityReferenceClass",
+        Layout {
+            size: size_of::<WebKitDOMEntityReferenceClass>(),
+            alignment: align_of::<WebKitDOMEntityReferenceClass>(),
+        },
+    ),
+    (
+        "WebKitDOMEvent",
+        Layout {
+            size: size_of::<WebKitDOMEvent>(),
+            alignment: align_of::<WebKitDOMEvent>(),
+        },
+    ),
+    (
+        "WebKitDOMEventClass",
+        Layout {
+            size: size_of::<WebKitDOMEventClass>(),
+            alignment: align_of::<WebKitDOMEventClass>(),
+        },
+    ),
+    (
+        "WebKitDOMEventTargetIface",
+        Layout {
+            size: size_of::<WebKitDOMEventTargetIface>(),
+            alignment: align_of::<WebKitDOMEventTargetIface>(),
+        },
+    ),
+    (
+        "WebKitDOMFile",
+        Layout {
+            size: size_of::<WebKitDOMFile>(),
+            alignment: align_of::<WebKitDOMFile>(),
+        },
+    ),
+    (
+        "WebKitDOMFileClass",
+        Layout {
+            size: size_of::<WebKitDOMFileClass>(),
+            alignment: align_of::<WebKitDOMFileClass>(),
+        },
+    ),
+    (
+        "WebKitDOMFileList",
+        Layout {
+            size: size_of::<WebKitDOMFileList>(),
+            alignment: align_of::<WebKitDOMFileList>(),
+        },
+    ),
+    (
+        "WebKitDOMFileListClass",
+        Layout {
+            size: size_of::<WebKitDOMFileListClass>(),
+            alignment: align_of::<WebKitDOMFileListClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLAnchorElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLAnchorElement>(),
+            alignment: align_of::<WebKitDOMHTMLAnchorElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLAnchorElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLAnchorElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLAnchorElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLAppletElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLAppletElement>(),
+            alignment: align_of::<WebKitDOMHTMLAppletElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLAppletElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLAppletElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLAppletElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLAreaElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLAreaElement>(),
+            alignment: align_of::<WebKitDOMHTMLAreaElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLAreaElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLAreaElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLAreaElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLBRElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLBRElement>(),
+            alignment: align_of::<WebKitDOMHTMLBRElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLBRElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLBRElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLBRElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLBaseElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLBaseElement>(),
+            alignment: align_of::<WebKitDOMHTMLBaseElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLBaseElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLBaseElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLBaseElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLBaseFontElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLBaseFontElement>(),
+            alignment: align_of::<WebKitDOMHTMLBaseFontElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLBaseFontElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLBaseFontElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLBaseFontElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLBodyElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLBodyElement>(),
+            alignment: align_of::<WebKitDOMHTMLBodyElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLBodyElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLBodyElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLBodyElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLButtonElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLButtonElement>(),
+            alignment: align_of::<WebKitDOMHTMLButtonElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLButtonElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLButtonElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLButtonElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLCanvasElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLCanvasElement>(),
+            alignment: align_of::<WebKitDOMHTMLCanvasElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLCanvasElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLCanvasElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLCanvasElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLCollection",
+        Layout {
+            size: size_of::<WebKitDOMHTMLCollection>(),
+            alignment: align_of::<WebKitDOMHTMLCollection>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLCollectionClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLCollectionClass>(),
+            alignment: align_of::<WebKitDOMHTMLCollectionClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLDListElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLDListElement>(),
+            alignment: align_of::<WebKitDOMHTMLDListElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLDListElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLDListElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLDListElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLDirectoryElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLDirectoryElement>(),
+            alignment: align_of::<WebKitDOMHTMLDirectoryElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLDirectoryElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLDirectoryElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLDirectoryElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLDivElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLDivElement>(),
+            alignment: align_of::<WebKitDOMHTMLDivElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLDivElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLDivElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLDivElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLDocument",
+        Layout {
+            size: size_of::<WebKitDOMHTMLDocument>(),
+            alignment: align_of::<WebKitDOMHTMLDocument>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLDocumentClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLDocumentClass>(),
+            alignment: align_of::<WebKitDOMHTMLDocumentClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLElement>(),
+            alignment: align_of::<WebKitDOMHTMLElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLEmbedElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLEmbedElement>(),
+            alignment: align_of::<WebKitDOMHTMLEmbedElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLEmbedElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLEmbedElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLEmbedElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLFieldSetElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLFieldSetElement>(),
+            alignment: align_of::<WebKitDOMHTMLFieldSetElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLFieldSetElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLFieldSetElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLFieldSetElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLFontElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLFontElement>(),
+            alignment: align_of::<WebKitDOMHTMLFontElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLFontElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLFontElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLFontElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLFormElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLFormElement>(),
+            alignment: align_of::<WebKitDOMHTMLFormElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLFormElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLFormElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLFormElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLFrameElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLFrameElement>(),
+            alignment: align_of::<WebKitDOMHTMLFrameElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLFrameElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLFrameElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLFrameElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLFrameSetElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLFrameSetElement>(),
+            alignment: align_of::<WebKitDOMHTMLFrameSetElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLFrameSetElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLFrameSetElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLFrameSetElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLHRElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLHRElement>(),
+            alignment: align_of::<WebKitDOMHTMLHRElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLHRElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLHRElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLHRElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLHeadElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLHeadElement>(),
+            alignment: align_of::<WebKitDOMHTMLHeadElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLHeadElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLHeadElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLHeadElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLHeadingElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLHeadingElement>(),
+            alignment: align_of::<WebKitDOMHTMLHeadingElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLHeadingElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLHeadingElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLHeadingElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLHtmlElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLHtmlElement>(),
+            alignment: align_of::<WebKitDOMHTMLHtmlElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLHtmlElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLHtmlElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLHtmlElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLIFrameElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLIFrameElement>(),
+            alignment: align_of::<WebKitDOMHTMLIFrameElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLIFrameElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLIFrameElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLIFrameElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLImageElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLImageElement>(),
+            alignment: align_of::<WebKitDOMHTMLImageElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLImageElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLImageElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLImageElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLInputElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLInputElement>(),
+            alignment: align_of::<WebKitDOMHTMLInputElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLInputElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLInputElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLInputElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLLIElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLLIElement>(),
+            alignment: align_of::<WebKitDOMHTMLLIElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLLIElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLLIElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLLIElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLLabelElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLLabelElement>(),
+            alignment: align_of::<WebKitDOMHTMLLabelElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLLabelElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLLabelElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLLabelElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLLegendElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLLegendElement>(),
+            alignment: align_of::<WebKitDOMHTMLLegendElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLLegendElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLLegendElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLLegendElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLLinkElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLLinkElement>(),
+            alignment: align_of::<WebKitDOMHTMLLinkElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLLinkElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLLinkElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLLinkElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLMapElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLMapElement>(),
+            alignment: align_of::<WebKitDOMHTMLMapElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLMapElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLMapElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLMapElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLMarqueeElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLMarqueeElement>(),
+            alignment: align_of::<WebKitDOMHTMLMarqueeElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLMarqueeElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLMarqueeElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLMarqueeElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLMenuElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLMenuElement>(),
+            alignment: align_of::<WebKitDOMHTMLMenuElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLMenuElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLMenuElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLMenuElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLMetaElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLMetaElement>(),
+            alignment: align_of::<WebKitDOMHTMLMetaElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLMetaElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLMetaElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLMetaElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLModElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLModElement>(),
+            alignment: align_of::<WebKitDOMHTMLModElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLModElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLModElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLModElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLOListElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLOListElement>(),
+            alignment: align_of::<WebKitDOMHTMLOListElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLOListElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLOListElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLOListElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLObjectElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLObjectElement>(),
+            alignment: align_of::<WebKitDOMHTMLObjectElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLObjectElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLObjectElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLObjectElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLOptGroupElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLOptGroupElement>(),
+            alignment: align_of::<WebKitDOMHTMLOptGroupElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLOptGroupElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLOptGroupElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLOptGroupElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLOptionElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLOptionElement>(),
+            alignment: align_of::<WebKitDOMHTMLOptionElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLOptionElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLOptionElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLOptionElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLOptionsCollection",
+        Layout {
+            size: size_of::<WebKitDOMHTMLOptionsCollection>(),
+            alignment: align_of::<WebKitDOMHTMLOptionsCollection>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLOptionsCollectionClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLOptionsCollectionClass>(),
+            alignment: align_of::<WebKitDOMHTMLOptionsCollectionClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLParagraphElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLParagraphElement>(),
+            alignment: align_of::<WebKitDOMHTMLParagraphElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLParagraphElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLParagraphElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLParagraphElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLParamElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLParamElement>(),
+            alignment: align_of::<WebKitDOMHTMLParamElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLParamElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLParamElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLParamElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLPreElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLPreElement>(),
+            alignment: align_of::<WebKitDOMHTMLPreElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLPreElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLPreElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLPreElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLQuoteElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLQuoteElement>(),
+            alignment: align_of::<WebKitDOMHTMLQuoteElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLQuoteElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLQuoteElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLQuoteElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLScriptElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLScriptElement>(),
+            alignment: align_of::<WebKitDOMHTMLScriptElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLScriptElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLScriptElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLScriptElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLSelectElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLSelectElement>(),
+            alignment: align_of::<WebKitDOMHTMLSelectElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLSelectElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLSelectElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLSelectElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLStyleElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLStyleElement>(),
+            alignment: align_of::<WebKitDOMHTMLStyleElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLStyleElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLStyleElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLStyleElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableCaptionElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableCaptionElement>(),
+            alignment: align_of::<WebKitDOMHTMLTableCaptionElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableCaptionElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableCaptionElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLTableCaptionElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableCellElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableCellElement>(),
+            alignment: align_of::<WebKitDOMHTMLTableCellElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableCellElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableCellElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLTableCellElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableColElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableColElement>(),
+            alignment: align_of::<WebKitDOMHTMLTableColElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableColElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableColElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLTableColElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableElement>(),
+            alignment: align_of::<WebKitDOMHTMLTableElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLTableElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableRowElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableRowElement>(),
+            alignment: align_of::<WebKitDOMHTMLTableRowElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableRowElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableRowElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLTableRowElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableSectionElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableSectionElement>(),
+            alignment: align_of::<WebKitDOMHTMLTableSectionElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTableSectionElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTableSectionElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLTableSectionElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTextAreaElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTextAreaElement>(),
+            alignment: align_of::<WebKitDOMHTMLTextAreaElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTextAreaElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTextAreaElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLTextAreaElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTitleElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTitleElement>(),
+            alignment: align_of::<WebKitDOMHTMLTitleElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLTitleElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLTitleElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLTitleElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLUListElement",
+        Layout {
+            size: size_of::<WebKitDOMHTMLUListElement>(),
+            alignment: align_of::<WebKitDOMHTMLUListElement>(),
+        },
+    ),
+    (
+        "WebKitDOMHTMLUListElementClass",
+        Layout {
+            size: size_of::<WebKitDOMHTMLUListElementClass>(),
+            alignment: align_of::<WebKitDOMHTMLUListElementClass>(),
+        },
+    ),
+    (
+        "WebKitDOMKeyboardEvent",
+        Layout {
+            size: size_of::<WebKitDOMKeyboardEvent>(),
+            alignment: align_of::<WebKitDOMKeyboardEvent>(),
+        },
+    ),
+    (
+        "WebKitDOMKeyboardEventClass",
+        Layout {
+            size: size_of::<WebKitDOMKeyboardEventClass>(),
+            alignment: align_of::<WebKitDOMKeyboardEventClass>(),
+        },
+    ),
+    (
+        "WebKitDOMMediaList",
+        Layout {
+            size: size_of::<WebKitDOMMediaList>(),
+            alignment: align_of::<WebKitDOMMediaList>(),
+        },
+    ),
+    (
+        "WebKitDOMMediaListClass",
+        Layout {
+            size: size_of::<WebKitDOMMediaListClass>(),
+            alignment: align_of::<WebKitDOMMediaListClass>(),
+        },
+    ),
+    (
+        "WebKitDOMMouseEvent",
+        Layout {
+            size: size_of::<WebKitDOMMouseEvent>(),
+            alignment: align_of::<WebKitDOMMouseEvent>(),
+        },
+    ),
+    (
+        "WebKitDOMMouseEventClass",
+        Layout {
+            size: size_of::<WebKitDOMMouseEventClass>(),
+            alignment: align_of::<WebKitDOMMouseEventClass>(),
+        },
+    ),
+    (
+        "WebKitDOMNamedNodeMap",
+        Layout {
+            size: size_of::<WebKitDOMNamedNodeMap>(),
+            alignment: align_of::<WebKitDOMNamedNodeMap>(),
+        },
+    ),
+    (
+        "WebKitDOMNamedNodeMapClass",
+        Layout {
+            size: size_of::<WebKitDOMNamedNodeMapClass>(),
+            alignment: align_of::<WebKitDOMNamedNodeMapClass>(),
+        },
+    ),
+    (
+        "WebKitDOMNode",
+        Layout {
+            size: size_of::<WebKitDOMNode>(),
+            alignment: align_of::<WebKitDOMNode>(),
+        },
+    ),
+    (
+        "WebKitDOMNodeClass",
+        Layout {
+            size: size_of::<WebKitDOMNodeClass>(),
+            alignment: align_of::<WebKitDOMNodeClass>(),
+        },
+    ),
+    (
+        "WebKitDOMNodeFilterIface",
+        Layout {
+            size: size_of::<WebKitDOMNodeFilterIface>(),
+            alignment: align_of::<WebKitDOMNodeFilterIface>(),
+        },
+    ),
+    (
+        "WebKitDOMNodeIterator",
+        Layout {
+            size: size_of::<WebKitDOMNodeIterator>(),
+            alignment: align_of::<WebKitDOMNodeIterator>(),
+        },
+    ),
+    (
+        "WebKitDOMNodeIteratorClass",
+        Layout {
+            size: size_of::<WebKitDOMNodeIteratorClass>(),
+            alignment: align_of::<WebKitDOMNodeIteratorClass>(),
+        },
+    ),
+    (
+        "WebKitDOMNodeList",
+        Layout {
+            size: size_of::<WebKitDOMNodeList>(),
+            alignment: align_of::<WebKitDOMNodeList>(),
+        },
+    ),
+    (
+        "WebKitDOMNodeListClass",
+        Layout {
+            size: size_of::<WebKitDOMNodeListClass>(),
+            alignment: align_of::<WebKitDOMNodeListClass>(),
+        },
+    ),
+    (
+        "WebKitDOMObject",
+        Layout {
+            size: size_of::<WebKitDOMObject>(),
+            alignment: align_of::<WebKitDOMObject>(),
+        },
+    ),
+    (
+        "WebKitDOMObjectClass",
+        Layout {
+            size: size_of::<WebKitDOMObjectClass>(),
+            alignment: align_of::<WebKitDOMObjectClass>(),
+        },
+    ),
+    (
+        "WebKitDOMProcessingInstruction",
+        Layout {
+            size: size_of::<WebKitDOMProcessingInstruction>(),
+            alignment: align_of::<WebKitDOMProcessingInstruction>(),
+        },
+    ),
+    (
+        "WebKitDOMProcessingInstructionClass",
+        Layout {
+            size: size_of::<WebKitDOMProcessingInstructionClass>(),
+            alignment: align_of::<WebKitDOMProcessingInstructionClass>(),
+        },
+    ),
+    (
+        "WebKitDOMRange",
+        Layout {
+            size: size_of::<WebKitDOMRange>(),
+            alignment: align_of::<WebKitDOMRange>(),
+        },
+    ),
+    (
+        "WebKitDOMRangeClass",
+        Layout {
+            size: size_of::<WebKitDOMRangeClass>(),
+            alignment: align_of::<WebKitDOMRangeClass>(),
+        },
+    ),
+    (
+        "WebKitDOMStyleSheet",
+        Layout {
+            size: size_of::<WebKitDOMStyleSheet>(),
+            alignment: align_of::<WebKitDOMStyleSheet>(),
+        },
+    ),
+    (
+        "WebKitDOMStyleSheetClass",
+        Layout {
+            size: size_of::<WebKitDOMStyleSheetClass>(),
+            alignment: align_of::<WebKitDOMStyleSheetClass>(),
+        },
+    ),
+    (
+        "WebKitDOMStyleSheetList",
+        Layout {
+            size: size_of::<WebKitDOMStyleSheetList>(),
+            alignment: align_of::<WebKitDOMStyleSheetList>(),
+        },
+    ),
+    (
+        "WebKitDOMStyleSheetListClass",
+        Layout {
+            size: size_of::<WebKitDOMStyleSheetListClass>(),
+            alignment: align_of::<WebKitDOMStyleSheetListClass>(),
+        },
+    ),
+    (
+        "WebKitDOMText",
+        Layout {
+            size: size_of::<WebKitDOMText>(),
+            alignment: align_of::<WebKitDOMText>(),
+        },
+    ),
+    (
+        "WebKitDOMTextClass",
+        Layout {
+            size: size_of::<WebKitDOMTextClass>(),
+            alignment: align_of::<WebKitDOMTextClass>(),
+        },
+    ),
+    (
+        "WebKitDOMTreeWalker",
+        Layout {
+            size: size_of::<WebKitDOMTreeWalker>(),
+            alignment: align_of::<WebKitDOMTreeWalker>(),
+        },
+    ),
+    (
+        "WebKitDOMTreeWalkerClass",
+        Layout {
+            size: size_of::<WebKitDOMTreeWalkerClass>(),
+            alignment: align_of::<WebKitDOMTreeWalkerClass>(),
+        },
+    ),
+    (
+        "WebKitDOMUIEvent",
+        Layout {
+            size: size_of::<WebKitDOMUIEvent>(),
+            alignment: align_of::<WebKitDOMUIEvent>(),
+        },
+    ),
+    (
+        "WebKitDOMUIEventClass",
+        Layout {
+            size: size_of::<WebKitDOMUIEventClass>(),
+            alignment: align_of::<WebKitDOMUIEventClass>(),
+        },
+    ),
+    (
+        "WebKitDOMWheelEvent",
+        Layout {
+            size: size_of::<WebKitDOMWheelEvent>(),
+            alignment: align_of::<WebKitDOMWheelEvent>(),
+        },
+    ),
+    (
+        "WebKitDOMWheelEventClass",
+        Layout {
+            size: size_of::<WebKitDOMWheelEventClass>(),
+            alignment: align_of::<WebKitDOMWheelEventClass>(),
+        },
+    ),
+    (
+        "WebKitDOMXPathExpression",
+        Layout {
+            size: size_of::<WebKitDOMXPathExpression>(),
+            alignment: align_of::<WebKitDOMXPathExpression>(),
+        },
+    ),
+    (
+        "WebKitDOMXPathExpressionClass",
+        Layout {
+            size: size_of::<WebKitDOMXPathExpressionClass>(),
+            alignment: align_of::<WebKitDOMXPathExpressionClass>(),
+        },
+    ),
+    (
+        "WebKitDOMXPathNSResolverIface",
+        Layout {
+            size: size_of::<WebKitDOMXPathNSResolverIface>(),
+            alignment: align_of::<WebKitDOMXPathNSResolverIface>(),
+        },
+    ),
+    (
+        "WebKitDOMXPathResult",
+        Layout {
+            size: size_of::<WebKitDOMXPathResult>(),
+            alignment: align_of::<WebKitDOMXPathResult>(),
+        },
+    ),
+    (
+        "WebKitDOMXPathResultClass",
+        Layout {
+            size: size_of::<WebKitDOMXPathResultClass>(),
+            alignment: align_of::<WebKitDOMXPathResultClass>(),
+        },
+    ),
+    (
+        "WebKitFormSubmissionStep",
+        Layout {
+            size: size_of::<WebKitFormSubmissionStep>(),
+            alignment: align_of::<WebKitFormSubmissionStep>(),
+        },
+    ),
+    (
+        "WebKitFrame",
+        Layout {
+            size: size_of::<WebKitFrame>(),
+            alignment: align_of::<WebKitFrame>(),
+        },
+    ),
+    (
+        "WebKitFrameClass",
+        Layout {
+            size: size_of::<WebKitFrameClass>(),
+            alignment: align_of::<WebKitFrameClass>(),
+        },
+    ),
+    (
+        "WebKitHitTestResult",
+        Layout {
+            size: size_of::<WebKitHitTestResult>(),
+            alignment: align_of::<WebKitHitTestResult>(),
+        },
+    ),
+    (
+        "WebKitHitTestResultClass",
+        Layout {
+            size: size_of::<WebKitHitTestResultClass>(),
+            alignment: align_of::<WebKitHitTestResultClass>(),
+        },
+    ),
+    (
+        "WebKitHitTestResultContext",
+        Layout {
+            size: size_of::<WebKitHitTestResultContext>(),
+            alignment: align_of::<WebKitHitTestResultContext>(),
+        },
+    ),
+    (
+        "WebKitScriptWorld",
+        Layout {
+            size: size_of::<WebKitScriptWorld>(),
+            alignment: align_of::<WebKitScriptWorld>(),
+        },
+    ),
+    (
+        "WebKitScriptWorldClass",
+        Layout {
+            size: size_of::<WebKitScriptWorldClass>(),
+            alignment: align_of::<WebKitScriptWorldClass>(),
+        },
+    ),
+    (
+        "WebKitURIRequest",
+        Layout {
+            size: size_of::<WebKitURIRequest>(),
+            alignment: align_of::<WebKitURIRequest>(),
+        },
+    ),
+    (
+        "WebKitURIRequestClass",
+        Layout {
+            size: size_of::<WebKitURIRequestClass>(),
+            alignment: align_of::<WebKitURIRequestClass>(),
+        },
+    ),
+    (
+        "WebKitURIResponse",
+        Layout {
+            size: size_of::<WebKitURIResponse>(),
+            alignment: align_of::<WebKitURIResponse>(),
+        },
+    ),
+    (
+        "WebKitURIResponseClass",
+        Layout {
+            size: size_of::<WebKitURIResponseClass>(),
+            alignment: align_of::<WebKitURIResponseClass>(),
+        },
+    ),
+    (
+        "WebKitWebEditor",
+        Layout {
+            size: size_of::<WebKitWebEditor>(),
+            alignment: align_of::<WebKitWebEditor>(),
+        },
+    ),
+    (
+        "WebKitWebEditorClass",
+        Layout {
+            size: size_of::<WebKitWebEditorClass>(),
+            alignment: align_of::<WebKitWebEditorClass>(),
+        },
+    ),
+    (
+        "WebKitWebExtension",
+        Layout {
+            size: size_of::<WebKitWebExtension>(),
+            alignment: align_of::<WebKitWebExtension>(),
+        },
+    ),
+    (
+        "WebKitWebExtensionClass",
+        Layout {
+            size: size_of::<WebKitWebExtensionClass>(),
+            alignment: align_of::<WebKitWebExtensionClass>(),
+        },
+    ),
+    (
+        "WebKitWebHitTestResult",
+        Layout {
+            size: size_of::<WebKitWebHitTestResult>(),
+            alignment: align_of::<WebKitWebHitTestResult>(),
+        },
+    ),
+    (
+        "WebKitWebHitTestResultClass",
+        Layout {
+            size: size_of::<WebKitWebHitTestResultClass>(),
+            alignment: align_of::<WebKitWebHitTestResultClass>(),
+        },
+    ),
+    (
+        "WebKitWebPage",
+        Layout {
+            size: size_of::<WebKitWebPage>(),
+            alignment: align_of::<WebKitWebPage>(),
+        },
+    ),
+    (
+        "WebKitWebPageClass",
+        Layout {
+            size: size_of::<WebKitWebPageClass>(),
+            alignment: align_of::<WebKitWebPageClass>(),
+        },
+    ),
 ];
 
 const RUST_CONSTANTS: &[(&str, &str)] = &[
@@ -482,19 +1863,49 @@ const RUST_CONSTANTS: &[(&str, &str)] = &[
     ("(gint) WEBKIT_CONSOLE_MESSAGE_SOURCE_SECURITY", "3"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_BOLD", "27"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_COPY", "14"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_COPY_AUDIO_LINK_TO_CLIPBOARD", "35"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_COPY_IMAGE_TO_CLIPBOARD", "7"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_COPY_IMAGE_URL_TO_CLIPBOARD", "8"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_COPY_LINK_TO_CLIPBOARD", "4"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_COPY_VIDEO_LINK_TO_CLIPBOARD", "34"),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_COPY_AUDIO_LINK_TO_CLIPBOARD",
+        "35",
+    ),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_COPY_IMAGE_TO_CLIPBOARD",
+        "7",
+    ),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_COPY_IMAGE_URL_TO_CLIPBOARD",
+        "8",
+    ),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_COPY_LINK_TO_CLIPBOARD",
+        "4",
+    ),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_COPY_VIDEO_LINK_TO_CLIPBOARD",
+        "34",
+    ),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_CUSTOM", "10000"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_CUT", "15"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_DELETE", "17"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_AUDIO_TO_DISK", "43"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_IMAGE_TO_DISK", "6"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_LINK_TO_DISK", "3"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_VIDEO_TO_DISK", "42"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_ENTER_VIDEO_FULLSCREEN", "38"),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_AUDIO_TO_DISK",
+        "43",
+    ),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_IMAGE_TO_DISK",
+        "6",
+    ),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_LINK_TO_DISK",
+        "3",
+    ),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_VIDEO_TO_DISK",
+        "42",
+    ),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_ENTER_VIDEO_FULLSCREEN",
+        "38",
+    ),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_FONT_MENU", "26"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_GO_BACK", "10"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_GO_FORWARD", "11"),
@@ -510,19 +1921,37 @@ const RUST_CONSTANTS: &[(&str, &str)] = &[
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_MEDIA_PLAY", "39"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_NO_ACTION", "0"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_NO_GUESSES_FOUND", "22"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_OPEN_AUDIO_IN_NEW_WINDOW", "33"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_OPEN_FRAME_IN_NEW_WINDOW", "9"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_OPEN_IMAGE_IN_NEW_WINDOW", "5"),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_OPEN_AUDIO_IN_NEW_WINDOW",
+        "33",
+    ),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_OPEN_FRAME_IN_NEW_WINDOW",
+        "9",
+    ),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_OPEN_IMAGE_IN_NEW_WINDOW",
+        "5",
+    ),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_OPEN_LINK", "1"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_OPEN_LINK_IN_NEW_WINDOW", "2"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_OPEN_VIDEO_IN_NEW_WINDOW", "32"),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_OPEN_LINK_IN_NEW_WINDOW",
+        "2",
+    ),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_OPEN_VIDEO_IN_NEW_WINDOW",
+        "32",
+    ),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_OUTLINE", "30"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_PASTE", "16"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_RELOAD", "13"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_SELECT_ALL", "18"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_SPELLING_GUESS", "21"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_STOP", "12"),
-    ("(gint) WEBKIT_CONTEXT_MENU_ACTION_TOGGLE_MEDIA_CONTROLS", "36"),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_TOGGLE_MEDIA_CONTROLS",
+        "36",
+    ),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_TOGGLE_MEDIA_LOOP", "37"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_UNDERLINE", "29"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_UNICODE", "20"),
@@ -571,7 +2000,10 @@ const RUST_CONSTANTS: &[(&str, &str)] = &[
     ("WEBKIT_DOM_NODE_DOCUMENT_POSITION_CONTAINS", "8"),
     ("WEBKIT_DOM_NODE_DOCUMENT_POSITION_DISCONNECTED", "1"),
     ("WEBKIT_DOM_NODE_DOCUMENT_POSITION_FOLLOWING", "4"),
-    ("WEBKIT_DOM_NODE_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC", "32"),
+    (
+        "WEBKIT_DOM_NODE_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC",
+        "32",
+    ),
     ("WEBKIT_DOM_NODE_DOCUMENT_POSITION_PRECEDING", "2"),
     ("WEBKIT_DOM_NODE_DOCUMENT_TYPE_NODE", "10"),
     ("WEBKIT_DOM_NODE_ELEMENT_NODE", "1"),
@@ -623,5 +2055,3 @@ const RUST_CONSTANTS: &[(&str, &str)] = &[
     ("(guint) WEBKIT_HIT_TEST_RESULT_CONTEXT_SCROLLBAR", "64"),
     ("(guint) WEBKIT_HIT_TEST_RESULT_CONTEXT_SELECTION", "128"),
 ];
-
-

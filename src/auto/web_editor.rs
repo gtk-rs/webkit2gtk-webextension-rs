@@ -43,22 +43,31 @@ impl<O: IsA<WebEditor>> WebEditorExt for O {
     #[cfg(any(feature = "v2_10", feature = "dox"))]
     fn get_page(&self) -> Option<WebPage> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_web_editor_get_page(self.as_ref().to_glib_none().0))
+            from_glib_none(webkit2_webextension_sys::webkit_web_editor_get_page(
+                self.as_ref().to_glib_none().0,
+            ))
         }
     }
 
     #[cfg(any(feature = "v2_10", feature = "dox"))]
     fn connect_selection_changed<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn selection_changed_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitWebEditor, f: glib_sys::gpointer)
-            where P: IsA<WebEditor>
+        unsafe extern "C" fn selection_changed_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitWebEditor,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<WebEditor>,
         {
             let f: &F = &*(f as *const F);
             f(&WebEditor::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"selection-changed\0".as_ptr() as *const _,
-                Some(transmute(selection_changed_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"selection-changed\0".as_ptr() as *const _,
+                Some(transmute(selection_changed_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 }

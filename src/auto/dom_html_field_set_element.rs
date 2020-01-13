@@ -39,21 +39,33 @@ pub trait DOMHTMLFieldSetElementExt: 'static {
 impl<O: IsA<DOMHTMLFieldSetElement>> DOMHTMLFieldSetElementExt for O {
     fn get_form(&self) -> Option<DOMHTMLFormElement> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_dom_html_field_set_element_get_form(self.as_ref().to_glib_none().0))
+            from_glib_none(
+                webkit2_webextension_sys::webkit_dom_html_field_set_element_get_form(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_form_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLFieldSetElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLFieldSetElement>
+        unsafe extern "C" fn notify_form_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLFieldSetElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLFieldSetElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLFieldSetElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::form\0".as_ptr() as *const _,
-                Some(transmute(notify_form_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::form\0".as_ptr() as *const _,
+                Some(transmute(notify_form_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 }

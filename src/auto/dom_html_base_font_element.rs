@@ -47,37 +47,56 @@ pub trait DOMHTMLBaseFontElementExt: 'static {
 impl<O: IsA<DOMHTMLBaseFontElement>> DOMHTMLBaseFontElementExt for O {
     fn get_color(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_base_font_element_get_color(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_base_font_element_get_color(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_face(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_base_font_element_get_face(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_base_font_element_get_face(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_size(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_base_font_element_get_size(self.as_ref().to_glib_none().0)
+            webkit2_webextension_sys::webkit_dom_html_base_font_element_get_size(
+                self.as_ref().to_glib_none().0,
+            )
         }
     }
 
     fn set_color(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_base_font_element_set_color(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_base_font_element_set_color(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_face(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_base_font_element_set_face(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_base_font_element_set_face(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_size(&self, value: libc::c_long) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_base_font_element_set_size(self.as_ref().to_glib_none().0, value);
+            webkit2_webextension_sys::webkit_dom_html_base_font_element_set_size(
+                self.as_ref().to_glib_none().0,
+                value,
+            );
         }
     }
 }

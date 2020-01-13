@@ -86,191 +86,308 @@ pub trait DOMHTMLButtonElementExt: 'static {
 
     fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
+    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(
+        &self,
+        f: F,
+    ) -> SignalHandlerId;
 }
 
 impl<O: IsA<DOMHTMLButtonElement>> DOMHTMLButtonElementExt for O {
     fn get_autofocus(&self) -> bool {
         unsafe {
-            from_glib(webkit2_webextension_sys::webkit_dom_html_button_element_get_autofocus(self.as_ref().to_glib_none().0))
+            from_glib(
+                webkit2_webextension_sys::webkit_dom_html_button_element_get_autofocus(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_button_type(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_button_element_get_button_type(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_button_element_get_button_type(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_disabled(&self) -> bool {
         unsafe {
-            from_glib(webkit2_webextension_sys::webkit_dom_html_button_element_get_disabled(self.as_ref().to_glib_none().0))
+            from_glib(
+                webkit2_webextension_sys::webkit_dom_html_button_element_get_disabled(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_form(&self) -> Option<DOMHTMLFormElement> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_dom_html_button_element_get_form(self.as_ref().to_glib_none().0))
+            from_glib_none(
+                webkit2_webextension_sys::webkit_dom_html_button_element_get_form(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_name(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_button_element_get_name(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_button_element_get_name(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_value(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_button_element_get_value(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_button_element_get_value(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_will_validate(&self) -> bool {
         unsafe {
-            from_glib(webkit2_webextension_sys::webkit_dom_html_button_element_get_will_validate(self.as_ref().to_glib_none().0))
+            from_glib(
+                webkit2_webextension_sys::webkit_dom_html_button_element_get_will_validate(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn set_autofocus(&self, value: bool) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_button_element_set_autofocus(self.as_ref().to_glib_none().0, value.to_glib());
+            webkit2_webextension_sys::webkit_dom_html_button_element_set_autofocus(
+                self.as_ref().to_glib_none().0,
+                value.to_glib(),
+            );
         }
     }
 
     fn set_button_type(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_button_element_set_button_type(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_button_element_set_button_type(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_disabled(&self, value: bool) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_button_element_set_disabled(self.as_ref().to_glib_none().0, value.to_glib());
+            webkit2_webextension_sys::webkit_dom_html_button_element_set_disabled(
+                self.as_ref().to_glib_none().0,
+                value.to_glib(),
+            );
         }
     }
 
     fn set_name(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_button_element_set_name(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_button_element_set_name(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_value(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_button_element_set_value(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_button_element_set_value(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn get_property_type(&self) -> Option<GString> {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
-            gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().expect("Return Value for property `type` getter")
+            gobject_sys::g_object_get_property(
+                self.to_glib_none().0 as *mut gobject_sys::GObject,
+                b"type\0".as_ptr() as *const _,
+                value.to_glib_none_mut().0,
+            );
+            value
+                .get()
+                .expect("Return Value for property `type` getter")
         }
     }
 
     fn set_property_type(&self, type_: Option<&str>) {
         unsafe {
-            gobject_sys::g_object_set_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"type\0".as_ptr() as *const _, Value::from(type_).to_glib_none().0);
+            gobject_sys::g_object_set_property(
+                self.to_glib_none().0 as *mut gobject_sys::GObject,
+                b"type\0".as_ptr() as *const _,
+                Value::from(type_).to_glib_none().0,
+            );
         }
     }
 
     fn connect_property_autofocus_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_autofocus_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLButtonElement>
+        unsafe extern "C" fn notify_autofocus_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLButtonElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLButtonElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::autofocus\0".as_ptr() as *const _,
-                Some(transmute(notify_autofocus_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::autofocus\0".as_ptr() as *const _,
+                Some(transmute(notify_autofocus_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_disabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_disabled_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLButtonElement>
+        unsafe extern "C" fn notify_disabled_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLButtonElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLButtonElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::disabled\0".as_ptr() as *const _,
-                Some(transmute(notify_disabled_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::disabled\0".as_ptr() as *const _,
+                Some(transmute(notify_disabled_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_form_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_form_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLButtonElement>
+        unsafe extern "C" fn notify_form_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLButtonElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLButtonElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::form\0".as_ptr() as *const _,
-                Some(transmute(notify_form_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::form\0".as_ptr() as *const _,
+                Some(transmute(notify_form_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLButtonElement>
+        unsafe extern "C" fn notify_name_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLButtonElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLButtonElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::name\0".as_ptr() as *const _,
+                Some(transmute(notify_name_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLButtonElement>
+        unsafe extern "C" fn notify_type_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLButtonElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLButtonElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::type\0".as_ptr() as *const _,
-                Some(transmute(notify_type_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::type\0".as_ptr() as *const _,
+                Some(transmute(notify_type_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_value_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_value_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLButtonElement>
+        unsafe extern "C" fn notify_value_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLButtonElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLButtonElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::value\0".as_ptr() as *const _,
-                Some(transmute(notify_value_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::value\0".as_ptr() as *const _,
+                Some(transmute(notify_value_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
-    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_will_validate_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLButtonElement>
+    fn connect_property_will_validate_notify<F: Fn(&Self) + 'static>(
+        &self,
+        f: F,
+    ) -> SignalHandlerId {
+        unsafe extern "C" fn notify_will_validate_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLButtonElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLButtonElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLButtonElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::will-validate\0".as_ptr() as *const _,
-                Some(transmute(notify_will_validate_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::will-validate\0".as_ptr() as *const _,
+                Some(transmute(
+                    notify_will_validate_trampoline::<Self, F> as usize,
+                )),
+                Box_::into_raw(f),
+            )
         }
     }
 }

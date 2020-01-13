@@ -33,15 +33,25 @@ impl<O: IsA<WebHitTestResult>> WebHitTestResultExt for O {
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     fn get_node(&self) -> Option<DOMNode> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_web_hit_test_result_get_node(self.as_ref().to_glib_none().0))
+            from_glib_none(
+                webkit2_webextension_sys::webkit_web_hit_test_result_get_node(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_property_node(&self) -> Option<DOMNode> {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
-            gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().expect("Return Value for property `node` getter")
+            gobject_sys::g_object_get_property(
+                self.to_glib_none().0 as *mut gobject_sys::GObject,
+                b"node\0".as_ptr() as *const _,
+                value.to_glib_none_mut().0,
+            );
+            value
+                .get()
+                .expect("Return Value for property `node` getter")
         }
     }
 }

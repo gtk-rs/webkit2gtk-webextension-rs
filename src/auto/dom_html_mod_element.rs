@@ -50,53 +50,83 @@ pub trait DOMHTMLModElementExt: 'static {
 impl<O: IsA<DOMHTMLModElement>> DOMHTMLModElementExt for O {
     fn get_cite(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_mod_element_get_cite(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_mod_element_get_cite(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn get_date_time(&self) -> Option<GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_html_mod_element_get_date_time(self.as_ref().to_glib_none().0))
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_html_mod_element_get_date_time(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
         }
     }
 
     fn set_cite(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_mod_element_set_cite(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_mod_element_set_cite(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn set_date_time(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_mod_element_set_date_time(self.as_ref().to_glib_none().0, value.to_glib_none().0);
+            webkit2_webextension_sys::webkit_dom_html_mod_element_set_date_time(
+                self.as_ref().to_glib_none().0,
+                value.to_glib_none().0,
+            );
         }
     }
 
     fn connect_property_cite_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_cite_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLModElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLModElement>
+        unsafe extern "C" fn notify_cite_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLModElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLModElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLModElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::cite\0".as_ptr() as *const _,
-                Some(transmute(notify_cite_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::cite\0".as_ptr() as *const _,
+                Some(transmute(notify_cite_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 
     fn connect_property_date_time_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_date_time_trampoline<P, F: Fn(&P) + 'static>(this: *mut webkit2_webextension_sys::WebKitDOMHTMLModElement, _param_spec: glib_sys::gpointer, f: glib_sys::gpointer)
-            where P: IsA<DOMHTMLModElement>
+        unsafe extern "C" fn notify_date_time_trampoline<P, F: Fn(&P) + 'static>(
+            this: *mut webkit2_webextension_sys::WebKitDOMHTMLModElement,
+            _param_spec: glib_sys::gpointer,
+            f: glib_sys::gpointer,
+        ) where
+            P: IsA<DOMHTMLModElement>,
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLModElement::from_glib_borrow(this).unsafe_cast())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::date-time\0".as_ptr() as *const _,
-                Some(transmute(notify_date_time_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"notify::date-time\0".as_ptr() as *const _,
+                Some(transmute(notify_date_time_trampoline::<Self, F> as usize)),
+                Box_::into_raw(f),
+            )
         }
     }
 }
