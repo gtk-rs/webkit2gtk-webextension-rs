@@ -2,23 +2,23 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMElement;
-use DOMEventTarget;
-use DOMNode;
-use DOMObject;
-use Error;
-use glib::GString;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
+use glib::GString;
 use glib_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMElement;
+use DOMEventTarget;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMAttr(Object<webkit2_webextension_sys::WebKitDOMAttr, webkit2_webextension_sys::WebKitDOMAttrClass, DOMAttrClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
@@ -44,7 +44,7 @@ pub trait DOMAttrExt: 'static {
     fn get_value(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_value(&self, value: &str) -> Result<(), Error>;
+    fn set_value(&self, value: &str) -> Result<(), glib::Error>;
 
     fn connect_property_local_name_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -86,7 +86,7 @@ impl<O: IsA<DOMAttr>> DOMAttrExt for O {
         }
     }
 
-    fn set_value(&self, value: &str) -> Result<(), Error> {
+    fn set_value(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_attr_set_value(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);

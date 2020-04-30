@@ -3,19 +3,15 @@
 // DO NOT EDIT
 
 #[cfg(any(feature = "v2_2", feature = "dox"))]
-use Frame;
-#[cfg(any(feature = "v2_2", feature = "dox"))]
-use WebPage;
-#[cfg(any(feature = "v2_22", feature = "dox"))]
-use glib::GString;
-#[cfg(any(feature = "v2_2", feature = "dox"))]
 use glib::object::Cast;
 use glib::object::IsA;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
-use glib::signal::SignalHandlerId;
-#[cfg(any(feature = "v2_2", feature = "dox"))]
 use glib::signal::connect_raw;
+#[cfg(any(feature = "v2_2", feature = "dox"))]
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
+#[cfg(any(feature = "v2_22", feature = "dox"))]
+use glib::GString;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
 use glib_sys;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
@@ -24,6 +20,10 @@ use std::fmt;
 #[cfg(any(feature = "v2_2", feature = "dox"))]
 use std::mem::transmute;
 use webkit2_webextension_sys;
+#[cfg(any(feature = "v2_2", feature = "dox"))]
+use Frame;
+#[cfg(any(feature = "v2_2", feature = "dox"))]
+use WebPage;
 
 glib_wrapper! {
     pub struct ScriptWorld(Object<webkit2_webextension_sys::WebKitScriptWorld, webkit2_webextension_sys::WebKitScriptWorldClass, ScriptWorldClass>);

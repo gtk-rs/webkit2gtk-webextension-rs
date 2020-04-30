@@ -14,22 +14,21 @@ soup-sys = "^0.9"
 [dev-dependencies]
 shell-words = "0.1.0"
 tempfile = "3"
-tempdir = "0.3"
 
 [features]
-dox = []
+v2_2 = []
+v2_4 = ["v2_2"]
+v2_6 = []
+v2_8 = ["v2_6"]
 v2_10 = ["v2_8"]
 v2_12 = ["v2_10"]
 v2_14 = ["v2_12"]
 v2_16 = ["v2_14"]
 v2_18 = ["v2_16"]
 v2_20 = ["v2_18"]
-v2_6 = []
-v2_8 = ["v2_6"]
-v2_2 = []
-v2_4 = ["v2_2"]
 v2_22 = ["v2_20"]
 v2_26 = ["v2_22"]
+dox = []
 
 [lib]
 name = "webkit2gtk_webextension_sys"
@@ -44,6 +43,6 @@ license = "MIT"
 links = "webkit2gtk_webextension"
 name = "webkit2gtk-webextension-sys"
 repository = "https://github.com/gtk-rs/webkit2gtk-webextension-rs"
-version = "0.7.0"
+version = "0.8.0"
 [package.metadata.docs.rs]
 features = ["dox"]

@@ -2,6 +2,17 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
+use glib::GString;
+use glib_sys;
+use std::boxed::Box as Box_;
+use std::fmt;
+use std::mem::transmute;
+use webkit2_webextension_sys;
 #[cfg(any(feature = "v2_12", feature = "dox"))]
 use ConsoleMessage;
 #[cfg(any(feature = "v2_8", feature = "dox"))]
@@ -15,17 +26,6 @@ use URIResponse;
 use WebEditor;
 #[cfg(any(feature = "v2_8", feature = "dox"))]
 use WebHitTestResult;
-use glib::GString;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
-use glib_sys;
-use std::boxed::Box as Box_;
-use std::fmt;
-use std::mem::transmute;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct WebPage(Object<webkit2_webextension_sys::WebKitWebPage, webkit2_webextension_sys::WebKitWebPageClass, WebPageClass>);
@@ -58,8 +58,12 @@ pub trait WebPageExt: 'static {
 
     fn connect_document_loaded<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
+    //#[cfg_attr(feature = "v2_26", deprecated)]
     //#[cfg(any(feature = "v2_16", feature = "dox"))]
     //fn connect_form_controls_associated<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId;
+
+    //#[cfg(any(feature = "v2_26", feature = "dox"))]
+    //fn connect_form_controls_associated_for_frame<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId;
 
     fn connect_send_request<F: Fn(&Self, &URIRequest, Option<&URIResponse>) -> bool + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -148,6 +152,11 @@ impl<O: IsA<WebPage>> WebPageExt for O {
 
     //#[cfg(any(feature = "v2_16", feature = "dox"))]
     //fn connect_form_controls_associated<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId {
+    //    Empty ctype elements: *.PtrArray TypeId { ns_id: 1, id: 12 }
+    //}
+
+    //#[cfg(any(feature = "v2_26", feature = "dox"))]
+    //fn connect_form_controls_associated_for_frame<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId {
     //    Empty ctype elements: *.PtrArray TypeId { ns_id: 1, id: 12 }
     //}
 

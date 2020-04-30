@@ -2,15 +2,11 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMCSSRule;
-use DOMCSSRuleList;
-use DOMObject;
-use DOMStyleSheet;
-use Error;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
 use glib_sys;
 use libc;
@@ -19,6 +15,10 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMCSSRule;
+use DOMCSSRuleList;
+use DOMObject;
+use DOMStyleSheet;
 
 glib_wrapper! {
     pub struct DOMCSSStyleSheet(Object<webkit2_webextension_sys::WebKitDOMCSSStyleSheet, webkit2_webextension_sys::WebKitDOMCSSStyleSheetClass, DOMCSSStyleSheetClass>) @extends DOMStyleSheet, DOMObject;
@@ -32,10 +32,10 @@ pub const NONE_DOMCSS_STYLE_SHEET: Option<&DOMCSSStyleSheet> = None;
 
 pub trait DOMCSSStyleSheetExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn add_rule(&self, selector: &str, style: &str, index: libc::c_ulong) -> Result<libc::c_long, Error>;
+    fn add_rule(&self, selector: &str, style: &str, index: libc::c_ulong) -> Result<libc::c_long, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn delete_rule(&self, index: libc::c_ulong) -> Result<(), Error>;
+    fn delete_rule(&self, index: libc::c_ulong) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_css_rules(&self) -> Option<DOMCSSRuleList>;
@@ -47,10 +47,10 @@ pub trait DOMCSSStyleSheetExt: 'static {
     fn get_rules(&self) -> Option<DOMCSSRuleList>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn insert_rule(&self, rule: &str, index: libc::c_ulong) -> Result<libc::c_ulong, Error>;
+    fn insert_rule(&self, rule: &str, index: libc::c_ulong) -> Result<libc::c_ulong, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn remove_rule(&self, index: libc::c_ulong) -> Result<(), Error>;
+    fn remove_rule(&self, index: libc::c_ulong) -> Result<(), glib::Error>;
 
     fn connect_property_css_rules_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -60,7 +60,7 @@ pub trait DOMCSSStyleSheetExt: 'static {
 }
 
 impl<O: IsA<DOMCSSStyleSheet>> DOMCSSStyleSheetExt for O {
-    fn add_rule(&self, selector: &str, style: &str, index: libc::c_ulong) -> Result<libc::c_long, Error> {
+    fn add_rule(&self, selector: &str, style: &str, index: libc::c_ulong) -> Result<libc::c_long, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_css_style_sheet_add_rule(self.as_ref().to_glib_none().0, selector.to_glib_none().0, style.to_glib_none().0, index, &mut error);
@@ -68,7 +68,7 @@ impl<O: IsA<DOMCSSStyleSheet>> DOMCSSStyleSheetExt for O {
         }
     }
 
-    fn delete_rule(&self, index: libc::c_ulong) -> Result<(), Error> {
+    fn delete_rule(&self, index: libc::c_ulong) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_css_style_sheet_delete_rule(self.as_ref().to_glib_none().0, index, &mut error);
@@ -94,7 +94,7 @@ impl<O: IsA<DOMCSSStyleSheet>> DOMCSSStyleSheetExt for O {
         }
     }
 
-    fn insert_rule(&self, rule: &str, index: libc::c_ulong) -> Result<libc::c_ulong, Error> {
+    fn insert_rule(&self, rule: &str, index: libc::c_ulong) -> Result<libc::c_ulong, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_css_style_sheet_insert_rule(self.as_ref().to_glib_none().0, rule.to_glib_none().0, index, &mut error);
@@ -102,7 +102,7 @@ impl<O: IsA<DOMCSSStyleSheet>> DOMCSSStyleSheetExt for O {
         }
     }
 
-    fn remove_rule(&self, index: libc::c_ulong) -> Result<(), Error> {
+    fn remove_rule(&self, index: libc::c_ulong) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_css_style_sheet_remove_rule(self.as_ref().to_glib_none().0, index, &mut error);

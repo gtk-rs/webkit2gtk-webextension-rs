@@ -2,13 +2,11 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMNode;
-use DOMObject;
-use Error;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
 use glib_sys;
 use libc;
@@ -17,6 +15,8 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMNodeIterator(Object<webkit2_webextension_sys::WebKitDOMNodeIterator, webkit2_webextension_sys::WebKitDOMNodeIteratorClass, DOMNodeIteratorClass>) @extends DOMObject;
@@ -51,10 +51,10 @@ pub trait DOMNodeIteratorExt: 'static {
     fn get_what_to_show(&self) -> libc::c_ulong;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn next_node(&self) -> Result<DOMNode, Error>;
+    fn next_node(&self) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn previous_node(&self) -> Result<DOMNode, Error>;
+    fn previous_node(&self) -> Result<DOMNode, glib::Error>;
 
     fn connect_property_filter_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -108,7 +108,7 @@ impl<O: IsA<DOMNodeIterator>> DOMNodeIteratorExt for O {
         }
     }
 
-    fn next_node(&self) -> Result<DOMNode, Error> {
+    fn next_node(&self) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_iterator_next_node(self.as_ref().to_glib_none().0, &mut error);
@@ -116,7 +116,7 @@ impl<O: IsA<DOMNodeIterator>> DOMNodeIteratorExt for O {
         }
     }
 
-    fn previous_node(&self) -> Result<DOMNode, Error> {
+    fn previous_node(&self) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_iterator_previous_node(self.as_ref().to_glib_none().0, &mut error);

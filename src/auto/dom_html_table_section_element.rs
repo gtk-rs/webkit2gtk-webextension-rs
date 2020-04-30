@@ -2,19 +2,13 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMElement;
-use DOMEventTarget;
-use DOMHTMLCollection;
-use DOMHTMLElement;
-use DOMNode;
-use DOMObject;
-use Error;
-use glib::GString;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
+use glib::GString;
 use glib_sys;
 use libc;
 use std::boxed::Box as Box_;
@@ -22,6 +16,12 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMElement;
+use DOMEventTarget;
+use DOMHTMLCollection;
+use DOMHTMLElement;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMHTMLTableSectionElement(Object<webkit2_webextension_sys::WebKitDOMHTMLTableSectionElement, webkit2_webextension_sys::WebKitDOMHTMLTableSectionElementClass, DOMHTMLTableSectionElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
@@ -35,7 +35,7 @@ pub const NONE_DOMHTML_TABLE_SECTION_ELEMENT: Option<&DOMHTMLTableSectionElement
 
 pub trait DOMHTMLTableSectionElementExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn delete_row(&self, index: libc::c_long) -> Result<(), Error>;
+    fn delete_row(&self, index: libc::c_long) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_align(&self) -> Option<GString>;
@@ -53,7 +53,7 @@ pub trait DOMHTMLTableSectionElementExt: 'static {
     fn get_v_align(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, Error>;
+    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
@@ -79,7 +79,7 @@ pub trait DOMHTMLTableSectionElementExt: 'static {
 }
 
 impl<O: IsA<DOMHTMLTableSectionElement>> DOMHTMLTableSectionElementExt for O {
-    fn delete_row(&self, index: libc::c_long) -> Result<(), Error> {
+    fn delete_row(&self, index: libc::c_long) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_table_section_element_delete_row(self.as_ref().to_glib_none().0, index, &mut error);
@@ -117,7 +117,7 @@ impl<O: IsA<DOMHTMLTableSectionElement>> DOMHTMLTableSectionElementExt for O {
         }
     }
 
-    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, Error> {
+    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_html_table_section_element_insert_row(self.as_ref().to_glib_none().0, index, &mut error);

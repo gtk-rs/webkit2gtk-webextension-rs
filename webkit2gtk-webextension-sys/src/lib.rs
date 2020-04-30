@@ -3,20 +3,25 @@
 // DO NOT EDIT
 
 #![allow(non_camel_case_types, non_upper_case_globals, non_snake_case)]
-#![allow(clippy::approx_constant, clippy::type_complexity, clippy::unreadable_literal)]
+#![allow(
+    clippy::approx_constant,
+    clippy::type_complexity,
+    clippy::unreadable_literal
+)]
 
-extern crate libc;
 extern crate gio_sys as gio;
 extern crate glib_sys as glib;
 extern crate gobject_sys as gobject;
 extern crate gtk_sys as gtk;
-extern crate soup_sys as soup;
 extern crate javascriptcore_sys as java_script_core;
+extern crate libc;
+extern crate soup_sys as soup;
 
 #[allow(unused_imports)]
-use libc::{c_int, c_char, c_uchar, c_float, c_uint, c_double,
-    c_short, c_ushort, c_long, c_ulong,
-    c_void, size_t, ssize_t, intptr_t, uintptr_t, time_t, FILE};
+use libc::{
+    c_char, c_double, c_float, c_int, c_long, c_short, c_uchar, c_uint, c_ulong, c_ushort, c_void,
+    intptr_t, size_t, ssize_t, time_t, uintptr_t, FILE,
+};
 
 #[allow(unused_imports)]
 use glib::{gboolean, gconstpointer, gpointer, GType};
@@ -81,6 +86,7 @@ pub const WEBKIT_CONTEXT_MENU_ACTION_MEDIA_PAUSE: WebKitContextMenuAction = 40;
 pub const WEBKIT_CONTEXT_MENU_ACTION_MEDIA_MUTE: WebKitContextMenuAction = 41;
 pub const WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_VIDEO_TO_DISK: WebKitContextMenuAction = 42;
 pub const WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_AUDIO_TO_DISK: WebKitContextMenuAction = 43;
+pub const WEBKIT_CONTEXT_MENU_ACTION_INSERT_EMOJI: WebKitContextMenuAction = 44;
 pub const WEBKIT_CONTEXT_MENU_ACTION_CUSTOM: WebKitContextMenuAction = 10000;
 
 pub type WebKitFormSubmissionStep = c_int;
@@ -187,8 +193,10 @@ pub const WEBKIT_HIT_TEST_RESULT_CONTEXT_SCROLLBAR: WebKitHitTestResultContext =
 pub const WEBKIT_HIT_TEST_RESULT_CONTEXT_SELECTION: WebKitHitTestResultContext = 128;
 
 // Callbacks
-pub type WebKitWebExtensionInitializeFunction = Option<unsafe extern "C" fn(*mut WebKitWebExtension)>;
-pub type WebKitWebExtensionInitializeWithUserDataFunction = Option<unsafe extern "C" fn(*mut WebKitWebExtension, *const glib::GVariant)>;
+pub type WebKitWebExtensionInitializeFunction =
+    Option<unsafe extern "C" fn(*mut WebKitWebExtension)>;
+pub type WebKitWebExtensionInitializeWithUserDataFunction =
+    Option<unsafe extern "C" fn(*mut WebKitWebExtension, *const glib::GVariant)>;
 
 // Records
 #[repr(C)]
@@ -197,7 +205,7 @@ pub struct WebKitConsoleMessage(c_void);
 impl ::std::fmt::Debug for WebKitConsoleMessage {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitConsoleMessage @ {:?}", self as *const _))
-         .finish()
+            .finish()
     }
 }
 
@@ -214,12 +222,12 @@ pub struct WebKitContextMenuClass {
 impl ::std::fmt::Debug for WebKitContextMenuClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitContextMenuClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .field("_webkit_reserved0", &self._webkit_reserved0)
-         .field("_webkit_reserved1", &self._webkit_reserved1)
-         .field("_webkit_reserved2", &self._webkit_reserved2)
-         .field("_webkit_reserved3", &self._webkit_reserved3)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .field("_webkit_reserved0", &self._webkit_reserved0)
+            .field("_webkit_reserved1", &self._webkit_reserved1)
+            .field("_webkit_reserved2", &self._webkit_reserved2)
+            .field("_webkit_reserved3", &self._webkit_reserved3)
+            .finish()
     }
 }
 
@@ -235,13 +243,16 @@ pub struct WebKitContextMenuItemClass {
 
 impl ::std::fmt::Debug for WebKitContextMenuItemClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitContextMenuItemClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .field("_webkit_reserved0", &self._webkit_reserved0)
-         .field("_webkit_reserved1", &self._webkit_reserved1)
-         .field("_webkit_reserved2", &self._webkit_reserved2)
-         .field("_webkit_reserved3", &self._webkit_reserved3)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitContextMenuItemClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .field("_webkit_reserved0", &self._webkit_reserved0)
+        .field("_webkit_reserved1", &self._webkit_reserved1)
+        .field("_webkit_reserved2", &self._webkit_reserved2)
+        .field("_webkit_reserved3", &self._webkit_reserved3)
+        .finish()
     }
 }
 
@@ -264,8 +275,8 @@ pub struct WebKitDOMAttrClass {
 impl ::std::fmt::Debug for WebKitDOMAttrClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMAttrClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -278,8 +289,8 @@ pub struct WebKitDOMBlobClass {
 impl ::std::fmt::Debug for WebKitDOMBlobClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMBlobClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -291,9 +302,12 @@ pub struct WebKitDOMCDATASectionClass {
 
 impl ::std::fmt::Debug for WebKitDOMCDATASectionClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMCDATASectionClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMCDATASectionClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -306,8 +320,8 @@ pub struct WebKitDOMCSSRuleClass {
 impl ::std::fmt::Debug for WebKitDOMCSSRuleClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMCSSRuleClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -319,9 +333,12 @@ pub struct WebKitDOMCSSRuleListClass {
 
 impl ::std::fmt::Debug for WebKitDOMCSSRuleListClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMCSSRuleListClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMCSSRuleListClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -333,9 +350,12 @@ pub struct WebKitDOMCSSStyleDeclarationClass {
 
 impl ::std::fmt::Debug for WebKitDOMCSSStyleDeclarationClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMCSSStyleDeclarationClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMCSSStyleDeclarationClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -347,9 +367,12 @@ pub struct WebKitDOMCSSStyleSheetClass {
 
 impl ::std::fmt::Debug for WebKitDOMCSSStyleSheetClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMCSSStyleSheetClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMCSSStyleSheetClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -362,8 +385,8 @@ pub struct WebKitDOMCSSValueClass {
 impl ::std::fmt::Debug for WebKitDOMCSSValueClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMCSSValueClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -375,9 +398,12 @@ pub struct WebKitDOMCharacterDataClass {
 
 impl ::std::fmt::Debug for WebKitDOMCharacterDataClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMCharacterDataClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMCharacterDataClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -389,9 +415,12 @@ pub struct WebKitDOMClientRectClass {
 
 impl ::std::fmt::Debug for WebKitDOMClientRectClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMClientRectClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMClientRectClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -403,9 +432,12 @@ pub struct WebKitDOMClientRectListClass {
 
 impl ::std::fmt::Debug for WebKitDOMClientRectListClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMClientRectListClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMClientRectListClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -418,8 +450,8 @@ pub struct WebKitDOMCommentClass {
 impl ::std::fmt::Debug for WebKitDOMCommentClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMCommentClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -431,9 +463,12 @@ pub struct WebKitDOMDOMImplementationClass {
 
 impl ::std::fmt::Debug for WebKitDOMDOMImplementationClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMDOMImplementationClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMDOMImplementationClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -445,9 +480,12 @@ pub struct WebKitDOMDOMSelectionClass {
 
 impl ::std::fmt::Debug for WebKitDOMDOMSelectionClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMDOMSelectionClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMDOMSelectionClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -459,9 +497,12 @@ pub struct WebKitDOMDOMTokenListClass {
 
 impl ::std::fmt::Debug for WebKitDOMDOMTokenListClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMDOMTokenListClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMDOMTokenListClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -474,8 +515,8 @@ pub struct WebKitDOMDOMWindowClass {
 impl ::std::fmt::Debug for WebKitDOMDOMWindowClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMDOMWindowClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -488,8 +529,8 @@ pub struct WebKitDOMDocumentClass {
 impl ::std::fmt::Debug for WebKitDOMDocumentClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMDocumentClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -501,9 +542,12 @@ pub struct WebKitDOMDocumentFragmentClass {
 
 impl ::std::fmt::Debug for WebKitDOMDocumentFragmentClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMDocumentFragmentClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMDocumentFragmentClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -515,9 +559,12 @@ pub struct WebKitDOMDocumentTypeClass {
 
 impl ::std::fmt::Debug for WebKitDOMDocumentTypeClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMDocumentTypeClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMDocumentTypeClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -530,8 +577,8 @@ pub struct WebKitDOMElementClass {
 impl ::std::fmt::Debug for WebKitDOMElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -543,9 +590,12 @@ pub struct WebKitDOMEntityReferenceClass {
 
 impl ::std::fmt::Debug for WebKitDOMEntityReferenceClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMEntityReferenceClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMEntityReferenceClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -558,8 +608,8 @@ pub struct WebKitDOMEventClass {
 impl ::std::fmt::Debug for WebKitDOMEventClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMEventClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -567,9 +617,29 @@ impl ::std::fmt::Debug for WebKitDOMEventClass {
 #[derive(Copy, Clone)]
 pub struct WebKitDOMEventTargetIface {
     pub gIface: gobject::GTypeInterface,
-    pub dispatch_event: Option<unsafe extern "C" fn(*mut WebKitDOMEventTarget, *mut WebKitDOMEvent, *mut *mut glib::GError) -> gboolean>,
-    pub add_event_listener: Option<unsafe extern "C" fn(*mut WebKitDOMEventTarget, *const c_char, *mut gobject::GClosure, gboolean) -> gboolean>,
-    pub remove_event_listener: Option<unsafe extern "C" fn(*mut WebKitDOMEventTarget, *const c_char, *mut gobject::GClosure, gboolean) -> gboolean>,
+    pub dispatch_event: Option<
+        unsafe extern "C" fn(
+            *mut WebKitDOMEventTarget,
+            *mut WebKitDOMEvent,
+            *mut *mut glib::GError,
+        ) -> gboolean,
+    >,
+    pub add_event_listener: Option<
+        unsafe extern "C" fn(
+            *mut WebKitDOMEventTarget,
+            *const c_char,
+            *mut gobject::GClosure,
+            gboolean,
+        ) -> gboolean,
+    >,
+    pub remove_event_listener: Option<
+        unsafe extern "C" fn(
+            *mut WebKitDOMEventTarget,
+            *const c_char,
+            *mut gobject::GClosure,
+            gboolean,
+        ) -> gboolean,
+    >,
     pub _webkitdom_reserved0: Option<unsafe extern "C" fn()>,
     pub _webkitdom_reserved1: Option<unsafe extern "C" fn()>,
     pub _webkitdom_reserved2: Option<unsafe extern "C" fn()>,
@@ -578,16 +648,19 @@ pub struct WebKitDOMEventTargetIface {
 
 impl ::std::fmt::Debug for WebKitDOMEventTargetIface {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMEventTargetIface @ {:?}", self as *const _))
-         .field("gIface", &self.gIface)
-         .field("dispatch_event", &self.dispatch_event)
-         .field("add_event_listener", &self.add_event_listener)
-         .field("remove_event_listener", &self.remove_event_listener)
-         .field("_webkitdom_reserved0", &self._webkitdom_reserved0)
-         .field("_webkitdom_reserved1", &self._webkitdom_reserved1)
-         .field("_webkitdom_reserved2", &self._webkitdom_reserved2)
-         .field("_webkitdom_reserved3", &self._webkitdom_reserved3)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMEventTargetIface @ {:?}",
+            self as *const _
+        ))
+        .field("gIface", &self.gIface)
+        .field("dispatch_event", &self.dispatch_event)
+        .field("add_event_listener", &self.add_event_listener)
+        .field("remove_event_listener", &self.remove_event_listener)
+        .field("_webkitdom_reserved0", &self._webkitdom_reserved0)
+        .field("_webkitdom_reserved1", &self._webkitdom_reserved1)
+        .field("_webkitdom_reserved2", &self._webkitdom_reserved2)
+        .field("_webkitdom_reserved3", &self._webkitdom_reserved3)
+        .finish()
     }
 }
 
@@ -600,8 +673,8 @@ pub struct WebKitDOMFileClass {
 impl ::std::fmt::Debug for WebKitDOMFileClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMFileClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -614,8 +687,8 @@ pub struct WebKitDOMFileListClass {
 impl ::std::fmt::Debug for WebKitDOMFileListClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMFileListClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -627,9 +700,12 @@ pub struct WebKitDOMHTMLAnchorElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLAnchorElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLAnchorElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLAnchorElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -641,9 +717,12 @@ pub struct WebKitDOMHTMLAppletElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLAppletElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLAppletElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLAppletElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -655,9 +734,12 @@ pub struct WebKitDOMHTMLAreaElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLAreaElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLAreaElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLAreaElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -669,9 +751,12 @@ pub struct WebKitDOMHTMLBRElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLBRElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLBRElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLBRElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -683,9 +768,12 @@ pub struct WebKitDOMHTMLBaseElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLBaseElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLBaseElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLBaseElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -697,9 +785,12 @@ pub struct WebKitDOMHTMLBaseFontElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLBaseFontElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLBaseFontElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLBaseFontElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -711,9 +802,12 @@ pub struct WebKitDOMHTMLBodyElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLBodyElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLBodyElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLBodyElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -725,9 +819,12 @@ pub struct WebKitDOMHTMLButtonElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLButtonElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLButtonElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLButtonElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -739,9 +836,12 @@ pub struct WebKitDOMHTMLCanvasElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLCanvasElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLCanvasElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLCanvasElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -753,9 +853,12 @@ pub struct WebKitDOMHTMLCollectionClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLCollectionClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLCollectionClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLCollectionClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -767,9 +870,12 @@ pub struct WebKitDOMHTMLDListElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLDListElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLDListElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLDListElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -781,9 +887,12 @@ pub struct WebKitDOMHTMLDirectoryElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLDirectoryElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLDirectoryElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLDirectoryElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -795,9 +904,12 @@ pub struct WebKitDOMHTMLDivElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLDivElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLDivElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLDivElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -809,9 +921,12 @@ pub struct WebKitDOMHTMLDocumentClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLDocumentClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLDocumentClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLDocumentClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -823,9 +938,12 @@ pub struct WebKitDOMHTMLElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -837,9 +955,12 @@ pub struct WebKitDOMHTMLEmbedElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLEmbedElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLEmbedElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLEmbedElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -851,9 +972,12 @@ pub struct WebKitDOMHTMLFieldSetElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLFieldSetElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLFieldSetElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLFieldSetElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -865,9 +989,12 @@ pub struct WebKitDOMHTMLFontElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLFontElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLFontElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLFontElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -879,9 +1006,12 @@ pub struct WebKitDOMHTMLFormElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLFormElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLFormElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLFormElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -893,9 +1023,12 @@ pub struct WebKitDOMHTMLFrameElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLFrameElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLFrameElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLFrameElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -907,9 +1040,12 @@ pub struct WebKitDOMHTMLFrameSetElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLFrameSetElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLFrameSetElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLFrameSetElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -921,9 +1057,12 @@ pub struct WebKitDOMHTMLHRElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLHRElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLHRElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLHRElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -935,9 +1074,12 @@ pub struct WebKitDOMHTMLHeadElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLHeadElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLHeadElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLHeadElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -949,9 +1091,12 @@ pub struct WebKitDOMHTMLHeadingElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLHeadingElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLHeadingElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLHeadingElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -963,9 +1108,12 @@ pub struct WebKitDOMHTMLHtmlElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLHtmlElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLHtmlElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLHtmlElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -977,9 +1125,12 @@ pub struct WebKitDOMHTMLIFrameElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLIFrameElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLIFrameElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLIFrameElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -991,9 +1142,12 @@ pub struct WebKitDOMHTMLImageElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLImageElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLImageElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLImageElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1005,9 +1159,12 @@ pub struct WebKitDOMHTMLInputElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLInputElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLInputElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLInputElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1019,9 +1176,12 @@ pub struct WebKitDOMHTMLLIElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLLIElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLLIElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLLIElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1033,9 +1193,12 @@ pub struct WebKitDOMHTMLLabelElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLLabelElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLLabelElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLLabelElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1047,9 +1210,12 @@ pub struct WebKitDOMHTMLLegendElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLLegendElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLLegendElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLLegendElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1061,9 +1227,12 @@ pub struct WebKitDOMHTMLLinkElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLLinkElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLLinkElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLLinkElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1075,9 +1244,12 @@ pub struct WebKitDOMHTMLMapElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLMapElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLMapElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLMapElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1089,9 +1261,12 @@ pub struct WebKitDOMHTMLMarqueeElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLMarqueeElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLMarqueeElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLMarqueeElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1103,9 +1278,12 @@ pub struct WebKitDOMHTMLMenuElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLMenuElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLMenuElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLMenuElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1117,9 +1295,12 @@ pub struct WebKitDOMHTMLMetaElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLMetaElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLMetaElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLMetaElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1131,9 +1312,12 @@ pub struct WebKitDOMHTMLModElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLModElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLModElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLModElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1145,9 +1329,12 @@ pub struct WebKitDOMHTMLOListElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLOListElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLOListElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLOListElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1159,9 +1346,12 @@ pub struct WebKitDOMHTMLObjectElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLObjectElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLObjectElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLObjectElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1173,9 +1363,12 @@ pub struct WebKitDOMHTMLOptGroupElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLOptGroupElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLOptGroupElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLOptGroupElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1187,9 +1380,12 @@ pub struct WebKitDOMHTMLOptionElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLOptionElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLOptionElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLOptionElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1201,9 +1397,12 @@ pub struct WebKitDOMHTMLOptionsCollectionClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLOptionsCollectionClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLOptionsCollectionClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLOptionsCollectionClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1215,9 +1414,12 @@ pub struct WebKitDOMHTMLParagraphElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLParagraphElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLParagraphElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLParagraphElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1229,9 +1431,12 @@ pub struct WebKitDOMHTMLParamElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLParamElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLParamElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLParamElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1243,9 +1448,12 @@ pub struct WebKitDOMHTMLPreElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLPreElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLPreElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLPreElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1257,9 +1465,12 @@ pub struct WebKitDOMHTMLQuoteElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLQuoteElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLQuoteElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLQuoteElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1271,9 +1482,12 @@ pub struct WebKitDOMHTMLScriptElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLScriptElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLScriptElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLScriptElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1285,9 +1499,12 @@ pub struct WebKitDOMHTMLSelectElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLSelectElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLSelectElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLSelectElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1299,9 +1516,12 @@ pub struct WebKitDOMHTMLStyleElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLStyleElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLStyleElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLStyleElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1313,9 +1533,12 @@ pub struct WebKitDOMHTMLTableCaptionElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableCaptionElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableCaptionElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableCaptionElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1327,9 +1550,12 @@ pub struct WebKitDOMHTMLTableCellElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableCellElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableCellElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableCellElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1341,9 +1567,12 @@ pub struct WebKitDOMHTMLTableColElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableColElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableColElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableColElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1355,9 +1584,12 @@ pub struct WebKitDOMHTMLTableElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1369,9 +1601,12 @@ pub struct WebKitDOMHTMLTableRowElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableRowElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableRowElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableRowElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1383,9 +1618,12 @@ pub struct WebKitDOMHTMLTableSectionElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableSectionElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableSectionElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableSectionElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1397,9 +1635,12 @@ pub struct WebKitDOMHTMLTextAreaElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTextAreaElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTextAreaElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTextAreaElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1411,9 +1652,12 @@ pub struct WebKitDOMHTMLTitleElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTitleElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTitleElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTitleElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1425,9 +1669,12 @@ pub struct WebKitDOMHTMLUListElementClass {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLUListElementClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLUListElementClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLUListElementClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1439,9 +1686,12 @@ pub struct WebKitDOMKeyboardEventClass {
 
 impl ::std::fmt::Debug for WebKitDOMKeyboardEventClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMKeyboardEventClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMKeyboardEventClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1454,8 +1704,8 @@ pub struct WebKitDOMMediaListClass {
 impl ::std::fmt::Debug for WebKitDOMMediaListClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMMediaListClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -1467,9 +1717,12 @@ pub struct WebKitDOMMouseEventClass {
 
 impl ::std::fmt::Debug for WebKitDOMMouseEventClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMMouseEventClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMMouseEventClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1481,9 +1734,12 @@ pub struct WebKitDOMNamedNodeMapClass {
 
 impl ::std::fmt::Debug for WebKitDOMNamedNodeMapClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMNamedNodeMapClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMNamedNodeMapClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1496,8 +1752,8 @@ pub struct WebKitDOMNodeClass {
 impl ::std::fmt::Debug for WebKitDOMNodeClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMNodeClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -1505,7 +1761,8 @@ impl ::std::fmt::Debug for WebKitDOMNodeClass {
 #[derive(Copy, Clone)]
 pub struct WebKitDOMNodeFilterIface {
     pub gIface: gobject::GTypeInterface,
-    pub accept_node: Option<unsafe extern "C" fn(*mut WebKitDOMNodeFilter, *mut WebKitDOMNode) -> c_short>,
+    pub accept_node:
+        Option<unsafe extern "C" fn(*mut WebKitDOMNodeFilter, *mut WebKitDOMNode) -> c_short>,
     pub _webkitdom_reserved0: Option<unsafe extern "C" fn()>,
     pub _webkitdom_reserved1: Option<unsafe extern "C" fn()>,
     pub _webkitdom_reserved2: Option<unsafe extern "C" fn()>,
@@ -1514,14 +1771,17 @@ pub struct WebKitDOMNodeFilterIface {
 
 impl ::std::fmt::Debug for WebKitDOMNodeFilterIface {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMNodeFilterIface @ {:?}", self as *const _))
-         .field("gIface", &self.gIface)
-         .field("accept_node", &self.accept_node)
-         .field("_webkitdom_reserved0", &self._webkitdom_reserved0)
-         .field("_webkitdom_reserved1", &self._webkitdom_reserved1)
-         .field("_webkitdom_reserved2", &self._webkitdom_reserved2)
-         .field("_webkitdom_reserved3", &self._webkitdom_reserved3)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMNodeFilterIface @ {:?}",
+            self as *const _
+        ))
+        .field("gIface", &self.gIface)
+        .field("accept_node", &self.accept_node)
+        .field("_webkitdom_reserved0", &self._webkitdom_reserved0)
+        .field("_webkitdom_reserved1", &self._webkitdom_reserved1)
+        .field("_webkitdom_reserved2", &self._webkitdom_reserved2)
+        .field("_webkitdom_reserved3", &self._webkitdom_reserved3)
+        .finish()
     }
 }
 
@@ -1533,9 +1793,12 @@ pub struct WebKitDOMNodeIteratorClass {
 
 impl ::std::fmt::Debug for WebKitDOMNodeIteratorClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMNodeIteratorClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMNodeIteratorClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1548,8 +1811,8 @@ pub struct WebKitDOMNodeListClass {
 impl ::std::fmt::Debug for WebKitDOMNodeListClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMNodeListClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -1562,8 +1825,8 @@ pub struct WebKitDOMObjectClass {
 impl ::std::fmt::Debug for WebKitDOMObjectClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMObjectClass @ {:?}", self as *const _))
-         .field("parentClass", &self.parentClass)
-         .finish()
+            .field("parentClass", &self.parentClass)
+            .finish()
     }
 }
 
@@ -1575,9 +1838,12 @@ pub struct WebKitDOMProcessingInstructionClass {
 
 impl ::std::fmt::Debug for WebKitDOMProcessingInstructionClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMProcessingInstructionClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMProcessingInstructionClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1590,8 +1856,8 @@ pub struct WebKitDOMRangeClass {
 impl ::std::fmt::Debug for WebKitDOMRangeClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMRangeClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -1603,9 +1869,12 @@ pub struct WebKitDOMStyleSheetClass {
 
 impl ::std::fmt::Debug for WebKitDOMStyleSheetClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMStyleSheetClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMStyleSheetClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1617,9 +1886,12 @@ pub struct WebKitDOMStyleSheetListClass {
 
 impl ::std::fmt::Debug for WebKitDOMStyleSheetListClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMStyleSheetListClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMStyleSheetListClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1632,8 +1904,8 @@ pub struct WebKitDOMTextClass {
 impl ::std::fmt::Debug for WebKitDOMTextClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMTextClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -1645,9 +1917,12 @@ pub struct WebKitDOMTreeWalkerClass {
 
 impl ::std::fmt::Debug for WebKitDOMTreeWalkerClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMTreeWalkerClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMTreeWalkerClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1660,8 +1935,8 @@ pub struct WebKitDOMUIEventClass {
 impl ::std::fmt::Debug for WebKitDOMUIEventClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMUIEventClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -1673,9 +1948,12 @@ pub struct WebKitDOMWheelEventClass {
 
 impl ::std::fmt::Debug for WebKitDOMWheelEventClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMWheelEventClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMWheelEventClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1687,9 +1965,12 @@ pub struct WebKitDOMXPathExpressionClass {
 
 impl ::std::fmt::Debug for WebKitDOMXPathExpressionClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMXPathExpressionClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMXPathExpressionClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1697,7 +1978,8 @@ impl ::std::fmt::Debug for WebKitDOMXPathExpressionClass {
 #[derive(Copy, Clone)]
 pub struct WebKitDOMXPathNSResolverIface {
     pub gIface: gobject::GTypeInterface,
-    pub lookup_namespace_uri: Option<unsafe extern "C" fn(*mut WebKitDOMXPathNSResolver, *const c_char) -> *mut c_char>,
+    pub lookup_namespace_uri:
+        Option<unsafe extern "C" fn(*mut WebKitDOMXPathNSResolver, *const c_char) -> *mut c_char>,
     pub _webkitdom_reserved0: Option<unsafe extern "C" fn()>,
     pub _webkitdom_reserved1: Option<unsafe extern "C" fn()>,
     pub _webkitdom_reserved2: Option<unsafe extern "C" fn()>,
@@ -1706,14 +1988,17 @@ pub struct WebKitDOMXPathNSResolverIface {
 
 impl ::std::fmt::Debug for WebKitDOMXPathNSResolverIface {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMXPathNSResolverIface @ {:?}", self as *const _))
-         .field("gIface", &self.gIface)
-         .field("lookup_namespace_uri", &self.lookup_namespace_uri)
-         .field("_webkitdom_reserved0", &self._webkitdom_reserved0)
-         .field("_webkitdom_reserved1", &self._webkitdom_reserved1)
-         .field("_webkitdom_reserved2", &self._webkitdom_reserved2)
-         .field("_webkitdom_reserved3", &self._webkitdom_reserved3)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMXPathNSResolverIface @ {:?}",
+            self as *const _
+        ))
+        .field("gIface", &self.gIface)
+        .field("lookup_namespace_uri", &self.lookup_namespace_uri)
+        .field("_webkitdom_reserved0", &self._webkitdom_reserved0)
+        .field("_webkitdom_reserved1", &self._webkitdom_reserved1)
+        .field("_webkitdom_reserved2", &self._webkitdom_reserved2)
+        .field("_webkitdom_reserved3", &self._webkitdom_reserved3)
+        .finish()
     }
 }
 
@@ -1725,9 +2010,12 @@ pub struct WebKitDOMXPathResultClass {
 
 impl ::std::fmt::Debug for WebKitDOMXPathResultClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMXPathResultClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMXPathResultClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .finish()
     }
 }
 
@@ -1740,8 +2028,8 @@ pub struct WebKitFrameClass {
 impl ::std::fmt::Debug for WebKitFrameClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitFrameClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -1762,13 +2050,16 @@ pub struct WebKitHitTestResultClass {
 
 impl ::std::fmt::Debug for WebKitHitTestResultClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitHitTestResultClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .field("_webkit_reserved0", &self._webkit_reserved0)
-         .field("_webkit_reserved1", &self._webkit_reserved1)
-         .field("_webkit_reserved2", &self._webkit_reserved2)
-         .field("_webkit_reserved3", &self._webkit_reserved3)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitHitTestResultClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .field("_webkit_reserved0", &self._webkit_reserved0)
+        .field("_webkit_reserved1", &self._webkit_reserved1)
+        .field("_webkit_reserved2", &self._webkit_reserved2)
+        .field("_webkit_reserved3", &self._webkit_reserved3)
+        .finish()
     }
 }
 
@@ -1790,12 +2081,12 @@ pub struct WebKitScriptWorldClass {
 impl ::std::fmt::Debug for WebKitScriptWorldClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitScriptWorldClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .field("_webkit_reserved0", &self._webkit_reserved0)
-         .field("_webkit_reserved1", &self._webkit_reserved1)
-         .field("_webkit_reserved2", &self._webkit_reserved2)
-         .field("_webkit_reserved3", &self._webkit_reserved3)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .field("_webkit_reserved0", &self._webkit_reserved0)
+            .field("_webkit_reserved1", &self._webkit_reserved1)
+            .field("_webkit_reserved2", &self._webkit_reserved2)
+            .field("_webkit_reserved3", &self._webkit_reserved3)
+            .finish()
     }
 }
 
@@ -1817,12 +2108,12 @@ pub struct WebKitURIRequestClass {
 impl ::std::fmt::Debug for WebKitURIRequestClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitURIRequestClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .field("_webkit_reserved0", &self._webkit_reserved0)
-         .field("_webkit_reserved1", &self._webkit_reserved1)
-         .field("_webkit_reserved2", &self._webkit_reserved2)
-         .field("_webkit_reserved3", &self._webkit_reserved3)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .field("_webkit_reserved0", &self._webkit_reserved0)
+            .field("_webkit_reserved1", &self._webkit_reserved1)
+            .field("_webkit_reserved2", &self._webkit_reserved2)
+            .field("_webkit_reserved3", &self._webkit_reserved3)
+            .finish()
     }
 }
 
@@ -1844,12 +2135,12 @@ pub struct WebKitURIResponseClass {
 impl ::std::fmt::Debug for WebKitURIResponseClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitURIResponseClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .field("_webkit_reserved0", &self._webkit_reserved0)
-         .field("_webkit_reserved1", &self._webkit_reserved1)
-         .field("_webkit_reserved2", &self._webkit_reserved2)
-         .field("_webkit_reserved3", &self._webkit_reserved3)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .field("_webkit_reserved0", &self._webkit_reserved0)
+            .field("_webkit_reserved1", &self._webkit_reserved1)
+            .field("_webkit_reserved2", &self._webkit_reserved2)
+            .field("_webkit_reserved3", &self._webkit_reserved3)
+            .finish()
     }
 }
 
@@ -1867,8 +2158,8 @@ pub struct WebKitWebEditorClass {
 impl ::std::fmt::Debug for WebKitWebEditorClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitWebEditorClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -1886,8 +2177,8 @@ pub struct WebKitWebExtensionClass {
 impl ::std::fmt::Debug for WebKitWebExtensionClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitWebExtensionClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -1908,13 +2199,16 @@ pub struct WebKitWebHitTestResultClass {
 
 impl ::std::fmt::Debug for WebKitWebHitTestResultClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitWebHitTestResultClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .field("_webkit_reserved0", &self._webkit_reserved0)
-         .field("_webkit_reserved1", &self._webkit_reserved1)
-         .field("_webkit_reserved2", &self._webkit_reserved2)
-         .field("_webkit_reserved3", &self._webkit_reserved3)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitWebHitTestResultClass @ {:?}",
+            self as *const _
+        ))
+        .field("parent_class", &self.parent_class)
+        .field("_webkit_reserved0", &self._webkit_reserved0)
+        .field("_webkit_reserved1", &self._webkit_reserved1)
+        .field("_webkit_reserved2", &self._webkit_reserved2)
+        .field("_webkit_reserved3", &self._webkit_reserved3)
+        .finish()
     }
 }
 
@@ -1932,8 +2226,8 @@ pub struct WebKitWebPageClass {
 impl ::std::fmt::Debug for WebKitWebPageClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitWebPageClass @ {:?}", self as *const _))
-         .field("parent_class", &self.parent_class)
-         .finish()
+            .field("parent_class", &self.parent_class)
+            .finish()
     }
 }
 
@@ -1952,9 +2246,9 @@ pub struct _WebKitContextMenu {
 impl ::std::fmt::Debug for _WebKitContextMenu {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("_WebKitContextMenu @ {:?}", self as *const _))
-         .field("parent", &self.parent)
-         .field("priv_", &self.priv_)
-         .finish()
+            .field("parent", &self.parent)
+            .field("priv_", &self.priv_)
+            .finish()
     }
 }
 
@@ -1968,9 +2262,9 @@ pub struct _WebKitContextMenuItem {
 impl ::std::fmt::Debug for _WebKitContextMenuItem {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("_WebKitContextMenuItem @ {:?}", self as *const _))
-         .field("parent", &self.parent)
-         .field("priv_", &self.priv_)
-         .finish()
+            .field("parent", &self.parent)
+            .field("priv_", &self.priv_)
+            .finish()
     }
 }
 
@@ -1981,7 +2275,7 @@ pub struct WebKitContextMenu(c_void);
 impl ::std::fmt::Debug for WebKitContextMenu {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitContextMenu @ {:?}", self as *const _))
-         .finish()
+            .finish()
     }
 }
 
@@ -1991,7 +2285,7 @@ pub struct WebKitContextMenuItem(c_void);
 impl ::std::fmt::Debug for WebKitContextMenuItem {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitContextMenuItem @ {:?}", self as *const _))
-         .finish()
+            .finish()
     }
 }
 
@@ -2004,8 +2298,8 @@ pub struct WebKitDOMAttr {
 impl ::std::fmt::Debug for WebKitDOMAttr {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMAttr @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2018,8 +2312,8 @@ pub struct WebKitDOMBlob {
 impl ::std::fmt::Debug for WebKitDOMBlob {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMBlob @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2032,8 +2326,8 @@ pub struct WebKitDOMCDATASection {
 impl ::std::fmt::Debug for WebKitDOMCDATASection {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMCDATASection @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2046,8 +2340,8 @@ pub struct WebKitDOMCSSRule {
 impl ::std::fmt::Debug for WebKitDOMCSSRule {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMCSSRule @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2060,8 +2354,8 @@ pub struct WebKitDOMCSSRuleList {
 impl ::std::fmt::Debug for WebKitDOMCSSRuleList {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMCSSRuleList @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2073,9 +2367,12 @@ pub struct WebKitDOMCSSStyleDeclaration {
 
 impl ::std::fmt::Debug for WebKitDOMCSSStyleDeclaration {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMCSSStyleDeclaration @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMCSSStyleDeclaration @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2088,8 +2385,8 @@ pub struct WebKitDOMCSSStyleSheet {
 impl ::std::fmt::Debug for WebKitDOMCSSStyleSheet {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMCSSStyleSheet @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2102,8 +2399,8 @@ pub struct WebKitDOMCSSValue {
 impl ::std::fmt::Debug for WebKitDOMCSSValue {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMCSSValue @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2116,8 +2413,8 @@ pub struct WebKitDOMCharacterData {
 impl ::std::fmt::Debug for WebKitDOMCharacterData {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMCharacterData @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2130,8 +2427,8 @@ pub struct WebKitDOMClientRect {
 impl ::std::fmt::Debug for WebKitDOMClientRect {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMClientRect @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2144,8 +2441,8 @@ pub struct WebKitDOMClientRectList {
 impl ::std::fmt::Debug for WebKitDOMClientRectList {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMClientRectList @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2158,8 +2455,8 @@ pub struct WebKitDOMComment {
 impl ::std::fmt::Debug for WebKitDOMComment {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMComment @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2171,9 +2468,12 @@ pub struct WebKitDOMDOMImplementation {
 
 impl ::std::fmt::Debug for WebKitDOMDOMImplementation {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMDOMImplementation @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMDOMImplementation @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2186,8 +2486,8 @@ pub struct WebKitDOMDOMSelection {
 impl ::std::fmt::Debug for WebKitDOMDOMSelection {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMDOMSelection @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2200,8 +2500,8 @@ pub struct WebKitDOMDOMTokenList {
 impl ::std::fmt::Debug for WebKitDOMDOMTokenList {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMDOMTokenList @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2214,8 +2514,8 @@ pub struct WebKitDOMDOMWindow {
 impl ::std::fmt::Debug for WebKitDOMDOMWindow {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMDOMWindow @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2228,8 +2528,8 @@ pub struct WebKitDOMDocument {
 impl ::std::fmt::Debug for WebKitDOMDocument {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMDocument @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2241,9 +2541,12 @@ pub struct WebKitDOMDocumentFragment {
 
 impl ::std::fmt::Debug for WebKitDOMDocumentFragment {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMDocumentFragment @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMDocumentFragment @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2256,8 +2559,8 @@ pub struct WebKitDOMDocumentType {
 impl ::std::fmt::Debug for WebKitDOMDocumentType {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMDocumentType @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2270,8 +2573,8 @@ pub struct WebKitDOMElement {
 impl ::std::fmt::Debug for WebKitDOMElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2283,9 +2586,12 @@ pub struct WebKitDOMEntityReference {
 
 impl ::std::fmt::Debug for WebKitDOMEntityReference {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMEntityReference @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMEntityReference @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2298,8 +2604,8 @@ pub struct WebKitDOMEvent {
 impl ::std::fmt::Debug for WebKitDOMEvent {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMEvent @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2312,8 +2618,8 @@ pub struct WebKitDOMFile {
 impl ::std::fmt::Debug for WebKitDOMFile {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMFile @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2326,8 +2632,8 @@ pub struct WebKitDOMFileList {
 impl ::std::fmt::Debug for WebKitDOMFileList {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMFileList @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2339,9 +2645,12 @@ pub struct WebKitDOMHTMLAnchorElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLAnchorElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLAnchorElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLAnchorElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2353,9 +2662,12 @@ pub struct WebKitDOMHTMLAppletElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLAppletElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLAppletElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLAppletElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2367,9 +2679,12 @@ pub struct WebKitDOMHTMLAreaElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLAreaElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLAreaElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLAreaElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2382,8 +2697,8 @@ pub struct WebKitDOMHTMLBRElement {
 impl ::std::fmt::Debug for WebKitDOMHTMLBRElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMHTMLBRElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2395,9 +2710,12 @@ pub struct WebKitDOMHTMLBaseElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLBaseElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLBaseElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLBaseElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2409,9 +2727,12 @@ pub struct WebKitDOMHTMLBaseFontElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLBaseFontElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLBaseFontElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLBaseFontElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2423,9 +2744,12 @@ pub struct WebKitDOMHTMLBodyElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLBodyElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLBodyElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLBodyElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2437,9 +2761,12 @@ pub struct WebKitDOMHTMLButtonElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLButtonElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLButtonElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLButtonElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2451,9 +2778,12 @@ pub struct WebKitDOMHTMLCanvasElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLCanvasElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLCanvasElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLCanvasElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2466,8 +2796,8 @@ pub struct WebKitDOMHTMLCollection {
 impl ::std::fmt::Debug for WebKitDOMHTMLCollection {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMHTMLCollection @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2479,9 +2809,12 @@ pub struct WebKitDOMHTMLDListElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLDListElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLDListElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLDListElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2493,9 +2826,12 @@ pub struct WebKitDOMHTMLDirectoryElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLDirectoryElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLDirectoryElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLDirectoryElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2508,8 +2844,8 @@ pub struct WebKitDOMHTMLDivElement {
 impl ::std::fmt::Debug for WebKitDOMHTMLDivElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMHTMLDivElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2522,8 +2858,8 @@ pub struct WebKitDOMHTMLDocument {
 impl ::std::fmt::Debug for WebKitDOMHTMLDocument {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMHTMLDocument @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2536,8 +2872,8 @@ pub struct WebKitDOMHTMLElement {
 impl ::std::fmt::Debug for WebKitDOMHTMLElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMHTMLElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2549,9 +2885,12 @@ pub struct WebKitDOMHTMLEmbedElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLEmbedElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLEmbedElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLEmbedElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2563,9 +2902,12 @@ pub struct WebKitDOMHTMLFieldSetElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLFieldSetElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLFieldSetElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLFieldSetElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2577,9 +2919,12 @@ pub struct WebKitDOMHTMLFontElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLFontElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLFontElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLFontElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2591,9 +2936,12 @@ pub struct WebKitDOMHTMLFormElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLFormElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLFormElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLFormElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2605,9 +2953,12 @@ pub struct WebKitDOMHTMLFrameElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLFrameElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLFrameElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLFrameElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2619,9 +2970,12 @@ pub struct WebKitDOMHTMLFrameSetElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLFrameSetElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLFrameSetElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLFrameSetElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2634,8 +2988,8 @@ pub struct WebKitDOMHTMLHRElement {
 impl ::std::fmt::Debug for WebKitDOMHTMLHRElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMHTMLHRElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2647,9 +3001,12 @@ pub struct WebKitDOMHTMLHeadElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLHeadElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLHeadElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLHeadElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2661,9 +3018,12 @@ pub struct WebKitDOMHTMLHeadingElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLHeadingElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLHeadingElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLHeadingElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2675,9 +3035,12 @@ pub struct WebKitDOMHTMLHtmlElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLHtmlElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLHtmlElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLHtmlElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2689,9 +3052,12 @@ pub struct WebKitDOMHTMLIFrameElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLIFrameElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLIFrameElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLIFrameElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2703,9 +3069,12 @@ pub struct WebKitDOMHTMLImageElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLImageElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLImageElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLImageElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2717,9 +3086,12 @@ pub struct WebKitDOMHTMLInputElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLInputElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLInputElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLInputElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2732,8 +3104,8 @@ pub struct WebKitDOMHTMLLIElement {
 impl ::std::fmt::Debug for WebKitDOMHTMLLIElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMHTMLLIElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2745,9 +3117,12 @@ pub struct WebKitDOMHTMLLabelElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLLabelElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLLabelElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLLabelElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2759,9 +3134,12 @@ pub struct WebKitDOMHTMLLegendElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLLegendElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLLegendElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLLegendElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2773,9 +3151,12 @@ pub struct WebKitDOMHTMLLinkElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLLinkElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLLinkElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLLinkElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2788,8 +3169,8 @@ pub struct WebKitDOMHTMLMapElement {
 impl ::std::fmt::Debug for WebKitDOMHTMLMapElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMHTMLMapElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2801,9 +3182,12 @@ pub struct WebKitDOMHTMLMarqueeElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLMarqueeElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLMarqueeElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLMarqueeElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2815,9 +3199,12 @@ pub struct WebKitDOMHTMLMenuElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLMenuElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLMenuElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLMenuElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2829,9 +3216,12 @@ pub struct WebKitDOMHTMLMetaElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLMetaElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLMetaElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLMetaElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2844,8 +3234,8 @@ pub struct WebKitDOMHTMLModElement {
 impl ::std::fmt::Debug for WebKitDOMHTMLModElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMHTMLModElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2857,9 +3247,12 @@ pub struct WebKitDOMHTMLOListElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLOListElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLOListElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLOListElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2871,9 +3264,12 @@ pub struct WebKitDOMHTMLObjectElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLObjectElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLObjectElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLObjectElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2885,9 +3281,12 @@ pub struct WebKitDOMHTMLOptGroupElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLOptGroupElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLOptGroupElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLOptGroupElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2899,9 +3298,12 @@ pub struct WebKitDOMHTMLOptionElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLOptionElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLOptionElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLOptionElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2913,9 +3315,12 @@ pub struct WebKitDOMHTMLOptionsCollection {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLOptionsCollection {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLOptionsCollection @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLOptionsCollection @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2927,9 +3332,12 @@ pub struct WebKitDOMHTMLParagraphElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLParagraphElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLParagraphElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLParagraphElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2941,9 +3349,12 @@ pub struct WebKitDOMHTMLParamElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLParamElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLParamElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLParamElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2956,8 +3367,8 @@ pub struct WebKitDOMHTMLPreElement {
 impl ::std::fmt::Debug for WebKitDOMHTMLPreElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMHTMLPreElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -2969,9 +3380,12 @@ pub struct WebKitDOMHTMLQuoteElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLQuoteElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLQuoteElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLQuoteElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2983,9 +3397,12 @@ pub struct WebKitDOMHTMLScriptElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLScriptElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLScriptElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLScriptElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -2997,9 +3414,12 @@ pub struct WebKitDOMHTMLSelectElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLSelectElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLSelectElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLSelectElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3011,9 +3431,12 @@ pub struct WebKitDOMHTMLStyleElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLStyleElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLStyleElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLStyleElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3025,9 +3448,12 @@ pub struct WebKitDOMHTMLTableCaptionElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableCaptionElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableCaptionElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableCaptionElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3039,9 +3465,12 @@ pub struct WebKitDOMHTMLTableCellElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableCellElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableCellElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableCellElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3053,9 +3482,12 @@ pub struct WebKitDOMHTMLTableColElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableColElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableColElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableColElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3067,9 +3499,12 @@ pub struct WebKitDOMHTMLTableElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3081,9 +3516,12 @@ pub struct WebKitDOMHTMLTableRowElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableRowElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableRowElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableRowElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3095,9 +3533,12 @@ pub struct WebKitDOMHTMLTableSectionElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTableSectionElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTableSectionElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTableSectionElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3109,9 +3550,12 @@ pub struct WebKitDOMHTMLTextAreaElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTextAreaElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTextAreaElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTextAreaElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3123,9 +3567,12 @@ pub struct WebKitDOMHTMLTitleElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLTitleElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLTitleElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLTitleElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3137,9 +3584,12 @@ pub struct WebKitDOMHTMLUListElement {
 
 impl ::std::fmt::Debug for WebKitDOMHTMLUListElement {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMHTMLUListElement @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMHTMLUListElement @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3152,8 +3602,8 @@ pub struct WebKitDOMKeyboardEvent {
 impl ::std::fmt::Debug for WebKitDOMKeyboardEvent {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMKeyboardEvent @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3166,8 +3616,8 @@ pub struct WebKitDOMMediaList {
 impl ::std::fmt::Debug for WebKitDOMMediaList {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMMediaList @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3180,8 +3630,8 @@ pub struct WebKitDOMMouseEvent {
 impl ::std::fmt::Debug for WebKitDOMMouseEvent {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMMouseEvent @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3194,8 +3644,8 @@ pub struct WebKitDOMNamedNodeMap {
 impl ::std::fmt::Debug for WebKitDOMNamedNodeMap {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMNamedNodeMap @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3208,8 +3658,8 @@ pub struct WebKitDOMNode {
 impl ::std::fmt::Debug for WebKitDOMNode {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMNode @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3222,8 +3672,8 @@ pub struct WebKitDOMNodeIterator {
 impl ::std::fmt::Debug for WebKitDOMNodeIterator {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMNodeIterator @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3236,8 +3686,8 @@ pub struct WebKitDOMNodeList {
 impl ::std::fmt::Debug for WebKitDOMNodeList {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMNodeList @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3251,9 +3701,9 @@ pub struct WebKitDOMObject {
 impl ::std::fmt::Debug for WebKitDOMObject {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMObject @ {:?}", self as *const _))
-         .field("parentInstance", &self.parentInstance)
-         .field("coreObject", &self.coreObject)
-         .finish()
+            .field("parentInstance", &self.parentInstance)
+            .field("coreObject", &self.coreObject)
+            .finish()
     }
 }
 
@@ -3265,9 +3715,12 @@ pub struct WebKitDOMProcessingInstruction {
 
 impl ::std::fmt::Debug for WebKitDOMProcessingInstruction {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMProcessingInstruction @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMProcessingInstruction @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3280,8 +3733,8 @@ pub struct WebKitDOMRange {
 impl ::std::fmt::Debug for WebKitDOMRange {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMRange @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3294,8 +3747,8 @@ pub struct WebKitDOMStyleSheet {
 impl ::std::fmt::Debug for WebKitDOMStyleSheet {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMStyleSheet @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3308,8 +3761,8 @@ pub struct WebKitDOMStyleSheetList {
 impl ::std::fmt::Debug for WebKitDOMStyleSheetList {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMStyleSheetList @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3322,8 +3775,8 @@ pub struct WebKitDOMText {
 impl ::std::fmt::Debug for WebKitDOMText {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMText @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3336,8 +3789,8 @@ pub struct WebKitDOMTreeWalker {
 impl ::std::fmt::Debug for WebKitDOMTreeWalker {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMTreeWalker @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3350,8 +3803,8 @@ pub struct WebKitDOMUIEvent {
 impl ::std::fmt::Debug for WebKitDOMUIEvent {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMUIEvent @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3364,8 +3817,8 @@ pub struct WebKitDOMWheelEvent {
 impl ::std::fmt::Debug for WebKitDOMWheelEvent {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMWheelEvent @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3377,9 +3830,12 @@ pub struct WebKitDOMXPathExpression {
 
 impl ::std::fmt::Debug for WebKitDOMXPathExpression {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-        f.debug_struct(&format!("WebKitDOMXPathExpression @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+        f.debug_struct(&format!(
+            "WebKitDOMXPathExpression @ {:?}",
+            self as *const _
+        ))
+        .field("parent_instance", &self.parent_instance)
+        .finish()
     }
 }
 
@@ -3392,8 +3848,8 @@ pub struct WebKitDOMXPathResult {
 impl ::std::fmt::Debug for WebKitDOMXPathResult {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitDOMXPathResult @ {:?}", self as *const _))
-         .field("parent_instance", &self.parent_instance)
-         .finish()
+            .field("parent_instance", &self.parent_instance)
+            .finish()
     }
 }
 
@@ -3407,9 +3863,9 @@ pub struct WebKitFrame {
 impl ::std::fmt::Debug for WebKitFrame {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitFrame @ {:?}", self as *const _))
-         .field("parent", &self.parent)
-         .field("priv_", &self.priv_)
-         .finish()
+            .field("parent", &self.parent)
+            .field("priv_", &self.priv_)
+            .finish()
     }
 }
 
@@ -3423,9 +3879,9 @@ pub struct WebKitHitTestResult {
 impl ::std::fmt::Debug for WebKitHitTestResult {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitHitTestResult @ {:?}", self as *const _))
-         .field("parent", &self.parent)
-         .field("priv_", &self.priv_)
-         .finish()
+            .field("parent", &self.parent)
+            .field("priv_", &self.priv_)
+            .finish()
     }
 }
 
@@ -3439,9 +3895,9 @@ pub struct WebKitScriptWorld {
 impl ::std::fmt::Debug for WebKitScriptWorld {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitScriptWorld @ {:?}", self as *const _))
-         .field("parent", &self.parent)
-         .field("priv_", &self.priv_)
-         .finish()
+            .field("parent", &self.parent)
+            .field("priv_", &self.priv_)
+            .finish()
     }
 }
 
@@ -3455,8 +3911,8 @@ pub struct WebKitURIRequest {
 impl ::std::fmt::Debug for WebKitURIRequest {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitURIRequest @ {:?}", self as *const _))
-         .field("parent", &self.parent)
-         .finish()
+            .field("parent", &self.parent)
+            .finish()
     }
 }
 
@@ -3470,8 +3926,8 @@ pub struct WebKitURIResponse {
 impl ::std::fmt::Debug for WebKitURIResponse {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitURIResponse @ {:?}", self as *const _))
-         .field("parent", &self.parent)
-         .finish()
+            .field("parent", &self.parent)
+            .finish()
     }
 }
 
@@ -3485,9 +3941,9 @@ pub struct WebKitWebEditor {
 impl ::std::fmt::Debug for WebKitWebEditor {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitWebEditor @ {:?}", self as *const _))
-         .field("parent", &self.parent)
-         .field("priv_", &self.priv_)
-         .finish()
+            .field("parent", &self.parent)
+            .field("priv_", &self.priv_)
+            .finish()
     }
 }
 
@@ -3501,9 +3957,9 @@ pub struct WebKitWebExtension {
 impl ::std::fmt::Debug for WebKitWebExtension {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitWebExtension @ {:?}", self as *const _))
-         .field("parent", &self.parent)
-         .field("priv_", &self.priv_)
-         .finish()
+            .field("parent", &self.parent)
+            .field("priv_", &self.priv_)
+            .finish()
     }
 }
 
@@ -3517,9 +3973,9 @@ pub struct WebKitWebHitTestResult {
 impl ::std::fmt::Debug for WebKitWebHitTestResult {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitWebHitTestResult @ {:?}", self as *const _))
-         .field("parent", &self.parent)
-         .field("priv_", &self.priv_)
-         .finish()
+            .field("parent", &self.parent)
+            .field("priv_", &self.priv_)
+            .finish()
     }
 }
 
@@ -3533,9 +3989,9 @@ pub struct WebKitWebPage {
 impl ::std::fmt::Debug for WebKitWebPage {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("WebKitWebPage @ {:?}", self as *const _))
-         .field("parent", &self.parent)
-         .field("priv_", &self.priv_)
-         .finish()
+            .field("parent", &self.parent)
+            .field("priv_", &self.priv_)
+            .finish()
     }
 }
 
@@ -3567,7 +4023,6 @@ impl ::std::fmt::Debug for WebKitDOMXPathNSResolver {
     }
 }
 
-
 extern "C" {
 
     //=========================================================================
@@ -3590,19 +4045,29 @@ extern "C" {
     //=========================================================================
     pub fn webkit_console_message_get_type() -> GType;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    pub fn webkit_console_message_copy(console_message: *mut WebKitConsoleMessage) -> *mut WebKitConsoleMessage;
+    pub fn webkit_console_message_copy(
+        console_message: *mut WebKitConsoleMessage,
+    ) -> *mut WebKitConsoleMessage;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     pub fn webkit_console_message_free(console_message: *mut WebKitConsoleMessage);
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    pub fn webkit_console_message_get_level(console_message: *mut WebKitConsoleMessage) -> WebKitConsoleMessageLevel;
+    pub fn webkit_console_message_get_level(
+        console_message: *mut WebKitConsoleMessage,
+    ) -> WebKitConsoleMessageLevel;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     pub fn webkit_console_message_get_line(console_message: *mut WebKitConsoleMessage) -> c_uint;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    pub fn webkit_console_message_get_source(console_message: *mut WebKitConsoleMessage) -> WebKitConsoleMessageSource;
+    pub fn webkit_console_message_get_source(
+        console_message: *mut WebKitConsoleMessage,
+    ) -> WebKitConsoleMessageSource;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    pub fn webkit_console_message_get_source_id(console_message: *mut WebKitConsoleMessage) -> *const c_char;
+    pub fn webkit_console_message_get_source_id(
+        console_message: *mut WebKitConsoleMessage,
+    ) -> *const c_char;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    pub fn webkit_console_message_get_text(console_message: *mut WebKitConsoleMessage) -> *const c_char;
+    pub fn webkit_console_message_get_text(
+        console_message: *mut WebKitConsoleMessage,
+    ) -> *const c_char;
 
     //=========================================================================
     // WebKitContextMenu
@@ -3610,21 +4075,44 @@ extern "C" {
     pub fn webkit_context_menu_get_type() -> GType;
     pub fn webkit_context_menu_new() -> *mut WebKitContextMenu;
     pub fn webkit_context_menu_new_with_items(items: *mut glib::GList) -> *mut WebKitContextMenu;
-    pub fn webkit_context_menu_append(menu: *mut WebKitContextMenu, item: *mut WebKitContextMenuItem);
+    pub fn webkit_context_menu_append(
+        menu: *mut WebKitContextMenu,
+        item: *mut WebKitContextMenuItem,
+    );
     pub fn webkit_context_menu_first(menu: *mut WebKitContextMenu) -> *mut WebKitContextMenuItem;
-    pub fn webkit_context_menu_get_item_at_position(menu: *mut WebKitContextMenu, position: c_uint) -> *mut WebKitContextMenuItem;
+    pub fn webkit_context_menu_get_item_at_position(
+        menu: *mut WebKitContextMenu,
+        position: c_uint,
+    ) -> *mut WebKitContextMenuItem;
     pub fn webkit_context_menu_get_items(menu: *mut WebKitContextMenu) -> *mut glib::GList;
     pub fn webkit_context_menu_get_n_items(menu: *mut WebKitContextMenu) -> c_uint;
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     pub fn webkit_context_menu_get_user_data(menu: *mut WebKitContextMenu) -> *mut glib::GVariant;
-    pub fn webkit_context_menu_insert(menu: *mut WebKitContextMenu, item: *mut WebKitContextMenuItem, position: c_int);
+    pub fn webkit_context_menu_insert(
+        menu: *mut WebKitContextMenu,
+        item: *mut WebKitContextMenuItem,
+        position: c_int,
+    );
     pub fn webkit_context_menu_last(menu: *mut WebKitContextMenu) -> *mut WebKitContextMenuItem;
-    pub fn webkit_context_menu_move_item(menu: *mut WebKitContextMenu, item: *mut WebKitContextMenuItem, position: c_int);
-    pub fn webkit_context_menu_prepend(menu: *mut WebKitContextMenu, item: *mut WebKitContextMenuItem);
-    pub fn webkit_context_menu_remove(menu: *mut WebKitContextMenu, item: *mut WebKitContextMenuItem);
+    pub fn webkit_context_menu_move_item(
+        menu: *mut WebKitContextMenu,
+        item: *mut WebKitContextMenuItem,
+        position: c_int,
+    );
+    pub fn webkit_context_menu_prepend(
+        menu: *mut WebKitContextMenu,
+        item: *mut WebKitContextMenuItem,
+    );
+    pub fn webkit_context_menu_remove(
+        menu: *mut WebKitContextMenu,
+        item: *mut WebKitContextMenuItem,
+    );
     pub fn webkit_context_menu_remove_all(menu: *mut WebKitContextMenu);
     #[cfg(any(feature = "v2_8", feature = "dox"))]
-    pub fn webkit_context_menu_set_user_data(menu: *mut WebKitContextMenu, user_data: *mut glib::GVariant);
+    pub fn webkit_context_menu_set_user_data(
+        menu: *mut WebKitContextMenu,
+        user_data: *mut glib::GVariant,
+    );
 
     //=========================================================================
     // WebKitContextMenuItem
@@ -3632,18 +4120,41 @@ extern "C" {
     pub fn webkit_context_menu_item_get_type() -> GType;
     pub fn webkit_context_menu_item_new(action: *mut gtk::GtkAction) -> *mut WebKitContextMenuItem;
     #[cfg(any(feature = "v2_18", feature = "dox"))]
-    pub fn webkit_context_menu_item_new_from_gaction(action: *mut gio::GAction, label: *const c_char, target: *mut glib::GVariant) -> *mut WebKitContextMenuItem;
-    pub fn webkit_context_menu_item_new_from_stock_action(action: WebKitContextMenuAction) -> *mut WebKitContextMenuItem;
-    pub fn webkit_context_menu_item_new_from_stock_action_with_label(action: WebKitContextMenuAction, label: *const c_char) -> *mut WebKitContextMenuItem;
+    pub fn webkit_context_menu_item_new_from_gaction(
+        action: *mut gio::GAction,
+        label: *const c_char,
+        target: *mut glib::GVariant,
+    ) -> *mut WebKitContextMenuItem;
+    pub fn webkit_context_menu_item_new_from_stock_action(
+        action: WebKitContextMenuAction,
+    ) -> *mut WebKitContextMenuItem;
+    pub fn webkit_context_menu_item_new_from_stock_action_with_label(
+        action: WebKitContextMenuAction,
+        label: *const c_char,
+    ) -> *mut WebKitContextMenuItem;
     pub fn webkit_context_menu_item_new_separator() -> *mut WebKitContextMenuItem;
-    pub fn webkit_context_menu_item_new_with_submenu(label: *const c_char, submenu: *mut WebKitContextMenu) -> *mut WebKitContextMenuItem;
-    pub fn webkit_context_menu_item_get_action(item: *mut WebKitContextMenuItem) -> *mut gtk::GtkAction;
+    pub fn webkit_context_menu_item_new_with_submenu(
+        label: *const c_char,
+        submenu: *mut WebKitContextMenu,
+    ) -> *mut WebKitContextMenuItem;
+    pub fn webkit_context_menu_item_get_action(
+        item: *mut WebKitContextMenuItem,
+    ) -> *mut gtk::GtkAction;
     #[cfg(any(feature = "v2_18", feature = "dox"))]
-    pub fn webkit_context_menu_item_get_gaction(item: *mut WebKitContextMenuItem) -> *mut gio::GAction;
-    pub fn webkit_context_menu_item_get_stock_action(item: *mut WebKitContextMenuItem) -> WebKitContextMenuAction;
-    pub fn webkit_context_menu_item_get_submenu(item: *mut WebKitContextMenuItem) -> *mut WebKitContextMenu;
+    pub fn webkit_context_menu_item_get_gaction(
+        item: *mut WebKitContextMenuItem,
+    ) -> *mut gio::GAction;
+    pub fn webkit_context_menu_item_get_stock_action(
+        item: *mut WebKitContextMenuItem,
+    ) -> WebKitContextMenuAction;
+    pub fn webkit_context_menu_item_get_submenu(
+        item: *mut WebKitContextMenuItem,
+    ) -> *mut WebKitContextMenu;
     pub fn webkit_context_menu_item_is_separator(item: *mut WebKitContextMenuItem) -> gboolean;
-    pub fn webkit_context_menu_item_set_submenu(item: *mut WebKitContextMenuItem, submenu: *mut WebKitContextMenu);
+    pub fn webkit_context_menu_item_set_submenu(
+        item: *mut WebKitContextMenuItem,
+        submenu: *mut WebKitContextMenu,
+    );
 
     //=========================================================================
     // WebKitDOMAttr
@@ -3659,7 +4170,11 @@ extern "C" {
     pub fn webkit_dom_attr_get_prefix(self_: *mut WebKitDOMAttr) -> *mut c_char;
     pub fn webkit_dom_attr_get_specified(self_: *mut WebKitDOMAttr) -> gboolean;
     pub fn webkit_dom_attr_get_value(self_: *mut WebKitDOMAttr) -> *mut c_char;
-    pub fn webkit_dom_attr_set_value(self_: *mut WebKitDOMAttr, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_attr_set_value(
+        self_: *mut WebKitDOMAttr,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
 
     //=========================================================================
     // WebKitDOMBlob
@@ -3677,45 +4192,116 @@ extern "C" {
     //=========================================================================
     pub fn webkit_dom_css_rule_get_type() -> GType;
     pub fn webkit_dom_css_rule_get_css_text(self_: *mut WebKitDOMCSSRule) -> *mut c_char;
-    pub fn webkit_dom_css_rule_get_parent_rule(self_: *mut WebKitDOMCSSRule) -> *mut WebKitDOMCSSRule;
-    pub fn webkit_dom_css_rule_get_parent_style_sheet(self_: *mut WebKitDOMCSSRule) -> *mut WebKitDOMCSSStyleSheet;
+    pub fn webkit_dom_css_rule_get_parent_rule(
+        self_: *mut WebKitDOMCSSRule,
+    ) -> *mut WebKitDOMCSSRule;
+    pub fn webkit_dom_css_rule_get_parent_style_sheet(
+        self_: *mut WebKitDOMCSSRule,
+    ) -> *mut WebKitDOMCSSStyleSheet;
     pub fn webkit_dom_css_rule_get_rule_type(self_: *mut WebKitDOMCSSRule) -> c_ushort;
-    pub fn webkit_dom_css_rule_set_css_text(self_: *mut WebKitDOMCSSRule, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_css_rule_set_css_text(
+        self_: *mut WebKitDOMCSSRule,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
 
     //=========================================================================
     // WebKitDOMCSSRuleList
     //=========================================================================
     pub fn webkit_dom_css_rule_list_get_type() -> GType;
     pub fn webkit_dom_css_rule_list_get_length(self_: *mut WebKitDOMCSSRuleList) -> c_ulong;
-    pub fn webkit_dom_css_rule_list_item(self_: *mut WebKitDOMCSSRuleList, index: c_ulong) -> *mut WebKitDOMCSSRule;
+    pub fn webkit_dom_css_rule_list_item(
+        self_: *mut WebKitDOMCSSRuleList,
+        index: c_ulong,
+    ) -> *mut WebKitDOMCSSRule;
 
     //=========================================================================
     // WebKitDOMCSSStyleDeclaration
     //=========================================================================
     pub fn webkit_dom_css_style_declaration_get_type() -> GType;
-    pub fn webkit_dom_css_style_declaration_get_css_text(self_: *mut WebKitDOMCSSStyleDeclaration) -> *mut c_char;
-    pub fn webkit_dom_css_style_declaration_get_length(self_: *mut WebKitDOMCSSStyleDeclaration) -> c_ulong;
-    pub fn webkit_dom_css_style_declaration_get_parent_rule(self_: *mut WebKitDOMCSSStyleDeclaration) -> *mut WebKitDOMCSSRule;
-    pub fn webkit_dom_css_style_declaration_get_property_priority(self_: *mut WebKitDOMCSSStyleDeclaration, propertyName: *const c_char) -> *mut c_char;
-    pub fn webkit_dom_css_style_declaration_get_property_shorthand(self_: *mut WebKitDOMCSSStyleDeclaration, propertyName: *const c_char) -> *mut c_char;
-    pub fn webkit_dom_css_style_declaration_get_property_value(self_: *mut WebKitDOMCSSStyleDeclaration, propertyName: *const c_char) -> *mut c_char;
-    pub fn webkit_dom_css_style_declaration_is_property_implicit(self_: *mut WebKitDOMCSSStyleDeclaration, propertyName: *const c_char) -> gboolean;
-    pub fn webkit_dom_css_style_declaration_item(self_: *mut WebKitDOMCSSStyleDeclaration, index: c_ulong) -> *mut c_char;
-    pub fn webkit_dom_css_style_declaration_remove_property(self_: *mut WebKitDOMCSSStyleDeclaration, propertyName: *const c_char, error: *mut *mut glib::GError) -> *mut c_char;
-    pub fn webkit_dom_css_style_declaration_set_css_text(self_: *mut WebKitDOMCSSStyleDeclaration, value: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_css_style_declaration_set_property(self_: *mut WebKitDOMCSSStyleDeclaration, propertyName: *const c_char, value: *const c_char, priority: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_css_style_declaration_get_css_text(
+        self_: *mut WebKitDOMCSSStyleDeclaration,
+    ) -> *mut c_char;
+    pub fn webkit_dom_css_style_declaration_get_length(
+        self_: *mut WebKitDOMCSSStyleDeclaration,
+    ) -> c_ulong;
+    pub fn webkit_dom_css_style_declaration_get_parent_rule(
+        self_: *mut WebKitDOMCSSStyleDeclaration,
+    ) -> *mut WebKitDOMCSSRule;
+    pub fn webkit_dom_css_style_declaration_get_property_priority(
+        self_: *mut WebKitDOMCSSStyleDeclaration,
+        propertyName: *const c_char,
+    ) -> *mut c_char;
+    pub fn webkit_dom_css_style_declaration_get_property_shorthand(
+        self_: *mut WebKitDOMCSSStyleDeclaration,
+        propertyName: *const c_char,
+    ) -> *mut c_char;
+    pub fn webkit_dom_css_style_declaration_get_property_value(
+        self_: *mut WebKitDOMCSSStyleDeclaration,
+        propertyName: *const c_char,
+    ) -> *mut c_char;
+    pub fn webkit_dom_css_style_declaration_is_property_implicit(
+        self_: *mut WebKitDOMCSSStyleDeclaration,
+        propertyName: *const c_char,
+    ) -> gboolean;
+    pub fn webkit_dom_css_style_declaration_item(
+        self_: *mut WebKitDOMCSSStyleDeclaration,
+        index: c_ulong,
+    ) -> *mut c_char;
+    pub fn webkit_dom_css_style_declaration_remove_property(
+        self_: *mut WebKitDOMCSSStyleDeclaration,
+        propertyName: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut c_char;
+    pub fn webkit_dom_css_style_declaration_set_css_text(
+        self_: *mut WebKitDOMCSSStyleDeclaration,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_css_style_declaration_set_property(
+        self_: *mut WebKitDOMCSSStyleDeclaration,
+        propertyName: *const c_char,
+        value: *const c_char,
+        priority: *const c_char,
+        error: *mut *mut glib::GError,
+    );
 
     //=========================================================================
     // WebKitDOMCSSStyleSheet
     //=========================================================================
     pub fn webkit_dom_css_style_sheet_get_type() -> GType;
-    pub fn webkit_dom_css_style_sheet_add_rule(self_: *mut WebKitDOMCSSStyleSheet, selector: *const c_char, style: *const c_char, index: c_ulong, error: *mut *mut glib::GError) -> c_long;
-    pub fn webkit_dom_css_style_sheet_delete_rule(self_: *mut WebKitDOMCSSStyleSheet, index: c_ulong, error: *mut *mut glib::GError);
-    pub fn webkit_dom_css_style_sheet_get_css_rules(self_: *mut WebKitDOMCSSStyleSheet) -> *mut WebKitDOMCSSRuleList;
-    pub fn webkit_dom_css_style_sheet_get_owner_rule(self_: *mut WebKitDOMCSSStyleSheet) -> *mut WebKitDOMCSSRule;
-    pub fn webkit_dom_css_style_sheet_get_rules(self_: *mut WebKitDOMCSSStyleSheet) -> *mut WebKitDOMCSSRuleList;
-    pub fn webkit_dom_css_style_sheet_insert_rule(self_: *mut WebKitDOMCSSStyleSheet, rule: *const c_char, index: c_ulong, error: *mut *mut glib::GError) -> c_ulong;
-    pub fn webkit_dom_css_style_sheet_remove_rule(self_: *mut WebKitDOMCSSStyleSheet, index: c_ulong, error: *mut *mut glib::GError);
+    pub fn webkit_dom_css_style_sheet_add_rule(
+        self_: *mut WebKitDOMCSSStyleSheet,
+        selector: *const c_char,
+        style: *const c_char,
+        index: c_ulong,
+        error: *mut *mut glib::GError,
+    ) -> c_long;
+    pub fn webkit_dom_css_style_sheet_delete_rule(
+        self_: *mut WebKitDOMCSSStyleSheet,
+        index: c_ulong,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_css_style_sheet_get_css_rules(
+        self_: *mut WebKitDOMCSSStyleSheet,
+    ) -> *mut WebKitDOMCSSRuleList;
+    pub fn webkit_dom_css_style_sheet_get_owner_rule(
+        self_: *mut WebKitDOMCSSStyleSheet,
+    ) -> *mut WebKitDOMCSSRule;
+    pub fn webkit_dom_css_style_sheet_get_rules(
+        self_: *mut WebKitDOMCSSStyleSheet,
+    ) -> *mut WebKitDOMCSSRuleList;
+    pub fn webkit_dom_css_style_sheet_insert_rule(
+        self_: *mut WebKitDOMCSSStyleSheet,
+        rule: *const c_char,
+        index: c_ulong,
+        error: *mut *mut glib::GError,
+    ) -> c_ulong;
+    pub fn webkit_dom_css_style_sheet_remove_rule(
+        self_: *mut WebKitDOMCSSStyleSheet,
+        index: c_ulong,
+        error: *mut *mut glib::GError,
+    );
 
     //=========================================================================
     // WebKitDOMCSSValue
@@ -3723,20 +4309,53 @@ extern "C" {
     pub fn webkit_dom_css_value_get_type() -> GType;
     pub fn webkit_dom_css_value_get_css_text(self_: *mut WebKitDOMCSSValue) -> *mut c_char;
     pub fn webkit_dom_css_value_get_css_value_type(self_: *mut WebKitDOMCSSValue) -> c_ushort;
-    pub fn webkit_dom_css_value_set_css_text(self_: *mut WebKitDOMCSSValue, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_css_value_set_css_text(
+        self_: *mut WebKitDOMCSSValue,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
 
     //=========================================================================
     // WebKitDOMCharacterData
     //=========================================================================
     pub fn webkit_dom_character_data_get_type() -> GType;
-    pub fn webkit_dom_character_data_append_data(self_: *mut WebKitDOMCharacterData, data: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_character_data_delete_data(self_: *mut WebKitDOMCharacterData, offset: c_ulong, length: c_ulong, error: *mut *mut glib::GError);
+    pub fn webkit_dom_character_data_append_data(
+        self_: *mut WebKitDOMCharacterData,
+        data: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_character_data_delete_data(
+        self_: *mut WebKitDOMCharacterData,
+        offset: c_ulong,
+        length: c_ulong,
+        error: *mut *mut glib::GError,
+    );
     pub fn webkit_dom_character_data_get_data(self_: *mut WebKitDOMCharacterData) -> *mut c_char;
     pub fn webkit_dom_character_data_get_length(self_: *mut WebKitDOMCharacterData) -> c_ulong;
-    pub fn webkit_dom_character_data_insert_data(self_: *mut WebKitDOMCharacterData, offset: c_ulong, data: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_character_data_replace_data(self_: *mut WebKitDOMCharacterData, offset: c_ulong, length: c_ulong, data: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_character_data_set_data(self_: *mut WebKitDOMCharacterData, value: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_character_data_substring_data(self_: *mut WebKitDOMCharacterData, offset: c_ulong, length: c_ulong, error: *mut *mut glib::GError) -> *mut c_char;
+    pub fn webkit_dom_character_data_insert_data(
+        self_: *mut WebKitDOMCharacterData,
+        offset: c_ulong,
+        data: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_character_data_replace_data(
+        self_: *mut WebKitDOMCharacterData,
+        offset: c_ulong,
+        length: c_ulong,
+        data: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_character_data_set_data(
+        self_: *mut WebKitDOMCharacterData,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_character_data_substring_data(
+        self_: *mut WebKitDOMCharacterData,
+        offset: c_ulong,
+        length: c_ulong,
+        error: *mut *mut glib::GError,
+    ) -> *mut c_char;
 
     //=========================================================================
     // WebKitDOMClientRect
@@ -3762,7 +4381,10 @@ extern "C" {
     #[cfg(any(feature = "v2_18", feature = "dox"))]
     pub fn webkit_dom_client_rect_list_get_length(self_: *mut WebKitDOMClientRectList) -> c_ulong;
     #[cfg(any(feature = "v2_18", feature = "dox"))]
-    pub fn webkit_dom_client_rect_list_item(self_: *mut WebKitDOMClientRectList, index: c_ulong) -> *mut WebKitDOMClientRect;
+    pub fn webkit_dom_client_rect_list_item(
+        self_: *mut WebKitDOMClientRectList,
+        index: c_ulong,
+    ) -> *mut WebKitDOMClientRect;
 
     //=========================================================================
     // WebKitDOMComment
@@ -3773,89 +4395,197 @@ extern "C" {
     // WebKitDOMDOMImplementation
     //=========================================================================
     pub fn webkit_dom_dom_implementation_get_type() -> GType;
-    pub fn webkit_dom_dom_implementation_create_css_style_sheet(self_: *mut WebKitDOMDOMImplementation, title: *const c_char, media: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMCSSStyleSheet;
-    pub fn webkit_dom_dom_implementation_create_document(self_: *mut WebKitDOMDOMImplementation, namespaceURI: *const c_char, qualifiedName: *const c_char, doctype: *mut WebKitDOMDocumentType, error: *mut *mut glib::GError) -> *mut WebKitDOMDocument;
-    pub fn webkit_dom_dom_implementation_create_document_type(self_: *mut WebKitDOMDOMImplementation, qualifiedName: *const c_char, publicId: *const c_char, systemId: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMDocumentType;
-    pub fn webkit_dom_dom_implementation_create_html_document(self_: *mut WebKitDOMDOMImplementation, title: *const c_char) -> *mut WebKitDOMHTMLDocument;
-    pub fn webkit_dom_dom_implementation_has_feature(self_: *mut WebKitDOMDOMImplementation, feature: *const c_char, version: *const c_char) -> gboolean;
+    pub fn webkit_dom_dom_implementation_create_css_style_sheet(
+        self_: *mut WebKitDOMDOMImplementation,
+        title: *const c_char,
+        media: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMCSSStyleSheet;
+    pub fn webkit_dom_dom_implementation_create_document(
+        self_: *mut WebKitDOMDOMImplementation,
+        namespaceURI: *const c_char,
+        qualifiedName: *const c_char,
+        doctype: *mut WebKitDOMDocumentType,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMDocument;
+    pub fn webkit_dom_dom_implementation_create_document_type(
+        self_: *mut WebKitDOMDOMImplementation,
+        qualifiedName: *const c_char,
+        publicId: *const c_char,
+        systemId: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMDocumentType;
+    pub fn webkit_dom_dom_implementation_create_html_document(
+        self_: *mut WebKitDOMDOMImplementation,
+        title: *const c_char,
+    ) -> *mut WebKitDOMHTMLDocument;
+    pub fn webkit_dom_dom_implementation_has_feature(
+        self_: *mut WebKitDOMDOMImplementation,
+        feature: *const c_char,
+        version: *const c_char,
+    ) -> gboolean;
 
     //=========================================================================
     // WebKitDOMDOMSelection
     //=========================================================================
     pub fn webkit_dom_dom_selection_get_type() -> GType;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_add_range(self_: *mut WebKitDOMDOMSelection, range: *mut WebKitDOMRange);
+    pub fn webkit_dom_dom_selection_add_range(
+        self_: *mut WebKitDOMDOMSelection,
+        range: *mut WebKitDOMRange,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_collapse(self_: *mut WebKitDOMDOMSelection, node: *mut WebKitDOMNode, offset: c_ulong);
+    pub fn webkit_dom_dom_selection_collapse(
+        self_: *mut WebKitDOMDOMSelection,
+        node: *mut WebKitDOMNode,
+        offset: c_ulong,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_collapse_to_end(self_: *mut WebKitDOMDOMSelection, error: *mut *mut glib::GError);
+    pub fn webkit_dom_dom_selection_collapse_to_end(
+        self_: *mut WebKitDOMDOMSelection,
+        error: *mut *mut glib::GError,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_collapse_to_start(self_: *mut WebKitDOMDOMSelection, error: *mut *mut glib::GError);
+    pub fn webkit_dom_dom_selection_collapse_to_start(
+        self_: *mut WebKitDOMDOMSelection,
+        error: *mut *mut glib::GError,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_contains_node(self_: *mut WebKitDOMDOMSelection, node: *mut WebKitDOMNode, allowPartial: gboolean) -> gboolean;
+    pub fn webkit_dom_dom_selection_contains_node(
+        self_: *mut WebKitDOMDOMSelection,
+        node: *mut WebKitDOMNode,
+        allowPartial: gboolean,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_selection_delete_from_document(self_: *mut WebKitDOMDOMSelection);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_selection_empty(self_: *mut WebKitDOMDOMSelection);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_extend(self_: *mut WebKitDOMDOMSelection, node: *mut WebKitDOMNode, offset: c_ulong, error: *mut *mut glib::GError);
+    pub fn webkit_dom_dom_selection_extend(
+        self_: *mut WebKitDOMDOMSelection,
+        node: *mut WebKitDOMNode,
+        offset: c_ulong,
+        error: *mut *mut glib::GError,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_get_anchor_node(self_: *mut WebKitDOMDOMSelection) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_dom_selection_get_anchor_node(
+        self_: *mut WebKitDOMDOMSelection,
+    ) -> *mut WebKitDOMNode;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_get_anchor_offset(self_: *mut WebKitDOMDOMSelection) -> c_ulong;
+    pub fn webkit_dom_dom_selection_get_anchor_offset(self_: *mut WebKitDOMDOMSelection)
+        -> c_ulong;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_get_base_node(self_: *mut WebKitDOMDOMSelection) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_dom_selection_get_base_node(
+        self_: *mut WebKitDOMDOMSelection,
+    ) -> *mut WebKitDOMNode;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_selection_get_base_offset(self_: *mut WebKitDOMDOMSelection) -> c_ulong;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_get_extent_node(self_: *mut WebKitDOMDOMSelection) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_dom_selection_get_extent_node(
+        self_: *mut WebKitDOMDOMSelection,
+    ) -> *mut WebKitDOMNode;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_get_extent_offset(self_: *mut WebKitDOMDOMSelection) -> c_ulong;
+    pub fn webkit_dom_dom_selection_get_extent_offset(self_: *mut WebKitDOMDOMSelection)
+        -> c_ulong;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_get_focus_node(self_: *mut WebKitDOMDOMSelection) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_dom_selection_get_focus_node(
+        self_: *mut WebKitDOMDOMSelection,
+    ) -> *mut WebKitDOMNode;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_selection_get_focus_offset(self_: *mut WebKitDOMDOMSelection) -> c_ulong;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_get_is_collapsed(self_: *mut WebKitDOMDOMSelection) -> gboolean;
+    pub fn webkit_dom_dom_selection_get_is_collapsed(self_: *mut WebKitDOMDOMSelection)
+        -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_get_range_at(self_: *mut WebKitDOMDOMSelection, index: c_ulong, error: *mut *mut glib::GError) -> *mut WebKitDOMRange;
+    pub fn webkit_dom_dom_selection_get_range_at(
+        self_: *mut WebKitDOMDOMSelection,
+        index: c_ulong,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMRange;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_selection_get_range_count(self_: *mut WebKitDOMDOMSelection) -> c_ulong;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_get_selection_type(self_: *mut WebKitDOMDOMSelection) -> *mut c_char;
+    pub fn webkit_dom_dom_selection_get_selection_type(
+        self_: *mut WebKitDOMDOMSelection,
+    ) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_modify(self_: *mut WebKitDOMDOMSelection, alter: *const c_char, direction: *const c_char, granularity: *const c_char);
+    pub fn webkit_dom_dom_selection_modify(
+        self_: *mut WebKitDOMDOMSelection,
+        alter: *const c_char,
+        direction: *const c_char,
+        granularity: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_selection_remove_all_ranges(self_: *mut WebKitDOMDOMSelection);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_select_all_children(self_: *mut WebKitDOMDOMSelection, node: *mut WebKitDOMNode);
+    pub fn webkit_dom_dom_selection_select_all_children(
+        self_: *mut WebKitDOMDOMSelection,
+        node: *mut WebKitDOMNode,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_set_base_and_extent(self_: *mut WebKitDOMDOMSelection, baseNode: *mut WebKitDOMNode, baseOffset: c_ulong, extentNode: *mut WebKitDOMNode, extentOffset: c_ulong);
+    pub fn webkit_dom_dom_selection_set_base_and_extent(
+        self_: *mut WebKitDOMDOMSelection,
+        baseNode: *mut WebKitDOMNode,
+        baseOffset: c_ulong,
+        extentNode: *mut WebKitDOMNode,
+        extentOffset: c_ulong,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_selection_set_position(self_: *mut WebKitDOMDOMSelection, node: *mut WebKitDOMNode, offset: c_ulong);
+    pub fn webkit_dom_dom_selection_set_position(
+        self_: *mut WebKitDOMDOMSelection,
+        node: *mut WebKitDOMNode,
+        offset: c_ulong,
+    );
 
     //=========================================================================
     // WebKitDOMDOMTokenList
     //=========================================================================
     pub fn webkit_dom_dom_token_list_get_type() -> GType;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_token_list_add(self_: *mut WebKitDOMDOMTokenList, error: *mut *mut glib::GError, ...);
+    pub fn webkit_dom_dom_token_list_add(
+        self_: *mut WebKitDOMDOMTokenList,
+        error: *mut *mut glib::GError,
+        ...
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_token_list_contains(self_: *mut WebKitDOMDOMTokenList, token: *const c_char) -> gboolean;
+    pub fn webkit_dom_dom_token_list_contains(
+        self_: *mut WebKitDOMDOMTokenList,
+        token: *const c_char,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_token_list_get_length(self_: *mut WebKitDOMDOMTokenList) -> c_ulong;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_token_list_get_value(self_: *mut WebKitDOMDOMTokenList) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_token_list_item(self_: *mut WebKitDOMDOMTokenList, index: c_ulong) -> *mut c_char;
+    pub fn webkit_dom_dom_token_list_item(
+        self_: *mut WebKitDOMDOMTokenList,
+        index: c_ulong,
+    ) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_token_list_remove(self_: *mut WebKitDOMDOMTokenList, error: *mut *mut glib::GError, ...);
+    pub fn webkit_dom_dom_token_list_remove(
+        self_: *mut WebKitDOMDOMTokenList,
+        error: *mut *mut glib::GError,
+        ...
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_token_list_replace(self_: *mut WebKitDOMDOMTokenList, token: *const c_char, newToken: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_dom_token_list_replace(
+        self_: *mut WebKitDOMDOMTokenList,
+        token: *const c_char,
+        newToken: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_token_list_set_value(self_: *mut WebKitDOMDOMTokenList, value: *const c_char);
+    pub fn webkit_dom_dom_token_list_set_value(
+        self_: *mut WebKitDOMDOMTokenList,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_token_list_toggle(self_: *mut WebKitDOMDOMTokenList, token: *const c_char, force: gboolean, error: *mut *mut glib::GError) -> gboolean;
+    pub fn webkit_dom_dom_token_list_toggle(
+        self_: *mut WebKitDOMDOMTokenList,
+        token: *const c_char,
+        force: gboolean,
+        error: *mut *mut glib::GError,
+    ) -> gboolean;
 
     //=========================================================================
     // WebKitDOMDOMWindow
@@ -3870,25 +4600,48 @@ extern "C" {
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_close(self_: *mut WebKitDOMDOMWindow);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_confirm(self_: *mut WebKitDOMDOMWindow, message: *const c_char) -> gboolean;
+    pub fn webkit_dom_dom_window_confirm(
+        self_: *mut WebKitDOMDOMWindow,
+        message: *const c_char,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_find(self_: *mut WebKitDOMDOMWindow, string: *const c_char, caseSensitive: gboolean, backwards: gboolean, wrap: gboolean, wholeWord: gboolean, searchInFrames: gboolean, showDialog: gboolean) -> gboolean;
+    pub fn webkit_dom_dom_window_find(
+        self_: *mut WebKitDOMDOMWindow,
+        string: *const c_char,
+        caseSensitive: gboolean,
+        backwards: gboolean,
+        wrap: gboolean,
+        wholeWord: gboolean,
+        searchInFrames: gboolean,
+        showDialog: gboolean,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_focus(self_: *mut WebKitDOMDOMWindow);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_get_closed(self_: *mut WebKitDOMDOMWindow) -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_computed_style(self_: *mut WebKitDOMDOMWindow, element: *mut WebKitDOMElement, pseudoElement: *const c_char) -> *mut WebKitDOMCSSStyleDeclaration;
+    pub fn webkit_dom_dom_window_get_computed_style(
+        self_: *mut WebKitDOMDOMWindow,
+        element: *mut WebKitDOMElement,
+        pseudoElement: *const c_char,
+    ) -> *mut WebKitDOMCSSStyleDeclaration;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_get_default_status(self_: *mut WebKitDOMDOMWindow) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_device_pixel_ratio(self_: *mut WebKitDOMDOMWindow) -> c_double;
+    pub fn webkit_dom_dom_window_get_device_pixel_ratio(self_: *mut WebKitDOMDOMWindow)
+        -> c_double;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_document(self_: *mut WebKitDOMDOMWindow) -> *mut WebKitDOMDocument;
+    pub fn webkit_dom_dom_window_get_document(
+        self_: *mut WebKitDOMDOMWindow,
+    ) -> *mut WebKitDOMDocument;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_frame_element(self_: *mut WebKitDOMDOMWindow) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_dom_window_get_frame_element(
+        self_: *mut WebKitDOMDOMWindow,
+    ) -> *mut WebKitDOMElement;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_frames(self_: *mut WebKitDOMDOMWindow) -> *mut WebKitDOMDOMWindow;
+    pub fn webkit_dom_dom_window_get_frames(
+        self_: *mut WebKitDOMDOMWindow,
+    ) -> *mut WebKitDOMDOMWindow;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_get_inner_height(self_: *mut WebKitDOMDOMWindow) -> c_long;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -3898,9 +4651,13 @@ extern "C" {
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_get_name(self_: *mut WebKitDOMDOMWindow) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_offscreen_buffering(self_: *mut WebKitDOMDOMWindow) -> gboolean;
+    pub fn webkit_dom_dom_window_get_offscreen_buffering(
+        self_: *mut WebKitDOMDOMWindow,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_opener(self_: *mut WebKitDOMDOMWindow) -> *mut WebKitDOMDOMWindow;
+    pub fn webkit_dom_dom_window_get_opener(
+        self_: *mut WebKitDOMDOMWindow,
+    ) -> *mut WebKitDOMDOMWindow;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_get_orientation(self_: *mut WebKitDOMDOMWindow) -> c_long;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -3912,7 +4669,9 @@ extern "C" {
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_get_page_y_offset(self_: *mut WebKitDOMDOMWindow) -> c_long;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_parent(self_: *mut WebKitDOMDOMWindow) -> *mut WebKitDOMDOMWindow;
+    pub fn webkit_dom_dom_window_get_parent(
+        self_: *mut WebKitDOMDOMWindow,
+    ) -> *mut WebKitDOMDOMWindow;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_get_screen_left(self_: *mut WebKitDOMDOMWindow) -> c_long;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -3926,15 +4685,22 @@ extern "C" {
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_get_scroll_y(self_: *mut WebKitDOMDOMWindow) -> c_long;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_selection(self_: *mut WebKitDOMDOMWindow) -> *mut WebKitDOMDOMSelection;
+    pub fn webkit_dom_dom_window_get_selection(
+        self_: *mut WebKitDOMDOMWindow,
+    ) -> *mut WebKitDOMDOMSelection;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_self(self_: *mut WebKitDOMDOMWindow) -> *mut WebKitDOMDOMWindow;
+    pub fn webkit_dom_dom_window_get_self(
+        self_: *mut WebKitDOMDOMWindow,
+    ) -> *mut WebKitDOMDOMWindow;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_get_status(self_: *mut WebKitDOMDOMWindow) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_top(self_: *mut WebKitDOMDOMWindow) -> *mut WebKitDOMDOMWindow;
+    pub fn webkit_dom_dom_window_get_top(self_: *mut WebKitDOMDOMWindow)
+        -> *mut WebKitDOMDOMWindow;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_get_window(self_: *mut WebKitDOMDOMWindow) -> *mut WebKitDOMDOMWindow;
+    pub fn webkit_dom_dom_window_get_window(
+        self_: *mut WebKitDOMDOMWindow,
+    ) -> *mut WebKitDOMDOMWindow;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_move_by(self_: *mut WebKitDOMDOMWindow, x: c_float, y: c_float);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -3942,163 +4708,416 @@ extern "C" {
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_print(self_: *mut WebKitDOMDOMWindow);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_prompt(self_: *mut WebKitDOMDOMWindow, message: *const c_char, defaultValue: *const c_char) -> *mut c_char;
+    pub fn webkit_dom_dom_window_prompt(
+        self_: *mut WebKitDOMDOMWindow,
+        message: *const c_char,
+        defaultValue: *const c_char,
+    ) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_release_events(self_: *mut WebKitDOMDOMWindow);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_resize_by(self_: *mut WebKitDOMDOMWindow, x: c_float, y: c_float);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_resize_to(self_: *mut WebKitDOMDOMWindow, width: c_float, height: c_float);
+    pub fn webkit_dom_dom_window_resize_to(
+        self_: *mut WebKitDOMDOMWindow,
+        width: c_float,
+        height: c_float,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_scroll_by(self_: *mut WebKitDOMDOMWindow, x: c_double, y: c_double);
+    pub fn webkit_dom_dom_window_scroll_by(
+        self_: *mut WebKitDOMDOMWindow,
+        x: c_double,
+        y: c_double,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_scroll_to(self_: *mut WebKitDOMDOMWindow, x: c_double, y: c_double);
+    pub fn webkit_dom_dom_window_scroll_to(
+        self_: *mut WebKitDOMDOMWindow,
+        x: c_double,
+        y: c_double,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_dom_window_set_default_status(self_: *mut WebKitDOMDOMWindow, value: *const c_char);
+    pub fn webkit_dom_dom_window_set_default_status(
+        self_: *mut WebKitDOMDOMWindow,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_set_name(self_: *mut WebKitDOMDOMWindow, value: *const c_char);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_set_status(self_: *mut WebKitDOMDOMWindow, value: *const c_char);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_dom_window_stop(self_: *mut WebKitDOMDOMWindow);
-    pub fn webkit_dom_dom_window_webkit_message_handlers_post_message(window: *mut WebKitDOMDOMWindow, handler: *const c_char, message: *const c_char) -> gboolean;
+    pub fn webkit_dom_dom_window_webkit_message_handlers_post_message(
+        window: *mut WebKitDOMDOMWindow,
+        handler: *const c_char,
+        message: *const c_char,
+    ) -> gboolean;
 
     //=========================================================================
     // WebKitDOMDocument
     //=========================================================================
     pub fn webkit_dom_document_get_type() -> GType;
-    pub fn webkit_dom_document_adopt_node(self_: *mut WebKitDOMDocument, source: *mut WebKitDOMNode, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_document_adopt_node(
+        self_: *mut WebKitDOMDocument,
+        source: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_caret_range_from_point(self_: *mut WebKitDOMDocument, x: c_long, y: c_long) -> *mut WebKitDOMRange;
-    pub fn webkit_dom_document_create_attribute(self_: *mut WebKitDOMDocument, name: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMAttr;
-    pub fn webkit_dom_document_create_attribute_ns(self_: *mut WebKitDOMDocument, namespaceURI: *const c_char, qualifiedName: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMAttr;
-    pub fn webkit_dom_document_create_cdata_section(self_: *mut WebKitDOMDocument, data: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMCDATASection;
-    pub fn webkit_dom_document_create_comment(self_: *mut WebKitDOMDocument, data: *const c_char) -> *mut WebKitDOMComment;
-    pub fn webkit_dom_document_create_css_style_declaration(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMCSSStyleDeclaration;
-    pub fn webkit_dom_document_create_document_fragment(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMDocumentFragment;
-    pub fn webkit_dom_document_create_element(self_: *mut WebKitDOMDocument, tagName: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMElement;
-    pub fn webkit_dom_document_create_element_ns(self_: *mut WebKitDOMDocument, namespaceURI: *const c_char, qualifiedName: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMElement;
-    pub fn webkit_dom_document_create_entity_reference(self_: *mut WebKitDOMDocument, name: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMEntityReference;
-    pub fn webkit_dom_document_create_event(self_: *mut WebKitDOMDocument, eventType: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMEvent;
-    pub fn webkit_dom_document_create_expression(self_: *mut WebKitDOMDocument, expression: *const c_char, resolver: *mut WebKitDOMXPathNSResolver, error: *mut *mut glib::GError) -> *mut WebKitDOMXPathExpression;
-    pub fn webkit_dom_document_create_node_iterator(self_: *mut WebKitDOMDocument, root: *mut WebKitDOMNode, whatToShow: c_ulong, filter: *mut WebKitDOMNodeFilter, expandEntityReferences: gboolean, error: *mut *mut glib::GError) -> *mut WebKitDOMNodeIterator;
-    pub fn webkit_dom_document_create_ns_resolver(self_: *mut WebKitDOMDocument, nodeResolver: *mut WebKitDOMNode) -> *mut WebKitDOMXPathNSResolver;
-    pub fn webkit_dom_document_create_processing_instruction(self_: *mut WebKitDOMDocument, target: *const c_char, data: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMProcessingInstruction;
+    pub fn webkit_dom_document_caret_range_from_point(
+        self_: *mut WebKitDOMDocument,
+        x: c_long,
+        y: c_long,
+    ) -> *mut WebKitDOMRange;
+    pub fn webkit_dom_document_create_attribute(
+        self_: *mut WebKitDOMDocument,
+        name: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMAttr;
+    pub fn webkit_dom_document_create_attribute_ns(
+        self_: *mut WebKitDOMDocument,
+        namespaceURI: *const c_char,
+        qualifiedName: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMAttr;
+    pub fn webkit_dom_document_create_cdata_section(
+        self_: *mut WebKitDOMDocument,
+        data: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMCDATASection;
+    pub fn webkit_dom_document_create_comment(
+        self_: *mut WebKitDOMDocument,
+        data: *const c_char,
+    ) -> *mut WebKitDOMComment;
+    pub fn webkit_dom_document_create_css_style_declaration(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMCSSStyleDeclaration;
+    pub fn webkit_dom_document_create_document_fragment(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMDocumentFragment;
+    pub fn webkit_dom_document_create_element(
+        self_: *mut WebKitDOMDocument,
+        tagName: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_create_element_ns(
+        self_: *mut WebKitDOMDocument,
+        namespaceURI: *const c_char,
+        qualifiedName: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_create_entity_reference(
+        self_: *mut WebKitDOMDocument,
+        name: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMEntityReference;
+    pub fn webkit_dom_document_create_event(
+        self_: *mut WebKitDOMDocument,
+        eventType: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMEvent;
+    pub fn webkit_dom_document_create_expression(
+        self_: *mut WebKitDOMDocument,
+        expression: *const c_char,
+        resolver: *mut WebKitDOMXPathNSResolver,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMXPathExpression;
+    pub fn webkit_dom_document_create_node_iterator(
+        self_: *mut WebKitDOMDocument,
+        root: *mut WebKitDOMNode,
+        whatToShow: c_ulong,
+        filter: *mut WebKitDOMNodeFilter,
+        expandEntityReferences: gboolean,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNodeIterator;
+    pub fn webkit_dom_document_create_ns_resolver(
+        self_: *mut WebKitDOMDocument,
+        nodeResolver: *mut WebKitDOMNode,
+    ) -> *mut WebKitDOMXPathNSResolver;
+    pub fn webkit_dom_document_create_processing_instruction(
+        self_: *mut WebKitDOMDocument,
+        target: *const c_char,
+        data: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMProcessingInstruction;
     pub fn webkit_dom_document_create_range(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMRange;
-    pub fn webkit_dom_document_create_text_node(self_: *mut WebKitDOMDocument, data: *const c_char) -> *mut WebKitDOMText;
-    pub fn webkit_dom_document_create_tree_walker(self_: *mut WebKitDOMDocument, root: *mut WebKitDOMNode, whatToShow: c_ulong, filter: *mut WebKitDOMNodeFilter, expandEntityReferences: gboolean, error: *mut *mut glib::GError) -> *mut WebKitDOMTreeWalker;
-    pub fn webkit_dom_document_element_from_point(self_: *mut WebKitDOMDocument, x: c_long, y: c_long) -> *mut WebKitDOMElement;
-    pub fn webkit_dom_document_evaluate(self_: *mut WebKitDOMDocument, expression: *const c_char, contextNode: *mut WebKitDOMNode, resolver: *mut WebKitDOMXPathNSResolver, type_: c_ushort, inResult: *mut WebKitDOMXPathResult, error: *mut *mut glib::GError) -> *mut WebKitDOMXPathResult;
-    pub fn webkit_dom_document_exec_command(self_: *mut WebKitDOMDocument, command: *const c_char, userInterface: gboolean, value: *const c_char) -> gboolean;
+    pub fn webkit_dom_document_create_text_node(
+        self_: *mut WebKitDOMDocument,
+        data: *const c_char,
+    ) -> *mut WebKitDOMText;
+    pub fn webkit_dom_document_create_tree_walker(
+        self_: *mut WebKitDOMDocument,
+        root: *mut WebKitDOMNode,
+        whatToShow: c_ulong,
+        filter: *mut WebKitDOMNodeFilter,
+        expandEntityReferences: gboolean,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMTreeWalker;
+    pub fn webkit_dom_document_element_from_point(
+        self_: *mut WebKitDOMDocument,
+        x: c_long,
+        y: c_long,
+    ) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_evaluate(
+        self_: *mut WebKitDOMDocument,
+        expression: *const c_char,
+        contextNode: *mut WebKitDOMNode,
+        resolver: *mut WebKitDOMXPathNSResolver,
+        type_: c_ushort,
+        inResult: *mut WebKitDOMXPathResult,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMXPathResult;
+    pub fn webkit_dom_document_exec_command(
+        self_: *mut WebKitDOMDocument,
+        command: *const c_char,
+        userInterface: gboolean,
+        value: *const c_char,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_document_exit_pointer_lock(self_: *mut WebKitDOMDocument);
-    pub fn webkit_dom_document_get_active_element(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMElement;
-    pub fn webkit_dom_document_get_anchors(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_document_get_applets(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_document_get_body(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLElement;
+    pub fn webkit_dom_document_get_active_element(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_get_anchors(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_applets(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_body(self_: *mut WebKitDOMDocument)
+        -> *mut WebKitDOMHTMLElement;
     pub fn webkit_dom_document_get_character_set(self_: *mut WebKitDOMDocument) -> *mut c_char;
     pub fn webkit_dom_document_get_charset(self_: *mut WebKitDOMDocument) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_document_get_child_element_count(self_: *mut WebKitDOMDocument) -> c_ulong;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_get_children(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_children(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     pub fn webkit_dom_document_get_compat_mode(self_: *mut WebKitDOMDocument) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_document_get_content_type(self_: *mut WebKitDOMDocument) -> *mut c_char;
-    pub fn webkit_dom_document_get_cookie(self_: *mut WebKitDOMDocument, error: *mut *mut glib::GError) -> *mut c_char;
+    pub fn webkit_dom_document_get_cookie(
+        self_: *mut WebKitDOMDocument,
+        error: *mut *mut glib::GError,
+    ) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_get_current_script(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLScriptElement;
+    pub fn webkit_dom_document_get_current_script(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMHTMLScriptElement;
     pub fn webkit_dom_document_get_default_charset(self_: *mut WebKitDOMDocument) -> *mut c_char;
-    pub fn webkit_dom_document_get_default_view(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMDOMWindow;
+    pub fn webkit_dom_document_get_default_view(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMDOMWindow;
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     pub fn webkit_dom_document_get_design_mode(self_: *mut WebKitDOMDocument) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_document_get_dir(self_: *mut WebKitDOMDocument) -> *mut c_char;
-    pub fn webkit_dom_document_get_doctype(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMDocumentType;
-    pub fn webkit_dom_document_get_document_element(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_get_doctype(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMDocumentType;
+    pub fn webkit_dom_document_get_document_element(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMElement;
     pub fn webkit_dom_document_get_document_uri(self_: *mut WebKitDOMDocument) -> *mut c_char;
     pub fn webkit_dom_document_get_domain(self_: *mut WebKitDOMDocument) -> *mut c_char;
-    pub fn webkit_dom_document_get_element_by_id(self_: *mut WebKitDOMDocument, elementId: *const c_char) -> *mut WebKitDOMElement;
-    pub fn webkit_dom_document_get_elements_by_class_name(self_: *mut WebKitDOMDocument, class_name: *const c_char) -> *mut WebKitDOMNodeList;
+    pub fn webkit_dom_document_get_element_by_id(
+        self_: *mut WebKitDOMDocument,
+        elementId: *const c_char,
+    ) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_get_elements_by_class_name(
+        self_: *mut WebKitDOMDocument,
+        class_name: *const c_char,
+    ) -> *mut WebKitDOMNodeList;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    pub fn webkit_dom_document_get_elements_by_class_name_as_html_collection(self_: *mut WebKitDOMDocument, classNames: *const c_char) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_document_get_elements_by_name(self_: *mut WebKitDOMDocument, elementName: *const c_char) -> *mut WebKitDOMNodeList;
-    pub fn webkit_dom_document_get_elements_by_tag_name(self_: *mut WebKitDOMDocument, tag_name: *const c_char) -> *mut WebKitDOMNodeList;
+    pub fn webkit_dom_document_get_elements_by_class_name_as_html_collection(
+        self_: *mut WebKitDOMDocument,
+        classNames: *const c_char,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_elements_by_name(
+        self_: *mut WebKitDOMDocument,
+        elementName: *const c_char,
+    ) -> *mut WebKitDOMNodeList;
+    pub fn webkit_dom_document_get_elements_by_tag_name(
+        self_: *mut WebKitDOMDocument,
+        tag_name: *const c_char,
+    ) -> *mut WebKitDOMNodeList;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    pub fn webkit_dom_document_get_elements_by_tag_name_as_html_collection(self_: *mut WebKitDOMDocument, tagname: *const c_char) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_document_get_elements_by_tag_name_ns(self_: *mut WebKitDOMDocument, namespace_uri: *const c_char, tag_name: *const c_char) -> *mut WebKitDOMNodeList;
+    pub fn webkit_dom_document_get_elements_by_tag_name_as_html_collection(
+        self_: *mut WebKitDOMDocument,
+        tagname: *const c_char,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_elements_by_tag_name_ns(
+        self_: *mut WebKitDOMDocument,
+        namespace_uri: *const c_char,
+        tag_name: *const c_char,
+    ) -> *mut WebKitDOMNodeList;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    pub fn webkit_dom_document_get_elements_by_tag_name_ns_as_html_collection(self_: *mut WebKitDOMDocument, namespaceURI: *const c_char, localName: *const c_char) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_elements_by_tag_name_ns_as_html_collection(
+        self_: *mut WebKitDOMDocument,
+        namespaceURI: *const c_char,
+        localName: *const c_char,
+    ) -> *mut WebKitDOMHTMLCollection;
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    pub fn webkit_dom_document_get_embeds(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_embeds(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_get_first_element_child(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMElement;
-    pub fn webkit_dom_document_get_forms(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_document_get_head(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLHeadElement;
+    pub fn webkit_dom_document_get_first_element_child(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_get_forms(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_head(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMHTMLHeadElement;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_document_get_hidden(self_: *mut WebKitDOMDocument) -> gboolean;
-    pub fn webkit_dom_document_get_images(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_document_get_implementation(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMDOMImplementation;
+    pub fn webkit_dom_document_get_images(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_implementation(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMDOMImplementation;
     pub fn webkit_dom_document_get_input_encoding(self_: *mut WebKitDOMDocument) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_get_last_element_child(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_get_last_element_child(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMElement;
     pub fn webkit_dom_document_get_last_modified(self_: *mut WebKitDOMDocument) -> *mut c_char;
-    pub fn webkit_dom_document_get_links(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_links(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_document_get_origin(self_: *mut WebKitDOMDocument) -> *mut c_char;
-    pub fn webkit_dom_document_get_override_style(self_: *mut WebKitDOMDocument, element: *mut WebKitDOMElement, pseudoElement: *const c_char) -> *mut WebKitDOMCSSStyleDeclaration;
+    pub fn webkit_dom_document_get_override_style(
+        self_: *mut WebKitDOMDocument,
+        element: *mut WebKitDOMElement,
+        pseudoElement: *const c_char,
+    ) -> *mut WebKitDOMCSSStyleDeclaration;
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    pub fn webkit_dom_document_get_plugins(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_plugins(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_get_pointer_lock_element(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMElement;
-    pub fn webkit_dom_document_get_preferred_stylesheet_set(self_: *mut WebKitDOMDocument) -> *mut c_char;
+    pub fn webkit_dom_document_get_pointer_lock_element(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_get_preferred_stylesheet_set(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut c_char;
     pub fn webkit_dom_document_get_ready_state(self_: *mut WebKitDOMDocument) -> *mut c_char;
     pub fn webkit_dom_document_get_referrer(self_: *mut WebKitDOMDocument) -> *mut c_char;
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    pub fn webkit_dom_document_get_scripts(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_get_scripts(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_get_scrolling_element(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMElement;
-    pub fn webkit_dom_document_get_selected_stylesheet_set(self_: *mut WebKitDOMDocument) -> *mut c_char;
-    pub fn webkit_dom_document_get_style_sheets(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMStyleSheetList;
+    pub fn webkit_dom_document_get_scrolling_element(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_get_selected_stylesheet_set(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut c_char;
+    pub fn webkit_dom_document_get_style_sheets(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMStyleSheetList;
     pub fn webkit_dom_document_get_title(self_: *mut WebKitDOMDocument) -> *mut c_char;
     pub fn webkit_dom_document_get_url(self_: *mut WebKitDOMDocument) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_document_get_visibility_state(self_: *mut WebKitDOMDocument) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_get_webkit_current_fullscreen_element(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_get_webkit_current_fullscreen_element(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMElement;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_get_webkit_fullscreen_element(self_: *mut WebKitDOMDocument) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_get_webkit_fullscreen_element(
+        self_: *mut WebKitDOMDocument,
+    ) -> *mut WebKitDOMElement;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_get_webkit_fullscreen_enabled(self_: *mut WebKitDOMDocument) -> gboolean;
+    pub fn webkit_dom_document_get_webkit_fullscreen_enabled(
+        self_: *mut WebKitDOMDocument,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_get_webkit_fullscreen_keyboard_input_allowed(self_: *mut WebKitDOMDocument) -> gboolean;
+    pub fn webkit_dom_document_get_webkit_fullscreen_keyboard_input_allowed(
+        self_: *mut WebKitDOMDocument,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_document_get_webkit_is_fullscreen(self_: *mut WebKitDOMDocument) -> gboolean;
     pub fn webkit_dom_document_get_xml_encoding(self_: *mut WebKitDOMDocument) -> *mut c_char;
     pub fn webkit_dom_document_get_xml_standalone(self_: *mut WebKitDOMDocument) -> gboolean;
     pub fn webkit_dom_document_get_xml_version(self_: *mut WebKitDOMDocument) -> *mut c_char;
     pub fn webkit_dom_document_has_focus(self_: *mut WebKitDOMDocument) -> gboolean;
-    pub fn webkit_dom_document_import_node(self_: *mut WebKitDOMDocument, importedNode: *mut WebKitDOMNode, deep: gboolean, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_document_query_command_enabled(self_: *mut WebKitDOMDocument, command: *const c_char) -> gboolean;
-    pub fn webkit_dom_document_query_command_indeterm(self_: *mut WebKitDOMDocument, command: *const c_char) -> gboolean;
-    pub fn webkit_dom_document_query_command_state(self_: *mut WebKitDOMDocument, command: *const c_char) -> gboolean;
-    pub fn webkit_dom_document_query_command_supported(self_: *mut WebKitDOMDocument, command: *const c_char) -> gboolean;
-    pub fn webkit_dom_document_query_command_value(self_: *mut WebKitDOMDocument, command: *const c_char) -> *mut c_char;
-    pub fn webkit_dom_document_query_selector(self_: *mut WebKitDOMDocument, selectors: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMElement;
-    pub fn webkit_dom_document_query_selector_all(self_: *mut WebKitDOMDocument, selectors: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMNodeList;
-    pub fn webkit_dom_document_set_body(self_: *mut WebKitDOMDocument, value: *mut WebKitDOMHTMLElement, error: *mut *mut glib::GError);
+    pub fn webkit_dom_document_import_node(
+        self_: *mut WebKitDOMDocument,
+        importedNode: *mut WebKitDOMNode,
+        deep: gboolean,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_document_query_command_enabled(
+        self_: *mut WebKitDOMDocument,
+        command: *const c_char,
+    ) -> gboolean;
+    pub fn webkit_dom_document_query_command_indeterm(
+        self_: *mut WebKitDOMDocument,
+        command: *const c_char,
+    ) -> gboolean;
+    pub fn webkit_dom_document_query_command_state(
+        self_: *mut WebKitDOMDocument,
+        command: *const c_char,
+    ) -> gboolean;
+    pub fn webkit_dom_document_query_command_supported(
+        self_: *mut WebKitDOMDocument,
+        command: *const c_char,
+    ) -> gboolean;
+    pub fn webkit_dom_document_query_command_value(
+        self_: *mut WebKitDOMDocument,
+        command: *const c_char,
+    ) -> *mut c_char;
+    pub fn webkit_dom_document_query_selector(
+        self_: *mut WebKitDOMDocument,
+        selectors: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_query_selector_all(
+        self_: *mut WebKitDOMDocument,
+        selectors: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNodeList;
+    pub fn webkit_dom_document_set_body(
+        self_: *mut WebKitDOMDocument,
+        value: *mut WebKitDOMHTMLElement,
+        error: *mut *mut glib::GError,
+    );
     pub fn webkit_dom_document_set_charset(self_: *mut WebKitDOMDocument, value: *const c_char);
-    pub fn webkit_dom_document_set_cookie(self_: *mut WebKitDOMDocument, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_document_set_cookie(
+        self_: *mut WebKitDOMDocument,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     pub fn webkit_dom_document_set_design_mode(self_: *mut WebKitDOMDocument, value: *const c_char);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_document_set_dir(self_: *mut WebKitDOMDocument, value: *const c_char);
-    pub fn webkit_dom_document_set_document_uri(self_: *mut WebKitDOMDocument, value: *const c_char);
-    pub fn webkit_dom_document_set_selected_stylesheet_set(self_: *mut WebKitDOMDocument, value: *const c_char);
+    pub fn webkit_dom_document_set_document_uri(
+        self_: *mut WebKitDOMDocument,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_document_set_selected_stylesheet_set(
+        self_: *mut WebKitDOMDocument,
+        value: *const c_char,
+    );
     pub fn webkit_dom_document_set_title(self_: *mut WebKitDOMDocument, value: *const c_char);
-    pub fn webkit_dom_document_set_xml_standalone(self_: *mut WebKitDOMDocument, value: gboolean, error: *mut *mut glib::GError);
-    pub fn webkit_dom_document_set_xml_version(self_: *mut WebKitDOMDocument, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_document_set_xml_standalone(
+        self_: *mut WebKitDOMDocument,
+        value: gboolean,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_document_set_xml_version(
+        self_: *mut WebKitDOMDocument,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_document_webkit_cancel_fullscreen(self_: *mut WebKitDOMDocument);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -4109,30 +5128,57 @@ extern "C" {
     //=========================================================================
     pub fn webkit_dom_document_fragment_get_type() -> GType;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_fragment_get_child_element_count(self_: *mut WebKitDOMDocumentFragment) -> c_ulong;
+    pub fn webkit_dom_document_fragment_get_child_element_count(
+        self_: *mut WebKitDOMDocumentFragment,
+    ) -> c_ulong;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_fragment_get_children(self_: *mut WebKitDOMDocumentFragment) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_document_fragment_get_children(
+        self_: *mut WebKitDOMDocumentFragment,
+    ) -> *mut WebKitDOMHTMLCollection;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_fragment_get_element_by_id(self_: *mut WebKitDOMDocumentFragment, elementId: *const c_char) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_fragment_get_element_by_id(
+        self_: *mut WebKitDOMDocumentFragment,
+        elementId: *const c_char,
+    ) -> *mut WebKitDOMElement;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_fragment_get_first_element_child(self_: *mut WebKitDOMDocumentFragment) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_fragment_get_first_element_child(
+        self_: *mut WebKitDOMDocumentFragment,
+    ) -> *mut WebKitDOMElement;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_fragment_get_last_element_child(self_: *mut WebKitDOMDocumentFragment) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_fragment_get_last_element_child(
+        self_: *mut WebKitDOMDocumentFragment,
+    ) -> *mut WebKitDOMElement;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_fragment_query_selector(self_: *mut WebKitDOMDocumentFragment, selectors: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_document_fragment_query_selector(
+        self_: *mut WebKitDOMDocumentFragment,
+        selectors: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMElement;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_document_fragment_query_selector_all(self_: *mut WebKitDOMDocumentFragment, selectors: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMNodeList;
+    pub fn webkit_dom_document_fragment_query_selector_all(
+        self_: *mut WebKitDOMDocumentFragment,
+        selectors: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNodeList;
 
     //=========================================================================
     // WebKitDOMDocumentType
     //=========================================================================
     pub fn webkit_dom_document_type_get_type() -> GType;
-    pub fn webkit_dom_document_type_get_entities(self_: *mut WebKitDOMDocumentType) -> *mut WebKitDOMNamedNodeMap;
-    pub fn webkit_dom_document_type_get_internal_subset(self_: *mut WebKitDOMDocumentType) -> *mut c_char;
+    pub fn webkit_dom_document_type_get_entities(
+        self_: *mut WebKitDOMDocumentType,
+    ) -> *mut WebKitDOMNamedNodeMap;
+    pub fn webkit_dom_document_type_get_internal_subset(
+        self_: *mut WebKitDOMDocumentType,
+    ) -> *mut c_char;
     pub fn webkit_dom_document_type_get_name(self_: *mut WebKitDOMDocumentType) -> *mut c_char;
-    pub fn webkit_dom_document_type_get_notations(self_: *mut WebKitDOMDocumentType) -> *mut WebKitDOMNamedNodeMap;
-    pub fn webkit_dom_document_type_get_public_id(self_: *mut WebKitDOMDocumentType) -> *mut c_char;
-    pub fn webkit_dom_document_type_get_system_id(self_: *mut WebKitDOMDocumentType) -> *mut c_char;
+    pub fn webkit_dom_document_type_get_notations(
+        self_: *mut WebKitDOMDocumentType,
+    ) -> *mut WebKitDOMNamedNodeMap;
+    pub fn webkit_dom_document_type_get_public_id(self_: *mut WebKitDOMDocumentType)
+        -> *mut c_char;
+    pub fn webkit_dom_document_type_get_system_id(self_: *mut WebKitDOMDocumentType)
+        -> *mut c_char;
 
     //=========================================================================
     // WebKitDOMElement
@@ -4140,108 +5186,259 @@ extern "C" {
     pub fn webkit_dom_element_get_type() -> GType;
     pub fn webkit_dom_element_blur(self_: *mut WebKitDOMElement);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_element_closest(self_: *mut WebKitDOMElement, selectors: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_element_closest(
+        self_: *mut WebKitDOMElement,
+        selectors: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMElement;
     pub fn webkit_dom_element_focus(self_: *mut WebKitDOMElement);
-    pub fn webkit_dom_element_get_attribute(self_: *mut WebKitDOMElement, name: *const c_char) -> *mut c_char;
-    pub fn webkit_dom_element_get_attribute_node(self_: *mut WebKitDOMElement, name: *const c_char) -> *mut WebKitDOMAttr;
-    pub fn webkit_dom_element_get_attribute_node_ns(self_: *mut WebKitDOMElement, namespaceURI: *const c_char, localName: *const c_char) -> *mut WebKitDOMAttr;
-    pub fn webkit_dom_element_get_attribute_ns(self_: *mut WebKitDOMElement, namespaceURI: *const c_char, localName: *const c_char) -> *mut c_char;
-    pub fn webkit_dom_element_get_attributes(self_: *mut WebKitDOMElement) -> *mut WebKitDOMNamedNodeMap;
+    pub fn webkit_dom_element_get_attribute(
+        self_: *mut WebKitDOMElement,
+        name: *const c_char,
+    ) -> *mut c_char;
+    pub fn webkit_dom_element_get_attribute_node(
+        self_: *mut WebKitDOMElement,
+        name: *const c_char,
+    ) -> *mut WebKitDOMAttr;
+    pub fn webkit_dom_element_get_attribute_node_ns(
+        self_: *mut WebKitDOMElement,
+        namespaceURI: *const c_char,
+        localName: *const c_char,
+    ) -> *mut WebKitDOMAttr;
+    pub fn webkit_dom_element_get_attribute_ns(
+        self_: *mut WebKitDOMElement,
+        namespaceURI: *const c_char,
+        localName: *const c_char,
+    ) -> *mut c_char;
+    pub fn webkit_dom_element_get_attributes(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut WebKitDOMNamedNodeMap;
     #[cfg(any(feature = "v2_18", feature = "dox"))]
-    pub fn webkit_dom_element_get_bounding_client_rect(self_: *mut WebKitDOMElement) -> *mut WebKitDOMClientRect;
+    pub fn webkit_dom_element_get_bounding_client_rect(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut WebKitDOMClientRect;
     pub fn webkit_dom_element_get_child_element_count(self_: *mut WebKitDOMElement) -> c_ulong;
     #[cfg(any(feature = "v2_10", feature = "dox"))]
-    pub fn webkit_dom_element_get_children(self_: *mut WebKitDOMElement) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_element_get_children(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut WebKitDOMHTMLCollection;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_element_get_class_list(self_: *mut WebKitDOMElement) -> *mut WebKitDOMDOMTokenList;
+    pub fn webkit_dom_element_get_class_list(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut WebKitDOMDOMTokenList;
     pub fn webkit_dom_element_get_class_name(self_: *mut WebKitDOMElement) -> *mut c_char;
     pub fn webkit_dom_element_get_client_height(self_: *mut WebKitDOMElement) -> c_double;
     pub fn webkit_dom_element_get_client_left(self_: *mut WebKitDOMElement) -> c_double;
     #[cfg(any(feature = "v2_18", feature = "dox"))]
-    pub fn webkit_dom_element_get_client_rects(self_: *mut WebKitDOMElement) -> *mut WebKitDOMClientRectList;
+    pub fn webkit_dom_element_get_client_rects(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut WebKitDOMClientRectList;
     pub fn webkit_dom_element_get_client_top(self_: *mut WebKitDOMElement) -> c_double;
     pub fn webkit_dom_element_get_client_width(self_: *mut WebKitDOMElement) -> c_double;
-    pub fn webkit_dom_element_get_elements_by_class_name(self_: *mut WebKitDOMElement, class_name: *const c_char) -> *mut WebKitDOMNodeList;
+    pub fn webkit_dom_element_get_elements_by_class_name(
+        self_: *mut WebKitDOMElement,
+        class_name: *const c_char,
+    ) -> *mut WebKitDOMNodeList;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    pub fn webkit_dom_element_get_elements_by_class_name_as_html_collection(self_: *mut WebKitDOMElement, name: *const c_char) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_element_get_elements_by_tag_name(self_: *mut WebKitDOMElement, tag_name: *const c_char) -> *mut WebKitDOMNodeList;
+    pub fn webkit_dom_element_get_elements_by_class_name_as_html_collection(
+        self_: *mut WebKitDOMElement,
+        name: *const c_char,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_element_get_elements_by_tag_name(
+        self_: *mut WebKitDOMElement,
+        tag_name: *const c_char,
+    ) -> *mut WebKitDOMNodeList;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    pub fn webkit_dom_element_get_elements_by_tag_name_as_html_collection(self_: *mut WebKitDOMElement, name: *const c_char) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_element_get_elements_by_tag_name_ns(self_: *mut WebKitDOMElement, namespace_uri: *const c_char, tag_name: *const c_char) -> *mut WebKitDOMNodeList;
+    pub fn webkit_dom_element_get_elements_by_tag_name_as_html_collection(
+        self_: *mut WebKitDOMElement,
+        name: *const c_char,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_element_get_elements_by_tag_name_ns(
+        self_: *mut WebKitDOMElement,
+        namespace_uri: *const c_char,
+        tag_name: *const c_char,
+    ) -> *mut WebKitDOMNodeList;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    pub fn webkit_dom_element_get_elements_by_tag_name_ns_as_html_collection(self_: *mut WebKitDOMElement, namespaceURI: *const c_char, localName: *const c_char) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_element_get_first_element_child(self_: *mut WebKitDOMElement) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_element_get_elements_by_tag_name_ns_as_html_collection(
+        self_: *mut WebKitDOMElement,
+        namespaceURI: *const c_char,
+        localName: *const c_char,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_element_get_first_element_child(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut WebKitDOMElement;
     pub fn webkit_dom_element_get_id(self_: *mut WebKitDOMElement) -> *mut c_char;
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     pub fn webkit_dom_element_get_inner_html(self_: *mut WebKitDOMElement) -> *mut c_char;
-    pub fn webkit_dom_element_get_last_element_child(self_: *mut WebKitDOMElement) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_element_get_last_element_child(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut WebKitDOMElement;
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     pub fn webkit_dom_element_get_local_name(self_: *mut WebKitDOMElement) -> *mut c_char;
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     pub fn webkit_dom_element_get_namespace_uri(self_: *mut WebKitDOMElement) -> *mut c_char;
-    pub fn webkit_dom_element_get_next_element_sibling(self_: *mut WebKitDOMElement) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_element_get_next_element_sibling(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut WebKitDOMElement;
     pub fn webkit_dom_element_get_offset_height(self_: *mut WebKitDOMElement) -> c_double;
     pub fn webkit_dom_element_get_offset_left(self_: *mut WebKitDOMElement) -> c_double;
-    pub fn webkit_dom_element_get_offset_parent(self_: *mut WebKitDOMElement) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_element_get_offset_parent(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut WebKitDOMElement;
     pub fn webkit_dom_element_get_offset_top(self_: *mut WebKitDOMElement) -> c_double;
     pub fn webkit_dom_element_get_offset_width(self_: *mut WebKitDOMElement) -> c_double;
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     pub fn webkit_dom_element_get_outer_html(self_: *mut WebKitDOMElement) -> *mut c_char;
     #[cfg(any(feature = "v2_14", feature = "dox"))]
     pub fn webkit_dom_element_get_prefix(self_: *mut WebKitDOMElement) -> *mut c_char;
-    pub fn webkit_dom_element_get_previous_element_sibling(self_: *mut WebKitDOMElement) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_element_get_previous_element_sibling(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut WebKitDOMElement;
     pub fn webkit_dom_element_get_scroll_height(self_: *mut WebKitDOMElement) -> c_long;
     pub fn webkit_dom_element_get_scroll_left(self_: *mut WebKitDOMElement) -> c_long;
     pub fn webkit_dom_element_get_scroll_top(self_: *mut WebKitDOMElement) -> c_long;
     pub fn webkit_dom_element_get_scroll_width(self_: *mut WebKitDOMElement) -> c_long;
-    pub fn webkit_dom_element_get_style(self_: *mut WebKitDOMElement) -> *mut WebKitDOMCSSStyleDeclaration;
+    pub fn webkit_dom_element_get_style(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut WebKitDOMCSSStyleDeclaration;
     pub fn webkit_dom_element_get_tag_name(self_: *mut WebKitDOMElement) -> *mut c_char;
-    pub fn webkit_dom_element_get_webkit_region_overset(self_: *mut WebKitDOMElement) -> *mut c_char;
-    pub fn webkit_dom_element_has_attribute(self_: *mut WebKitDOMElement, name: *const c_char) -> gboolean;
-    pub fn webkit_dom_element_has_attribute_ns(self_: *mut WebKitDOMElement, namespaceURI: *const c_char, localName: *const c_char) -> gboolean;
+    pub fn webkit_dom_element_get_webkit_region_overset(
+        self_: *mut WebKitDOMElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_element_has_attribute(
+        self_: *mut WebKitDOMElement,
+        name: *const c_char,
+    ) -> gboolean;
+    pub fn webkit_dom_element_has_attribute_ns(
+        self_: *mut WebKitDOMElement,
+        namespaceURI: *const c_char,
+        localName: *const c_char,
+    ) -> gboolean;
     pub fn webkit_dom_element_has_attributes(self_: *mut WebKitDOMElement) -> gboolean;
-    pub fn webkit_dom_element_html_input_element_get_auto_filled(element: *mut WebKitDOMElement) -> gboolean;
+    pub fn webkit_dom_element_html_input_element_get_auto_filled(
+        element: *mut WebKitDOMElement,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_22", feature = "dox"))]
-    pub fn webkit_dom_element_html_input_element_is_user_edited(element: *mut WebKitDOMElement) -> gboolean;
+    pub fn webkit_dom_element_html_input_element_is_user_edited(
+        element: *mut WebKitDOMElement,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_22", feature = "dox"))]
-    pub fn webkit_dom_element_html_input_element_set_auto_filled(element: *mut WebKitDOMElement, auto_filled: gboolean);
+    pub fn webkit_dom_element_html_input_element_set_auto_filled(
+        element: *mut WebKitDOMElement,
+        auto_filled: gboolean,
+    );
     #[cfg(any(feature = "v2_22", feature = "dox"))]
-    pub fn webkit_dom_element_html_input_element_set_editing_value(element: *mut WebKitDOMElement, value: *const c_char);
+    pub fn webkit_dom_element_html_input_element_set_editing_value(
+        element: *mut WebKitDOMElement,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_element_insert_adjacent_element(self_: *mut WebKitDOMElement, where_: *const c_char, element: *mut WebKitDOMElement, error: *mut *mut glib::GError) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_element_insert_adjacent_element(
+        self_: *mut WebKitDOMElement,
+        where_: *const c_char,
+        element: *mut WebKitDOMElement,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMElement;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_element_insert_adjacent_html(self_: *mut WebKitDOMElement, where_: *const c_char, html: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_element_insert_adjacent_html(
+        self_: *mut WebKitDOMElement,
+        where_: *const c_char,
+        html: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_element_insert_adjacent_text(self_: *mut WebKitDOMElement, where_: *const c_char, text: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_element_insert_adjacent_text(
+        self_: *mut WebKitDOMElement,
+        where_: *const c_char,
+        text: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_element_matches(self_: *mut WebKitDOMElement, selectors: *const c_char, error: *mut *mut glib::GError) -> gboolean;
-    pub fn webkit_dom_element_query_selector(self_: *mut WebKitDOMElement, selectors: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMElement;
-    pub fn webkit_dom_element_query_selector_all(self_: *mut WebKitDOMElement, selectors: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMNodeList;
+    pub fn webkit_dom_element_matches(
+        self_: *mut WebKitDOMElement,
+        selectors: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> gboolean;
+    pub fn webkit_dom_element_query_selector(
+        self_: *mut WebKitDOMElement,
+        selectors: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMElement;
+    pub fn webkit_dom_element_query_selector_all(
+        self_: *mut WebKitDOMElement,
+        selectors: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNodeList;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_element_remove(self_: *mut WebKitDOMElement, error: *mut *mut glib::GError);
     pub fn webkit_dom_element_remove_attribute(self_: *mut WebKitDOMElement, name: *const c_char);
-    pub fn webkit_dom_element_remove_attribute_node(self_: *mut WebKitDOMElement, oldAttr: *mut WebKitDOMAttr, error: *mut *mut glib::GError) -> *mut WebKitDOMAttr;
-    pub fn webkit_dom_element_remove_attribute_ns(self_: *mut WebKitDOMElement, namespaceURI: *const c_char, localName: *const c_char);
+    pub fn webkit_dom_element_remove_attribute_node(
+        self_: *mut WebKitDOMElement,
+        oldAttr: *mut WebKitDOMAttr,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMAttr;
+    pub fn webkit_dom_element_remove_attribute_ns(
+        self_: *mut WebKitDOMElement,
+        namespaceURI: *const c_char,
+        localName: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_element_request_pointer_lock(self_: *mut WebKitDOMElement);
     pub fn webkit_dom_element_scroll_by_lines(self_: *mut WebKitDOMElement, lines: c_long);
     pub fn webkit_dom_element_scroll_by_pages(self_: *mut WebKitDOMElement, pages: c_long);
-    pub fn webkit_dom_element_scroll_into_view(self_: *mut WebKitDOMElement, alignWithTop: gboolean);
-    pub fn webkit_dom_element_scroll_into_view_if_needed(self_: *mut WebKitDOMElement, centerIfNeeded: gboolean);
-    pub fn webkit_dom_element_set_attribute(self_: *mut WebKitDOMElement, name: *const c_char, value: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_element_set_attribute_node(self_: *mut WebKitDOMElement, newAttr: *mut WebKitDOMAttr, error: *mut *mut glib::GError) -> *mut WebKitDOMAttr;
-    pub fn webkit_dom_element_set_attribute_node_ns(self_: *mut WebKitDOMElement, newAttr: *mut WebKitDOMAttr, error: *mut *mut glib::GError) -> *mut WebKitDOMAttr;
-    pub fn webkit_dom_element_set_attribute_ns(self_: *mut WebKitDOMElement, namespaceURI: *const c_char, qualifiedName: *const c_char, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_element_scroll_into_view(
+        self_: *mut WebKitDOMElement,
+        alignWithTop: gboolean,
+    );
+    pub fn webkit_dom_element_scroll_into_view_if_needed(
+        self_: *mut WebKitDOMElement,
+        centerIfNeeded: gboolean,
+    );
+    pub fn webkit_dom_element_set_attribute(
+        self_: *mut WebKitDOMElement,
+        name: *const c_char,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_element_set_attribute_node(
+        self_: *mut WebKitDOMElement,
+        newAttr: *mut WebKitDOMAttr,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMAttr;
+    pub fn webkit_dom_element_set_attribute_node_ns(
+        self_: *mut WebKitDOMElement,
+        newAttr: *mut WebKitDOMAttr,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMAttr;
+    pub fn webkit_dom_element_set_attribute_ns(
+        self_: *mut WebKitDOMElement,
+        namespaceURI: *const c_char,
+        qualifiedName: *const c_char,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     pub fn webkit_dom_element_set_class_name(self_: *mut WebKitDOMElement, value: *const c_char);
     pub fn webkit_dom_element_set_id(self_: *mut WebKitDOMElement, value: *const c_char);
     #[cfg(any(feature = "v2_8", feature = "dox"))]
-    pub fn webkit_dom_element_set_inner_html(self_: *mut WebKitDOMElement, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_element_set_inner_html(
+        self_: *mut WebKitDOMElement,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     #[cfg(any(feature = "v2_8", feature = "dox"))]
-    pub fn webkit_dom_element_set_outer_html(self_: *mut WebKitDOMElement, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_element_set_outer_html(
+        self_: *mut WebKitDOMElement,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     pub fn webkit_dom_element_set_scroll_left(self_: *mut WebKitDOMElement, value: c_long);
     pub fn webkit_dom_element_set_scroll_top(self_: *mut WebKitDOMElement, value: c_long);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_element_webkit_matches_selector(self_: *mut WebKitDOMElement, selectors: *const c_char, error: *mut *mut glib::GError) -> gboolean;
+    pub fn webkit_dom_element_webkit_matches_selector(
+        self_: *mut WebKitDOMElement,
+        selectors: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_element_webkit_request_fullscreen(self_: *mut WebKitDOMElement);
 
@@ -4257,14 +5454,23 @@ extern "C" {
     pub fn webkit_dom_event_get_bubbles(self_: *mut WebKitDOMEvent) -> gboolean;
     pub fn webkit_dom_event_get_cancel_bubble(self_: *mut WebKitDOMEvent) -> gboolean;
     pub fn webkit_dom_event_get_cancelable(self_: *mut WebKitDOMEvent) -> gboolean;
-    pub fn webkit_dom_event_get_current_target(self_: *mut WebKitDOMEvent) -> *mut WebKitDOMEventTarget;
+    pub fn webkit_dom_event_get_current_target(
+        self_: *mut WebKitDOMEvent,
+    ) -> *mut WebKitDOMEventTarget;
     pub fn webkit_dom_event_get_event_phase(self_: *mut WebKitDOMEvent) -> c_ushort;
     pub fn webkit_dom_event_get_event_type(self_: *mut WebKitDOMEvent) -> *mut c_char;
     pub fn webkit_dom_event_get_return_value(self_: *mut WebKitDOMEvent) -> gboolean;
-    pub fn webkit_dom_event_get_src_element(self_: *mut WebKitDOMEvent) -> *mut WebKitDOMEventTarget;
+    pub fn webkit_dom_event_get_src_element(
+        self_: *mut WebKitDOMEvent,
+    ) -> *mut WebKitDOMEventTarget;
     pub fn webkit_dom_event_get_target(self_: *mut WebKitDOMEvent) -> *mut WebKitDOMEventTarget;
     pub fn webkit_dom_event_get_time_stamp(self_: *mut WebKitDOMEvent) -> u32;
-    pub fn webkit_dom_event_init_event(self_: *mut WebKitDOMEvent, eventTypeArg: *const c_char, canBubbleArg: gboolean, cancelableArg: gboolean);
+    pub fn webkit_dom_event_init_event(
+        self_: *mut WebKitDOMEvent,
+        eventTypeArg: *const c_char,
+        canBubbleArg: gboolean,
+        cancelableArg: gboolean,
+    );
     pub fn webkit_dom_event_prevent_default(self_: *mut WebKitDOMEvent);
     pub fn webkit_dom_event_set_cancel_bubble(self_: *mut WebKitDOMEvent, value: gboolean);
     pub fn webkit_dom_event_set_return_value(self_: *mut WebKitDOMEvent, value: gboolean);
@@ -4281,212 +5487,543 @@ extern "C" {
     //=========================================================================
     pub fn webkit_dom_file_list_get_type() -> GType;
     pub fn webkit_dom_file_list_get_length(self_: *mut WebKitDOMFileList) -> c_ulong;
-    pub fn webkit_dom_file_list_item(self_: *mut WebKitDOMFileList, index: c_ulong) -> *mut WebKitDOMFile;
+    pub fn webkit_dom_file_list_item(
+        self_: *mut WebKitDOMFileList,
+        index: c_ulong,
+    ) -> *mut WebKitDOMFile;
 
     //=========================================================================
     // WebKitDOMHTMLAnchorElement
     //=========================================================================
     pub fn webkit_dom_html_anchor_element_get_type() -> GType;
-    pub fn webkit_dom_html_anchor_element_get_charset(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_coords(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_hash(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_host(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_hostname(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_href(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_hreflang(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_name(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_pathname(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_port(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_protocol(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_rel(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_rev(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_search(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_shape(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_target(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_text(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_get_type_attr(self_: *mut WebKitDOMHTMLAnchorElement) -> *mut c_char;
-    pub fn webkit_dom_html_anchor_element_set_charset(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_coords(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_hash(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_host(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_hostname(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_href(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_hreflang(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_name(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_pathname(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_port(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_protocol(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_rel(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_rev(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_search(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_shape(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_target(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
+    pub fn webkit_dom_html_anchor_element_get_charset(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_coords(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_hash(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_host(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_hostname(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_href(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_hreflang(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_name(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_pathname(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_port(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_protocol(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_rel(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_rev(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_search(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_shape(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_target(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_text(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_get_type_attr(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_anchor_element_set_charset(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_coords(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_hash(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_host(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_hostname(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_href(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_hreflang(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_name(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_pathname(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_port(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_protocol(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_rel(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_rev(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_search(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_shape(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_target(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_anchor_element_set_text(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
-    pub fn webkit_dom_html_anchor_element_set_type_attr(self_: *mut WebKitDOMHTMLAnchorElement, value: *const c_char);
+    pub fn webkit_dom_html_anchor_element_set_text(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_anchor_element_set_type_attr(
+        self_: *mut WebKitDOMHTMLAnchorElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLAppletElement
     //=========================================================================
     pub fn webkit_dom_html_applet_element_get_type() -> GType;
-    pub fn webkit_dom_html_applet_element_get_align(self_: *mut WebKitDOMHTMLAppletElement) -> *mut c_char;
-    pub fn webkit_dom_html_applet_element_get_alt(self_: *mut WebKitDOMHTMLAppletElement) -> *mut c_char;
-    pub fn webkit_dom_html_applet_element_get_archive(self_: *mut WebKitDOMHTMLAppletElement) -> *mut c_char;
-    pub fn webkit_dom_html_applet_element_get_code(self_: *mut WebKitDOMHTMLAppletElement) -> *mut c_char;
-    pub fn webkit_dom_html_applet_element_get_code_base(self_: *mut WebKitDOMHTMLAppletElement) -> *mut c_char;
-    pub fn webkit_dom_html_applet_element_get_height(self_: *mut WebKitDOMHTMLAppletElement) -> *mut c_char;
-    pub fn webkit_dom_html_applet_element_get_hspace(self_: *mut WebKitDOMHTMLAppletElement) -> c_long;
-    pub fn webkit_dom_html_applet_element_get_name(self_: *mut WebKitDOMHTMLAppletElement) -> *mut c_char;
-    pub fn webkit_dom_html_applet_element_get_object(self_: *mut WebKitDOMHTMLAppletElement) -> *mut c_char;
-    pub fn webkit_dom_html_applet_element_get_vspace(self_: *mut WebKitDOMHTMLAppletElement) -> c_long;
-    pub fn webkit_dom_html_applet_element_get_width(self_: *mut WebKitDOMHTMLAppletElement) -> *mut c_char;
-    pub fn webkit_dom_html_applet_element_set_align(self_: *mut WebKitDOMHTMLAppletElement, value: *const c_char);
-    pub fn webkit_dom_html_applet_element_set_alt(self_: *mut WebKitDOMHTMLAppletElement, value: *const c_char);
-    pub fn webkit_dom_html_applet_element_set_archive(self_: *mut WebKitDOMHTMLAppletElement, value: *const c_char);
-    pub fn webkit_dom_html_applet_element_set_code(self_: *mut WebKitDOMHTMLAppletElement, value: *const c_char);
-    pub fn webkit_dom_html_applet_element_set_code_base(self_: *mut WebKitDOMHTMLAppletElement, value: *const c_char);
-    pub fn webkit_dom_html_applet_element_set_height(self_: *mut WebKitDOMHTMLAppletElement, value: *const c_char);
-    pub fn webkit_dom_html_applet_element_set_hspace(self_: *mut WebKitDOMHTMLAppletElement, value: c_long);
-    pub fn webkit_dom_html_applet_element_set_name(self_: *mut WebKitDOMHTMLAppletElement, value: *const c_char);
-    pub fn webkit_dom_html_applet_element_set_object(self_: *mut WebKitDOMHTMLAppletElement, value: *const c_char);
-    pub fn webkit_dom_html_applet_element_set_vspace(self_: *mut WebKitDOMHTMLAppletElement, value: c_long);
-    pub fn webkit_dom_html_applet_element_set_width(self_: *mut WebKitDOMHTMLAppletElement, value: *const c_char);
+    pub fn webkit_dom_html_applet_element_get_align(
+        self_: *mut WebKitDOMHTMLAppletElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_applet_element_get_alt(
+        self_: *mut WebKitDOMHTMLAppletElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_applet_element_get_archive(
+        self_: *mut WebKitDOMHTMLAppletElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_applet_element_get_code(
+        self_: *mut WebKitDOMHTMLAppletElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_applet_element_get_code_base(
+        self_: *mut WebKitDOMHTMLAppletElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_applet_element_get_height(
+        self_: *mut WebKitDOMHTMLAppletElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_applet_element_get_hspace(
+        self_: *mut WebKitDOMHTMLAppletElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_applet_element_get_name(
+        self_: *mut WebKitDOMHTMLAppletElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_applet_element_get_object(
+        self_: *mut WebKitDOMHTMLAppletElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_applet_element_get_vspace(
+        self_: *mut WebKitDOMHTMLAppletElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_applet_element_get_width(
+        self_: *mut WebKitDOMHTMLAppletElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_applet_element_set_align(
+        self_: *mut WebKitDOMHTMLAppletElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_applet_element_set_alt(
+        self_: *mut WebKitDOMHTMLAppletElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_applet_element_set_archive(
+        self_: *mut WebKitDOMHTMLAppletElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_applet_element_set_code(
+        self_: *mut WebKitDOMHTMLAppletElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_applet_element_set_code_base(
+        self_: *mut WebKitDOMHTMLAppletElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_applet_element_set_height(
+        self_: *mut WebKitDOMHTMLAppletElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_applet_element_set_hspace(
+        self_: *mut WebKitDOMHTMLAppletElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_applet_element_set_name(
+        self_: *mut WebKitDOMHTMLAppletElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_applet_element_set_object(
+        self_: *mut WebKitDOMHTMLAppletElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_applet_element_set_vspace(
+        self_: *mut WebKitDOMHTMLAppletElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_applet_element_set_width(
+        self_: *mut WebKitDOMHTMLAppletElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLAreaElement
     //=========================================================================
     pub fn webkit_dom_html_area_element_get_type() -> GType;
-    pub fn webkit_dom_html_area_element_get_alt(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_get_coords(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_get_hash(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_get_host(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_get_hostname(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_get_href(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_get_no_href(self_: *mut WebKitDOMHTMLAreaElement) -> gboolean;
-    pub fn webkit_dom_html_area_element_get_pathname(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_get_port(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_get_protocol(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_get_search(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_get_shape(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_get_target(self_: *mut WebKitDOMHTMLAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_area_element_set_alt(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
-    pub fn webkit_dom_html_area_element_set_coords(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
-    pub fn webkit_dom_html_area_element_set_hash(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
+    pub fn webkit_dom_html_area_element_get_alt(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_get_coords(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_get_hash(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_get_host(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_get_hostname(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_get_href(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_get_no_href(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_area_element_get_pathname(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_get_port(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_get_protocol(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_get_search(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_get_shape(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_get_target(
+        self_: *mut WebKitDOMHTMLAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_area_element_set_alt(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_area_element_set_coords(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_area_element_set_hash(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_area_element_set_host(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
+    pub fn webkit_dom_html_area_element_set_host(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_area_element_set_hostname(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
-    pub fn webkit_dom_html_area_element_set_href(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
-    pub fn webkit_dom_html_area_element_set_no_href(self_: *mut WebKitDOMHTMLAreaElement, value: gboolean);
+    pub fn webkit_dom_html_area_element_set_hostname(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_area_element_set_href(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_area_element_set_no_href(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: gboolean,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_area_element_set_pathname(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
+    pub fn webkit_dom_html_area_element_set_pathname(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_area_element_set_port(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
+    pub fn webkit_dom_html_area_element_set_port(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_area_element_set_protocol(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
+    pub fn webkit_dom_html_area_element_set_protocol(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_area_element_set_search(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
-    pub fn webkit_dom_html_area_element_set_shape(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
-    pub fn webkit_dom_html_area_element_set_target(self_: *mut WebKitDOMHTMLAreaElement, value: *const c_char);
+    pub fn webkit_dom_html_area_element_set_search(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_area_element_set_shape(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_area_element_set_target(
+        self_: *mut WebKitDOMHTMLAreaElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLBRElement
     //=========================================================================
     pub fn webkit_dom_html_br_element_get_type() -> GType;
     pub fn webkit_dom_html_br_element_get_clear(self_: *mut WebKitDOMHTMLBRElement) -> *mut c_char;
-    pub fn webkit_dom_html_br_element_set_clear(self_: *mut WebKitDOMHTMLBRElement, value: *const c_char);
+    pub fn webkit_dom_html_br_element_set_clear(
+        self_: *mut WebKitDOMHTMLBRElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLBaseElement
     //=========================================================================
     pub fn webkit_dom_html_base_element_get_type() -> GType;
-    pub fn webkit_dom_html_base_element_get_href(self_: *mut WebKitDOMHTMLBaseElement) -> *mut c_char;
-    pub fn webkit_dom_html_base_element_get_target(self_: *mut WebKitDOMHTMLBaseElement) -> *mut c_char;
-    pub fn webkit_dom_html_base_element_set_href(self_: *mut WebKitDOMHTMLBaseElement, value: *const c_char);
-    pub fn webkit_dom_html_base_element_set_target(self_: *mut WebKitDOMHTMLBaseElement, value: *const c_char);
+    pub fn webkit_dom_html_base_element_get_href(
+        self_: *mut WebKitDOMHTMLBaseElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_base_element_get_target(
+        self_: *mut WebKitDOMHTMLBaseElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_base_element_set_href(
+        self_: *mut WebKitDOMHTMLBaseElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_base_element_set_target(
+        self_: *mut WebKitDOMHTMLBaseElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLBaseFontElement
     //=========================================================================
     pub fn webkit_dom_html_base_font_element_get_type() -> GType;
-    pub fn webkit_dom_html_base_font_element_get_color(self_: *mut WebKitDOMHTMLBaseFontElement) -> *mut c_char;
-    pub fn webkit_dom_html_base_font_element_get_face(self_: *mut WebKitDOMHTMLBaseFontElement) -> *mut c_char;
-    pub fn webkit_dom_html_base_font_element_get_size(self_: *mut WebKitDOMHTMLBaseFontElement) -> c_long;
-    pub fn webkit_dom_html_base_font_element_set_color(self_: *mut WebKitDOMHTMLBaseFontElement, value: *const c_char);
-    pub fn webkit_dom_html_base_font_element_set_face(self_: *mut WebKitDOMHTMLBaseFontElement, value: *const c_char);
-    pub fn webkit_dom_html_base_font_element_set_size(self_: *mut WebKitDOMHTMLBaseFontElement, value: c_long);
+    pub fn webkit_dom_html_base_font_element_get_color(
+        self_: *mut WebKitDOMHTMLBaseFontElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_base_font_element_get_face(
+        self_: *mut WebKitDOMHTMLBaseFontElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_base_font_element_get_size(
+        self_: *mut WebKitDOMHTMLBaseFontElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_base_font_element_set_color(
+        self_: *mut WebKitDOMHTMLBaseFontElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_base_font_element_set_face(
+        self_: *mut WebKitDOMHTMLBaseFontElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_base_font_element_set_size(
+        self_: *mut WebKitDOMHTMLBaseFontElement,
+        value: c_long,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLBodyElement
     //=========================================================================
     pub fn webkit_dom_html_body_element_get_type() -> GType;
-    pub fn webkit_dom_html_body_element_get_a_link(self_: *mut WebKitDOMHTMLBodyElement) -> *mut c_char;
-    pub fn webkit_dom_html_body_element_get_background(self_: *mut WebKitDOMHTMLBodyElement) -> *mut c_char;
-    pub fn webkit_dom_html_body_element_get_bg_color(self_: *mut WebKitDOMHTMLBodyElement) -> *mut c_char;
-    pub fn webkit_dom_html_body_element_get_link(self_: *mut WebKitDOMHTMLBodyElement) -> *mut c_char;
-    pub fn webkit_dom_html_body_element_get_text(self_: *mut WebKitDOMHTMLBodyElement) -> *mut c_char;
-    pub fn webkit_dom_html_body_element_get_v_link(self_: *mut WebKitDOMHTMLBodyElement) -> *mut c_char;
-    pub fn webkit_dom_html_body_element_set_a_link(self_: *mut WebKitDOMHTMLBodyElement, value: *const c_char);
-    pub fn webkit_dom_html_body_element_set_background(self_: *mut WebKitDOMHTMLBodyElement, value: *const c_char);
-    pub fn webkit_dom_html_body_element_set_bg_color(self_: *mut WebKitDOMHTMLBodyElement, value: *const c_char);
-    pub fn webkit_dom_html_body_element_set_link(self_: *mut WebKitDOMHTMLBodyElement, value: *const c_char);
-    pub fn webkit_dom_html_body_element_set_text(self_: *mut WebKitDOMHTMLBodyElement, value: *const c_char);
-    pub fn webkit_dom_html_body_element_set_v_link(self_: *mut WebKitDOMHTMLBodyElement, value: *const c_char);
+    pub fn webkit_dom_html_body_element_get_a_link(
+        self_: *mut WebKitDOMHTMLBodyElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_body_element_get_background(
+        self_: *mut WebKitDOMHTMLBodyElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_body_element_get_bg_color(
+        self_: *mut WebKitDOMHTMLBodyElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_body_element_get_link(
+        self_: *mut WebKitDOMHTMLBodyElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_body_element_get_text(
+        self_: *mut WebKitDOMHTMLBodyElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_body_element_get_v_link(
+        self_: *mut WebKitDOMHTMLBodyElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_body_element_set_a_link(
+        self_: *mut WebKitDOMHTMLBodyElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_body_element_set_background(
+        self_: *mut WebKitDOMHTMLBodyElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_body_element_set_bg_color(
+        self_: *mut WebKitDOMHTMLBodyElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_body_element_set_link(
+        self_: *mut WebKitDOMHTMLBodyElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_body_element_set_text(
+        self_: *mut WebKitDOMHTMLBodyElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_body_element_set_v_link(
+        self_: *mut WebKitDOMHTMLBodyElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLButtonElement
     //=========================================================================
     pub fn webkit_dom_html_button_element_get_type() -> GType;
-    pub fn webkit_dom_html_button_element_get_autofocus(self_: *mut WebKitDOMHTMLButtonElement) -> gboolean;
-    pub fn webkit_dom_html_button_element_get_button_type(self_: *mut WebKitDOMHTMLButtonElement) -> *mut c_char;
-    pub fn webkit_dom_html_button_element_get_disabled(self_: *mut WebKitDOMHTMLButtonElement) -> gboolean;
-    pub fn webkit_dom_html_button_element_get_form(self_: *mut WebKitDOMHTMLButtonElement) -> *mut WebKitDOMHTMLFormElement;
-    pub fn webkit_dom_html_button_element_get_name(self_: *mut WebKitDOMHTMLButtonElement) -> *mut c_char;
-    pub fn webkit_dom_html_button_element_get_value(self_: *mut WebKitDOMHTMLButtonElement) -> *mut c_char;
-    pub fn webkit_dom_html_button_element_get_will_validate(self_: *mut WebKitDOMHTMLButtonElement) -> gboolean;
-    pub fn webkit_dom_html_button_element_set_autofocus(self_: *mut WebKitDOMHTMLButtonElement, value: gboolean);
-    pub fn webkit_dom_html_button_element_set_button_type(self_: *mut WebKitDOMHTMLButtonElement, value: *const c_char);
-    pub fn webkit_dom_html_button_element_set_disabled(self_: *mut WebKitDOMHTMLButtonElement, value: gboolean);
-    pub fn webkit_dom_html_button_element_set_name(self_: *mut WebKitDOMHTMLButtonElement, value: *const c_char);
-    pub fn webkit_dom_html_button_element_set_value(self_: *mut WebKitDOMHTMLButtonElement, value: *const c_char);
+    pub fn webkit_dom_html_button_element_get_autofocus(
+        self_: *mut WebKitDOMHTMLButtonElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_button_element_get_button_type(
+        self_: *mut WebKitDOMHTMLButtonElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_button_element_get_disabled(
+        self_: *mut WebKitDOMHTMLButtonElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_button_element_get_form(
+        self_: *mut WebKitDOMHTMLButtonElement,
+    ) -> *mut WebKitDOMHTMLFormElement;
+    pub fn webkit_dom_html_button_element_get_name(
+        self_: *mut WebKitDOMHTMLButtonElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_button_element_get_value(
+        self_: *mut WebKitDOMHTMLButtonElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_button_element_get_will_validate(
+        self_: *mut WebKitDOMHTMLButtonElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_button_element_set_autofocus(
+        self_: *mut WebKitDOMHTMLButtonElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_button_element_set_button_type(
+        self_: *mut WebKitDOMHTMLButtonElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_button_element_set_disabled(
+        self_: *mut WebKitDOMHTMLButtonElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_button_element_set_name(
+        self_: *mut WebKitDOMHTMLButtonElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_button_element_set_value(
+        self_: *mut WebKitDOMHTMLButtonElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLCanvasElement
     //=========================================================================
     pub fn webkit_dom_html_canvas_element_get_type() -> GType;
-    pub fn webkit_dom_html_canvas_element_get_height(self_: *mut WebKitDOMHTMLCanvasElement) -> c_long;
-    pub fn webkit_dom_html_canvas_element_get_width(self_: *mut WebKitDOMHTMLCanvasElement) -> c_long;
-    pub fn webkit_dom_html_canvas_element_set_height(self_: *mut WebKitDOMHTMLCanvasElement, value: c_long);
-    pub fn webkit_dom_html_canvas_element_set_width(self_: *mut WebKitDOMHTMLCanvasElement, value: c_long);
+    pub fn webkit_dom_html_canvas_element_get_height(
+        self_: *mut WebKitDOMHTMLCanvasElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_canvas_element_get_width(
+        self_: *mut WebKitDOMHTMLCanvasElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_canvas_element_set_height(
+        self_: *mut WebKitDOMHTMLCanvasElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_canvas_element_set_width(
+        self_: *mut WebKitDOMHTMLCanvasElement,
+        value: c_long,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLCollection
     //=========================================================================
     pub fn webkit_dom_html_collection_get_type() -> GType;
     pub fn webkit_dom_html_collection_get_length(self_: *mut WebKitDOMHTMLCollection) -> c_ulong;
-    pub fn webkit_dom_html_collection_item(self_: *mut WebKitDOMHTMLCollection, index: c_ulong) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_html_collection_named_item(self_: *mut WebKitDOMHTMLCollection, name: *const c_char) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_html_collection_item(
+        self_: *mut WebKitDOMHTMLCollection,
+        index: c_ulong,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_html_collection_named_item(
+        self_: *mut WebKitDOMHTMLCollection,
+        name: *const c_char,
+    ) -> *mut WebKitDOMNode;
 
     //=========================================================================
     // WebKitDOMHTMLDListElement
     //=========================================================================
     pub fn webkit_dom_html_d_list_element_get_type() -> GType;
-    pub fn webkit_dom_html_d_list_element_get_compact(self_: *mut WebKitDOMHTMLDListElement) -> gboolean;
-    pub fn webkit_dom_html_d_list_element_set_compact(self_: *mut WebKitDOMHTMLDListElement, value: gboolean);
+    pub fn webkit_dom_html_d_list_element_get_compact(
+        self_: *mut WebKitDOMHTMLDListElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_d_list_element_set_compact(
+        self_: *mut WebKitDOMHTMLDListElement,
+        value: gboolean,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLDirectoryElement
     //=========================================================================
     pub fn webkit_dom_html_directory_element_get_type() -> GType;
-    pub fn webkit_dom_html_directory_element_get_compact(self_: *mut WebKitDOMHTMLDirectoryElement) -> gboolean;
-    pub fn webkit_dom_html_directory_element_set_compact(self_: *mut WebKitDOMHTMLDirectoryElement, value: gboolean);
+    pub fn webkit_dom_html_directory_element_get_compact(
+        self_: *mut WebKitDOMHTMLDirectoryElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_directory_element_set_compact(
+        self_: *mut WebKitDOMHTMLDirectoryElement,
+        value: gboolean,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLDivElement
     //=========================================================================
     pub fn webkit_dom_html_div_element_get_type() -> GType;
-    pub fn webkit_dom_html_div_element_get_align(self_: *mut WebKitDOMHTMLDivElement) -> *mut c_char;
-    pub fn webkit_dom_html_div_element_set_align(self_: *mut WebKitDOMHTMLDivElement, value: *const c_char);
+    pub fn webkit_dom_html_div_element_get_align(
+        self_: *mut WebKitDOMHTMLDivElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_div_element_set_align(
+        self_: *mut WebKitDOMHTMLDivElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLDocument
@@ -4495,27 +6032,64 @@ extern "C" {
     pub fn webkit_dom_html_document_capture_events(self_: *mut WebKitDOMHTMLDocument);
     pub fn webkit_dom_html_document_clear(self_: *mut WebKitDOMHTMLDocument);
     pub fn webkit_dom_html_document_close(self_: *mut WebKitDOMHTMLDocument);
-    pub fn webkit_dom_html_document_get_alink_color(self_: *mut WebKitDOMHTMLDocument) -> *mut c_char;
+    pub fn webkit_dom_html_document_get_alink_color(
+        self_: *mut WebKitDOMHTMLDocument,
+    ) -> *mut c_char;
     pub fn webkit_dom_html_document_get_bg_color(self_: *mut WebKitDOMHTMLDocument) -> *mut c_char;
-    pub fn webkit_dom_html_document_get_compat_mode(self_: *mut WebKitDOMHTMLDocument) -> *mut c_char;
-    pub fn webkit_dom_html_document_get_design_mode(self_: *mut WebKitDOMHTMLDocument) -> *mut c_char;
+    pub fn webkit_dom_html_document_get_compat_mode(
+        self_: *mut WebKitDOMHTMLDocument,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_document_get_design_mode(
+        self_: *mut WebKitDOMHTMLDocument,
+    ) -> *mut c_char;
     pub fn webkit_dom_html_document_get_dir(self_: *mut WebKitDOMHTMLDocument) -> *mut c_char;
-    pub fn webkit_dom_html_document_get_embeds(self_: *mut WebKitDOMHTMLDocument) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_html_document_get_embeds(
+        self_: *mut WebKitDOMHTMLDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
     pub fn webkit_dom_html_document_get_fg_color(self_: *mut WebKitDOMHTMLDocument) -> *mut c_char;
     pub fn webkit_dom_html_document_get_height(self_: *mut WebKitDOMHTMLDocument) -> c_long;
-    pub fn webkit_dom_html_document_get_link_color(self_: *mut WebKitDOMHTMLDocument) -> *mut c_char;
-    pub fn webkit_dom_html_document_get_plugins(self_: *mut WebKitDOMHTMLDocument) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_html_document_get_scripts(self_: *mut WebKitDOMHTMLDocument) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_html_document_get_vlink_color(self_: *mut WebKitDOMHTMLDocument) -> *mut c_char;
+    pub fn webkit_dom_html_document_get_link_color(
+        self_: *mut WebKitDOMHTMLDocument,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_document_get_plugins(
+        self_: *mut WebKitDOMHTMLDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_html_document_get_scripts(
+        self_: *mut WebKitDOMHTMLDocument,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_html_document_get_vlink_color(
+        self_: *mut WebKitDOMHTMLDocument,
+    ) -> *mut c_char;
     pub fn webkit_dom_html_document_get_width(self_: *mut WebKitDOMHTMLDocument) -> c_long;
     pub fn webkit_dom_html_document_release_events(self_: *mut WebKitDOMHTMLDocument);
-    pub fn webkit_dom_html_document_set_alink_color(self_: *mut WebKitDOMHTMLDocument, value: *const c_char);
-    pub fn webkit_dom_html_document_set_bg_color(self_: *mut WebKitDOMHTMLDocument, value: *const c_char);
-    pub fn webkit_dom_html_document_set_design_mode(self_: *mut WebKitDOMHTMLDocument, value: *const c_char);
-    pub fn webkit_dom_html_document_set_dir(self_: *mut WebKitDOMHTMLDocument, value: *const c_char);
-    pub fn webkit_dom_html_document_set_fg_color(self_: *mut WebKitDOMHTMLDocument, value: *const c_char);
-    pub fn webkit_dom_html_document_set_link_color(self_: *mut WebKitDOMHTMLDocument, value: *const c_char);
-    pub fn webkit_dom_html_document_set_vlink_color(self_: *mut WebKitDOMHTMLDocument, value: *const c_char);
+    pub fn webkit_dom_html_document_set_alink_color(
+        self_: *mut WebKitDOMHTMLDocument,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_document_set_bg_color(
+        self_: *mut WebKitDOMHTMLDocument,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_document_set_design_mode(
+        self_: *mut WebKitDOMHTMLDocument,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_document_set_dir(
+        self_: *mut WebKitDOMHTMLDocument,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_document_set_fg_color(
+        self_: *mut WebKitDOMHTMLDocument,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_document_set_link_color(
+        self_: *mut WebKitDOMHTMLDocument,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_document_set_vlink_color(
+        self_: *mut WebKitDOMHTMLDocument,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLElement
@@ -4523,8 +6097,12 @@ extern "C" {
     pub fn webkit_dom_html_element_get_type() -> GType;
     pub fn webkit_dom_html_element_click(self_: *mut WebKitDOMHTMLElement);
     pub fn webkit_dom_html_element_get_access_key(self_: *mut WebKitDOMHTMLElement) -> *mut c_char;
-    pub fn webkit_dom_html_element_get_children(self_: *mut WebKitDOMHTMLElement) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_html_element_get_content_editable(self_: *mut WebKitDOMHTMLElement) -> *mut c_char;
+    pub fn webkit_dom_html_element_get_children(
+        self_: *mut WebKitDOMHTMLElement,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_html_element_get_content_editable(
+        self_: *mut WebKitDOMHTMLElement,
+    ) -> *mut c_char;
     pub fn webkit_dom_html_element_get_dir(self_: *mut WebKitDOMHTMLElement) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_html_element_get_draggable(self_: *mut WebKitDOMHTMLElement) -> gboolean;
@@ -4532,7 +6110,9 @@ extern "C" {
     pub fn webkit_dom_html_element_get_hidden(self_: *mut WebKitDOMHTMLElement) -> gboolean;
     pub fn webkit_dom_html_element_get_inner_html(self_: *mut WebKitDOMHTMLElement) -> *mut c_char;
     pub fn webkit_dom_html_element_get_inner_text(self_: *mut WebKitDOMHTMLElement) -> *mut c_char;
-    pub fn webkit_dom_html_element_get_is_content_editable(self_: *mut WebKitDOMHTMLElement) -> gboolean;
+    pub fn webkit_dom_html_element_get_is_content_editable(
+        self_: *mut WebKitDOMHTMLElement,
+    ) -> gboolean;
     pub fn webkit_dom_html_element_get_lang(self_: *mut WebKitDOMHTMLElement) -> *mut c_char;
     pub fn webkit_dom_html_element_get_outer_html(self_: *mut WebKitDOMHTMLElement) -> *mut c_char;
     pub fn webkit_dom_html_element_get_outer_text(self_: *mut WebKitDOMHTMLElement) -> *mut c_char;
@@ -4543,118 +6123,292 @@ extern "C" {
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_html_element_get_translate(self_: *mut WebKitDOMHTMLElement) -> gboolean;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_element_get_webkitdropzone(self_: *mut WebKitDOMHTMLElement) -> *mut c_char;
-    pub fn webkit_dom_html_element_set_access_key(self_: *mut WebKitDOMHTMLElement, value: *const c_char);
-    pub fn webkit_dom_html_element_set_content_editable(self_: *mut WebKitDOMHTMLElement, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_html_element_get_webkitdropzone(
+        self_: *mut WebKitDOMHTMLElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_element_set_access_key(
+        self_: *mut WebKitDOMHTMLElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_element_set_content_editable(
+        self_: *mut WebKitDOMHTMLElement,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     pub fn webkit_dom_html_element_set_dir(self_: *mut WebKitDOMHTMLElement, value: *const c_char);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_html_element_set_draggable(self_: *mut WebKitDOMHTMLElement, value: gboolean);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_html_element_set_hidden(self_: *mut WebKitDOMHTMLElement, value: gboolean);
-    pub fn webkit_dom_html_element_set_inner_html(self_: *mut WebKitDOMHTMLElement, contents: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_html_element_set_inner_text(self_: *mut WebKitDOMHTMLElement, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_html_element_set_inner_html(
+        self_: *mut WebKitDOMHTMLElement,
+        contents: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_html_element_set_inner_text(
+        self_: *mut WebKitDOMHTMLElement,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     pub fn webkit_dom_html_element_set_lang(self_: *mut WebKitDOMHTMLElement, value: *const c_char);
-    pub fn webkit_dom_html_element_set_outer_html(self_: *mut WebKitDOMHTMLElement, contents: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_html_element_set_outer_text(self_: *mut WebKitDOMHTMLElement, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_html_element_set_outer_html(
+        self_: *mut WebKitDOMHTMLElement,
+        contents: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_html_element_set_outer_text(
+        self_: *mut WebKitDOMHTMLElement,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_element_set_spellcheck(self_: *mut WebKitDOMHTMLElement, value: gboolean);
+    pub fn webkit_dom_html_element_set_spellcheck(
+        self_: *mut WebKitDOMHTMLElement,
+        value: gboolean,
+    );
     pub fn webkit_dom_html_element_set_tab_index(self_: *mut WebKitDOMHTMLElement, value: c_long);
-    pub fn webkit_dom_html_element_set_title(self_: *mut WebKitDOMHTMLElement, value: *const c_char);
+    pub fn webkit_dom_html_element_set_title(
+        self_: *mut WebKitDOMHTMLElement,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_dom_html_element_set_translate(self_: *mut WebKitDOMHTMLElement, value: gboolean);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_element_set_webkitdropzone(self_: *mut WebKitDOMHTMLElement, value: *const c_char);
+    pub fn webkit_dom_html_element_set_webkitdropzone(
+        self_: *mut WebKitDOMHTMLElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLEmbedElement
     //=========================================================================
     pub fn webkit_dom_html_embed_element_get_type() -> GType;
-    pub fn webkit_dom_html_embed_element_get_align(self_: *mut WebKitDOMHTMLEmbedElement) -> *mut c_char;
-    pub fn webkit_dom_html_embed_element_get_height(self_: *mut WebKitDOMHTMLEmbedElement) -> c_long;
-    pub fn webkit_dom_html_embed_element_get_name(self_: *mut WebKitDOMHTMLEmbedElement) -> *mut c_char;
-    pub fn webkit_dom_html_embed_element_get_src(self_: *mut WebKitDOMHTMLEmbedElement) -> *mut c_char;
-    pub fn webkit_dom_html_embed_element_get_type_attr(self_: *mut WebKitDOMHTMLEmbedElement) -> *mut c_char;
-    pub fn webkit_dom_html_embed_element_get_width(self_: *mut WebKitDOMHTMLEmbedElement) -> c_long;
-    pub fn webkit_dom_html_embed_element_set_align(self_: *mut WebKitDOMHTMLEmbedElement, value: *const c_char);
-    pub fn webkit_dom_html_embed_element_set_height(self_: *mut WebKitDOMHTMLEmbedElement, value: c_long);
-    pub fn webkit_dom_html_embed_element_set_name(self_: *mut WebKitDOMHTMLEmbedElement, value: *const c_char);
-    pub fn webkit_dom_html_embed_element_set_src(self_: *mut WebKitDOMHTMLEmbedElement, value: *const c_char);
-    pub fn webkit_dom_html_embed_element_set_type_attr(self_: *mut WebKitDOMHTMLEmbedElement, value: *const c_char);
-    pub fn webkit_dom_html_embed_element_set_width(self_: *mut WebKitDOMHTMLEmbedElement, value: c_long);
+    pub fn webkit_dom_html_embed_element_get_align(
+        self_: *mut WebKitDOMHTMLEmbedElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_embed_element_get_height(
+        self_: *mut WebKitDOMHTMLEmbedElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_embed_element_get_name(
+        self_: *mut WebKitDOMHTMLEmbedElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_embed_element_get_src(
+        self_: *mut WebKitDOMHTMLEmbedElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_embed_element_get_type_attr(
+        self_: *mut WebKitDOMHTMLEmbedElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_embed_element_get_width(self_: *mut WebKitDOMHTMLEmbedElement)
+        -> c_long;
+    pub fn webkit_dom_html_embed_element_set_align(
+        self_: *mut WebKitDOMHTMLEmbedElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_embed_element_set_height(
+        self_: *mut WebKitDOMHTMLEmbedElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_embed_element_set_name(
+        self_: *mut WebKitDOMHTMLEmbedElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_embed_element_set_src(
+        self_: *mut WebKitDOMHTMLEmbedElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_embed_element_set_type_attr(
+        self_: *mut WebKitDOMHTMLEmbedElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_embed_element_set_width(
+        self_: *mut WebKitDOMHTMLEmbedElement,
+        value: c_long,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLFieldSetElement
     //=========================================================================
     pub fn webkit_dom_html_field_set_element_get_type() -> GType;
-    pub fn webkit_dom_html_field_set_element_get_form(self_: *mut WebKitDOMHTMLFieldSetElement) -> *mut WebKitDOMHTMLFormElement;
+    pub fn webkit_dom_html_field_set_element_get_form(
+        self_: *mut WebKitDOMHTMLFieldSetElement,
+    ) -> *mut WebKitDOMHTMLFormElement;
 
     //=========================================================================
     // WebKitDOMHTMLFontElement
     //=========================================================================
     pub fn webkit_dom_html_font_element_get_type() -> GType;
-    pub fn webkit_dom_html_font_element_get_color(self_: *mut WebKitDOMHTMLFontElement) -> *mut c_char;
-    pub fn webkit_dom_html_font_element_get_face(self_: *mut WebKitDOMHTMLFontElement) -> *mut c_char;
-    pub fn webkit_dom_html_font_element_get_size(self_: *mut WebKitDOMHTMLFontElement) -> *mut c_char;
-    pub fn webkit_dom_html_font_element_set_color(self_: *mut WebKitDOMHTMLFontElement, value: *const c_char);
-    pub fn webkit_dom_html_font_element_set_face(self_: *mut WebKitDOMHTMLFontElement, value: *const c_char);
-    pub fn webkit_dom_html_font_element_set_size(self_: *mut WebKitDOMHTMLFontElement, value: *const c_char);
+    pub fn webkit_dom_html_font_element_get_color(
+        self_: *mut WebKitDOMHTMLFontElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_font_element_get_face(
+        self_: *mut WebKitDOMHTMLFontElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_font_element_get_size(
+        self_: *mut WebKitDOMHTMLFontElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_font_element_set_color(
+        self_: *mut WebKitDOMHTMLFontElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_font_element_set_face(
+        self_: *mut WebKitDOMHTMLFontElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_font_element_set_size(
+        self_: *mut WebKitDOMHTMLFontElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLFormElement
     //=========================================================================
     pub fn webkit_dom_html_form_element_get_type() -> GType;
-    pub fn webkit_dom_html_form_element_get_accept_charset(self_: *mut WebKitDOMHTMLFormElement) -> *mut c_char;
-    pub fn webkit_dom_html_form_element_get_action(self_: *mut WebKitDOMHTMLFormElement) -> *mut c_char;
-    pub fn webkit_dom_html_form_element_get_elements(self_: *mut WebKitDOMHTMLFormElement) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_html_form_element_get_encoding(self_: *mut WebKitDOMHTMLFormElement) -> *mut c_char;
-    pub fn webkit_dom_html_form_element_get_enctype(self_: *mut WebKitDOMHTMLFormElement) -> *mut c_char;
+    pub fn webkit_dom_html_form_element_get_accept_charset(
+        self_: *mut WebKitDOMHTMLFormElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_form_element_get_action(
+        self_: *mut WebKitDOMHTMLFormElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_form_element_get_elements(
+        self_: *mut WebKitDOMHTMLFormElement,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_html_form_element_get_encoding(
+        self_: *mut WebKitDOMHTMLFormElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_form_element_get_enctype(
+        self_: *mut WebKitDOMHTMLFormElement,
+    ) -> *mut c_char;
     pub fn webkit_dom_html_form_element_get_length(self_: *mut WebKitDOMHTMLFormElement) -> c_long;
-    pub fn webkit_dom_html_form_element_get_method(self_: *mut WebKitDOMHTMLFormElement) -> *mut c_char;
-    pub fn webkit_dom_html_form_element_get_name(self_: *mut WebKitDOMHTMLFormElement) -> *mut c_char;
-    pub fn webkit_dom_html_form_element_get_target(self_: *mut WebKitDOMHTMLFormElement) -> *mut c_char;
+    pub fn webkit_dom_html_form_element_get_method(
+        self_: *mut WebKitDOMHTMLFormElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_form_element_get_name(
+        self_: *mut WebKitDOMHTMLFormElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_form_element_get_target(
+        self_: *mut WebKitDOMHTMLFormElement,
+    ) -> *mut c_char;
     pub fn webkit_dom_html_form_element_reset(self_: *mut WebKitDOMHTMLFormElement);
-    pub fn webkit_dom_html_form_element_set_accept_charset(self_: *mut WebKitDOMHTMLFormElement, value: *const c_char);
-    pub fn webkit_dom_html_form_element_set_action(self_: *mut WebKitDOMHTMLFormElement, value: *const c_char);
-    pub fn webkit_dom_html_form_element_set_encoding(self_: *mut WebKitDOMHTMLFormElement, value: *const c_char);
-    pub fn webkit_dom_html_form_element_set_enctype(self_: *mut WebKitDOMHTMLFormElement, value: *const c_char);
-    pub fn webkit_dom_html_form_element_set_method(self_: *mut WebKitDOMHTMLFormElement, value: *const c_char);
-    pub fn webkit_dom_html_form_element_set_name(self_: *mut WebKitDOMHTMLFormElement, value: *const c_char);
-    pub fn webkit_dom_html_form_element_set_target(self_: *mut WebKitDOMHTMLFormElement, value: *const c_char);
+    pub fn webkit_dom_html_form_element_set_accept_charset(
+        self_: *mut WebKitDOMHTMLFormElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_form_element_set_action(
+        self_: *mut WebKitDOMHTMLFormElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_form_element_set_encoding(
+        self_: *mut WebKitDOMHTMLFormElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_form_element_set_enctype(
+        self_: *mut WebKitDOMHTMLFormElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_form_element_set_method(
+        self_: *mut WebKitDOMHTMLFormElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_form_element_set_name(
+        self_: *mut WebKitDOMHTMLFormElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_form_element_set_target(
+        self_: *mut WebKitDOMHTMLFormElement,
+        value: *const c_char,
+    );
     pub fn webkit_dom_html_form_element_submit(self_: *mut WebKitDOMHTMLFormElement);
 
     //=========================================================================
     // WebKitDOMHTMLFrameElement
     //=========================================================================
     pub fn webkit_dom_html_frame_element_get_type() -> GType;
-    pub fn webkit_dom_html_frame_element_get_content_document(self_: *mut WebKitDOMHTMLFrameElement) -> *mut WebKitDOMDocument;
-    pub fn webkit_dom_html_frame_element_get_content_window(self_: *mut WebKitDOMHTMLFrameElement) -> *mut WebKitDOMDOMWindow;
-    pub fn webkit_dom_html_frame_element_get_frame_border(self_: *mut WebKitDOMHTMLFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_frame_element_get_height(self_: *mut WebKitDOMHTMLFrameElement) -> c_long;
-    pub fn webkit_dom_html_frame_element_get_long_desc(self_: *mut WebKitDOMHTMLFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_frame_element_get_margin_height(self_: *mut WebKitDOMHTMLFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_frame_element_get_margin_width(self_: *mut WebKitDOMHTMLFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_frame_element_get_name(self_: *mut WebKitDOMHTMLFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_frame_element_get_no_resize(self_: *mut WebKitDOMHTMLFrameElement) -> gboolean;
-    pub fn webkit_dom_html_frame_element_get_scrolling(self_: *mut WebKitDOMHTMLFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_frame_element_get_src(self_: *mut WebKitDOMHTMLFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_frame_element_get_width(self_: *mut WebKitDOMHTMLFrameElement) -> c_long;
-    pub fn webkit_dom_html_frame_element_set_frame_border(self_: *mut WebKitDOMHTMLFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_frame_element_set_long_desc(self_: *mut WebKitDOMHTMLFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_frame_element_set_margin_height(self_: *mut WebKitDOMHTMLFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_frame_element_set_margin_width(self_: *mut WebKitDOMHTMLFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_frame_element_set_name(self_: *mut WebKitDOMHTMLFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_frame_element_set_no_resize(self_: *mut WebKitDOMHTMLFrameElement, value: gboolean);
-    pub fn webkit_dom_html_frame_element_set_scrolling(self_: *mut WebKitDOMHTMLFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_frame_element_set_src(self_: *mut WebKitDOMHTMLFrameElement, value: *const c_char);
+    pub fn webkit_dom_html_frame_element_get_content_document(
+        self_: *mut WebKitDOMHTMLFrameElement,
+    ) -> *mut WebKitDOMDocument;
+    pub fn webkit_dom_html_frame_element_get_content_window(
+        self_: *mut WebKitDOMHTMLFrameElement,
+    ) -> *mut WebKitDOMDOMWindow;
+    pub fn webkit_dom_html_frame_element_get_frame_border(
+        self_: *mut WebKitDOMHTMLFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_frame_element_get_height(
+        self_: *mut WebKitDOMHTMLFrameElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_frame_element_get_long_desc(
+        self_: *mut WebKitDOMHTMLFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_frame_element_get_margin_height(
+        self_: *mut WebKitDOMHTMLFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_frame_element_get_margin_width(
+        self_: *mut WebKitDOMHTMLFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_frame_element_get_name(
+        self_: *mut WebKitDOMHTMLFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_frame_element_get_no_resize(
+        self_: *mut WebKitDOMHTMLFrameElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_frame_element_get_scrolling(
+        self_: *mut WebKitDOMHTMLFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_frame_element_get_src(
+        self_: *mut WebKitDOMHTMLFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_frame_element_get_width(self_: *mut WebKitDOMHTMLFrameElement)
+        -> c_long;
+    pub fn webkit_dom_html_frame_element_set_frame_border(
+        self_: *mut WebKitDOMHTMLFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_frame_element_set_long_desc(
+        self_: *mut WebKitDOMHTMLFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_frame_element_set_margin_height(
+        self_: *mut WebKitDOMHTMLFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_frame_element_set_margin_width(
+        self_: *mut WebKitDOMHTMLFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_frame_element_set_name(
+        self_: *mut WebKitDOMHTMLFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_frame_element_set_no_resize(
+        self_: *mut WebKitDOMHTMLFrameElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_frame_element_set_scrolling(
+        self_: *mut WebKitDOMHTMLFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_frame_element_set_src(
+        self_: *mut WebKitDOMHTMLFrameElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLFrameSetElement
     //=========================================================================
     pub fn webkit_dom_html_frame_set_element_get_type() -> GType;
-    pub fn webkit_dom_html_frame_set_element_get_cols(self_: *mut WebKitDOMHTMLFrameSetElement) -> *mut c_char;
-    pub fn webkit_dom_html_frame_set_element_get_rows(self_: *mut WebKitDOMHTMLFrameSetElement) -> *mut c_char;
-    pub fn webkit_dom_html_frame_set_element_set_cols(self_: *mut WebKitDOMHTMLFrameSetElement, value: *const c_char);
-    pub fn webkit_dom_html_frame_set_element_set_rows(self_: *mut WebKitDOMHTMLFrameSetElement, value: *const c_char);
+    pub fn webkit_dom_html_frame_set_element_get_cols(
+        self_: *mut WebKitDOMHTMLFrameSetElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_frame_set_element_get_rows(
+        self_: *mut WebKitDOMHTMLFrameSetElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_frame_set_element_set_cols(
+        self_: *mut WebKitDOMHTMLFrameSetElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_frame_set_element_set_rows(
+        self_: *mut WebKitDOMHTMLFrameSetElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLHRElement
@@ -4664,219 +6418,574 @@ extern "C" {
     pub fn webkit_dom_html_hr_element_get_no_shade(self_: *mut WebKitDOMHTMLHRElement) -> gboolean;
     pub fn webkit_dom_html_hr_element_get_size(self_: *mut WebKitDOMHTMLHRElement) -> *mut c_char;
     pub fn webkit_dom_html_hr_element_get_width(self_: *mut WebKitDOMHTMLHRElement) -> *mut c_char;
-    pub fn webkit_dom_html_hr_element_set_align(self_: *mut WebKitDOMHTMLHRElement, value: *const c_char);
-    pub fn webkit_dom_html_hr_element_set_no_shade(self_: *mut WebKitDOMHTMLHRElement, value: gboolean);
-    pub fn webkit_dom_html_hr_element_set_size(self_: *mut WebKitDOMHTMLHRElement, value: *const c_char);
-    pub fn webkit_dom_html_hr_element_set_width(self_: *mut WebKitDOMHTMLHRElement, value: *const c_char);
+    pub fn webkit_dom_html_hr_element_set_align(
+        self_: *mut WebKitDOMHTMLHRElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_hr_element_set_no_shade(
+        self_: *mut WebKitDOMHTMLHRElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_hr_element_set_size(
+        self_: *mut WebKitDOMHTMLHRElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_hr_element_set_width(
+        self_: *mut WebKitDOMHTMLHRElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLHeadElement
     //=========================================================================
     pub fn webkit_dom_html_head_element_get_type() -> GType;
-    pub fn webkit_dom_html_head_element_get_profile(self_: *mut WebKitDOMHTMLHeadElement) -> *mut c_char;
-    pub fn webkit_dom_html_head_element_set_profile(self_: *mut WebKitDOMHTMLHeadElement, value: *const c_char);
+    pub fn webkit_dom_html_head_element_get_profile(
+        self_: *mut WebKitDOMHTMLHeadElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_head_element_set_profile(
+        self_: *mut WebKitDOMHTMLHeadElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLHeadingElement
     //=========================================================================
     pub fn webkit_dom_html_heading_element_get_type() -> GType;
-    pub fn webkit_dom_html_heading_element_get_align(self_: *mut WebKitDOMHTMLHeadingElement) -> *mut c_char;
-    pub fn webkit_dom_html_heading_element_set_align(self_: *mut WebKitDOMHTMLHeadingElement, value: *const c_char);
+    pub fn webkit_dom_html_heading_element_get_align(
+        self_: *mut WebKitDOMHTMLHeadingElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_heading_element_set_align(
+        self_: *mut WebKitDOMHTMLHeadingElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLHtmlElement
     //=========================================================================
     pub fn webkit_dom_html_html_element_get_type() -> GType;
-    pub fn webkit_dom_html_html_element_get_version(self_: *mut WebKitDOMHTMLHtmlElement) -> *mut c_char;
-    pub fn webkit_dom_html_html_element_set_version(self_: *mut WebKitDOMHTMLHtmlElement, value: *const c_char);
+    pub fn webkit_dom_html_html_element_get_version(
+        self_: *mut WebKitDOMHTMLHtmlElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_html_element_set_version(
+        self_: *mut WebKitDOMHTMLHtmlElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLIFrameElement
     //=========================================================================
     pub fn webkit_dom_html_iframe_element_get_type() -> GType;
-    pub fn webkit_dom_html_iframe_element_get_align(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_iframe_element_get_content_document(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut WebKitDOMDocument;
-    pub fn webkit_dom_html_iframe_element_get_content_window(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut WebKitDOMDOMWindow;
-    pub fn webkit_dom_html_iframe_element_get_frame_border(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_iframe_element_get_height(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_iframe_element_get_long_desc(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_iframe_element_get_margin_height(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_iframe_element_get_margin_width(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_iframe_element_get_name(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_iframe_element_get_scrolling(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_iframe_element_get_src(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_iframe_element_get_width(self_: *mut WebKitDOMHTMLIFrameElement) -> *mut c_char;
-    pub fn webkit_dom_html_iframe_element_set_align(self_: *mut WebKitDOMHTMLIFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_iframe_element_set_frame_border(self_: *mut WebKitDOMHTMLIFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_iframe_element_set_height(self_: *mut WebKitDOMHTMLIFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_iframe_element_set_long_desc(self_: *mut WebKitDOMHTMLIFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_iframe_element_set_margin_height(self_: *mut WebKitDOMHTMLIFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_iframe_element_set_margin_width(self_: *mut WebKitDOMHTMLIFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_iframe_element_set_name(self_: *mut WebKitDOMHTMLIFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_iframe_element_set_scrolling(self_: *mut WebKitDOMHTMLIFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_iframe_element_set_src(self_: *mut WebKitDOMHTMLIFrameElement, value: *const c_char);
-    pub fn webkit_dom_html_iframe_element_set_width(self_: *mut WebKitDOMHTMLIFrameElement, value: *const c_char);
+    pub fn webkit_dom_html_iframe_element_get_align(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_iframe_element_get_content_document(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut WebKitDOMDocument;
+    pub fn webkit_dom_html_iframe_element_get_content_window(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut WebKitDOMDOMWindow;
+    pub fn webkit_dom_html_iframe_element_get_frame_border(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_iframe_element_get_height(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_iframe_element_get_long_desc(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_iframe_element_get_margin_height(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_iframe_element_get_margin_width(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_iframe_element_get_name(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_iframe_element_get_scrolling(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_iframe_element_get_src(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_iframe_element_get_width(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_iframe_element_set_align(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_iframe_element_set_frame_border(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_iframe_element_set_height(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_iframe_element_set_long_desc(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_iframe_element_set_margin_height(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_iframe_element_set_margin_width(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_iframe_element_set_name(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_iframe_element_set_scrolling(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_iframe_element_set_src(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_iframe_element_set_width(
+        self_: *mut WebKitDOMHTMLIFrameElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLImageElement
     //=========================================================================
     pub fn webkit_dom_html_image_element_get_type() -> GType;
-    pub fn webkit_dom_html_image_element_get_align(self_: *mut WebKitDOMHTMLImageElement) -> *mut c_char;
-    pub fn webkit_dom_html_image_element_get_alt(self_: *mut WebKitDOMHTMLImageElement) -> *mut c_char;
-    pub fn webkit_dom_html_image_element_get_border(self_: *mut WebKitDOMHTMLImageElement) -> *mut c_char;
-    pub fn webkit_dom_html_image_element_get_complete(self_: *mut WebKitDOMHTMLImageElement) -> gboolean;
-    pub fn webkit_dom_html_image_element_get_height(self_: *mut WebKitDOMHTMLImageElement) -> c_long;
-    pub fn webkit_dom_html_image_element_get_hspace(self_: *mut WebKitDOMHTMLImageElement) -> c_long;
-    pub fn webkit_dom_html_image_element_get_is_map(self_: *mut WebKitDOMHTMLImageElement) -> gboolean;
-    pub fn webkit_dom_html_image_element_get_long_desc(self_: *mut WebKitDOMHTMLImageElement) -> *mut c_char;
-    pub fn webkit_dom_html_image_element_get_lowsrc(self_: *mut WebKitDOMHTMLImageElement) -> *mut c_char;
-    pub fn webkit_dom_html_image_element_get_name(self_: *mut WebKitDOMHTMLImageElement) -> *mut c_char;
-    pub fn webkit_dom_html_image_element_get_natural_height(self_: *mut WebKitDOMHTMLImageElement) -> c_long;
-    pub fn webkit_dom_html_image_element_get_natural_width(self_: *mut WebKitDOMHTMLImageElement) -> c_long;
-    pub fn webkit_dom_html_image_element_get_src(self_: *mut WebKitDOMHTMLImageElement) -> *mut c_char;
-    pub fn webkit_dom_html_image_element_get_use_map(self_: *mut WebKitDOMHTMLImageElement) -> *mut c_char;
-    pub fn webkit_dom_html_image_element_get_vspace(self_: *mut WebKitDOMHTMLImageElement) -> c_long;
-    pub fn webkit_dom_html_image_element_get_width(self_: *mut WebKitDOMHTMLImageElement) -> c_long;
+    pub fn webkit_dom_html_image_element_get_align(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_image_element_get_alt(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_image_element_get_border(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_image_element_get_complete(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_image_element_get_height(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_image_element_get_hspace(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_image_element_get_is_map(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_image_element_get_long_desc(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_image_element_get_lowsrc(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_image_element_get_name(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_image_element_get_natural_height(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_image_element_get_natural_width(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_image_element_get_src(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_image_element_get_use_map(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_image_element_get_vspace(
+        self_: *mut WebKitDOMHTMLImageElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_image_element_get_width(self_: *mut WebKitDOMHTMLImageElement)
+        -> c_long;
     pub fn webkit_dom_html_image_element_get_x(self_: *mut WebKitDOMHTMLImageElement) -> c_long;
     pub fn webkit_dom_html_image_element_get_y(self_: *mut WebKitDOMHTMLImageElement) -> c_long;
-    pub fn webkit_dom_html_image_element_set_align(self_: *mut WebKitDOMHTMLImageElement, value: *const c_char);
-    pub fn webkit_dom_html_image_element_set_alt(self_: *mut WebKitDOMHTMLImageElement, value: *const c_char);
-    pub fn webkit_dom_html_image_element_set_border(self_: *mut WebKitDOMHTMLImageElement, value: *const c_char);
-    pub fn webkit_dom_html_image_element_set_height(self_: *mut WebKitDOMHTMLImageElement, value: c_long);
-    pub fn webkit_dom_html_image_element_set_hspace(self_: *mut WebKitDOMHTMLImageElement, value: c_long);
-    pub fn webkit_dom_html_image_element_set_is_map(self_: *mut WebKitDOMHTMLImageElement, value: gboolean);
-    pub fn webkit_dom_html_image_element_set_long_desc(self_: *mut WebKitDOMHTMLImageElement, value: *const c_char);
-    pub fn webkit_dom_html_image_element_set_lowsrc(self_: *mut WebKitDOMHTMLImageElement, value: *const c_char);
-    pub fn webkit_dom_html_image_element_set_name(self_: *mut WebKitDOMHTMLImageElement, value: *const c_char);
-    pub fn webkit_dom_html_image_element_set_src(self_: *mut WebKitDOMHTMLImageElement, value: *const c_char);
-    pub fn webkit_dom_html_image_element_set_use_map(self_: *mut WebKitDOMHTMLImageElement, value: *const c_char);
-    pub fn webkit_dom_html_image_element_set_vspace(self_: *mut WebKitDOMHTMLImageElement, value: c_long);
-    pub fn webkit_dom_html_image_element_set_width(self_: *mut WebKitDOMHTMLImageElement, value: c_long);
+    pub fn webkit_dom_html_image_element_set_align(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_image_element_set_alt(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_image_element_set_border(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_image_element_set_height(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_image_element_set_hspace(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_image_element_set_is_map(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_image_element_set_long_desc(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_image_element_set_lowsrc(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_image_element_set_name(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_image_element_set_src(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_image_element_set_use_map(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_image_element_set_vspace(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_image_element_set_width(
+        self_: *mut WebKitDOMHTMLImageElement,
+        value: c_long,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLInputElement
     //=========================================================================
     pub fn webkit_dom_html_input_element_get_type() -> GType;
-    pub fn webkit_dom_html_input_element_get_accept(self_: *mut WebKitDOMHTMLInputElement) -> *mut c_char;
-    pub fn webkit_dom_html_input_element_get_align(self_: *mut WebKitDOMHTMLInputElement) -> *mut c_char;
-    pub fn webkit_dom_html_input_element_get_alt(self_: *mut WebKitDOMHTMLInputElement) -> *mut c_char;
+    pub fn webkit_dom_html_input_element_get_accept(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_input_element_get_align(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_input_element_get_alt(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_input_element_get_auto_filled(self_: *mut WebKitDOMHTMLInputElement) -> gboolean;
-    pub fn webkit_dom_html_input_element_get_autofocus(self_: *mut WebKitDOMHTMLInputElement) -> gboolean;
-    pub fn webkit_dom_html_input_element_get_capture(self_: *mut WebKitDOMHTMLInputElement) -> gboolean;
+    pub fn webkit_dom_html_input_element_get_auto_filled(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_input_element_get_autofocus(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_input_element_get_capture(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    pub fn webkit_dom_html_input_element_get_capture_type(self_: *mut WebKitDOMHTMLInputElement) -> *mut c_char;
-    pub fn webkit_dom_html_input_element_get_checked(self_: *mut WebKitDOMHTMLInputElement) -> gboolean;
-    pub fn webkit_dom_html_input_element_get_default_checked(self_: *mut WebKitDOMHTMLInputElement) -> gboolean;
-    pub fn webkit_dom_html_input_element_get_default_value(self_: *mut WebKitDOMHTMLInputElement) -> *mut c_char;
-    pub fn webkit_dom_html_input_element_get_disabled(self_: *mut WebKitDOMHTMLInputElement) -> gboolean;
-    pub fn webkit_dom_html_input_element_get_files(self_: *mut WebKitDOMHTMLInputElement) -> *mut WebKitDOMFileList;
-    pub fn webkit_dom_html_input_element_get_form(self_: *mut WebKitDOMHTMLInputElement) -> *mut WebKitDOMHTMLFormElement;
-    pub fn webkit_dom_html_input_element_get_height(self_: *mut WebKitDOMHTMLInputElement) -> c_ulong;
-    pub fn webkit_dom_html_input_element_get_indeterminate(self_: *mut WebKitDOMHTMLInputElement) -> gboolean;
-    pub fn webkit_dom_html_input_element_get_input_type(self_: *mut WebKitDOMHTMLInputElement) -> *mut c_char;
-    pub fn webkit_dom_html_input_element_get_max_length(self_: *mut WebKitDOMHTMLInputElement) -> c_long;
-    pub fn webkit_dom_html_input_element_get_multiple(self_: *mut WebKitDOMHTMLInputElement) -> gboolean;
-    pub fn webkit_dom_html_input_element_get_name(self_: *mut WebKitDOMHTMLInputElement) -> *mut c_char;
+    pub fn webkit_dom_html_input_element_get_capture_type(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_input_element_get_checked(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_input_element_get_default_checked(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_input_element_get_default_value(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_input_element_get_disabled(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_input_element_get_files(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut WebKitDOMFileList;
+    pub fn webkit_dom_html_input_element_get_form(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut WebKitDOMHTMLFormElement;
+    pub fn webkit_dom_html_input_element_get_height(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> c_ulong;
+    pub fn webkit_dom_html_input_element_get_indeterminate(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_input_element_get_input_type(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_input_element_get_max_length(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_input_element_get_multiple(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_input_element_get_name(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_input_element_get_read_only(self_: *mut WebKitDOMHTMLInputElement) -> gboolean;
-    pub fn webkit_dom_html_input_element_get_size(self_: *mut WebKitDOMHTMLInputElement) -> c_ulong;
-    pub fn webkit_dom_html_input_element_get_src(self_: *mut WebKitDOMHTMLInputElement) -> *mut c_char;
-    pub fn webkit_dom_html_input_element_get_use_map(self_: *mut WebKitDOMHTMLInputElement) -> *mut c_char;
-    pub fn webkit_dom_html_input_element_get_value(self_: *mut WebKitDOMHTMLInputElement) -> *mut c_char;
-    pub fn webkit_dom_html_input_element_get_width(self_: *mut WebKitDOMHTMLInputElement) -> c_ulong;
-    pub fn webkit_dom_html_input_element_get_will_validate(self_: *mut WebKitDOMHTMLInputElement) -> gboolean;
-    pub fn webkit_dom_html_input_element_is_edited(input: *mut WebKitDOMHTMLInputElement) -> gboolean;
+    pub fn webkit_dom_html_input_element_get_read_only(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_input_element_get_size(self_: *mut WebKitDOMHTMLInputElement)
+        -> c_ulong;
+    pub fn webkit_dom_html_input_element_get_src(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_input_element_get_use_map(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_input_element_get_value(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_input_element_get_width(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> c_ulong;
+    pub fn webkit_dom_html_input_element_get_will_validate(
+        self_: *mut WebKitDOMHTMLInputElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_input_element_is_edited(
+        input: *mut WebKitDOMHTMLInputElement,
+    ) -> gboolean;
     pub fn webkit_dom_html_input_element_select(self_: *mut WebKitDOMHTMLInputElement);
-    pub fn webkit_dom_html_input_element_set_accept(self_: *mut WebKitDOMHTMLInputElement, value: *const c_char);
-    pub fn webkit_dom_html_input_element_set_align(self_: *mut WebKitDOMHTMLInputElement, value: *const c_char);
-    pub fn webkit_dom_html_input_element_set_alt(self_: *mut WebKitDOMHTMLInputElement, value: *const c_char);
+    pub fn webkit_dom_html_input_element_set_accept(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_input_element_set_align(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_input_element_set_alt(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_input_element_set_auto_filled(self_: *mut WebKitDOMHTMLInputElement, value: gboolean);
-    pub fn webkit_dom_html_input_element_set_autofocus(self_: *mut WebKitDOMHTMLInputElement, value: gboolean);
+    pub fn webkit_dom_html_input_element_set_auto_filled(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_input_element_set_autofocus(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: gboolean,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_input_element_set_capture_type(self_: *mut WebKitDOMHTMLInputElement, value: *const c_char);
-    pub fn webkit_dom_html_input_element_set_checked(self_: *mut WebKitDOMHTMLInputElement, value: gboolean);
+    pub fn webkit_dom_html_input_element_set_capture_type(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_input_element_set_checked(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: gboolean,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_input_element_set_default_checked(self_: *mut WebKitDOMHTMLInputElement, value: gboolean);
-    pub fn webkit_dom_html_input_element_set_default_value(self_: *mut WebKitDOMHTMLInputElement, value: *const c_char);
-    pub fn webkit_dom_html_input_element_set_disabled(self_: *mut WebKitDOMHTMLInputElement, value: gboolean);
+    pub fn webkit_dom_html_input_element_set_default_checked(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_input_element_set_default_value(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_input_element_set_disabled(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: gboolean,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_input_element_set_editing_value(self_: *mut WebKitDOMHTMLInputElement, value: *const c_char);
-    pub fn webkit_dom_html_input_element_set_files(self_: *mut WebKitDOMHTMLInputElement, value: *mut WebKitDOMFileList);
-    pub fn webkit_dom_html_input_element_set_height(self_: *mut WebKitDOMHTMLInputElement, value: c_ulong);
-    pub fn webkit_dom_html_input_element_set_indeterminate(self_: *mut WebKitDOMHTMLInputElement, value: gboolean);
-    pub fn webkit_dom_html_input_element_set_input_type(self_: *mut WebKitDOMHTMLInputElement, value: *const c_char);
-    pub fn webkit_dom_html_input_element_set_max_length(self_: *mut WebKitDOMHTMLInputElement, value: c_long, error: *mut *mut glib::GError);
-    pub fn webkit_dom_html_input_element_set_multiple(self_: *mut WebKitDOMHTMLInputElement, value: gboolean);
-    pub fn webkit_dom_html_input_element_set_name(self_: *mut WebKitDOMHTMLInputElement, value: *const c_char);
-    pub fn webkit_dom_html_input_element_set_read_only(self_: *mut WebKitDOMHTMLInputElement, value: gboolean);
-    pub fn webkit_dom_html_input_element_set_size(self_: *mut WebKitDOMHTMLInputElement, value: c_ulong, error: *mut *mut glib::GError);
-    pub fn webkit_dom_html_input_element_set_src(self_: *mut WebKitDOMHTMLInputElement, value: *const c_char);
-    pub fn webkit_dom_html_input_element_set_use_map(self_: *mut WebKitDOMHTMLInputElement, value: *const c_char);
-    pub fn webkit_dom_html_input_element_set_value(self_: *mut WebKitDOMHTMLInputElement, value: *const c_char);
-    pub fn webkit_dom_html_input_element_set_width(self_: *mut WebKitDOMHTMLInputElement, value: c_ulong);
+    pub fn webkit_dom_html_input_element_set_editing_value(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_input_element_set_files(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *mut WebKitDOMFileList,
+    );
+    pub fn webkit_dom_html_input_element_set_height(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: c_ulong,
+    );
+    pub fn webkit_dom_html_input_element_set_indeterminate(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_input_element_set_input_type(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_input_element_set_max_length(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: c_long,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_html_input_element_set_multiple(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_input_element_set_name(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_input_element_set_read_only(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_input_element_set_size(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: c_ulong,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_html_input_element_set_src(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_input_element_set_use_map(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_input_element_set_value(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_input_element_set_width(
+        self_: *mut WebKitDOMHTMLInputElement,
+        value: c_ulong,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLLIElement
     //=========================================================================
     pub fn webkit_dom_html_li_element_get_type() -> GType;
-    pub fn webkit_dom_html_li_element_get_type_attr(self_: *mut WebKitDOMHTMLLIElement) -> *mut c_char;
+    pub fn webkit_dom_html_li_element_get_type_attr(
+        self_: *mut WebKitDOMHTMLLIElement,
+    ) -> *mut c_char;
     pub fn webkit_dom_html_li_element_get_value(self_: *mut WebKitDOMHTMLLIElement) -> c_long;
-    pub fn webkit_dom_html_li_element_set_type_attr(self_: *mut WebKitDOMHTMLLIElement, value: *const c_char);
+    pub fn webkit_dom_html_li_element_set_type_attr(
+        self_: *mut WebKitDOMHTMLLIElement,
+        value: *const c_char,
+    );
     pub fn webkit_dom_html_li_element_set_value(self_: *mut WebKitDOMHTMLLIElement, value: c_long);
 
     //=========================================================================
     // WebKitDOMHTMLLabelElement
     //=========================================================================
     pub fn webkit_dom_html_label_element_get_type() -> GType;
-    pub fn webkit_dom_html_label_element_get_form(self_: *mut WebKitDOMHTMLLabelElement) -> *mut WebKitDOMHTMLFormElement;
-    pub fn webkit_dom_html_label_element_get_html_for(self_: *mut WebKitDOMHTMLLabelElement) -> *mut c_char;
-    pub fn webkit_dom_html_label_element_set_html_for(self_: *mut WebKitDOMHTMLLabelElement, value: *const c_char);
+    pub fn webkit_dom_html_label_element_get_form(
+        self_: *mut WebKitDOMHTMLLabelElement,
+    ) -> *mut WebKitDOMHTMLFormElement;
+    pub fn webkit_dom_html_label_element_get_html_for(
+        self_: *mut WebKitDOMHTMLLabelElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_label_element_set_html_for(
+        self_: *mut WebKitDOMHTMLLabelElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLLegendElement
     //=========================================================================
     pub fn webkit_dom_html_legend_element_get_type() -> GType;
-    pub fn webkit_dom_html_legend_element_get_align(self_: *mut WebKitDOMHTMLLegendElement) -> *mut c_char;
-    pub fn webkit_dom_html_legend_element_get_form(self_: *mut WebKitDOMHTMLLegendElement) -> *mut WebKitDOMHTMLFormElement;
-    pub fn webkit_dom_html_legend_element_set_align(self_: *mut WebKitDOMHTMLLegendElement, value: *const c_char);
+    pub fn webkit_dom_html_legend_element_get_align(
+        self_: *mut WebKitDOMHTMLLegendElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_legend_element_get_form(
+        self_: *mut WebKitDOMHTMLLegendElement,
+    ) -> *mut WebKitDOMHTMLFormElement;
+    pub fn webkit_dom_html_legend_element_set_align(
+        self_: *mut WebKitDOMHTMLLegendElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLLinkElement
     //=========================================================================
     pub fn webkit_dom_html_link_element_get_type() -> GType;
-    pub fn webkit_dom_html_link_element_get_charset(self_: *mut WebKitDOMHTMLLinkElement) -> *mut c_char;
-    pub fn webkit_dom_html_link_element_get_disabled(self_: *mut WebKitDOMHTMLLinkElement) -> gboolean;
-    pub fn webkit_dom_html_link_element_get_href(self_: *mut WebKitDOMHTMLLinkElement) -> *mut c_char;
-    pub fn webkit_dom_html_link_element_get_hreflang(self_: *mut WebKitDOMHTMLLinkElement) -> *mut c_char;
-    pub fn webkit_dom_html_link_element_get_media(self_: *mut WebKitDOMHTMLLinkElement) -> *mut c_char;
-    pub fn webkit_dom_html_link_element_get_rel(self_: *mut WebKitDOMHTMLLinkElement) -> *mut c_char;
-    pub fn webkit_dom_html_link_element_get_rev(self_: *mut WebKitDOMHTMLLinkElement) -> *mut c_char;
-    pub fn webkit_dom_html_link_element_get_sheet(self_: *mut WebKitDOMHTMLLinkElement) -> *mut WebKitDOMStyleSheet;
+    pub fn webkit_dom_html_link_element_get_charset(
+        self_: *mut WebKitDOMHTMLLinkElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_link_element_get_disabled(
+        self_: *mut WebKitDOMHTMLLinkElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_link_element_get_href(
+        self_: *mut WebKitDOMHTMLLinkElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_link_element_get_hreflang(
+        self_: *mut WebKitDOMHTMLLinkElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_link_element_get_media(
+        self_: *mut WebKitDOMHTMLLinkElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_link_element_get_rel(
+        self_: *mut WebKitDOMHTMLLinkElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_link_element_get_rev(
+        self_: *mut WebKitDOMHTMLLinkElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_link_element_get_sheet(
+        self_: *mut WebKitDOMHTMLLinkElement,
+    ) -> *mut WebKitDOMStyleSheet;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_link_element_get_sizes(self_: *mut WebKitDOMHTMLLinkElement) -> *mut WebKitDOMDOMTokenList;
-    pub fn webkit_dom_html_link_element_get_target(self_: *mut WebKitDOMHTMLLinkElement) -> *mut c_char;
-    pub fn webkit_dom_html_link_element_get_type_attr(self_: *mut WebKitDOMHTMLLinkElement) -> *mut c_char;
-    pub fn webkit_dom_html_link_element_set_charset(self_: *mut WebKitDOMHTMLLinkElement, value: *const c_char);
-    pub fn webkit_dom_html_link_element_set_disabled(self_: *mut WebKitDOMHTMLLinkElement, value: gboolean);
-    pub fn webkit_dom_html_link_element_set_href(self_: *mut WebKitDOMHTMLLinkElement, value: *const c_char);
-    pub fn webkit_dom_html_link_element_set_hreflang(self_: *mut WebKitDOMHTMLLinkElement, value: *const c_char);
-    pub fn webkit_dom_html_link_element_set_media(self_: *mut WebKitDOMHTMLLinkElement, value: *const c_char);
-    pub fn webkit_dom_html_link_element_set_rel(self_: *mut WebKitDOMHTMLLinkElement, value: *const c_char);
-    pub fn webkit_dom_html_link_element_set_rev(self_: *mut WebKitDOMHTMLLinkElement, value: *const c_char);
+    pub fn webkit_dom_html_link_element_get_sizes(
+        self_: *mut WebKitDOMHTMLLinkElement,
+    ) -> *mut WebKitDOMDOMTokenList;
+    pub fn webkit_dom_html_link_element_get_target(
+        self_: *mut WebKitDOMHTMLLinkElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_link_element_get_type_attr(
+        self_: *mut WebKitDOMHTMLLinkElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_link_element_set_charset(
+        self_: *mut WebKitDOMHTMLLinkElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_link_element_set_disabled(
+        self_: *mut WebKitDOMHTMLLinkElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_link_element_set_href(
+        self_: *mut WebKitDOMHTMLLinkElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_link_element_set_hreflang(
+        self_: *mut WebKitDOMHTMLLinkElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_link_element_set_media(
+        self_: *mut WebKitDOMHTMLLinkElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_link_element_set_rel(
+        self_: *mut WebKitDOMHTMLLinkElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_link_element_set_rev(
+        self_: *mut WebKitDOMHTMLLinkElement,
+        value: *const c_char,
+    );
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_link_element_set_sizes(self_: *mut WebKitDOMHTMLLinkElement, value: *const c_char);
-    pub fn webkit_dom_html_link_element_set_target(self_: *mut WebKitDOMHTMLLinkElement, value: *const c_char);
-    pub fn webkit_dom_html_link_element_set_type_attr(self_: *mut WebKitDOMHTMLLinkElement, value: *const c_char);
+    pub fn webkit_dom_html_link_element_set_sizes(
+        self_: *mut WebKitDOMHTMLLinkElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_link_element_set_target(
+        self_: *mut WebKitDOMHTMLLinkElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_link_element_set_type_attr(
+        self_: *mut WebKitDOMHTMLLinkElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLMapElement
     //=========================================================================
     pub fn webkit_dom_html_map_element_get_type() -> GType;
-    pub fn webkit_dom_html_map_element_get_areas(self_: *mut WebKitDOMHTMLMapElement) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_html_map_element_get_name(self_: *mut WebKitDOMHTMLMapElement) -> *mut c_char;
-    pub fn webkit_dom_html_map_element_set_name(self_: *mut WebKitDOMHTMLMapElement, value: *const c_char);
+    pub fn webkit_dom_html_map_element_get_areas(
+        self_: *mut WebKitDOMHTMLMapElement,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_html_map_element_get_name(self_: *mut WebKitDOMHTMLMapElement)
+        -> *mut c_char;
+    pub fn webkit_dom_html_map_element_set_name(
+        self_: *mut WebKitDOMHTMLMapElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLMarqueeElement
@@ -4889,136 +6998,345 @@ extern "C" {
     // WebKitDOMHTMLMenuElement
     //=========================================================================
     pub fn webkit_dom_html_menu_element_get_type() -> GType;
-    pub fn webkit_dom_html_menu_element_get_compact(self_: *mut WebKitDOMHTMLMenuElement) -> gboolean;
-    pub fn webkit_dom_html_menu_element_set_compact(self_: *mut WebKitDOMHTMLMenuElement, value: gboolean);
+    pub fn webkit_dom_html_menu_element_get_compact(
+        self_: *mut WebKitDOMHTMLMenuElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_menu_element_set_compact(
+        self_: *mut WebKitDOMHTMLMenuElement,
+        value: gboolean,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLMetaElement
     //=========================================================================
     pub fn webkit_dom_html_meta_element_get_type() -> GType;
-    pub fn webkit_dom_html_meta_element_get_content(self_: *mut WebKitDOMHTMLMetaElement) -> *mut c_char;
-    pub fn webkit_dom_html_meta_element_get_http_equiv(self_: *mut WebKitDOMHTMLMetaElement) -> *mut c_char;
-    pub fn webkit_dom_html_meta_element_get_name(self_: *mut WebKitDOMHTMLMetaElement) -> *mut c_char;
-    pub fn webkit_dom_html_meta_element_get_scheme(self_: *mut WebKitDOMHTMLMetaElement) -> *mut c_char;
-    pub fn webkit_dom_html_meta_element_set_content(self_: *mut WebKitDOMHTMLMetaElement, value: *const c_char);
-    pub fn webkit_dom_html_meta_element_set_http_equiv(self_: *mut WebKitDOMHTMLMetaElement, value: *const c_char);
-    pub fn webkit_dom_html_meta_element_set_name(self_: *mut WebKitDOMHTMLMetaElement, value: *const c_char);
-    pub fn webkit_dom_html_meta_element_set_scheme(self_: *mut WebKitDOMHTMLMetaElement, value: *const c_char);
+    pub fn webkit_dom_html_meta_element_get_content(
+        self_: *mut WebKitDOMHTMLMetaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_meta_element_get_http_equiv(
+        self_: *mut WebKitDOMHTMLMetaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_meta_element_get_name(
+        self_: *mut WebKitDOMHTMLMetaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_meta_element_get_scheme(
+        self_: *mut WebKitDOMHTMLMetaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_meta_element_set_content(
+        self_: *mut WebKitDOMHTMLMetaElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_meta_element_set_http_equiv(
+        self_: *mut WebKitDOMHTMLMetaElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_meta_element_set_name(
+        self_: *mut WebKitDOMHTMLMetaElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_meta_element_set_scheme(
+        self_: *mut WebKitDOMHTMLMetaElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLModElement
     //=========================================================================
     pub fn webkit_dom_html_mod_element_get_type() -> GType;
-    pub fn webkit_dom_html_mod_element_get_cite(self_: *mut WebKitDOMHTMLModElement) -> *mut c_char;
-    pub fn webkit_dom_html_mod_element_get_date_time(self_: *mut WebKitDOMHTMLModElement) -> *mut c_char;
-    pub fn webkit_dom_html_mod_element_set_cite(self_: *mut WebKitDOMHTMLModElement, value: *const c_char);
-    pub fn webkit_dom_html_mod_element_set_date_time(self_: *mut WebKitDOMHTMLModElement, value: *const c_char);
+    pub fn webkit_dom_html_mod_element_get_cite(self_: *mut WebKitDOMHTMLModElement)
+        -> *mut c_char;
+    pub fn webkit_dom_html_mod_element_get_date_time(
+        self_: *mut WebKitDOMHTMLModElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_mod_element_set_cite(
+        self_: *mut WebKitDOMHTMLModElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_mod_element_set_date_time(
+        self_: *mut WebKitDOMHTMLModElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLOListElement
     //=========================================================================
     pub fn webkit_dom_html_o_list_element_get_type() -> GType;
-    pub fn webkit_dom_html_o_list_element_get_compact(self_: *mut WebKitDOMHTMLOListElement) -> gboolean;
-    pub fn webkit_dom_html_o_list_element_get_start(self_: *mut WebKitDOMHTMLOListElement) -> c_long;
-    pub fn webkit_dom_html_o_list_element_get_type_attr(self_: *mut WebKitDOMHTMLOListElement) -> *mut c_char;
-    pub fn webkit_dom_html_o_list_element_set_compact(self_: *mut WebKitDOMHTMLOListElement, value: gboolean);
-    pub fn webkit_dom_html_o_list_element_set_start(self_: *mut WebKitDOMHTMLOListElement, value: c_long);
-    pub fn webkit_dom_html_o_list_element_set_type_attr(self_: *mut WebKitDOMHTMLOListElement, value: *const c_char);
+    pub fn webkit_dom_html_o_list_element_get_compact(
+        self_: *mut WebKitDOMHTMLOListElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_o_list_element_get_start(
+        self_: *mut WebKitDOMHTMLOListElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_o_list_element_get_type_attr(
+        self_: *mut WebKitDOMHTMLOListElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_o_list_element_set_compact(
+        self_: *mut WebKitDOMHTMLOListElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_o_list_element_set_start(
+        self_: *mut WebKitDOMHTMLOListElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_o_list_element_set_type_attr(
+        self_: *mut WebKitDOMHTMLOListElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLObjectElement
     //=========================================================================
     pub fn webkit_dom_html_object_element_get_type() -> GType;
-    pub fn webkit_dom_html_object_element_get_align(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_archive(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_border(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_code(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_code_base(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_code_type(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_content_document(self_: *mut WebKitDOMHTMLObjectElement) -> *mut WebKitDOMDocument;
-    pub fn webkit_dom_html_object_element_get_data(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_declare(self_: *mut WebKitDOMHTMLObjectElement) -> gboolean;
-    pub fn webkit_dom_html_object_element_get_form(self_: *mut WebKitDOMHTMLObjectElement) -> *mut WebKitDOMHTMLFormElement;
-    pub fn webkit_dom_html_object_element_get_height(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_hspace(self_: *mut WebKitDOMHTMLObjectElement) -> c_long;
-    pub fn webkit_dom_html_object_element_get_name(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_standby(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_type_attr(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_use_map(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_get_vspace(self_: *mut WebKitDOMHTMLObjectElement) -> c_long;
-    pub fn webkit_dom_html_object_element_get_width(self_: *mut WebKitDOMHTMLObjectElement) -> *mut c_char;
-    pub fn webkit_dom_html_object_element_set_align(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_archive(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_border(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_code(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_code_base(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_code_type(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_data(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_declare(self_: *mut WebKitDOMHTMLObjectElement, value: gboolean);
-    pub fn webkit_dom_html_object_element_set_height(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_hspace(self_: *mut WebKitDOMHTMLObjectElement, value: c_long);
-    pub fn webkit_dom_html_object_element_set_name(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_standby(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_type_attr(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_use_map(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
-    pub fn webkit_dom_html_object_element_set_vspace(self_: *mut WebKitDOMHTMLObjectElement, value: c_long);
-    pub fn webkit_dom_html_object_element_set_width(self_: *mut WebKitDOMHTMLObjectElement, value: *const c_char);
+    pub fn webkit_dom_html_object_element_get_align(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_archive(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_border(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_code(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_code_base(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_code_type(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_content_document(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut WebKitDOMDocument;
+    pub fn webkit_dom_html_object_element_get_data(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_declare(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_object_element_get_form(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut WebKitDOMHTMLFormElement;
+    pub fn webkit_dom_html_object_element_get_height(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_hspace(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_object_element_get_name(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_standby(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_type_attr(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_use_map(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_get_vspace(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_object_element_get_width(
+        self_: *mut WebKitDOMHTMLObjectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_object_element_set_align(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_archive(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_border(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_code(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_code_base(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_code_type(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_data(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_declare(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_object_element_set_height(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_hspace(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_object_element_set_name(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_standby(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_type_attr(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_use_map(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_object_element_set_vspace(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_object_element_set_width(
+        self_: *mut WebKitDOMHTMLObjectElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLOptGroupElement
     //=========================================================================
     pub fn webkit_dom_html_opt_group_element_get_type() -> GType;
-    pub fn webkit_dom_html_opt_group_element_get_disabled(self_: *mut WebKitDOMHTMLOptGroupElement) -> gboolean;
-    pub fn webkit_dom_html_opt_group_element_get_label(self_: *mut WebKitDOMHTMLOptGroupElement) -> *mut c_char;
-    pub fn webkit_dom_html_opt_group_element_set_disabled(self_: *mut WebKitDOMHTMLOptGroupElement, value: gboolean);
-    pub fn webkit_dom_html_opt_group_element_set_label(self_: *mut WebKitDOMHTMLOptGroupElement, value: *const c_char);
+    pub fn webkit_dom_html_opt_group_element_get_disabled(
+        self_: *mut WebKitDOMHTMLOptGroupElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_opt_group_element_get_label(
+        self_: *mut WebKitDOMHTMLOptGroupElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_opt_group_element_set_disabled(
+        self_: *mut WebKitDOMHTMLOptGroupElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_opt_group_element_set_label(
+        self_: *mut WebKitDOMHTMLOptGroupElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLOptionElement
     //=========================================================================
     pub fn webkit_dom_html_option_element_get_type() -> GType;
-    pub fn webkit_dom_html_option_element_get_default_selected(self_: *mut WebKitDOMHTMLOptionElement) -> gboolean;
-    pub fn webkit_dom_html_option_element_get_disabled(self_: *mut WebKitDOMHTMLOptionElement) -> gboolean;
-    pub fn webkit_dom_html_option_element_get_form(self_: *mut WebKitDOMHTMLOptionElement) -> *mut WebKitDOMHTMLFormElement;
-    pub fn webkit_dom_html_option_element_get_index(self_: *mut WebKitDOMHTMLOptionElement) -> c_long;
-    pub fn webkit_dom_html_option_element_get_label(self_: *mut WebKitDOMHTMLOptionElement) -> *mut c_char;
-    pub fn webkit_dom_html_option_element_get_selected(self_: *mut WebKitDOMHTMLOptionElement) -> gboolean;
-    pub fn webkit_dom_html_option_element_get_text(self_: *mut WebKitDOMHTMLOptionElement) -> *mut c_char;
-    pub fn webkit_dom_html_option_element_get_value(self_: *mut WebKitDOMHTMLOptionElement) -> *mut c_char;
-    pub fn webkit_dom_html_option_element_set_default_selected(self_: *mut WebKitDOMHTMLOptionElement, value: gboolean);
-    pub fn webkit_dom_html_option_element_set_disabled(self_: *mut WebKitDOMHTMLOptionElement, value: gboolean);
-    pub fn webkit_dom_html_option_element_set_label(self_: *mut WebKitDOMHTMLOptionElement, value: *const c_char);
-    pub fn webkit_dom_html_option_element_set_selected(self_: *mut WebKitDOMHTMLOptionElement, value: gboolean);
-    pub fn webkit_dom_html_option_element_set_value(self_: *mut WebKitDOMHTMLOptionElement, value: *const c_char);
+    pub fn webkit_dom_html_option_element_get_default_selected(
+        self_: *mut WebKitDOMHTMLOptionElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_option_element_get_disabled(
+        self_: *mut WebKitDOMHTMLOptionElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_option_element_get_form(
+        self_: *mut WebKitDOMHTMLOptionElement,
+    ) -> *mut WebKitDOMHTMLFormElement;
+    pub fn webkit_dom_html_option_element_get_index(
+        self_: *mut WebKitDOMHTMLOptionElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_option_element_get_label(
+        self_: *mut WebKitDOMHTMLOptionElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_option_element_get_selected(
+        self_: *mut WebKitDOMHTMLOptionElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_option_element_get_text(
+        self_: *mut WebKitDOMHTMLOptionElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_option_element_get_value(
+        self_: *mut WebKitDOMHTMLOptionElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_option_element_set_default_selected(
+        self_: *mut WebKitDOMHTMLOptionElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_option_element_set_disabled(
+        self_: *mut WebKitDOMHTMLOptionElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_option_element_set_label(
+        self_: *mut WebKitDOMHTMLOptionElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_option_element_set_selected(
+        self_: *mut WebKitDOMHTMLOptionElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_option_element_set_value(
+        self_: *mut WebKitDOMHTMLOptionElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLOptionsCollection
     //=========================================================================
     pub fn webkit_dom_html_options_collection_get_type() -> GType;
-    pub fn webkit_dom_html_options_collection_get_length(self_: *mut WebKitDOMHTMLOptionsCollection) -> c_ulong;
-    pub fn webkit_dom_html_options_collection_get_selected_index(self_: *mut WebKitDOMHTMLOptionsCollection) -> c_long;
-    pub fn webkit_dom_html_options_collection_named_item(self_: *mut WebKitDOMHTMLOptionsCollection, name: *const c_char) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_html_options_collection_set_selected_index(self_: *mut WebKitDOMHTMLOptionsCollection, value: c_long);
+    pub fn webkit_dom_html_options_collection_get_length(
+        self_: *mut WebKitDOMHTMLOptionsCollection,
+    ) -> c_ulong;
+    pub fn webkit_dom_html_options_collection_get_selected_index(
+        self_: *mut WebKitDOMHTMLOptionsCollection,
+    ) -> c_long;
+    pub fn webkit_dom_html_options_collection_named_item(
+        self_: *mut WebKitDOMHTMLOptionsCollection,
+        name: *const c_char,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_html_options_collection_set_selected_index(
+        self_: *mut WebKitDOMHTMLOptionsCollection,
+        value: c_long,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLParagraphElement
     //=========================================================================
     pub fn webkit_dom_html_paragraph_element_get_type() -> GType;
-    pub fn webkit_dom_html_paragraph_element_get_align(self_: *mut WebKitDOMHTMLParagraphElement) -> *mut c_char;
-    pub fn webkit_dom_html_paragraph_element_set_align(self_: *mut WebKitDOMHTMLParagraphElement, value: *const c_char);
+    pub fn webkit_dom_html_paragraph_element_get_align(
+        self_: *mut WebKitDOMHTMLParagraphElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_paragraph_element_set_align(
+        self_: *mut WebKitDOMHTMLParagraphElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLParamElement
     //=========================================================================
     pub fn webkit_dom_html_param_element_get_type() -> GType;
-    pub fn webkit_dom_html_param_element_get_name(self_: *mut WebKitDOMHTMLParamElement) -> *mut c_char;
-    pub fn webkit_dom_html_param_element_get_type_attr(self_: *mut WebKitDOMHTMLParamElement) -> *mut c_char;
-    pub fn webkit_dom_html_param_element_get_value(self_: *mut WebKitDOMHTMLParamElement) -> *mut c_char;
-    pub fn webkit_dom_html_param_element_get_value_type(self_: *mut WebKitDOMHTMLParamElement) -> *mut c_char;
-    pub fn webkit_dom_html_param_element_set_name(self_: *mut WebKitDOMHTMLParamElement, value: *const c_char);
-    pub fn webkit_dom_html_param_element_set_type_attr(self_: *mut WebKitDOMHTMLParamElement, value: *const c_char);
-    pub fn webkit_dom_html_param_element_set_value(self_: *mut WebKitDOMHTMLParamElement, value: *const c_char);
-    pub fn webkit_dom_html_param_element_set_value_type(self_: *mut WebKitDOMHTMLParamElement, value: *const c_char);
+    pub fn webkit_dom_html_param_element_get_name(
+        self_: *mut WebKitDOMHTMLParamElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_param_element_get_type_attr(
+        self_: *mut WebKitDOMHTMLParamElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_param_element_get_value(
+        self_: *mut WebKitDOMHTMLParamElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_param_element_get_value_type(
+        self_: *mut WebKitDOMHTMLParamElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_param_element_set_name(
+        self_: *mut WebKitDOMHTMLParamElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_param_element_set_type_attr(
+        self_: *mut WebKitDOMHTMLParamElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_param_element_set_value(
+        self_: *mut WebKitDOMHTMLParamElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_param_element_set_value_type(
+        self_: *mut WebKitDOMHTMLParamElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLPreElement
@@ -5026,279 +7344,772 @@ extern "C" {
     pub fn webkit_dom_html_pre_element_get_type() -> GType;
     pub fn webkit_dom_html_pre_element_get_width(self_: *mut WebKitDOMHTMLPreElement) -> c_long;
     pub fn webkit_dom_html_pre_element_get_wrap(self_: *mut WebKitDOMHTMLPreElement) -> gboolean;
-    pub fn webkit_dom_html_pre_element_set_width(self_: *mut WebKitDOMHTMLPreElement, value: c_long);
-    pub fn webkit_dom_html_pre_element_set_wrap(self_: *mut WebKitDOMHTMLPreElement, value: gboolean);
+    pub fn webkit_dom_html_pre_element_set_width(
+        self_: *mut WebKitDOMHTMLPreElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_pre_element_set_wrap(
+        self_: *mut WebKitDOMHTMLPreElement,
+        value: gboolean,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLQuoteElement
     //=========================================================================
     pub fn webkit_dom_html_quote_element_get_type() -> GType;
-    pub fn webkit_dom_html_quote_element_get_cite(self_: *mut WebKitDOMHTMLQuoteElement) -> *mut c_char;
-    pub fn webkit_dom_html_quote_element_set_cite(self_: *mut WebKitDOMHTMLQuoteElement, value: *const c_char);
+    pub fn webkit_dom_html_quote_element_get_cite(
+        self_: *mut WebKitDOMHTMLQuoteElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_quote_element_set_cite(
+        self_: *mut WebKitDOMHTMLQuoteElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLScriptElement
     //=========================================================================
     pub fn webkit_dom_html_script_element_get_type() -> GType;
-    pub fn webkit_dom_html_script_element_get_charset(self_: *mut WebKitDOMHTMLScriptElement) -> *mut c_char;
-    pub fn webkit_dom_html_script_element_get_defer(self_: *mut WebKitDOMHTMLScriptElement) -> gboolean;
-    pub fn webkit_dom_html_script_element_get_event(self_: *mut WebKitDOMHTMLScriptElement) -> *mut c_char;
-    pub fn webkit_dom_html_script_element_get_html_for(self_: *mut WebKitDOMHTMLScriptElement) -> *mut c_char;
-    pub fn webkit_dom_html_script_element_get_src(self_: *mut WebKitDOMHTMLScriptElement) -> *mut c_char;
-    pub fn webkit_dom_html_script_element_get_text(self_: *mut WebKitDOMHTMLScriptElement) -> *mut c_char;
-    pub fn webkit_dom_html_script_element_get_type_attr(self_: *mut WebKitDOMHTMLScriptElement) -> *mut c_char;
+    pub fn webkit_dom_html_script_element_get_charset(
+        self_: *mut WebKitDOMHTMLScriptElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_script_element_get_defer(
+        self_: *mut WebKitDOMHTMLScriptElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_script_element_get_event(
+        self_: *mut WebKitDOMHTMLScriptElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_script_element_get_html_for(
+        self_: *mut WebKitDOMHTMLScriptElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_script_element_get_src(
+        self_: *mut WebKitDOMHTMLScriptElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_script_element_get_text(
+        self_: *mut WebKitDOMHTMLScriptElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_script_element_get_type_attr(
+        self_: *mut WebKitDOMHTMLScriptElement,
+    ) -> *mut c_char;
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_html_script_element_set_charset(self_: *mut WebKitDOMHTMLScriptElement, value: *const c_char);
-    pub fn webkit_dom_html_script_element_set_defer(self_: *mut WebKitDOMHTMLScriptElement, value: gboolean);
-    pub fn webkit_dom_html_script_element_set_event(self_: *mut WebKitDOMHTMLScriptElement, value: *const c_char);
-    pub fn webkit_dom_html_script_element_set_html_for(self_: *mut WebKitDOMHTMLScriptElement, value: *const c_char);
-    pub fn webkit_dom_html_script_element_set_src(self_: *mut WebKitDOMHTMLScriptElement, value: *const c_char);
-    pub fn webkit_dom_html_script_element_set_text(self_: *mut WebKitDOMHTMLScriptElement, value: *const c_char);
-    pub fn webkit_dom_html_script_element_set_type_attr(self_: *mut WebKitDOMHTMLScriptElement, value: *const c_char);
+    pub fn webkit_dom_html_script_element_set_charset(
+        self_: *mut WebKitDOMHTMLScriptElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_script_element_set_defer(
+        self_: *mut WebKitDOMHTMLScriptElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_script_element_set_event(
+        self_: *mut WebKitDOMHTMLScriptElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_script_element_set_html_for(
+        self_: *mut WebKitDOMHTMLScriptElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_script_element_set_src(
+        self_: *mut WebKitDOMHTMLScriptElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_script_element_set_text(
+        self_: *mut WebKitDOMHTMLScriptElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_script_element_set_type_attr(
+        self_: *mut WebKitDOMHTMLScriptElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLSelectElement
     //=========================================================================
     pub fn webkit_dom_html_select_element_get_type() -> GType;
-    pub fn webkit_dom_html_select_element_add(self_: *mut WebKitDOMHTMLSelectElement, element: *mut WebKitDOMHTMLElement, before: *mut WebKitDOMHTMLElement, error: *mut *mut glib::GError);
-    pub fn webkit_dom_html_select_element_get_autofocus(self_: *mut WebKitDOMHTMLSelectElement) -> gboolean;
-    pub fn webkit_dom_html_select_element_get_disabled(self_: *mut WebKitDOMHTMLSelectElement) -> gboolean;
-    pub fn webkit_dom_html_select_element_get_form(self_: *mut WebKitDOMHTMLSelectElement) -> *mut WebKitDOMHTMLFormElement;
-    pub fn webkit_dom_html_select_element_get_length(self_: *mut WebKitDOMHTMLSelectElement) -> c_ulong;
-    pub fn webkit_dom_html_select_element_get_multiple(self_: *mut WebKitDOMHTMLSelectElement) -> gboolean;
-    pub fn webkit_dom_html_select_element_get_name(self_: *mut WebKitDOMHTMLSelectElement) -> *mut c_char;
-    pub fn webkit_dom_html_select_element_get_options(self_: *mut WebKitDOMHTMLSelectElement) -> *mut WebKitDOMHTMLOptionsCollection;
-    pub fn webkit_dom_html_select_element_get_select_type(self_: *mut WebKitDOMHTMLSelectElement) -> *mut c_char;
-    pub fn webkit_dom_html_select_element_get_selected_index(self_: *mut WebKitDOMHTMLSelectElement) -> c_long;
-    pub fn webkit_dom_html_select_element_get_size(self_: *mut WebKitDOMHTMLSelectElement) -> c_long;
-    pub fn webkit_dom_html_select_element_get_value(self_: *mut WebKitDOMHTMLSelectElement) -> *mut c_char;
-    pub fn webkit_dom_html_select_element_get_will_validate(self_: *mut WebKitDOMHTMLSelectElement) -> gboolean;
-    pub fn webkit_dom_html_select_element_item(self_: *mut WebKitDOMHTMLSelectElement, index: c_ulong) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_html_select_element_named_item(self_: *mut WebKitDOMHTMLSelectElement, name: *const c_char) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_html_select_element_remove(self_: *mut WebKitDOMHTMLSelectElement, index: c_long);
-    pub fn webkit_dom_html_select_element_set_autofocus(self_: *mut WebKitDOMHTMLSelectElement, value: gboolean);
-    pub fn webkit_dom_html_select_element_set_disabled(self_: *mut WebKitDOMHTMLSelectElement, value: gboolean);
-    pub fn webkit_dom_html_select_element_set_length(self_: *mut WebKitDOMHTMLSelectElement, value: c_ulong, error: *mut *mut glib::GError);
-    pub fn webkit_dom_html_select_element_set_multiple(self_: *mut WebKitDOMHTMLSelectElement, value: gboolean);
-    pub fn webkit_dom_html_select_element_set_name(self_: *mut WebKitDOMHTMLSelectElement, value: *const c_char);
-    pub fn webkit_dom_html_select_element_set_selected_index(self_: *mut WebKitDOMHTMLSelectElement, value: c_long);
-    pub fn webkit_dom_html_select_element_set_size(self_: *mut WebKitDOMHTMLSelectElement, value: c_long);
-    pub fn webkit_dom_html_select_element_set_value(self_: *mut WebKitDOMHTMLSelectElement, value: *const c_char);
+    pub fn webkit_dom_html_select_element_add(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        element: *mut WebKitDOMHTMLElement,
+        before: *mut WebKitDOMHTMLElement,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_html_select_element_get_autofocus(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_select_element_get_disabled(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_select_element_get_form(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> *mut WebKitDOMHTMLFormElement;
+    pub fn webkit_dom_html_select_element_get_length(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> c_ulong;
+    pub fn webkit_dom_html_select_element_get_multiple(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_select_element_get_name(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_select_element_get_options(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> *mut WebKitDOMHTMLOptionsCollection;
+    pub fn webkit_dom_html_select_element_get_select_type(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_select_element_get_selected_index(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_select_element_get_size(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_select_element_get_value(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_select_element_get_will_validate(
+        self_: *mut WebKitDOMHTMLSelectElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_select_element_item(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        index: c_ulong,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_html_select_element_named_item(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        name: *const c_char,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_html_select_element_remove(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        index: c_long,
+    );
+    pub fn webkit_dom_html_select_element_set_autofocus(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_select_element_set_disabled(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_select_element_set_length(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        value: c_ulong,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_html_select_element_set_multiple(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_select_element_set_name(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_select_element_set_selected_index(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_select_element_set_size(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_select_element_set_value(
+        self_: *mut WebKitDOMHTMLSelectElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLStyleElement
     //=========================================================================
     pub fn webkit_dom_html_style_element_get_type() -> GType;
-    pub fn webkit_dom_html_style_element_get_disabled(self_: *mut WebKitDOMHTMLStyleElement) -> gboolean;
-    pub fn webkit_dom_html_style_element_get_media(self_: *mut WebKitDOMHTMLStyleElement) -> *mut c_char;
-    pub fn webkit_dom_html_style_element_get_sheet(self_: *mut WebKitDOMHTMLStyleElement) -> *mut WebKitDOMStyleSheet;
-    pub fn webkit_dom_html_style_element_get_type_attr(self_: *mut WebKitDOMHTMLStyleElement) -> *mut c_char;
-    pub fn webkit_dom_html_style_element_set_disabled(self_: *mut WebKitDOMHTMLStyleElement, value: gboolean);
-    pub fn webkit_dom_html_style_element_set_media(self_: *mut WebKitDOMHTMLStyleElement, value: *const c_char);
-    pub fn webkit_dom_html_style_element_set_type_attr(self_: *mut WebKitDOMHTMLStyleElement, value: *const c_char);
+    pub fn webkit_dom_html_style_element_get_disabled(
+        self_: *mut WebKitDOMHTMLStyleElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_style_element_get_media(
+        self_: *mut WebKitDOMHTMLStyleElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_style_element_get_sheet(
+        self_: *mut WebKitDOMHTMLStyleElement,
+    ) -> *mut WebKitDOMStyleSheet;
+    pub fn webkit_dom_html_style_element_get_type_attr(
+        self_: *mut WebKitDOMHTMLStyleElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_style_element_set_disabled(
+        self_: *mut WebKitDOMHTMLStyleElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_style_element_set_media(
+        self_: *mut WebKitDOMHTMLStyleElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_style_element_set_type_attr(
+        self_: *mut WebKitDOMHTMLStyleElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLTableCaptionElement
     //=========================================================================
     pub fn webkit_dom_html_table_caption_element_get_type() -> GType;
-    pub fn webkit_dom_html_table_caption_element_get_align(self_: *mut WebKitDOMHTMLTableCaptionElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_caption_element_set_align(self_: *mut WebKitDOMHTMLTableCaptionElement, value: *const c_char);
+    pub fn webkit_dom_html_table_caption_element_get_align(
+        self_: *mut WebKitDOMHTMLTableCaptionElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_caption_element_set_align(
+        self_: *mut WebKitDOMHTMLTableCaptionElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLTableCellElement
     //=========================================================================
     pub fn webkit_dom_html_table_cell_element_get_type() -> GType;
-    pub fn webkit_dom_html_table_cell_element_get_abbr(self_: *mut WebKitDOMHTMLTableCellElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_cell_element_get_align(self_: *mut WebKitDOMHTMLTableCellElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_cell_element_get_axis(self_: *mut WebKitDOMHTMLTableCellElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_cell_element_get_bg_color(self_: *mut WebKitDOMHTMLTableCellElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_cell_element_get_cell_index(self_: *mut WebKitDOMHTMLTableCellElement) -> c_long;
-    pub fn webkit_dom_html_table_cell_element_get_ch(self_: *mut WebKitDOMHTMLTableCellElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_cell_element_get_ch_off(self_: *mut WebKitDOMHTMLTableCellElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_cell_element_get_col_span(self_: *mut WebKitDOMHTMLTableCellElement) -> c_long;
-    pub fn webkit_dom_html_table_cell_element_get_headers(self_: *mut WebKitDOMHTMLTableCellElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_cell_element_get_height(self_: *mut WebKitDOMHTMLTableCellElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_cell_element_get_no_wrap(self_: *mut WebKitDOMHTMLTableCellElement) -> gboolean;
-    pub fn webkit_dom_html_table_cell_element_get_row_span(self_: *mut WebKitDOMHTMLTableCellElement) -> c_long;
-    pub fn webkit_dom_html_table_cell_element_get_scope(self_: *mut WebKitDOMHTMLTableCellElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_cell_element_get_v_align(self_: *mut WebKitDOMHTMLTableCellElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_cell_element_get_width(self_: *mut WebKitDOMHTMLTableCellElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_cell_element_set_abbr(self_: *mut WebKitDOMHTMLTableCellElement, value: *const c_char);
-    pub fn webkit_dom_html_table_cell_element_set_align(self_: *mut WebKitDOMHTMLTableCellElement, value: *const c_char);
-    pub fn webkit_dom_html_table_cell_element_set_axis(self_: *mut WebKitDOMHTMLTableCellElement, value: *const c_char);
-    pub fn webkit_dom_html_table_cell_element_set_bg_color(self_: *mut WebKitDOMHTMLTableCellElement, value: *const c_char);
-    pub fn webkit_dom_html_table_cell_element_set_ch(self_: *mut WebKitDOMHTMLTableCellElement, value: *const c_char);
-    pub fn webkit_dom_html_table_cell_element_set_ch_off(self_: *mut WebKitDOMHTMLTableCellElement, value: *const c_char);
-    pub fn webkit_dom_html_table_cell_element_set_col_span(self_: *mut WebKitDOMHTMLTableCellElement, value: c_long);
-    pub fn webkit_dom_html_table_cell_element_set_headers(self_: *mut WebKitDOMHTMLTableCellElement, value: *const c_char);
-    pub fn webkit_dom_html_table_cell_element_set_height(self_: *mut WebKitDOMHTMLTableCellElement, value: *const c_char);
-    pub fn webkit_dom_html_table_cell_element_set_no_wrap(self_: *mut WebKitDOMHTMLTableCellElement, value: gboolean);
-    pub fn webkit_dom_html_table_cell_element_set_row_span(self_: *mut WebKitDOMHTMLTableCellElement, value: c_long);
-    pub fn webkit_dom_html_table_cell_element_set_scope(self_: *mut WebKitDOMHTMLTableCellElement, value: *const c_char);
-    pub fn webkit_dom_html_table_cell_element_set_v_align(self_: *mut WebKitDOMHTMLTableCellElement, value: *const c_char);
-    pub fn webkit_dom_html_table_cell_element_set_width(self_: *mut WebKitDOMHTMLTableCellElement, value: *const c_char);
+    pub fn webkit_dom_html_table_cell_element_get_abbr(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_cell_element_get_align(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_cell_element_get_axis(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_cell_element_get_bg_color(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_cell_element_get_cell_index(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_table_cell_element_get_ch(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_cell_element_get_ch_off(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_cell_element_get_col_span(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_table_cell_element_get_headers(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_cell_element_get_height(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_cell_element_get_no_wrap(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_table_cell_element_get_row_span(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_table_cell_element_get_scope(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_cell_element_get_v_align(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_cell_element_get_width(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_cell_element_set_abbr(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_align(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_axis(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_bg_color(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_ch(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_ch_off(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_col_span(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_headers(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_height(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_no_wrap(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_row_span(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_scope(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_v_align(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_cell_element_set_width(
+        self_: *mut WebKitDOMHTMLTableCellElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLTableColElement
     //=========================================================================
     pub fn webkit_dom_html_table_col_element_get_type() -> GType;
-    pub fn webkit_dom_html_table_col_element_get_align(self_: *mut WebKitDOMHTMLTableColElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_col_element_get_ch(self_: *mut WebKitDOMHTMLTableColElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_col_element_get_ch_off(self_: *mut WebKitDOMHTMLTableColElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_col_element_get_span(self_: *mut WebKitDOMHTMLTableColElement) -> c_long;
-    pub fn webkit_dom_html_table_col_element_get_v_align(self_: *mut WebKitDOMHTMLTableColElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_col_element_get_width(self_: *mut WebKitDOMHTMLTableColElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_col_element_set_align(self_: *mut WebKitDOMHTMLTableColElement, value: *const c_char);
-    pub fn webkit_dom_html_table_col_element_set_ch(self_: *mut WebKitDOMHTMLTableColElement, value: *const c_char);
-    pub fn webkit_dom_html_table_col_element_set_ch_off(self_: *mut WebKitDOMHTMLTableColElement, value: *const c_char);
-    pub fn webkit_dom_html_table_col_element_set_span(self_: *mut WebKitDOMHTMLTableColElement, value: c_long);
-    pub fn webkit_dom_html_table_col_element_set_v_align(self_: *mut WebKitDOMHTMLTableColElement, value: *const c_char);
-    pub fn webkit_dom_html_table_col_element_set_width(self_: *mut WebKitDOMHTMLTableColElement, value: *const c_char);
+    pub fn webkit_dom_html_table_col_element_get_align(
+        self_: *mut WebKitDOMHTMLTableColElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_col_element_get_ch(
+        self_: *mut WebKitDOMHTMLTableColElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_col_element_get_ch_off(
+        self_: *mut WebKitDOMHTMLTableColElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_col_element_get_span(
+        self_: *mut WebKitDOMHTMLTableColElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_table_col_element_get_v_align(
+        self_: *mut WebKitDOMHTMLTableColElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_col_element_get_width(
+        self_: *mut WebKitDOMHTMLTableColElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_col_element_set_align(
+        self_: *mut WebKitDOMHTMLTableColElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_col_element_set_ch(
+        self_: *mut WebKitDOMHTMLTableColElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_col_element_set_ch_off(
+        self_: *mut WebKitDOMHTMLTableColElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_col_element_set_span(
+        self_: *mut WebKitDOMHTMLTableColElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_table_col_element_set_v_align(
+        self_: *mut WebKitDOMHTMLTableColElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_col_element_set_width(
+        self_: *mut WebKitDOMHTMLTableColElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLTableElement
     //=========================================================================
     pub fn webkit_dom_html_table_element_get_type() -> GType;
-    pub fn webkit_dom_html_table_element_create_caption(self_: *mut WebKitDOMHTMLTableElement) -> *mut WebKitDOMHTMLElement;
-    pub fn webkit_dom_html_table_element_create_t_foot(self_: *mut WebKitDOMHTMLTableElement) -> *mut WebKitDOMHTMLElement;
-    pub fn webkit_dom_html_table_element_create_t_head(self_: *mut WebKitDOMHTMLTableElement) -> *mut WebKitDOMHTMLElement;
+    pub fn webkit_dom_html_table_element_create_caption(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut WebKitDOMHTMLElement;
+    pub fn webkit_dom_html_table_element_create_t_foot(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut WebKitDOMHTMLElement;
+    pub fn webkit_dom_html_table_element_create_t_head(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut WebKitDOMHTMLElement;
     pub fn webkit_dom_html_table_element_delete_caption(self_: *mut WebKitDOMHTMLTableElement);
-    pub fn webkit_dom_html_table_element_delete_row(self_: *mut WebKitDOMHTMLTableElement, index: c_long, error: *mut *mut glib::GError);
+    pub fn webkit_dom_html_table_element_delete_row(
+        self_: *mut WebKitDOMHTMLTableElement,
+        index: c_long,
+        error: *mut *mut glib::GError,
+    );
     pub fn webkit_dom_html_table_element_delete_t_foot(self_: *mut WebKitDOMHTMLTableElement);
     pub fn webkit_dom_html_table_element_delete_t_head(self_: *mut WebKitDOMHTMLTableElement);
-    pub fn webkit_dom_html_table_element_get_align(self_: *mut WebKitDOMHTMLTableElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_element_get_bg_color(self_: *mut WebKitDOMHTMLTableElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_element_get_border(self_: *mut WebKitDOMHTMLTableElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_element_get_caption(self_: *mut WebKitDOMHTMLTableElement) -> *mut WebKitDOMHTMLTableCaptionElement;
-    pub fn webkit_dom_html_table_element_get_cell_padding(self_: *mut WebKitDOMHTMLTableElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_element_get_cell_spacing(self_: *mut WebKitDOMHTMLTableElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_element_get_rows(self_: *mut WebKitDOMHTMLTableElement) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_html_table_element_get_rules(self_: *mut WebKitDOMHTMLTableElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_element_get_summary(self_: *mut WebKitDOMHTMLTableElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_element_get_t_bodies(self_: *mut WebKitDOMHTMLTableElement) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_html_table_element_get_t_foot(self_: *mut WebKitDOMHTMLTableElement) -> *mut WebKitDOMHTMLTableSectionElement;
-    pub fn webkit_dom_html_table_element_get_t_head(self_: *mut WebKitDOMHTMLTableElement) -> *mut WebKitDOMHTMLTableSectionElement;
-    pub fn webkit_dom_html_table_element_get_width(self_: *mut WebKitDOMHTMLTableElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_element_insert_row(self_: *mut WebKitDOMHTMLTableElement, index: c_long, error: *mut *mut glib::GError) -> *mut WebKitDOMHTMLElement;
-    pub fn webkit_dom_html_table_element_set_align(self_: *mut WebKitDOMHTMLTableElement, value: *const c_char);
-    pub fn webkit_dom_html_table_element_set_bg_color(self_: *mut WebKitDOMHTMLTableElement, value: *const c_char);
-    pub fn webkit_dom_html_table_element_set_border(self_: *mut WebKitDOMHTMLTableElement, value: *const c_char);
-    pub fn webkit_dom_html_table_element_set_caption(self_: *mut WebKitDOMHTMLTableElement, value: *mut WebKitDOMHTMLTableCaptionElement, error: *mut *mut glib::GError);
-    pub fn webkit_dom_html_table_element_set_cell_padding(self_: *mut WebKitDOMHTMLTableElement, value: *const c_char);
-    pub fn webkit_dom_html_table_element_set_cell_spacing(self_: *mut WebKitDOMHTMLTableElement, value: *const c_char);
-    pub fn webkit_dom_html_table_element_set_rules(self_: *mut WebKitDOMHTMLTableElement, value: *const c_char);
-    pub fn webkit_dom_html_table_element_set_summary(self_: *mut WebKitDOMHTMLTableElement, value: *const c_char);
-    pub fn webkit_dom_html_table_element_set_t_foot(self_: *mut WebKitDOMHTMLTableElement, value: *mut WebKitDOMHTMLTableSectionElement, error: *mut *mut glib::GError);
-    pub fn webkit_dom_html_table_element_set_t_head(self_: *mut WebKitDOMHTMLTableElement, value: *mut WebKitDOMHTMLTableSectionElement, error: *mut *mut glib::GError);
-    pub fn webkit_dom_html_table_element_set_width(self_: *mut WebKitDOMHTMLTableElement, value: *const c_char);
+    pub fn webkit_dom_html_table_element_get_align(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_element_get_bg_color(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_element_get_border(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_element_get_caption(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut WebKitDOMHTMLTableCaptionElement;
+    pub fn webkit_dom_html_table_element_get_cell_padding(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_element_get_cell_spacing(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_element_get_rows(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_html_table_element_get_rules(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_element_get_summary(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_element_get_t_bodies(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_html_table_element_get_t_foot(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut WebKitDOMHTMLTableSectionElement;
+    pub fn webkit_dom_html_table_element_get_t_head(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut WebKitDOMHTMLTableSectionElement;
+    pub fn webkit_dom_html_table_element_get_width(
+        self_: *mut WebKitDOMHTMLTableElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_element_insert_row(
+        self_: *mut WebKitDOMHTMLTableElement,
+        index: c_long,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMHTMLElement;
+    pub fn webkit_dom_html_table_element_set_align(
+        self_: *mut WebKitDOMHTMLTableElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_element_set_bg_color(
+        self_: *mut WebKitDOMHTMLTableElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_element_set_border(
+        self_: *mut WebKitDOMHTMLTableElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_element_set_caption(
+        self_: *mut WebKitDOMHTMLTableElement,
+        value: *mut WebKitDOMHTMLTableCaptionElement,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_html_table_element_set_cell_padding(
+        self_: *mut WebKitDOMHTMLTableElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_element_set_cell_spacing(
+        self_: *mut WebKitDOMHTMLTableElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_element_set_rules(
+        self_: *mut WebKitDOMHTMLTableElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_element_set_summary(
+        self_: *mut WebKitDOMHTMLTableElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_element_set_t_foot(
+        self_: *mut WebKitDOMHTMLTableElement,
+        value: *mut WebKitDOMHTMLTableSectionElement,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_html_table_element_set_t_head(
+        self_: *mut WebKitDOMHTMLTableElement,
+        value: *mut WebKitDOMHTMLTableSectionElement,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_html_table_element_set_width(
+        self_: *mut WebKitDOMHTMLTableElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLTableRowElement
     //=========================================================================
     pub fn webkit_dom_html_table_row_element_get_type() -> GType;
-    pub fn webkit_dom_html_table_row_element_delete_cell(self_: *mut WebKitDOMHTMLTableRowElement, index: c_long, error: *mut *mut glib::GError);
-    pub fn webkit_dom_html_table_row_element_get_align(self_: *mut WebKitDOMHTMLTableRowElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_row_element_get_bg_color(self_: *mut WebKitDOMHTMLTableRowElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_row_element_get_cells(self_: *mut WebKitDOMHTMLTableRowElement) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_html_table_row_element_get_ch(self_: *mut WebKitDOMHTMLTableRowElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_row_element_get_ch_off(self_: *mut WebKitDOMHTMLTableRowElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_row_element_get_row_index(self_: *mut WebKitDOMHTMLTableRowElement) -> c_long;
-    pub fn webkit_dom_html_table_row_element_get_section_row_index(self_: *mut WebKitDOMHTMLTableRowElement) -> c_long;
-    pub fn webkit_dom_html_table_row_element_get_v_align(self_: *mut WebKitDOMHTMLTableRowElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_row_element_insert_cell(self_: *mut WebKitDOMHTMLTableRowElement, index: c_long, error: *mut *mut glib::GError) -> *mut WebKitDOMHTMLElement;
-    pub fn webkit_dom_html_table_row_element_set_align(self_: *mut WebKitDOMHTMLTableRowElement, value: *const c_char);
-    pub fn webkit_dom_html_table_row_element_set_bg_color(self_: *mut WebKitDOMHTMLTableRowElement, value: *const c_char);
-    pub fn webkit_dom_html_table_row_element_set_ch(self_: *mut WebKitDOMHTMLTableRowElement, value: *const c_char);
-    pub fn webkit_dom_html_table_row_element_set_ch_off(self_: *mut WebKitDOMHTMLTableRowElement, value: *const c_char);
-    pub fn webkit_dom_html_table_row_element_set_v_align(self_: *mut WebKitDOMHTMLTableRowElement, value: *const c_char);
+    pub fn webkit_dom_html_table_row_element_delete_cell(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+        index: c_long,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_html_table_row_element_get_align(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_row_element_get_bg_color(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_row_element_get_cells(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_html_table_row_element_get_ch(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_row_element_get_ch_off(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_row_element_get_row_index(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_table_row_element_get_section_row_index(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_table_row_element_get_v_align(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_row_element_insert_cell(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+        index: c_long,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMHTMLElement;
+    pub fn webkit_dom_html_table_row_element_set_align(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_row_element_set_bg_color(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_row_element_set_ch(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_row_element_set_ch_off(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_row_element_set_v_align(
+        self_: *mut WebKitDOMHTMLTableRowElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLTableSectionElement
     //=========================================================================
     pub fn webkit_dom_html_table_section_element_get_type() -> GType;
-    pub fn webkit_dom_html_table_section_element_delete_row(self_: *mut WebKitDOMHTMLTableSectionElement, index: c_long, error: *mut *mut glib::GError);
-    pub fn webkit_dom_html_table_section_element_get_align(self_: *mut WebKitDOMHTMLTableSectionElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_section_element_get_ch(self_: *mut WebKitDOMHTMLTableSectionElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_section_element_get_ch_off(self_: *mut WebKitDOMHTMLTableSectionElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_section_element_get_rows(self_: *mut WebKitDOMHTMLTableSectionElement) -> *mut WebKitDOMHTMLCollection;
-    pub fn webkit_dom_html_table_section_element_get_v_align(self_: *mut WebKitDOMHTMLTableSectionElement) -> *mut c_char;
-    pub fn webkit_dom_html_table_section_element_insert_row(self_: *mut WebKitDOMHTMLTableSectionElement, index: c_long, error: *mut *mut glib::GError) -> *mut WebKitDOMHTMLElement;
-    pub fn webkit_dom_html_table_section_element_set_align(self_: *mut WebKitDOMHTMLTableSectionElement, value: *const c_char);
-    pub fn webkit_dom_html_table_section_element_set_ch(self_: *mut WebKitDOMHTMLTableSectionElement, value: *const c_char);
-    pub fn webkit_dom_html_table_section_element_set_ch_off(self_: *mut WebKitDOMHTMLTableSectionElement, value: *const c_char);
-    pub fn webkit_dom_html_table_section_element_set_v_align(self_: *mut WebKitDOMHTMLTableSectionElement, value: *const c_char);
+    pub fn webkit_dom_html_table_section_element_delete_row(
+        self_: *mut WebKitDOMHTMLTableSectionElement,
+        index: c_long,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_html_table_section_element_get_align(
+        self_: *mut WebKitDOMHTMLTableSectionElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_section_element_get_ch(
+        self_: *mut WebKitDOMHTMLTableSectionElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_section_element_get_ch_off(
+        self_: *mut WebKitDOMHTMLTableSectionElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_section_element_get_rows(
+        self_: *mut WebKitDOMHTMLTableSectionElement,
+    ) -> *mut WebKitDOMHTMLCollection;
+    pub fn webkit_dom_html_table_section_element_get_v_align(
+        self_: *mut WebKitDOMHTMLTableSectionElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_table_section_element_insert_row(
+        self_: *mut WebKitDOMHTMLTableSectionElement,
+        index: c_long,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMHTMLElement;
+    pub fn webkit_dom_html_table_section_element_set_align(
+        self_: *mut WebKitDOMHTMLTableSectionElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_section_element_set_ch(
+        self_: *mut WebKitDOMHTMLTableSectionElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_section_element_set_ch_off(
+        self_: *mut WebKitDOMHTMLTableSectionElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_table_section_element_set_v_align(
+        self_: *mut WebKitDOMHTMLTableSectionElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLTextAreaElement
     //=========================================================================
     pub fn webkit_dom_html_text_area_element_get_type() -> GType;
-    pub fn webkit_dom_html_text_area_element_get_area_type(self_: *mut WebKitDOMHTMLTextAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_text_area_element_get_autofocus(self_: *mut WebKitDOMHTMLTextAreaElement) -> gboolean;
-    pub fn webkit_dom_html_text_area_element_get_cols(self_: *mut WebKitDOMHTMLTextAreaElement) -> c_long;
-    pub fn webkit_dom_html_text_area_element_get_default_value(self_: *mut WebKitDOMHTMLTextAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_text_area_element_get_disabled(self_: *mut WebKitDOMHTMLTextAreaElement) -> gboolean;
-    pub fn webkit_dom_html_text_area_element_get_form(self_: *mut WebKitDOMHTMLTextAreaElement) -> *mut WebKitDOMHTMLFormElement;
-    pub fn webkit_dom_html_text_area_element_get_name(self_: *mut WebKitDOMHTMLTextAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_text_area_element_get_read_only(self_: *mut WebKitDOMHTMLTextAreaElement) -> gboolean;
-    pub fn webkit_dom_html_text_area_element_get_rows(self_: *mut WebKitDOMHTMLTextAreaElement) -> c_long;
-    pub fn webkit_dom_html_text_area_element_get_selection_end(self_: *mut WebKitDOMHTMLTextAreaElement) -> c_long;
-    pub fn webkit_dom_html_text_area_element_get_selection_start(self_: *mut WebKitDOMHTMLTextAreaElement) -> c_long;
-    pub fn webkit_dom_html_text_area_element_get_value(self_: *mut WebKitDOMHTMLTextAreaElement) -> *mut c_char;
-    pub fn webkit_dom_html_text_area_element_get_will_validate(self_: *mut WebKitDOMHTMLTextAreaElement) -> gboolean;
-    pub fn webkit_dom_html_text_area_element_is_edited(input: *mut WebKitDOMHTMLTextAreaElement) -> gboolean;
+    pub fn webkit_dom_html_text_area_element_get_area_type(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_text_area_element_get_autofocus(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_text_area_element_get_cols(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_text_area_element_get_default_value(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_text_area_element_get_disabled(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_text_area_element_get_form(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> *mut WebKitDOMHTMLFormElement;
+    pub fn webkit_dom_html_text_area_element_get_name(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_text_area_element_get_read_only(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_text_area_element_get_rows(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_text_area_element_get_selection_end(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_text_area_element_get_selection_start(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> c_long;
+    pub fn webkit_dom_html_text_area_element_get_value(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_text_area_element_get_will_validate(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_text_area_element_is_edited(
+        input: *mut WebKitDOMHTMLTextAreaElement,
+    ) -> gboolean;
     pub fn webkit_dom_html_text_area_element_select(self_: *mut WebKitDOMHTMLTextAreaElement);
-    pub fn webkit_dom_html_text_area_element_set_autofocus(self_: *mut WebKitDOMHTMLTextAreaElement, value: gboolean);
-    pub fn webkit_dom_html_text_area_element_set_cols(self_: *mut WebKitDOMHTMLTextAreaElement, value: c_long);
-    pub fn webkit_dom_html_text_area_element_set_default_value(self_: *mut WebKitDOMHTMLTextAreaElement, value: *const c_char);
-    pub fn webkit_dom_html_text_area_element_set_disabled(self_: *mut WebKitDOMHTMLTextAreaElement, value: gboolean);
-    pub fn webkit_dom_html_text_area_element_set_name(self_: *mut WebKitDOMHTMLTextAreaElement, value: *const c_char);
-    pub fn webkit_dom_html_text_area_element_set_read_only(self_: *mut WebKitDOMHTMLTextAreaElement, value: gboolean);
-    pub fn webkit_dom_html_text_area_element_set_rows(self_: *mut WebKitDOMHTMLTextAreaElement, value: c_long);
-    pub fn webkit_dom_html_text_area_element_set_selection_end(self_: *mut WebKitDOMHTMLTextAreaElement, value: c_long);
-    pub fn webkit_dom_html_text_area_element_set_selection_range(self_: *mut WebKitDOMHTMLTextAreaElement, start: c_long, end: c_long, direction: *const c_char);
-    pub fn webkit_dom_html_text_area_element_set_selection_start(self_: *mut WebKitDOMHTMLTextAreaElement, value: c_long);
-    pub fn webkit_dom_html_text_area_element_set_value(self_: *mut WebKitDOMHTMLTextAreaElement, value: *const c_char);
+    pub fn webkit_dom_html_text_area_element_set_autofocus(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_text_area_element_set_cols(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_text_area_element_set_default_value(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_text_area_element_set_disabled(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_text_area_element_set_name(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+        value: *const c_char,
+    );
+    pub fn webkit_dom_html_text_area_element_set_read_only(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_text_area_element_set_rows(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_text_area_element_set_selection_end(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_text_area_element_set_selection_range(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+        start: c_long,
+        end: c_long,
+        direction: *const c_char,
+    );
+    pub fn webkit_dom_html_text_area_element_set_selection_start(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+        value: c_long,
+    );
+    pub fn webkit_dom_html_text_area_element_set_value(
+        self_: *mut WebKitDOMHTMLTextAreaElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLTitleElement
     //=========================================================================
     pub fn webkit_dom_html_title_element_get_type() -> GType;
-    pub fn webkit_dom_html_title_element_get_text(self_: *mut WebKitDOMHTMLTitleElement) -> *mut c_char;
-    pub fn webkit_dom_html_title_element_set_text(self_: *mut WebKitDOMHTMLTitleElement, value: *const c_char);
+    pub fn webkit_dom_html_title_element_get_text(
+        self_: *mut WebKitDOMHTMLTitleElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_title_element_set_text(
+        self_: *mut WebKitDOMHTMLTitleElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMHTMLUListElement
     //=========================================================================
     pub fn webkit_dom_html_u_list_element_get_type() -> GType;
-    pub fn webkit_dom_html_u_list_element_get_compact(self_: *mut WebKitDOMHTMLUListElement) -> gboolean;
-    pub fn webkit_dom_html_u_list_element_get_type_attr(self_: *mut WebKitDOMHTMLUListElement) -> *mut c_char;
-    pub fn webkit_dom_html_u_list_element_set_compact(self_: *mut WebKitDOMHTMLUListElement, value: gboolean);
-    pub fn webkit_dom_html_u_list_element_set_type_attr(self_: *mut WebKitDOMHTMLUListElement, value: *const c_char);
+    pub fn webkit_dom_html_u_list_element_get_compact(
+        self_: *mut WebKitDOMHTMLUListElement,
+    ) -> gboolean;
+    pub fn webkit_dom_html_u_list_element_get_type_attr(
+        self_: *mut WebKitDOMHTMLUListElement,
+    ) -> *mut c_char;
+    pub fn webkit_dom_html_u_list_element_set_compact(
+        self_: *mut WebKitDOMHTMLUListElement,
+        value: gboolean,
+    );
+    pub fn webkit_dom_html_u_list_element_set_type_attr(
+        self_: *mut WebKitDOMHTMLUListElement,
+        value: *const c_char,
+    );
 
     //=========================================================================
     // WebKitDOMKeyboardEvent
     //=========================================================================
     pub fn webkit_dom_keyboard_event_get_type() -> GType;
-    pub fn webkit_dom_keyboard_event_get_alt_graph_key(self_: *mut WebKitDOMKeyboardEvent) -> gboolean;
+    pub fn webkit_dom_keyboard_event_get_alt_graph_key(
+        self_: *mut WebKitDOMKeyboardEvent,
+    ) -> gboolean;
     pub fn webkit_dom_keyboard_event_get_alt_key(self_: *mut WebKitDOMKeyboardEvent) -> gboolean;
     pub fn webkit_dom_keyboard_event_get_ctrl_key(self_: *mut WebKitDOMKeyboardEvent) -> gboolean;
-    pub fn webkit_dom_keyboard_event_get_key_identifier(self_: *mut WebKitDOMKeyboardEvent) -> *mut c_char;
-    pub fn webkit_dom_keyboard_event_get_key_location(self_: *mut WebKitDOMKeyboardEvent) -> c_ulong;
+    pub fn webkit_dom_keyboard_event_get_key_identifier(
+        self_: *mut WebKitDOMKeyboardEvent,
+    ) -> *mut c_char;
+    pub fn webkit_dom_keyboard_event_get_key_location(
+        self_: *mut WebKitDOMKeyboardEvent,
+    ) -> c_ulong;
     pub fn webkit_dom_keyboard_event_get_meta_key(self_: *mut WebKitDOMKeyboardEvent) -> gboolean;
-    pub fn webkit_dom_keyboard_event_get_modifier_state(self_: *mut WebKitDOMKeyboardEvent, keyIdentifierArg: *const c_char) -> gboolean;
+    pub fn webkit_dom_keyboard_event_get_modifier_state(
+        self_: *mut WebKitDOMKeyboardEvent,
+        keyIdentifierArg: *const c_char,
+    ) -> gboolean;
     pub fn webkit_dom_keyboard_event_get_shift_key(self_: *mut WebKitDOMKeyboardEvent) -> gboolean;
-    pub fn webkit_dom_keyboard_event_init_keyboard_event(self_: *mut WebKitDOMKeyboardEvent, type_: *const c_char, canBubble: gboolean, cancelable: gboolean, view: *mut WebKitDOMDOMWindow, keyIdentifier: *const c_char, location: c_ulong, ctrlKey: gboolean, altKey: gboolean, shiftKey: gboolean, metaKey: gboolean, altGraphKey: gboolean);
+    pub fn webkit_dom_keyboard_event_init_keyboard_event(
+        self_: *mut WebKitDOMKeyboardEvent,
+        type_: *const c_char,
+        canBubble: gboolean,
+        cancelable: gboolean,
+        view: *mut WebKitDOMDOMWindow,
+        keyIdentifier: *const c_char,
+        location: c_ulong,
+        ctrlKey: gboolean,
+        altKey: gboolean,
+        shiftKey: gboolean,
+        metaKey: gboolean,
+        altGraphKey: gboolean,
+    );
 
     //=========================================================================
     // WebKitDOMMediaList
     //=========================================================================
     pub fn webkit_dom_media_list_get_type() -> GType;
-    pub fn webkit_dom_media_list_append_medium(self_: *mut WebKitDOMMediaList, newMedium: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_media_list_delete_medium(self_: *mut WebKitDOMMediaList, oldMedium: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_media_list_append_medium(
+        self_: *mut WebKitDOMMediaList,
+        newMedium: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_media_list_delete_medium(
+        self_: *mut WebKitDOMMediaList,
+        oldMedium: *const c_char,
+        error: *mut *mut glib::GError,
+    );
     pub fn webkit_dom_media_list_get_length(self_: *mut WebKitDOMMediaList) -> c_ulong;
     pub fn webkit_dom_media_list_get_media_text(self_: *mut WebKitDOMMediaList) -> *mut c_char;
-    pub fn webkit_dom_media_list_item(self_: *mut WebKitDOMMediaList, index: c_ulong) -> *mut c_char;
-    pub fn webkit_dom_media_list_set_media_text(self_: *mut WebKitDOMMediaList, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_media_list_item(
+        self_: *mut WebKitDOMMediaList,
+        index: c_ulong,
+    ) -> *mut c_char;
+    pub fn webkit_dom_media_list_set_media_text(
+        self_: *mut WebKitDOMMediaList,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
 
     //=========================================================================
     // WebKitDOMMouseEvent
@@ -5309,44 +8120,114 @@ extern "C" {
     pub fn webkit_dom_mouse_event_get_client_x(self_: *mut WebKitDOMMouseEvent) -> c_long;
     pub fn webkit_dom_mouse_event_get_client_y(self_: *mut WebKitDOMMouseEvent) -> c_long;
     pub fn webkit_dom_mouse_event_get_ctrl_key(self_: *mut WebKitDOMMouseEvent) -> gboolean;
-    pub fn webkit_dom_mouse_event_get_from_element(self_: *mut WebKitDOMMouseEvent) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_mouse_event_get_from_element(
+        self_: *mut WebKitDOMMouseEvent,
+    ) -> *mut WebKitDOMNode;
     pub fn webkit_dom_mouse_event_get_meta_key(self_: *mut WebKitDOMMouseEvent) -> gboolean;
     pub fn webkit_dom_mouse_event_get_offset_x(self_: *mut WebKitDOMMouseEvent) -> c_long;
     pub fn webkit_dom_mouse_event_get_offset_y(self_: *mut WebKitDOMMouseEvent) -> c_long;
-    pub fn webkit_dom_mouse_event_get_related_target(self_: *mut WebKitDOMMouseEvent) -> *mut WebKitDOMEventTarget;
+    pub fn webkit_dom_mouse_event_get_related_target(
+        self_: *mut WebKitDOMMouseEvent,
+    ) -> *mut WebKitDOMEventTarget;
     pub fn webkit_dom_mouse_event_get_screen_x(self_: *mut WebKitDOMMouseEvent) -> c_long;
     pub fn webkit_dom_mouse_event_get_screen_y(self_: *mut WebKitDOMMouseEvent) -> c_long;
     pub fn webkit_dom_mouse_event_get_shift_key(self_: *mut WebKitDOMMouseEvent) -> gboolean;
-    pub fn webkit_dom_mouse_event_get_to_element(self_: *mut WebKitDOMMouseEvent) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_mouse_event_get_to_element(
+        self_: *mut WebKitDOMMouseEvent,
+    ) -> *mut WebKitDOMNode;
     pub fn webkit_dom_mouse_event_get_x(self_: *mut WebKitDOMMouseEvent) -> c_long;
     pub fn webkit_dom_mouse_event_get_y(self_: *mut WebKitDOMMouseEvent) -> c_long;
-    pub fn webkit_dom_mouse_event_init_mouse_event(self_: *mut WebKitDOMMouseEvent, type_: *const c_char, canBubble: gboolean, cancelable: gboolean, view: *mut WebKitDOMDOMWindow, detail: c_long, screenX: c_long, screenY: c_long, clientX: c_long, clientY: c_long, ctrlKey: gboolean, altKey: gboolean, shiftKey: gboolean, metaKey: gboolean, button: c_ushort, relatedTarget: *mut WebKitDOMEventTarget);
+    pub fn webkit_dom_mouse_event_init_mouse_event(
+        self_: *mut WebKitDOMMouseEvent,
+        type_: *const c_char,
+        canBubble: gboolean,
+        cancelable: gboolean,
+        view: *mut WebKitDOMDOMWindow,
+        detail: c_long,
+        screenX: c_long,
+        screenY: c_long,
+        clientX: c_long,
+        clientY: c_long,
+        ctrlKey: gboolean,
+        altKey: gboolean,
+        shiftKey: gboolean,
+        metaKey: gboolean,
+        button: c_ushort,
+        relatedTarget: *mut WebKitDOMEventTarget,
+    );
 
     //=========================================================================
     // WebKitDOMNamedNodeMap
     //=========================================================================
     pub fn webkit_dom_named_node_map_get_type() -> GType;
     pub fn webkit_dom_named_node_map_get_length(self_: *mut WebKitDOMNamedNodeMap) -> c_ulong;
-    pub fn webkit_dom_named_node_map_get_named_item(self_: *mut WebKitDOMNamedNodeMap, name: *const c_char) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_named_node_map_get_named_item_ns(self_: *mut WebKitDOMNamedNodeMap, namespaceURI: *const c_char, localName: *const c_char) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_named_node_map_item(self_: *mut WebKitDOMNamedNodeMap, index: c_ulong) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_named_node_map_remove_named_item(self_: *mut WebKitDOMNamedNodeMap, name: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_named_node_map_remove_named_item_ns(self_: *mut WebKitDOMNamedNodeMap, namespaceURI: *const c_char, localName: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_named_node_map_set_named_item(self_: *mut WebKitDOMNamedNodeMap, node: *mut WebKitDOMNode, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_named_node_map_set_named_item_ns(self_: *mut WebKitDOMNamedNodeMap, node: *mut WebKitDOMNode, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_named_node_map_get_named_item(
+        self_: *mut WebKitDOMNamedNodeMap,
+        name: *const c_char,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_named_node_map_get_named_item_ns(
+        self_: *mut WebKitDOMNamedNodeMap,
+        namespaceURI: *const c_char,
+        localName: *const c_char,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_named_node_map_item(
+        self_: *mut WebKitDOMNamedNodeMap,
+        index: c_ulong,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_named_node_map_remove_named_item(
+        self_: *mut WebKitDOMNamedNodeMap,
+        name: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_named_node_map_remove_named_item_ns(
+        self_: *mut WebKitDOMNamedNodeMap,
+        namespaceURI: *const c_char,
+        localName: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_named_node_map_set_named_item(
+        self_: *mut WebKitDOMNamedNodeMap,
+        node: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_named_node_map_set_named_item_ns(
+        self_: *mut WebKitDOMNamedNodeMap,
+        node: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
 
     //=========================================================================
     // WebKitDOMNode
     //=========================================================================
     pub fn webkit_dom_node_get_type() -> GType;
     #[cfg(any(feature = "v2_22", feature = "dox"))]
-    pub fn webkit_dom_node_for_js_value(value: *mut java_script_core::JSCValue) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_node_append_child(self_: *mut WebKitDOMNode, newChild: *mut WebKitDOMNode, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_node_clone_node(self_: *mut WebKitDOMNode, deep: gboolean, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_for_js_value(
+        value: *mut java_script_core::JSCValue,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_append_child(
+        self_: *mut WebKitDOMNode,
+        newChild: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_clone_node(
+        self_: *mut WebKitDOMNode,
+        deep: gboolean,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    pub fn webkit_dom_node_clone_node_with_error(self_: *mut WebKitDOMNode, deep: gboolean, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_node_compare_document_position(self_: *mut WebKitDOMNode, other: *mut WebKitDOMNode) -> c_ushort;
-    pub fn webkit_dom_node_contains(self_: *mut WebKitDOMNode, other: *mut WebKitDOMNode) -> gboolean;
+    pub fn webkit_dom_node_clone_node_with_error(
+        self_: *mut WebKitDOMNode,
+        deep: gboolean,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_compare_document_position(
+        self_: *mut WebKitDOMNode,
+        other: *mut WebKitDOMNode,
+    ) -> c_ushort;
+    pub fn webkit_dom_node_contains(
+        self_: *mut WebKitDOMNode,
+        other: *mut WebKitDOMNode,
+    ) -> gboolean;
     pub fn webkit_dom_node_get_base_uri(self_: *mut WebKitDOMNode) -> *mut c_char;
     pub fn webkit_dom_node_get_child_nodes(self_: *mut WebKitDOMNode) -> *mut WebKitDOMNodeList;
     pub fn webkit_dom_node_get_first_child(self_: *mut WebKitDOMNode) -> *mut WebKitDOMNode;
@@ -5364,40 +8245,104 @@ extern "C" {
     pub fn webkit_dom_node_get_previous_sibling(self_: *mut WebKitDOMNode) -> *mut WebKitDOMNode;
     pub fn webkit_dom_node_get_text_content(self_: *mut WebKitDOMNode) -> *mut c_char;
     pub fn webkit_dom_node_has_child_nodes(self_: *mut WebKitDOMNode) -> gboolean;
-    pub fn webkit_dom_node_insert_before(self_: *mut WebKitDOMNode, newChild: *mut WebKitDOMNode, refChild: *mut WebKitDOMNode, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_node_is_default_namespace(self_: *mut WebKitDOMNode, namespaceURI: *const c_char) -> gboolean;
-    pub fn webkit_dom_node_is_equal_node(self_: *mut WebKitDOMNode, other: *mut WebKitDOMNode) -> gboolean;
-    pub fn webkit_dom_node_is_same_node(self_: *mut WebKitDOMNode, other: *mut WebKitDOMNode) -> gboolean;
-    pub fn webkit_dom_node_is_supported(self_: *mut WebKitDOMNode, feature: *const c_char, version: *const c_char) -> gboolean;
-    pub fn webkit_dom_node_lookup_namespace_uri(self_: *mut WebKitDOMNode, prefix: *const c_char) -> *mut c_char;
-    pub fn webkit_dom_node_lookup_prefix(self_: *mut WebKitDOMNode, namespaceURI: *const c_char) -> *mut c_char;
+    pub fn webkit_dom_node_insert_before(
+        self_: *mut WebKitDOMNode,
+        newChild: *mut WebKitDOMNode,
+        refChild: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_is_default_namespace(
+        self_: *mut WebKitDOMNode,
+        namespaceURI: *const c_char,
+    ) -> gboolean;
+    pub fn webkit_dom_node_is_equal_node(
+        self_: *mut WebKitDOMNode,
+        other: *mut WebKitDOMNode,
+    ) -> gboolean;
+    pub fn webkit_dom_node_is_same_node(
+        self_: *mut WebKitDOMNode,
+        other: *mut WebKitDOMNode,
+    ) -> gboolean;
+    pub fn webkit_dom_node_is_supported(
+        self_: *mut WebKitDOMNode,
+        feature: *const c_char,
+        version: *const c_char,
+    ) -> gboolean;
+    pub fn webkit_dom_node_lookup_namespace_uri(
+        self_: *mut WebKitDOMNode,
+        prefix: *const c_char,
+    ) -> *mut c_char;
+    pub fn webkit_dom_node_lookup_prefix(
+        self_: *mut WebKitDOMNode,
+        namespaceURI: *const c_char,
+    ) -> *mut c_char;
     pub fn webkit_dom_node_normalize(self_: *mut WebKitDOMNode);
-    pub fn webkit_dom_node_remove_child(self_: *mut WebKitDOMNode, oldChild: *mut WebKitDOMNode, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_node_replace_child(self_: *mut WebKitDOMNode, newChild: *mut WebKitDOMNode, oldChild: *mut WebKitDOMNode, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_node_set_node_value(self_: *mut WebKitDOMNode, value: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_node_set_prefix(self_: *mut WebKitDOMNode, value: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_node_set_text_content(self_: *mut WebKitDOMNode, value: *const c_char, error: *mut *mut glib::GError);
+    pub fn webkit_dom_node_remove_child(
+        self_: *mut WebKitDOMNode,
+        oldChild: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_replace_child(
+        self_: *mut WebKitDOMNode,
+        newChild: *mut WebKitDOMNode,
+        oldChild: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_set_node_value(
+        self_: *mut WebKitDOMNode,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_node_set_prefix(
+        self_: *mut WebKitDOMNode,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_node_set_text_content(
+        self_: *mut WebKitDOMNode,
+        value: *const c_char,
+        error: *mut *mut glib::GError,
+    );
 
     //=========================================================================
     // WebKitDOMNodeIterator
     //=========================================================================
     pub fn webkit_dom_node_iterator_get_type() -> GType;
     pub fn webkit_dom_node_iterator_detach(self_: *mut WebKitDOMNodeIterator);
-    pub fn webkit_dom_node_iterator_get_expand_entity_references(self_: *mut WebKitDOMNodeIterator) -> gboolean;
-    pub fn webkit_dom_node_iterator_get_filter(self_: *mut WebKitDOMNodeIterator) -> *mut WebKitDOMNodeFilter;
-    pub fn webkit_dom_node_iterator_get_pointer_before_reference_node(self_: *mut WebKitDOMNodeIterator) -> gboolean;
-    pub fn webkit_dom_node_iterator_get_reference_node(self_: *mut WebKitDOMNodeIterator) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_node_iterator_get_root(self_: *mut WebKitDOMNodeIterator) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_iterator_get_expand_entity_references(
+        self_: *mut WebKitDOMNodeIterator,
+    ) -> gboolean;
+    pub fn webkit_dom_node_iterator_get_filter(
+        self_: *mut WebKitDOMNodeIterator,
+    ) -> *mut WebKitDOMNodeFilter;
+    pub fn webkit_dom_node_iterator_get_pointer_before_reference_node(
+        self_: *mut WebKitDOMNodeIterator,
+    ) -> gboolean;
+    pub fn webkit_dom_node_iterator_get_reference_node(
+        self_: *mut WebKitDOMNodeIterator,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_iterator_get_root(
+        self_: *mut WebKitDOMNodeIterator,
+    ) -> *mut WebKitDOMNode;
     pub fn webkit_dom_node_iterator_get_what_to_show(self_: *mut WebKitDOMNodeIterator) -> c_ulong;
-    pub fn webkit_dom_node_iterator_next_node(self_: *mut WebKitDOMNodeIterator, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_node_iterator_previous_node(self_: *mut WebKitDOMNodeIterator, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_iterator_next_node(
+        self_: *mut WebKitDOMNodeIterator,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_iterator_previous_node(
+        self_: *mut WebKitDOMNodeIterator,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
 
     //=========================================================================
     // WebKitDOMNodeList
     //=========================================================================
     pub fn webkit_dom_node_list_get_type() -> GType;
     pub fn webkit_dom_node_list_get_length(self_: *mut WebKitDOMNodeList) -> c_ulong;
-    pub fn webkit_dom_node_list_item(self_: *mut WebKitDOMNodeList, index: c_ulong) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_node_list_item(
+        self_: *mut WebKitDOMNodeList,
+        index: c_ulong,
+    ) -> *mut WebKitDOMNode;
 
     //=========================================================================
     // WebKitDOMObject
@@ -5408,45 +8353,159 @@ extern "C" {
     // WebKitDOMProcessingInstruction
     //=========================================================================
     pub fn webkit_dom_processing_instruction_get_type() -> GType;
-    pub fn webkit_dom_processing_instruction_get_sheet(self_: *mut WebKitDOMProcessingInstruction) -> *mut WebKitDOMStyleSheet;
-    pub fn webkit_dom_processing_instruction_get_target(self_: *mut WebKitDOMProcessingInstruction) -> *mut c_char;
+    pub fn webkit_dom_processing_instruction_get_sheet(
+        self_: *mut WebKitDOMProcessingInstruction,
+    ) -> *mut WebKitDOMStyleSheet;
+    pub fn webkit_dom_processing_instruction_get_target(
+        self_: *mut WebKitDOMProcessingInstruction,
+    ) -> *mut c_char;
 
     //=========================================================================
     // WebKitDOMRange
     //=========================================================================
     pub fn webkit_dom_range_get_type() -> GType;
-    pub fn webkit_dom_range_clone_contents(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError) -> *mut WebKitDOMDocumentFragment;
-    pub fn webkit_dom_range_clone_range(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError) -> *mut WebKitDOMRange;
-    pub fn webkit_dom_range_collapse(self_: *mut WebKitDOMRange, toStart: gboolean, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_compare_boundary_points(self_: *mut WebKitDOMRange, how: c_ushort, sourceRange: *mut WebKitDOMRange, error: *mut *mut glib::GError) -> c_short;
-    pub fn webkit_dom_range_compare_node(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, error: *mut *mut glib::GError) -> c_short;
-    pub fn webkit_dom_range_compare_point(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, offset: c_long, error: *mut *mut glib::GError) -> c_short;
-    pub fn webkit_dom_range_create_contextual_fragment(self_: *mut WebKitDOMRange, html: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMDocumentFragment;
-    pub fn webkit_dom_range_delete_contents(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError);
+    pub fn webkit_dom_range_clone_contents(
+        self_: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMDocumentFragment;
+    pub fn webkit_dom_range_clone_range(
+        self_: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMRange;
+    pub fn webkit_dom_range_collapse(
+        self_: *mut WebKitDOMRange,
+        toStart: gboolean,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_compare_boundary_points(
+        self_: *mut WebKitDOMRange,
+        how: c_ushort,
+        sourceRange: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    ) -> c_short;
+    pub fn webkit_dom_range_compare_node(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    ) -> c_short;
+    pub fn webkit_dom_range_compare_point(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        offset: c_long,
+        error: *mut *mut glib::GError,
+    ) -> c_short;
+    pub fn webkit_dom_range_create_contextual_fragment(
+        self_: *mut WebKitDOMRange,
+        html: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMDocumentFragment;
+    pub fn webkit_dom_range_delete_contents(
+        self_: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    );
     pub fn webkit_dom_range_detach(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError);
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    pub fn webkit_dom_range_expand(self_: *mut WebKitDOMRange, unit: *const c_char, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_extract_contents(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError) -> *mut WebKitDOMDocumentFragment;
-    pub fn webkit_dom_range_get_collapsed(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError) -> gboolean;
-    pub fn webkit_dom_range_get_common_ancestor_container(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_range_get_end_container(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_range_get_end_offset(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError) -> c_long;
-    pub fn webkit_dom_range_get_start_container(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_range_get_start_offset(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError) -> c_long;
+    pub fn webkit_dom_range_expand(
+        self_: *mut WebKitDOMRange,
+        unit: *const c_char,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_extract_contents(
+        self_: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMDocumentFragment;
+    pub fn webkit_dom_range_get_collapsed(
+        self_: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    ) -> gboolean;
+    pub fn webkit_dom_range_get_common_ancestor_container(
+        self_: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_range_get_end_container(
+        self_: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_range_get_end_offset(
+        self_: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    ) -> c_long;
+    pub fn webkit_dom_range_get_start_container(
+        self_: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_range_get_start_offset(
+        self_: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    ) -> c_long;
     pub fn webkit_dom_range_get_text(self_: *mut WebKitDOMRange) -> *mut c_char;
-    pub fn webkit_dom_range_insert_node(self_: *mut WebKitDOMRange, newNode: *mut WebKitDOMNode, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_intersects_node(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, error: *mut *mut glib::GError) -> gboolean;
-    pub fn webkit_dom_range_is_point_in_range(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, offset: c_long, error: *mut *mut glib::GError) -> gboolean;
-    pub fn webkit_dom_range_select_node(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_select_node_contents(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_set_end(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, offset: c_long, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_set_end_after(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_set_end_before(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_set_start(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, offset: c_long, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_set_start_after(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_set_start_before(self_: *mut WebKitDOMRange, refNode: *mut WebKitDOMNode, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_surround_contents(self_: *mut WebKitDOMRange, newParent: *mut WebKitDOMNode, error: *mut *mut glib::GError);
-    pub fn webkit_dom_range_to_string(self_: *mut WebKitDOMRange, error: *mut *mut glib::GError) -> *mut c_char;
+    pub fn webkit_dom_range_insert_node(
+        self_: *mut WebKitDOMRange,
+        newNode: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_intersects_node(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    ) -> gboolean;
+    pub fn webkit_dom_range_is_point_in_range(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        offset: c_long,
+        error: *mut *mut glib::GError,
+    ) -> gboolean;
+    pub fn webkit_dom_range_select_node(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_select_node_contents(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_set_end(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        offset: c_long,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_set_end_after(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_set_end_before(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_set_start(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        offset: c_long,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_set_start_after(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_set_start_before(
+        self_: *mut WebKitDOMRange,
+        refNode: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_surround_contents(
+        self_: *mut WebKitDOMRange,
+        newParent: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    );
+    pub fn webkit_dom_range_to_string(
+        self_: *mut WebKitDOMRange,
+        error: *mut *mut glib::GError,
+    ) -> *mut c_char;
 
     //=========================================================================
     // WebKitDOMStyleSheet
@@ -5455,9 +8514,15 @@ extern "C" {
     pub fn webkit_dom_style_sheet_get_content_type(self_: *mut WebKitDOMStyleSheet) -> *mut c_char;
     pub fn webkit_dom_style_sheet_get_disabled(self_: *mut WebKitDOMStyleSheet) -> gboolean;
     pub fn webkit_dom_style_sheet_get_href(self_: *mut WebKitDOMStyleSheet) -> *mut c_char;
-    pub fn webkit_dom_style_sheet_get_media(self_: *mut WebKitDOMStyleSheet) -> *mut WebKitDOMMediaList;
-    pub fn webkit_dom_style_sheet_get_owner_node(self_: *mut WebKitDOMStyleSheet) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_style_sheet_get_parent_style_sheet(self_: *mut WebKitDOMStyleSheet) -> *mut WebKitDOMStyleSheet;
+    pub fn webkit_dom_style_sheet_get_media(
+        self_: *mut WebKitDOMStyleSheet,
+    ) -> *mut WebKitDOMMediaList;
+    pub fn webkit_dom_style_sheet_get_owner_node(
+        self_: *mut WebKitDOMStyleSheet,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_style_sheet_get_parent_style_sheet(
+        self_: *mut WebKitDOMStyleSheet,
+    ) -> *mut WebKitDOMStyleSheet;
     pub fn webkit_dom_style_sheet_get_title(self_: *mut WebKitDOMStyleSheet) -> *mut c_char;
     pub fn webkit_dom_style_sheet_set_disabled(self_: *mut WebKitDOMStyleSheet, value: gboolean);
 
@@ -5466,33 +8531,65 @@ extern "C" {
     //=========================================================================
     pub fn webkit_dom_style_sheet_list_get_type() -> GType;
     pub fn webkit_dom_style_sheet_list_get_length(self_: *mut WebKitDOMStyleSheetList) -> c_ulong;
-    pub fn webkit_dom_style_sheet_list_item(self_: *mut WebKitDOMStyleSheetList, index: c_ulong) -> *mut WebKitDOMStyleSheet;
+    pub fn webkit_dom_style_sheet_list_item(
+        self_: *mut WebKitDOMStyleSheetList,
+        index: c_ulong,
+    ) -> *mut WebKitDOMStyleSheet;
 
     //=========================================================================
     // WebKitDOMText
     //=========================================================================
     pub fn webkit_dom_text_get_type() -> GType;
     pub fn webkit_dom_text_get_whole_text(self_: *mut WebKitDOMText) -> *mut c_char;
-    pub fn webkit_dom_text_replace_whole_text(self_: *mut WebKitDOMText, content: *const c_char, error: *mut *mut glib::GError) -> *mut WebKitDOMText;
-    pub fn webkit_dom_text_split_text(self_: *mut WebKitDOMText, offset: c_ulong, error: *mut *mut glib::GError) -> *mut WebKitDOMText;
+    pub fn webkit_dom_text_replace_whole_text(
+        self_: *mut WebKitDOMText,
+        content: *const c_char,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMText;
+    pub fn webkit_dom_text_split_text(
+        self_: *mut WebKitDOMText,
+        offset: c_ulong,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMText;
 
     //=========================================================================
     // WebKitDOMTreeWalker
     //=========================================================================
     pub fn webkit_dom_tree_walker_get_type() -> GType;
-    pub fn webkit_dom_tree_walker_first_child(self_: *mut WebKitDOMTreeWalker) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_tree_walker_get_current_node(self_: *mut WebKitDOMTreeWalker) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_tree_walker_get_expand_entity_references(self_: *mut WebKitDOMTreeWalker) -> gboolean;
-    pub fn webkit_dom_tree_walker_get_filter(self_: *mut WebKitDOMTreeWalker) -> *mut WebKitDOMNodeFilter;
+    pub fn webkit_dom_tree_walker_first_child(
+        self_: *mut WebKitDOMTreeWalker,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_tree_walker_get_current_node(
+        self_: *mut WebKitDOMTreeWalker,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_tree_walker_get_expand_entity_references(
+        self_: *mut WebKitDOMTreeWalker,
+    ) -> gboolean;
+    pub fn webkit_dom_tree_walker_get_filter(
+        self_: *mut WebKitDOMTreeWalker,
+    ) -> *mut WebKitDOMNodeFilter;
     pub fn webkit_dom_tree_walker_get_root(self_: *mut WebKitDOMTreeWalker) -> *mut WebKitDOMNode;
     pub fn webkit_dom_tree_walker_get_what_to_show(self_: *mut WebKitDOMTreeWalker) -> c_ulong;
-    pub fn webkit_dom_tree_walker_last_child(self_: *mut WebKitDOMTreeWalker) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_tree_walker_last_child(self_: *mut WebKitDOMTreeWalker)
+        -> *mut WebKitDOMNode;
     pub fn webkit_dom_tree_walker_next_node(self_: *mut WebKitDOMTreeWalker) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_tree_walker_next_sibling(self_: *mut WebKitDOMTreeWalker) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_tree_walker_parent_node(self_: *mut WebKitDOMTreeWalker) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_tree_walker_previous_node(self_: *mut WebKitDOMTreeWalker) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_tree_walker_previous_sibling(self_: *mut WebKitDOMTreeWalker) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_tree_walker_set_current_node(self_: *mut WebKitDOMTreeWalker, value: *mut WebKitDOMNode, error: *mut *mut glib::GError);
+    pub fn webkit_dom_tree_walker_next_sibling(
+        self_: *mut WebKitDOMTreeWalker,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_tree_walker_parent_node(
+        self_: *mut WebKitDOMTreeWalker,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_tree_walker_previous_node(
+        self_: *mut WebKitDOMTreeWalker,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_tree_walker_previous_sibling(
+        self_: *mut WebKitDOMTreeWalker,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_tree_walker_set_current_node(
+        self_: *mut WebKitDOMTreeWalker,
+        value: *mut WebKitDOMNode,
+        error: *mut *mut glib::GError,
+    );
 
     //=========================================================================
     // WebKitDOMUIEvent
@@ -5506,7 +8603,14 @@ extern "C" {
     pub fn webkit_dom_ui_event_get_page_x(self_: *mut WebKitDOMUIEvent) -> c_long;
     pub fn webkit_dom_ui_event_get_page_y(self_: *mut WebKitDOMUIEvent) -> c_long;
     pub fn webkit_dom_ui_event_get_view(self_: *mut WebKitDOMUIEvent) -> *mut WebKitDOMDOMWindow;
-    pub fn webkit_dom_ui_event_init_ui_event(self_: *mut WebKitDOMUIEvent, type_: *const c_char, canBubble: gboolean, cancelable: gboolean, view: *mut WebKitDOMDOMWindow, detail: c_long);
+    pub fn webkit_dom_ui_event_init_ui_event(
+        self_: *mut WebKitDOMUIEvent,
+        type_: *const c_char,
+        canBubble: gboolean,
+        cancelable: gboolean,
+        view: *mut WebKitDOMDOMWindow,
+        detail: c_long,
+    );
 
     //=========================================================================
     // WebKitDOMWheelEvent
@@ -5515,42 +8619,104 @@ extern "C" {
     pub fn webkit_dom_wheel_event_get_wheel_delta(self_: *mut WebKitDOMWheelEvent) -> c_long;
     pub fn webkit_dom_wheel_event_get_wheel_delta_x(self_: *mut WebKitDOMWheelEvent) -> c_long;
     pub fn webkit_dom_wheel_event_get_wheel_delta_y(self_: *mut WebKitDOMWheelEvent) -> c_long;
-    pub fn webkit_dom_wheel_event_init_wheel_event(self_: *mut WebKitDOMWheelEvent, wheelDeltaX: c_long, wheelDeltaY: c_long, view: *mut WebKitDOMDOMWindow, screenX: c_long, screenY: c_long, clientX: c_long, clientY: c_long, ctrlKey: gboolean, altKey: gboolean, shiftKey: gboolean, metaKey: gboolean);
+    pub fn webkit_dom_wheel_event_init_wheel_event(
+        self_: *mut WebKitDOMWheelEvent,
+        wheelDeltaX: c_long,
+        wheelDeltaY: c_long,
+        view: *mut WebKitDOMDOMWindow,
+        screenX: c_long,
+        screenY: c_long,
+        clientX: c_long,
+        clientY: c_long,
+        ctrlKey: gboolean,
+        altKey: gboolean,
+        shiftKey: gboolean,
+        metaKey: gboolean,
+    );
 
     //=========================================================================
     // WebKitDOMXPathExpression
     //=========================================================================
     pub fn webkit_dom_xpath_expression_get_type() -> GType;
-    pub fn webkit_dom_xpath_expression_evaluate(self_: *mut WebKitDOMXPathExpression, contextNode: *mut WebKitDOMNode, type_: c_ushort, inResult: *mut WebKitDOMXPathResult, error: *mut *mut glib::GError) -> *mut WebKitDOMXPathResult;
+    pub fn webkit_dom_xpath_expression_evaluate(
+        self_: *mut WebKitDOMXPathExpression,
+        contextNode: *mut WebKitDOMNode,
+        type_: c_ushort,
+        inResult: *mut WebKitDOMXPathResult,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMXPathResult;
 
     //=========================================================================
     // WebKitDOMXPathResult
     //=========================================================================
     pub fn webkit_dom_xpath_result_get_type() -> GType;
-    pub fn webkit_dom_xpath_result_get_boolean_value(self_: *mut WebKitDOMXPathResult, error: *mut *mut glib::GError) -> gboolean;
-    pub fn webkit_dom_xpath_result_get_invalid_iterator_state(self_: *mut WebKitDOMXPathResult) -> gboolean;
-    pub fn webkit_dom_xpath_result_get_number_value(self_: *mut WebKitDOMXPathResult, error: *mut *mut glib::GError) -> c_double;
+    pub fn webkit_dom_xpath_result_get_boolean_value(
+        self_: *mut WebKitDOMXPathResult,
+        error: *mut *mut glib::GError,
+    ) -> gboolean;
+    pub fn webkit_dom_xpath_result_get_invalid_iterator_state(
+        self_: *mut WebKitDOMXPathResult,
+    ) -> gboolean;
+    pub fn webkit_dom_xpath_result_get_number_value(
+        self_: *mut WebKitDOMXPathResult,
+        error: *mut *mut glib::GError,
+    ) -> c_double;
     pub fn webkit_dom_xpath_result_get_result_type(self_: *mut WebKitDOMXPathResult) -> c_ushort;
-    pub fn webkit_dom_xpath_result_get_single_node_value(self_: *mut WebKitDOMXPathResult, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_xpath_result_get_snapshot_length(self_: *mut WebKitDOMXPathResult, error: *mut *mut glib::GError) -> c_ulong;
-    pub fn webkit_dom_xpath_result_get_string_value(self_: *mut WebKitDOMXPathResult, error: *mut *mut glib::GError) -> *mut c_char;
-    pub fn webkit_dom_xpath_result_iterate_next(self_: *mut WebKitDOMXPathResult, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
-    pub fn webkit_dom_xpath_result_snapshot_item(self_: *mut WebKitDOMXPathResult, index: c_ulong, error: *mut *mut glib::GError) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_xpath_result_get_single_node_value(
+        self_: *mut WebKitDOMXPathResult,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_xpath_result_get_snapshot_length(
+        self_: *mut WebKitDOMXPathResult,
+        error: *mut *mut glib::GError,
+    ) -> c_ulong;
+    pub fn webkit_dom_xpath_result_get_string_value(
+        self_: *mut WebKitDOMXPathResult,
+        error: *mut *mut glib::GError,
+    ) -> *mut c_char;
+    pub fn webkit_dom_xpath_result_iterate_next(
+        self_: *mut WebKitDOMXPathResult,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
+    pub fn webkit_dom_xpath_result_snapshot_item(
+        self_: *mut WebKitDOMXPathResult,
+        index: c_ulong,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitDOMNode;
 
     //=========================================================================
     // WebKitFrame
     //=========================================================================
     pub fn webkit_frame_get_type() -> GType;
-    pub fn webkit_frame_get_javascript_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> java_script_core::JSGlobalContextRef;
-    pub fn webkit_frame_get_javascript_global_context(frame: *mut WebKitFrame) -> java_script_core::JSGlobalContextRef;
+    #[cfg(any(feature = "v2_26", feature = "dox"))]
+    pub fn webkit_frame_get_id(frame: *mut WebKitFrame) -> u64;
+    pub fn webkit_frame_get_javascript_context_for_script_world(
+        frame: *mut WebKitFrame,
+        world: *mut WebKitScriptWorld,
+    ) -> java_script_core::JSGlobalContextRef;
+    pub fn webkit_frame_get_javascript_global_context(
+        frame: *mut WebKitFrame,
+    ) -> java_script_core::JSGlobalContextRef;
     #[cfg(any(feature = "v2_22", feature = "dox"))]
-    pub fn webkit_frame_get_js_context(frame: *mut WebKitFrame) -> *mut java_script_core::JSCContext;
+    pub fn webkit_frame_get_js_context(
+        frame: *mut WebKitFrame,
+    ) -> *mut java_script_core::JSCContext;
     #[cfg(any(feature = "v2_22", feature = "dox"))]
-    pub fn webkit_frame_get_js_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> *mut java_script_core::JSCContext;
+    pub fn webkit_frame_get_js_context_for_script_world(
+        frame: *mut WebKitFrame,
+        world: *mut WebKitScriptWorld,
+    ) -> *mut java_script_core::JSCContext;
     #[cfg(any(feature = "v2_22", feature = "dox"))]
-    pub fn webkit_frame_get_js_value_for_dom_object(frame: *mut WebKitFrame, dom_object: *mut WebKitDOMObject) -> *mut java_script_core::JSCValue;
+    pub fn webkit_frame_get_js_value_for_dom_object(
+        frame: *mut WebKitFrame,
+        dom_object: *mut WebKitDOMObject,
+    ) -> *mut java_script_core::JSCValue;
     #[cfg(any(feature = "v2_22", feature = "dox"))]
-    pub fn webkit_frame_get_js_value_for_dom_object_in_script_world(frame: *mut WebKitFrame, dom_object: *mut WebKitDOMObject, world: *mut WebKitScriptWorld) -> *mut java_script_core::JSCValue;
+    pub fn webkit_frame_get_js_value_for_dom_object_in_script_world(
+        frame: *mut WebKitFrame,
+        dom_object: *mut WebKitDOMObject,
+        world: *mut WebKitScriptWorld,
+    ) -> *mut java_script_core::JSCValue;
     pub fn webkit_frame_get_uri(frame: *mut WebKitFrame) -> *const c_char;
     pub fn webkit_frame_is_main_frame(frame: *mut WebKitFrame) -> gboolean;
 
@@ -5558,19 +8724,41 @@ extern "C" {
     // WebKitHitTestResult
     //=========================================================================
     pub fn webkit_hit_test_result_get_type() -> GType;
-    pub fn webkit_hit_test_result_context_is_editable(hit_test_result: *mut WebKitHitTestResult) -> gboolean;
-    pub fn webkit_hit_test_result_context_is_image(hit_test_result: *mut WebKitHitTestResult) -> gboolean;
-    pub fn webkit_hit_test_result_context_is_link(hit_test_result: *mut WebKitHitTestResult) -> gboolean;
-    pub fn webkit_hit_test_result_context_is_media(hit_test_result: *mut WebKitHitTestResult) -> gboolean;
-    pub fn webkit_hit_test_result_context_is_scrollbar(hit_test_result: *mut WebKitHitTestResult) -> gboolean;
+    pub fn webkit_hit_test_result_context_is_editable(
+        hit_test_result: *mut WebKitHitTestResult,
+    ) -> gboolean;
+    pub fn webkit_hit_test_result_context_is_image(
+        hit_test_result: *mut WebKitHitTestResult,
+    ) -> gboolean;
+    pub fn webkit_hit_test_result_context_is_link(
+        hit_test_result: *mut WebKitHitTestResult,
+    ) -> gboolean;
+    pub fn webkit_hit_test_result_context_is_media(
+        hit_test_result: *mut WebKitHitTestResult,
+    ) -> gboolean;
+    pub fn webkit_hit_test_result_context_is_scrollbar(
+        hit_test_result: *mut WebKitHitTestResult,
+    ) -> gboolean;
     #[cfg(any(feature = "v2_8", feature = "dox"))]
-    pub fn webkit_hit_test_result_context_is_selection(hit_test_result: *mut WebKitHitTestResult) -> gboolean;
+    pub fn webkit_hit_test_result_context_is_selection(
+        hit_test_result: *mut WebKitHitTestResult,
+    ) -> gboolean;
     pub fn webkit_hit_test_result_get_context(hit_test_result: *mut WebKitHitTestResult) -> c_uint;
-    pub fn webkit_hit_test_result_get_image_uri(hit_test_result: *mut WebKitHitTestResult) -> *const c_char;
-    pub fn webkit_hit_test_result_get_link_label(hit_test_result: *mut WebKitHitTestResult) -> *const c_char;
-    pub fn webkit_hit_test_result_get_link_title(hit_test_result: *mut WebKitHitTestResult) -> *const c_char;
-    pub fn webkit_hit_test_result_get_link_uri(hit_test_result: *mut WebKitHitTestResult) -> *const c_char;
-    pub fn webkit_hit_test_result_get_media_uri(hit_test_result: *mut WebKitHitTestResult) -> *const c_char;
+    pub fn webkit_hit_test_result_get_image_uri(
+        hit_test_result: *mut WebKitHitTestResult,
+    ) -> *const c_char;
+    pub fn webkit_hit_test_result_get_link_label(
+        hit_test_result: *mut WebKitHitTestResult,
+    ) -> *const c_char;
+    pub fn webkit_hit_test_result_get_link_title(
+        hit_test_result: *mut WebKitHitTestResult,
+    ) -> *const c_char;
+    pub fn webkit_hit_test_result_get_link_uri(
+        hit_test_result: *mut WebKitHitTestResult,
+    ) -> *const c_char;
+    pub fn webkit_hit_test_result_get_media_uri(
+        hit_test_result: *mut WebKitHitTestResult,
+    ) -> *const c_char;
 
     //=========================================================================
     // WebKitScriptWorld
@@ -5588,7 +8776,9 @@ extern "C" {
     //=========================================================================
     pub fn webkit_uri_request_get_type() -> GType;
     pub fn webkit_uri_request_new(uri: *const c_char) -> *mut WebKitURIRequest;
-    pub fn webkit_uri_request_get_http_headers(request: *mut WebKitURIRequest) -> *mut soup::SoupMessageHeaders;
+    pub fn webkit_uri_request_get_http_headers(
+        request: *mut WebKitURIRequest,
+    ) -> *mut soup::SoupMessageHeaders;
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     pub fn webkit_uri_request_get_http_method(request: *mut WebKitURIRequest) -> *const c_char;
     pub fn webkit_uri_request_get_uri(request: *mut WebKitURIRequest) -> *const c_char;
@@ -5600,10 +8790,14 @@ extern "C" {
     pub fn webkit_uri_response_get_type() -> GType;
     pub fn webkit_uri_response_get_content_length(response: *mut WebKitURIResponse) -> u64;
     #[cfg(any(feature = "v2_6", feature = "dox"))]
-    pub fn webkit_uri_response_get_http_headers(response: *mut WebKitURIResponse) -> *mut soup::SoupMessageHeaders;
+    pub fn webkit_uri_response_get_http_headers(
+        response: *mut WebKitURIResponse,
+    ) -> *mut soup::SoupMessageHeaders;
     pub fn webkit_uri_response_get_mime_type(response: *mut WebKitURIResponse) -> *const c_char;
     pub fn webkit_uri_response_get_status_code(response: *mut WebKitURIResponse) -> c_uint;
-    pub fn webkit_uri_response_get_suggested_filename(response: *mut WebKitURIResponse) -> *const c_char;
+    pub fn webkit_uri_response_get_suggested_filename(
+        response: *mut WebKitURIResponse,
+    ) -> *const c_char;
     pub fn webkit_uri_response_get_uri(response: *mut WebKitURIResponse) -> *const c_char;
 
     //=========================================================================
@@ -5617,20 +8811,26 @@ extern "C" {
     // WebKitWebExtension
     //=========================================================================
     pub fn webkit_web_extension_get_type() -> GType;
-    pub fn webkit_web_extension_get_page(extension: *mut WebKitWebExtension, page_id: u64) -> *mut WebKitWebPage;
+    pub fn webkit_web_extension_get_page(
+        extension: *mut WebKitWebExtension,
+        page_id: u64,
+    ) -> *mut WebKitWebPage;
 
     //=========================================================================
     // WebKitWebHitTestResult
     //=========================================================================
     pub fn webkit_web_hit_test_result_get_type() -> GType;
     #[cfg(any(feature = "v2_8", feature = "dox"))]
-    pub fn webkit_web_hit_test_result_get_node(hit_test_result: *mut WebKitWebHitTestResult) -> *mut WebKitDOMNode;
+    pub fn webkit_web_hit_test_result_get_node(
+        hit_test_result: *mut WebKitWebHitTestResult,
+    ) -> *mut WebKitDOMNode;
 
     //=========================================================================
     // WebKitWebPage
     //=========================================================================
     pub fn webkit_web_page_get_type() -> GType;
-    pub fn webkit_web_page_get_dom_document(web_page: *mut WebKitWebPage) -> *mut WebKitDOMDocument;
+    pub fn webkit_web_page_get_dom_document(web_page: *mut WebKitWebPage)
+        -> *mut WebKitDOMDocument;
     #[cfg(any(feature = "v2_10", feature = "dox"))]
     pub fn webkit_web_page_get_editor(web_page: *mut WebKitWebPage) -> *mut WebKitWebEditor;
     pub fn webkit_web_page_get_id(web_page: *mut WebKitWebPage) -> u64;
@@ -5641,22 +8841,53 @@ extern "C" {
     // WebKitDOMEventTarget
     //=========================================================================
     pub fn webkit_dom_event_target_get_type() -> GType;
-    pub fn webkit_dom_event_target_add_event_listener(target: *mut WebKitDOMEventTarget, event_name: *const c_char, handler: gobject::GCallback, use_capture: gboolean, user_data: gpointer) -> gboolean;
-    pub fn webkit_dom_event_target_add_event_listener_with_closure(target: *mut WebKitDOMEventTarget, event_name: *const c_char, handler: *mut gobject::GClosure, use_capture: gboolean) -> gboolean;
-    pub fn webkit_dom_event_target_dispatch_event(target: *mut WebKitDOMEventTarget, event: *mut WebKitDOMEvent, error: *mut *mut glib::GError) -> gboolean;
-    pub fn webkit_dom_event_target_remove_event_listener(target: *mut WebKitDOMEventTarget, event_name: *const c_char, handler: gobject::GCallback, use_capture: gboolean) -> gboolean;
-    pub fn webkit_dom_event_target_remove_event_listener_with_closure(target: *mut WebKitDOMEventTarget, event_name: *const c_char, handler: *mut gobject::GClosure, use_capture: gboolean) -> gboolean;
+    pub fn webkit_dom_event_target_add_event_listener(
+        target: *mut WebKitDOMEventTarget,
+        event_name: *const c_char,
+        handler: gobject::GCallback,
+        use_capture: gboolean,
+        user_data: gpointer,
+    ) -> gboolean;
+    pub fn webkit_dom_event_target_add_event_listener_with_closure(
+        target: *mut WebKitDOMEventTarget,
+        event_name: *const c_char,
+        handler: *mut gobject::GClosure,
+        use_capture: gboolean,
+    ) -> gboolean;
+    pub fn webkit_dom_event_target_dispatch_event(
+        target: *mut WebKitDOMEventTarget,
+        event: *mut WebKitDOMEvent,
+        error: *mut *mut glib::GError,
+    ) -> gboolean;
+    pub fn webkit_dom_event_target_remove_event_listener(
+        target: *mut WebKitDOMEventTarget,
+        event_name: *const c_char,
+        handler: gobject::GCallback,
+        use_capture: gboolean,
+    ) -> gboolean;
+    pub fn webkit_dom_event_target_remove_event_listener_with_closure(
+        target: *mut WebKitDOMEventTarget,
+        event_name: *const c_char,
+        handler: *mut gobject::GClosure,
+        use_capture: gboolean,
+    ) -> gboolean;
 
     //=========================================================================
     // WebKitDOMNodeFilter
     //=========================================================================
     pub fn webkit_dom_node_filter_get_type() -> GType;
-    pub fn webkit_dom_node_filter_accept_node(filter: *mut WebKitDOMNodeFilter, node: *mut WebKitDOMNode) -> c_short;
+    pub fn webkit_dom_node_filter_accept_node(
+        filter: *mut WebKitDOMNodeFilter,
+        node: *mut WebKitDOMNode,
+    ) -> c_short;
 
     //=========================================================================
     // WebKitDOMXPathNSResolver
     //=========================================================================
     pub fn webkit_dom_xpath_ns_resolver_get_type() -> GType;
-    pub fn webkit_dom_xpath_ns_resolver_lookup_namespace_uri(resolver: *mut WebKitDOMXPathNSResolver, prefix: *const c_char) -> *mut c_char;
+    pub fn webkit_dom_xpath_ns_resolver_lookup_namespace_uri(
+        resolver: *mut WebKitDOMXPathNSResolver,
+        prefix: *const c_char,
+    ) -> *mut c_char;
 
 }

@@ -2,6 +2,23 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
+use glib::GString;
+use glib::StaticType;
+use glib::Value;
+use glib_sys;
+use gobject_sys;
+use libc;
+use std::boxed::Box as Box_;
+use std::fmt;
+use std::mem::transmute;
+use std::ptr;
+use webkit2_webextension_sys;
 use DOMAttr;
 use DOMCDATASection;
 use DOMCSSStyleDeclaration;
@@ -26,23 +43,6 @@ use DOMProcessingInstruction;
 use DOMRange;
 use DOMStyleSheetList;
 use DOMText;
-use Error;
-use glib::GString;
-use glib::StaticType;
-use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
-use glib_sys;
-use gobject_sys;
-use libc;
-use std::boxed::Box as Box_;
-use std::fmt;
-use std::mem::transmute;
-use std::ptr;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct DOMDocument(Object<webkit2_webextension_sys::WebKitDOMDocument, webkit2_webextension_sys::WebKitDOMDocumentClass, DOMDocumentClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
@@ -56,20 +56,20 @@ pub const NONE_DOM_DOCUMENT: Option<&DOMDocument> = None;
 
 pub trait DOMDocumentExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn adopt_node<P: IsA<DOMNode>>(&self, source: &P) -> Result<DOMNode, Error>;
+    fn adopt_node<P: IsA<DOMNode>>(&self, source: &P) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn caret_range_from_point(&self, x: libc::c_long, y: libc::c_long) -> Option<DOMRange>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_attribute(&self, name: &str) -> Result<DOMAttr, Error>;
+    fn create_attribute(&self, name: &str) -> Result<DOMAttr, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMAttr, Error>;
+    fn create_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMAttr, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_cdata_section(&self, data: &str) -> Result<DOMCDATASection, Error>;
+    fn create_cdata_section(&self, data: &str) -> Result<DOMCDATASection, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_comment(&self, data: &str) -> Option<DOMComment>;
@@ -82,28 +82,28 @@ pub trait DOMDocumentExt: 'static {
     fn create_document_fragment(&self) -> Option<DOMDocumentFragment>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_element(&self, tagName: &str) -> Result<DOMElement, Error>;
+    fn create_element(&self, tagName: &str) -> Result<DOMElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_element_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMElement, Error>;
+    fn create_element_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
-    fn create_entity_reference(&self, name: Option<&str>) -> Result<DOMEntityReference, Error>;
+    fn create_entity_reference(&self, name: Option<&str>) -> Result<DOMEntityReference, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_event(&self, eventType: &str) -> Result<DOMEvent, Error>;
+    fn create_event(&self, eventType: &str) -> Result<DOMEvent, glib::Error>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
-    //fn create_expression(&self, expression: &str, resolver: /*Ignored*/&DOMXPathNSResolver) -> Result<DOMXPathExpression, Error>;
+    //fn create_expression(&self, expression: &str, resolver: /*Ignored*/&DOMXPathNSResolver) -> Result<DOMXPathExpression, glib::Error>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
-    //fn create_node_iterator<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMNodeIterator, Error>;
+    //fn create_node_iterator<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMNodeIterator, glib::Error>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
     //fn create_ns_resolver<P: IsA<DOMNode>>(&self, nodeResolver: &P) -> /*Ignored*/Option<DOMXPathNSResolver>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_processing_instruction(&self, target: &str, data: &str) -> Result<DOMProcessingInstruction, Error>;
+    fn create_processing_instruction(&self, target: &str, data: &str) -> Result<DOMProcessingInstruction, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn create_range(&self) -> Option<DOMRange>;
@@ -112,13 +112,13 @@ pub trait DOMDocumentExt: 'static {
     fn create_text_node(&self, data: &str) -> Option<DOMText>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
-    //fn create_tree_walker<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMTreeWalker, Error>;
+    //fn create_tree_walker<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMTreeWalker, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn element_from_point(&self, x: libc::c_long, y: libc::c_long) -> Option<DOMElement>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
-    //fn evaluate<P: IsA<DOMNode>, Q: IsA<DOMXPathResult>>(&self, expression: &str, contextNode: &P, resolver: /*Ignored*/Option<&DOMXPathNSResolver>, type_: libc::c_ushort, inResult: Option<&Q>) -> Result<DOMXPathResult, Error>;
+    //fn evaluate<P: IsA<DOMNode>, Q: IsA<DOMXPathResult>>(&self, expression: &str, contextNode: &P, resolver: /*Ignored*/Option<&DOMXPathNSResolver>, type_: libc::c_ushort, inResult: Option<&Q>) -> Result<DOMXPathResult, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn exec_command(&self, command: &str, userInterface: bool, value: &str) -> bool;
@@ -162,7 +162,7 @@ pub trait DOMDocumentExt: 'static {
     fn get_content_type(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_cookie(&self) -> Result<GString, Error>;
+    fn get_cookie(&self) -> Result<GString, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -339,7 +339,7 @@ pub trait DOMDocumentExt: 'static {
     fn has_focus(&self) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn import_node<P: IsA<DOMNode>>(&self, importedNode: &P, deep: bool) -> Result<DOMNode, Error>;
+    fn import_node<P: IsA<DOMNode>>(&self, importedNode: &P, deep: bool) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn query_command_enabled(&self, command: &str) -> bool;
@@ -357,19 +357,19 @@ pub trait DOMDocumentExt: 'static {
     fn query_command_value(&self, command: &str) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn query_selector(&self, selectors: &str) -> Result<DOMElement, Error>;
+    fn query_selector(&self, selectors: &str) -> Result<DOMElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error>;
+    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_body<P: IsA<DOMHTMLElement>>(&self, value: &P) -> Result<(), Error>;
+    fn set_body<P: IsA<DOMHTMLElement>>(&self, value: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_charset(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_cookie(&self, value: &str) -> Result<(), Error>;
+    fn set_cookie(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
@@ -389,10 +389,10 @@ pub trait DOMDocumentExt: 'static {
     fn set_title(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_xml_standalone(&self, value: bool) -> Result<(), Error>;
+    fn set_xml_standalone(&self, value: bool) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_xml_version(&self, value: &str) -> Result<(), Error>;
+    fn set_xml_version(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -554,7 +554,7 @@ pub trait DOMDocumentExt: 'static {
 }
 
 impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
-    fn adopt_node<P: IsA<DOMNode>>(&self, source: &P) -> Result<DOMNode, Error> {
+    fn adopt_node<P: IsA<DOMNode>>(&self, source: &P) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_adopt_node(self.as_ref().to_glib_none().0, source.as_ref().to_glib_none().0, &mut error);
@@ -569,7 +569,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn create_attribute(&self, name: &str) -> Result<DOMAttr, Error> {
+    fn create_attribute(&self, name: &str) -> Result<DOMAttr, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_create_attribute(self.as_ref().to_glib_none().0, name.to_glib_none().0, &mut error);
@@ -577,7 +577,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn create_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMAttr, Error> {
+    fn create_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMAttr, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_create_attribute_ns(self.as_ref().to_glib_none().0, namespaceURI.to_glib_none().0, qualifiedName.to_glib_none().0, &mut error);
@@ -585,7 +585,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn create_cdata_section(&self, data: &str) -> Result<DOMCDATASection, Error> {
+    fn create_cdata_section(&self, data: &str) -> Result<DOMCDATASection, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_create_cdata_section(self.as_ref().to_glib_none().0, data.to_glib_none().0, &mut error);
@@ -612,7 +612,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn create_element(&self, tagName: &str) -> Result<DOMElement, Error> {
+    fn create_element(&self, tagName: &str) -> Result<DOMElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_create_element(self.as_ref().to_glib_none().0, tagName.to_glib_none().0, &mut error);
@@ -620,7 +620,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn create_element_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMElement, Error> {
+    fn create_element_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_create_element_ns(self.as_ref().to_glib_none().0, namespaceURI.to_glib_none().0, qualifiedName.to_glib_none().0, &mut error);
@@ -628,7 +628,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn create_entity_reference(&self, name: Option<&str>) -> Result<DOMEntityReference, Error> {
+    fn create_entity_reference(&self, name: Option<&str>) -> Result<DOMEntityReference, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_create_entity_reference(self.as_ref().to_glib_none().0, name.to_glib_none().0, &mut error);
@@ -636,7 +636,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn create_event(&self, eventType: &str) -> Result<DOMEvent, Error> {
+    fn create_event(&self, eventType: &str) -> Result<DOMEvent, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_create_event(self.as_ref().to_glib_none().0, eventType.to_glib_none().0, &mut error);
@@ -644,11 +644,11 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    //fn create_expression(&self, expression: &str, resolver: /*Ignored*/&DOMXPathNSResolver) -> Result<DOMXPathExpression, Error> {
+    //fn create_expression(&self, expression: &str, resolver: /*Ignored*/&DOMXPathNSResolver) -> Result<DOMXPathExpression, glib::Error> {
     //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_document_create_expression() }
     //}
 
-    //fn create_node_iterator<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMNodeIterator, Error> {
+    //fn create_node_iterator<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMNodeIterator, glib::Error> {
     //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_document_create_node_iterator() }
     //}
 
@@ -656,7 +656,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
     //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_document_create_ns_resolver() }
     //}
 
-    fn create_processing_instruction(&self, target: &str, data: &str) -> Result<DOMProcessingInstruction, Error> {
+    fn create_processing_instruction(&self, target: &str, data: &str) -> Result<DOMProcessingInstruction, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_create_processing_instruction(self.as_ref().to_glib_none().0, target.to_glib_none().0, data.to_glib_none().0, &mut error);
@@ -676,7 +676,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    //fn create_tree_walker<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMTreeWalker, Error> {
+    //fn create_tree_walker<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMTreeWalker, glib::Error> {
     //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_document_create_tree_walker() }
     //}
 
@@ -686,7 +686,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    //fn evaluate<P: IsA<DOMNode>, Q: IsA<DOMXPathResult>>(&self, expression: &str, contextNode: &P, resolver: /*Ignored*/Option<&DOMXPathNSResolver>, type_: libc::c_ushort, inResult: Option<&Q>) -> Result<DOMXPathResult, Error> {
+    //fn evaluate<P: IsA<DOMNode>, Q: IsA<DOMXPathResult>>(&self, expression: &str, contextNode: &P, resolver: /*Ignored*/Option<&DOMXPathNSResolver>, type_: libc::c_ushort, inResult: Option<&Q>) -> Result<DOMXPathResult, glib::Error> {
     //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_document_evaluate() }
     //}
 
@@ -767,7 +767,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn get_cookie(&self) -> Result<GString, Error> {
+    fn get_cookie(&self) -> Result<GString, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_get_cookie(self.as_ref().to_glib_none().0, &mut error);
@@ -1102,7 +1102,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn import_node<P: IsA<DOMNode>>(&self, importedNode: &P, deep: bool) -> Result<DOMNode, Error> {
+    fn import_node<P: IsA<DOMNode>>(&self, importedNode: &P, deep: bool) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_import_node(self.as_ref().to_glib_none().0, importedNode.as_ref().to_glib_none().0, deep.to_glib(), &mut error);
@@ -1140,7 +1140,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn query_selector(&self, selectors: &str) -> Result<DOMElement, Error> {
+    fn query_selector(&self, selectors: &str) -> Result<DOMElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_query_selector(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
@@ -1148,7 +1148,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error> {
+    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_query_selector_all(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
@@ -1156,7 +1156,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn set_body<P: IsA<DOMHTMLElement>>(&self, value: &P) -> Result<(), Error> {
+    fn set_body<P: IsA<DOMHTMLElement>>(&self, value: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_document_set_body(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
@@ -1170,7 +1170,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn set_cookie(&self, value: &str) -> Result<(), Error> {
+    fn set_cookie(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_document_set_cookie(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -1210,7 +1210,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn set_xml_standalone(&self, value: bool) -> Result<(), Error> {
+    fn set_xml_standalone(&self, value: bool) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_document_set_xml_standalone(self.as_ref().to_glib_none().0, value.to_glib(), &mut error);
@@ -1218,7 +1218,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         }
     }
 
-    fn set_xml_version(&self, value: &str) -> Result<(), Error> {
+    fn set_xml_version(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_document_set_xml_version(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -1244,7 +1244,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"child-element-count\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `child-element-count` getter").unwrap()
         }
     }
 
@@ -1252,7 +1252,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"children\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `children` getter")
         }
     }
 
@@ -1260,7 +1260,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"compat-mode\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `compat-mode` getter")
         }
     }
 
@@ -1268,7 +1268,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"content-type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `content-type` getter")
         }
     }
 
@@ -1276,7 +1276,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMHTMLScriptElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"current-script\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `current-script` getter")
         }
     }
 
@@ -1284,7 +1284,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"design-mode\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `design-mode` getter")
         }
     }
 
@@ -1298,7 +1298,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"dir\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `dir` getter")
         }
     }
 
@@ -1312,7 +1312,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"embeds\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `embeds` getter")
         }
     }
 
@@ -1320,7 +1320,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"first-element-child\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `first-element-child` getter")
         }
     }
 
@@ -1328,7 +1328,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"hidden\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `hidden` getter").unwrap()
         }
     }
 
@@ -1336,7 +1336,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"last-element-child\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `last-element-child` getter")
         }
     }
 
@@ -1344,7 +1344,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"origin\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `origin` getter")
         }
     }
 
@@ -1352,7 +1352,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"plugins\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `plugins` getter")
         }
     }
 
@@ -1360,7 +1360,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"pointer-lock-element\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `pointer-lock-element` getter")
         }
     }
 
@@ -1368,7 +1368,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"scripts\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `scripts` getter")
         }
     }
 
@@ -1376,7 +1376,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"scrolling-element\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `scrolling-element` getter")
         }
     }
 
@@ -1384,7 +1384,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"visibility-state\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `visibility-state` getter")
         }
     }
 
@@ -1392,7 +1392,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"webkit-current-full-screen-element\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `webkit-current-full-screen-element` getter")
         }
     }
 
@@ -1400,7 +1400,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"webkit-full-screen-keyboard-input-allowed\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `webkit-full-screen-keyboard-input-allowed` getter").unwrap()
         }
     }
 
@@ -1408,7 +1408,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"webkit-fullscreen-element\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `webkit-fullscreen-element` getter")
         }
     }
 
@@ -1416,7 +1416,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"webkit-fullscreen-enabled\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `webkit-fullscreen-enabled` getter").unwrap()
         }
     }
 
@@ -1424,7 +1424,7 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"webkit-is-full-screen\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `webkit-is-full-screen` getter").unwrap()
         }
     }
 

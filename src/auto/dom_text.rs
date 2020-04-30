@@ -2,17 +2,13 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMCharacterData;
-use DOMEventTarget;
-use DOMNode;
-use DOMObject;
-use Error;
-use glib::GString;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
+use glib::GString;
 use glib_sys;
 use libc;
 use std::boxed::Box as Box_;
@@ -20,6 +16,10 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMCharacterData;
+use DOMEventTarget;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMText(Object<webkit2_webextension_sys::WebKitDOMText, webkit2_webextension_sys::WebKitDOMTextClass, DOMTextClass>) @extends DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
@@ -36,10 +36,10 @@ pub trait DOMTextExt: 'static {
     fn get_whole_text(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
-    fn replace_whole_text(&self, content: &str) -> Result<DOMText, Error>;
+    fn replace_whole_text(&self, content: &str) -> Result<DOMText, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn split_text(&self, offset: libc::c_ulong) -> Result<DOMText, Error>;
+    fn split_text(&self, offset: libc::c_ulong) -> Result<DOMText, glib::Error>;
 
     fn connect_property_whole_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
@@ -51,7 +51,7 @@ impl<O: IsA<DOMText>> DOMTextExt for O {
         }
     }
 
-    fn replace_whole_text(&self, content: &str) -> Result<DOMText, Error> {
+    fn replace_whole_text(&self, content: &str) -> Result<DOMText, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_text_replace_whole_text(self.as_ref().to_glib_none().0, content.to_glib_none().0, &mut error);
@@ -59,7 +59,7 @@ impl<O: IsA<DOMText>> DOMTextExt for O {
         }
     }
 
-    fn split_text(&self, offset: libc::c_ulong) -> Result<DOMText, Error> {
+    fn split_text(&self, offset: libc::c_ulong) -> Result<DOMText, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_text_split_text(self.as_ref().to_glib_none().0, offset, &mut error);

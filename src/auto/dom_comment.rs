@@ -2,13 +2,13 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib::translate::*;
+use std::fmt;
+use webkit2_webextension_sys;
 use DOMCharacterData;
 use DOMEventTarget;
 use DOMNode;
 use DOMObject;
-use glib::translate::*;
-use std::fmt;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct DOMComment(Object<webkit2_webextension_sys::WebKitDOMComment, webkit2_webextension_sys::WebKitDOMCommentClass, DOMCommentClass>) @extends DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;

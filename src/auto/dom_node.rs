@@ -2,18 +2,13 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMDocument;
-use DOMElement;
-use DOMEventTarget;
-use DOMNodeList;
-use DOMObject;
-use Error;
-use glib::GString;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
+use glib::GString;
 use glib_sys;
 use libc;
 use std::boxed::Box as Box_;
@@ -21,6 +16,11 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMDocument;
+use DOMElement;
+use DOMEventTarget;
+use DOMNodeList;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMNode(Object<webkit2_webextension_sys::WebKitDOMNode, webkit2_webextension_sys::WebKitDOMNodeClass, DOMNodeClass>) @extends DOMObject, @implements DOMEventTarget;
@@ -32,7 +32,7 @@ glib_wrapper! {
 
 impl DOMNode {
     //#[cfg(any(feature = "v2_22", feature = "dox"))]
-    //pub fn for_js_value(value: /*Ignored*/&mut java_script_core::Value) -> Option<DOMNode> {
+    //pub fn for_js_value(value: /*Ignored*/&java_script_core::Value) -> Option<DOMNode> {
     //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_node_for_js_value() }
     //}
 }
@@ -41,14 +41,14 @@ pub const NONE_DOM_NODE: Option<&DOMNode> = None;
 
 pub trait DOMNodeExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn append_child<P: IsA<DOMNode>>(&self, newChild: &P) -> Result<DOMNode, Error>;
+    fn append_child<P: IsA<DOMNode>>(&self, newChild: &P) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
-    fn clone_node(&self, deep: bool) -> Result<DOMNode, Error>;
+    fn clone_node(&self, deep: bool) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    fn clone_node_with_error(&self, deep: bool) -> Result<DOMNode, Error>;
+    fn clone_node_with_error(&self, deep: bool) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn compare_document_position<P: IsA<DOMNode>>(&self, other: &P) -> libc::c_ushort;
@@ -108,7 +108,7 @@ pub trait DOMNodeExt: 'static {
     fn has_child_nodes(&self) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn insert_before<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, refChild: Option<&Q>) -> Result<DOMNode, Error>;
+    fn insert_before<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, refChild: Option<&Q>) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn is_default_namespace(&self, namespaceURI: &str) -> bool;
@@ -132,19 +132,19 @@ pub trait DOMNodeExt: 'static {
     fn normalize(&self);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn remove_child<P: IsA<DOMNode>>(&self, oldChild: &P) -> Result<DOMNode, Error>;
+    fn remove_child<P: IsA<DOMNode>>(&self, oldChild: &P) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn replace_child<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, oldChild: &Q) -> Result<DOMNode, Error>;
+    fn replace_child<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, oldChild: &Q) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_node_value(&self, value: &str) -> Result<(), Error>;
+    fn set_node_value(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
-    fn set_prefix(&self, value: &str) -> Result<(), Error>;
+    fn set_prefix(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_text_content(&self, value: &str) -> Result<(), Error>;
+    fn set_text_content(&self, value: &str) -> Result<(), glib::Error>;
 
     fn connect_property_base_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -174,7 +174,7 @@ pub trait DOMNodeExt: 'static {
 }
 
 impl<O: IsA<DOMNode>> DOMNodeExt for O {
-    fn append_child<P: IsA<DOMNode>>(&self, newChild: &P) -> Result<DOMNode, Error> {
+    fn append_child<P: IsA<DOMNode>>(&self, newChild: &P) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_append_child(self.as_ref().to_glib_none().0, newChild.as_ref().to_glib_none().0, &mut error);
@@ -182,7 +182,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn clone_node(&self, deep: bool) -> Result<DOMNode, Error> {
+    fn clone_node(&self, deep: bool) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_clone_node(self.as_ref().to_glib_none().0, deep.to_glib(), &mut error);
@@ -191,7 +191,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
     }
 
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    fn clone_node_with_error(&self, deep: bool) -> Result<DOMNode, Error> {
+    fn clone_node_with_error(&self, deep: bool) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_clone_node_with_error(self.as_ref().to_glib_none().0, deep.to_glib(), &mut error);
@@ -313,7 +313,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn insert_before<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, refChild: Option<&Q>) -> Result<DOMNode, Error> {
+    fn insert_before<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, refChild: Option<&Q>) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_insert_before(self.as_ref().to_glib_none().0, newChild.as_ref().to_glib_none().0, refChild.map(|p| p.as_ref()).to_glib_none().0, &mut error);
@@ -363,7 +363,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn remove_child<P: IsA<DOMNode>>(&self, oldChild: &P) -> Result<DOMNode, Error> {
+    fn remove_child<P: IsA<DOMNode>>(&self, oldChild: &P) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_remove_child(self.as_ref().to_glib_none().0, oldChild.as_ref().to_glib_none().0, &mut error);
@@ -371,7 +371,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn replace_child<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, oldChild: &Q) -> Result<DOMNode, Error> {
+    fn replace_child<P: IsA<DOMNode>, Q: IsA<DOMNode>>(&self, newChild: &P, oldChild: &Q) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_node_replace_child(self.as_ref().to_glib_none().0, newChild.as_ref().to_glib_none().0, oldChild.as_ref().to_glib_none().0, &mut error);
@@ -379,7 +379,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn set_node_value(&self, value: &str) -> Result<(), Error> {
+    fn set_node_value(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_node_set_node_value(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -387,7 +387,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn set_prefix(&self, value: &str) -> Result<(), Error> {
+    fn set_prefix(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_node_set_prefix(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -395,7 +395,7 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
         }
     }
 
-    fn set_text_content(&self, value: &str) -> Result<(), Error> {
+    fn set_text_content(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_node_set_text_content(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);

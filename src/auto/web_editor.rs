@@ -3,14 +3,12 @@
 // DO NOT EDIT
 
 #[cfg(any(feature = "v2_10", feature = "dox"))]
-use WebPage;
-#[cfg(any(feature = "v2_10", feature = "dox"))]
 use glib::object::Cast;
 use glib::object::IsA;
 #[cfg(any(feature = "v2_10", feature = "dox"))]
-use glib::signal::SignalHandlerId;
-#[cfg(any(feature = "v2_10", feature = "dox"))]
 use glib::signal::connect_raw;
+#[cfg(any(feature = "v2_10", feature = "dox"))]
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
 #[cfg(any(feature = "v2_10", feature = "dox"))]
 use glib_sys;
@@ -20,6 +18,8 @@ use std::fmt;
 #[cfg(any(feature = "v2_10", feature = "dox"))]
 use std::mem::transmute;
 use webkit2_webextension_sys;
+#[cfg(any(feature = "v2_10", feature = "dox"))]
+use WebPage;
 
 glib_wrapper! {
     pub struct WebEditor(Object<webkit2_webextension_sys::WebKitWebEditor, webkit2_webextension_sys::WebKitWebEditorClass, WebEditorClass>);

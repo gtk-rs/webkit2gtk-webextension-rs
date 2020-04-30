@@ -2,15 +2,13 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMCSSRule;
-use DOMObject;
-use Error;
-use glib::GString;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
+use glib::GString;
 use glib_sys;
 use libc;
 use std::boxed::Box as Box_;
@@ -18,6 +16,8 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMCSSRule;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMCSSStyleDeclaration(Object<webkit2_webextension_sys::WebKitDOMCSSStyleDeclaration, webkit2_webextension_sys::WebKitDOMCSSStyleDeclarationClass, DOMCSSStyleDeclarationClass>) @extends DOMObject;
@@ -55,13 +55,13 @@ pub trait DOMCSSStyleDeclarationExt: 'static {
     fn item(&self, index: libc::c_ulong) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn remove_property(&self, propertyName: &str) -> Result<GString, Error>;
+    fn remove_property(&self, propertyName: &str) -> Result<GString, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_css_text(&self, value: &str) -> Result<(), Error>;
+    fn set_css_text(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_property(&self, propertyName: &str, value: &str, priority: &str) -> Result<(), Error>;
+    fn set_property(&self, propertyName: &str, value: &str, priority: &str) -> Result<(), glib::Error>;
 
     fn connect_property_css_text_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -119,7 +119,7 @@ impl<O: IsA<DOMCSSStyleDeclaration>> DOMCSSStyleDeclarationExt for O {
         }
     }
 
-    fn remove_property(&self, propertyName: &str) -> Result<GString, Error> {
+    fn remove_property(&self, propertyName: &str) -> Result<GString, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_css_style_declaration_remove_property(self.as_ref().to_glib_none().0, propertyName.to_glib_none().0, &mut error);
@@ -127,7 +127,7 @@ impl<O: IsA<DOMCSSStyleDeclaration>> DOMCSSStyleDeclarationExt for O {
         }
     }
 
-    fn set_css_text(&self, value: &str) -> Result<(), Error> {
+    fn set_css_text(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_css_style_declaration_set_css_text(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -135,7 +135,7 @@ impl<O: IsA<DOMCSSStyleDeclaration>> DOMCSSStyleDeclarationExt for O {
         }
     }
 
-    fn set_property(&self, propertyName: &str, value: &str, priority: &str) -> Result<(), Error> {
+    fn set_property(&self, propertyName: &str, value: &str, priority: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_css_style_declaration_set_property(self.as_ref().to_glib_none().0, propertyName.to_glib_none().0, value.to_glib_none().0, priority.to_glib_none().0, &mut error);

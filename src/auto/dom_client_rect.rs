@@ -2,20 +2,20 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMObject;
-use glib::StaticType;
-use glib::Value;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
+use glib::StaticType;
+use glib::Value;
 use glib_sys;
 use gobject_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 use webkit2_webextension_sys;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMClientRect(Object<webkit2_webextension_sys::WebKitDOMClientRect, webkit2_webextension_sys::WebKitDOMClientRectClass, DOMClientRectClass>) @extends DOMObject;
@@ -124,7 +124,7 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"bottom\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `bottom` getter").unwrap()
         }
     }
 
@@ -132,7 +132,7 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"height\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `height` getter").unwrap()
         }
     }
 
@@ -140,7 +140,7 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"left\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `left` getter").unwrap()
         }
     }
 
@@ -148,7 +148,7 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"right\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `right` getter").unwrap()
         }
     }
 
@@ -156,7 +156,7 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"top\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `top` getter").unwrap()
         }
     }
 
@@ -164,7 +164,7 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
         unsafe {
             let mut value = Value::from_type(<f32 as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"width\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `width` getter").unwrap()
         }
     }
 

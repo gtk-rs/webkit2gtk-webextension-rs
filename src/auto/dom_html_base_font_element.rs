@@ -2,17 +2,17 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib::object::IsA;
+use glib::translate::*;
+use glib::GString;
+use libc;
+use std::fmt;
+use webkit2_webextension_sys;
 use DOMElement;
 use DOMEventTarget;
 use DOMHTMLElement;
 use DOMNode;
 use DOMObject;
-use glib::GString;
-use glib::object::IsA;
-use glib::translate::*;
-use libc;
-use std::fmt;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct DOMHTMLBaseFontElement(Object<webkit2_webextension_sys::WebKitDOMHTMLBaseFontElement, webkit2_webextension_sys::WebKitDOMHTMLBaseFontElementClass, DOMHTMLBaseFontElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;

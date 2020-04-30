@@ -2,22 +2,15 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMElement;
-use DOMEventTarget;
-use DOMFileList;
-use DOMHTMLElement;
-use DOMHTMLFormElement;
-use DOMNode;
-use DOMObject;
-use Error;
+use glib;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
 use glib_sys;
 use gobject_sys;
 use libc;
@@ -26,6 +19,13 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMElement;
+use DOMEventTarget;
+use DOMFileList;
+use DOMHTMLElement;
+use DOMHTMLFormElement;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMHTMLInputElement(Object<webkit2_webextension_sys::WebKitDOMHTMLInputElement, webkit2_webextension_sys::WebKitDOMHTMLInputElementClass, DOMHTMLInputElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
@@ -175,7 +175,7 @@ pub trait DOMHTMLInputElementExt: 'static {
     fn set_input_type(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_max_length(&self, value: libc::c_long) -> Result<(), Error>;
+    fn set_max_length(&self, value: libc::c_long) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_multiple(&self, value: bool);
@@ -187,7 +187,7 @@ pub trait DOMHTMLInputElementExt: 'static {
     fn set_read_only(&self, value: bool);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_size(&self, value: libc::c_ulong) -> Result<(), Error>;
+    fn set_size(&self, value: libc::c_ulong) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_src(&self, value: &str);
@@ -526,7 +526,7 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
         }
     }
 
-    fn set_max_length(&self, value: libc::c_long) -> Result<(), Error> {
+    fn set_max_length(&self, value: libc::c_long) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_input_element_set_max_length(self.as_ref().to_glib_none().0, value, &mut error);
@@ -552,7 +552,7 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
         }
     }
 
-    fn set_size(&self, value: libc::c_ulong) -> Result<(), Error> {
+    fn set_size(&self, value: libc::c_ulong) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_input_element_set_size(self.as_ref().to_glib_none().0, value, &mut error);
@@ -600,7 +600,7 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"read-only\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `read-only` getter").unwrap()
         }
     }
 
@@ -608,7 +608,7 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `type` getter")
         }
     }
 

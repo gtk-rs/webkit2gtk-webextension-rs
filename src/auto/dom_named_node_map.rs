@@ -2,13 +2,11 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMNode;
-use DOMObject;
-use Error;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
 use glib_sys;
 use libc;
@@ -17,6 +15,8 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMNamedNodeMap(Object<webkit2_webextension_sys::WebKitDOMNamedNodeMap, webkit2_webextension_sys::WebKitDOMNamedNodeMapClass, DOMNamedNodeMapClass>) @extends DOMObject;
@@ -42,16 +42,16 @@ pub trait DOMNamedNodeMapExt: 'static {
     fn item(&self, index: libc::c_ulong) -> Option<DOMNode>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn remove_named_item(&self, name: &str) -> Result<DOMNode, Error>;
+    fn remove_named_item(&self, name: &str) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn remove_named_item_ns(&self, namespaceURI: &str, localName: &str) -> Result<DOMNode, Error>;
+    fn remove_named_item_ns(&self, namespaceURI: &str, localName: &str) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_named_item<P: IsA<DOMNode>>(&self, node: &P) -> Result<DOMNode, Error>;
+    fn set_named_item<P: IsA<DOMNode>>(&self, node: &P) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_named_item_ns<P: IsA<DOMNode>>(&self, node: &P) -> Result<DOMNode, Error>;
+    fn set_named_item_ns<P: IsA<DOMNode>>(&self, node: &P) -> Result<DOMNode, glib::Error>;
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
@@ -81,7 +81,7 @@ impl<O: IsA<DOMNamedNodeMap>> DOMNamedNodeMapExt for O {
         }
     }
 
-    fn remove_named_item(&self, name: &str) -> Result<DOMNode, Error> {
+    fn remove_named_item(&self, name: &str) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_named_node_map_remove_named_item(self.as_ref().to_glib_none().0, name.to_glib_none().0, &mut error);
@@ -89,7 +89,7 @@ impl<O: IsA<DOMNamedNodeMap>> DOMNamedNodeMapExt for O {
         }
     }
 
-    fn remove_named_item_ns(&self, namespaceURI: &str, localName: &str) -> Result<DOMNode, Error> {
+    fn remove_named_item_ns(&self, namespaceURI: &str, localName: &str) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_named_node_map_remove_named_item_ns(self.as_ref().to_glib_none().0, namespaceURI.to_glib_none().0, localName.to_glib_none().0, &mut error);
@@ -97,7 +97,7 @@ impl<O: IsA<DOMNamedNodeMap>> DOMNamedNodeMapExt for O {
         }
     }
 
-    fn set_named_item<P: IsA<DOMNode>>(&self, node: &P) -> Result<DOMNode, Error> {
+    fn set_named_item<P: IsA<DOMNode>>(&self, node: &P) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_named_node_map_set_named_item(self.as_ref().to_glib_none().0, node.as_ref().to_glib_none().0, &mut error);
@@ -105,7 +105,7 @@ impl<O: IsA<DOMNamedNodeMap>> DOMNamedNodeMapExt for O {
         }
     }
 
-    fn set_named_item_ns<P: IsA<DOMNode>>(&self, node: &P) -> Result<DOMNode, Error> {
+    fn set_named_item_ns<P: IsA<DOMNode>>(&self, node: &P) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_named_node_map_set_named_item_ns(self.as_ref().to_glib_none().0, node.as_ref().to_glib_none().0, &mut error);
