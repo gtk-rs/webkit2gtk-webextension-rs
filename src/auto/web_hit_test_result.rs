@@ -2,15 +2,15 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMNode;
-use HitTestResult;
-use glib::StaticType;
-use glib::Value;
 use glib::object::IsA;
 use glib::translate::*;
+use glib::StaticType;
+use glib::Value;
 use gobject_sys;
 use std::fmt;
 use webkit2_webextension_sys;
+use DOMNode;
+use HitTestResult;
 
 glib_wrapper! {
     pub struct WebHitTestResult(Object<webkit2_webextension_sys::WebKitWebHitTestResult, webkit2_webextension_sys::WebKitWebHitTestResultClass, WebHitTestResultClass>) @extends HitTestResult;
@@ -41,7 +41,7 @@ impl<O: IsA<WebHitTestResult>> WebHitTestResultExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `node` getter")
         }
     }
 }

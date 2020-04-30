@@ -3,9 +3,9 @@
 // DO NOT EDIT
 
 #[cfg(any(feature = "v2_12", feature = "dox"))]
-use glib::GString;
-#[cfg(any(feature = "v2_12", feature = "dox"))]
 use glib::translate::*;
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+use glib::GString;
 use webkit2_webextension_sys;
 
 glib_wrapper! {

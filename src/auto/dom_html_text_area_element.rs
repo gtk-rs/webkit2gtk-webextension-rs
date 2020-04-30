@@ -2,20 +2,14 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMElement;
-use DOMEventTarget;
-use DOMHTMLElement;
-use DOMHTMLFormElement;
-use DOMNode;
-use DOMObject;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
 use glib_sys;
 use gobject_sys;
 use libc;
@@ -23,6 +17,12 @@ use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 use webkit2_webextension_sys;
+use DOMElement;
+use DOMEventTarget;
+use DOMHTMLElement;
+use DOMHTMLFormElement;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMHTMLTextAreaElement(Object<webkit2_webextension_sys::WebKitDOMHTMLTextAreaElement, webkit2_webextension_sys::WebKitDOMHTMLTextAreaElementClass, DOMHTMLTextAreaElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
@@ -303,7 +303,7 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `type` getter")
         }
     }
 

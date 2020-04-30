@@ -2,14 +2,24 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+#[cfg(not(feature = "dox"))]
 extern crate pkg_config;
 
+#[cfg(not(feature = "dox"))]
 use pkg_config::{Config, Error};
+#[cfg(not(feature = "dox"))]
 use std::env;
-use std::io::prelude::*;
+#[cfg(not(feature = "dox"))]
 use std::io;
+#[cfg(not(feature = "dox"))]
+use std::io::prelude::*;
+#[cfg(not(feature = "dox"))]
 use std::process;
 
+#[cfg(feature = "dox")]
+fn main() {} // prevent linking libraries to avoid documentation failure
+
+#[cfg(not(feature = "dox"))]
 fn main() {
     if let Err(s) = find() {
         let _ = writeln!(io::stderr(), "{}", s);
@@ -17,10 +27,13 @@ fn main() {
     }
 }
 
+#[cfg(not(feature = "dox"))]
 fn find() -> Result<(), Error> {
     let package_name = "webkit2gtk-web-extension-4.0";
     let shared_libs = ["webkit2gtk-4.0", "javascriptcoregtk-4.0"];
-    let version = if cfg!(feature = "v2_22") {
+    let version = if cfg!(feature = "v2_26") {
+        "2.26"
+    } else if cfg!(feature = "v2_22") {
         "2.22"
     } else if cfg!(feature = "v2_20") {
         "2.20"
@@ -50,7 +63,7 @@ fn find() -> Result<(), Error> {
             println!("cargo:rustc-link-lib=dylib={}", lib_);
         }
         println!("cargo:rustc-link-search=native={}", lib_dir);
-        return Ok(())
+        return Ok(());
     }
 
     let target = env::var("TARGET").expect("TARGET environment variable doesn't exist");
@@ -72,8 +85,10 @@ fn find() -> Result<(), Error> {
                     println!("cargo:rustc-link-lib=dylib={}", lib_);
                 }
                 for path in library.link_paths.iter() {
-                    println!("cargo:rustc-link-search=native={}",
-                             path.to_str().expect("library path doesn't exist"));
+                    println!(
+                        "cargo:rustc-link-search=native={}",
+                        path.to_str().expect("library path doesn't exist")
+                    );
                 }
             }
             Ok(())
@@ -87,4 +102,3 @@ fn find() -> Result<(), Error> {
         Err(err) => Err(err),
     }
 }
-

@@ -2,6 +2,20 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
+use glib::GString;
+use glib_sys;
+use libc;
+use std::boxed::Box as Box_;
+use std::fmt;
+use std::mem::transmute;
+use std::ptr;
+use webkit2_webextension_sys;
 use DOMElement;
 use DOMEventTarget;
 use DOMHTMLCollection;
@@ -10,20 +24,6 @@ use DOMHTMLTableCaptionElement;
 use DOMHTMLTableSectionElement;
 use DOMNode;
 use DOMObject;
-use Error;
-use glib::GString;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
-use glib_sys;
-use libc;
-use std::boxed::Box as Box_;
-use std::fmt;
-use std::mem::transmute;
-use std::ptr;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct DOMHTMLTableElement(Object<webkit2_webextension_sys::WebKitDOMHTMLTableElement, webkit2_webextension_sys::WebKitDOMHTMLTableElementClass, DOMHTMLTableElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
@@ -49,7 +49,7 @@ pub trait DOMHTMLTableElementExt: 'static {
     fn delete_caption(&self);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn delete_row(&self, index: libc::c_long) -> Result<(), Error>;
+    fn delete_row(&self, index: libc::c_long) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn delete_t_foot(&self);
@@ -97,7 +97,7 @@ pub trait DOMHTMLTableElementExt: 'static {
     fn get_width(&self) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, Error>;
+    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_align(&self, value: &str);
@@ -109,7 +109,7 @@ pub trait DOMHTMLTableElementExt: 'static {
     fn set_border(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_caption<P: IsA<DOMHTMLTableCaptionElement>>(&self, value: &P) -> Result<(), Error>;
+    fn set_caption<P: IsA<DOMHTMLTableCaptionElement>>(&self, value: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_cell_padding(&self, value: &str);
@@ -124,10 +124,10 @@ pub trait DOMHTMLTableElementExt: 'static {
     fn set_summary(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_t_foot<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error>;
+    fn set_t_foot<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_t_head<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error>;
+    fn set_t_head<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_width(&self, value: &str);
@@ -184,7 +184,7 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
         }
     }
 
-    fn delete_row(&self, index: libc::c_long) -> Result<(), Error> {
+    fn delete_row(&self, index: libc::c_long) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_table_element_delete_row(self.as_ref().to_glib_none().0, index, &mut error);
@@ -282,7 +282,7 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
         }
     }
 
-    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, Error> {
+    fn insert_row(&self, index: libc::c_long) -> Result<DOMHTMLElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_html_table_element_insert_row(self.as_ref().to_glib_none().0, index, &mut error);
@@ -308,7 +308,7 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
         }
     }
 
-    fn set_caption<P: IsA<DOMHTMLTableCaptionElement>>(&self, value: &P) -> Result<(), Error> {
+    fn set_caption<P: IsA<DOMHTMLTableCaptionElement>>(&self, value: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_table_element_set_caption(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
@@ -340,7 +340,7 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
         }
     }
 
-    fn set_t_foot<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error> {
+    fn set_t_foot<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_table_element_set_t_foot(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
@@ -348,7 +348,7 @@ impl<O: IsA<DOMHTMLTableElement>> DOMHTMLTableElementExt for O {
         }
     }
 
-    fn set_t_head<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), Error> {
+    fn set_t_head<P: IsA<DOMHTMLTableSectionElement>>(&self, value: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_table_element_set_t_head(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);

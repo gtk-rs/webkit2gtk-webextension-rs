@@ -2,20 +2,16 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMNode;
-use DOMObject;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
-use DOMRange;
-#[cfg(any(feature = "v2_16", feature = "dox"))]
-use Error;
+use glib;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
 use glib_sys;
 use gobject_sys;
 use libc;
@@ -25,6 +21,10 @@ use std::mem::transmute;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMNode;
+use DOMObject;
+#[cfg(any(feature = "v2_16", feature = "dox"))]
+use DOMRange;
 
 glib_wrapper! {
     pub struct DOMDOMSelection(Object<webkit2_webextension_sys::WebKitDOMDOMSelection, webkit2_webextension_sys::WebKitDOMDOMSelectionClass, DOMDOMSelectionClass>) @extends DOMObject;
@@ -47,11 +47,11 @@ pub trait DOMDOMSelectionExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn collapse_to_end(&self) -> Result<(), Error>;
+    fn collapse_to_end(&self) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn collapse_to_start(&self) -> Result<(), Error>;
+    fn collapse_to_start(&self) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -67,7 +67,7 @@ pub trait DOMDOMSelectionExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn extend<P: IsA<DOMNode>>(&self, node: &P, offset: libc::c_ulong) -> Result<(), Error>;
+    fn extend<P: IsA<DOMNode>>(&self, node: &P, offset: libc::c_ulong) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -107,7 +107,7 @@ pub trait DOMDOMSelectionExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_range_at(&self, index: libc::c_ulong) -> Result<DOMRange, Error>;
+    fn get_range_at(&self, index: libc::c_ulong) -> Result<DOMRange, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -198,7 +198,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn collapse_to_end(&self) -> Result<(), Error> {
+    fn collapse_to_end(&self) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_dom_selection_collapse_to_end(self.as_ref().to_glib_none().0, &mut error);
@@ -207,7 +207,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn collapse_to_start(&self) -> Result<(), Error> {
+    fn collapse_to_start(&self) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_dom_selection_collapse_to_start(self.as_ref().to_glib_none().0, &mut error);
@@ -237,7 +237,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn extend<P: IsA<DOMNode>>(&self, node: &P, offset: libc::c_ulong) -> Result<(), Error> {
+    fn extend<P: IsA<DOMNode>>(&self, node: &P, offset: libc::c_ulong) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_dom_selection_extend(self.as_ref().to_glib_none().0, node.as_ref().to_glib_none().0, offset, &mut error);
@@ -309,7 +309,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_range_at(&self, index: libc::c_ulong) -> Result<DOMRange, Error> {
+    fn get_range_at(&self, index: libc::c_ulong) -> Result<DOMRange, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_dom_selection_get_range_at(self.as_ref().to_glib_none().0, index, &mut error);
@@ -370,7 +370,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"anchor-node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `anchor-node` getter")
         }
     }
 
@@ -378,7 +378,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"anchor-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `anchor-offset` getter").unwrap()
         }
     }
 
@@ -386,7 +386,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"base-node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `base-node` getter")
         }
     }
 
@@ -394,7 +394,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"base-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `base-offset` getter").unwrap()
         }
     }
 
@@ -402,7 +402,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"extent-node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `extent-node` getter")
         }
     }
 
@@ -410,7 +410,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"extent-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `extent-offset` getter").unwrap()
         }
     }
 
@@ -418,7 +418,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMNode as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"focus-node\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `focus-node` getter")
         }
     }
 
@@ -426,7 +426,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"focus-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `focus-offset` getter").unwrap()
         }
     }
 
@@ -434,7 +434,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"is-collapsed\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `is-collapsed` getter").unwrap()
         }
     }
 
@@ -442,7 +442,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"range-count\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `range-count` getter").unwrap()
         }
     }
 
@@ -450,7 +450,7 @@ impl<O: IsA<DOMDOMSelection>> DOMDOMSelectionExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `type` getter")
         }
     }
 

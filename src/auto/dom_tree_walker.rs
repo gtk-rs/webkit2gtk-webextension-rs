@@ -2,13 +2,11 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMNode;
-use DOMObject;
-use Error;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
 use glib_sys;
 use libc;
@@ -17,6 +15,8 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMTreeWalker(Object<webkit2_webextension_sys::WebKitDOMTreeWalker, webkit2_webextension_sys::WebKitDOMTreeWalkerClass, DOMTreeWalkerClass>) @extends DOMObject;
@@ -66,7 +66,7 @@ pub trait DOMTreeWalkerExt: 'static {
     fn previous_sibling(&self) -> Option<DOMNode>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_current_node<P: IsA<DOMNode>>(&self, value: &P) -> Result<(), Error>;
+    fn set_current_node<P: IsA<DOMNode>>(&self, value: &P) -> Result<(), glib::Error>;
 
     fn connect_property_current_node_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -148,7 +148,7 @@ impl<O: IsA<DOMTreeWalker>> DOMTreeWalkerExt for O {
         }
     }
 
-    fn set_current_node<P: IsA<DOMNode>>(&self, value: &P) -> Result<(), Error> {
+    fn set_current_node<P: IsA<DOMNode>>(&self, value: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_tree_walker_set_current_node(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);

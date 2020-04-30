@@ -2,15 +2,10 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMDOMWindow;
-use DOMEvent;
-use DOMMouseEvent;
-use DOMObject;
-use DOMUIEvent;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
 use glib_sys;
 use libc;
@@ -18,6 +13,11 @@ use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 use webkit2_webextension_sys;
+use DOMDOMWindow;
+use DOMEvent;
+use DOMMouseEvent;
+use DOMObject;
+use DOMUIEvent;
 
 glib_wrapper! {
     pub struct DOMWheelEvent(Object<webkit2_webextension_sys::WebKitDOMWheelEvent, webkit2_webextension_sys::WebKitDOMWheelEventClass, DOMWheelEventClass>) @extends DOMMouseEvent, DOMUIEvent, DOMEvent, DOMObject;

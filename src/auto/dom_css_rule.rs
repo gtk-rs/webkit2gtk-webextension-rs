@@ -2,17 +2,15 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMCSSStyleSheet;
-use DOMObject;
-use Error;
+use glib;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
 use glib_sys;
 use gobject_sys;
 use libc;
@@ -21,6 +19,8 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMCSSStyleSheet;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMCSSRule(Object<webkit2_webextension_sys::WebKitDOMCSSRule, webkit2_webextension_sys::WebKitDOMCSSRuleClass, DOMCSSRuleClass>) @extends DOMObject;
@@ -46,7 +46,7 @@ pub trait DOMCSSRuleExt: 'static {
     fn get_rule_type(&self) -> libc::c_ushort;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_css_text(&self, value: &str) -> Result<(), Error>;
+    fn set_css_text(&self, value: &str) -> Result<(), glib::Error>;
 
     fn get_property_type(&self) -> u32;
 
@@ -84,7 +84,7 @@ impl<O: IsA<DOMCSSRule>> DOMCSSRuleExt for O {
         }
     }
 
-    fn set_css_text(&self, value: &str) -> Result<(), Error> {
+    fn set_css_text(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_css_rule_set_css_text(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -96,7 +96,7 @@ impl<O: IsA<DOMCSSRule>> DOMCSSRuleExt for O {
         unsafe {
             let mut value = Value::from_type(<u32 as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `type` getter").unwrap()
         }
     }
 

@@ -2,20 +2,15 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMElement;
-use DOMEventTarget;
-use DOMHTMLCollection;
-use DOMNode;
-use DOMObject;
-use Error;
+use glib;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
 use glib_sys;
 use gobject_sys;
 use libc;
@@ -24,6 +19,11 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMElement;
+use DOMEventTarget;
+use DOMHTMLCollection;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMHTMLElement(Object<webkit2_webextension_sys::WebKitDOMHTMLElement, webkit2_webextension_sys::WebKitDOMHTMLElementClass, DOMHTMLElementClass>) @extends DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
@@ -102,7 +102,7 @@ pub trait DOMHTMLElementExt: 'static {
     fn set_access_key(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_content_editable(&self, value: &str) -> Result<(), Error>;
+    fn set_content_editable(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_dir(&self, value: &str);
@@ -117,20 +117,20 @@ pub trait DOMHTMLElementExt: 'static {
 
     #[cfg_attr(feature = "v2_8", deprecated)]
     #[cfg(any(not(feature = "v2_8"), feature = "dox"))]
-    fn set_inner_html(&self, contents: &str) -> Result<(), Error>;
+    fn set_inner_html(&self, contents: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_inner_text(&self, value: &str) -> Result<(), Error>;
+    fn set_inner_text(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_lang(&self, value: &str);
 
     #[cfg_attr(feature = "v2_8", deprecated)]
     #[cfg(any(not(feature = "v2_8"), feature = "dox"))]
-    fn set_outer_html(&self, contents: &str) -> Result<(), Error>;
+    fn set_outer_html(&self, contents: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_outer_text(&self, value: &str) -> Result<(), Error>;
+    fn set_outer_text(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -322,7 +322,7 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         }
     }
 
-    fn set_content_editable(&self, value: &str) -> Result<(), Error> {
+    fn set_content_editable(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_element_set_content_editable(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -351,7 +351,7 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
     }
 
     #[cfg(any(not(feature = "v2_8"), feature = "dox"))]
-    fn set_inner_html(&self, contents: &str) -> Result<(), Error> {
+    fn set_inner_html(&self, contents: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_element_set_inner_html(self.as_ref().to_glib_none().0, contents.to_glib_none().0, &mut error);
@@ -359,7 +359,7 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         }
     }
 
-    fn set_inner_text(&self, value: &str) -> Result<(), Error> {
+    fn set_inner_text(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_element_set_inner_text(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -374,7 +374,7 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
     }
 
     #[cfg(any(not(feature = "v2_8"), feature = "dox"))]
-    fn set_outer_html(&self, contents: &str) -> Result<(), Error> {
+    fn set_outer_html(&self, contents: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_element_set_outer_html(self.as_ref().to_glib_none().0, contents.to_glib_none().0, &mut error);
@@ -382,7 +382,7 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         }
     }
 
-    fn set_outer_text(&self, value: &str) -> Result<(), Error> {
+    fn set_outer_text(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_element_set_outer_text(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -427,7 +427,7 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"draggable\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `draggable` getter").unwrap()
         }
     }
 
@@ -441,7 +441,7 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"hidden\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `hidden` getter").unwrap()
         }
     }
 
@@ -455,7 +455,7 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"spellcheck\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `spellcheck` getter").unwrap()
         }
     }
 
@@ -469,7 +469,7 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"translate\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `translate` getter").unwrap()
         }
     }
 
@@ -483,7 +483,7 @@ impl<O: IsA<DOMHTMLElement>> DOMHTMLElementExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"webkitdropzone\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `webkitdropzone` getter")
         }
     }
 

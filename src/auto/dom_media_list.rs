@@ -2,14 +2,13 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMObject;
-use Error;
-use glib::GString;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
+use glib::GString;
 use glib_sys;
 use libc;
 use std::boxed::Box as Box_;
@@ -17,6 +16,7 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMMediaList(Object<webkit2_webextension_sys::WebKitDOMMediaList, webkit2_webextension_sys::WebKitDOMMediaListClass, DOMMediaListClass>) @extends DOMObject;
@@ -30,10 +30,10 @@ pub const NONE_DOM_MEDIA_LIST: Option<&DOMMediaList> = None;
 
 pub trait DOMMediaListExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn append_medium(&self, newMedium: &str) -> Result<(), Error>;
+    fn append_medium(&self, newMedium: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn delete_medium(&self, oldMedium: &str) -> Result<(), Error>;
+    fn delete_medium(&self, oldMedium: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_length(&self) -> libc::c_ulong;
@@ -45,7 +45,7 @@ pub trait DOMMediaListExt: 'static {
     fn item(&self, index: libc::c_ulong) -> Option<GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_media_text(&self, value: &str) -> Result<(), Error>;
+    fn set_media_text(&self, value: &str) -> Result<(), glib::Error>;
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -53,7 +53,7 @@ pub trait DOMMediaListExt: 'static {
 }
 
 impl<O: IsA<DOMMediaList>> DOMMediaListExt for O {
-    fn append_medium(&self, newMedium: &str) -> Result<(), Error> {
+    fn append_medium(&self, newMedium: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_media_list_append_medium(self.as_ref().to_glib_none().0, newMedium.to_glib_none().0, &mut error);
@@ -61,7 +61,7 @@ impl<O: IsA<DOMMediaList>> DOMMediaListExt for O {
         }
     }
 
-    fn delete_medium(&self, oldMedium: &str) -> Result<(), Error> {
+    fn delete_medium(&self, oldMedium: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_media_list_delete_medium(self.as_ref().to_glib_none().0, oldMedium.to_glib_none().0, &mut error);
@@ -87,7 +87,7 @@ impl<O: IsA<DOMMediaList>> DOMMediaListExt for O {
         }
     }
 
-    fn set_media_text(&self, value: &str) -> Result<(), Error> {
+    fn set_media_text(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_media_list_set_media_text(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);

@@ -2,6 +2,23 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
+use glib::GString;
+use glib::StaticType;
+use glib::Value;
+use glib_sys;
+use gobject_sys;
+use libc;
+use std::boxed::Box as Box_;
+use std::fmt;
+use std::mem::transmute;
+use std::ptr;
+use webkit2_webextension_sys;
 use DOMAttr;
 use DOMCSSStyleDeclaration;
 #[cfg(any(feature = "v2_18", feature = "dox"))]
@@ -16,23 +33,6 @@ use DOMNamedNodeMap;
 use DOMNode;
 use DOMNodeList;
 use DOMObject;
-use Error;
-use glib::GString;
-use glib::StaticType;
-use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
-use glib_sys;
-use gobject_sys;
-use libc;
-use std::boxed::Box as Box_;
-use std::fmt;
-use std::mem::transmute;
-use std::ptr;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct DOMElement(Object<webkit2_webextension_sys::WebKitDOMElement, webkit2_webextension_sys::WebKitDOMElementClass, DOMElementClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
@@ -50,7 +50,7 @@ pub trait DOMElementExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn closest(&self, selectors: &str) -> Result<DOMElement, Error>;
+    fn closest(&self, selectors: &str) -> Result<DOMElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn focus(&self);
@@ -206,35 +206,35 @@ pub trait DOMElementExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn insert_adjacent_element<P: IsA<DOMElement>>(&self, where_: &str, element: &P) -> Result<DOMElement, Error>;
+    fn insert_adjacent_element<P: IsA<DOMElement>>(&self, where_: &str, element: &P) -> Result<DOMElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn insert_adjacent_html(&self, where_: &str, html: &str) -> Result<(), Error>;
+    fn insert_adjacent_html(&self, where_: &str, html: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn insert_adjacent_text(&self, where_: &str, text: &str) -> Result<(), Error>;
+    fn insert_adjacent_text(&self, where_: &str, text: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn matches(&self, selectors: &str) -> Result<(), Error>;
+    fn matches(&self, selectors: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn query_selector(&self, selectors: &str) -> Result<Option<DOMElement>, Error>;
+    fn query_selector(&self, selectors: &str) -> Result<Option<DOMElement>, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error>;
+    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn remove(&self) -> Result<(), Error>;
+    fn remove(&self) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_attribute(&self, name: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn remove_attribute_node<P: IsA<DOMAttr>>(&self, oldAttr: &P) -> Result<DOMAttr, Error>;
+    fn remove_attribute_node<P: IsA<DOMAttr>>(&self, oldAttr: &P) -> Result<DOMAttr, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn remove_attribute_ns(&self, namespaceURI: &str, localName: &str);
@@ -256,16 +256,16 @@ pub trait DOMElementExt: 'static {
     fn scroll_into_view_if_needed(&self, centerIfNeeded: bool);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_attribute(&self, name: &str, value: &str) -> Result<(), Error>;
+    fn set_attribute(&self, name: &str, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_attribute_node<P: IsA<DOMAttr>>(&self, newAttr: &P) -> Result<DOMAttr, Error>;
+    fn set_attribute_node<P: IsA<DOMAttr>>(&self, newAttr: &P) -> Result<DOMAttr, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_attribute_node_ns<P: IsA<DOMAttr>>(&self, newAttr: &P) -> Result<DOMAttr, Error>;
+    fn set_attribute_node_ns<P: IsA<DOMAttr>>(&self, newAttr: &P) -> Result<DOMAttr, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str, value: &str) -> Result<(), Error>;
+    fn set_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_class_name(&self, value: &str);
@@ -275,11 +275,11 @@ pub trait DOMElementExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_8", feature = "dox"))]
-    fn set_inner_html(&self, value: &str) -> Result<(), Error>;
+    fn set_inner_html(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_8", feature = "dox"))]
-    fn set_outer_html(&self, value: &str) -> Result<(), Error>;
+    fn set_outer_html(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_scroll_left(&self, value: libc::c_long);
@@ -289,7 +289,7 @@ pub trait DOMElementExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn webkit_matches_selector(&self, selectors: &str) -> Result<(), Error>;
+    fn webkit_matches_selector(&self, selectors: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -377,7 +377,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn closest(&self, selectors: &str) -> Result<DOMElement, Error> {
+    fn closest(&self, selectors: &str) -> Result<DOMElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_element_closest(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
@@ -686,7 +686,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn insert_adjacent_element<P: IsA<DOMElement>>(&self, where_: &str, element: &P) -> Result<DOMElement, Error> {
+    fn insert_adjacent_element<P: IsA<DOMElement>>(&self, where_: &str, element: &P) -> Result<DOMElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_element_insert_adjacent_element(self.as_ref().to_glib_none().0, where_.to_glib_none().0, element.as_ref().to_glib_none().0, &mut error);
@@ -695,7 +695,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn insert_adjacent_html(&self, where_: &str, html: &str) -> Result<(), Error> {
+    fn insert_adjacent_html(&self, where_: &str, html: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_element_insert_adjacent_html(self.as_ref().to_glib_none().0, where_.to_glib_none().0, html.to_glib_none().0, &mut error);
@@ -704,7 +704,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn insert_adjacent_text(&self, where_: &str, text: &str) -> Result<(), Error> {
+    fn insert_adjacent_text(&self, where_: &str, text: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_element_insert_adjacent_text(self.as_ref().to_glib_none().0, where_.to_glib_none().0, text.to_glib_none().0, &mut error);
@@ -713,7 +713,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn matches(&self, selectors: &str) -> Result<(), Error> {
+    fn matches(&self, selectors: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_element_matches(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
@@ -721,7 +721,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    fn query_selector(&self, selectors: &str) -> Result<Option<DOMElement>, Error> {
+    fn query_selector(&self, selectors: &str) -> Result<Option<DOMElement>, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_element_query_selector(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
@@ -729,7 +729,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error> {
+    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_element_query_selector_all(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
@@ -738,7 +738,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn remove(&self) -> Result<(), Error> {
+    fn remove(&self) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_element_remove(self.as_ref().to_glib_none().0, &mut error);
@@ -752,7 +752,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    fn remove_attribute_node<P: IsA<DOMAttr>>(&self, oldAttr: &P) -> Result<DOMAttr, Error> {
+    fn remove_attribute_node<P: IsA<DOMAttr>>(&self, oldAttr: &P) -> Result<DOMAttr, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_element_remove_attribute_node(self.as_ref().to_glib_none().0, oldAttr.as_ref().to_glib_none().0, &mut error);
@@ -797,7 +797,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    fn set_attribute(&self, name: &str, value: &str) -> Result<(), Error> {
+    fn set_attribute(&self, name: &str, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_element_set_attribute(self.as_ref().to_glib_none().0, name.to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -805,7 +805,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    fn set_attribute_node<P: IsA<DOMAttr>>(&self, newAttr: &P) -> Result<DOMAttr, Error> {
+    fn set_attribute_node<P: IsA<DOMAttr>>(&self, newAttr: &P) -> Result<DOMAttr, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_element_set_attribute_node(self.as_ref().to_glib_none().0, newAttr.as_ref().to_glib_none().0, &mut error);
@@ -813,7 +813,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    fn set_attribute_node_ns<P: IsA<DOMAttr>>(&self, newAttr: &P) -> Result<DOMAttr, Error> {
+    fn set_attribute_node_ns<P: IsA<DOMAttr>>(&self, newAttr: &P) -> Result<DOMAttr, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_element_set_attribute_node_ns(self.as_ref().to_glib_none().0, newAttr.as_ref().to_glib_none().0, &mut error);
@@ -821,7 +821,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         }
     }
 
-    fn set_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str, value: &str) -> Result<(), Error> {
+    fn set_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_element_set_attribute_ns(self.as_ref().to_glib_none().0, namespaceURI.to_glib_none().0, qualifiedName.to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -842,7 +842,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
     }
 
     #[cfg(any(feature = "v2_8", feature = "dox"))]
-    fn set_inner_html(&self, value: &str) -> Result<(), Error> {
+    fn set_inner_html(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_element_set_inner_html(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -851,7 +851,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
     }
 
     #[cfg(any(feature = "v2_8", feature = "dox"))]
-    fn set_outer_html(&self, value: &str) -> Result<(), Error> {
+    fn set_outer_html(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_element_set_outer_html(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
@@ -872,7 +872,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn webkit_matches_selector(&self, selectors: &str) -> Result<(), Error> {
+    fn webkit_matches_selector(&self, selectors: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_element_webkit_matches_selector(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
@@ -891,7 +891,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"children\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `children` getter")
         }
     }
 
@@ -899,7 +899,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"inner-html\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `inner-html` getter")
         }
     }
 
@@ -913,7 +913,7 @@ impl<O: IsA<DOMElement>> DOMElementExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"outer-html\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `outer-html` getter")
         }
     }
 

@@ -2,22 +2,15 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMElement;
-use DOMEventTarget;
-use DOMHTMLCollection;
-use DOMNode;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
-use DOMNodeList;
-use DOMObject;
-#[cfg(any(feature = "v2_16", feature = "dox"))]
-use Error;
-use glib::StaticType;
-use glib::Value;
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
-use glib::signal::SignalHandlerId;
 use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
 use glib::translate::*;
+use glib::StaticType;
+use glib::Value;
 use glib_sys;
 use gobject_sys;
 use libc;
@@ -27,6 +20,13 @@ use std::mem::transmute;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMElement;
+use DOMEventTarget;
+use DOMHTMLCollection;
+use DOMNode;
+#[cfg(any(feature = "v2_16", feature = "dox"))]
+use DOMNodeList;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMDocumentFragment(Object<webkit2_webextension_sys::WebKitDOMDocumentFragment, webkit2_webextension_sys::WebKitDOMDocumentFragmentClass, DOMDocumentFragmentClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
@@ -61,11 +61,11 @@ pub trait DOMDocumentFragmentExt: 'static {
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn query_selector(&self, selectors: &str) -> Result<DOMElement, Error>;
+    fn query_selector(&self, selectors: &str) -> Result<DOMElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error>;
+    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, glib::Error>;
 
     fn get_property_child_element_count(&self) -> libc::c_ulong;
 
@@ -121,7 +121,7 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn query_selector(&self, selectors: &str) -> Result<DOMElement, Error> {
+    fn query_selector(&self, selectors: &str) -> Result<DOMElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_fragment_query_selector(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
@@ -130,7 +130,7 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, Error> {
+    fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let ret = webkit2_webextension_sys::webkit_dom_document_fragment_query_selector_all(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
@@ -142,7 +142,7 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"child-element-count\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `child-element-count` getter").unwrap()
         }
     }
 
@@ -150,7 +150,7 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"children\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `children` getter")
         }
     }
 
@@ -158,7 +158,7 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"first-element-child\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `first-element-child` getter")
         }
     }
 
@@ -166,7 +166,7 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"last-element-child\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `last-element-child` getter")
         }
     }
 

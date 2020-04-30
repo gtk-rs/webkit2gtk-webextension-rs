@@ -2,22 +2,15 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use DOMElement;
-use DOMEventTarget;
-use DOMHTMLElement;
-use DOMHTMLFormElement;
-use DOMHTMLOptionsCollection;
-use DOMNode;
-use DOMObject;
-use Error;
+use glib;
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
 use glib::GString;
 use glib::StaticType;
 use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
 use glib_sys;
 use gobject_sys;
 use libc;
@@ -26,6 +19,13 @@ use std::fmt;
 use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
+use DOMElement;
+use DOMEventTarget;
+use DOMHTMLElement;
+use DOMHTMLFormElement;
+use DOMHTMLOptionsCollection;
+use DOMNode;
+use DOMObject;
 
 glib_wrapper! {
     pub struct DOMHTMLSelectElement(Object<webkit2_webextension_sys::WebKitDOMHTMLSelectElement, webkit2_webextension_sys::WebKitDOMHTMLSelectElementClass, DOMHTMLSelectElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
@@ -39,7 +39,7 @@ pub const NONE_DOMHTML_SELECT_ELEMENT: Option<&DOMHTMLSelectElement> = None;
 
 pub trait DOMHTMLSelectElementExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn add<P: IsA<DOMHTMLElement>, Q: IsA<DOMHTMLElement>>(&self, element: &P, before: &Q) -> Result<(), Error>;
+    fn add<P: IsA<DOMHTMLElement>, Q: IsA<DOMHTMLElement>>(&self, element: &P, before: &Q) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_autofocus(&self) -> bool;
@@ -93,7 +93,7 @@ pub trait DOMHTMLSelectElementExt: 'static {
     fn set_disabled(&self, value: bool);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn set_length(&self, value: libc::c_ulong) -> Result<(), Error>;
+    fn set_length(&self, value: libc::c_ulong) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn set_multiple(&self, value: bool);
@@ -138,7 +138,7 @@ pub trait DOMHTMLSelectElementExt: 'static {
 }
 
 impl<O: IsA<DOMHTMLSelectElement>> DOMHTMLSelectElementExt for O {
-    fn add<P: IsA<DOMHTMLElement>, Q: IsA<DOMHTMLElement>>(&self, element: &P, before: &Q) -> Result<(), Error> {
+    fn add<P: IsA<DOMHTMLElement>, Q: IsA<DOMHTMLElement>>(&self, element: &P, before: &Q) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_select_element_add(self.as_ref().to_glib_none().0, element.as_ref().to_glib_none().0, before.as_ref().to_glib_none().0, &mut error);
@@ -248,7 +248,7 @@ impl<O: IsA<DOMHTMLSelectElement>> DOMHTMLSelectElementExt for O {
         }
     }
 
-    fn set_length(&self, value: libc::c_ulong) -> Result<(), Error> {
+    fn set_length(&self, value: libc::c_ulong) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
             let _ = webkit2_webextension_sys::webkit_dom_html_select_element_set_length(self.as_ref().to_glib_none().0, value, &mut error);
@@ -290,7 +290,7 @@ impl<O: IsA<DOMHTMLSelectElement>> DOMHTMLSelectElementExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `type` getter")
         }
     }
 

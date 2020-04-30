@@ -2,6 +2,21 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use glib::object::Cast;
+use glib::object::IsA;
+use glib::signal::connect_raw;
+use glib::signal::SignalHandlerId;
+use glib::translate::*;
+use glib::GString;
+use glib::StaticType;
+use glib::Value;
+use glib_sys;
+use gobject_sys;
+use libc;
+use std::boxed::Box as Box_;
+use std::fmt;
+use std::mem::transmute;
+use webkit2_webextension_sys;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use DOMCSSStyleDeclaration;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
@@ -10,21 +25,6 @@ use DOMDocument;
 use DOMElement;
 use DOMEventTarget;
 use DOMObject;
-use glib::GString;
-use glib::StaticType;
-use glib::Value;
-use glib::object::Cast;
-use glib::object::IsA;
-use glib::signal::SignalHandlerId;
-use glib::signal::connect_raw;
-use glib::translate::*;
-use glib_sys;
-use gobject_sys;
-use libc;
-use std::boxed::Box as Box_;
-use std::fmt;
-use std::mem::transmute;
-use webkit2_webextension_sys;
 
 glib_wrapper! {
     pub struct DOMDOMWindow(Object<webkit2_webextension_sys::WebKitDOMDOMWindow, webkit2_webextension_sys::WebKitDOMDOMWindowClass, DOMDOMWindowClass>) @extends DOMObject, @implements DOMEventTarget;
@@ -719,7 +719,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"closed\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `closed` getter").unwrap()
         }
     }
 
@@ -727,7 +727,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"default-status\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `default-status` getter")
         }
     }
 
@@ -741,7 +741,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<f64 as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"device-pixel-ratio\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `device-pixel-ratio` getter").unwrap()
         }
     }
 
@@ -749,7 +749,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMDocument as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"document\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `document` getter")
         }
     }
 
@@ -757,7 +757,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"frame-element\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `frame-element` getter")
         }
     }
 
@@ -765,7 +765,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"frames\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `frames` getter")
         }
     }
 
@@ -773,7 +773,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"inner-height\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `inner-height` getter").unwrap()
         }
     }
 
@@ -781,7 +781,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"inner-width\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `inner-width` getter").unwrap()
         }
     }
 
@@ -789,7 +789,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"length\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `length` getter").unwrap()
         }
     }
 
@@ -797,7 +797,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"name\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `name` getter")
         }
     }
 
@@ -811,7 +811,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<bool as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"offscreen-buffering\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `offscreen-buffering` getter").unwrap()
         }
     }
 
@@ -819,7 +819,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"opener\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `opener` getter")
         }
     }
 
@@ -827,7 +827,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"orientation\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `orientation` getter").unwrap()
         }
     }
 
@@ -835,7 +835,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"outer-height\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `outer-height` getter").unwrap()
         }
     }
 
@@ -843,7 +843,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"outer-width\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `outer-width` getter").unwrap()
         }
     }
 
@@ -851,7 +851,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"page-x-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `page-x-offset` getter").unwrap()
         }
     }
 
@@ -859,7 +859,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"page-y-offset\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `page-y-offset` getter").unwrap()
         }
     }
 
@@ -867,7 +867,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"parent\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `parent` getter")
         }
     }
 
@@ -875,7 +875,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"screen-left\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `screen-left` getter").unwrap()
         }
     }
 
@@ -883,7 +883,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"screen-top\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `screen-top` getter").unwrap()
         }
     }
 
@@ -891,7 +891,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"screen-x\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `screen-x` getter").unwrap()
         }
     }
 
@@ -899,7 +899,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"screen-y\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `screen-y` getter").unwrap()
         }
     }
 
@@ -907,7 +907,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"scroll-x\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `scroll-x` getter").unwrap()
         }
     }
 
@@ -915,7 +915,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<libc::c_long as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"scroll-y\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get().unwrap()
+            value.get().expect("Return Value for property `scroll-y` getter").unwrap()
         }
     }
 
@@ -923,7 +923,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"self\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `self` getter")
         }
     }
 
@@ -931,7 +931,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<GString as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"status\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `status` getter")
         }
     }
 
@@ -945,7 +945,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"top\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `top` getter")
         }
     }
 
@@ -953,7 +953,7 @@ impl<O: IsA<DOMDOMWindow>> DOMDOMWindowExt for O {
         unsafe {
             let mut value = Value::from_type(<DOMDOMWindow as StaticType>::static_type());
             gobject_sys::g_object_get_property(self.to_glib_none().0 as *mut gobject_sys::GObject, b"window\0".as_ptr() as *const _, value.to_glib_none_mut().0);
-            value.get()
+            value.get().expect("Return Value for property `window` getter")
         }
     }
 
