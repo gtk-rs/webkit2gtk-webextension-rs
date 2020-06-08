@@ -335,14 +335,16 @@ impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
             P: IsA<DOMHTMLAppletElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::align\0".as_ptr() as *const _,
-                Some(transmute(notify_align_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_align_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -357,14 +359,16 @@ impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
             P: IsA<DOMHTMLAppletElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::alt\0".as_ptr() as *const _,
-                Some(transmute(notify_alt_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_alt_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -379,14 +383,16 @@ impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
             P: IsA<DOMHTMLAppletElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::archive\0".as_ptr() as *const _,
-                Some(transmute(notify_archive_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_archive_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -401,14 +407,16 @@ impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
             P: IsA<DOMHTMLAppletElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::code\0".as_ptr() as *const _,
-                Some(transmute(notify_code_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_code_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -423,14 +431,16 @@ impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
             P: IsA<DOMHTMLAppletElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::code-base\0".as_ptr() as *const _,
-                Some(transmute(notify_code_base_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_code_base_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -445,14 +455,16 @@ impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
             P: IsA<DOMHTMLAppletElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::height\0".as_ptr() as *const _,
-                Some(transmute(notify_height_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_height_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -467,14 +479,16 @@ impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
             P: IsA<DOMHTMLAppletElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::hspace\0".as_ptr() as *const _,
-                Some(transmute(notify_hspace_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_hspace_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -489,14 +503,16 @@ impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
             P: IsA<DOMHTMLAppletElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_name_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -511,14 +527,16 @@ impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
             P: IsA<DOMHTMLAppletElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::object\0".as_ptr() as *const _,
-                Some(transmute(notify_object_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_object_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -533,14 +551,16 @@ impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
             P: IsA<DOMHTMLAppletElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::vspace\0".as_ptr() as *const _,
-                Some(transmute(notify_vspace_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_vspace_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -555,14 +575,16 @@ impl<O: IsA<DOMHTMLAppletElement>> DOMHTMLAppletElementExt for O {
             P: IsA<DOMHTMLAppletElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAppletElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::width\0".as_ptr() as *const _,
-                Some(transmute(notify_width_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_width_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

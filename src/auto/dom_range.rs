@@ -689,14 +689,16 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
             P: IsA<DOMRange>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::collapsed\0".as_ptr() as *const _,
-                Some(transmute(notify_collapsed_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_collapsed_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -714,15 +716,15 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
             P: IsA<DOMRange>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::common-ancestor-container\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_common_ancestor_container_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_common_ancestor_container_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -741,15 +743,15 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
             P: IsA<DOMRange>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::end-container\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_end_container_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_end_container_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -765,14 +767,16 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
             P: IsA<DOMRange>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::end-offset\0".as_ptr() as *const _,
-                Some(transmute(notify_end_offset_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_end_offset_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -790,15 +794,15 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
             P: IsA<DOMRange>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::start-container\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_start_container_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_start_container_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -817,15 +821,15 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
             P: IsA<DOMRange>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::start-offset\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_start_offset_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_start_offset_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -841,14 +845,16 @@ impl<O: IsA<DOMRange>> DOMRangeExt for O {
             P: IsA<DOMRange>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMRange::from_glib_borrow(this).unsafe_cast())
+            f(&DOMRange::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::text\0".as_ptr() as *const _,
-                Some(transmute(notify_text_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_text_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

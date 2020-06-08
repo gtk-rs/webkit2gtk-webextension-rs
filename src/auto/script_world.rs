@@ -105,7 +105,7 @@ impl<O: IsA<ScriptWorld>> ScriptWorldExt for O {
         {
             let f: &F = &*(f as *const F);
             f(
-                &ScriptWorld::from_glib_borrow(this).unsafe_cast(),
+                &ScriptWorld::from_glib_borrow(this).unsafe_cast_ref(),
                 &from_glib_borrow(page),
                 &from_glib_borrow(frame),
             )
@@ -115,8 +115,8 @@ impl<O: IsA<ScriptWorld>> ScriptWorldExt for O {
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"window-object-cleared\0".as_ptr() as *const _,
-                Some(transmute(
-                    window_object_cleared_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    window_object_cleared_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )

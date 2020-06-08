@@ -419,14 +419,16 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::autofocus\0".as_ptr() as *const _,
-                Some(transmute(notify_autofocus_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_autofocus_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -441,14 +443,16 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::cols\0".as_ptr() as *const _,
-                Some(transmute(notify_cols_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_cols_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -466,15 +470,15 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::default-value\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_default_value_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_default_value_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -490,14 +494,16 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::disabled\0".as_ptr() as *const _,
-                Some(transmute(notify_disabled_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_disabled_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -512,14 +518,16 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::form\0".as_ptr() as *const _,
-                Some(transmute(notify_form_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_form_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -534,14 +542,16 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_name_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -556,14 +566,16 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::read-only\0".as_ptr() as *const _,
-                Some(transmute(notify_read_only_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_read_only_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -578,14 +590,16 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::rows\0".as_ptr() as *const _,
-                Some(transmute(notify_rows_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_rows_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -603,15 +617,15 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::selection-end\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_selection_end_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_selection_end_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -630,15 +644,15 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::selection-start\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_selection_start_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_selection_start_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -654,14 +668,16 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::type\0".as_ptr() as *const _,
-                Some(transmute(notify_type_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_type_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -676,14 +692,16 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::value\0".as_ptr() as *const _,
-                Some(transmute(notify_value_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_value_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -701,15 +719,15 @@ impl<O: IsA<DOMHTMLTextAreaElement>> DOMHTMLTextAreaElementExt for O {
             P: IsA<DOMHTMLTextAreaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTextAreaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::will-validate\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_will_validate_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_will_validate_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )

@@ -125,14 +125,16 @@ impl<O: IsA<DOMAttr>> DOMAttrExt for O {
             P: IsA<DOMAttr>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
+            f(&DOMAttr::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::local-name\0".as_ptr() as *const _,
-                Some(transmute(notify_local_name_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_local_name_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -147,14 +149,16 @@ impl<O: IsA<DOMAttr>> DOMAttrExt for O {
             P: IsA<DOMAttr>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
+            f(&DOMAttr::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_name_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -172,15 +176,15 @@ impl<O: IsA<DOMAttr>> DOMAttrExt for O {
             P: IsA<DOMAttr>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
+            f(&DOMAttr::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::namespace-uri\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_namespace_uri_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_namespace_uri_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -199,15 +203,15 @@ impl<O: IsA<DOMAttr>> DOMAttrExt for O {
             P: IsA<DOMAttr>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
+            f(&DOMAttr::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::owner-element\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_owner_element_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_owner_element_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -223,14 +227,16 @@ impl<O: IsA<DOMAttr>> DOMAttrExt for O {
             P: IsA<DOMAttr>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
+            f(&DOMAttr::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::prefix\0".as_ptr() as *const _,
-                Some(transmute(notify_prefix_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_prefix_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -245,14 +251,16 @@ impl<O: IsA<DOMAttr>> DOMAttrExt for O {
             P: IsA<DOMAttr>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
+            f(&DOMAttr::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::specified\0".as_ptr() as *const _,
-                Some(transmute(notify_specified_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_specified_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -267,14 +275,16 @@ impl<O: IsA<DOMAttr>> DOMAttrExt for O {
             P: IsA<DOMAttr>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMAttr::from_glib_borrow(this).unsafe_cast())
+            f(&DOMAttr::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::value\0".as_ptr() as *const _,
-                Some(transmute(notify_value_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_value_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

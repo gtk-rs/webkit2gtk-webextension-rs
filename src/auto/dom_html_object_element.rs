@@ -536,14 +536,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::align\0".as_ptr() as *const _,
-                Some(transmute(notify_align_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_align_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -558,14 +560,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::archive\0".as_ptr() as *const _,
-                Some(transmute(notify_archive_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_archive_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -580,14 +584,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::border\0".as_ptr() as *const _,
-                Some(transmute(notify_border_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_border_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -602,14 +608,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::code\0".as_ptr() as *const _,
-                Some(transmute(notify_code_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_code_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -624,14 +632,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::code-base\0".as_ptr() as *const _,
-                Some(transmute(notify_code_base_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_code_base_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -646,14 +656,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::code-type\0".as_ptr() as *const _,
-                Some(transmute(notify_code_type_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_code_type_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -671,15 +683,15 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::content-document\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_content_document_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_content_document_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -695,14 +707,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::data\0".as_ptr() as *const _,
-                Some(transmute(notify_data_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_data_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -717,14 +731,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::declare\0".as_ptr() as *const _,
-                Some(transmute(notify_declare_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_declare_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -739,14 +755,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::form\0".as_ptr() as *const _,
-                Some(transmute(notify_form_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_form_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -761,14 +779,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::height\0".as_ptr() as *const _,
-                Some(transmute(notify_height_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_height_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -783,14 +803,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::hspace\0".as_ptr() as *const _,
-                Some(transmute(notify_hspace_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_hspace_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -805,14 +827,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_name_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -827,14 +851,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::standby\0".as_ptr() as *const _,
-                Some(transmute(notify_standby_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_standby_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -849,14 +875,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::type\0".as_ptr() as *const _,
-                Some(transmute(notify_type_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_type_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -871,14 +899,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::use-map\0".as_ptr() as *const _,
-                Some(transmute(notify_use_map_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_use_map_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -893,14 +923,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::vspace\0".as_ptr() as *const _,
-                Some(transmute(notify_vspace_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_vspace_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -915,14 +947,16 @@ impl<O: IsA<DOMHTMLObjectElement>> DOMHTMLObjectElementExt for O {
             P: IsA<DOMHTMLObjectElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLObjectElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::width\0".as_ptr() as *const _,
-                Some(transmute(notify_width_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_width_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

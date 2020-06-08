@@ -180,14 +180,16 @@ impl<O: IsA<DOMHTMLParamElement>> DOMHTMLParamElementExt for O {
             P: IsA<DOMHTMLParamElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_name_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -202,14 +204,16 @@ impl<O: IsA<DOMHTMLParamElement>> DOMHTMLParamElementExt for O {
             P: IsA<DOMHTMLParamElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::type\0".as_ptr() as *const _,
-                Some(transmute(notify_type_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_type_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -224,14 +228,16 @@ impl<O: IsA<DOMHTMLParamElement>> DOMHTMLParamElementExt for O {
             P: IsA<DOMHTMLParamElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::value\0".as_ptr() as *const _,
-                Some(transmute(notify_value_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_value_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -246,14 +252,16 @@ impl<O: IsA<DOMHTMLParamElement>> DOMHTMLParamElementExt for O {
             P: IsA<DOMHTMLParamElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLParamElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::value-type\0".as_ptr() as *const _,
-                Some(transmute(notify_value_type_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_value_type_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

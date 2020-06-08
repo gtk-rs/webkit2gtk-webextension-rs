@@ -119,15 +119,15 @@ impl<O: IsA<URIResponse>> URIResponseExt for O {
             P: IsA<URIResponse>,
         {
             let f: &F = &*(f as *const F);
-            f(&URIResponse::from_glib_borrow(this).unsafe_cast())
+            f(&URIResponse::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::content-length\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_content_length_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_content_length_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -147,15 +147,15 @@ impl<O: IsA<URIResponse>> URIResponseExt for O {
             P: IsA<URIResponse>,
         {
             let f: &F = &*(f as *const F);
-            f(&URIResponse::from_glib_borrow(this).unsafe_cast())
+            f(&URIResponse::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::http-headers\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_http_headers_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_http_headers_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -171,14 +171,16 @@ impl<O: IsA<URIResponse>> URIResponseExt for O {
             P: IsA<URIResponse>,
         {
             let f: &F = &*(f as *const F);
-            f(&URIResponse::from_glib_borrow(this).unsafe_cast())
+            f(&URIResponse::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::mime-type\0".as_ptr() as *const _,
-                Some(transmute(notify_mime_type_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_mime_type_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -193,14 +195,16 @@ impl<O: IsA<URIResponse>> URIResponseExt for O {
             P: IsA<URIResponse>,
         {
             let f: &F = &*(f as *const F);
-            f(&URIResponse::from_glib_borrow(this).unsafe_cast())
+            f(&URIResponse::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::status-code\0".as_ptr() as *const _,
-                Some(transmute(notify_status_code_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_status_code_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -218,15 +222,15 @@ impl<O: IsA<URIResponse>> URIResponseExt for O {
             P: IsA<URIResponse>,
         {
             let f: &F = &*(f as *const F);
-            f(&URIResponse::from_glib_borrow(this).unsafe_cast())
+            f(&URIResponse::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::suggested-filename\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_suggested_filename_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_suggested_filename_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -242,14 +246,16 @@ impl<O: IsA<URIResponse>> URIResponseExt for O {
             P: IsA<URIResponse>,
         {
             let f: &F = &*(f as *const F);
-            f(&URIResponse::from_glib_borrow(this).unsafe_cast())
+            f(&URIResponse::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::uri\0".as_ptr() as *const _,
-                Some(transmute(notify_uri_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_uri_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

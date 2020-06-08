@@ -167,14 +167,16 @@ impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
             P: IsA<DOMUIEvent>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::char-code\0".as_ptr() as *const _,
-                Some(transmute(notify_char_code_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_char_code_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -189,14 +191,16 @@ impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
             P: IsA<DOMUIEvent>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::detail\0".as_ptr() as *const _,
-                Some(transmute(notify_detail_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_detail_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -211,14 +215,16 @@ impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
             P: IsA<DOMUIEvent>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::key-code\0".as_ptr() as *const _,
-                Some(transmute(notify_key_code_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_key_code_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -233,14 +239,16 @@ impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
             P: IsA<DOMUIEvent>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::layer-x\0".as_ptr() as *const _,
-                Some(transmute(notify_layer_x_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_layer_x_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -255,14 +263,16 @@ impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
             P: IsA<DOMUIEvent>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::layer-y\0".as_ptr() as *const _,
-                Some(transmute(notify_layer_y_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_layer_y_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -277,14 +287,16 @@ impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
             P: IsA<DOMUIEvent>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::page-x\0".as_ptr() as *const _,
-                Some(transmute(notify_page_x_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_page_x_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -299,14 +311,16 @@ impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
             P: IsA<DOMUIEvent>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::page-y\0".as_ptr() as *const _,
-                Some(transmute(notify_page_y_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_page_y_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -321,14 +335,16 @@ impl<O: IsA<DOMUIEvent>> DOMUIEventExt for O {
             P: IsA<DOMUIEvent>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMUIEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::view\0".as_ptr() as *const _,
-                Some(transmute(notify_view_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_view_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

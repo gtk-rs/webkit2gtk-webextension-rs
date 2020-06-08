@@ -251,15 +251,15 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
             P: IsA<DOMDocumentFragment>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::child-element-count\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_child_element_count_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_child_element_count_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -275,14 +275,16 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
             P: IsA<DOMDocumentFragment>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::children\0".as_ptr() as *const _,
-                Some(transmute(notify_children_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_children_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -300,15 +302,15 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
             P: IsA<DOMDocumentFragment>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::first-element-child\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_first_element_child_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_first_element_child_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -327,15 +329,15 @@ impl<O: IsA<DOMDocumentFragment>> DOMDocumentFragmentExt for O {
             P: IsA<DOMDocumentFragment>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocumentFragment::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::last-element-child\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_last_element_child_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_last_element_child_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )

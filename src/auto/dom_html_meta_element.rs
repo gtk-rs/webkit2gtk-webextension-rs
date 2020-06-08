@@ -149,14 +149,16 @@ impl<O: IsA<DOMHTMLMetaElement>> DOMHTMLMetaElementExt for O {
             P: IsA<DOMHTMLMetaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::content\0".as_ptr() as *const _,
-                Some(transmute(notify_content_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_content_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -171,14 +173,16 @@ impl<O: IsA<DOMHTMLMetaElement>> DOMHTMLMetaElementExt for O {
             P: IsA<DOMHTMLMetaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::http-equiv\0".as_ptr() as *const _,
-                Some(transmute(notify_http_equiv_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_http_equiv_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -193,14 +197,16 @@ impl<O: IsA<DOMHTMLMetaElement>> DOMHTMLMetaElementExt for O {
             P: IsA<DOMHTMLMetaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_name_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -215,14 +221,16 @@ impl<O: IsA<DOMHTMLMetaElement>> DOMHTMLMetaElementExt for O {
             P: IsA<DOMHTMLMetaElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLMetaElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::scheme\0".as_ptr() as *const _,
-                Some(transmute(notify_scheme_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_scheme_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
