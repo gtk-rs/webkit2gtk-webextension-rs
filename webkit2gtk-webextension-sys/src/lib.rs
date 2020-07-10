@@ -93,6 +93,9 @@ pub type WebKitFormSubmissionStep = c_int;
 pub const WEBKIT_FORM_SUBMISSION_WILL_SEND_DOM_EVENT: WebKitFormSubmissionStep = 0;
 pub const WEBKIT_FORM_SUBMISSION_WILL_COMPLETE: WebKitFormSubmissionStep = 1;
 
+pub type WebKitUserMessageError = c_int;
+pub const WEBKIT_USER_MESSAGE_UNHANDLED_MESSAGE: WebKitUserMessageError = 0;
+
 // Constants
 pub const WEBKIT_DOM_CSS_RULE_CHARSET_RULE: c_int = 2;
 pub const WEBKIT_DOM_CSS_RULE_FONT_FACE_RULE: c_int = 5;
@@ -2151,6 +2154,33 @@ pub type WebKitURIResponsePrivate = *mut _WebKitURIResponsePrivate;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct WebKitUserMessageClass {
+    pub parent_class: gobject::GInitiallyUnownedClass,
+    pub _webkit_reserved0: Option<unsafe extern "C" fn()>,
+    pub _webkit_reserved1: Option<unsafe extern "C" fn()>,
+    pub _webkit_reserved2: Option<unsafe extern "C" fn()>,
+    pub _webkit_reserved3: Option<unsafe extern "C" fn()>,
+}
+
+impl ::std::fmt::Debug for WebKitUserMessageClass {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        f.debug_struct(&format!("WebKitUserMessageClass @ {:?}", self as *const _))
+            .field("parent_class", &self.parent_class)
+            .field("_webkit_reserved0", &self._webkit_reserved0)
+            .field("_webkit_reserved1", &self._webkit_reserved1)
+            .field("_webkit_reserved2", &self._webkit_reserved2)
+            .field("_webkit_reserved3", &self._webkit_reserved3)
+            .finish()
+    }
+}
+
+#[repr(C)]
+pub struct _WebKitUserMessagePrivate(c_void);
+
+pub type WebKitUserMessagePrivate = *mut _WebKitUserMessagePrivate;
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct WebKitWebEditorClass {
     pub parent_class: gobject::GObjectClass,
 }
@@ -3933,6 +3963,22 @@ impl ::std::fmt::Debug for WebKitURIResponse {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct WebKitUserMessage {
+    pub parent: gobject::GInitiallyUnowned,
+    pub priv_: *mut WebKitUserMessagePrivate,
+}
+
+impl ::std::fmt::Debug for WebKitUserMessage {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        f.debug_struct(&format!("WebKitUserMessage @ {:?}", self as *const _))
+            .field("parent", &self.parent)
+            .field("priv_", &self.priv_)
+            .finish()
+    }
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct WebKitWebEditor {
     pub parent: gobject::GObject,
     pub priv_: *mut WebKitWebEditorPrivate,
@@ -4028,16 +4074,19 @@ extern "C" {
     //=========================================================================
     // WebKitConsoleMessageLevel
     //=========================================================================
+    #[cfg(any(feature = "v2_12", feature = "dox"))]
     pub fn webkit_console_message_level_get_type() -> GType;
 
     //=========================================================================
     // WebKitConsoleMessageSource
     //=========================================================================
+    #[cfg(any(feature = "v2_12", feature = "dox"))]
     pub fn webkit_console_message_source_get_type() -> GType;
 
     //=========================================================================
     // WebKitFormSubmissionStep
     //=========================================================================
+    #[cfg(any(feature = "v2_20", feature = "dox"))]
     pub fn webkit_form_submission_step_get_type() -> GType;
 
     //=========================================================================
@@ -8801,6 +8850,38 @@ extern "C" {
     pub fn webkit_uri_response_get_uri(response: *mut WebKitURIResponse) -> *const c_char;
 
     //=========================================================================
+    // WebKitUserMessage
+    //=========================================================================
+    pub fn webkit_user_message_get_type() -> GType;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    pub fn webkit_user_message_new(
+        name: *const c_char,
+        parameters: *mut glib::GVariant,
+    ) -> *mut WebKitUserMessage;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    pub fn webkit_user_message_new_with_fd_list(
+        name: *const c_char,
+        parameters: *mut glib::GVariant,
+        fd_list: *mut gio::GUnixFDList,
+    ) -> *mut WebKitUserMessage;
+    pub fn webkit_user_message_error_quark() -> glib::GQuark;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    pub fn webkit_user_message_get_fd_list(
+        message: *mut WebKitUserMessage,
+    ) -> *mut gio::GUnixFDList;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    pub fn webkit_user_message_get_name(message: *mut WebKitUserMessage) -> *const c_char;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    pub fn webkit_user_message_get_parameters(
+        message: *mut WebKitUserMessage,
+    ) -> *mut glib::GVariant;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    pub fn webkit_user_message_send_reply(
+        message: *mut WebKitUserMessage,
+        reply: *mut WebKitUserMessage,
+    );
+
+    //=========================================================================
     // WebKitWebEditor
     //=========================================================================
     pub fn webkit_web_editor_get_type() -> GType;
@@ -8815,6 +8896,20 @@ extern "C" {
         extension: *mut WebKitWebExtension,
         page_id: u64,
     ) -> *mut WebKitWebPage;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    pub fn webkit_web_extension_send_message_to_context(
+        extension: *mut WebKitWebExtension,
+        message: *mut WebKitUserMessage,
+        cancellable: *mut gio::GCancellable,
+        callback: gio::GAsyncReadyCallback,
+        user_data: gpointer,
+    );
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    pub fn webkit_web_extension_send_message_to_context_finish(
+        extension: *mut WebKitWebExtension,
+        result: *mut gio::GAsyncResult,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitUserMessage;
 
     //=========================================================================
     // WebKitWebHitTestResult
@@ -8836,6 +8931,20 @@ extern "C" {
     pub fn webkit_web_page_get_id(web_page: *mut WebKitWebPage) -> u64;
     pub fn webkit_web_page_get_main_frame(web_page: *mut WebKitWebPage) -> *mut WebKitFrame;
     pub fn webkit_web_page_get_uri(web_page: *mut WebKitWebPage) -> *const c_char;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    pub fn webkit_web_page_send_message_to_view(
+        web_page: *mut WebKitWebPage,
+        message: *mut WebKitUserMessage,
+        cancellable: *mut gio::GCancellable,
+        callback: gio::GAsyncReadyCallback,
+        user_data: gpointer,
+    );
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    pub fn webkit_web_page_send_message_to_view_finish(
+        web_page: *mut WebKitWebPage,
+        result: *mut gio::GAsyncResult,
+        error: *mut *mut glib::GError,
+    ) -> *mut WebKitUserMessage;
 
     //=========================================================================
     // WebKitDOMEventTarget

@@ -41,7 +41,7 @@ impl ScriptWorld {
     }
 
     #[cfg(any(feature = "v2_22", feature = "dox"))]
-    pub fn new_with_name(name: &str) -> ScriptWorld {
+    pub fn with_name(name: &str) -> ScriptWorld {
         assert_initialized_main_thread!();
         unsafe {
             from_glib_full(webkit2_webextension_sys::webkit_script_world_new_with_name(

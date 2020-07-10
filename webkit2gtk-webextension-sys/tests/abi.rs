@@ -1793,6 +1793,27 @@ const RUST_LAYOUTS: &[(&str, Layout)] = &[
         },
     ),
     (
+        "WebKitUserMessage",
+        Layout {
+            size: size_of::<WebKitUserMessage>(),
+            alignment: align_of::<WebKitUserMessage>(),
+        },
+    ),
+    (
+        "WebKitUserMessageClass",
+        Layout {
+            size: size_of::<WebKitUserMessageClass>(),
+            alignment: align_of::<WebKitUserMessageClass>(),
+        },
+    ),
+    (
+        "WebKitUserMessageError",
+        Layout {
+            size: size_of::<WebKitUserMessageError>(),
+            alignment: align_of::<WebKitUserMessageError>(),
+        },
+    ),
+    (
         "WebKitWebEditor",
         Layout {
             size: size_of::<WebKitWebEditor>(),
@@ -2054,4 +2075,5 @@ const RUST_CONSTANTS: &[(&str, &str)] = &[
     ("(guint) WEBKIT_HIT_TEST_RESULT_CONTEXT_MEDIA", "16"),
     ("(guint) WEBKIT_HIT_TEST_RESULT_CONTEXT_SCROLLBAR", "64"),
     ("(guint) WEBKIT_HIT_TEST_RESULT_CONTEXT_SELECTION", "128"),
+    ("(gint) WEBKIT_USER_MESSAGE_UNHANDLED_MESSAGE", "0"),
 ];
