@@ -28,7 +28,7 @@ impl ContextMenuItem {
     //}
 
     #[cfg(any(feature = "v2_18", feature = "dox"))]
-    pub fn new_from_gaction<P: IsA<gio::Action>>(
+    pub fn from_gaction<P: IsA<gio::Action>>(
         action: &P,
         label: &str,
         target: Option<&glib::Variant>,
@@ -45,7 +45,7 @@ impl ContextMenuItem {
         }
     }
 
-    pub fn new_from_stock_action(action: ContextMenuAction) -> ContextMenuItem {
+    pub fn from_stock_action(action: ContextMenuAction) -> ContextMenuItem {
         assert_initialized_main_thread!();
         unsafe {
             from_glib_none(
@@ -56,10 +56,7 @@ impl ContextMenuItem {
         }
     }
 
-    pub fn new_from_stock_action_with_label(
-        action: ContextMenuAction,
-        label: &str,
-    ) -> ContextMenuItem {
+    pub fn from_stock_action_with_label(action: ContextMenuAction, label: &str) -> ContextMenuItem {
         assert_initialized_main_thread!();
         unsafe {
             from_glib_none(
@@ -78,7 +75,7 @@ impl ContextMenuItem {
         }
     }
 
-    pub fn new_with_submenu<P: IsA<ContextMenu>>(label: &str, submenu: &P) -> ContextMenuItem {
+    pub fn with_submenu<P: IsA<ContextMenu>>(label: &str, submenu: &P) -> ContextMenuItem {
         skip_assert_initialized!();
         unsafe {
             from_glib_none(

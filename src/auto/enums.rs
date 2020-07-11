@@ -7,6 +7,7 @@ use std::fmt;
 use webkit2_webextension_sys;
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
+#[non_exhaustive]
 pub enum ContextMenuAction {
     NoAction,
     OpenLink,

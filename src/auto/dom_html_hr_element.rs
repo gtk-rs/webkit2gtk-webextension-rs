@@ -149,14 +149,16 @@ impl<O: IsA<DOMHTMLHRElement>> DOMHTMLHRElementExt for O {
             P: IsA<DOMHTMLHRElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLHRElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLHRElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::align\0".as_ptr() as *const _,
-                Some(transmute(notify_align_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_align_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -171,14 +173,16 @@ impl<O: IsA<DOMHTMLHRElement>> DOMHTMLHRElementExt for O {
             P: IsA<DOMHTMLHRElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLHRElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLHRElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::no-shade\0".as_ptr() as *const _,
-                Some(transmute(notify_no_shade_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_no_shade_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -193,14 +197,16 @@ impl<O: IsA<DOMHTMLHRElement>> DOMHTMLHRElementExt for O {
             P: IsA<DOMHTMLHRElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLHRElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLHRElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::size\0".as_ptr() as *const _,
-                Some(transmute(notify_size_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_size_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -215,14 +221,16 @@ impl<O: IsA<DOMHTMLHRElement>> DOMHTMLHRElementExt for O {
             P: IsA<DOMHTMLHRElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLHRElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLHRElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::width\0".as_ptr() as *const _,
-                Some(transmute(notify_width_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_width_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

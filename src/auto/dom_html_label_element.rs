@@ -84,14 +84,16 @@ impl<O: IsA<DOMHTMLLabelElement>> DOMHTMLLabelElementExt for O {
             P: IsA<DOMHTMLLabelElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLLabelElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLLabelElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::form\0".as_ptr() as *const _,
-                Some(transmute(notify_form_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_form_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -106,14 +108,16 @@ impl<O: IsA<DOMHTMLLabelElement>> DOMHTMLLabelElementExt for O {
             P: IsA<DOMHTMLLabelElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLLabelElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLLabelElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::html-for\0".as_ptr() as *const _,
-                Some(transmute(notify_html_for_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_html_for_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

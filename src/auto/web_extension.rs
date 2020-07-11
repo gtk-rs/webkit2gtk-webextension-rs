@@ -27,7 +27,17 @@ pub const NONE_WEB_EXTENSION: Option<&WebExtension> = None;
 pub trait WebExtensionExt: 'static {
     fn get_page(&self, page_id: u64) -> Option<WebPage>;
 
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn send_message_to_context<P: FnOnce(Result</*Ignored*/UserMessage, glib::Error>) + Send + 'static>(&self, message: /*Ignored*/&UserMessage, cancellable: /*Ignored*/Option<&gio::Cancellable>, callback: P);
+
+    //
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn send_message_to_context_future(&self, message: /*Ignored*/&UserMessage) -> Pin<Box_<dyn std::future::Future<Output = Result</*Ignored*/UserMessage, glib::Error>> + 'static>>;
+
     fn connect_page_created<F: Fn(&Self, &WebPage) + 'static>(&self, f: F) -> SignalHandlerId;
+
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn connect_user_message_received<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId;
 }
 
 impl<O: IsA<WebExtension>> WebExtensionExt for O {
@@ -40,6 +50,30 @@ impl<O: IsA<WebExtension>> WebExtensionExt for O {
         }
     }
 
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn send_message_to_context<P: FnOnce(Result</*Ignored*/UserMessage, glib::Error>) + Send + 'static>(&self, message: /*Ignored*/&UserMessage, cancellable: /*Ignored*/Option<&gio::Cancellable>, callback: P) {
+    //    unsafe { TODO: call webkit2_webextension_sys:webkit_web_extension_send_message_to_context() }
+    //}
+
+    //
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn send_message_to_context_future(&self, message: /*Ignored*/&UserMessage) -> Pin<Box_<dyn std::future::Future<Output = Result</*Ignored*/UserMessage, glib::Error>> + 'static>> {
+
+    //let message = message.clone();
+    //Box_::pin(gio::GioFuture::new(self, move |obj, send| {
+    //    let cancellable = gio::Cancellable::new();
+    //    obj.send_message_to_context(
+    //        &message,
+    //        Some(&cancellable),
+    //        move |res| {
+    //            send.resolve(res);
+    //        },
+    //    );
+
+    //    cancellable
+    //}))
+    //}
+
     fn connect_page_created<F: Fn(&Self, &WebPage) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn page_created_trampoline<P, F: Fn(&P, &WebPage) + 'static>(
             this: *mut webkit2_webextension_sys::WebKitWebExtension,
@@ -50,7 +84,7 @@ impl<O: IsA<WebExtension>> WebExtensionExt for O {
         {
             let f: &F = &*(f as *const F);
             f(
-                &WebExtension::from_glib_borrow(this).unsafe_cast(),
+                &WebExtension::from_glib_borrow(this).unsafe_cast_ref(),
                 &from_glib_borrow(web_page),
             )
         }
@@ -59,11 +93,18 @@ impl<O: IsA<WebExtension>> WebExtensionExt for O {
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"page-created\0".as_ptr() as *const _,
-                Some(transmute(page_created_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    page_created_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
     }
+
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn connect_user_message_received<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId {
+    //    Ignored message: WebKit2WebExtension.UserMessage
+    //}
 }
 
 impl fmt::Display for WebExtension {

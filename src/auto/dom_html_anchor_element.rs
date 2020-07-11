@@ -572,14 +572,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::charset\0".as_ptr() as *const _,
-                Some(transmute(notify_charset_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_charset_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -594,14 +596,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::coords\0".as_ptr() as *const _,
-                Some(transmute(notify_coords_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_coords_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -616,14 +620,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::hash\0".as_ptr() as *const _,
-                Some(transmute(notify_hash_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_hash_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -638,14 +644,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::host\0".as_ptr() as *const _,
-                Some(transmute(notify_host_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_host_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -660,14 +668,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::hostname\0".as_ptr() as *const _,
-                Some(transmute(notify_hostname_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_hostname_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -682,14 +692,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::href\0".as_ptr() as *const _,
-                Some(transmute(notify_href_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_href_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -704,14 +716,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::hreflang\0".as_ptr() as *const _,
-                Some(transmute(notify_hreflang_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_hreflang_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -726,14 +740,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_name_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -748,14 +764,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::pathname\0".as_ptr() as *const _,
-                Some(transmute(notify_pathname_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_pathname_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -770,14 +788,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::port\0".as_ptr() as *const _,
-                Some(transmute(notify_port_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_port_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -792,14 +812,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::protocol\0".as_ptr() as *const _,
-                Some(transmute(notify_protocol_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_protocol_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -814,14 +836,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::rel\0".as_ptr() as *const _,
-                Some(transmute(notify_rel_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_rel_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -836,14 +860,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::rev\0".as_ptr() as *const _,
-                Some(transmute(notify_rev_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_rev_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -858,14 +884,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::search\0".as_ptr() as *const _,
-                Some(transmute(notify_search_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_search_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -880,14 +908,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::shape\0".as_ptr() as *const _,
-                Some(transmute(notify_shape_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_shape_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -902,14 +932,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::target\0".as_ptr() as *const _,
-                Some(transmute(notify_target_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_target_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -924,14 +956,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::text\0".as_ptr() as *const _,
-                Some(transmute(notify_text_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_text_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -946,14 +980,16 @@ impl<O: IsA<DOMHTMLAnchorElement>> DOMHTMLAnchorElementExt for O {
             P: IsA<DOMHTMLAnchorElement>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLAnchorElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::type\0".as_ptr() as *const _,
-                Some(transmute(notify_type_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_type_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

@@ -223,14 +223,16 @@ impl<O: IsA<DOMCSSStyleDeclaration>> DOMCSSStyleDeclarationExt for O {
             P: IsA<DOMCSSStyleDeclaration>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMCSSStyleDeclaration::from_glib_borrow(this).unsafe_cast())
+            f(&DOMCSSStyleDeclaration::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::css-text\0".as_ptr() as *const _,
-                Some(transmute(notify_css_text_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_css_text_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -245,14 +247,16 @@ impl<O: IsA<DOMCSSStyleDeclaration>> DOMCSSStyleDeclarationExt for O {
             P: IsA<DOMCSSStyleDeclaration>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMCSSStyleDeclaration::from_glib_borrow(this).unsafe_cast())
+            f(&DOMCSSStyleDeclaration::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::length\0".as_ptr() as *const _,
-                Some(transmute(notify_length_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_length_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -267,14 +271,16 @@ impl<O: IsA<DOMCSSStyleDeclaration>> DOMCSSStyleDeclarationExt for O {
             P: IsA<DOMCSSStyleDeclaration>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMCSSStyleDeclaration::from_glib_borrow(this).unsafe_cast())
+            f(&DOMCSSStyleDeclaration::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::parent-rule\0".as_ptr() as *const _,
-                Some(transmute(notify_parent_rule_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_parent_rule_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

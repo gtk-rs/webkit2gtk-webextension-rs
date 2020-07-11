@@ -71,14 +71,16 @@ impl<O: IsA<DOMProcessingInstruction>> DOMProcessingInstructionExt for O {
             P: IsA<DOMProcessingInstruction>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMProcessingInstruction::from_glib_borrow(this).unsafe_cast())
+            f(&DOMProcessingInstruction::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::sheet\0".as_ptr() as *const _,
-                Some(transmute(notify_sheet_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_sheet_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -93,14 +95,16 @@ impl<O: IsA<DOMProcessingInstruction>> DOMProcessingInstructionExt for O {
             P: IsA<DOMProcessingInstruction>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMProcessingInstruction::from_glib_borrow(this).unsafe_cast())
+            f(&DOMProcessingInstruction::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::target\0".as_ptr() as *const _,
-                Some(transmute(notify_target_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_target_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }

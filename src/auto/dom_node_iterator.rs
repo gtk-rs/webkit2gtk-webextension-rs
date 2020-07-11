@@ -168,14 +168,16 @@ impl<O: IsA<DOMNodeIterator>> DOMNodeIteratorExt for O {
             P: IsA<DOMNodeIterator>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::filter\0".as_ptr() as *const _,
-                Some(transmute(notify_filter_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_filter_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -196,15 +198,15 @@ impl<O: IsA<DOMNodeIterator>> DOMNodeIteratorExt for O {
             P: IsA<DOMNodeIterator>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::pointer-before-reference-node\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_pointer_before_reference_node_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_pointer_before_reference_node_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -223,15 +225,15 @@ impl<O: IsA<DOMNodeIterator>> DOMNodeIteratorExt for O {
             P: IsA<DOMNodeIterator>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::reference-node\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_reference_node_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_reference_node_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
@@ -247,14 +249,16 @@ impl<O: IsA<DOMNodeIterator>> DOMNodeIteratorExt for O {
             P: IsA<DOMNodeIterator>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::root\0".as_ptr() as *const _,
-                Some(transmute(notify_root_trampoline::<Self, F> as usize)),
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_root_trampoline::<Self, F> as *const (),
+                )),
                 Box_::into_raw(f),
             )
         }
@@ -272,15 +276,15 @@ impl<O: IsA<DOMNodeIterator>> DOMNodeIteratorExt for O {
             P: IsA<DOMNodeIterator>,
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNodeIterator::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
                 b"notify::what-to-show\0".as_ptr() as *const _,
-                Some(transmute(
-                    notify_what_to_show_trampoline::<Self, F> as usize,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    notify_what_to_show_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
             )
