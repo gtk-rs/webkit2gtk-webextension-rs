@@ -1433,12 +1433,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::active-element\0".as_ptr() as *const _,
-                Some(transmute(notify_active_element_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_active_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1447,12 +1447,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::anchors\0".as_ptr() as *const _,
-                Some(transmute(notify_anchors_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_anchors_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1461,12 +1461,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::applets\0".as_ptr() as *const _,
-                Some(transmute(notify_applets_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_applets_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1475,12 +1475,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::body\0".as_ptr() as *const _,
-                Some(transmute(notify_body_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_body_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1489,12 +1489,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::character-set\0".as_ptr() as *const _,
-                Some(transmute(notify_character_set_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_character_set_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1503,12 +1503,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::charset\0".as_ptr() as *const _,
-                Some(transmute(notify_charset_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_charset_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1517,12 +1517,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::child-element-count\0".as_ptr() as *const _,
-                Some(transmute(notify_child_element_count_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_child_element_count_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1531,12 +1531,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::children\0".as_ptr() as *const _,
-                Some(transmute(notify_children_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_children_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1545,12 +1545,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::compat-mode\0".as_ptr() as *const _,
-                Some(transmute(notify_compat_mode_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_compat_mode_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1559,12 +1559,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::content-type\0".as_ptr() as *const _,
-                Some(transmute(notify_content_type_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_content_type_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1573,12 +1573,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::cookie\0".as_ptr() as *const _,
-                Some(transmute(notify_cookie_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_cookie_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1587,12 +1587,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::current-script\0".as_ptr() as *const _,
-                Some(transmute(notify_current_script_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_current_script_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1601,12 +1601,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::default-view\0".as_ptr() as *const _,
-                Some(transmute(notify_default_view_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_default_view_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1615,12 +1615,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::design-mode\0".as_ptr() as *const _,
-                Some(transmute(notify_design_mode_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_design_mode_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1629,12 +1629,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::dir\0".as_ptr() as *const _,
-                Some(transmute(notify_dir_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_dir_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1643,12 +1643,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::doctype\0".as_ptr() as *const _,
-                Some(transmute(notify_doctype_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_doctype_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1657,12 +1657,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::document-element\0".as_ptr() as *const _,
-                Some(transmute(notify_document_element_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_document_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1671,12 +1671,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::document-uri\0".as_ptr() as *const _,
-                Some(transmute(notify_document_uri_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_document_uri_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1685,12 +1685,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::domain\0".as_ptr() as *const _,
-                Some(transmute(notify_domain_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_domain_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1699,12 +1699,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::embeds\0".as_ptr() as *const _,
-                Some(transmute(notify_embeds_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_embeds_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1713,12 +1713,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::first-element-child\0".as_ptr() as *const _,
-                Some(transmute(notify_first_element_child_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_first_element_child_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1727,12 +1727,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::forms\0".as_ptr() as *const _,
-                Some(transmute(notify_forms_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_forms_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1741,12 +1741,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::head\0".as_ptr() as *const _,
-                Some(transmute(notify_head_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_head_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1755,12 +1755,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::hidden\0".as_ptr() as *const _,
-                Some(transmute(notify_hidden_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_hidden_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1769,12 +1769,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::images\0".as_ptr() as *const _,
-                Some(transmute(notify_images_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_images_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1783,12 +1783,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::implementation\0".as_ptr() as *const _,
-                Some(transmute(notify_implementation_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_implementation_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1797,12 +1797,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::input-encoding\0".as_ptr() as *const _,
-                Some(transmute(notify_input_encoding_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_input_encoding_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1811,12 +1811,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::last-element-child\0".as_ptr() as *const _,
-                Some(transmute(notify_last_element_child_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_last_element_child_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1825,12 +1825,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::last-modified\0".as_ptr() as *const _,
-                Some(transmute(notify_last_modified_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_last_modified_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1839,12 +1839,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::links\0".as_ptr() as *const _,
-                Some(transmute(notify_links_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_links_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1853,12 +1853,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::origin\0".as_ptr() as *const _,
-                Some(transmute(notify_origin_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_origin_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1867,12 +1867,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::plugins\0".as_ptr() as *const _,
-                Some(transmute(notify_plugins_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_plugins_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1881,12 +1881,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::pointer-lock-element\0".as_ptr() as *const _,
-                Some(transmute(notify_pointer_lock_element_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_pointer_lock_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1895,12 +1895,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::preferred-stylesheet-set\0".as_ptr() as *const _,
-                Some(transmute(notify_preferred_stylesheet_set_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_preferred_stylesheet_set_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1909,12 +1909,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::ready-state\0".as_ptr() as *const _,
-                Some(transmute(notify_ready_state_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_ready_state_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1923,12 +1923,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::referrer\0".as_ptr() as *const _,
-                Some(transmute(notify_referrer_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_referrer_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1937,12 +1937,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::scripts\0".as_ptr() as *const _,
-                Some(transmute(notify_scripts_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_scripts_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1951,12 +1951,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::scrolling-element\0".as_ptr() as *const _,
-                Some(transmute(notify_scrolling_element_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_scrolling_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1965,12 +1965,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::selected-stylesheet-set\0".as_ptr() as *const _,
-                Some(transmute(notify_selected_stylesheet_set_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_selected_stylesheet_set_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1979,12 +1979,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::style-sheets\0".as_ptr() as *const _,
-                Some(transmute(notify_style_sheets_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_style_sheets_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -1993,12 +1993,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::title\0".as_ptr() as *const _,
-                Some(transmute(notify_title_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_title_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -2007,12 +2007,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::url\0".as_ptr() as *const _,
-                Some(transmute(notify_url_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_url_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -2021,12 +2021,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::visibility-state\0".as_ptr() as *const _,
-                Some(transmute(notify_visibility_state_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_visibility_state_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -2035,12 +2035,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::webkit-current-full-screen-element\0".as_ptr() as *const _,
-                Some(transmute(notify_webkit_current_full_screen_element_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_webkit_current_full_screen_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -2049,12 +2049,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::webkit-full-screen-keyboard-input-allowed\0".as_ptr() as *const _,
-                Some(transmute(notify_webkit_full_screen_keyboard_input_allowed_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_webkit_full_screen_keyboard_input_allowed_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -2063,12 +2063,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::webkit-fullscreen-element\0".as_ptr() as *const _,
-                Some(transmute(notify_webkit_fullscreen_element_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_webkit_fullscreen_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -2077,12 +2077,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::webkit-fullscreen-enabled\0".as_ptr() as *const _,
-                Some(transmute(notify_webkit_fullscreen_enabled_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_webkit_fullscreen_enabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -2091,12 +2091,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::webkit-is-full-screen\0".as_ptr() as *const _,
-                Some(transmute(notify_webkit_is_full_screen_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_webkit_is_full_screen_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -2105,12 +2105,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::xml-encoding\0".as_ptr() as *const _,
-                Some(transmute(notify_xml_encoding_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_xml_encoding_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -2119,12 +2119,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::xml-standalone\0".as_ptr() as *const _,
-                Some(transmute(notify_xml_standalone_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_xml_standalone_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -2133,12 +2133,12 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
             where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocument::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::xml-version\0".as_ptr() as *const _,
-                Some(transmute(notify_xml_version_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_xml_version_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

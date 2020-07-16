@@ -119,12 +119,12 @@ impl<O: IsA<DOMHTMLOListElement>> DOMHTMLOListElementExt for O {
             where P: IsA<DOMHTMLOListElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLOListElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLOListElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::compact\0".as_ptr() as *const _,
-                Some(transmute(notify_compact_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_compact_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -133,12 +133,12 @@ impl<O: IsA<DOMHTMLOListElement>> DOMHTMLOListElementExt for O {
             where P: IsA<DOMHTMLOListElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLOListElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLOListElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::start\0".as_ptr() as *const _,
-                Some(transmute(notify_start_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_start_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -147,12 +147,12 @@ impl<O: IsA<DOMHTMLOListElement>> DOMHTMLOListElementExt for O {
             where P: IsA<DOMHTMLOListElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLOListElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLOListElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::type\0".as_ptr() as *const _,
-                Some(transmute(notify_type_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_type_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

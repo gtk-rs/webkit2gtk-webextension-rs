@@ -173,12 +173,12 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
             where P: IsA<DOMClientRect>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
+            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::bottom\0".as_ptr() as *const _,
-                Some(transmute(notify_bottom_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_bottom_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -187,12 +187,12 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
             where P: IsA<DOMClientRect>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
+            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
-                Some(transmute(notify_height_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_height_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -201,12 +201,12 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
             where P: IsA<DOMClientRect>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
+            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::left\0".as_ptr() as *const _,
-                Some(transmute(notify_left_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_left_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -215,12 +215,12 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
             where P: IsA<DOMClientRect>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
+            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::right\0".as_ptr() as *const _,
-                Some(transmute(notify_right_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_right_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -229,12 +229,12 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
             where P: IsA<DOMClientRect>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
+            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::top\0".as_ptr() as *const _,
-                Some(transmute(notify_top_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_top_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -243,12 +243,12 @@ impl<O: IsA<DOMClientRect>> DOMClientRectExt for O {
             where P: IsA<DOMClientRect>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast())
+            f(&DOMClientRect::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
-                Some(transmute(notify_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_width_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

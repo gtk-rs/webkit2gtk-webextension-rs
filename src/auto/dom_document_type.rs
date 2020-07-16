@@ -102,12 +102,12 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
             where P: IsA<DOMDocumentType>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::entities\0".as_ptr() as *const _,
-                Some(transmute(notify_entities_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_entities_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -116,12 +116,12 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
             where P: IsA<DOMDocumentType>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::internal-subset\0".as_ptr() as *const _,
-                Some(transmute(notify_internal_subset_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_internal_subset_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -130,12 +130,12 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
             where P: IsA<DOMDocumentType>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -144,12 +144,12 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
             where P: IsA<DOMDocumentType>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::notations\0".as_ptr() as *const _,
-                Some(transmute(notify_notations_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_notations_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -158,12 +158,12 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
             where P: IsA<DOMDocumentType>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::public-id\0".as_ptr() as *const _,
-                Some(transmute(notify_public_id_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_public_id_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -172,12 +172,12 @@ impl<O: IsA<DOMDocumentType>> DOMDocumentTypeExt for O {
             where P: IsA<DOMDocumentType>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast())
+            f(&DOMDocumentType::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::system-id\0".as_ptr() as *const _,
-                Some(transmute(notify_system_id_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_system_id_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

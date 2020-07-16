@@ -50,6 +50,13 @@ pub trait WebPageExt: 'static {
 
     fn get_uri(&self) -> Option<GString>;
 
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn send_message_to_view<P: FnOnce(Result</*Ignored*/UserMessage, glib::Error>) + Send + 'static>(&self, message: /*Ignored*/&UserMessage, cancellable: /*Ignored*/Option<&gio::Cancellable>, callback: P);
+
+    //
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn send_message_to_view_future(&self, message: /*Ignored*/&UserMessage) -> Pin<Box_<dyn std::future::Future<Output = Result</*Ignored*/UserMessage, glib::Error>> + 'static>>;
+
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn connect_console_message_sent<F: Fn(&Self, &ConsoleMessage) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -66,6 +73,9 @@ pub trait WebPageExt: 'static {
     //fn connect_form_controls_associated_for_frame<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId;
 
     fn connect_send_request<F: Fn(&Self, &URIRequest, Option<&URIResponse>) -> bool + 'static>(&self, f: F) -> SignalHandlerId;
+
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn connect_user_message_received<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId;
 
     //#[cfg(any(feature = "v2_20", feature = "dox"))]
     //fn connect_will_submit_form<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId;
@@ -106,18 +116,42 @@ impl<O: IsA<WebPage>> WebPageExt for O {
         }
     }
 
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn send_message_to_view<P: FnOnce(Result</*Ignored*/UserMessage, glib::Error>) + Send + 'static>(&self, message: /*Ignored*/&UserMessage, cancellable: /*Ignored*/Option<&gio::Cancellable>, callback: P) {
+    //    unsafe { TODO: call webkit2_webextension_sys:webkit_web_page_send_message_to_view() }
+    //}
+
+    //
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn send_message_to_view_future(&self, message: /*Ignored*/&UserMessage) -> Pin<Box_<dyn std::future::Future<Output = Result</*Ignored*/UserMessage, glib::Error>> + 'static>> {
+
+        //let message = message.clone();
+        //Box_::pin(gio::GioFuture::new(self, move |obj, send| {
+        //    let cancellable = gio::Cancellable::new();
+        //    obj.send_message_to_view(
+        //        &message,
+        //        Some(&cancellable),
+        //        move |res| {
+        //            send.resolve(res);
+        //        },
+        //    );
+
+        //    cancellable
+        //}))
+    //}
+
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn connect_console_message_sent<F: Fn(&Self, &ConsoleMessage) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn console_message_sent_trampoline<P, F: Fn(&P, &ConsoleMessage) + 'static>(this: *mut webkit2_webextension_sys::WebKitWebPage, console_message: *mut webkit2_webextension_sys::WebKitConsoleMessage, f: glib_sys::gpointer)
             where P: IsA<WebPage>
         {
             let f: &F = &*(f as *const F);
-            f(&WebPage::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(console_message))
+            f(&WebPage::from_glib_borrow(this).unsafe_cast_ref(), &from_glib_borrow(console_message))
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"console-message-sent\0".as_ptr() as *const _,
-                Some(transmute(console_message_sent_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(console_message_sent_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -127,12 +161,12 @@ impl<O: IsA<WebPage>> WebPageExt for O {
             where P: IsA<WebPage>
         {
             let f: &F = &*(f as *const F);
-            f(&WebPage::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(context_menu), &from_glib_borrow(hit_test_result)).to_glib()
+            f(&WebPage::from_glib_borrow(this).unsafe_cast_ref(), &from_glib_borrow(context_menu), &from_glib_borrow(hit_test_result)).to_glib()
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"context-menu\0".as_ptr() as *const _,
-                Some(transmute(context_menu_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(context_menu_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -141,12 +175,12 @@ impl<O: IsA<WebPage>> WebPageExt for O {
             where P: IsA<WebPage>
         {
             let f: &F = &*(f as *const F);
-            f(&WebPage::from_glib_borrow(this).unsafe_cast())
+            f(&WebPage::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"document-loaded\0".as_ptr() as *const _,
-                Some(transmute(document_loaded_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(document_loaded_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -165,14 +199,19 @@ impl<O: IsA<WebPage>> WebPageExt for O {
             where P: IsA<WebPage>
         {
             let f: &F = &*(f as *const F);
-            f(&WebPage::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(request), Option::<URIResponse>::from_glib_borrow(redirected_response).as_ref()).to_glib()
+            f(&WebPage::from_glib_borrow(this).unsafe_cast_ref(), &from_glib_borrow(request), Option::<URIResponse>::from_glib_borrow(redirected_response).as_ref().as_ref()).to_glib()
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"send-request\0".as_ptr() as *const _,
-                Some(transmute(send_request_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(send_request_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
+
+    //#[cfg(any(feature = "v2_28", feature = "dox"))]
+    //fn connect_user_message_received<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId {
+    //    Ignored message: WebKit2WebExtension.UserMessage
+    //}
 
     //#[cfg(any(feature = "v2_20", feature = "dox"))]
     //fn connect_will_submit_form<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId {
@@ -186,12 +225,12 @@ impl<O: IsA<WebPage>> WebPageExt for O {
             where P: IsA<WebPage>
         {
             let f: &F = &*(f as *const F);
-            f(&WebPage::from_glib_borrow(this).unsafe_cast())
+            f(&WebPage::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::uri\0".as_ptr() as *const _,
-                Some(transmute(notify_uri_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_uri_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

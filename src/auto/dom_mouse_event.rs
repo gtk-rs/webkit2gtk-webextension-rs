@@ -223,12 +223,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alt-key\0".as_ptr() as *const _,
-                Some(transmute(notify_alt_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_alt_key_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -237,12 +237,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::button\0".as_ptr() as *const _,
-                Some(transmute(notify_button_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_button_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -251,12 +251,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::client-x\0".as_ptr() as *const _,
-                Some(transmute(notify_client_x_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_client_x_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -265,12 +265,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::client-y\0".as_ptr() as *const _,
-                Some(transmute(notify_client_y_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_client_y_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -279,12 +279,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::ctrl-key\0".as_ptr() as *const _,
-                Some(transmute(notify_ctrl_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_ctrl_key_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -293,12 +293,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::from-element\0".as_ptr() as *const _,
-                Some(transmute(notify_from_element_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_from_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -307,12 +307,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::meta-key\0".as_ptr() as *const _,
-                Some(transmute(notify_meta_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_meta_key_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -321,12 +321,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::offset-x\0".as_ptr() as *const _,
-                Some(transmute(notify_offset_x_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_offset_x_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -335,12 +335,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::offset-y\0".as_ptr() as *const _,
-                Some(transmute(notify_offset_y_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_offset_y_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -349,12 +349,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::related-target\0".as_ptr() as *const _,
-                Some(transmute(notify_related_target_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_related_target_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -363,12 +363,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::screen-x\0".as_ptr() as *const _,
-                Some(transmute(notify_screen_x_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_screen_x_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -377,12 +377,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::screen-y\0".as_ptr() as *const _,
-                Some(transmute(notify_screen_y_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_screen_y_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -391,12 +391,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::shift-key\0".as_ptr() as *const _,
-                Some(transmute(notify_shift_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_shift_key_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -405,12 +405,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::to-element\0".as_ptr() as *const _,
-                Some(transmute(notify_to_element_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_to_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -419,12 +419,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::x\0".as_ptr() as *const _,
-                Some(transmute(notify_x_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_x_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -433,12 +433,12 @@ impl<O: IsA<DOMMouseEvent>> DOMMouseEventExt for O {
             where P: IsA<DOMMouseEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMMouseEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::y\0".as_ptr() as *const _,
-                Some(transmute(notify_y_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_y_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

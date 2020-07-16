@@ -623,12 +623,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::accept\0".as_ptr() as *const _,
-                Some(transmute(notify_accept_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_accept_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -637,12 +637,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
-                Some(transmute(notify_align_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_align_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -651,12 +651,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alt\0".as_ptr() as *const _,
-                Some(transmute(notify_alt_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_alt_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -665,12 +665,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::autofocus\0".as_ptr() as *const _,
-                Some(transmute(notify_autofocus_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_autofocus_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -679,12 +679,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::capture\0".as_ptr() as *const _,
-                Some(transmute(notify_capture_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_capture_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -693,12 +693,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::checked\0".as_ptr() as *const _,
-                Some(transmute(notify_checked_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_checked_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -707,12 +707,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::default-checked\0".as_ptr() as *const _,
-                Some(transmute(notify_default_checked_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_default_checked_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -721,12 +721,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::default-value\0".as_ptr() as *const _,
-                Some(transmute(notify_default_value_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_default_value_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -735,12 +735,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::disabled\0".as_ptr() as *const _,
-                Some(transmute(notify_disabled_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -749,12 +749,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::files\0".as_ptr() as *const _,
-                Some(transmute(notify_files_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_files_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -763,12 +763,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::form\0".as_ptr() as *const _,
-                Some(transmute(notify_form_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_form_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -777,12 +777,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
-                Some(transmute(notify_height_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_height_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -791,12 +791,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::indeterminate\0".as_ptr() as *const _,
-                Some(transmute(notify_indeterminate_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_indeterminate_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -805,12 +805,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::max-length\0".as_ptr() as *const _,
-                Some(transmute(notify_max_length_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_max_length_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -819,12 +819,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::multiple\0".as_ptr() as *const _,
-                Some(transmute(notify_multiple_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_multiple_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -833,12 +833,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -847,12 +847,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::read-only\0".as_ptr() as *const _,
-                Some(transmute(notify_read_only_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_read_only_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -861,12 +861,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::size\0".as_ptr() as *const _,
-                Some(transmute(notify_size_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_size_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -875,12 +875,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::src\0".as_ptr() as *const _,
-                Some(transmute(notify_src_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_src_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -889,12 +889,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::type\0".as_ptr() as *const _,
-                Some(transmute(notify_type_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_type_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -903,12 +903,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::use-map\0".as_ptr() as *const _,
-                Some(transmute(notify_use_map_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_use_map_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -917,12 +917,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::value\0".as_ptr() as *const _,
-                Some(transmute(notify_value_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_value_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -931,12 +931,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
-                Some(transmute(notify_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_width_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -945,12 +945,12 @@ impl<O: IsA<DOMHTMLInputElement>> DOMHTMLInputElementExt for O {
             where P: IsA<DOMHTMLInputElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLInputElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::will-validate\0".as_ptr() as *const _,
-                Some(transmute(notify_will_validate_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_will_validate_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

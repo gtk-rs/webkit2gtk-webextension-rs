@@ -161,12 +161,12 @@ impl<O: IsA<DOMTreeWalker>> DOMTreeWalkerExt for O {
             where P: IsA<DOMTreeWalker>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
+            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::current-node\0".as_ptr() as *const _,
-                Some(transmute(notify_current_node_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_current_node_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -175,12 +175,12 @@ impl<O: IsA<DOMTreeWalker>> DOMTreeWalkerExt for O {
             where P: IsA<DOMTreeWalker>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
+            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::filter\0".as_ptr() as *const _,
-                Some(transmute(notify_filter_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_filter_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -189,12 +189,12 @@ impl<O: IsA<DOMTreeWalker>> DOMTreeWalkerExt for O {
             where P: IsA<DOMTreeWalker>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
+            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::root\0".as_ptr() as *const _,
-                Some(transmute(notify_root_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_root_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -203,12 +203,12 @@ impl<O: IsA<DOMTreeWalker>> DOMTreeWalkerExt for O {
             where P: IsA<DOMTreeWalker>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast())
+            f(&DOMTreeWalker::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::what-to-show\0".as_ptr() as *const _,
-                Some(transmute(notify_what_to_show_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_what_to_show_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

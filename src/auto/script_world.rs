@@ -43,7 +43,7 @@ impl ScriptWorld {
     }
 
     #[cfg(any(feature = "v2_22", feature = "dox"))]
-    pub fn new_with_name(name: &str) -> ScriptWorld {
+    pub fn with_name(name: &str) -> ScriptWorld {
         assert_initialized_main_thread!();
         unsafe {
             from_glib_full(webkit2_webextension_sys::webkit_script_world_new_with_name(name.to_glib_none().0))
@@ -90,12 +90,12 @@ impl<O: IsA<ScriptWorld>> ScriptWorldExt for O {
             where P: IsA<ScriptWorld>
         {
             let f: &F = &*(f as *const F);
-            f(&ScriptWorld::from_glib_borrow(this).unsafe_cast(), &from_glib_borrow(page), &from_glib_borrow(frame))
+            f(&ScriptWorld::from_glib_borrow(this).unsafe_cast_ref(), &from_glib_borrow(page), &from_glib_borrow(frame))
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"window-object-cleared\0".as_ptr() as *const _,
-                Some(transmute(window_object_cleared_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(window_object_cleared_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

@@ -219,12 +219,12 @@ impl<O: IsA<DOMHTMLFormElement>> DOMHTMLFormElementExt for O {
             where P: IsA<DOMHTMLFormElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::accept-charset\0".as_ptr() as *const _,
-                Some(transmute(notify_accept_charset_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_accept_charset_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -233,12 +233,12 @@ impl<O: IsA<DOMHTMLFormElement>> DOMHTMLFormElementExt for O {
             where P: IsA<DOMHTMLFormElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::action\0".as_ptr() as *const _,
-                Some(transmute(notify_action_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_action_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -247,12 +247,12 @@ impl<O: IsA<DOMHTMLFormElement>> DOMHTMLFormElementExt for O {
             where P: IsA<DOMHTMLFormElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::elements\0".as_ptr() as *const _,
-                Some(transmute(notify_elements_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_elements_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -261,12 +261,12 @@ impl<O: IsA<DOMHTMLFormElement>> DOMHTMLFormElementExt for O {
             where P: IsA<DOMHTMLFormElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::encoding\0".as_ptr() as *const _,
-                Some(transmute(notify_encoding_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_encoding_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -275,12 +275,12 @@ impl<O: IsA<DOMHTMLFormElement>> DOMHTMLFormElementExt for O {
             where P: IsA<DOMHTMLFormElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::enctype\0".as_ptr() as *const _,
-                Some(transmute(notify_enctype_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_enctype_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -289,12 +289,12 @@ impl<O: IsA<DOMHTMLFormElement>> DOMHTMLFormElementExt for O {
             where P: IsA<DOMHTMLFormElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::length\0".as_ptr() as *const _,
-                Some(transmute(notify_length_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_length_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -303,12 +303,12 @@ impl<O: IsA<DOMHTMLFormElement>> DOMHTMLFormElementExt for O {
             where P: IsA<DOMHTMLFormElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::method\0".as_ptr() as *const _,
-                Some(transmute(notify_method_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_method_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -317,12 +317,12 @@ impl<O: IsA<DOMHTMLFormElement>> DOMHTMLFormElementExt for O {
             where P: IsA<DOMHTMLFormElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -331,12 +331,12 @@ impl<O: IsA<DOMHTMLFormElement>> DOMHTMLFormElementExt for O {
             where P: IsA<DOMHTMLFormElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFormElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::target\0".as_ptr() as *const _,
-                Some(transmute(notify_target_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_target_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

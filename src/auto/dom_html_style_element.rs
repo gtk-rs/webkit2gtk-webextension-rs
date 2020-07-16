@@ -130,12 +130,12 @@ impl<O: IsA<DOMHTMLStyleElement>> DOMHTMLStyleElementExt for O {
             where P: IsA<DOMHTMLStyleElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLStyleElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLStyleElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::disabled\0".as_ptr() as *const _,
-                Some(transmute(notify_disabled_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -144,12 +144,12 @@ impl<O: IsA<DOMHTMLStyleElement>> DOMHTMLStyleElementExt for O {
             where P: IsA<DOMHTMLStyleElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLStyleElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLStyleElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::media\0".as_ptr() as *const _,
-                Some(transmute(notify_media_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_media_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -158,12 +158,12 @@ impl<O: IsA<DOMHTMLStyleElement>> DOMHTMLStyleElementExt for O {
             where P: IsA<DOMHTMLStyleElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLStyleElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLStyleElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::sheet\0".as_ptr() as *const _,
-                Some(transmute(notify_sheet_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_sheet_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -172,12 +172,12 @@ impl<O: IsA<DOMHTMLStyleElement>> DOMHTMLStyleElementExt for O {
             where P: IsA<DOMHTMLStyleElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLStyleElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLStyleElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::type\0".as_ptr() as *const _,
-                Some(transmute(notify_type_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_type_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
