@@ -408,12 +408,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::base-uri\0".as_ptr() as *const _,
-                Some(transmute(notify_base_uri_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_base_uri_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -422,12 +422,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::child-nodes\0".as_ptr() as *const _,
-                Some(transmute(notify_child_nodes_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_child_nodes_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -436,12 +436,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::first-child\0".as_ptr() as *const _,
-                Some(transmute(notify_first_child_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_first_child_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -450,12 +450,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::last-child\0".as_ptr() as *const _,
-                Some(transmute(notify_last_child_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_last_child_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -464,12 +464,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::next-sibling\0".as_ptr() as *const _,
-                Some(transmute(notify_next_sibling_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_next_sibling_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -478,12 +478,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::node-name\0".as_ptr() as *const _,
-                Some(transmute(notify_node_name_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_node_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -492,12 +492,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::node-type\0".as_ptr() as *const _,
-                Some(transmute(notify_node_type_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_node_type_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -506,12 +506,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::node-value\0".as_ptr() as *const _,
-                Some(transmute(notify_node_value_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_node_value_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -520,12 +520,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::owner-document\0".as_ptr() as *const _,
-                Some(transmute(notify_owner_document_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_owner_document_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -534,12 +534,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::parent-element\0".as_ptr() as *const _,
-                Some(transmute(notify_parent_element_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_parent_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -548,12 +548,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::parent-node\0".as_ptr() as *const _,
-                Some(transmute(notify_parent_node_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_parent_node_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -562,12 +562,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::previous-sibling\0".as_ptr() as *const _,
-                Some(transmute(notify_previous_sibling_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_previous_sibling_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -576,12 +576,12 @@ impl<O: IsA<DOMNode>> DOMNodeExt for O {
             where P: IsA<DOMNode>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMNode::from_glib_borrow(this).unsafe_cast())
+            f(&DOMNode::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::text-content\0".as_ptr() as *const _,
-                Some(transmute(notify_text_content_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_text_content_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

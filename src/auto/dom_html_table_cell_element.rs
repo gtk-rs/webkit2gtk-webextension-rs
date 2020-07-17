@@ -329,12 +329,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::abbr\0".as_ptr() as *const _,
-                Some(transmute(notify_abbr_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_abbr_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -343,12 +343,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
-                Some(transmute(notify_align_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_align_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -357,12 +357,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::axis\0".as_ptr() as *const _,
-                Some(transmute(notify_axis_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_axis_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -371,12 +371,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::bg-color\0".as_ptr() as *const _,
-                Some(transmute(notify_bg_color_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_bg_color_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -385,12 +385,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::cell-index\0".as_ptr() as *const _,
-                Some(transmute(notify_cell_index_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_cell_index_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -399,12 +399,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::ch\0".as_ptr() as *const _,
-                Some(transmute(notify_ch_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_ch_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -413,12 +413,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::ch-off\0".as_ptr() as *const _,
-                Some(transmute(notify_ch_off_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_ch_off_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -427,12 +427,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::col-span\0".as_ptr() as *const _,
-                Some(transmute(notify_col_span_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_col_span_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -441,12 +441,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::headers\0".as_ptr() as *const _,
-                Some(transmute(notify_headers_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_headers_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -455,12 +455,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
-                Some(transmute(notify_height_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_height_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -469,12 +469,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::no-wrap\0".as_ptr() as *const _,
-                Some(transmute(notify_no_wrap_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_no_wrap_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -483,12 +483,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::row-span\0".as_ptr() as *const _,
-                Some(transmute(notify_row_span_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_row_span_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -497,12 +497,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::scope\0".as_ptr() as *const _,
-                Some(transmute(notify_scope_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_scope_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -511,12 +511,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::v-align\0".as_ptr() as *const _,
-                Some(transmute(notify_v_align_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_v_align_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -525,12 +525,12 @@ impl<O: IsA<DOMHTMLTableCellElement>> DOMHTMLTableCellElementExt for O {
             where P: IsA<DOMHTMLTableCellElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLTableCellElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
-                Some(transmute(notify_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_width_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

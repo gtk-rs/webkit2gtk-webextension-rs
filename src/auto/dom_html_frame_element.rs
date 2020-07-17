@@ -244,12 +244,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::content-document\0".as_ptr() as *const _,
-                Some(transmute(notify_content_document_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_content_document_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -258,12 +258,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::content-window\0".as_ptr() as *const _,
-                Some(transmute(notify_content_window_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_content_window_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -272,12 +272,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::frame-border\0".as_ptr() as *const _,
-                Some(transmute(notify_frame_border_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_frame_border_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -286,12 +286,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
-                Some(transmute(notify_height_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_height_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -300,12 +300,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::long-desc\0".as_ptr() as *const _,
-                Some(transmute(notify_long_desc_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_long_desc_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -314,12 +314,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::margin-height\0".as_ptr() as *const _,
-                Some(transmute(notify_margin_height_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_margin_height_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -328,12 +328,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::margin-width\0".as_ptr() as *const _,
-                Some(transmute(notify_margin_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_margin_width_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -342,12 +342,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -356,12 +356,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::no-resize\0".as_ptr() as *const _,
-                Some(transmute(notify_no_resize_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_no_resize_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -370,12 +370,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::scrolling\0".as_ptr() as *const _,
-                Some(transmute(notify_scrolling_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_scrolling_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -384,12 +384,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::src\0".as_ptr() as *const _,
-                Some(transmute(notify_src_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_src_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -398,12 +398,12 @@ impl<O: IsA<DOMHTMLFrameElement>> DOMHTMLFrameElementExt for O {
             where P: IsA<DOMHTMLFrameElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLFrameElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
-                Some(transmute(notify_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_width_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

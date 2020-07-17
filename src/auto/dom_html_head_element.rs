@@ -57,12 +57,12 @@ impl<O: IsA<DOMHTMLHeadElement>> DOMHTMLHeadElementExt for O {
             where P: IsA<DOMHTMLHeadElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLHeadElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLHeadElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::profile\0".as_ptr() as *const _,
-                Some(transmute(notify_profile_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_profile_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

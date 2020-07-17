@@ -132,12 +132,12 @@ impl<O: IsA<DOMKeyboardEvent>> DOMKeyboardEventExt for O {
             where P: IsA<DOMKeyboardEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alt-graph-key\0".as_ptr() as *const _,
-                Some(transmute(notify_alt_graph_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_alt_graph_key_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -146,12 +146,12 @@ impl<O: IsA<DOMKeyboardEvent>> DOMKeyboardEventExt for O {
             where P: IsA<DOMKeyboardEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alt-key\0".as_ptr() as *const _,
-                Some(transmute(notify_alt_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_alt_key_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -160,12 +160,12 @@ impl<O: IsA<DOMKeyboardEvent>> DOMKeyboardEventExt for O {
             where P: IsA<DOMKeyboardEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::ctrl-key\0".as_ptr() as *const _,
-                Some(transmute(notify_ctrl_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_ctrl_key_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -174,12 +174,12 @@ impl<O: IsA<DOMKeyboardEvent>> DOMKeyboardEventExt for O {
             where P: IsA<DOMKeyboardEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::key-identifier\0".as_ptr() as *const _,
-                Some(transmute(notify_key_identifier_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_key_identifier_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -188,12 +188,12 @@ impl<O: IsA<DOMKeyboardEvent>> DOMKeyboardEventExt for O {
             where P: IsA<DOMKeyboardEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::key-location\0".as_ptr() as *const _,
-                Some(transmute(notify_key_location_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_key_location_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -202,12 +202,12 @@ impl<O: IsA<DOMKeyboardEvent>> DOMKeyboardEventExt for O {
             where P: IsA<DOMKeyboardEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::meta-key\0".as_ptr() as *const _,
-                Some(transmute(notify_meta_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_meta_key_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -216,12 +216,12 @@ impl<O: IsA<DOMKeyboardEvent>> DOMKeyboardEventExt for O {
             where P: IsA<DOMKeyboardEvent>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast())
+            f(&DOMKeyboardEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::shift-key\0".as_ptr() as *const _,
-                Some(transmute(notify_shift_key_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_shift_key_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

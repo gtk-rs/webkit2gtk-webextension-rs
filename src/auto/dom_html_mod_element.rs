@@ -77,12 +77,12 @@ impl<O: IsA<DOMHTMLModElement>> DOMHTMLModElementExt for O {
             where P: IsA<DOMHTMLModElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLModElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLModElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::cite\0".as_ptr() as *const _,
-                Some(transmute(notify_cite_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_cite_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -91,12 +91,12 @@ impl<O: IsA<DOMHTMLModElement>> DOMHTMLModElementExt for O {
             where P: IsA<DOMHTMLModElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLModElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLModElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::date-time\0".as_ptr() as *const _,
-                Some(transmute(notify_date_time_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_date_time_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

@@ -353,12 +353,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::align\0".as_ptr() as *const _,
-                Some(transmute(notify_align_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_align_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -367,12 +367,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::alt\0".as_ptr() as *const _,
-                Some(transmute(notify_alt_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_alt_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -381,12 +381,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::border\0".as_ptr() as *const _,
-                Some(transmute(notify_border_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_border_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -395,12 +395,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::complete\0".as_ptr() as *const _,
-                Some(transmute(notify_complete_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_complete_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -409,12 +409,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::height\0".as_ptr() as *const _,
-                Some(transmute(notify_height_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_height_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -423,12 +423,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::hspace\0".as_ptr() as *const _,
-                Some(transmute(notify_hspace_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_hspace_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -437,12 +437,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::is-map\0".as_ptr() as *const _,
-                Some(transmute(notify_is_map_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_is_map_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -451,12 +451,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::long-desc\0".as_ptr() as *const _,
-                Some(transmute(notify_long_desc_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_long_desc_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -465,12 +465,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::lowsrc\0".as_ptr() as *const _,
-                Some(transmute(notify_lowsrc_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_lowsrc_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -479,12 +479,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
-                Some(transmute(notify_name_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -493,12 +493,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::natural-height\0".as_ptr() as *const _,
-                Some(transmute(notify_natural_height_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_natural_height_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -507,12 +507,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::natural-width\0".as_ptr() as *const _,
-                Some(transmute(notify_natural_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_natural_width_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -521,12 +521,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::src\0".as_ptr() as *const _,
-                Some(transmute(notify_src_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_src_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -535,12 +535,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::use-map\0".as_ptr() as *const _,
-                Some(transmute(notify_use_map_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_use_map_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -549,12 +549,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::vspace\0".as_ptr() as *const _,
-                Some(transmute(notify_vspace_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_vspace_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -563,12 +563,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::width\0".as_ptr() as *const _,
-                Some(transmute(notify_width_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_width_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -577,12 +577,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::x\0".as_ptr() as *const _,
-                Some(transmute(notify_x_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_x_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -591,12 +591,12 @@ impl<O: IsA<DOMHTMLImageElement>> DOMHTMLImageElementExt for O {
             where P: IsA<DOMHTMLImageElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLImageElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::y\0".as_ptr() as *const _,
-                Some(transmute(notify_y_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_y_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

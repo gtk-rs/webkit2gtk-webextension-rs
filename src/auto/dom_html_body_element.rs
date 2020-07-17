@@ -157,12 +157,12 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
             where P: IsA<DOMHTMLBodyElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::a-link\0".as_ptr() as *const _,
-                Some(transmute(notify_a_link_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_a_link_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -171,12 +171,12 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
             where P: IsA<DOMHTMLBodyElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::background\0".as_ptr() as *const _,
-                Some(transmute(notify_background_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_background_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -185,12 +185,12 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
             where P: IsA<DOMHTMLBodyElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::bg-color\0".as_ptr() as *const _,
-                Some(transmute(notify_bg_color_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_bg_color_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -199,12 +199,12 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
             where P: IsA<DOMHTMLBodyElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::link\0".as_ptr() as *const _,
-                Some(transmute(notify_link_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_link_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -213,12 +213,12 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
             where P: IsA<DOMHTMLBodyElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::text\0".as_ptr() as *const _,
-                Some(transmute(notify_text_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_text_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -227,12 +227,12 @@ impl<O: IsA<DOMHTMLBodyElement>> DOMHTMLBodyElementExt for O {
             where P: IsA<DOMHTMLBodyElement>
         {
             let f: &F = &*(f as *const F);
-            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast())
+            f(&DOMHTMLBodyElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::v-link\0".as_ptr() as *const _,
-                Some(transmute(notify_v_link_trampoline::<Self, F> as usize)), Box_::into_raw(f))
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_v_link_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
