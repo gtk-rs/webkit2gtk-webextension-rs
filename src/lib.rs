@@ -11,6 +11,9 @@
 extern crate gio;
 #[macro_use]
 extern crate glib;
+#[macro_use]
+extern crate bitflags;
+extern crate gio_sys;
 pub extern crate glib_sys;
 extern crate gobject_sys;
 extern crate gtk;

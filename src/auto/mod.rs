@@ -504,6 +504,10 @@ mod dom_node;
 pub use self::dom_node::DOMNodeExt;
 pub use self::dom_node::{DOMNode, DOMNodeClass, NONE_DOM_NODE};
 
+mod dom_node_filter;
+pub use self::dom_node_filter::DOMNodeFilterExt;
+pub use self::dom_node_filter::{DOMNodeFilter, NONE_DOM_NODE_FILTER};
+
 mod dom_node_iterator;
 pub use self::dom_node_iterator::DOMNodeIteratorExt;
 pub use self::dom_node_iterator::{DOMNodeIterator, DOMNodeIteratorClass, NONE_DOM_NODE_ITERATOR};
@@ -557,6 +561,10 @@ pub use self::dom_xpath_expression::{
     DOMXPathExpression, DOMXPathExpressionClass, NONE_DOMX_PATH_EXPRESSION,
 };
 
+mod domx_path_ns_resolver;
+pub use self::domx_path_ns_resolver::DOMXPathNSResolverExt;
+pub use self::domx_path_ns_resolver::{DOMXPathNSResolver, NONE_DOMX_PATH_NS_RESOLVER};
+
 mod dom_xpath_result;
 pub use self::dom_xpath_result::DOMXPathResultExt;
 pub use self::dom_xpath_result::{DOMXPathResult, DOMXPathResultClass, NONE_DOMX_PATH_RESULT};
@@ -588,6 +596,11 @@ pub use self::uri_request::{URIRequest, URIRequestClass, NONE_URI_REQUEST};
 mod uri_response;
 pub use self::uri_response::URIResponseExt;
 pub use self::uri_response::{URIResponse, URIResponseClass, NONE_URI_RESPONSE};
+
+mod user_message;
+pub use self::user_message::UserMessageBuilder;
+pub use self::user_message::UserMessageExt;
+pub use self::user_message::{UserMessage, UserMessageClass, NONE_USER_MESSAGE};
 
 #[cfg(any(feature = "v2_10", feature = "dox"))]
 mod web_editor;
@@ -621,7 +634,18 @@ mod console_message;
 pub use self::console_message::ConsoleMessage;
 
 mod enums;
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+pub use self::enums::ConsoleMessageLevel;
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+pub use self::enums::ConsoleMessageSource;
 pub use self::enums::ContextMenuAction;
+#[cfg(any(feature = "v2_20", feature = "dox"))]
+pub use self::enums::FormSubmissionStep;
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+pub use self::enums::UserMessageError;
+
+mod flags;
+pub use self::flags::HitTestResultContext;
 
 #[doc(hidden)]
 pub mod traits {
@@ -717,6 +741,7 @@ pub mod traits {
     pub use super::DOMMouseEventExt;
     pub use super::DOMNamedNodeMapExt;
     pub use super::DOMNodeExt;
+    pub use super::DOMNodeFilterExt;
     pub use super::DOMNodeIteratorExt;
     pub use super::DOMNodeListExt;
     pub use super::DOMProcessingInstructionExt;
@@ -728,6 +753,7 @@ pub mod traits {
     pub use super::DOMUIEventExt;
     pub use super::DOMWheelEventExt;
     pub use super::DOMXPathExpressionExt;
+    pub use super::DOMXPathNSResolverExt;
     pub use super::DOMXPathResultExt;
     #[cfg(any(feature = "v2_2", feature = "dox"))]
     pub use super::FrameExt;
@@ -736,6 +762,7 @@ pub mod traits {
     pub use super::ScriptWorldExt;
     pub use super::URIRequestExt;
     pub use super::URIResponseExt;
+    pub use super::UserMessageExt;
     #[cfg(any(feature = "v2_10", feature = "dox"))]
     pub use super::WebEditorExt;
     pub use super::WebExtensionExt;

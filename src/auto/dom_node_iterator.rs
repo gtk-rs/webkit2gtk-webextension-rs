@@ -16,6 +16,7 @@ use std::mem::transmute;
 use std::ptr;
 use webkit2_webextension_sys;
 use DOMNode;
+use DOMNodeFilter;
 use DOMObject;
 
 glib_wrapper! {
@@ -35,8 +36,8 @@ pub trait DOMNodeIteratorExt: 'static {
     #[cfg_attr(feature = "v2_12", deprecated)]
     fn get_expand_entity_references(&self) -> bool;
 
-    //#[cfg_attr(feature = "v2_22", deprecated)]
-    //fn get_filter(&self) -> /*Ignored*/Option<DOMNodeFilter>;
+    #[cfg_attr(feature = "v2_22", deprecated)]
+    fn get_filter(&self) -> Option<DOMNodeFilter>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     fn get_pointer_before_reference_node(&self) -> bool;
@@ -93,9 +94,15 @@ impl<O: IsA<DOMNodeIterator>> DOMNodeIteratorExt for O {
         }
     }
 
-    //fn get_filter(&self) -> /*Ignored*/Option<DOMNodeFilter> {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_node_iterator_get_filter() }
-    //}
+    fn get_filter(&self) -> Option<DOMNodeFilter> {
+        unsafe {
+            from_glib_full(
+                webkit2_webextension_sys::webkit_dom_node_iterator_get_filter(
+                    self.as_ref().to_glib_none().0,
+                ),
+            )
+        }
+    }
 
     fn get_pointer_before_reference_node(&self) -> bool {
         unsafe {

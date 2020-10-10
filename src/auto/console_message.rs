@@ -7,6 +7,10 @@ use glib::translate::*;
 #[cfg(any(feature = "v2_12", feature = "dox"))]
 use glib::GString;
 use webkit2_webextension_sys;
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+use ConsoleMessageLevel;
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+use ConsoleMessageSource;
 
 glib_wrapper! {
     #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -20,10 +24,14 @@ glib_wrapper! {
 }
 
 impl ConsoleMessage {
-    //#[cfg(any(feature = "v2_12", feature = "dox"))]
-    //pub fn get_level(&mut self) -> /*Ignored*/ConsoleMessageLevel {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_console_message_get_level() }
-    //}
+    #[cfg(any(feature = "v2_12", feature = "dox"))]
+    pub fn get_level(&mut self) -> ConsoleMessageLevel {
+        unsafe {
+            from_glib(webkit2_webextension_sys::webkit_console_message_get_level(
+                self.to_glib_none_mut().0,
+            ))
+        }
+    }
 
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     pub fn get_line(&mut self) -> u32 {
@@ -32,10 +40,14 @@ impl ConsoleMessage {
         }
     }
 
-    //#[cfg(any(feature = "v2_12", feature = "dox"))]
-    //pub fn get_source(&mut self) -> /*Ignored*/ConsoleMessageSource {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_console_message_get_source() }
-    //}
+    #[cfg(any(feature = "v2_12", feature = "dox"))]
+    pub fn get_source(&mut self) -> ConsoleMessageSource {
+        unsafe {
+            from_glib(webkit2_webextension_sys::webkit_console_message_get_source(
+                self.to_glib_none_mut().0,
+            ))
+        }
+    }
 
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     pub fn get_source_id(&mut self) -> Option<GString> {

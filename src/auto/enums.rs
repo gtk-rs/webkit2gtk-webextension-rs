@@ -3,8 +3,217 @@
 // DO NOT EDIT
 
 use glib::translate::*;
+use glib::value::FromValue;
+use glib::value::FromValueOptional;
+use glib::value::SetValue;
+use glib::value::Value;
+use glib::StaticType;
+use glib::Type;
+use gobject_sys;
 use std::fmt;
 use webkit2_webextension_sys;
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
+#[non_exhaustive]
+pub enum ConsoleMessageLevel {
+    Info,
+    Log,
+    Warning,
+    Error,
+    Debug,
+    #[doc(hidden)]
+    __Unknown(i32),
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+impl fmt::Display for ConsoleMessageLevel {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(
+            f,
+            "ConsoleMessageLevel::{}",
+            match *self {
+                ConsoleMessageLevel::Info => "Info",
+                ConsoleMessageLevel::Log => "Log",
+                ConsoleMessageLevel::Warning => "Warning",
+                ConsoleMessageLevel::Error => "Error",
+                ConsoleMessageLevel::Debug => "Debug",
+                _ => "Unknown",
+            }
+        )
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+#[doc(hidden)]
+impl ToGlib for ConsoleMessageLevel {
+    type GlibType = webkit2_webextension_sys::WebKitConsoleMessageLevel;
+
+    fn to_glib(&self) -> webkit2_webextension_sys::WebKitConsoleMessageLevel {
+        match *self {
+            ConsoleMessageLevel::Info => {
+                webkit2_webextension_sys::WEBKIT_CONSOLE_MESSAGE_LEVEL_INFO
+            }
+            ConsoleMessageLevel::Log => webkit2_webextension_sys::WEBKIT_CONSOLE_MESSAGE_LEVEL_LOG,
+            ConsoleMessageLevel::Warning => {
+                webkit2_webextension_sys::WEBKIT_CONSOLE_MESSAGE_LEVEL_WARNING
+            }
+            ConsoleMessageLevel::Error => {
+                webkit2_webextension_sys::WEBKIT_CONSOLE_MESSAGE_LEVEL_ERROR
+            }
+            ConsoleMessageLevel::Debug => {
+                webkit2_webextension_sys::WEBKIT_CONSOLE_MESSAGE_LEVEL_DEBUG
+            }
+            ConsoleMessageLevel::__Unknown(value) => value,
+        }
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+#[doc(hidden)]
+impl FromGlib<webkit2_webextension_sys::WebKitConsoleMessageLevel> for ConsoleMessageLevel {
+    fn from_glib(value: webkit2_webextension_sys::WebKitConsoleMessageLevel) -> Self {
+        skip_assert_initialized!();
+        match value {
+            0 => ConsoleMessageLevel::Info,
+            1 => ConsoleMessageLevel::Log,
+            2 => ConsoleMessageLevel::Warning,
+            3 => ConsoleMessageLevel::Error,
+            4 => ConsoleMessageLevel::Debug,
+            value => ConsoleMessageLevel::__Unknown(value),
+        }
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+impl StaticType for ConsoleMessageLevel {
+    fn static_type() -> Type {
+        unsafe { from_glib(webkit2_webextension_sys::webkit_console_message_level_get_type()) }
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+impl<'a> FromValueOptional<'a> for ConsoleMessageLevel {
+    unsafe fn from_value_optional(value: &Value) -> Option<Self> {
+        Some(FromValue::from_value(value))
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+impl<'a> FromValue<'a> for ConsoleMessageLevel {
+    unsafe fn from_value(value: &Value) -> Self {
+        from_glib(gobject_sys::g_value_get_enum(value.to_glib_none().0))
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+impl SetValue for ConsoleMessageLevel {
+    unsafe fn set_value(value: &mut Value, this: &Self) {
+        gobject_sys::g_value_set_enum(value.to_glib_none_mut().0, this.to_glib())
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
+#[non_exhaustive]
+pub enum ConsoleMessageSource {
+    Javascript,
+    Network,
+    ConsoleApi,
+    Security,
+    Other,
+    #[doc(hidden)]
+    __Unknown(i32),
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+impl fmt::Display for ConsoleMessageSource {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(
+            f,
+            "ConsoleMessageSource::{}",
+            match *self {
+                ConsoleMessageSource::Javascript => "Javascript",
+                ConsoleMessageSource::Network => "Network",
+                ConsoleMessageSource::ConsoleApi => "ConsoleApi",
+                ConsoleMessageSource::Security => "Security",
+                ConsoleMessageSource::Other => "Other",
+                _ => "Unknown",
+            }
+        )
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+#[doc(hidden)]
+impl ToGlib for ConsoleMessageSource {
+    type GlibType = webkit2_webextension_sys::WebKitConsoleMessageSource;
+
+    fn to_glib(&self) -> webkit2_webextension_sys::WebKitConsoleMessageSource {
+        match *self {
+            ConsoleMessageSource::Javascript => {
+                webkit2_webextension_sys::WEBKIT_CONSOLE_MESSAGE_SOURCE_JAVASCRIPT
+            }
+            ConsoleMessageSource::Network => {
+                webkit2_webextension_sys::WEBKIT_CONSOLE_MESSAGE_SOURCE_NETWORK
+            }
+            ConsoleMessageSource::ConsoleApi => {
+                webkit2_webextension_sys::WEBKIT_CONSOLE_MESSAGE_SOURCE_CONSOLE_API
+            }
+            ConsoleMessageSource::Security => {
+                webkit2_webextension_sys::WEBKIT_CONSOLE_MESSAGE_SOURCE_SECURITY
+            }
+            ConsoleMessageSource::Other => {
+                webkit2_webextension_sys::WEBKIT_CONSOLE_MESSAGE_SOURCE_OTHER
+            }
+            ConsoleMessageSource::__Unknown(value) => value,
+        }
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+#[doc(hidden)]
+impl FromGlib<webkit2_webextension_sys::WebKitConsoleMessageSource> for ConsoleMessageSource {
+    fn from_glib(value: webkit2_webextension_sys::WebKitConsoleMessageSource) -> Self {
+        skip_assert_initialized!();
+        match value {
+            0 => ConsoleMessageSource::Javascript,
+            1 => ConsoleMessageSource::Network,
+            2 => ConsoleMessageSource::ConsoleApi,
+            3 => ConsoleMessageSource::Security,
+            4 => ConsoleMessageSource::Other,
+            value => ConsoleMessageSource::__Unknown(value),
+        }
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+impl StaticType for ConsoleMessageSource {
+    fn static_type() -> Type {
+        unsafe { from_glib(webkit2_webextension_sys::webkit_console_message_source_get_type()) }
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+impl<'a> FromValueOptional<'a> for ConsoleMessageSource {
+    unsafe fn from_value_optional(value: &Value) -> Option<Self> {
+        Some(FromValue::from_value(value))
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+impl<'a> FromValue<'a> for ConsoleMessageSource {
+    unsafe fn from_value(value: &Value) -> Self {
+        from_glib(gobject_sys::g_value_get_enum(value.to_glib_none().0))
+    }
+}
+
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+impl SetValue for ConsoleMessageSource {
+    unsafe fn set_value(value: &mut Value, this: &Self) {
+        gobject_sys::g_value_set_enum(value.to_glib_none_mut().0, this.to_glib())
+    }
+}
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
 #[non_exhaustive]
@@ -314,6 +523,140 @@ impl FromGlib<webkit2_webextension_sys::WebKitContextMenuAction> for ContextMenu
             45 => ContextMenuAction::PasteAsPlainText,
             10000 => ContextMenuAction::Custom,
             value => ContextMenuAction::__Unknown(value),
+        }
+    }
+}
+
+#[cfg(any(feature = "v2_20", feature = "dox"))]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
+#[non_exhaustive]
+pub enum FormSubmissionStep {
+    SendDomEvent,
+    Complete,
+    #[doc(hidden)]
+    __Unknown(i32),
+}
+
+#[cfg(any(feature = "v2_20", feature = "dox"))]
+impl fmt::Display for FormSubmissionStep {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(
+            f,
+            "FormSubmissionStep::{}",
+            match *self {
+                FormSubmissionStep::SendDomEvent => "SendDomEvent",
+                FormSubmissionStep::Complete => "Complete",
+                _ => "Unknown",
+            }
+        )
+    }
+}
+
+#[cfg(any(feature = "v2_20", feature = "dox"))]
+#[doc(hidden)]
+impl ToGlib for FormSubmissionStep {
+    type GlibType = webkit2_webextension_sys::WebKitFormSubmissionStep;
+
+    fn to_glib(&self) -> webkit2_webextension_sys::WebKitFormSubmissionStep {
+        match *self {
+            FormSubmissionStep::SendDomEvent => {
+                webkit2_webextension_sys::WEBKIT_FORM_SUBMISSION_WILL_SEND_DOM_EVENT
+            }
+            FormSubmissionStep::Complete => {
+                webkit2_webextension_sys::WEBKIT_FORM_SUBMISSION_WILL_COMPLETE
+            }
+            FormSubmissionStep::__Unknown(value) => value,
+        }
+    }
+}
+
+#[cfg(any(feature = "v2_20", feature = "dox"))]
+#[doc(hidden)]
+impl FromGlib<webkit2_webextension_sys::WebKitFormSubmissionStep> for FormSubmissionStep {
+    fn from_glib(value: webkit2_webextension_sys::WebKitFormSubmissionStep) -> Self {
+        skip_assert_initialized!();
+        match value {
+            0 => FormSubmissionStep::SendDomEvent,
+            1 => FormSubmissionStep::Complete,
+            value => FormSubmissionStep::__Unknown(value),
+        }
+    }
+}
+
+#[cfg(any(feature = "v2_20", feature = "dox"))]
+impl StaticType for FormSubmissionStep {
+    fn static_type() -> Type {
+        unsafe { from_glib(webkit2_webextension_sys::webkit_form_submission_step_get_type()) }
+    }
+}
+
+#[cfg(any(feature = "v2_20", feature = "dox"))]
+impl<'a> FromValueOptional<'a> for FormSubmissionStep {
+    unsafe fn from_value_optional(value: &Value) -> Option<Self> {
+        Some(FromValue::from_value(value))
+    }
+}
+
+#[cfg(any(feature = "v2_20", feature = "dox"))]
+impl<'a> FromValue<'a> for FormSubmissionStep {
+    unsafe fn from_value(value: &Value) -> Self {
+        from_glib(gobject_sys::g_value_get_enum(value.to_glib_none().0))
+    }
+}
+
+#[cfg(any(feature = "v2_20", feature = "dox"))]
+impl SetValue for FormSubmissionStep {
+    unsafe fn set_value(value: &mut Value, this: &Self) {
+        gobject_sys::g_value_set_enum(value.to_glib_none_mut().0, this.to_glib())
+    }
+}
+
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
+#[non_exhaustive]
+pub enum UserMessageError {
+    UserMessageUnhandledMessage,
+    #[doc(hidden)]
+    __Unknown(i32),
+}
+
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+impl fmt::Display for UserMessageError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(
+            f,
+            "UserMessageError::{}",
+            match *self {
+                UserMessageError::UserMessageUnhandledMessage => "UserMessageUnhandledMessage",
+                _ => "Unknown",
+            }
+        )
+    }
+}
+
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+#[doc(hidden)]
+impl ToGlib for UserMessageError {
+    type GlibType = webkit2_webextension_sys::WebKitUserMessageError;
+
+    fn to_glib(&self) -> webkit2_webextension_sys::WebKitUserMessageError {
+        match *self {
+            UserMessageError::UserMessageUnhandledMessage => {
+                webkit2_webextension_sys::WEBKIT_USER_MESSAGE_UNHANDLED_MESSAGE
+            }
+            UserMessageError::__Unknown(value) => value,
+        }
+    }
+}
+
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+#[doc(hidden)]
+impl FromGlib<webkit2_webextension_sys::WebKitUserMessageError> for UserMessageError {
+    fn from_glib(value: webkit2_webextension_sys::WebKitUserMessageError) -> Self {
+        skip_assert_initialized!();
+        match value {
+            0 => UserMessageError::UserMessageUnhandledMessage,
+            value => UserMessageError::__Unknown(value),
         }
     }
 }

@@ -12,19 +12,31 @@ target_path = "."
 
 generate = [
     "WebKit2WebExtension.ConsoleMessage",
+    "WebKit2WebExtension.ConsoleMessageLevel",
+    "WebKit2WebExtension.ConsoleMessageSource",
     "WebKit2WebExtension.ContextMenu",
     "WebKit2WebExtension.ContextMenuAction",
     "WebKit2WebExtension.ContextMenuItem",
+    "WebKit2WebExtension.DOMXPathNSResolver",
+    "WebKit2WebExtension.DOMNodeFilter",
+    "WebKit2WebExtension.FormSubmissionStep",
     "WebKit2WebExtension.Frame",
+    "WebKit2WebExtension.HitTestResultContext",
     "WebKit2WebExtension.ScriptWorld",
+    "WebKit2WebExtension.UserMessageError",
     "WebKit2WebExtension.WebEditor",
     "WebKit2WebExtension.WebExtension",
+    "WebKit2WebExtension.WebExtensionInitializeFunction",
+    "WebKit2WebExtension.WebExtensionInitializeWithUserDataFunction",
 ]
 
 manual = [
     "Gio.Action",
+    "Gio.Cancellable",
+    "Gio.UnixFDList",
     "GObject.Closure",
     "GLib.Error",
+    "GLib.Quark",
     "GLib.Variant",
 ]
 
@@ -638,6 +650,11 @@ module_name = "uri_request"
 name = "WebKit2WebExtension.URIResponse"
 status = "generate"
 module_name = "uri_response"
+
+[[object]]
+name = "WebKit2WebExtension.UserMessage"
+status = "generate"
+generate_builder = true
 
 [[object]]
 name = "WebKit2WebExtension.WebHitTestResult"

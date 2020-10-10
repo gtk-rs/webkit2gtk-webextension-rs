@@ -2,6 +2,12 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+use gio;
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+use gio_sys;
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+use glib;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::connect_raw;
@@ -9,9 +15,15 @@ use glib::signal::SignalHandlerId;
 use glib::translate::*;
 use glib::GString;
 use glib_sys;
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+use gobject_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+use std::pin::Pin;
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+use std::ptr;
 use webkit2_webextension_sys;
 #[cfg(any(feature = "v2_12", feature = "dox"))]
 use ConsoleMessage;
@@ -22,6 +34,8 @@ use DOMDocument;
 use Frame;
 use URIRequest;
 use URIResponse;
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+use UserMessage;
 #[cfg(any(feature = "v2_10", feature = "dox"))]
 use WebEditor;
 #[cfg(any(feature = "v2_8", feature = "dox"))]
@@ -50,12 +64,23 @@ pub trait WebPageExt: 'static {
 
     fn get_uri(&self) -> Option<GString>;
 
-    //#[cfg(any(feature = "v2_28", feature = "dox"))]
-    //fn send_message_to_view<P: FnOnce(Result</*Ignored*/UserMessage, glib::Error>) + Send + 'static>(&self, message: /*Ignored*/&UserMessage, cancellable: /*Ignored*/Option<&gio::Cancellable>, callback: P);
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    fn send_message_to_view<
+        P: IsA<UserMessage>,
+        Q: IsA<gio::Cancellable>,
+        R: FnOnce(Result<UserMessage, glib::Error>) + Send + 'static,
+    >(
+        &self,
+        message: &P,
+        cancellable: Option<&Q>,
+        callback: R,
+    );
 
-    //
-    //#[cfg(any(feature = "v2_28", feature = "dox"))]
-    //fn send_message_to_view_future(&self, message: /*Ignored*/&UserMessage) -> Pin<Box_<dyn std::future::Future<Output = Result</*Ignored*/UserMessage, glib::Error>> + 'static>>;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    fn send_message_to_view_future<P: IsA<UserMessage> + Clone + 'static>(
+        &self,
+        message: &P,
+    ) -> Pin<Box_<dyn std::future::Future<Output = Result<UserMessage, glib::Error>> + 'static>>;
 
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn connect_console_message_sent<F: Fn(&Self, &ConsoleMessage) + 'static>(
@@ -83,8 +108,11 @@ pub trait WebPageExt: 'static {
         f: F,
     ) -> SignalHandlerId;
 
-    //#[cfg(any(feature = "v2_28", feature = "dox"))]
-    //fn connect_user_message_received<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    fn connect_user_message_received<F: Fn(&Self, &UserMessage) -> bool + 'static>(
+        &self,
+        f: F,
+    ) -> SignalHandlerId;
 
     //#[cfg(any(feature = "v2_20", feature = "dox"))]
     //fn connect_will_submit_form<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId;
@@ -131,29 +159,67 @@ impl<O: IsA<WebPage>> WebPageExt for O {
         }
     }
 
-    //#[cfg(any(feature = "v2_28", feature = "dox"))]
-    //fn send_message_to_view<P: FnOnce(Result</*Ignored*/UserMessage, glib::Error>) + Send + 'static>(&self, message: /*Ignored*/&UserMessage, cancellable: /*Ignored*/Option<&gio::Cancellable>, callback: P) {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_web_page_send_message_to_view() }
-    //}
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    fn send_message_to_view<
+        P: IsA<UserMessage>,
+        Q: IsA<gio::Cancellable>,
+        R: FnOnce(Result<UserMessage, glib::Error>) + Send + 'static,
+    >(
+        &self,
+        message: &P,
+        cancellable: Option<&Q>,
+        callback: R,
+    ) {
+        let user_data: Box_<R> = Box_::new(callback);
+        unsafe extern "C" fn send_message_to_view_trampoline<
+            R: FnOnce(Result<UserMessage, glib::Error>) + Send + 'static,
+        >(
+            _source_object: *mut gobject_sys::GObject,
+            res: *mut gio_sys::GAsyncResult,
+            user_data: glib_sys::gpointer,
+        ) {
+            let mut error = ptr::null_mut();
+            let ret = webkit2_webextension_sys::webkit_web_page_send_message_to_view_finish(
+                _source_object as *mut _,
+                res,
+                &mut error,
+            );
+            let result = if error.is_null() {
+                Ok(from_glib_full(ret))
+            } else {
+                Err(from_glib_full(error))
+            };
+            let callback: Box_<R> = Box_::from_raw(user_data as *mut _);
+            callback(result);
+        }
+        let callback = send_message_to_view_trampoline::<R>;
+        unsafe {
+            webkit2_webextension_sys::webkit_web_page_send_message_to_view(
+                self.as_ref().to_glib_none().0,
+                message.as_ref().to_glib_none().0,
+                cancellable.map(|p| p.as_ref()).to_glib_none().0,
+                Some(callback),
+                Box_::into_raw(user_data) as *mut _,
+            );
+        }
+    }
 
-    //
-    //#[cfg(any(feature = "v2_28", feature = "dox"))]
-    //fn send_message_to_view_future(&self, message: /*Ignored*/&UserMessage) -> Pin<Box_<dyn std::future::Future<Output = Result</*Ignored*/UserMessage, glib::Error>> + 'static>> {
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    fn send_message_to_view_future<P: IsA<UserMessage> + Clone + 'static>(
+        &self,
+        message: &P,
+    ) -> Pin<Box_<dyn std::future::Future<Output = Result<UserMessage, glib::Error>> + 'static>>
+    {
+        let message = message.clone();
+        Box_::pin(gio::GioFuture::new(self, move |obj, send| {
+            let cancellable = gio::Cancellable::new();
+            obj.send_message_to_view(&message, Some(&cancellable), move |res| {
+                send.resolve(res);
+            });
 
-    //let message = message.clone();
-    //Box_::pin(gio::GioFuture::new(self, move |obj, send| {
-    //    let cancellable = gio::Cancellable::new();
-    //    obj.send_message_to_view(
-    //        &message,
-    //        Some(&cancellable),
-    //        move |res| {
-    //            send.resolve(res);
-    //        },
-    //    );
-
-    //    cancellable
-    //}))
-    //}
+            cancellable
+        }))
+    }
 
     #[cfg(any(feature = "v2_12", feature = "dox"))]
     fn connect_console_message_sent<F: Fn(&Self, &ConsoleMessage) + 'static>(
@@ -299,14 +365,44 @@ impl<O: IsA<WebPage>> WebPageExt for O {
         }
     }
 
-    //#[cfg(any(feature = "v2_28", feature = "dox"))]
-    //fn connect_user_message_received<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId {
-    //    Ignored message: WebKit2WebExtension.UserMessage
-    //}
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    fn connect_user_message_received<F: Fn(&Self, &UserMessage) -> bool + 'static>(
+        &self,
+        f: F,
+    ) -> SignalHandlerId {
+        unsafe extern "C" fn user_message_received_trampoline<
+            P,
+            F: Fn(&P, &UserMessage) -> bool + 'static,
+        >(
+            this: *mut webkit2_webextension_sys::WebKitWebPage,
+            message: *mut webkit2_webextension_sys::WebKitUserMessage,
+            f: glib_sys::gpointer,
+        ) -> glib_sys::gboolean
+        where
+            P: IsA<WebPage>,
+        {
+            let f: &F = &*(f as *const F);
+            f(
+                &WebPage::from_glib_borrow(this).unsafe_cast_ref(),
+                &from_glib_borrow(message),
+            )
+            .to_glib()
+        }
+        unsafe {
+            let f: Box_<F> = Box_::new(f);
+            connect_raw(
+                self.as_ptr() as *mut _,
+                b"user-message-received\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(
+                    user_message_received_trampoline::<Self, F> as *const (),
+                )),
+                Box_::into_raw(f),
+            )
+        }
+    }
 
     //#[cfg(any(feature = "v2_20", feature = "dox"))]
     //fn connect_will_submit_form<Unsupported or ignored types>(&self, f: F) -> SignalHandlerId {
-    //    Ignored step: WebKit2WebExtension.FormSubmissionStep
     //    Empty ctype text_field_names: *.PtrArray TypeId { ns_id: 0, id: 28 }
     //    Empty ctype text_field_values: *.PtrArray TypeId { ns_id: 0, id: 28 }
     //}
