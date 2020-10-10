@@ -87,6 +87,7 @@ pub const WEBKIT_CONTEXT_MENU_ACTION_MEDIA_MUTE: WebKitContextMenuAction = 41;
 pub const WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_VIDEO_TO_DISK: WebKitContextMenuAction = 42;
 pub const WEBKIT_CONTEXT_MENU_ACTION_DOWNLOAD_AUDIO_TO_DISK: WebKitContextMenuAction = 43;
 pub const WEBKIT_CONTEXT_MENU_ACTION_INSERT_EMOJI: WebKitContextMenuAction = 44;
+pub const WEBKIT_CONTEXT_MENU_ACTION_PASTE_AS_PLAIN_TEXT: WebKitContextMenuAction = 45;
 pub const WEBKIT_CONTEXT_MENU_ACTION_CUSTOM: WebKitContextMenuAction = 10000;
 
 pub type WebKitFormSubmissionStep = c_int;
@@ -4069,6 +4070,8 @@ impl ::std::fmt::Debug for WebKitDOMXPathNSResolver {
     }
 }
 
+#[link(name = "webkit2gtk-4.0")]
+#[link(name = "javascriptcoregtk-4.0")]
 extern "C" {
 
     //=========================================================================

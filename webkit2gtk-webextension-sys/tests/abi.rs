@@ -1965,6 +1965,10 @@ const RUST_CONSTANTS: &[(&str, &str)] = &[
     ),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_OUTLINE", "30"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_PASTE", "16"),
+    (
+        "(gint) WEBKIT_CONTEXT_MENU_ACTION_PASTE_AS_PLAIN_TEXT",
+        "45",
+    ),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_RELOAD", "13"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_SELECT_ALL", "18"),
     ("(gint) WEBKIT_CONTEXT_MENU_ACTION_SPELLING_GUESS", "21"),

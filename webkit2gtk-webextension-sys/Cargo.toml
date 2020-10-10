@@ -24,7 +24,7 @@ git = "https://github.com/gtk-rs/javascriptcore-rs"
 git = "https://github.com/gtk-rs/soup-sys-rs"
 
 [dev-dependencies]
-shell-words = "0.1.0"
+shell-words = "1.0.0"
 tempfile = "3"
 
 [features]

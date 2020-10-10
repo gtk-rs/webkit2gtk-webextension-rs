@@ -54,6 +54,7 @@ pub enum ContextMenuAction {
     DownloadVideoToDisk,
     DownloadAudioToDisk,
     InsertEmoji,
+    PasteAsPlainText,
     Custom,
     #[doc(hidden)]
     __Unknown(i32),
@@ -110,6 +111,7 @@ impl fmt::Display for ContextMenuAction {
                 ContextMenuAction::DownloadVideoToDisk => "DownloadVideoToDisk",
                 ContextMenuAction::DownloadAudioToDisk => "DownloadAudioToDisk",
                 ContextMenuAction::InsertEmoji => "InsertEmoji",
+                ContextMenuAction::PasteAsPlainText => "PasteAsPlainText",
                 ContextMenuAction::Custom => "Custom",
                 _ => "Unknown",
             }
@@ -248,6 +250,9 @@ impl ToGlib for ContextMenuAction {
             ContextMenuAction::InsertEmoji => {
                 webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_INSERT_EMOJI
             }
+            ContextMenuAction::PasteAsPlainText => {
+                webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_PASTE_AS_PLAIN_TEXT
+            }
             ContextMenuAction::Custom => {
                 webkit2_webextension_sys::WEBKIT_CONTEXT_MENU_ACTION_CUSTOM
             }
@@ -306,6 +311,7 @@ impl FromGlib<webkit2_webextension_sys::WebKitContextMenuAction> for ContextMenu
             42 => ContextMenuAction::DownloadVideoToDisk,
             43 => ContextMenuAction::DownloadAudioToDisk,
             44 => ContextMenuAction::InsertEmoji,
+            45 => ContextMenuAction::PasteAsPlainText,
             10000 => ContextMenuAction::Custom,
             value => ContextMenuAction::__Unknown(value),
         }
