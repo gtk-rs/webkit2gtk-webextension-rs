@@ -569,6 +569,7 @@ pub use self::frame::FrameExt;
 pub use self::frame::{Frame, FrameClass, NONE_FRAME};
 
 mod hit_test_result;
+pub use self::hit_test_result::HitTestResultBuilder;
 pub use self::hit_test_result::HitTestResultExt;
 pub use self::hit_test_result::{HitTestResult, HitTestResultClass, NONE_HIT_TEST_RESULT};
 
@@ -580,6 +581,7 @@ pub use self::script_world::ScriptWorldExt;
 pub use self::script_world::{ScriptWorld, ScriptWorldClass, NONE_SCRIPT_WORLD};
 
 mod uri_request;
+pub use self::uri_request::URIRequestBuilder;
 pub use self::uri_request::URIRequestExt;
 pub use self::uri_request::{URIRequest, URIRequestClass, NONE_URI_REQUEST};
 
@@ -600,6 +602,8 @@ pub use self::web_extension::{WebExtension, WebExtensionClass, NONE_WEB_EXTENSIO
 
 #[cfg(any(feature = "v2_8", feature = "dox"))]
 mod web_hit_test_result;
+#[cfg(any(feature = "v2_8", feature = "dox"))]
+pub use self::web_hit_test_result::WebHitTestResultBuilder;
 #[cfg(any(feature = "v2_8", feature = "dox"))]
 pub use self::web_hit_test_result::WebHitTestResultExt;
 #[cfg(any(feature = "v2_8", feature = "dox"))]

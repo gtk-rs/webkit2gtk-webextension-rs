@@ -16,11 +16,9 @@ generate = [
     "WebKit2WebExtension.ContextMenuAction",
     "WebKit2WebExtension.ContextMenuItem",
     "WebKit2WebExtension.Frame",
-    "WebKit2WebExtension.HitTestResult",
     "WebKit2WebExtension.ScriptWorld",
     "WebKit2WebExtension.WebEditor",
     "WebKit2WebExtension.WebExtension",
-    "WebKit2WebExtension.WebHitTestResult",
 ]
 
 manual = [
@@ -33,6 +31,7 @@ manual = [
 [[object]]
 name = "WebKit2WebExtension.DOMAttr"
 status = "generate"
+generate_builder = false
 module_name = "dom_attr"
 
 [[object]]
@@ -57,6 +56,7 @@ module_name = "dom_client_rect_list"
 
 [[object]]
 name = "WebKit2WebExtension.DOMCSSRule"
+generate_builder = false
 status = "generate"
 module_name = "dom_css_rule"
 
@@ -68,6 +68,7 @@ module_name = "dom_css_rule_list"
 [[object]]
 name = "WebKit2WebExtension.DOMCSSStyleDeclaration"
 status = "generate"
+generate_builder = false
 module_name = "dom_css_style_declaration"
 
 [[object]]
@@ -78,11 +79,13 @@ module_name = "dom_css_style_sheet"
 [[object]]
 name = "WebKit2WebExtension.DOMCSSValue"
 status = "generate"
+generate_builder = false
 module_name = "dom_css_value"
 
 [[object]]
 name = "WebKit2WebExtension.DOMCharacterData"
 status = "generate"
+generate_builder = false
 module_name = "dom_character_data"
 
 [[object]]
@@ -103,16 +106,19 @@ module_name = "dom_dom_selection"
 [[object]]
 name = "WebKit2WebExtension.DOMDOMTokenList"
 status = "generate"
+generate_builder = false
 module_name = "dom_dom_token_list"
 
 [[object]]
 name = "WebKit2WebExtension.DOMDOMWindow"
 status = "generate"
+generate_builder = false
 module_name = "dom_dom_window"
 
 [[object]]
 name = "WebKit2WebExtension.DOMDocument"
 status = "generate"
+generate_builder = false
 module_name = "dom_document"
     [[object.function]]
     name = "create_document_fragment"
@@ -131,6 +137,7 @@ module_name = "dom_document_type"
 [[object]]
 name = "WebKit2WebExtension.DOMElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_element"
     [[object.function]]
     name = "query_selector"
@@ -148,6 +155,7 @@ module_name = "dom_entity_reference"
 [[object]]
 name = "WebKit2WebExtension.DOMEvent"
 status = "generate"
+generate_builder = false
 module_name = "dom_event"
 
 [[object]]
@@ -168,26 +176,31 @@ module_name = "dom_file_list"
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLAnchorElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_anchor_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLAppletElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_applet_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLAreaElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_area_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLBRElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_br_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLBaseElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_base_element"
 
 [[object]]
@@ -198,16 +211,19 @@ module_name = "dom_html_base_font_element"
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLBodyElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_body_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLButtonElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_button_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLCanvasElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_canvas_element"
 
 [[object]]
@@ -218,31 +234,37 @@ module_name = "dom_html_collection"
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLDListElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_d_list_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLDirectoryElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_directory_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLDivElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_div_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLDocument"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_document"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLEmbedElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_embed_element"
 
 [[object]]
@@ -253,76 +275,91 @@ module_name = "dom_html_field_set_element"
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLFontElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_font_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLFormElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_form_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLFrameElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_frame_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLFrameSetElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_frame_set_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLHRElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_hr_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLHeadElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_head_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLHeadingElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_heading_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLHtmlElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_html_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLIFrameElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_iframe_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLImageElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_image_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLInputElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_input_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLLIElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_li_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLLabelElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_label_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLLegendElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_legend_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLLinkElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_link_element"
     [[object.property]]
     name = "sizes"
@@ -331,6 +368,7 @@ module_name = "dom_html_link_element"
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLMapElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_map_element"
 
 [[object]]
@@ -341,121 +379,145 @@ module_name = "dom_html_marquee_element"
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLMenuElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_menu_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLMetaElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_meta_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLModElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_mod_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLOListElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_o_list_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLObjectElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_object_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLOptGroupElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_opt_group_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLOptionElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_option_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLOptionsCollection"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_options_collection"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLParagraphElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_paragraph_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLParamElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_param_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLPreElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_pre_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLQuoteElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_quote_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLScriptElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_script_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLSelectElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_select_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLStyleElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_style_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLTableCaptionElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_table_caption_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLTableCellElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_table_cell_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLTableColElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_table_col_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLTableElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_table_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLTableRowElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_table_row_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLTableSectionElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_table_section_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLTextAreaElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_text_area_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLTitleElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_title_element"
 
 [[object]]
 name = "WebKit2WebExtension.DOMHTMLUListElement"
 status = "generate"
+generate_builder = false
 module_name = "dom_html_u_list_element"
 
 [[object]]
@@ -466,6 +528,7 @@ module_name = "dom_keyboard_event"
 [[object]]
 name = "WebKit2WebExtension.DOMMediaList"
 status = "generate"
+generate_builder = false
 module_name = "dom_media_list"
 
 [[object]]
@@ -481,6 +544,7 @@ module_name = "dom_named_node_map"
 [[object]]
 name = "WebKit2WebExtension.DOMNode"
 status = "generate"
+generate_builder = false
 module_name = "dom_node"
 
 [[object]]
@@ -496,6 +560,7 @@ module_name = "dom_node_list"
 [[object]]
 name = "WebKit2WebExtension.DOMObject"
 status = "generate"
+generate_builder = false
 module_name = "dom_object"
 
 [[object]]
@@ -520,6 +585,7 @@ module_name = "dom_range"
 [[object]]
 name = "WebKit2WebExtension.DOMStyleSheet"
 status = "generate"
+generate_builder = false
 module_name = "dom_style_sheet"
 
 [[object]]
@@ -558,14 +624,25 @@ status = "generate"
 module_name = "dom_xpath_result"
 
 [[object]]
+name = "WebKit2WebExtension.HitTestResult"
+status = "generate"
+generate_builder = true
+
+[[object]]
 name = "WebKit2WebExtension.URIRequest"
 status = "generate"
+generate_builder = true
 module_name = "uri_request"
 
 [[object]]
 name = "WebKit2WebExtension.URIResponse"
 status = "generate"
 module_name = "uri_response"
+
+[[object]]
+name = "WebKit2WebExtension.WebHitTestResult"
+status = "generate"
+generate_builder = true
 
 [[object]]
 name = "WebKit2WebExtension.WebPage"
