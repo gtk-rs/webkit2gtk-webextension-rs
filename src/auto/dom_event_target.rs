@@ -2,19 +2,17 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use glib;
+use crate::DOMEvent;
 use glib::object::IsA;
 use glib::translate::*;
 use std::fmt;
 use std::ptr;
-use webkit2_webextension_sys;
-use DOMEvent;
 
-glib_wrapper! {
-    pub struct DOMEventTarget(Interface<webkit2_webextension_sys::WebKitDOMEventTarget>);
+glib::wrapper! {
+    pub struct DOMEventTarget(Interface<ffi::WebKitDOMEventTarget>);
 
     match fn {
-        get_type => || webkit2_webextension_sys::webkit_dom_event_target_get_type(),
+        get_type => || ffi::webkit_dom_event_target_get_type(),
     }
 }
 
@@ -22,88 +20,58 @@ pub const NONE_DOM_EVENT_TARGET: Option<&DOMEventTarget> = None;
 
 pub trait DOMEventTargetExt: 'static {
     //#[cfg_attr(feature = "v2_22", deprecated)]
+    //#[doc(alias = "webkit_dom_event_target_add_event_listener")]
     //fn add_event_listener<P: FnOnce() + 'static>(&self, event_name: &str, handler: P, use_capture: bool, user_data: /*Unimplemented*/Option<Fundamental: Pointer>) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn add_event_listener_with_closure(
-        &self,
-        event_name: &str,
-        handler: &glib::Closure,
-        use_capture: bool,
-    ) -> bool;
+    #[doc(alias = "webkit_dom_event_target_add_event_listener_with_closure")]
+    fn add_event_listener_with_closure(&self, event_name: &str, handler: &glib::Closure, use_capture: bool) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_event_target_dispatch_event")]
     fn dispatch_event<P: IsA<DOMEvent>>(&self, event: &P) -> Result<(), glib::Error>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
+    //#[doc(alias = "webkit_dom_event_target_remove_event_listener")]
     //fn remove_event_listener<P: FnMut()>(&self, event_name: &str, handler: P, use_capture: bool) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn remove_event_listener_with_closure(
-        &self,
-        event_name: &str,
-        handler: &glib::Closure,
-        use_capture: bool,
-    ) -> bool;
+    #[doc(alias = "webkit_dom_event_target_remove_event_listener_with_closure")]
+    fn remove_event_listener_with_closure(&self, event_name: &str, handler: &glib::Closure, use_capture: bool) -> bool;
 }
 
 impl<O: IsA<DOMEventTarget>> DOMEventTargetExt for O {
     //fn add_event_listener<P: FnOnce() + 'static>(&self, event_name: &str, handler: P, use_capture: bool, user_data: /*Unimplemented*/Option<Fundamental: Pointer>) -> bool {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_event_target_add_event_listener() }
+    //    unsafe { TODO: call ffi:webkit_dom_event_target_add_event_listener() }
     //}
 
-    fn add_event_listener_with_closure(
-        &self,
-        event_name: &str,
-        handler: &glib::Closure,
-        use_capture: bool,
-    ) -> bool {
+    fn add_event_listener_with_closure(&self, event_name: &str, handler: &glib::Closure, use_capture: bool) -> bool {
         unsafe {
-            from_glib(
-                webkit2_webextension_sys::webkit_dom_event_target_add_event_listener_with_closure(
-                    self.as_ref().to_glib_none().0,
-                    event_name.to_glib_none().0,
-                    handler.to_glib_none().0,
-                    use_capture.to_glib(),
-                ),
-            )
+            from_glib(ffi::webkit_dom_event_target_add_event_listener_with_closure(self.as_ref().to_glib_none().0, event_name.to_glib_none().0, handler.to_glib_none().0, use_capture.to_glib()))
         }
     }
 
     fn dispatch_event<P: IsA<DOMEvent>>(&self, event: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = webkit2_webextension_sys::webkit_dom_event_target_dispatch_event(
-                self.as_ref().to_glib_none().0,
-                event.as_ref().to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(())
-            } else {
-                Err(from_glib_full(error))
-            }
+            let _ = ffi::webkit_dom_event_target_dispatch_event(self.as_ref().to_glib_none().0, event.as_ref().to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     //fn remove_event_listener<P: FnMut()>(&self, event_name: &str, handler: P, use_capture: bool) -> bool {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_event_target_remove_event_listener() }
+    //    unsafe { TODO: call ffi:webkit_dom_event_target_remove_event_listener() }
     //}
 
-    fn remove_event_listener_with_closure(
-        &self,
-        event_name: &str,
-        handler: &glib::Closure,
-        use_capture: bool,
-    ) -> bool {
+    fn remove_event_listener_with_closure(&self, event_name: &str, handler: &glib::Closure, use_capture: bool) -> bool {
         unsafe {
-            from_glib(webkit2_webextension_sys::webkit_dom_event_target_remove_event_listener_with_closure(self.as_ref().to_glib_none().0, event_name.to_glib_none().0, handler.to_glib_none().0, use_capture.to_glib()))
+            from_glib(ffi::webkit_dom_event_target_remove_event_listener_with_closure(self.as_ref().to_glib_none().0, event_name.to_glib_none().0, handler.to_glib_none().0, use_capture.to_glib()))
         }
     }
 }
 
 impl fmt::Display for DOMEventTarget {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "DOMEventTarget")
+        f.write_str("DOMEventTarget")
     }
 }

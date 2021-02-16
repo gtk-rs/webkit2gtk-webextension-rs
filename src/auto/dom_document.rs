@@ -2,53 +2,47 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use glib;
+use crate::DOMAttr;
+use crate::DOMCDATASection;
+use crate::DOMCSSStyleDeclaration;
+use crate::DOMComment;
+use crate::DOMDOMImplementation;
+use crate::DOMDOMWindow;
+#[cfg(any(feature = "v2_16", feature = "dox"))]
+#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+use crate::DOMDocumentFragment;
+use crate::DOMDocumentType;
+use crate::DOMElement;
+use crate::DOMEntityReference;
+use crate::DOMEvent;
+use crate::DOMEventTarget;
+use crate::DOMHTMLCollection;
+use crate::DOMHTMLElement;
+use crate::DOMHTMLHeadElement;
+use crate::DOMHTMLScriptElement;
+use crate::DOMNode;
+use crate::DOMNodeList;
+use crate::DOMObject;
+use crate::DOMProcessingInstruction;
+use crate::DOMRange;
+use crate::DOMStyleSheetList;
+use crate::DOMText;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::connect_raw;
 use glib::signal::SignalHandlerId;
 use glib::translate::*;
-use glib::GString;
 use glib::StaticType;
-use glib::Value;
-use glib_sys;
-use gobject_sys;
-use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 use std::ptr;
-use webkit2_webextension_sys;
-use DOMAttr;
-use DOMCDATASection;
-use DOMCSSStyleDeclaration;
-use DOMComment;
-use DOMDOMImplementation;
-use DOMDOMWindow;
-#[cfg(any(feature = "v2_16", feature = "dox"))]
-use DOMDocumentFragment;
-use DOMDocumentType;
-use DOMElement;
-use DOMEntityReference;
-use DOMEvent;
-use DOMEventTarget;
-use DOMHTMLCollection;
-use DOMHTMLElement;
-use DOMHTMLHeadElement;
-use DOMHTMLScriptElement;
-use DOMNode;
-use DOMNodeList;
-use DOMObject;
-use DOMProcessingInstruction;
-use DOMRange;
-use DOMStyleSheetList;
-use DOMText;
 
-glib_wrapper! {
-    pub struct DOMDocument(Object<webkit2_webextension_sys::WebKitDOMDocument, webkit2_webextension_sys::WebKitDOMDocumentClass, DOMDocumentClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
+glib::wrapper! {
+    pub struct DOMDocument(Object<ffi::WebKitDOMDocument, ffi::WebKitDOMDocumentClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || webkit2_webextension_sys::webkit_dom_document_get_type(),
+        get_type => || ffi::webkit_dom_document_get_type(),
     }
 }
 
@@ -56,404 +50,504 @@ pub const NONE_DOM_DOCUMENT: Option<&DOMDocument> = None;
 
 pub trait DOMDocumentExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_adopt_node")]
     fn adopt_node<P: IsA<DOMNode>>(&self, source: &P) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_caret_range_from_point")]
     fn caret_range_from_point(&self, x: libc::c_long, y: libc::c_long) -> Option<DOMRange>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_create_attribute")]
     fn create_attribute(&self, name: &str) -> Result<DOMAttr, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_attribute_ns(
-        &self,
-        namespaceURI: Option<&str>,
-        qualifiedName: &str,
-    ) -> Result<DOMAttr, glib::Error>;
+    #[doc(alias = "webkit_dom_document_create_attribute_ns")]
+    fn create_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMAttr, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_create_cdata_section")]
     fn create_cdata_section(&self, data: &str) -> Result<DOMCDATASection, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_create_comment")]
     fn create_comment(&self, data: &str) -> Option<DOMComment>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_create_css_style_declaration")]
     fn create_css_style_declaration(&self) -> Option<DOMCSSStyleDeclaration>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_create_document_fragment")]
     fn create_document_fragment(&self) -> Option<DOMDocumentFragment>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_create_element")]
     fn create_element(&self, tagName: &str) -> Result<DOMElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_element_ns(
-        &self,
-        namespaceURI: Option<&str>,
-        qualifiedName: &str,
-    ) -> Result<DOMElement, glib::Error>;
+    #[doc(alias = "webkit_dom_document_create_element_ns")]
+    fn create_element_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
-    fn create_entity_reference(
-        &self,
-        name: Option<&str>,
-    ) -> Result<DOMEntityReference, glib::Error>;
+    #[doc(alias = "webkit_dom_document_create_entity_reference")]
+    fn create_entity_reference(&self, name: Option<&str>) -> Result<DOMEntityReference, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_create_event")]
     fn create_event(&self, eventType: &str) -> Result<DOMEvent, glib::Error>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
+    //#[doc(alias = "webkit_dom_document_create_expression")]
     //fn create_expression(&self, expression: &str, resolver: /*Ignored*/&DOMXPathNSResolver) -> Result<DOMXPathExpression, glib::Error>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
+    //#[doc(alias = "webkit_dom_document_create_node_iterator")]
     //fn create_node_iterator<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMNodeIterator, glib::Error>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
+    //#[doc(alias = "webkit_dom_document_create_ns_resolver")]
     //fn create_ns_resolver<P: IsA<DOMNode>>(&self, nodeResolver: &P) -> /*Ignored*/Option<DOMXPathNSResolver>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn create_processing_instruction(
-        &self,
-        target: &str,
-        data: &str,
-    ) -> Result<DOMProcessingInstruction, glib::Error>;
+    #[doc(alias = "webkit_dom_document_create_processing_instruction")]
+    fn create_processing_instruction(&self, target: &str, data: &str) -> Result<DOMProcessingInstruction, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_create_range")]
     fn create_range(&self) -> Option<DOMRange>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_create_text_node")]
     fn create_text_node(&self, data: &str) -> Option<DOMText>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
+    //#[doc(alias = "webkit_dom_document_create_tree_walker")]
     //fn create_tree_walker<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMTreeWalker, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_element_from_point")]
     fn element_from_point(&self, x: libc::c_long, y: libc::c_long) -> Option<DOMElement>;
 
     //#[cfg_attr(feature = "v2_22", deprecated)]
+    //#[doc(alias = "webkit_dom_document_evaluate")]
     //fn evaluate<P: IsA<DOMNode>, Q: IsA<DOMXPathResult>>(&self, expression: &str, contextNode: &P, resolver: /*Ignored*/Option<&DOMXPathNSResolver>, type_: libc::c_ushort, inResult: Option<&Q>) -> Result<DOMXPathResult, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_exec_command")]
     fn exec_command(&self, command: &str, userInterface: bool, value: &str) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_exit_pointer_lock")]
     fn exit_pointer_lock(&self);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_active_element")]
     fn get_active_element(&self) -> Option<DOMElement>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_anchors")]
     fn get_anchors(&self) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_applets")]
     fn get_applets(&self) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_body")]
     fn get_body(&self) -> Option<DOMHTMLElement>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_character_set(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_character_set")]
+    fn get_character_set(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_charset(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_charset")]
+    fn get_charset(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_child_element_count")]
     fn get_child_element_count(&self) -> libc::c_ulong;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_children")]
     fn get_children(&self) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    fn get_compat_mode(&self) -> Option<GString>;
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
+    #[doc(alias = "webkit_dom_document_get_compat_mode")]
+    fn get_compat_mode(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_content_type(&self) -> Option<GString>;
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_content_type")]
+    fn get_content_type(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_cookie(&self) -> Result<GString, glib::Error>;
+    #[doc(alias = "webkit_dom_document_get_cookie")]
+    fn get_cookie(&self) -> Result<glib::GString, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_current_script")]
     fn get_current_script(&self) -> Option<DOMHTMLScriptElement>;
 
     #[cfg_attr(feature = "v2_14", deprecated)]
-    fn get_default_charset(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_default_charset")]
+    fn get_default_charset(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_default_view")]
     fn get_default_view(&self) -> Option<DOMDOMWindow>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    fn get_design_mode(&self) -> Option<GString>;
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
+    #[doc(alias = "webkit_dom_document_get_design_mode")]
+    fn get_design_mode(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_dir(&self) -> Option<GString>;
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_dir")]
+    fn get_dir(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_doctype")]
     fn get_doctype(&self) -> Option<DOMDocumentType>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_document_element")]
     fn get_document_element(&self) -> Option<DOMElement>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_document_uri(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_document_uri")]
+    fn get_document_uri(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_domain(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_domain")]
+    fn get_domain(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_element_by_id")]
     fn get_element_by_id(&self, elementId: &str) -> Option<DOMElement>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_elements_by_class_name")]
     fn get_elements_by_class_name(&self, class_name: &str) -> Option<DOMNodeList>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    fn get_elements_by_class_name_as_html_collection(
-        &self,
-        classNames: &str,
-    ) -> Option<DOMHTMLCollection>;
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
+    #[doc(alias = "webkit_dom_document_get_elements_by_class_name_as_html_collection")]
+    fn get_elements_by_class_name_as_html_collection(&self, classNames: &str) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_elements_by_name")]
     fn get_elements_by_name(&self, elementName: &str) -> Option<DOMNodeList>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_elements_by_tag_name")]
     fn get_elements_by_tag_name(&self, tag_name: &str) -> Option<DOMNodeList>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    fn get_elements_by_tag_name_as_html_collection(
-        &self,
-        tagname: &str,
-    ) -> Option<DOMHTMLCollection>;
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
+    #[doc(alias = "webkit_dom_document_get_elements_by_tag_name_as_html_collection")]
+    fn get_elements_by_tag_name_as_html_collection(&self, tagname: &str) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
-    fn get_elements_by_tag_name_ns(
-        &self,
-        namespace_uri: &str,
-        tag_name: &str,
-    ) -> Option<DOMNodeList>;
+    #[doc(alias = "webkit_dom_document_get_elements_by_tag_name_ns")]
+    fn get_elements_by_tag_name_ns(&self, namespace_uri: &str, tag_name: &str) -> Option<DOMNodeList>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    fn get_elements_by_tag_name_ns_as_html_collection(
-        &self,
-        namespaceURI: &str,
-        localName: &str,
-    ) -> Option<DOMHTMLCollection>;
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
+    #[doc(alias = "webkit_dom_document_get_elements_by_tag_name_ns_as_html_collection")]
+    fn get_elements_by_tag_name_ns_as_html_collection(&self, namespaceURI: &str, localName: &str) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
+    #[doc(alias = "webkit_dom_document_get_embeds")]
     fn get_embeds(&self) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_first_element_child")]
     fn get_first_element_child(&self) -> Option<DOMElement>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_forms")]
     fn get_forms(&self) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_head")]
     fn get_head(&self) -> Option<DOMHTMLHeadElement>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_hidden")]
     fn get_hidden(&self) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_images")]
     fn get_images(&self) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_implementation")]
     fn get_implementation(&self) -> Option<DOMDOMImplementation>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_input_encoding(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_input_encoding")]
+    fn get_input_encoding(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_last_element_child")]
     fn get_last_element_child(&self) -> Option<DOMElement>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_last_modified(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_last_modified")]
+    fn get_last_modified(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_links")]
     fn get_links(&self) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_origin(&self) -> Option<GString>;
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_origin")]
+    fn get_origin(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_override_style<P: IsA<DOMElement>>(
-        &self,
-        element: &P,
-        pseudoElement: Option<&str>,
-    ) -> Option<DOMCSSStyleDeclaration>;
+    #[doc(alias = "webkit_dom_document_get_override_style")]
+    fn get_override_style<P: IsA<DOMElement>>(&self, element: &P, pseudoElement: Option<&str>) -> Option<DOMCSSStyleDeclaration>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
+    #[doc(alias = "webkit_dom_document_get_plugins")]
     fn get_plugins(&self) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_pointer_lock_element")]
     fn get_pointer_lock_element(&self) -> Option<DOMElement>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_preferred_stylesheet_set(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_preferred_stylesheet_set")]
+    fn get_preferred_stylesheet_set(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_ready_state(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_ready_state")]
+    fn get_ready_state(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_referrer(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_referrer")]
+    fn get_referrer(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
+    #[doc(alias = "webkit_dom_document_get_scripts")]
     fn get_scripts(&self) -> Option<DOMHTMLCollection>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_scrolling_element")]
     fn get_scrolling_element(&self) -> Option<DOMElement>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_selected_stylesheet_set(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_selected_stylesheet_set")]
+    fn get_selected_stylesheet_set(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_style_sheets")]
     fn get_style_sheets(&self) -> Option<DOMStyleSheetList>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_title(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_title")]
+    fn get_title(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_url(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_url")]
+    fn get_url(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_visibility_state(&self) -> Option<GString>;
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_visibility_state")]
+    fn get_visibility_state(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_webkit_current_fullscreen_element")]
     fn get_webkit_current_fullscreen_element(&self) -> Option<DOMElement>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_webkit_fullscreen_element")]
     fn get_webkit_fullscreen_element(&self) -> Option<DOMElement>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_webkit_fullscreen_enabled")]
     fn get_webkit_fullscreen_enabled(&self) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_webkit_fullscreen_keyboard_input_allowed")]
     fn get_webkit_fullscreen_keyboard_input_allowed(&self) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_get_webkit_is_fullscreen")]
     fn get_webkit_is_fullscreen(&self) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_xml_encoding(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_xml_encoding")]
+    fn get_xml_encoding(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_get_xml_standalone")]
     fn get_xml_standalone(&self) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_xml_version(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_get_xml_version")]
+    fn get_xml_version(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_has_focus")]
     fn has_focus(&self) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn import_node<P: IsA<DOMNode>>(
-        &self,
-        importedNode: &P,
-        deep: bool,
-    ) -> Result<DOMNode, glib::Error>;
+    #[doc(alias = "webkit_dom_document_import_node")]
+    fn import_node<P: IsA<DOMNode>>(&self, importedNode: &P, deep: bool) -> Result<DOMNode, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_query_command_enabled")]
     fn query_command_enabled(&self, command: &str) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_query_command_indeterm")]
     fn query_command_indeterm(&self, command: &str) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_query_command_state")]
     fn query_command_state(&self, command: &str) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_query_command_supported")]
     fn query_command_supported(&self, command: &str) -> bool;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn query_command_value(&self, command: &str) -> Option<GString>;
+    #[doc(alias = "webkit_dom_document_query_command_value")]
+    fn query_command_value(&self, command: &str) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_query_selector")]
     fn query_selector(&self, selectors: &str) -> Result<DOMElement, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_query_selector_all")]
     fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_set_body")]
     fn set_body<P: IsA<DOMHTMLElement>>(&self, value: &P) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_set_charset")]
     fn set_charset(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_set_cookie")]
     fn set_cookie(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_14", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
+    #[doc(alias = "webkit_dom_document_set_design_mode")]
     fn set_design_mode(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_set_dir")]
     fn set_dir(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_set_document_uri")]
     fn set_document_uri(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_set_selected_stylesheet_set")]
     fn set_selected_stylesheet_set(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_set_title")]
     fn set_title(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_set_xml_standalone")]
     fn set_xml_standalone(&self, value: bool) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_document_set_xml_version")]
     fn set_xml_version(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_webkit_cancel_fullscreen")]
     fn webkit_cancel_fullscreen(&self);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    #[doc(alias = "webkit_dom_document_webkit_exit_fullscreen")]
     fn webkit_exit_fullscreen(&self);
 
     fn get_property_child_element_count(&self) -> libc::c_ulong;
 
     fn get_property_children(&self) -> Option<DOMHTMLCollection>;
 
-    fn get_property_compat_mode(&self) -> Option<GString>;
+    fn get_property_compat_mode(&self) -> Option<glib::GString>;
 
-    fn get_property_content_type(&self) -> Option<GString>;
+    fn get_property_content_type(&self) -> Option<glib::GString>;
 
     fn get_property_current_script(&self) -> Option<DOMHTMLScriptElement>;
 
-    fn get_property_design_mode(&self) -> Option<GString>;
+    fn get_property_design_mode(&self) -> Option<glib::GString>;
 
     fn set_property_design_mode(&self, design_mode: Option<&str>);
 
-    fn get_property_dir(&self) -> Option<GString>;
+    fn get_property_dir(&self) -> Option<glib::GString>;
 
     fn set_property_dir(&self, dir: Option<&str>);
 
@@ -465,7 +559,7 @@ pub trait DOMDocumentExt: 'static {
 
     fn get_property_last_element_child(&self) -> Option<DOMElement>;
 
-    fn get_property_origin(&self) -> Option<GString>;
+    fn get_property_origin(&self) -> Option<glib::GString>;
 
     fn get_property_plugins(&self) -> Option<DOMHTMLCollection>;
 
@@ -475,7 +569,7 @@ pub trait DOMDocumentExt: 'static {
 
     fn get_property_scrolling_element(&self) -> Option<DOMElement>;
 
-    fn get_property_visibility_state(&self) -> Option<GString>;
+    fn get_property_visibility_state(&self) -> Option<glib::GString>;
 
     fn get_property_webkit_current_full_screen_element(&self) -> Option<DOMElement>;
 
@@ -487,10 +581,7 @@ pub trait DOMDocumentExt: 'static {
 
     fn get_property_webkit_is_full_screen(&self) -> bool;
 
-    fn connect_property_active_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_active_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_anchors_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -498,34 +589,23 @@ pub trait DOMDocumentExt: 'static {
 
     fn connect_property_body_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_character_set_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_character_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_children_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_compat_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_content_type_notify<F: Fn(&Self) + 'static>(&self, f: F)
-        -> SignalHandlerId;
+    fn connect_property_content_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_cookie_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_current_script_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_current_script_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_default_view_notify<F: Fn(&Self) + 'static>(&self, f: F)
-        -> SignalHandlerId;
+    fn connect_property_default_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_design_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -533,22 +613,15 @@ pub trait DOMDocumentExt: 'static {
 
     fn connect_property_doctype_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_document_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_document_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_document_uri_notify<F: Fn(&Self) + 'static>(&self, f: F)
-        -> SignalHandlerId;
+    fn connect_property_document_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_domain_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_embeds_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_forms_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -558,25 +631,13 @@ pub trait DOMDocumentExt: 'static {
 
     fn connect_property_images_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_implementation_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_implementation_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_input_encoding_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_input_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_last_modified_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_last_modified_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_links_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -584,15 +645,9 @@ pub trait DOMDocumentExt: 'static {
 
     fn connect_property_plugins_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_pointer_lock_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_pointer_lock_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_preferred_stylesheet_set_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_preferred_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_ready_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -600,60 +655,31 @@ pub trait DOMDocumentExt: 'static {
 
     fn connect_property_scripts_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_scrolling_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_scrolling_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_selected_stylesheet_set_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_selected_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_style_sheets_notify<F: Fn(&Self) + 'static>(&self, f: F)
-        -> SignalHandlerId;
+    fn connect_property_style_sheets_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_url_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_visibility_state_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_visibility_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_webkit_current_full_screen_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_webkit_current_full_screen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_webkit_full_screen_keyboard_input_allowed_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_webkit_full_screen_keyboard_input_allowed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_webkit_fullscreen_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_webkit_fullscreen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_webkit_fullscreen_enabled_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_webkit_fullscreen_enabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_webkit_is_full_screen_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_webkit_is_full_screen_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_xml_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F)
-        -> SignalHandlerId;
+    fn connect_property_xml_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_xml_standalone_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_xml_standalone_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
     fn connect_property_xml_version_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
@@ -662,2788 +688,1626 @@ impl<O: IsA<DOMDocument>> DOMDocumentExt for O {
     fn adopt_node<P: IsA<DOMNode>>(&self, source: &P) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_adopt_node(
-                self.as_ref().to_glib_none().0,
-                source.as_ref().to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_none(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_adopt_node(self.as_ref().to_glib_none().0, source.as_ref().to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn caret_range_from_point(&self, x: libc::c_long, y: libc::c_long) -> Option<DOMRange> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_caret_range_from_point(
-                    self.as_ref().to_glib_none().0,
-                    x,
-                    y,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_caret_range_from_point(self.as_ref().to_glib_none().0, x, y))
         }
     }
 
     fn create_attribute(&self, name: &str) -> Result<DOMAttr, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_create_attribute(
-                self.as_ref().to_glib_none().0,
-                name.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_none(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_create_attribute(self.as_ref().to_glib_none().0, name.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
-    fn create_attribute_ns(
-        &self,
-        namespaceURI: Option<&str>,
-        qualifiedName: &str,
-    ) -> Result<DOMAttr, glib::Error> {
+    fn create_attribute_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMAttr, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_create_attribute_ns(
-                self.as_ref().to_glib_none().0,
-                namespaceURI.to_glib_none().0,
-                qualifiedName.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_none(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_create_attribute_ns(self.as_ref().to_glib_none().0, namespaceURI.to_glib_none().0, qualifiedName.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn create_cdata_section(&self, data: &str) -> Result<DOMCDATASection, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_create_cdata_section(
-                self.as_ref().to_glib_none().0,
-                data.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_none(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_create_cdata_section(self.as_ref().to_glib_none().0, data.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn create_comment(&self, data: &str) -> Option<DOMComment> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_create_comment(
-                    self.as_ref().to_glib_none().0,
-                    data.to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_create_comment(self.as_ref().to_glib_none().0, data.to_glib_none().0))
         }
     }
 
     fn create_css_style_declaration(&self) -> Option<DOMCSSStyleDeclaration> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_create_css_style_declaration(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_create_css_style_declaration(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn create_document_fragment(&self) -> Option<DOMDocumentFragment> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_create_document_fragment(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_create_document_fragment(self.as_ref().to_glib_none().0))
         }
     }
 
     fn create_element(&self, tagName: &str) -> Result<DOMElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_create_element(
-                self.as_ref().to_glib_none().0,
-                tagName.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_none(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_create_element(self.as_ref().to_glib_none().0, tagName.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
-    fn create_element_ns(
-        &self,
-        namespaceURI: Option<&str>,
-        qualifiedName: &str,
-    ) -> Result<DOMElement, glib::Error> {
+    fn create_element_ns(&self, namespaceURI: Option<&str>, qualifiedName: &str) -> Result<DOMElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_create_element_ns(
-                self.as_ref().to_glib_none().0,
-                namespaceURI.to_glib_none().0,
-                qualifiedName.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_none(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_create_element_ns(self.as_ref().to_glib_none().0, namespaceURI.to_glib_none().0, qualifiedName.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
-    fn create_entity_reference(
-        &self,
-        name: Option<&str>,
-    ) -> Result<DOMEntityReference, glib::Error> {
+    fn create_entity_reference(&self, name: Option<&str>) -> Result<DOMEntityReference, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_create_entity_reference(
-                self.as_ref().to_glib_none().0,
-                name.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_none(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_create_entity_reference(self.as_ref().to_glib_none().0, name.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn create_event(&self, eventType: &str) -> Result<DOMEvent, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_create_event(
-                self.as_ref().to_glib_none().0,
-                eventType.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_full(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_create_event(self.as_ref().to_glib_none().0, eventType.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     //fn create_expression(&self, expression: &str, resolver: /*Ignored*/&DOMXPathNSResolver) -> Result<DOMXPathExpression, glib::Error> {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_document_create_expression() }
+    //    unsafe { TODO: call ffi:webkit_dom_document_create_expression() }
     //}
 
     //fn create_node_iterator<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMNodeIterator, glib::Error> {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_document_create_node_iterator() }
+    //    unsafe { TODO: call ffi:webkit_dom_document_create_node_iterator() }
     //}
 
     //fn create_ns_resolver<P: IsA<DOMNode>>(&self, nodeResolver: &P) -> /*Ignored*/Option<DOMXPathNSResolver> {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_document_create_ns_resolver() }
+    //    unsafe { TODO: call ffi:webkit_dom_document_create_ns_resolver() }
     //}
 
-    fn create_processing_instruction(
-        &self,
-        target: &str,
-        data: &str,
-    ) -> Result<DOMProcessingInstruction, glib::Error> {
+    fn create_processing_instruction(&self, target: &str, data: &str) -> Result<DOMProcessingInstruction, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_create_processing_instruction(
-                self.as_ref().to_glib_none().0,
-                target.to_glib_none().0,
-                data.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_none(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_create_processing_instruction(self.as_ref().to_glib_none().0, target.to_glib_none().0, data.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn create_range(&self) -> Option<DOMRange> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_create_range(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_create_range(self.as_ref().to_glib_none().0))
         }
     }
 
     fn create_text_node(&self, data: &str) -> Option<DOMText> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_create_text_node(
-                    self.as_ref().to_glib_none().0,
-                    data.to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_create_text_node(self.as_ref().to_glib_none().0, data.to_glib_none().0))
         }
     }
 
     //fn create_tree_walker<P: IsA<DOMNode>>(&self, root: &P, whatToShow: libc::c_ulong, filter: /*Ignored*/Option<&DOMNodeFilter>, expandEntityReferences: bool) -> Result<DOMTreeWalker, glib::Error> {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_document_create_tree_walker() }
+    //    unsafe { TODO: call ffi:webkit_dom_document_create_tree_walker() }
     //}
 
     fn element_from_point(&self, x: libc::c_long, y: libc::c_long) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_element_from_point(
-                    self.as_ref().to_glib_none().0,
-                    x,
-                    y,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_element_from_point(self.as_ref().to_glib_none().0, x, y))
         }
     }
 
     //fn evaluate<P: IsA<DOMNode>, Q: IsA<DOMXPathResult>>(&self, expression: &str, contextNode: &P, resolver: /*Ignored*/Option<&DOMXPathNSResolver>, type_: libc::c_ushort, inResult: Option<&Q>) -> Result<DOMXPathResult, glib::Error> {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_dom_document_evaluate() }
+    //    unsafe { TODO: call ffi:webkit_dom_document_evaluate() }
     //}
 
     fn exec_command(&self, command: &str, userInterface: bool, value: &str) -> bool {
         unsafe {
-            from_glib(webkit2_webextension_sys::webkit_dom_document_exec_command(
-                self.as_ref().to_glib_none().0,
-                command.to_glib_none().0,
-                userInterface.to_glib(),
-                value.to_glib_none().0,
-            ))
+            from_glib(ffi::webkit_dom_document_exec_command(self.as_ref().to_glib_none().0, command.to_glib_none().0, userInterface.to_glib(), value.to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn exit_pointer_lock(&self) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_document_exit_pointer_lock(
-                self.as_ref().to_glib_none().0,
-            );
+            ffi::webkit_dom_document_exit_pointer_lock(self.as_ref().to_glib_none().0);
         }
     }
 
     fn get_active_element(&self) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_get_active_element(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_get_active_element(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_anchors(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_anchors(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_anchors(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_applets(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_applets(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_applets(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_body(&self) -> Option<DOMHTMLElement> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_dom_document_get_body(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_none(ffi::webkit_dom_document_get_body(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_character_set(&self) -> Option<GString> {
+    fn get_character_set(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_character_set(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_character_set(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_charset(&self) -> Option<GString> {
+    fn get_charset(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_charset(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_charset(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_child_element_count(&self) -> libc::c_ulong {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_document_get_child_element_count(
-                self.as_ref().to_glib_none().0,
-            )
+            ffi::webkit_dom_document_get_child_element_count(self.as_ref().to_glib_none().0)
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_children(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_children(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_children(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    fn get_compat_mode(&self) -> Option<GString> {
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
+    fn get_compat_mode(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_compat_mode(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_compat_mode(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_content_type(&self) -> Option<GString> {
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    fn get_content_type(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_content_type(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_content_type(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_cookie(&self) -> Result<GString, glib::Error> {
+    fn get_cookie(&self) -> Result<glib::GString, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_get_cookie(
-                self.as_ref().to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_full(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_get_cookie(self.as_ref().to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_current_script(&self) -> Option<DOMHTMLScriptElement> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_get_current_script(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_get_current_script(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_default_charset(&self) -> Option<GString> {
+    fn get_default_charset(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_default_charset(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_default_charset(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_default_view(&self) -> Option<DOMDOMWindow> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_default_view(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_default_view(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_14", feature = "dox"))]
-    fn get_design_mode(&self) -> Option<GString> {
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
+    fn get_design_mode(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_design_mode(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_design_mode(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_dir(&self) -> Option<GString> {
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    fn get_dir(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_dir(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_dir(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_doctype(&self) -> Option<DOMDocumentType> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_dom_document_get_doctype(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_none(ffi::webkit_dom_document_get_doctype(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_document_element(&self) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_get_document_element(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_get_document_element(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_document_uri(&self) -> Option<GString> {
+    fn get_document_uri(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_document_uri(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_document_uri(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_domain(&self) -> Option<GString> {
+    fn get_domain(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_domain(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_domain(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_element_by_id(&self, elementId: &str) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_get_element_by_id(
-                    self.as_ref().to_glib_none().0,
-                    elementId.to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_get_element_by_id(self.as_ref().to_glib_none().0, elementId.to_glib_none().0))
         }
     }
 
     fn get_elements_by_class_name(&self, class_name: &str) -> Option<DOMNodeList> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_elements_by_class_name(
-                    self.as_ref().to_glib_none().0,
-                    class_name.to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_elements_by_class_name(self.as_ref().to_glib_none().0, class_name.to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    fn get_elements_by_class_name_as_html_collection(
-        &self,
-        classNames: &str,
-    ) -> Option<DOMHTMLCollection> {
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
+    fn get_elements_by_class_name_as_html_collection(&self, classNames: &str) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_elements_by_class_name_as_html_collection(self.as_ref().to_glib_none().0, classNames.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_document_get_elements_by_class_name_as_html_collection(self.as_ref().to_glib_none().0, classNames.to_glib_none().0))
         }
     }
 
     fn get_elements_by_name(&self, elementName: &str) -> Option<DOMNodeList> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_elements_by_name(
-                    self.as_ref().to_glib_none().0,
-                    elementName.to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_elements_by_name(self.as_ref().to_glib_none().0, elementName.to_glib_none().0))
         }
     }
 
     fn get_elements_by_tag_name(&self, tag_name: &str) -> Option<DOMNodeList> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_elements_by_tag_name(
-                    self.as_ref().to_glib_none().0,
-                    tag_name.to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_elements_by_tag_name(self.as_ref().to_glib_none().0, tag_name.to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    fn get_elements_by_tag_name_as_html_collection(
-        &self,
-        tagname: &str,
-    ) -> Option<DOMHTMLCollection> {
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
+    fn get_elements_by_tag_name_as_html_collection(&self, tagname: &str) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_elements_by_tag_name_as_html_collection(self.as_ref().to_glib_none().0, tagname.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_document_get_elements_by_tag_name_as_html_collection(self.as_ref().to_glib_none().0, tagname.to_glib_none().0))
         }
     }
 
-    fn get_elements_by_tag_name_ns(
-        &self,
-        namespace_uri: &str,
-        tag_name: &str,
-    ) -> Option<DOMNodeList> {
+    fn get_elements_by_tag_name_ns(&self, namespace_uri: &str, tag_name: &str) -> Option<DOMNodeList> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_elements_by_tag_name_ns(
-                    self.as_ref().to_glib_none().0,
-                    namespace_uri.to_glib_none().0,
-                    tag_name.to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_elements_by_tag_name_ns(self.as_ref().to_glib_none().0, namespace_uri.to_glib_none().0, tag_name.to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_12", feature = "dox"))]
-    fn get_elements_by_tag_name_ns_as_html_collection(
-        &self,
-        namespaceURI: &str,
-        localName: &str,
-    ) -> Option<DOMHTMLCollection> {
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
+    fn get_elements_by_tag_name_ns_as_html_collection(&self, namespaceURI: &str, localName: &str) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_elements_by_tag_name_ns_as_html_collection(self.as_ref().to_glib_none().0, namespaceURI.to_glib_none().0, localName.to_glib_none().0))
+            from_glib_full(ffi::webkit_dom_document_get_elements_by_tag_name_ns_as_html_collection(self.as_ref().to_glib_none().0, namespaceURI.to_glib_none().0, localName.to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_14", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
     fn get_embeds(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_embeds(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_embeds(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_first_element_child(&self) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_get_first_element_child(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_get_first_element_child(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_forms(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_forms(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_forms(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_head(&self) -> Option<DOMHTMLHeadElement> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_dom_document_get_head(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_none(ffi::webkit_dom_document_get_head(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_hidden(&self) -> bool {
         unsafe {
-            from_glib(webkit2_webextension_sys::webkit_dom_document_get_hidden(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib(ffi::webkit_dom_document_get_hidden(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_images(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_images(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_images(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_implementation(&self) -> Option<DOMDOMImplementation> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_implementation(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_implementation(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_input_encoding(&self) -> Option<GString> {
+    fn get_input_encoding(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_input_encoding(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_input_encoding(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_last_element_child(&self) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_get_last_element_child(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_get_last_element_child(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_last_modified(&self) -> Option<GString> {
+    fn get_last_modified(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_last_modified(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_last_modified(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_links(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_links(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_links(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_origin(&self) -> Option<GString> {
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    fn get_origin(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_origin(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_origin(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_override_style<P: IsA<DOMElement>>(
-        &self,
-        element: &P,
-        pseudoElement: Option<&str>,
-    ) -> Option<DOMCSSStyleDeclaration> {
+    fn get_override_style<P: IsA<DOMElement>>(&self, element: &P, pseudoElement: Option<&str>) -> Option<DOMCSSStyleDeclaration> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_override_style(
-                    self.as_ref().to_glib_none().0,
-                    element.as_ref().to_glib_none().0,
-                    pseudoElement.to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_override_style(self.as_ref().to_glib_none().0, element.as_ref().to_glib_none().0, pseudoElement.to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_14", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
     fn get_plugins(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_plugins(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_plugins(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_pointer_lock_element(&self) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_get_pointer_lock_element(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_get_pointer_lock_element(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_preferred_stylesheet_set(&self) -> Option<GString> {
+    fn get_preferred_stylesheet_set(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_preferred_stylesheet_set(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_preferred_stylesheet_set(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_ready_state(&self) -> Option<GString> {
+    fn get_ready_state(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_ready_state(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_ready_state(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_referrer(&self) -> Option<GString> {
+    fn get_referrer(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_referrer(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_referrer(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_14", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
     fn get_scripts(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_scripts(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_scripts(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_scrolling_element(&self) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_get_scrolling_element(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_get_scrolling_element(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_selected_stylesheet_set(&self) -> Option<GString> {
+    fn get_selected_stylesheet_set(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_selected_stylesheet_set(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_selected_stylesheet_set(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_style_sheets(&self) -> Option<DOMStyleSheetList> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_get_style_sheets(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_get_style_sheets(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_title(&self) -> Option<GString> {
+    fn get_title(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_title(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_title(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_url(&self) -> Option<GString> {
+    fn get_url(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(webkit2_webextension_sys::webkit_dom_document_get_url(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib_full(ffi::webkit_dom_document_get_url(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
-    fn get_visibility_state(&self) -> Option<GString> {
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
+    fn get_visibility_state(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_visibility_state(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_visibility_state(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_webkit_current_fullscreen_element(&self) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_get_webkit_current_fullscreen_element(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_get_webkit_current_fullscreen_element(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_webkit_fullscreen_element(&self) -> Option<DOMElement> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_document_get_webkit_fullscreen_element(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_document_get_webkit_fullscreen_element(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_webkit_fullscreen_enabled(&self) -> bool {
         unsafe {
-            from_glib(
-                webkit2_webextension_sys::webkit_dom_document_get_webkit_fullscreen_enabled(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib(ffi::webkit_dom_document_get_webkit_fullscreen_enabled(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_webkit_fullscreen_keyboard_input_allowed(&self) -> bool {
         unsafe {
-            from_glib(webkit2_webextension_sys::webkit_dom_document_get_webkit_fullscreen_keyboard_input_allowed(self.as_ref().to_glib_none().0))
+            from_glib(ffi::webkit_dom_document_get_webkit_fullscreen_keyboard_input_allowed(self.as_ref().to_glib_none().0))
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn get_webkit_is_fullscreen(&self) -> bool {
         unsafe {
-            from_glib(
-                webkit2_webextension_sys::webkit_dom_document_get_webkit_is_fullscreen(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib(ffi::webkit_dom_document_get_webkit_is_fullscreen(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_xml_encoding(&self) -> Option<GString> {
+    fn get_xml_encoding(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_xml_encoding(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_xml_encoding(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_xml_standalone(&self) -> bool {
         unsafe {
-            from_glib(
-                webkit2_webextension_sys::webkit_dom_document_get_xml_standalone(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib(ffi::webkit_dom_document_get_xml_standalone(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_xml_version(&self) -> Option<GString> {
+    fn get_xml_version(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_get_xml_version(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_get_xml_version(self.as_ref().to_glib_none().0))
         }
     }
 
     fn has_focus(&self) -> bool {
         unsafe {
-            from_glib(webkit2_webextension_sys::webkit_dom_document_has_focus(
-                self.as_ref().to_glib_none().0,
-            ))
+            from_glib(ffi::webkit_dom_document_has_focus(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn import_node<P: IsA<DOMNode>>(
-        &self,
-        importedNode: &P,
-        deep: bool,
-    ) -> Result<DOMNode, glib::Error> {
+    fn import_node<P: IsA<DOMNode>>(&self, importedNode: &P, deep: bool) -> Result<DOMNode, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_import_node(
-                self.as_ref().to_glib_none().0,
-                importedNode.as_ref().to_glib_none().0,
-                deep.to_glib(),
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_none(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_import_node(self.as_ref().to_glib_none().0, importedNode.as_ref().to_glib_none().0, deep.to_glib(), &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn query_command_enabled(&self, command: &str) -> bool {
         unsafe {
-            from_glib(
-                webkit2_webextension_sys::webkit_dom_document_query_command_enabled(
-                    self.as_ref().to_glib_none().0,
-                    command.to_glib_none().0,
-                ),
-            )
+            from_glib(ffi::webkit_dom_document_query_command_enabled(self.as_ref().to_glib_none().0, command.to_glib_none().0))
         }
     }
 
     fn query_command_indeterm(&self, command: &str) -> bool {
         unsafe {
-            from_glib(
-                webkit2_webextension_sys::webkit_dom_document_query_command_indeterm(
-                    self.as_ref().to_glib_none().0,
-                    command.to_glib_none().0,
-                ),
-            )
+            from_glib(ffi::webkit_dom_document_query_command_indeterm(self.as_ref().to_glib_none().0, command.to_glib_none().0))
         }
     }
 
     fn query_command_state(&self, command: &str) -> bool {
         unsafe {
-            from_glib(
-                webkit2_webextension_sys::webkit_dom_document_query_command_state(
-                    self.as_ref().to_glib_none().0,
-                    command.to_glib_none().0,
-                ),
-            )
+            from_glib(ffi::webkit_dom_document_query_command_state(self.as_ref().to_glib_none().0, command.to_glib_none().0))
         }
     }
 
     fn query_command_supported(&self, command: &str) -> bool {
         unsafe {
-            from_glib(
-                webkit2_webextension_sys::webkit_dom_document_query_command_supported(
-                    self.as_ref().to_glib_none().0,
-                    command.to_glib_none().0,
-                ),
-            )
+            from_glib(ffi::webkit_dom_document_query_command_supported(self.as_ref().to_glib_none().0, command.to_glib_none().0))
         }
     }
 
-    fn query_command_value(&self, command: &str) -> Option<GString> {
+    fn query_command_value(&self, command: &str) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_document_query_command_value(
-                    self.as_ref().to_glib_none().0,
-                    command.to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_document_query_command_value(self.as_ref().to_glib_none().0, command.to_glib_none().0))
         }
     }
 
     fn query_selector(&self, selectors: &str) -> Result<DOMElement, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_query_selector(
-                self.as_ref().to_glib_none().0,
-                selectors.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_none(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_query_selector(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_none(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn query_selector_all(&self, selectors: &str) -> Result<DOMNodeList, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_document_query_selector_all(
-                self.as_ref().to_glib_none().0,
-                selectors.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_full(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_document_query_selector_all(self.as_ref().to_glib_none().0, selectors.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn set_body<P: IsA<DOMHTMLElement>>(&self, value: &P) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = webkit2_webextension_sys::webkit_dom_document_set_body(
-                self.as_ref().to_glib_none().0,
-                value.as_ref().to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(())
-            } else {
-                Err(from_glib_full(error))
-            }
+            let _ = ffi::webkit_dom_document_set_body(self.as_ref().to_glib_none().0, value.as_ref().to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn set_charset(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_document_set_charset(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-            );
+            ffi::webkit_dom_document_set_charset(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_cookie(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = webkit2_webextension_sys::webkit_dom_document_set_cookie(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(())
-            } else {
-                Err(from_glib_full(error))
-            }
+            let _ = ffi::webkit_dom_document_set_cookie(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     #[cfg(any(feature = "v2_14", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_14")))]
     fn set_design_mode(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_document_set_design_mode(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-            );
+            ffi::webkit_dom_document_set_design_mode(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn set_dir(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_document_set_dir(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-            );
+            ffi::webkit_dom_document_set_dir(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_document_uri(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_document_set_document_uri(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-            );
+            ffi::webkit_dom_document_set_document_uri(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_selected_stylesheet_set(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_document_set_selected_stylesheet_set(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-            );
+            ffi::webkit_dom_document_set_selected_stylesheet_set(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_title(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_document_set_title(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-            );
+            ffi::webkit_dom_document_set_title(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_xml_standalone(&self, value: bool) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = webkit2_webextension_sys::webkit_dom_document_set_xml_standalone(
-                self.as_ref().to_glib_none().0,
-                value.to_glib(),
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(())
-            } else {
-                Err(from_glib_full(error))
-            }
+            let _ = ffi::webkit_dom_document_set_xml_standalone(self.as_ref().to_glib_none().0, value.to_glib(), &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn set_xml_version(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = webkit2_webextension_sys::webkit_dom_document_set_xml_version(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(())
-            } else {
-                Err(from_glib_full(error))
-            }
+            let _ = ffi::webkit_dom_document_set_xml_version(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn webkit_cancel_fullscreen(&self) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_document_webkit_cancel_fullscreen(
-                self.as_ref().to_glib_none().0,
-            );
+            ffi::webkit_dom_document_webkit_cancel_fullscreen(self.as_ref().to_glib_none().0);
         }
     }
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_16")))]
     fn webkit_exit_fullscreen(&self) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_document_webkit_exit_fullscreen(
-                self.as_ref().to_glib_none().0,
-            );
+            ffi::webkit_dom_document_webkit_exit_fullscreen(self.as_ref().to_glib_none().0);
         }
     }
 
     fn get_property_child_element_count(&self) -> libc::c_ulong {
         unsafe {
-            let mut value = Value::from_type(<libc::c_ulong as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"child-element-count\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `child-element-count` getter")
-                .unwrap()
+            let mut value = glib::Value::from_type(<libc::c_ulong as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"child-element-count\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `child-element-count` getter").unwrap()
         }
     }
 
     fn get_property_children(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            let mut value = Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"children\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `children` getter")
+            let mut value = glib::Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"children\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `children` getter")
         }
     }
 
-    fn get_property_compat_mode(&self) -> Option<GString> {
+    fn get_property_compat_mode(&self) -> Option<glib::GString> {
         unsafe {
-            let mut value = Value::from_type(<GString as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"compat-mode\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `compat-mode` getter")
+            let mut value = glib::Value::from_type(<glib::GString as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"compat-mode\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `compat-mode` getter")
         }
     }
 
-    fn get_property_content_type(&self) -> Option<GString> {
+    fn get_property_content_type(&self) -> Option<glib::GString> {
         unsafe {
-            let mut value = Value::from_type(<GString as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"content-type\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `content-type` getter")
+            let mut value = glib::Value::from_type(<glib::GString as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"content-type\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `content-type` getter")
         }
     }
 
     fn get_property_current_script(&self) -> Option<DOMHTMLScriptElement> {
         unsafe {
-            let mut value = Value::from_type(<DOMHTMLScriptElement as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"current-script\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `current-script` getter")
+            let mut value = glib::Value::from_type(<DOMHTMLScriptElement as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"current-script\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `current-script` getter")
         }
     }
 
-    fn get_property_design_mode(&self) -> Option<GString> {
+    fn get_property_design_mode(&self) -> Option<glib::GString> {
         unsafe {
-            let mut value = Value::from_type(<GString as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"design-mode\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `design-mode` getter")
+            let mut value = glib::Value::from_type(<glib::GString as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"design-mode\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `design-mode` getter")
         }
     }
 
     fn set_property_design_mode(&self, design_mode: Option<&str>) {
         unsafe {
-            gobject_sys::g_object_set_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"design-mode\0".as_ptr() as *const _,
-                Value::from(design_mode).to_glib_none().0,
-            );
+            glib::gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"design-mode\0".as_ptr() as *const _, glib::Value::from(design_mode).to_glib_none().0);
         }
     }
 
-    fn get_property_dir(&self) -> Option<GString> {
+    fn get_property_dir(&self) -> Option<glib::GString> {
         unsafe {
-            let mut value = Value::from_type(<GString as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"dir\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
+            let mut value = glib::Value::from_type(<glib::GString as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"dir\0".as_ptr() as *const _, value.to_glib_none_mut().0);
             value.get().expect("Return Value for property `dir` getter")
         }
     }
 
     fn set_property_dir(&self, dir: Option<&str>) {
         unsafe {
-            gobject_sys::g_object_set_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"dir\0".as_ptr() as *const _,
-                Value::from(dir).to_glib_none().0,
-            );
+            glib::gobject_ffi::g_object_set_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"dir\0".as_ptr() as *const _, glib::Value::from(dir).to_glib_none().0);
         }
     }
 
     fn get_property_embeds(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            let mut value = Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"embeds\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `embeds` getter")
+            let mut value = glib::Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"embeds\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `embeds` getter")
         }
     }
 
     fn get_property_first_element_child(&self) -> Option<DOMElement> {
         unsafe {
-            let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"first-element-child\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `first-element-child` getter")
+            let mut value = glib::Value::from_type(<DOMElement as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"first-element-child\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `first-element-child` getter")
         }
     }
 
     fn get_property_hidden(&self) -> bool {
         unsafe {
-            let mut value = Value::from_type(<bool as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"hidden\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `hidden` getter")
-                .unwrap()
+            let mut value = glib::Value::from_type(<bool as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"hidden\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `hidden` getter").unwrap()
         }
     }
 
     fn get_property_last_element_child(&self) -> Option<DOMElement> {
         unsafe {
-            let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"last-element-child\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `last-element-child` getter")
+            let mut value = glib::Value::from_type(<DOMElement as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"last-element-child\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `last-element-child` getter")
         }
     }
 
-    fn get_property_origin(&self) -> Option<GString> {
+    fn get_property_origin(&self) -> Option<glib::GString> {
         unsafe {
-            let mut value = Value::from_type(<GString as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"origin\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `origin` getter")
+            let mut value = glib::Value::from_type(<glib::GString as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"origin\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `origin` getter")
         }
     }
 
     fn get_property_plugins(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            let mut value = Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"plugins\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `plugins` getter")
+            let mut value = glib::Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"plugins\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `plugins` getter")
         }
     }
 
     fn get_property_pointer_lock_element(&self) -> Option<DOMElement> {
         unsafe {
-            let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"pointer-lock-element\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `pointer-lock-element` getter")
+            let mut value = glib::Value::from_type(<DOMElement as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"pointer-lock-element\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `pointer-lock-element` getter")
         }
     }
 
     fn get_property_scripts(&self) -> Option<DOMHTMLCollection> {
         unsafe {
-            let mut value = Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"scripts\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `scripts` getter")
+            let mut value = glib::Value::from_type(<DOMHTMLCollection as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"scripts\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `scripts` getter")
         }
     }
 
     fn get_property_scrolling_element(&self) -> Option<DOMElement> {
         unsafe {
-            let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"scrolling-element\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `scrolling-element` getter")
+            let mut value = glib::Value::from_type(<DOMElement as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"scrolling-element\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `scrolling-element` getter")
         }
     }
 
-    fn get_property_visibility_state(&self) -> Option<GString> {
+    fn get_property_visibility_state(&self) -> Option<glib::GString> {
         unsafe {
-            let mut value = Value::from_type(<GString as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"visibility-state\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `visibility-state` getter")
+            let mut value = glib::Value::from_type(<glib::GString as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"visibility-state\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `visibility-state` getter")
         }
     }
 
     fn get_property_webkit_current_full_screen_element(&self) -> Option<DOMElement> {
         unsafe {
-            let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"webkit-current-full-screen-element\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `webkit-current-full-screen-element` getter")
+            let mut value = glib::Value::from_type(<DOMElement as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"webkit-current-full-screen-element\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `webkit-current-full-screen-element` getter")
         }
     }
 
     fn get_property_webkit_full_screen_keyboard_input_allowed(&self) -> bool {
         unsafe {
-            let mut value = Value::from_type(<bool as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"webkit-full-screen-keyboard-input-allowed\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect(
-                    "Return Value for property `webkit-full-screen-keyboard-input-allowed` getter",
-                )
-                .unwrap()
+            let mut value = glib::Value::from_type(<bool as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"webkit-full-screen-keyboard-input-allowed\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `webkit-full-screen-keyboard-input-allowed` getter").unwrap()
         }
     }
 
     fn get_property_webkit_fullscreen_element(&self) -> Option<DOMElement> {
         unsafe {
-            let mut value = Value::from_type(<DOMElement as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"webkit-fullscreen-element\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `webkit-fullscreen-element` getter")
+            let mut value = glib::Value::from_type(<DOMElement as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"webkit-fullscreen-element\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `webkit-fullscreen-element` getter")
         }
     }
 
     fn get_property_webkit_fullscreen_enabled(&self) -> bool {
         unsafe {
-            let mut value = Value::from_type(<bool as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"webkit-fullscreen-enabled\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `webkit-fullscreen-enabled` getter")
-                .unwrap()
+            let mut value = glib::Value::from_type(<bool as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"webkit-fullscreen-enabled\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `webkit-fullscreen-enabled` getter").unwrap()
         }
     }
 
     fn get_property_webkit_is_full_screen(&self) -> bool {
         unsafe {
-            let mut value = Value::from_type(<bool as StaticType>::static_type());
-            gobject_sys::g_object_get_property(
-                self.to_glib_none().0 as *mut gobject_sys::GObject,
-                b"webkit-is-full-screen\0".as_ptr() as *const _,
-                value.to_glib_none_mut().0,
-            );
-            value
-                .get()
-                .expect("Return Value for property `webkit-is-full-screen` getter")
-                .unwrap()
+            let mut value = glib::Value::from_type(<bool as StaticType>::static_type());
+            glib::gobject_ffi::g_object_get_property(self.to_glib_none().0 as *mut glib::gobject_ffi::GObject, b"webkit-is-full-screen\0".as_ptr() as *const _, value.to_glib_none_mut().0);
+            value.get().expect("Return Value for property `webkit-is-full-screen` getter").unwrap()
         }
     }
 
-    fn connect_property_active_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_active_element_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_active_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_active_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::active-element\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_active_element_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::active-element\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_active_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_anchors_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_anchors_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_anchors_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::anchors\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_anchors_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::anchors\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_anchors_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_applets_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_applets_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_applets_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::applets\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_applets_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::applets\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_applets_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_body_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_body_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_body_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::body\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_body_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::body\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_body_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_character_set_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_character_set_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_character_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_character_set_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::character-set\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_character_set_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::character-set\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_character_set_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_charset_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_charset_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_charset_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::charset\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_charset_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::charset\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_charset_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_child_element_count_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_child_element_count_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_child_element_count_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::child-element-count\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_child_element_count_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::child-element-count\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_child_element_count_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_children_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_children_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_children_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::children\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_children_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::children\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_children_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_compat_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_compat_mode_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_compat_mode_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::compat-mode\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_compat_mode_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::compat-mode\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_compat_mode_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_content_type_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_content_type_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_content_type_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_content_type_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::content-type\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_content_type_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::content-type\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_content_type_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_cookie_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_cookie_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_cookie_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::cookie\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_cookie_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::cookie\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_cookie_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_current_script_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_current_script_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_current_script_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_current_script_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::current-script\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_current_script_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::current-script\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_current_script_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_default_view_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_default_view_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_default_view_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_default_view_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::default-view\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_default_view_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::default-view\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_default_view_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_design_mode_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_design_mode_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_design_mode_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::design-mode\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_design_mode_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::design-mode\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_design_mode_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_dir_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_dir_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_dir_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::dir\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_dir_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::dir\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_dir_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_doctype_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_doctype_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_doctype_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::doctype\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_doctype_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::doctype\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_doctype_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_document_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_document_element_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_document_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_document_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::document-element\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_document_element_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::document-element\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_document_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_document_uri_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_document_uri_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_document_uri_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_document_uri_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::document-uri\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_document_uri_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::document-uri\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_document_uri_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_domain_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_domain_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_domain_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::domain\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_domain_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::domain\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_domain_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_embeds_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_embeds_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_embeds_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::embeds\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_embeds_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::embeds\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_embeds_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_first_element_child_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_first_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_first_element_child_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::first-element-child\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_first_element_child_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::first-element-child\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_first_element_child_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_forms_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_forms_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_forms_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::forms\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_forms_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::forms\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_forms_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_head_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_head_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_head_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::head\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_head_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::head\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_head_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_hidden_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_hidden_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_hidden_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::hidden\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_hidden_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::hidden\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_hidden_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_images_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_images_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_images_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::images\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_images_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::images\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_images_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_implementation_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_implementation_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_implementation_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_implementation_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::implementation\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_implementation_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::implementation\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_implementation_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_input_encoding_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_input_encoding_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_input_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_input_encoding_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::input-encoding\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_input_encoding_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::input-encoding\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_input_encoding_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_last_element_child_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_last_element_child_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_last_element_child_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::last-element-child\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_last_element_child_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::last-element-child\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_last_element_child_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_last_modified_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_last_modified_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_last_modified_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_last_modified_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::last-modified\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_last_modified_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::last-modified\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_last_modified_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_links_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_links_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_links_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::links\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_links_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::links\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_links_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_origin_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_origin_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_origin_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::origin\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_origin_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::origin\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_origin_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_plugins_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_plugins_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_plugins_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::plugins\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_plugins_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::plugins\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_plugins_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_pointer_lock_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_pointer_lock_element_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_pointer_lock_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_pointer_lock_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::pointer-lock-element\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_pointer_lock_element_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::pointer-lock-element\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_pointer_lock_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_preferred_stylesheet_set_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_preferred_stylesheet_set_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_preferred_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_preferred_stylesheet_set_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::preferred-stylesheet-set\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_preferred_stylesheet_set_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::preferred-stylesheet-set\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_preferred_stylesheet_set_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_ready_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_ready_state_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_ready_state_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::ready-state\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_ready_state_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::ready-state\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_ready_state_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_referrer_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_referrer_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_referrer_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::referrer\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_referrer_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::referrer\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_referrer_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_scripts_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_scripts_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_scripts_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::scripts\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_scripts_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::scripts\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_scripts_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_scrolling_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_scrolling_element_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_scrolling_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_scrolling_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::scrolling-element\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_scrolling_element_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::scrolling-element\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_scrolling_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_selected_stylesheet_set_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_selected_stylesheet_set_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_selected_stylesheet_set_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_selected_stylesheet_set_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::selected-stylesheet-set\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_selected_stylesheet_set_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::selected-stylesheet-set\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_selected_stylesheet_set_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_style_sheets_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_style_sheets_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_style_sheets_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_style_sheets_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::style-sheets\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_style_sheets_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::style-sheets\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_style_sheets_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_title_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_title_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_title_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::title\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_title_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::title\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_title_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_url_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_url_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_url_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::url\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_url_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::url\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_url_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_visibility_state_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_visibility_state_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_visibility_state_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_visibility_state_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::visibility-state\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_visibility_state_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::visibility-state\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_visibility_state_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_webkit_current_full_screen_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_webkit_current_full_screen_element_trampoline<
-            P,
-            F: Fn(&P) + 'static,
-        >(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_webkit_current_full_screen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_webkit_current_full_screen_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::webkit-current-full-screen-element\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_webkit_current_full_screen_element_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::webkit-current-full-screen-element\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_webkit_current_full_screen_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_webkit_full_screen_keyboard_input_allowed_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_webkit_full_screen_keyboard_input_allowed_trampoline<
-            P,
-            F: Fn(&P) + 'static,
-        >(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_webkit_full_screen_keyboard_input_allowed_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_webkit_full_screen_keyboard_input_allowed_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::webkit-full-screen-keyboard-input-allowed\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_webkit_full_screen_keyboard_input_allowed_trampoline::<Self, F>
-                        as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::webkit-full-screen-keyboard-input-allowed\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_webkit_full_screen_keyboard_input_allowed_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_webkit_fullscreen_element_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_webkit_fullscreen_element_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_webkit_fullscreen_element_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_webkit_fullscreen_element_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::webkit-fullscreen-element\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_webkit_fullscreen_element_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::webkit-fullscreen-element\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_webkit_fullscreen_element_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_webkit_fullscreen_enabled_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_webkit_fullscreen_enabled_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_webkit_fullscreen_enabled_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_webkit_fullscreen_enabled_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::webkit-fullscreen-enabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_webkit_fullscreen_enabled_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::webkit-fullscreen-enabled\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_webkit_fullscreen_enabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_webkit_is_full_screen_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_webkit_is_full_screen_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_webkit_is_full_screen_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_webkit_is_full_screen_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::webkit-is-full-screen\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_webkit_is_full_screen_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::webkit-is-full-screen\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_webkit_is_full_screen_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_xml_encoding_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_xml_encoding_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_xml_encoding_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_xml_encoding_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::xml-encoding\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_xml_encoding_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::xml-encoding\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_xml_encoding_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_xml_standalone_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_xml_standalone_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+    fn connect_property_xml_standalone_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_xml_standalone_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::xml-standalone\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_xml_standalone_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::xml-standalone\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_xml_standalone_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_xml_version_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_xml_version_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMDocument,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMDocument>,
+        unsafe extern "C" fn notify_xml_version_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMDocument, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMDocument>
         {
             let f: &F = &*(f as *const F);
             f(&DOMDocument::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::xml-version\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_xml_version_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::xml-version\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_xml_version_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
 
 impl fmt::Display for DOMDocument {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "DOMDocument")
+        f.write_str("DOMDocument")
     }
 }

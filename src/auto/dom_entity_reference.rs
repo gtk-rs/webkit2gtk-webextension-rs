@@ -2,18 +2,16 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use glib::translate::*;
+use crate::DOMEventTarget;
+use crate::DOMNode;
+use crate::DOMObject;
 use std::fmt;
-use webkit2_webextension_sys;
-use DOMEventTarget;
-use DOMNode;
-use DOMObject;
 
-glib_wrapper! {
-    pub struct DOMEntityReference(Object<webkit2_webextension_sys::WebKitDOMEntityReference, webkit2_webextension_sys::WebKitDOMEntityReferenceClass, DOMEntityReferenceClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
+glib::wrapper! {
+    pub struct DOMEntityReference(Object<ffi::WebKitDOMEntityReference, ffi::WebKitDOMEntityReferenceClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || webkit2_webextension_sys::webkit_dom_entity_reference_get_type(),
+        get_type => || ffi::webkit_dom_entity_reference_get_type(),
     }
 }
 
@@ -23,6 +21,6 @@ pub const NONE_DOM_ENTITY_REFERENCE: Option<&DOMEntityReference> = None;
 
 impl fmt::Display for DOMEntityReference {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "DOMEntityReference")
+        f.write_str("DOMEntityReference")
     }
 }

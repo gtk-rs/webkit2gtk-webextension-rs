@@ -2,21 +2,20 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use crate::DOMElement;
+use crate::DOMEventTarget;
+use crate::DOMHTMLElement;
+use crate::DOMNode;
+use crate::DOMObject;
 use glib::object::IsA;
 use glib::translate::*;
 use std::fmt;
-use webkit2_webextension_sys;
-use DOMElement;
-use DOMEventTarget;
-use DOMHTMLElement;
-use DOMNode;
-use DOMObject;
 
-glib_wrapper! {
-    pub struct DOMHTMLMarqueeElement(Object<webkit2_webextension_sys::WebKitDOMHTMLMarqueeElement, webkit2_webextension_sys::WebKitDOMHTMLMarqueeElementClass, DOMHTMLMarqueeElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+glib::wrapper! {
+    pub struct DOMHTMLMarqueeElement(Object<ffi::WebKitDOMHTMLMarqueeElement, ffi::WebKitDOMHTMLMarqueeElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || webkit2_webextension_sys::webkit_dom_html_marquee_element_get_type(),
+        get_type => || ffi::webkit_dom_html_marquee_element_get_type(),
     }
 }
 
@@ -24,32 +23,30 @@ pub const NONE_DOMHTML_MARQUEE_ELEMENT: Option<&DOMHTMLMarqueeElement> = None;
 
 pub trait DOMHTMLMarqueeElementExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_html_marquee_element_start")]
     fn start(&self);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_html_marquee_element_stop")]
     fn stop(&self);
 }
 
 impl<O: IsA<DOMHTMLMarqueeElement>> DOMHTMLMarqueeElementExt for O {
     fn start(&self) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_marquee_element_start(
-                self.as_ref().to_glib_none().0,
-            );
+            ffi::webkit_dom_html_marquee_element_start(self.as_ref().to_glib_none().0);
         }
     }
 
     fn stop(&self) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_marquee_element_stop(
-                self.as_ref().to_glib_none().0,
-            );
+            ffi::webkit_dom_html_marquee_element_stop(self.as_ref().to_glib_none().0);
         }
     }
 }
 
 impl fmt::Display for DOMHTMLMarqueeElement {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "DOMHTMLMarqueeElement")
+        f.write_str("DOMHTMLMarqueeElement")
     }
 }

@@ -2,25 +2,22 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use crate::DOMNode;
+use crate::DOMObject;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::connect_raw;
 use glib::signal::SignalHandlerId;
 use glib::translate::*;
-use glib_sys;
-use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
-use webkit2_webextension_sys;
-use DOMNode;
-use DOMObject;
 
-glib_wrapper! {
-    pub struct DOMHTMLCollection(Object<webkit2_webextension_sys::WebKitDOMHTMLCollection, webkit2_webextension_sys::WebKitDOMHTMLCollectionClass, DOMHTMLCollectionClass>) @extends DOMObject;
+glib::wrapper! {
+    pub struct DOMHTMLCollection(Object<ffi::WebKitDOMHTMLCollection, ffi::WebKitDOMHTMLCollectionClass>) @extends DOMObject;
 
     match fn {
-        get_type => || webkit2_webextension_sys::webkit_dom_html_collection_get_type(),
+        get_type => || ffi::webkit_dom_html_collection_get_type(),
     }
 }
 
@@ -28,12 +25,15 @@ pub const NONE_DOMHTML_COLLECTION: Option<&DOMHTMLCollection> = None;
 
 pub trait DOMHTMLCollectionExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_html_collection_get_length")]
     fn get_length(&self) -> libc::c_ulong;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_html_collection_item")]
     fn item(&self, index: libc::c_ulong) -> Option<DOMNode>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_html_collection_named_item")]
     fn named_item(&self, name: &str) -> Option<DOMNode>;
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
@@ -42,59 +42,39 @@ pub trait DOMHTMLCollectionExt: 'static {
 impl<O: IsA<DOMHTMLCollection>> DOMHTMLCollectionExt for O {
     fn get_length(&self) -> libc::c_ulong {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_collection_get_length(
-                self.as_ref().to_glib_none().0,
-            )
+            ffi::webkit_dom_html_collection_get_length(self.as_ref().to_glib_none().0)
         }
     }
 
     fn item(&self, index: libc::c_ulong) -> Option<DOMNode> {
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_dom_html_collection_item(
-                self.as_ref().to_glib_none().0,
-                index,
-            ))
+            from_glib_none(ffi::webkit_dom_html_collection_item(self.as_ref().to_glib_none().0, index))
         }
     }
 
     fn named_item(&self, name: &str) -> Option<DOMNode> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_dom_html_collection_named_item(
-                    self.as_ref().to_glib_none().0,
-                    name.to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_dom_html_collection_named_item(self.as_ref().to_glib_none().0, name.to_glib_none().0))
         }
     }
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMHTMLCollection,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMHTMLCollection>,
+        unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLCollection, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMHTMLCollection>
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLCollection::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::length\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_length_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::length\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_length_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
 
 impl fmt::Display for DOMHTMLCollection {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "DOMHTMLCollection")
+        f.write_str("DOMHTMLCollection")
     }
 }
