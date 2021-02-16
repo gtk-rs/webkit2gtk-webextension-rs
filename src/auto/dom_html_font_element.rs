@@ -2,28 +2,25 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use crate::DOMElement;
+use crate::DOMEventTarget;
+use crate::DOMHTMLElement;
+use crate::DOMNode;
+use crate::DOMObject;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::connect_raw;
 use glib::signal::SignalHandlerId;
 use glib::translate::*;
-use glib::GString;
-use glib_sys;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
-use webkit2_webextension_sys;
-use DOMElement;
-use DOMEventTarget;
-use DOMHTMLElement;
-use DOMNode;
-use DOMObject;
 
-glib_wrapper! {
-    pub struct DOMHTMLFontElement(Object<webkit2_webextension_sys::WebKitDOMHTMLFontElement, webkit2_webextension_sys::WebKitDOMHTMLFontElementClass, DOMHTMLFontElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+glib::wrapper! {
+    pub struct DOMHTMLFontElement(Object<ffi::WebKitDOMHTMLFontElement, ffi::WebKitDOMHTMLFontElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || webkit2_webextension_sys::webkit_dom_html_font_element_get_type(),
+        get_type => || ffi::webkit_dom_html_font_element_get_type(),
     }
 }
 
@@ -31,21 +28,27 @@ pub const NONE_DOMHTML_FONT_ELEMENT: Option<&DOMHTMLFontElement> = None;
 
 pub trait DOMHTMLFontElementExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_color(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_html_font_element_get_color")]
+    fn get_color(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_face(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_html_font_element_get_face")]
+    fn get_face(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_size(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_html_font_element_get_size")]
+    fn get_size(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_html_font_element_set_color")]
     fn set_color(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_html_font_element_set_face")]
     fn set_face(&self, value: &str);
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_html_font_element_set_size")]
     fn set_size(&self, value: &str);
 
     fn connect_property_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
@@ -56,138 +59,87 @@ pub trait DOMHTMLFontElementExt: 'static {
 }
 
 impl<O: IsA<DOMHTMLFontElement>> DOMHTMLFontElementExt for O {
-    fn get_color(&self) -> Option<GString> {
+    fn get_color(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_html_font_element_get_color(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_html_font_element_get_color(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_face(&self) -> Option<GString> {
+    fn get_face(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_html_font_element_get_face(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_html_font_element_get_face(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_size(&self) -> Option<GString> {
+    fn get_size(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_html_font_element_get_size(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_html_font_element_get_size(self.as_ref().to_glib_none().0))
         }
     }
 
     fn set_color(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_font_element_set_color(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-            );
+            ffi::webkit_dom_html_font_element_set_color(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_face(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_font_element_set_face(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-            );
+            ffi::webkit_dom_html_font_element_set_face(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_size(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_font_element_set_size(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-            );
+            ffi::webkit_dom_html_font_element_set_size(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn connect_property_color_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_color_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMHTMLFontElement,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMHTMLFontElement>,
+        unsafe extern "C" fn notify_color_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLFontElement, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMHTMLFontElement>
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLFontElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::color\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_color_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::color\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_color_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_face_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_face_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMHTMLFontElement,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMHTMLFontElement>,
+        unsafe extern "C" fn notify_face_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLFontElement, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMHTMLFontElement>
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLFontElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::face\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_face_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::face\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_face_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_size_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_size_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMHTMLFontElement,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMHTMLFontElement>,
+        unsafe extern "C" fn notify_size_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMHTMLFontElement, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMHTMLFontElement>
         {
             let f: &F = &*(f as *const F);
             f(&DOMHTMLFontElement::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::size\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_size_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::size\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_size_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
 
 impl fmt::Display for DOMHTMLFontElement {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "DOMHTMLFontElement")
+        f.write_str("DOMHTMLFontElement")
     }
 }

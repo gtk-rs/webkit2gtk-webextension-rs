@@ -2,19 +2,17 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use glib::translate::*;
+use crate::DOMCharacterData;
+use crate::DOMEventTarget;
+use crate::DOMNode;
+use crate::DOMObject;
 use std::fmt;
-use webkit2_webextension_sys;
-use DOMCharacterData;
-use DOMEventTarget;
-use DOMNode;
-use DOMObject;
 
-glib_wrapper! {
-    pub struct DOMComment(Object<webkit2_webextension_sys::WebKitDOMComment, webkit2_webextension_sys::WebKitDOMCommentClass, DOMCommentClass>) @extends DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
+glib::wrapper! {
+    pub struct DOMComment(Object<ffi::WebKitDOMComment, ffi::WebKitDOMCommentClass>) @extends DOMCharacterData, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || webkit2_webextension_sys::webkit_dom_comment_get_type(),
+        get_type => || ffi::webkit_dom_comment_get_type(),
     }
 }
 
@@ -24,6 +22,6 @@ pub const NONE_DOM_COMMENT: Option<&DOMComment> = None;
 
 impl fmt::Display for DOMComment {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "DOMComment")
+        f.write_str("DOMComment")
     }
 }

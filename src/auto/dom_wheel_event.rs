@@ -2,28 +2,25 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use crate::DOMDOMWindow;
+use crate::DOMEvent;
+use crate::DOMMouseEvent;
+use crate::DOMObject;
+use crate::DOMUIEvent;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::connect_raw;
 use glib::signal::SignalHandlerId;
 use glib::translate::*;
-use glib_sys;
-use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
-use webkit2_webextension_sys;
-use DOMDOMWindow;
-use DOMEvent;
-use DOMMouseEvent;
-use DOMObject;
-use DOMUIEvent;
 
-glib_wrapper! {
-    pub struct DOMWheelEvent(Object<webkit2_webextension_sys::WebKitDOMWheelEvent, webkit2_webextension_sys::WebKitDOMWheelEventClass, DOMWheelEventClass>) @extends DOMMouseEvent, DOMUIEvent, DOMEvent, DOMObject;
+glib::wrapper! {
+    pub struct DOMWheelEvent(Object<ffi::WebKitDOMWheelEvent, ffi::WebKitDOMWheelEventClass>) @extends DOMMouseEvent, DOMUIEvent, DOMEvent, DOMObject;
 
     match fn {
-        get_type => || webkit2_webextension_sys::webkit_dom_wheel_event_get_type(),
+        get_type => || ffi::webkit_dom_wheel_event_get_type(),
     }
 }
 
@@ -31,181 +28,98 @@ pub const NONE_DOM_WHEEL_EVENT: Option<&DOMWheelEvent> = None;
 
 pub trait DOMWheelEventExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_wheel_event_get_wheel_delta")]
     fn get_wheel_delta(&self) -> libc::c_long;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_wheel_event_get_wheel_delta_x")]
     fn get_wheel_delta_x(&self) -> libc::c_long;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_wheel_event_get_wheel_delta_y")]
     fn get_wheel_delta_y(&self) -> libc::c_long;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn init_wheel_event<P: IsA<DOMDOMWindow>>(
-        &self,
-        wheelDeltaX: libc::c_long,
-        wheelDeltaY: libc::c_long,
-        view: &P,
-        screenX: libc::c_long,
-        screenY: libc::c_long,
-        clientX: libc::c_long,
-        clientY: libc::c_long,
-        ctrlKey: bool,
-        altKey: bool,
-        shiftKey: bool,
-        metaKey: bool,
-    );
+    #[doc(alias = "webkit_dom_wheel_event_init_wheel_event")]
+    fn init_wheel_event<P: IsA<DOMDOMWindow>>(&self, wheelDeltaX: libc::c_long, wheelDeltaY: libc::c_long, view: &P, screenX: libc::c_long, screenY: libc::c_long, clientX: libc::c_long, clientY: libc::c_long, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool);
 
     fn connect_property_wheel_delta_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_wheel_delta_x_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_wheel_delta_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
-    fn connect_property_wheel_delta_y_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId;
+    fn connect_property_wheel_delta_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 }
 
 impl<O: IsA<DOMWheelEvent>> DOMWheelEventExt for O {
     fn get_wheel_delta(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_wheel_event_get_wheel_delta(
-                self.as_ref().to_glib_none().0,
-            )
+            ffi::webkit_dom_wheel_event_get_wheel_delta(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_wheel_delta_x(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_wheel_event_get_wheel_delta_x(
-                self.as_ref().to_glib_none().0,
-            )
+            ffi::webkit_dom_wheel_event_get_wheel_delta_x(self.as_ref().to_glib_none().0)
         }
     }
 
     fn get_wheel_delta_y(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_wheel_event_get_wheel_delta_y(
-                self.as_ref().to_glib_none().0,
-            )
+            ffi::webkit_dom_wheel_event_get_wheel_delta_y(self.as_ref().to_glib_none().0)
         }
     }
 
-    fn init_wheel_event<P: IsA<DOMDOMWindow>>(
-        &self,
-        wheelDeltaX: libc::c_long,
-        wheelDeltaY: libc::c_long,
-        view: &P,
-        screenX: libc::c_long,
-        screenY: libc::c_long,
-        clientX: libc::c_long,
-        clientY: libc::c_long,
-        ctrlKey: bool,
-        altKey: bool,
-        shiftKey: bool,
-        metaKey: bool,
-    ) {
+    fn init_wheel_event<P: IsA<DOMDOMWindow>>(&self, wheelDeltaX: libc::c_long, wheelDeltaY: libc::c_long, view: &P, screenX: libc::c_long, screenY: libc::c_long, clientX: libc::c_long, clientY: libc::c_long, ctrlKey: bool, altKey: bool, shiftKey: bool, metaKey: bool) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_wheel_event_init_wheel_event(
-                self.as_ref().to_glib_none().0,
-                wheelDeltaX,
-                wheelDeltaY,
-                view.as_ref().to_glib_none().0,
-                screenX,
-                screenY,
-                clientX,
-                clientY,
-                ctrlKey.to_glib(),
-                altKey.to_glib(),
-                shiftKey.to_glib(),
-                metaKey.to_glib(),
-            );
+            ffi::webkit_dom_wheel_event_init_wheel_event(self.as_ref().to_glib_none().0, wheelDeltaX, wheelDeltaY, view.as_ref().to_glib_none().0, screenX, screenY, clientX, clientY, ctrlKey.to_glib(), altKey.to_glib(), shiftKey.to_glib(), metaKey.to_glib());
         }
     }
 
     fn connect_property_wheel_delta_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_wheel_delta_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMWheelEvent,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMWheelEvent>,
+        unsafe extern "C" fn notify_wheel_delta_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMWheelEvent, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMWheelEvent>
         {
             let f: &F = &*(f as *const F);
             f(&DOMWheelEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::wheel-delta\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_wheel_delta_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::wheel-delta\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_wheel_delta_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_wheel_delta_x_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_wheel_delta_x_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMWheelEvent,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMWheelEvent>,
+    fn connect_property_wheel_delta_x_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_wheel_delta_x_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMWheelEvent, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMWheelEvent>
         {
             let f: &F = &*(f as *const F);
             f(&DOMWheelEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::wheel-delta-x\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_wheel_delta_x_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::wheel-delta-x\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_wheel_delta_x_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
-    fn connect_property_wheel_delta_y_notify<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> SignalHandlerId {
-        unsafe extern "C" fn notify_wheel_delta_y_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMWheelEvent,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMWheelEvent>,
+    fn connect_property_wheel_delta_y_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_wheel_delta_y_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMWheelEvent, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMWheelEvent>
         {
             let f: &F = &*(f as *const F);
             f(&DOMWheelEvent::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::wheel-delta-y\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_wheel_delta_y_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::wheel-delta-y\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_wheel_delta_y_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
 
 impl fmt::Display for DOMWheelEvent {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "DOMWheelEvent")
+        f.write_str("DOMWheelEvent")
     }
 }

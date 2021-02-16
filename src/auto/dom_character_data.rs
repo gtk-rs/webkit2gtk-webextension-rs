@@ -2,29 +2,24 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
-use glib;
+use crate::DOMEventTarget;
+use crate::DOMNode;
+use crate::DOMObject;
 use glib::object::Cast;
 use glib::object::IsA;
 use glib::signal::connect_raw;
 use glib::signal::SignalHandlerId;
 use glib::translate::*;
-use glib::GString;
-use glib_sys;
-use libc;
 use std::boxed::Box as Box_;
 use std::fmt;
 use std::mem::transmute;
 use std::ptr;
-use webkit2_webextension_sys;
-use DOMEventTarget;
-use DOMNode;
-use DOMObject;
 
-glib_wrapper! {
-    pub struct DOMCharacterData(Object<webkit2_webextension_sys::WebKitDOMCharacterData, webkit2_webextension_sys::WebKitDOMCharacterDataClass, DOMCharacterDataClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
+glib::wrapper! {
+    pub struct DOMCharacterData(Object<ffi::WebKitDOMCharacterData, ffi::WebKitDOMCharacterDataClass>) @extends DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || webkit2_webextension_sys::webkit_dom_character_data_get_type(),
+        get_type => || ffi::webkit_dom_character_data_get_type(),
     }
 }
 
@@ -32,37 +27,36 @@ pub const NONE_DOM_CHARACTER_DATA: Option<&DOMCharacterData> = None;
 
 pub trait DOMCharacterDataExt: 'static {
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_character_data_append_data")]
     fn append_data(&self, data: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_character_data_delete_data")]
     fn delete_data(&self, offset: libc::c_ulong, length: libc::c_ulong) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn get_data(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_character_data_get_data")]
+    fn get_data(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_character_data_get_length")]
     fn get_length(&self) -> libc::c_ulong;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_character_data_insert_data")]
     fn insert_data(&self, offset: libc::c_ulong, data: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn replace_data(
-        &self,
-        offset: libc::c_ulong,
-        length: libc::c_ulong,
-        data: &str,
-    ) -> Result<(), glib::Error>;
+    #[doc(alias = "webkit_dom_character_data_replace_data")]
+    fn replace_data(&self, offset: libc::c_ulong, length: libc::c_ulong, data: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
+    #[doc(alias = "webkit_dom_character_data_set_data")]
     fn set_data(&self, value: &str) -> Result<(), glib::Error>;
 
     #[cfg_attr(feature = "v2_22", deprecated)]
-    fn substring_data(
-        &self,
-        offset: libc::c_ulong,
-        length: libc::c_ulong,
-    ) -> Result<GString, glib::Error>;
+    #[doc(alias = "webkit_dom_character_data_substring_data")]
+    fn substring_data(&self, offset: libc::c_ulong, length: libc::c_ulong) -> Result<glib::GString, glib::Error>;
 
     fn connect_property_data_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId;
 
@@ -73,182 +67,94 @@ impl<O: IsA<DOMCharacterData>> DOMCharacterDataExt for O {
     fn append_data(&self, data: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = webkit2_webextension_sys::webkit_dom_character_data_append_data(
-                self.as_ref().to_glib_none().0,
-                data.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(())
-            } else {
-                Err(from_glib_full(error))
-            }
+            let _ = ffi::webkit_dom_character_data_append_data(self.as_ref().to_glib_none().0, data.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn delete_data(&self, offset: libc::c_ulong, length: libc::c_ulong) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = webkit2_webextension_sys::webkit_dom_character_data_delete_data(
-                self.as_ref().to_glib_none().0,
-                offset,
-                length,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(())
-            } else {
-                Err(from_glib_full(error))
-            }
+            let _ = ffi::webkit_dom_character_data_delete_data(self.as_ref().to_glib_none().0, offset, length, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
-    fn get_data(&self) -> Option<GString> {
+    fn get_data(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_character_data_get_data(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_character_data_get_data(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_length(&self) -> libc::c_ulong {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_character_data_get_length(
-                self.as_ref().to_glib_none().0,
-            )
+            ffi::webkit_dom_character_data_get_length(self.as_ref().to_glib_none().0)
         }
     }
 
     fn insert_data(&self, offset: libc::c_ulong, data: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = webkit2_webextension_sys::webkit_dom_character_data_insert_data(
-                self.as_ref().to_glib_none().0,
-                offset,
-                data.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(())
-            } else {
-                Err(from_glib_full(error))
-            }
+            let _ = ffi::webkit_dom_character_data_insert_data(self.as_ref().to_glib_none().0, offset, data.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
-    fn replace_data(
-        &self,
-        offset: libc::c_ulong,
-        length: libc::c_ulong,
-        data: &str,
-    ) -> Result<(), glib::Error> {
+    fn replace_data(&self, offset: libc::c_ulong, length: libc::c_ulong, data: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = webkit2_webextension_sys::webkit_dom_character_data_replace_data(
-                self.as_ref().to_glib_none().0,
-                offset,
-                length,
-                data.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(())
-            } else {
-                Err(from_glib_full(error))
-            }
+            let _ = ffi::webkit_dom_character_data_replace_data(self.as_ref().to_glib_none().0, offset, length, data.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn set_data(&self, value: &str) -> Result<(), glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let _ = webkit2_webextension_sys::webkit_dom_character_data_set_data(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(())
-            } else {
-                Err(from_glib_full(error))
-            }
+            let _ = ffi::webkit_dom_character_data_set_data(self.as_ref().to_glib_none().0, value.to_glib_none().0, &mut error);
+            if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
         }
     }
 
-    fn substring_data(
-        &self,
-        offset: libc::c_ulong,
-        length: libc::c_ulong,
-    ) -> Result<GString, glib::Error> {
+    fn substring_data(&self, offset: libc::c_ulong, length: libc::c_ulong) -> Result<glib::GString, glib::Error> {
         unsafe {
             let mut error = ptr::null_mut();
-            let ret = webkit2_webextension_sys::webkit_dom_character_data_substring_data(
-                self.as_ref().to_glib_none().0,
-                offset,
-                length,
-                &mut error,
-            );
-            if error.is_null() {
-                Ok(from_glib_full(ret))
-            } else {
-                Err(from_glib_full(error))
-            }
+            let ret = ffi::webkit_dom_character_data_substring_data(self.as_ref().to_glib_none().0, offset, length, &mut error);
+            if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
         }
     }
 
     fn connect_property_data_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_data_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMCharacterData,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMCharacterData>,
+        unsafe extern "C" fn notify_data_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMCharacterData, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMCharacterData>
         {
             let f: &F = &*(f as *const F);
             f(&DOMCharacterData::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::data\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_data_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::data\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_data_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
     fn connect_property_length_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(
-            this: *mut webkit2_webextension_sys::WebKitDOMCharacterData,
-            _param_spec: glib_sys::gpointer,
-            f: glib_sys::gpointer,
-        ) where
-            P: IsA<DOMCharacterData>,
+        unsafe extern "C" fn notify_length_trampoline<P, F: Fn(&P) + 'static>(this: *mut ffi::WebKitDOMCharacterData, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer)
+            where P: IsA<DOMCharacterData>
         {
             let f: &F = &*(f as *const F);
             f(&DOMCharacterData::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(
-                self.as_ptr() as *mut _,
-                b"notify::length\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(
-                    notify_length_trampoline::<Self, F> as *const (),
-                )),
-                Box_::into_raw(f),
-            )
+            connect_raw(self.as_ptr() as *mut _, b"notify::length\0".as_ptr() as *const _,
+                Some(transmute::<_, unsafe extern "C" fn()>(notify_length_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
 
 impl fmt::Display for DOMCharacterData {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "DOMCharacterData")
+        f.write_str("DOMCharacterData")
     }
 }

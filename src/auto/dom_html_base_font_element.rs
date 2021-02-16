@@ -2,23 +2,20 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use crate::DOMElement;
+use crate::DOMEventTarget;
+use crate::DOMHTMLElement;
+use crate::DOMNode;
+use crate::DOMObject;
 use glib::object::IsA;
 use glib::translate::*;
-use glib::GString;
-use libc;
 use std::fmt;
-use webkit2_webextension_sys;
-use DOMElement;
-use DOMEventTarget;
-use DOMHTMLElement;
-use DOMNode;
-use DOMObject;
 
-glib_wrapper! {
-    pub struct DOMHTMLBaseFontElement(Object<webkit2_webextension_sys::WebKitDOMHTMLBaseFontElement, webkit2_webextension_sys::WebKitDOMHTMLBaseFontElementClass, DOMHTMLBaseFontElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
+glib::wrapper! {
+    pub struct DOMHTMLBaseFontElement(Object<ffi::WebKitDOMHTMLBaseFontElement, ffi::WebKitDOMHTMLBaseFontElementClass>) @extends DOMHTMLElement, DOMElement, DOMNode, DOMObject, @implements DOMEventTarget;
 
     match fn {
-        get_type => || webkit2_webextension_sys::webkit_dom_html_base_font_element_get_type(),
+        get_type => || ffi::webkit_dom_html_base_font_element_get_type(),
     }
 }
 
@@ -26,83 +23,70 @@ pub const NONE_DOMHTML_BASE_FONT_ELEMENT: Option<&DOMHTMLBaseFontElement> = None
 
 pub trait DOMHTMLBaseFontElementExt: 'static {
     #[cfg_attr(feature = "v2_12", deprecated)]
-    fn get_color(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_html_base_font_element_get_color")]
+    fn get_color(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
-    fn get_face(&self) -> Option<GString>;
+    #[doc(alias = "webkit_dom_html_base_font_element_get_face")]
+    fn get_face(&self) -> Option<glib::GString>;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
+    #[doc(alias = "webkit_dom_html_base_font_element_get_size")]
     fn get_size(&self) -> libc::c_long;
 
     #[cfg_attr(feature = "v2_12", deprecated)]
+    #[doc(alias = "webkit_dom_html_base_font_element_set_color")]
     fn set_color(&self, value: &str);
 
     #[cfg_attr(feature = "v2_12", deprecated)]
+    #[doc(alias = "webkit_dom_html_base_font_element_set_face")]
     fn set_face(&self, value: &str);
 
     #[cfg_attr(feature = "v2_12", deprecated)]
+    #[doc(alias = "webkit_dom_html_base_font_element_set_size")]
     fn set_size(&self, value: libc::c_long);
 }
 
 impl<O: IsA<DOMHTMLBaseFontElement>> DOMHTMLBaseFontElementExt for O {
-    fn get_color(&self) -> Option<GString> {
+    fn get_color(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_html_base_font_element_get_color(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_html_base_font_element_get_color(self.as_ref().to_glib_none().0))
         }
     }
 
-    fn get_face(&self) -> Option<GString> {
+    fn get_face(&self) -> Option<glib::GString> {
         unsafe {
-            from_glib_full(
-                webkit2_webextension_sys::webkit_dom_html_base_font_element_get_face(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_full(ffi::webkit_dom_html_base_font_element_get_face(self.as_ref().to_glib_none().0))
         }
     }
 
     fn get_size(&self) -> libc::c_long {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_base_font_element_get_size(
-                self.as_ref().to_glib_none().0,
-            )
+            ffi::webkit_dom_html_base_font_element_get_size(self.as_ref().to_glib_none().0)
         }
     }
 
     fn set_color(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_base_font_element_set_color(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-            );
+            ffi::webkit_dom_html_base_font_element_set_color(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_face(&self, value: &str) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_base_font_element_set_face(
-                self.as_ref().to_glib_none().0,
-                value.to_glib_none().0,
-            );
+            ffi::webkit_dom_html_base_font_element_set_face(self.as_ref().to_glib_none().0, value.to_glib_none().0);
         }
     }
 
     fn set_size(&self, value: libc::c_long) {
         unsafe {
-            webkit2_webextension_sys::webkit_dom_html_base_font_element_set_size(
-                self.as_ref().to_glib_none().0,
-                value,
-            );
+            ffi::webkit_dom_html_base_font_element_set_size(self.as_ref().to_glib_none().0, value);
         }
     }
 }
 
 impl fmt::Display for DOMHTMLBaseFontElement {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "DOMHTMLBaseFontElement")
+        f.write_str("DOMHTMLBaseFontElement")
     }
 }

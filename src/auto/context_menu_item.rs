@@ -2,168 +2,117 @@
 // from gir-files (https://github.com/gtk-rs/gir-files)
 // DO NOT EDIT
 
+use crate::ContextMenu;
+use crate::ContextMenuAction;
 #[cfg(any(feature = "v2_18", feature = "dox"))]
-use gio;
-#[cfg(any(feature = "v2_18", feature = "dox"))]
-use glib;
+#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_18")))]
 use glib::object::IsA;
 use glib::translate::*;
 use std::fmt;
-use webkit2_webextension_sys;
-use ContextMenu;
-use ContextMenuAction;
 
-glib_wrapper! {
-    pub struct ContextMenuItem(Object<webkit2_webextension_sys::WebKitContextMenuItem, webkit2_webextension_sys::WebKitContextMenuItemClass, ContextMenuItemClass>);
+glib::wrapper! {
+    pub struct ContextMenuItem(Object<ffi::WebKitContextMenuItem, ffi::WebKitContextMenuItemClass>);
 
     match fn {
-        get_type => || webkit2_webextension_sys::webkit_context_menu_item_get_type(),
+        get_type => || ffi::webkit_context_menu_item_get_type(),
     }
 }
 
 impl ContextMenuItem {
     //#[cfg_attr(feature = "v2_18", deprecated)]
+    //#[doc(alias = "webkit_context_menu_item_new")]
     //pub fn new(action: /*Ignored*/&gtk::Action) -> ContextMenuItem {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_context_menu_item_new() }
+    //    unsafe { TODO: call ffi:webkit_context_menu_item_new() }
     //}
 
     #[cfg(any(feature = "v2_18", feature = "dox"))]
-    pub fn from_gaction<P: IsA<gio::Action>>(
-        action: &P,
-        label: &str,
-        target: Option<&glib::Variant>,
-    ) -> ContextMenuItem {
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_18")))]
+    #[doc(alias = "webkit_context_menu_item_new_from_gaction")]
+    pub fn from_gaction<P: IsA<gio::Action>>(action: &P, label: &str, target: Option<&glib::Variant>) -> ContextMenuItem {
         assert_initialized_main_thread!();
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_context_menu_item_new_from_gaction(
-                    action.as_ref().to_glib_none().0,
-                    label.to_glib_none().0,
-                    target.to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_context_menu_item_new_from_gaction(action.as_ref().to_glib_none().0, label.to_glib_none().0, target.to_glib_none().0))
         }
     }
 
+    #[doc(alias = "webkit_context_menu_item_new_from_stock_action")]
     pub fn from_stock_action(action: ContextMenuAction) -> ContextMenuItem {
         assert_initialized_main_thread!();
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_context_menu_item_new_from_stock_action(
-                    action.to_glib(),
-                ),
-            )
+            from_glib_none(ffi::webkit_context_menu_item_new_from_stock_action(action.to_glib()))
         }
     }
 
+    #[doc(alias = "webkit_context_menu_item_new_from_stock_action_with_label")]
     pub fn from_stock_action_with_label(action: ContextMenuAction, label: &str) -> ContextMenuItem {
         assert_initialized_main_thread!();
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_context_menu_item_new_from_stock_action_with_label(
-                    action.to_glib(),
-                    label.to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_context_menu_item_new_from_stock_action_with_label(action.to_glib(), label.to_glib_none().0))
         }
     }
 
+    #[doc(alias = "webkit_context_menu_item_new_separator")]
     pub fn new_separator() -> ContextMenuItem {
         assert_initialized_main_thread!();
         unsafe {
-            from_glib_none(webkit2_webextension_sys::webkit_context_menu_item_new_separator())
+            from_glib_none(ffi::webkit_context_menu_item_new_separator())
         }
     }
 
-    pub fn with_submenu<P: IsA<ContextMenu>>(label: &str, submenu: &P) -> ContextMenuItem {
+    #[doc(alias = "webkit_context_menu_item_new_with_submenu")]
+    pub fn with_submenu(label: &str, submenu: &ContextMenu) -> ContextMenuItem {
         skip_assert_initialized!();
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_context_menu_item_new_with_submenu(
-                    label.to_glib_none().0,
-                    submenu.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_context_menu_item_new_with_submenu(label.to_glib_none().0, submenu.to_glib_none().0))
         }
     }
-}
 
-pub const NONE_CONTEXT_MENU_ITEM: Option<&ContextMenuItem> = None;
-
-pub trait ContextMenuItemExt: 'static {
     //#[cfg_attr(feature = "v2_18", deprecated)]
-    //fn get_action(&self) -> /*Ignored*/Option<gtk::Action>;
-
-    #[cfg(any(feature = "v2_18", feature = "dox"))]
-    fn get_gaction(&self) -> Option<gio::Action>;
-
-    fn get_stock_action(&self) -> ContextMenuAction;
-
-    fn get_submenu(&self) -> Option<ContextMenu>;
-
-    fn is_separator(&self) -> bool;
-
-    fn set_submenu<P: IsA<ContextMenu>>(&self, submenu: Option<&P>);
-}
-
-impl<O: IsA<ContextMenuItem>> ContextMenuItemExt for O {
-    //fn get_action(&self) -> /*Ignored*/Option<gtk::Action> {
-    //    unsafe { TODO: call webkit2_webextension_sys:webkit_context_menu_item_get_action() }
+    //#[doc(alias = "webkit_context_menu_item_get_action")]
+    //pub fn get_action(&self) -> /*Ignored*/Option<gtk::Action> {
+    //    unsafe { TODO: call ffi:webkit_context_menu_item_get_action() }
     //}
 
     #[cfg(any(feature = "v2_18", feature = "dox"))]
-    fn get_gaction(&self) -> Option<gio::Action> {
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_18")))]
+    #[doc(alias = "webkit_context_menu_item_get_gaction")]
+    pub fn get_gaction(&self) -> Option<gio::Action> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_context_menu_item_get_gaction(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_context_menu_item_get_gaction(self.to_glib_none().0))
         }
     }
 
-    fn get_stock_action(&self) -> ContextMenuAction {
+    #[doc(alias = "webkit_context_menu_item_get_stock_action")]
+    pub fn get_stock_action(&self) -> ContextMenuAction {
         unsafe {
-            from_glib(
-                webkit2_webextension_sys::webkit_context_menu_item_get_stock_action(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib(ffi::webkit_context_menu_item_get_stock_action(self.to_glib_none().0))
         }
     }
 
-    fn get_submenu(&self) -> Option<ContextMenu> {
+    #[doc(alias = "webkit_context_menu_item_get_submenu")]
+    pub fn get_submenu(&self) -> Option<ContextMenu> {
         unsafe {
-            from_glib_none(
-                webkit2_webextension_sys::webkit_context_menu_item_get_submenu(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib_none(ffi::webkit_context_menu_item_get_submenu(self.to_glib_none().0))
         }
     }
 
-    fn is_separator(&self) -> bool {
+    #[doc(alias = "webkit_context_menu_item_is_separator")]
+    pub fn is_separator(&self) -> bool {
         unsafe {
-            from_glib(
-                webkit2_webextension_sys::webkit_context_menu_item_is_separator(
-                    self.as_ref().to_glib_none().0,
-                ),
-            )
+            from_glib(ffi::webkit_context_menu_item_is_separator(self.to_glib_none().0))
         }
     }
 
-    fn set_submenu<P: IsA<ContextMenu>>(&self, submenu: Option<&P>) {
+    #[doc(alias = "webkit_context_menu_item_set_submenu")]
+    pub fn set_submenu(&self, submenu: Option<&ContextMenu>) {
         unsafe {
-            webkit2_webextension_sys::webkit_context_menu_item_set_submenu(
-                self.as_ref().to_glib_none().0,
-                submenu.map(|p| p.as_ref()).to_glib_none().0,
-            );
+            ffi::webkit_context_menu_item_set_submenu(self.to_glib_none().0, submenu.to_glib_none().0);
         }
     }
 }
 
 impl fmt::Display for ContextMenuItem {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "ContextMenuItem")
+        f.write_str("ContextMenuItem")
     }
 }
