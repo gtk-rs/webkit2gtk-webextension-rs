@@ -28,8 +28,6 @@ extern crate libc;
 
 use glib::closure::Closure;
 use glib::variant::Variant;
-use glib::Cast;
-use glib::Object;
 use webkit2gtk_webextension::{
     DOMDocumentExt, DOMElementExt, DOMEventTargetExt, DOMMouseEvent, DOMMouseEventExt,
     WebExtension, WebExtensionExt, WebPage, WebPageExt,
@@ -73,24 +71,24 @@ pub fn web_extension_initialize(extension: &WebExtension) {
 web_extension_init_with_data!();
 
 pub fn web_extension_initialize(extension: &WebExtension, user_data: Option<&Variant>) {
-    let user_string: Option<String> = user_data.and_then(Variant::get_str).map(ToOwned::to_owned);
+    let user_string: Option<String> = user_data.and_then(Variant::str).map(ToOwned::to_owned);
     dbg!(user_string);
 
     extension.connect_page_created(|_, page| {
         page.connect_document_loaded(|page| {
-            println!("Page {} created for {:?}", page.get_id(), page.get_uri());
-            let document = page.get_dom_document().unwrap();
-            println!("URL: {:?}", document.get_url());
-            println!("Title: {:?}", document.get_title());
+            println!("Page {} created for {:?}", page.id(), page.uri());
+            let document = page.dom_document().unwrap();
+            println!("URL: {:?}", document.url());
+            println!("Title: {:?}", document.title());
             document.set_title("My Web Page");
 
             let handler = Closure::new(|values| {
-                if let Some(event) = values[1].get::<Object>() {
-                    if let Ok(mouse_event) = event.downcast::<DOMMouseEvent>() {
+                if let Ok(event) = values[1].get::<DOMMouseEvent>() {
+                    if let Some(mouse_event) = event {
                         println!(
                             "Click at ({}, {})",
-                            mouse_event.get_x(),
-                            mouse_event.get_y()
+                            mouse_event.x(),
+                            mouse_event.y()
                         );
                     }
                 }
@@ -113,27 +111,27 @@ pub fn web_extension_initialize(extension: &WebExtension, user_data: Option<&Var
 }
 
 fn scroll_by(page: &WebPage, pixels: i64) {
-    let document = page.get_dom_document().unwrap();
-    let body = document.get_body().unwrap();
-    body.set_scroll_top(body.get_scroll_top() + pixels as libc::c_long);
+    let document = page.dom_document().unwrap();
+    let body = document.body().unwrap();
+    body.set_scroll_top(body.scroll_top() + pixels as libc::c_long);
 }
 
 fn scroll_bottom(page: &WebPage) {
-    let document = page.get_dom_document().unwrap();
-    let body = document.get_body().unwrap();
-    body.set_scroll_top(body.get_scroll_height());
+    let document = page.dom_document().unwrap();
+    let body = document.body().unwrap();
+    body.set_scroll_top(body.scroll_height());
 }
 
 fn scroll_percentage(page: &WebPage) -> i64 {
-    let document = page.get_dom_document().unwrap();
-    let body = document.get_body().unwrap();
-    let document = document.get_document_element().unwrap();
-    let height = document.get_client_height();
-    (body.get_scroll_top() as f64 / (body.get_scroll_height() as f64 - height) * 100.0) as i64
+    let document = page.dom_document().unwrap();
+    let body = document.body().unwrap();
+    let document = document.document_element().unwrap();
+    let height = document.client_height();
+    (body.scroll_top() as f64 / (body.scroll_height() as f64 - height) * 100.0) as i64
 }
 
 fn scroll_top(page: &WebPage) {
-    let document = page.get_dom_document().unwrap();
-    let body = document.get_body().unwrap();
-    body.set_scroll_top(0);
+    let document = page.dom_document().unwrap();
+    let body = document.body().unwrap();
+    body.scroll_top();
 }

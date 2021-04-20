@@ -4,8 +4,8 @@ name = "example"
 version = "0.1.0"
 
 [dependencies]
-glib = { git = "https://github.com/gtk-rs/glib" }
-glib-sys = { git = "https://github.com/gtk-rs/sys" }
+glib = { git = "https://github.com/gtk-rs/gtk-rs.git" }
+glib-sys = { git = "https://github.com/gtk-rs/gtk-rs.git" }
 libc = "^0.2"
 
 [dependencies.webkit2gtk-webextension]
