@@ -1,3 +1,5 @@
+// Take a look at the license at the top of the repository in the LICENSE file.
+
 #![allow(
     clippy::let_unit_value,
     clippy::new_without_default,
