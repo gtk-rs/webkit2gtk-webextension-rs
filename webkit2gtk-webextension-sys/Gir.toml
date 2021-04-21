@@ -8,11 +8,11 @@ girs_directories = ["../gir-files"]
 target_path = "."
 
 external_libraries = [
-   "Gio",
-   "GLib",
-   "GObject",
-   "Gtk",
-   "Soup",
+    "Gio",
+    "GLib",
+    "GObject",
+    "Gtk",
+    "Soup",
 ]
 
 [external_libraries]
