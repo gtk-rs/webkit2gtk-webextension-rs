@@ -2,7 +2,7 @@
 "web_kit2_web_extension" = "webkit2_webextension"
 
 [options]
-girs_dir = "gir-files"
+girs_directories = ["gir-files"]
 library = "WebKit2WebExtension"
 version = "4.0"
 work_mode = "normal"

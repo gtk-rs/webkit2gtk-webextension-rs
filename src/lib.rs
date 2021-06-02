@@ -1,3 +1,5 @@
+// Take a look at the license at the top of the repository in the LICENSE file.
+
 #![allow(
     clippy::let_unit_value,
     clippy::new_without_default,
@@ -9,15 +11,13 @@
 
 #[cfg(any(feature = "v2_18"))]
 extern crate gio;
-#[macro_use]
 extern crate glib;
 pub extern crate glib_sys;
 extern crate gobject_sys;
 extern crate gtk;
 extern crate libc;
 
-pub extern crate webkit2gtk_webextension_sys as webkit2_webextension_sys;
-
+pub use ffi;
 pub use glib::{Error, Object};
 
 macro_rules! assert_initialized_main_thread {
@@ -42,7 +42,7 @@ macro_rules! web_extension_init {
         #[no_mangle]
         #[doc(hidden)]
         pub unsafe fn webkit_web_extension_initialize(
-            extension: *mut $crate::webkit2_webextension_sys::WebKitWebExtension,
+            extension: *mut $crate::ffi::WebKitWebExtension,
         ) {
             let extension: $crate::WebExtension =
                 ::glib::translate::FromGlibPtrNone::from_glib_none(extension);
@@ -57,7 +57,7 @@ macro_rules! web_extension_init_with_data {
         #[no_mangle]
         #[doc(hidden)]
         pub unsafe fn webkit_web_extension_initialize_with_user_data(
-            extension: *mut $crate::webkit2_webextension_sys::WebKitWebExtension,
+            extension: *mut $crate::ffi::WebKitWebExtension,
             user_data: *mut $crate::glib_sys::GVariant,
         ) {
             let extension: $crate::WebExtension =
