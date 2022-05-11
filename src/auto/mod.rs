@@ -341,7 +341,11 @@ pub use self::web_hit_test_result::WebHitTestResult;
 mod web_page;
 pub use self::web_page::WebPage;
 
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
 mod console_message;
+#[cfg(any(feature = "v2_12", feature = "dox"))]
+#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
 pub use self::console_message::ConsoleMessage;
 
 mod enums;

@@ -2,8 +2,6 @@
 // from gir-files (https://github.com/gtk-rs/gir-files.git)
 // DO NOT EDIT
 
-#[cfg(any(feature = "v2_12", feature = "dox"))]
-#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
 use glib::translate::*;
 
 glib::wrapper! {
@@ -18,16 +16,12 @@ glib::wrapper! {
 }
 
 impl ConsoleMessage {
-    //#[cfg(any(feature = "v2_12", feature = "dox"))]
-    //#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
     //#[doc(alias = "webkit_console_message_get_level")]
     //#[doc(alias = "get_level")]
     //pub fn level(&mut self) -> /*Ignored*/ConsoleMessageLevel {
     //    unsafe { TODO: call ffi:webkit_console_message_get_level() }
     //}
 
-    #[cfg(any(feature = "v2_12", feature = "dox"))]
-    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
     #[doc(alias = "webkit_console_message_get_line")]
     #[doc(alias = "get_line")]
     pub fn line(&mut self) -> u32 {
@@ -36,16 +30,12 @@ impl ConsoleMessage {
         }
     }
 
-    //#[cfg(any(feature = "v2_12", feature = "dox"))]
-    //#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
     //#[doc(alias = "webkit_console_message_get_source")]
     //#[doc(alias = "get_source")]
     //pub fn source(&mut self) -> /*Ignored*/ConsoleMessageSource {
     //    unsafe { TODO: call ffi:webkit_console_message_get_source() }
     //}
 
-    #[cfg(any(feature = "v2_12", feature = "dox"))]
-    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
     #[doc(alias = "webkit_console_message_get_source_id")]
     #[doc(alias = "get_source_id")]
     pub fn source_id(&mut self) -> Option<glib::GString> {
@@ -54,8 +44,6 @@ impl ConsoleMessage {
         }
     }
 
-    #[cfg(any(feature = "v2_12", feature = "dox"))]
-    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_12")))]
     #[doc(alias = "webkit_console_message_get_text")]
     #[doc(alias = "get_text")]
     pub fn text(&mut self) -> Option<glib::GString> {

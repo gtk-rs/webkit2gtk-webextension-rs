@@ -11,7 +11,6 @@ single_version_file = true
 target_path = "."
 
 generate = [
-    "WebKit2WebExtension.ConsoleMessage",
     "WebKit2WebExtension.ContextMenu",
     "WebKit2WebExtension.ContextMenuAction",
     "WebKit2WebExtension.ContextMenuItem",
@@ -36,6 +35,11 @@ manual = [
 name = "WebKit2WebExtension.DOMAttr"
 status = "generate"
 module_name = "dom_attr"
+
+[[object]]
+name = "WebKit2WebExtension.ConsoleMessage"
+status = "generate"
+version = "2.12"
 
 [[object]]
 name = "WebKit2WebExtension.DOMBlob"
