@@ -9,8 +9,6 @@ extern crate gobject_sys;
 extern crate gtk;
 extern crate libc;
 
-pub extern crate webkit2gtk_webextension_sys as webkit2_webextension_sys;
-
 pub use glib::{Error, Object};
 
 macro_rules! assert_initialized_main_thread {

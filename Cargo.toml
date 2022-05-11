@@ -9,6 +9,7 @@ repository = "https://github.com/gtk-rs/webkit2gtk-webextension-rs"
 license = "MIT"
 homepage = "http://gtk-rs.org/"
 documentation = "http://gtk-rs.org/docs/gtk/"
+edition = "2021"
 
 keywords = ["webkit", "gtk", "gtk-rs", "GUI"]
 
@@ -20,21 +21,22 @@ name = "webkit2gtk_webextension"
 
 [features]
 v2_2 = []
-v2_8 = ["v2_2", "webkit2gtk-webextension-sys/v2_8"]
-v2_10 = ["v2_8", "webkit2gtk-webextension-sys/v2_10"]
-v2_12 = ["v2_10", "webkit2gtk-webextension-sys/v2_12"]
-v2_14 = ["v2_12", "webkit2gtk-webextension-sys/v2_14"]
-v2_16 = ["v2_14", "webkit2gtk-webextension-sys/v2_16"]
-v2_18 = ["v2_16", "webkit2gtk-webextension-sys/v2_18"]
+v2_8 = ["v2_2", "ffi/v2_8"]
+v2_10 = ["v2_8", "ffi/v2_10"]
+v2_12 = ["v2_10", "ffi/v2_12"]
+v2_14 = ["v2_12", "ffi/v2_14"]
+v2_16 = ["v2_14", "ffi/v2_16"]
+v2_18 = ["v2_16", "ffi/v2_18"]
 
 [dependencies]
 libc = "^0.2"
-gio = { version = "^0.9.0", optional = true }
-glib = "^0.10.0"
-glib-sys = "^0.10.0"
-gobject-sys = "^0.10.0"
-gtk = "^0.9.0"
+gio = { version = "^0.15.0", optional = true }
+glib = "^0.15.0"
+glib-sys = "^0.15.0"
+gobject-sys = "^0.15.0"
+gtk = "^0.15.0"
 
-[dependencies.webkit2gtk-webextension-sys]
+[dependencies.ffi]
+package = "webkit2gtk-webextension-sys"
 path = "./webkit2gtk-webextension-sys"
 version = "^0.9"

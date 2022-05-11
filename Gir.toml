@@ -18,6 +18,7 @@ generate = [
     "WebKit2WebExtension.Frame",
     "WebKit2WebExtension.HitTestResult",
     "WebKit2WebExtension.ScriptWorld",
+    "WebKit2WebExtension.UserMessage",
     "WebKit2WebExtension.WebEditor",
     "WebKit2WebExtension.WebExtension",
     "WebKit2WebExtension.WebHitTestResult",
@@ -28,6 +29,7 @@ manual = [
     "GObject.Closure",
     "GLib.Error",
     "GLib.Variant",
+    "Gio.Cancellable",
 ]
 
 [[object]]
