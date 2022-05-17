@@ -1,6 +1,6 @@
 [package]
 name = "webkit2gtk-webextension"
-version = "0.15.0"
+version = "0.15.1"
 authors = ["The Gtk-rs Project Developers"]
 
 categories = ["api-bindings", "gui"]
@@ -27,6 +27,10 @@ v2_12 = ["v2_10", "ffi/v2_12"]
 v2_14 = ["v2_12", "ffi/v2_14"]
 v2_16 = ["v2_14", "ffi/v2_16"]
 v2_18 = ["v2_16", "ffi/v2_18"]
+v2_20 = ["v2_18", "ffi/v2_20"]
+v2_22 = ["v2_20", "ffi/v2_22"]
+v2_26 = ["v2_22", "ffi/v2_26"]
+v2_28 = ["v2_26", "ffi/v2_28"]
 
 [dependencies]
 libc = "^0.2"
