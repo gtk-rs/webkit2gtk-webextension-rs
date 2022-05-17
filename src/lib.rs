@@ -8,6 +8,7 @@ pub extern crate glib_sys;
 extern crate gobject_sys;
 extern crate gtk;
 extern crate libc;
+pub extern crate ffi;
 
 pub use glib::{Error, Object};
 
@@ -33,7 +34,7 @@ macro_rules! web_extension_init {
         #[no_mangle]
         #[doc(hidden)]
         pub unsafe fn webkit_web_extension_initialize(
-            extension: *mut $crate::webkit2_webextension_sys::WebKitWebExtension,
+            extension: *mut $crate::ffi::WebKitWebExtension,
         ) {
             let extension: $crate::WebExtension =
                 ::glib::translate::FromGlibPtrNone::from_glib_none(extension);
@@ -48,7 +49,7 @@ macro_rules! web_extension_init_with_data {
         #[no_mangle]
         #[doc(hidden)]
         pub unsafe fn webkit_web_extension_initialize_with_user_data(
-            extension: *mut $crate::webkit2_webextension_sys::WebKitWebExtension,
+            extension: *mut $crate::ffi::WebKitWebExtension,
             user_data: *mut $crate::glib_sys::GVariant,
         ) {
             let extension: $crate::WebExtension =
