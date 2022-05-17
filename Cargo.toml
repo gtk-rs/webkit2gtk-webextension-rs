@@ -1,6 +1,6 @@
 [package]
 name = "webkit2gtk-webextension"
-version = "0.10.0"
+version = "0.15.0"
 authors = ["The Gtk-rs Project Developers"]
 
 categories = ["api-bindings", "gui"]
@@ -39,4 +39,4 @@ gtk = "^0.15.0"
 [dependencies.ffi]
 package = "webkit2gtk-webextension-sys"
 path = "./webkit2gtk-webextension-sys"
-version = "^0.9"
+version = "^0.15"
