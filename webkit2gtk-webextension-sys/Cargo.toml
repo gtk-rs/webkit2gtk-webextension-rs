@@ -8,19 +8,19 @@ libc = "0.2"
 
 [dependencies.glib]
 package = "glib-sys"
-version = "^0.15.0"
+version = "^0.16.0"
 
 [dependencies.gio]
 package = "gio-sys"
-version = "^0.15.0"
+version = "^0.16.0"
 
 [dependencies.gobject]
 package = "gobject-sys"
-version = "^0.15.0"
+version = "^0.16.0"
 
 [dependencies.gtk]
 package = "gtk-sys"
-version = "^0.15.0"
+version = "^0.16.0"
 
 [dependencies.soup]
 package = "soup-sys"
@@ -63,7 +63,7 @@ license = "MIT"
 links = "webkit2gtk_webextension"
 name = "webkit2gtk-webextension-sys"
 repository = "https://github.com/gtk-rs/webkit2gtk-webextension-rs"
-version = "0.15.0"
+version = "0.16.0"
 edition = "2021"
 [package.metadata.docs.rs]
 features = ["dox"]
