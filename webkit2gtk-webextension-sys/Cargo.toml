@@ -23,8 +23,8 @@ package = "gtk-sys"
 version = "^0.16.0"
 
 [dependencies.soup]
-package = "soup-sys"
-version = "^0.10.0"
+package = "soup3-sys"
+version = "^0.4.0"
 
 [dependencies.java_script_core]
 package = "javascriptcore-rs-sys"
@@ -63,7 +63,7 @@ license = "MIT"
 links = "webkit2gtk_webextension"
 name = "webkit2gtk-webextension-sys"
 repository = "https://github.com/gtk-rs/webkit2gtk-webextension-rs"
-version = "0.16.0"
+version = "0.16.1"
 edition = "2021"
 [package.metadata.docs.rs]
 features = ["dox"]
