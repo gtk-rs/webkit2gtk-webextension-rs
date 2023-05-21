@@ -3631,8 +3631,8 @@ impl ::std::fmt::Debug for WebKitDOMXPathNSResolver {
 }
 
 
-#[link(name = "webkit2gtk-4.0")]
-#[link(name = "javascriptcoregtk-4.0")]
+#[link(name = "webkit2gtk-4.1")]
+#[link(name = "javascriptcoregtk-4.1")]
 extern "C" {
 
     //=========================================================================
@@ -5815,8 +5815,8 @@ extern "C" {
     #[cfg(any(feature = "v2_26", feature = "dox"))]
     #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_26")))]
     pub fn webkit_frame_get_id(frame: *mut WebKitFrame) -> u64;
-    pub fn webkit_frame_get_javascript_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> java_script_core::JSGlobalContextRef;
-    pub fn webkit_frame_get_javascript_global_context(frame: *mut WebKitFrame) -> java_script_core::JSGlobalContextRef;
+    /*pub fn webkit_frame_get_javascript_context_for_script_world(frame: *mut WebKitFrame, world: *mut WebKitScriptWorld) -> java_script_core::JSGlobalContextRef;
+    pub fn webkit_frame_get_javascript_global_context(frame: *mut WebKitFrame) -> java_script_core::JSGlobalContextRef;*/
     #[cfg(any(feature = "v2_22", feature = "dox"))]
     #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_22")))]
     pub fn webkit_frame_get_js_context(frame: *mut WebKitFrame) -> *mut java_script_core::JSCContext;
